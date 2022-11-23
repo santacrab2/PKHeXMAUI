@@ -67,4 +67,16 @@
 	  </Reference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="tabs\MetTab.xaml.cs">
+	    <DependentUpon>MetTab.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="tabs\MetTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
