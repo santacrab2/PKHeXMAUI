@@ -40,8 +40,9 @@ public partial class MainPage : ContentPage
 
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
-        
-        await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{(Species)pk.Species}.pk9", pk.pkdata);
+        #if ANDROID
+            await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{(Species)pk.Species}.pk9", pk.pkdata);
+        #endif
     }
 
     private void specieschanger(object sender, EventArgs e) => pk.Species = (ushort)specieslabel.SelectedIndex;
