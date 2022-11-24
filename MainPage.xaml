@@ -34,11 +34,12 @@
                 />
 
            <Button Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Shiny" x:Name="shinybutton" Clicked="turnshiny"/>
             <Button Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Save" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
 
             <Label Grid.Row="2" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="End"></Label>
             <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID"></Editor>
-            <Button Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid"></Button>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
             <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="End"></Label>
             <Picker Grid.Row="3" Grid.Column="1" Title="Species" x:Name="specieslabel" HorizontalOptions="Center" SelectedIndexChanged="specieschanger"/>
             <Label Grid.Row="4" Grid.Column="0" Text="Nickname:" VerticalOptions="Center" HorizontalOptions="End"></Label>

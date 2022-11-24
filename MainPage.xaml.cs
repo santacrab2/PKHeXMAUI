@@ -57,5 +57,15 @@ public partial class MainPage : ContentPage
         pk.SetNickname(pk.Nickname);
         nickname.Text = pk.Nickname;
     }
+
+    private void turnshiny(object sender, EventArgs e)
+    {
+        if (!pk.IsShiny)
+            pk.SetIsShiny(true);
+        else
+            pk.SetIsShiny(false);
+        displaypid.Text = $"{pk.PID:X}";
+        
+    }
 }
 
