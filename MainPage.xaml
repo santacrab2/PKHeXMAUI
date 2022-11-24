@@ -15,11 +15,13 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
+              
 
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Grid.Row="0"
@@ -31,15 +33,16 @@
                    VerticalOptions="Start"
                 />
 
-           <Button Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Open File" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
+           <Button Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
+            <Button Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Save" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
 
-
-            <Label Grid.Row="2" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="End" ></Label>
+            <Label Grid.Row="2" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="End"></Label>
             <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID"></Editor>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid"></Button>
             <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="End"></Label>
-            <Picker Grid.Row="3" Grid.Column="1" Title="Species" x:Name="specieslabel" HorizontalOptions="Center"/>
+            <Picker Grid.Row="3" Grid.Column="1" Title="Species" x:Name="specieslabel" HorizontalOptions="Center" SelectedIndexChanged="specieschanger"/>
             <Label Grid.Row="4" Grid.Column="0" Text="Nickname:" VerticalOptions="Center" HorizontalOptions="End"></Label>
-            <Editor Grid.Row="4" Grid.Column="1" AutoSize="TextChanges" Text="Nickname" x:Name="nickname" VerticalOptions="Center" HorizontalOptions="Start"></Editor>
+            <Editor Grid.Row="4" Grid.Column="1" AutoSize="TextChanges" Text="Nickname" x:Name="nickname" VerticalOptions="Center" HorizontalOptions="Start" TextChanged="applynickname"></Editor>
             <Label Grid.Row="5" Grid.Column="0" Text="EXP:" HorizontalOptions="End" VerticalOptions="Center"></Label>
             <Editor Grid.Row="5" Grid.Column="1" AutoSize="TextChanges" Text="Exp" HorizontalOptions="Start" VerticalOptions="Center" x:Name="exp"></Editor>
             <Label Grid.Row="6" Grid.Column="0" Text="Nature:" VerticalOptions="Center" HorizontalOptions="End"></Label>
@@ -48,6 +51,8 @@
             <Picker Grid.Row="7" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType"></Picker>
             <Label Grid.Row="8" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Form:"></Label>
             <Picker Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="formpicker" Title="Form"></Picker>
+            <Label Grid.Row="9" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Held Item:"></Label>
+            <Picker Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="helditempicker" Title="Held Item"></Picker>
            
          
 
