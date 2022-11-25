@@ -35,14 +35,11 @@
 		<MauiIcon Include="Resources\AppIcon\icon.png" ForegroundFile="Resources\AppIcon\icon.png" />
 	
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\bg009.png" BaseSize="250,250" Color="Black" />
+		<MauiSplashScreen Include="Resources\AppIcon\icon.png" BaseSize="500,250" Color="Black" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Include="Resources\Images\dotnet_bot.svg" BaseSize="168,208"  />
-		<MauiImage Include="Resources\Images\iconp.png" BaseSize="168,208" />
-		 
-		
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -50,8 +47,6 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
-
-
 
 
 
