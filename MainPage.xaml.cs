@@ -1,6 +1,7 @@
 ﻿
 using PKHeX.Core;
 using System.Net.Sockets;
+using CommunityToolkit.Maui.Core;
 
 
 
@@ -35,47 +36,47 @@ public partial class MainPage : ContentPage
         var pkfile = await FilePicker.PickAsync();
         var bytes= File.ReadAllBytes(pkfile.FullPath);
         pk = new(bytes);
-
-        if (pk.IsShiny)
-            shinybutton.Text = "★";
-        specieslabel.SelectedIndex = pk.Species;
-        displaypid.Text = $"{pk.PID:X}";
-        nickname.Text = pk.Nickname;
-        exp.Text = $"{pk.EXP}";
-        leveldisplay.Text = $"{Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth)}";
-        naturepicker.SelectedIndex = pk.Nature;
-        Teratypepicker.SelectedIndex = (int) pk.TeraTypeOverride == 0x13 ? (int)pk.TeraTypeOriginal : (int)pk.TeraTypeOverride;
-        MainTeratypepicker.SelectedIndex = (int)pk.TeraTypeOriginal;
-        var str = GameInfo.Strings;
-        var forms = FormConverter.GetFormList(pk.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, EntityContext.Gen9);
-        if(forms.Count() != 0) 
-        { 
-            formpicker.ItemsSource = forms;
-        formpicker.SelectedIndex = pk.Form;
-        }
-        if(abilitypicker.Items.Count() != 0)
-            abilitypicker.Items.Clear();
-        for(int i = 0; i<3; i++)
-        {
-            var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
-            abilitypicker.Items.Add($"{(Ability)abili}");
-            
-        }
-
-
-
-       
-        Friendshipdisplay.Text = $"{pk.CurrentFriendship}";
-        Heightdisplay.Text = $"{pk.HeightScalar}";
-        Weightdisplay.Text =$"{pk.WeightScalar}";
-        scaledisplay.Text = $"{pk.Scale}";
-        genderdisplay.SelectedIndex = pk.Gender;
+        applypkinfo(pk);
         
 
 
 
 
 
+    }
+    public void applypkinfo(PK9 pkm)
+    {
+        if (pkm.IsShiny)
+            shinybutton.Text = "★";
+        specieslabel.SelectedIndex = pkm.Species;
+        displaypid.Text = $"{pkm.PID:X}";
+        nickname.Text = pkm.Nickname;
+        exp.Text = $"{pkm.EXP}";
+        leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
+        naturepicker.SelectedIndex = pkm.Nature;
+        Teratypepicker.SelectedIndex = (int)pkm.TeraTypeOverride == 0x13 ? (int)pkm.TeraTypeOriginal : (int)pkm.TeraTypeOverride;
+        MainTeratypepicker.SelectedIndex = (int)pkm.TeraTypeOriginal;
+        var str = GameInfo.Strings;
+        var forms = FormConverter.GetFormList(pkm.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, EntityContext.Gen9);
+        if (forms.Count() != 0)
+        {
+            formpicker.ItemsSource = forms;
+            formpicker.SelectedIndex = pkm.Form;
+        }
+        if (abilitypicker.Items.Count() != 0)
+            abilitypicker.Items.Clear();
+        for (int i = 0; i < 3; i++)
+        {
+            var abili = pkm.PersonalInfo.GetAbilityAtIndex(i);
+            abilitypicker.Items.Add($"{(Ability)abili}");
+
+        }
+        abilitypicker.SelectedIndex = pkm.Ability;
+        Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
+        Heightdisplay.Text = $"{pkm.HeightScalar}";
+        Weightdisplay.Text = $"{pkm.WeightScalar}";
+        scaledisplay.Text = $"{pkm.Scale}";
+        genderdisplay.SelectedIndex = pkm.Gender;
     }
     private static int GetSafeIndex(Picker cb, int index) => Math.Max(0, Math.Min(cb.Items.Count - 1, index));
     public async void pk9saver_Clicked(object sender, EventArgs e)
@@ -85,7 +86,32 @@ public partial class MainPage : ContentPage
         
     }
 
-    private void specieschanger(object sender, EventArgs e) => pk.Species = (ushort)specieslabel.SelectedIndex;
+    private void specieschanger(object sender, EventArgs e) 
+    { 
+        pk.Species = (ushort)specieslabel.SelectedIndex;
+        if (abilitypicker.Items.Count() != 0)
+            abilitypicker.Items.Clear();
+        for (int i = 0; i < 3; i++)
+        {
+            var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
+            abilitypicker.Items.Add($"{(Ability)abili}");
+
+        }
+        abilitypicker.SelectedIndex = pk.Ability;
+        if(pk.PersonalInfo.Genderless && genderdisplay.SelectedIndex != 2)
+        {
+            pk.Gender = 2;
+            genderdisplay.SelectedIndex = 2;
+        }
+        if(pk.PersonalInfo.IsDualGender && genderdisplay.SelectedIndex == 2)
+        {
+            pk.Gender = 0;
+            genderdisplay.SelectedIndex = 0;
+        }
+        if(!pk.IsNicknamed)
+            pk.ClearNickname();
+
+    }
 
     private void rollpid(object sender, EventArgs e) 
     { 
@@ -116,7 +142,16 @@ public partial class MainPage : ContentPage
         
     }
 
-    private void applyexp(object sender, TextChangedEventArgs e) => pk.EXP = uint.Parse(exp.Text);
+    private void applyexp(object sender, TextChangedEventArgs e)
+    {
+        if(exp.Text.Length > 0)
+        {
+            pk.EXP = uint.Parse(exp.Text);
+            var newlevel = Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth);
+            pk.CurrentLevel = newlevel;
+            leveldisplay.Text = $"{pk.CurrentLevel}";
+        }
+    }
 
     private void applynature(object sender, EventArgs e) => pk.Nature = naturepicker.SelectedIndex;
 
@@ -128,7 +163,7 @@ public partial class MainPage : ContentPage
 
     private void applyhelditem(object sender, EventArgs e) => pk.ApplyHeldItem(helditempicker.SelectedIndex, EntityContext.Gen8);
 
-    private void applyability(object sender, EventArgs e) => pk.SetAbility((int)(Ability)abilitypicker.SelectedItem);
+    private void applyability(object sender, EventArgs e) => pk.SetAbility(abilitypicker.SelectedIndex);
 
     private void botbaseconnect(object sender, EventArgs e)
     {
@@ -153,8 +188,12 @@ public partial class MainPage : ContentPage
 
     private void changelevel(object sender, TextChangedEventArgs e)
     {
-        pk.CurrentLevel = int.Parse(leveldisplay.Text);
-        exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
+        if (leveldisplay.Text.Length > 0)
+        {
+            pk.CurrentLevel = int.Parse(leveldisplay.Text);
+            exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
+            pk.EXP = Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth);
+        }
     }
 
     private void applyfriendship(object sender, TextChangedEventArgs e) => pk.CurrentFriendship = int.Parse(Friendshipdisplay.Text);
@@ -174,40 +213,7 @@ public partial class MainPage : ContentPage
         var bytes = await botBase.ReadBytesAsync((uint)off, 344);
         pk = new(bytes);
 
-        if (pk.IsShiny)
-            shinybutton.Text = "★";
-        specieslabel.SelectedIndex = pk.Species;
-        displaypid.Text = $"{pk.PID:X}";
-        nickname.Text = pk.Nickname;
-        exp.Text = $"{pk.EXP}";
-        leveldisplay.Text = $"{Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth)}";
-        naturepicker.SelectedIndex = pk.Nature;
-        Teratypepicker.SelectedIndex = (int)pk.TeraTypeOverride == 0x13 ? (int)pk.TeraTypeOriginal : (int)pk.TeraTypeOverride;
-        MainTeratypepicker.SelectedIndex = (int)pk.TeraTypeOriginal;
-        var str = GameInfo.Strings;
-        var forms = FormConverter.GetFormList(pk.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, EntityContext.Gen9);
-        if (forms.Count() != 0)
-        {
-            formpicker.ItemsSource = forms;
-            formpicker.SelectedIndex = pk.Form;
-        }
-        if (abilitypicker.Items.Count() != 0)
-            abilitypicker.Items.Clear();
-        for (int i = 0; i < 3; i++)
-        {
-            var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
-            abilitypicker.Items.Add($"{(Ability)abili}");
-
-        }
-
-
-
-        
-        Friendshipdisplay.Text = $"{pk.CurrentFriendship}";
-        Heightdisplay.Text = $"{pk.HeightScalar}";
-        Weightdisplay.Text = $"{pk.WeightScalar}";
-        scaledisplay.Text = $"{pk.Scale}";
-        genderdisplay.SelectedIndex = pk.Gender;
+        applypkinfo(pk);
 
     }
 }
