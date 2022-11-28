@@ -34,6 +34,7 @@
 
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Grid.Row="0"
+                x:FieldModifier="Public"
                 x:Name="pic"
                 Source="iconp.png"
                 HeightRequest="50"

@@ -7,14 +7,14 @@
     <TabBar>
         <Tab Title="Main">
             <ShellContent
-        Title="MainPage"
+        Title="Main"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
         </Tab>
         <Tab Title="Met">
             <ShellContent Title="Met"
                   ContentTemplate="{DataTemplate local:MetTab}"
-                  Route="MetTab"/>
+                  Route="MetTab" />
 
         </Tab>
         <Tab Title="Stats">
