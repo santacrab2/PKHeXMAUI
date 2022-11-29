@@ -30,17 +30,21 @@
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-
-
+                    <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
             <Image Grid.Column="0" Grid.Row="0"
                 x:Name="mettabpic"
                 HeightRequest="50"
                    HorizontalOptions="Start"
-                   VerticalOptions="Start"
-                />
-        </Grid>
+                   VerticalOptions="Start"/>
+            
+            <!--Origin Game-->
+            <Label Grid.Row="1" Grid.Column="0" x:Name="og" Text="Origin Game:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="origingamepicker" SelectedIndexChanged="applyorigingame"/>
+
+
+            </Grid>
     </ScrollView>
     </RefreshView>
 

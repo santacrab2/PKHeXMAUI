@@ -1,6 +1,7 @@
 
 
 using System.Windows.Input;
+using PKHeX.Core;
 
 namespace pk9reader;
 
@@ -10,6 +11,7 @@ public partial class MetTab : ContentPage
 	{
 		InitializeComponent();
         mettabpic.Source = MainPage.spriteurl;
+        origingamepicker.ItemsSource = GameInfo.Strings.gamelist;
         ICommand refreshCommand = new Command(() =>
         {
             mettabpic.Source = MainPage.spriteurl;
@@ -17,5 +19,15 @@ public partial class MetTab : ContentPage
         });
         metrefresh.Command = refreshCommand;
     }
-	
+    
+    public void applymetpkinfo (PK9 pkm)
+    {
+        
+    }
+
+    private void applyorigingame(object sender, EventArgs e)
+    {
+        og.Text = origingamepicker.SelectedIndex.ToString();
+    }
 }
+

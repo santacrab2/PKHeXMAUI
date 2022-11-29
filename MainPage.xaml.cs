@@ -2,16 +2,17 @@
 using PKHeX.Core;
 using System.Net.Sockets;
 using CommunityToolkit.Maui.Core;
+
 namespace pk9reader;
 
 public partial class MainPage : ContentPage
 {
-	
 
+    
 	public MainPage()
 	{
 		InitializeComponent();
-
+      
    
         specieslabel.ItemsSource = (System.Collections.IList)datasourcefiltered.Species;
         specieslabel.ItemDisplayBinding = new Binding("Text");
@@ -20,15 +21,17 @@ public partial class MainPage : ContentPage
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
         helditempicker.ItemDisplayBinding= new Binding("Text");
-       
+
+        
 
 
 
 
 
     }
+    MetTab met = new();
     BotBaseRoutines botBase = new();
-    PK9 pk = new();
+    public static PK9 pk = new();
     public static SaveFile sav = (SAV9SV) new();
     FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
@@ -39,15 +42,15 @@ public partial class MainPage : ContentPage
         var pkfile = await FilePicker.PickAsync();
         var bytes= File.ReadAllBytes(pkfile.FullPath);
         pk = new(bytes);
-        applypkinfo(pk);
-        
+        applymainpkinfo(pk);
+        met.applymetpkinfo(pk);
 
 
 
 
 
     }
-    public void applypkinfo(PK9 pkm)
+    public void applymainpkinfo(PK9 pkm)
     {
         if (pkm.IsShiny)
             shinybutton.Text = "★";
@@ -59,7 +62,7 @@ public partial class MainPage : ContentPage
         naturepicker.SelectedIndex = pkm.Nature;
         Teratypepicker.SelectedIndex = (int)pkm.TeraTypeOverride == 0x13 ? (int)pkm.TeraTypeOriginal : (int)pkm.TeraTypeOverride;
         MainTeratypepicker.SelectedIndex = (int)pkm.TeraTypeOriginal;
-      
+        
         if (abilitypicker.Items.Count() != 0)
             abilitypicker.Items.Clear();
         for (int i = 0; i < 3; i++)
@@ -78,6 +81,8 @@ public partial class MainPage : ContentPage
         formpicker.SelectedIndex = pkm.Form;
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         pic.Source = spriteurl;
+       
+        
 
 
     }
@@ -176,7 +181,8 @@ public partial class MainPage : ContentPage
     private void applyform(object sender, EventArgs e) 
     {
         pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
-        pic.Source = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+        spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+        pic.Source = spriteurl;
     }
 
     private void applyhelditem(object sender, EventArgs e) 
@@ -235,7 +241,7 @@ public partial class MainPage : ContentPage
         var bytes = await botBase.ReadBytesAsync((uint)off, 344);
         pk = new(bytes);
 
-        applypkinfo(pk);
+        applymainpkinfo(pk);
 
     }
 }
