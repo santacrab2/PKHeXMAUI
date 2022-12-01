@@ -81,10 +81,16 @@
 	  <Compile Update="tabs\MetTab.xaml.cs">
 	    <DependentUpon>MetTab.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="tabs\StatsTab.xaml.cs">
+	    <DependentUpon>StatsTab.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="tabs\MetTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="tabs\StatsTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

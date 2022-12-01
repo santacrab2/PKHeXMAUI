@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pk9reader.MainPage">
-    <RefreshView x:Name="mainrefresh">
+    
         <ScrollView>
+        <RefreshView x:Name="mainrefresh">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -40,8 +41,9 @@
                 HeightRequest="50"
                    HorizontalOptions="Start"
                    VerticalOptions="Start"
+                       
                 />
-                <Label Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="⚠" x:Name="legality" TextColor="Red"/>
+                <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="⚠" x:Name="legality" BackgroundColor="Red" Clicked="displaylegalitymessage"/>
 
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
@@ -80,7 +82,7 @@
                 <!--TeraType-->
                 <Label Grid.Row="8" Grid.Column="0" Text="Override TeraType:" HorizontalOptions="End" VerticalOptions="Center"></Label>
                 <Picker Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType" SelectedIndexChanged="applytera"></Picker>
-                <Label Grid.Row="9" Grid.Column="0" Text="Main TeraType:" HorizontalOptions="End" VerticalOptions="Center"></Label>
+                <Label Grid.Row="9" Grid.Column="0" Text="Original TeraType:" HorizontalOptions="End" VerticalOptions="Center"></Label>
                 <Picker Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="MainTeratypepicker" Title="TeraType" SelectedIndexChanged="applymaintera"></Picker>
                 <!--form-->
                 <Label Grid.Row="10" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Form:"></Label>
@@ -107,6 +109,7 @@
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
 
             </Grid>
-        </ScrollView>
-    </RefreshView>
+        </RefreshView>
+    </ScrollView>
+   
 </ContentPage>

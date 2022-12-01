@@ -29,15 +29,14 @@ public partial class MainPage : ContentPage
             mainrefresh.IsRefreshing = false;
             
         });
-
-
+        mainrefresh.Command = refreshCommand;
+       
 
 
 
 
     }
     public static LegalityAnalysis la;
-  
     BotBaseRoutines botBase = new();
     public static PK9 pk = new();
     public static SaveFile sav = (SAV9SV) new();
@@ -51,8 +50,7 @@ public partial class MainPage : ContentPage
         var bytes= File.ReadAllBytes(pkfile.FullPath);
         pk = new(bytes);
         applymainpkinfo(pk);
-       
-
+      
 
 
         checklegality();
@@ -61,7 +59,7 @@ public partial class MainPage : ContentPage
     {
         la = new(pk);
         legality.Text = la.Valid ? "✔" : "⚠";
-        legality.TextColor = la.Valid ? Colors.Green : Colors.Red;
+        legality.BackgroundColor = la.Valid ? Colors.Green : Colors.Red;
     }
     public void applymainpkinfo(PK9 pkm)
     {
@@ -267,6 +265,17 @@ public partial class MainPage : ContentPage
     {
         pk = (PK9)pk.Legalize();
         checklegality();
+    }
+
+    private async void displaylegalitymessage(object sender, EventArgs e)
+    {
+        checklegality();
+        var makelegal = await DisplayAlert("Legality Report", la.Report(), "ok","legalize");
+        if (makelegal)
+        {
+            pk = (PK9)pk.Legalize();
+            checklegality();
+        }
     }
 }
 

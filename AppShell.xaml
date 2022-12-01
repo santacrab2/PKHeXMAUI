@@ -18,7 +18,7 @@
 
         </Tab>
         <Tab Title="Stats">
-            <ShellContent Title="Stats"></ShellContent></Tab>
+            <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}" Route="StatsTab"></ShellContent></Tab>
         <Tab Title="Attacks">
             <ShellContent Title="Attacks"></ShellContent></Tab>
         <Tab Title="OT/Misc">

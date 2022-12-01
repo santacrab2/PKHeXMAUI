@@ -48,7 +48,19 @@
             <!--Met Location-->
                 <Label Grid.Row="3" Grid.Column="0" Text="Met Location:" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Picker  Grid.Row="3" Grid.Column="1" x:Name="metlocationpicker" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" SelectedIndexChanged="applymetlocation"/>
-
+            <!--Ball-->
+                <Label Grid.Row="4" Grid.Column="0" Text="Ball:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Picker Grid.Row="4" Grid.Column="1" x:Name="ballpicker" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" SelectedIndexChanged="givebackballs"/>
+                <Image Grid.Row="4" Grid.Column="2" x:Name="ballimage" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="50" Source="https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/Beast.png"/>
+                <!--Met Date-->
+                <Label Grid.Row="5" Grid.Column="0" Text="Met Date:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <DatePicker Grid.Row="5" Grid.Column="1" x:Name="metdatepicker" DateSelected="applymetdate"/>
+            <!--Met Level-->
+                <Label Grid.Row="6" Grid.Column="0" Text="Met Level:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Editor Grid.Row="6" Grid.Column="1" Text="Met Level" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" TextChanged="applymetlevel" x:Name="metleveldisplay"/>
+            <!--Obedience level-->
+                <Label Grid.Row="7" Grid.Column="0" Text="Obedience Level:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Editor Grid.Row="7" Grid.Column="1" Text="Obedience Level" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay"/>
             </Grid>
     </ScrollView>
     </RefreshView>
