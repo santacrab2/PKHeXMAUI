@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                     <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -40,9 +40,14 @@
                    VerticalOptions="Start"/>
             
             <!--Origin Game-->
-            <Label Grid.Row="1" Grid.Column="0" x:Name="og" Text="Origin Game:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="Origin Game:" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="origingamepicker" SelectedIndexChanged="applyorigingame"/>
-
+            <!--Battle Version-->
+                <Label Grid.Row="2" Grid.Column="0" Text="Battle Version:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Picker Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="battleversionpicker" SelectedIndexChanged="applybattleversion"/>
+            <!--Met Location-->
+                <Label Grid.Row="3" Grid.Column="0" Text="Met Location:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Picker  Grid.Row="3" Grid.Column="1" x:Name="metlocationpicker" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" SelectedIndexChanged="applymetlocation"/>
 
             </Grid>
     </ScrollView>

@@ -1,7 +1,9 @@
 ﻿
 using PKHeX.Core;
 using System.Net.Sockets;
-using CommunityToolkit.Maui.Core;
+using PKHeX.Core.AutoMod;
+using static pk9reader.MetTab;
+using System.Windows.Input;
 
 namespace pk9reader;
 
@@ -12,7 +14,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-      
+     
    
         specieslabel.ItemsSource = (System.Collections.IList)datasourcefiltered.Species;
         specieslabel.ItemDisplayBinding = new Binding("Text");
@@ -21,19 +23,25 @@ public partial class MainPage : ContentPage
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
         helditempicker.ItemDisplayBinding= new Binding("Text");
+        ICommand refreshCommand = new Command(() =>
+        {
+            checklegality();
+            mainrefresh.IsRefreshing = false;
+            
+        });
 
-        
 
 
 
 
 
     }
-    MetTab met = new();
+    public static LegalityAnalysis la;
+  
     BotBaseRoutines botBase = new();
     public static PK9 pk = new();
     public static SaveFile sav = (SAV9SV) new();
-    FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
+    public static FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
     public async void pk9picker_Clicked(object sender, EventArgs e)
@@ -43,12 +51,17 @@ public partial class MainPage : ContentPage
         var bytes= File.ReadAllBytes(pkfile.FullPath);
         pk = new(bytes);
         applymainpkinfo(pk);
-        met.applymetpkinfo(pk);
+       
 
 
 
-
-
+        checklegality();
+    }
+    public void checklegality()
+    {
+        la = new(pk);
+        legality.Text = la.Valid ? "✔" : "⚠";
+        legality.TextColor = la.Valid ? Colors.Green : Colors.Red;
     }
     public void applymainpkinfo(PK9 pkm)
     {
@@ -81,12 +94,11 @@ public partial class MainPage : ContentPage
         formpicker.SelectedIndex = pkm.Form;
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         pic.Source = spriteurl;
-       
-        
+      
+
 
 
     }
-    private static int GetSafeIndex(Picker cb, int index) => Math.Max(0, Math.Min(cb.Items.Count - 1, index));
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
         
@@ -130,18 +142,20 @@ public partial class MainPage : ContentPage
         formpicker.SelectedIndex = pk.Form;
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
         pic.Source = spriteurl;
+        checklegality();
     }
 
     private void rollpid(object sender, EventArgs e) 
     { 
         pk.SetPIDGender(pk.Gender);
         displaypid.Text = $"{pk.PID:X}";
+        checklegality();
     }
 
     private void applynickname(object sender, TextChangedEventArgs e)
     {
         pk.SetNickname(pk.Nickname);
-        
+        checklegality();
     }
 
     private void turnshiny(object sender, EventArgs e)
@@ -158,7 +172,7 @@ public partial class MainPage : ContentPage
         }
 
         displaypid.Text = $"{pk.PID:X}";
-        
+        checklegality();
     }
 
     private void applyexp(object sender, TextChangedEventArgs e)
@@ -170,30 +184,33 @@ public partial class MainPage : ContentPage
             pk.CurrentLevel = newlevel;
             leveldisplay.Text = $"{pk.CurrentLevel}";
         }
+        checklegality();
     }
 
-    private void applynature(object sender, EventArgs e) => pk.Nature = naturepicker.SelectedIndex;
+    private void applynature(object sender, EventArgs e) { pk.Nature = naturepicker.SelectedIndex; checklegality(); }
 
-    private void applytera(object sender, EventArgs e) => pk.TeraTypeOverride = (MoveType)Teratypepicker.SelectedIndex;
+        private void applytera(object sender, EventArgs e) { pk.TeraTypeOverride = (MoveType)Teratypepicker.SelectedIndex; checklegality(); }
 
-    private void applymaintera(object sender, EventArgs e) => pk.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
+        private void applymaintera(object sender, EventArgs e) { pk.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex; checklegality(); }
 
     private void applyform(object sender, EventArgs e) 
     {
         pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
         pic.Source = spriteurl;
+        checklegality();
     }
 
     private void applyhelditem(object sender, EventArgs e) 
     {
         ComboItem helditemtoapply = (ComboItem)helditempicker.SelectedItem;
-        pk.ApplyHeldItem(helditemtoapply.Value, EntityContext.Gen8); 
+        pk.ApplyHeldItem(helditemtoapply.Value, EntityContext.Gen8);
+        checklegality();
     }
 
-    private void applyability(object sender, EventArgs e) => pk.SetAbility(abilitypicker.SelectedIndex);
+    private void applyability(object sender, EventArgs e) { pk.SetAbility(abilitypicker.SelectedIndex); checklegality(); }
 
-    private void botbaseconnect(object sender, EventArgs e)
+        private void botbaseconnect(object sender, EventArgs e)
     {
         if (!SwitchConnection.Connected)
         {
@@ -222,17 +239,18 @@ public partial class MainPage : ContentPage
             exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
             pk.EXP = Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth);
         }
+        checklegality();
     }
 
-    private void applyfriendship(object sender, TextChangedEventArgs e) => pk.CurrentFriendship = int.Parse(Friendshipdisplay.Text);
+    private void applyfriendship(object sender, TextChangedEventArgs e) { pk.CurrentFriendship = int.Parse(Friendshipdisplay.Text); checklegality(); }
 
-    private void applyheight(object sender, TextChangedEventArgs e) => pk.HeightScalar = (byte)int.Parse(Heightdisplay.Text);
+        private void applyheight(object sender, TextChangedEventArgs e) { pk.HeightScalar = (byte)int.Parse(Heightdisplay.Text); checklegality(); }
 
-    private void applyweight(object sender, TextChangedEventArgs e) => pk.WeightScalar = (byte)int.Parse(Weightdisplay.Text);
+        private void applyweight(object sender, TextChangedEventArgs e) { pk.WeightScalar = (byte)int.Parse(Weightdisplay.Text); checklegality(); }
 
-    private void applyscale(object sender, TextChangedEventArgs e) => pk.Scale = (byte)int.Parse(scaledisplay.Text);
+        private void applyscale(object sender, TextChangedEventArgs e) { pk.Scale = (byte)int.Parse(scaledisplay.Text); checklegality(); }
 
-    private void applygender(object sender, EventArgs e) => pk.SetGender(genderdisplay.SelectedIndex);
+        private void applygender(object sender, EventArgs e) { pk.SetGender(genderdisplay.SelectedIndex); checklegality(); }
 
     private async void read(object sender, EventArgs e)
     {
@@ -242,7 +260,13 @@ public partial class MainPage : ContentPage
         pk = new(bytes);
 
         applymainpkinfo(pk);
+        checklegality();
+    }
 
+    private void legalize(object sender, EventArgs e)
+    {
+        pk = (PK9)pk.Legalize();
+        checklegality();
     }
 }
 
