@@ -224,7 +224,7 @@ public partial class MainPage : ContentPage
 
     private async void inject(object sender, EventArgs e)
     {
-        IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
+        IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
         var off = await botBase.PointerRelative(jumps);
         await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off);
     }
