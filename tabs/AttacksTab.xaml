@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pk9reader.AttacksTab"
+             Title="AttacksTab">
+    <RefreshView x:Name="attackrefresh">
+        <ScrollView>
+       
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+
+
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.Row="0"
+                x:FieldModifier="Public"
+                x:Name="attackpic"
+                Source="iconp.png"
+                HeightRequest="50"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                />
+                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Moves"/>
+                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="PP"/>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="PP Ups"/>
+                <!--Move 1-->
+                <Picker Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1" SelectedIndexChanged="applymove1"/>
+                <Picker Grid.Row="3" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move2" SelectedIndexChanged="applymove2"/>
+                <Picker Grid.Row="4" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move3" SelectedIndexChanged="applymove3"/>
+                <Picker Grid.Row="5" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4" SelectedIndexChanged="applymove4"/>
+                <!--Relearn Moves-->
+                <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Relearn Moves"/>
+                <Picker Grid.Row="7" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove1" SelectedIndexChanged="applyrmove1"/>
+                <Picker Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove2" SelectedIndexChanged="applyrmove2"/>
+                <Picker Grid.Row="9" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove3" SelectedIndexChanged="applyrmove3"/>
+                <Picker Grid.Row="10" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove4" SelectedIndexChanged="applyrmove4"/>
+                
+                <!--helpful buttons-->
+                <Button Grid.Row="11" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="suggestedmoves" Clicked="setsuggmoves" BackgroundColor="DeepSkyBlue"/>
+
+
+            </Grid>
+       
+    </ScrollView>
+    </RefreshView>
+</ContentPage>

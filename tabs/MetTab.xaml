@@ -5,7 +5,8 @@
              Title="MetTab">
     <RefreshView x:Name="metrefresh">
     <ScrollView>
-        <Grid>
+       
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -62,7 +63,9 @@
                 <Label Grid.Row="7" Grid.Column="0" Text="Obedience Level:" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Editor Grid.Row="7" Grid.Column="1" Text="Obedience Level" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay"/>
             </Grid>
-    </ScrollView>
+
+        </ScrollView>
     </RefreshView>
+
 
 </ContentPage>

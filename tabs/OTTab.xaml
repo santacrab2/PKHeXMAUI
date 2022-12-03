@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pk9reader.OTTab"
+             Title="OTTab">
+    <RefreshView x:Name="otrefresh">
+        <ScrollView>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+
+
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.Row="0"
+                x:FieldModifier="Public"
+                x:Name="OTpic"
+                Source="iconp.png"
+                HeightRequest="50"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                />
+                <!--OT-->
+                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Trainer Information"/>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="SID:"/>
+                <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" AutoSize="TextChanges" x:Name="SIDdisplay" TextChanged="applySID"/>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Text="TID:"/>
+                <Editor Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" AutoSize="TextChanges" x:Name="TIDdisplay" TextChanged="applyTID"/>
+                <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="OT:"/>
+                <Editor Grid.Row="3" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="otdisplay" TextChanged="applyot"/>
+              <!--EC-->
+                <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Encryption Constant"/>
+                <Editor Grid.Row="4" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="ecdisplay" TextChanged="applyec"/>
+
+            </Grid>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

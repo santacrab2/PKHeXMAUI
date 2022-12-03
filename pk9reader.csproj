@@ -87,7 +87,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="tabs\AttacksTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="tabs\MetTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="tabs\OTTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="tabs\StatsTab.xaml">

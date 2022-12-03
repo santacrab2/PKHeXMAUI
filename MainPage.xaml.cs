@@ -92,7 +92,7 @@ public partial class MainPage : ContentPage
         formpicker.SelectedIndex = pkm.Form;
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         pic.Source = spriteurl;
-      
+        checklegality();
 
 
 
@@ -252,7 +252,7 @@ public partial class MainPage : ContentPage
 
     private async void read(object sender, EventArgs e)
     {
-        IEnumerable<long> jumps = new long[] { 0x42FD510, 0xA90, 0x9B0, 0x0 };
+        IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
         var off = await botBase.PointerRelative(jumps);
         var bytes = await botBase.ReadBytesAsync((uint)off, 344);
         pk = new(bytes);
@@ -265,16 +265,19 @@ public partial class MainPage : ContentPage
     {
         pk = (PK9)pk.Legalize();
         checklegality();
+        applymainpkinfo(pk);
     }
 
     private async void displaylegalitymessage(object sender, EventArgs e)
     {
+        applymainpkinfo(pk);
         checklegality();
         var makelegal = await DisplayAlert("Legality Report", la.Report(), "ok","legalize");
         if (makelegal)
         {
             pk = (PK9)pk.Legalize();
             checklegality();
+            applymainpkinfo(pk);
         }
     }
 }

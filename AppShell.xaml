@@ -12,16 +12,13 @@
         Route="MainPage" />
         </Tab>
         <Tab Title="Met">
-            <ShellContent Title="Met"
-                  ContentTemplate="{DataTemplate local:MetTab}"
-                  Route="MetTab" />
-
+            <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" Route="MetTab" />
         </Tab>
         <Tab Title="Stats">
             <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}" Route="StatsTab"></ShellContent></Tab>
         <Tab Title="Attacks">
-            <ShellContent Title="Attacks"></ShellContent></Tab>
+            <ShellContent Title="Attacks" ContentTemplate="{DataTemplate local:AttacksTab}" Route="AttackTab"></ShellContent></Tab>
         <Tab Title="OT/Misc">
-            <ShellContent Title="OT/MISC"></ShellContent></Tab>
+            <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}" Route="OTTab"></ShellContent></Tab>
     </TabBar>
 </Shell>
