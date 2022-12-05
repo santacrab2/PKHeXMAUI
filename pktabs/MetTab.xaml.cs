@@ -13,6 +13,7 @@ public partial class MetTab : ContentPage
 	public MetTab()
 	{
 		InitializeComponent();
+      
         mettabpic.Source = spriteurl;
         origingamepicker.ItemsSource = GameInfo.Strings.gamelist;
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
@@ -35,7 +36,7 @@ public partial class MetTab : ContentPage
         mettabpic.Source = spriteurl;
         origingamepicker.SelectedIndex = pkm.Version > -1?pkm.Version:0;
         battleversionpicker.SelectedIndex = pkm.BattleVersion>-1?pkm.BattleVersion:0;
-        metlocationpicker.SelectedIndex = pkm.Met_Location>-1?pkm.Version:0;
+        metlocationpicker.SelectedIndex = pkm.Met_Location>-1?pkm.Met_Location:0;
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
         ballimage.Source = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(pkm.Ball>-1?(Ball)pkm.Ball:"Poke")}.png";
         metdatepicker.Date = pkm.MetDate != null?(DateTime)pkm.MetDate:DateTime.Now;

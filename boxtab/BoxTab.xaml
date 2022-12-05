@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pk9reader.BoxTab"
+             Title="BoxTab">
+    <RefreshView x:Name="boxrefresh">
+        <ScrollView>
+            <StackLayout>
+                <Button Text="Read Box" x:Name="readbox" Clicked="readboxdata" BackgroundColor="DeepSkyBlue" />
+                <Editor FontSize="18" Text="Box number" x:Name="boxnum"  />
+                <CollectionView HeightRequest="1000" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
+              
+
+            </StackLayout>
+        </ScrollView>
+      
+    </RefreshView>
+
+
+
+</ContentPage>

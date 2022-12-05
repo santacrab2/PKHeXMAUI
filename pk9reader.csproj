@@ -64,13 +64,13 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="PKHeX.Core" Version="22.11.26" />
+		<PackageReference Include="PKHeX.Core" Version="22.12.1" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Reference Include="PKHeX.Core.AutoMod">
-	    <HintPath>..\PKHeX-Plugins\PKHeX.Core.AutoMod\bin\Release\net46\PKHeX.Core.AutoMod.dll</HintPath>
+	    <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
 	  </Reference>
 	  <Reference Include="PKHeX.Drawing.PokeSprite">
 	    <HintPath>..\LGPETradeBot\SysBot.Pokemon\deps\PKHeX.Drawing.PokeSprite.dll</HintPath>
@@ -78,25 +78,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="tabs\MetTab.xaml.cs">
+	  <Compile Update="boxtab\BoxTab.xaml.cs">
+	    <DependentUpon>BoxTab.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="pktabs\MetTab.xaml.cs">
 	    <DependentUpon>MetTab.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="tabs\StatsTab.xaml.cs">
+	  <Compile Update="pktabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="tabs\AttacksTab.xaml">
+	  <MauiXaml Update="boxtab\BoxTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="tabs\MetTab.xaml">
+	  <MauiXaml Update="pktabs\AttacksTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="tabs\OTTab.xaml">
+	  <MauiXaml Update="pktabs\MetTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="tabs\StatsTab.xaml">
+	  <MauiXaml Update="pktabs\OTTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\StatsTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

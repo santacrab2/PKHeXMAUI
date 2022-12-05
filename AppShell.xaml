@@ -5,20 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:pk9reader">
     <TabBar>
-        <Tab Title="Main">
-            <ShellContent
-        Title="Main"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        <Tab Title="Pk9 Editor">
+            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"  />
+            <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
+
+
+            <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}" Route="StatsTab"></ShellContent>
+
+            <ShellContent Title="Attacks" ContentTemplate="{DataTemplate local:AttacksTab}" Route="AttackTab"></ShellContent>
+
+            <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}" Route="OTTab"></ShellContent>
         </Tab>
-        <Tab Title="Met">
-            <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" Route="MetTab" />
+        <Tab Title="Box">
+            <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
         </Tab>
-        <Tab Title="Stats">
-            <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}" Route="StatsTab"></ShellContent></Tab>
-        <Tab Title="Attacks">
-            <ShellContent Title="Attacks" ContentTemplate="{DataTemplate local:AttacksTab}" Route="AttackTab"></ShellContent></Tab>
-        <Tab Title="OT/Misc">
-            <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}" Route="OTTab"></ShellContent></Tab>
     </TabBar>
 </Shell>

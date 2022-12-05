@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="pk9reader.MainPage">
+             x:Class="pk9reader.MainPage"
+             Title="Main">
     
         <ScrollView>
         <RefreshView x:Name="mainrefresh">
@@ -25,6 +26,10 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -103,10 +108,14 @@
                 <Editor Grid.Row="15" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight"/>
                 <Label Grid.Row="16" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Scale:"/>
                 <Editor Grid.Row="16" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
+                <Picker Grid.Row="17" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
 
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+                <Editor Grid.Row="25" Grid.Column="0" Text="Box" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="boxnum"/>
+                <Editor Grid.Row="25" Grid.Column="1" Text="Slot" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="slotnum"/>
+                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
+                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
+                <Button BackgroundColor="DeepSkyBlue" Grid.Row="18" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+           
 
             </Grid>
         </RefreshView>

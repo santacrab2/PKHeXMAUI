@@ -23,6 +23,7 @@ public partial class MainPage : ContentPage
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
         helditempicker.ItemDisplayBinding= new Binding("Text");
+        languagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
         ICommand refreshCommand = new Command(() =>
         {
             checklegality();
@@ -37,7 +38,7 @@ public partial class MainPage : ContentPage
 
     }
     public static LegalityAnalysis la;
-    BotBaseRoutines botBase = new();
+    public static BotBaseRoutines botBase = new();
     public static PK9 pk = new();
     public static SaveFile sav = (SAV9SV) new();
     public static FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
@@ -65,7 +66,8 @@ public partial class MainPage : ContentPage
     {
         if (pkm.IsShiny)
             shinybutton.Text = "★";
-        specieslabel.SelectedIndex = specieslabel.Items.IndexOf($"{(Species)pkm.Species}");
+        
+        specieslabel.SelectedIndex = specieslabel.Items.IndexOf(SpeciesName.GetSpeciesName(pkm.Species,2));
         displaypid.Text = $"{pkm.PID:X}";
         nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
@@ -92,6 +94,7 @@ public partial class MainPage : ContentPage
         formpicker.SelectedIndex = pkm.Form;
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         pic.Source = spriteurl;
+        languagepicker.SelectedIndex = pkm.Language;
         checklegality();
 
 
@@ -226,7 +229,7 @@ public partial class MainPage : ContentPage
     {
         IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
         var off = await botBase.PointerRelative(jumps);
-        await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off);
+        await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))));
     }
 
     private void changelevel(object sender, TextChangedEventArgs e)
@@ -254,7 +257,7 @@ public partial class MainPage : ContentPage
     {
         IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
         var off = await botBase.PointerRelative(jumps);
-        var bytes = await botBase.ReadBytesAsync((uint)off, 344);
+        var bytes = await botBase.ReadBytesAsync((uint)off+(344*30*uint.Parse(boxnum.Text)+(344*uint.Parse(slotnum.Text))),344);
         pk = new(bytes);
 
         applymainpkinfo(pk);
@@ -272,13 +275,18 @@ public partial class MainPage : ContentPage
     {
         applymainpkinfo(pk);
         checklegality();
-        var makelegal = await DisplayAlert("Legality Report", la.Report(), "ok","legalize");
+        var makelegal = await DisplayAlert("Legality Report", la.Report(), "legalize","ok");
         if (makelegal)
         {
             pk = (PK9)pk.Legalize();
             checklegality();
             applymainpkinfo(pk);
         }
+    }
+
+    private void applylang(object sender, EventArgs e)
+    {
+        pk.Language = languagepicker.SelectedIndex; checklegality();
     }
 }
 
