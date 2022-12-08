@@ -14,8 +14,14 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-     
-   
+
+        APILegality.SetAllLegalRibbons = false;
+        APILegality.UseTrainerData = true;
+        APILegality.AllowTrainerOverride = true;
+        APILegality.UseTrainerData = true;
+        APILegality.SetMatchingBalls = true;
+        Legalizer.EnableEasterEggs = false;
+        
         specieslabel.ItemsSource = (System.Collections.IList)datasourcefiltered.Species;
         specieslabel.ItemDisplayBinding = new Binding("Text");
         naturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
@@ -213,15 +219,19 @@ public partial class MainPage : ContentPage
 
         private void botbaseconnect(object sender, EventArgs e)
     {
+        
         if (!SwitchConnection.Connected)
         {
             SwitchConnection.Connect(IP.Text,6000);
             connect.Text = "disconnect";
+        
+          
         }
         else
         {
             SwitchConnection.Disconnect(true);
             connect.Text = "connect";
+           SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
         }
     }
 
@@ -287,6 +297,11 @@ public partial class MainPage : ContentPage
     private void applylang(object sender, EventArgs e)
     {
         pk.Language = languagepicker.SelectedIndex; checklegality();
+    }
+
+    private void refreshmain(object sender, EventArgs e)
+    {
+        applymainpkinfo(pk);
     }
 }
 

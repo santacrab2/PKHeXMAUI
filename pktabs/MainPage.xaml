@@ -85,9 +85,9 @@
                 <Label Grid.Row="7" Grid.Column="0" Text="Nature:" VerticalOptions="Center" HorizontalOptions="End"></Label>
                 <Picker Grid.Row="7" Grid.Column="1" Title="Nature" x:Name="naturepicker" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="applynature"></Picker>
                 <!--TeraType-->
-                <Label Grid.Row="8" Grid.Column="0" Text="Override TeraType:" HorizontalOptions="End" VerticalOptions="Center"></Label>
+                <Label Grid.Row="8" Grid.Column="0" Text="Override TeraType:" HorizontalOptions="Start" VerticalOptions="Center"></Label>
                 <Picker Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType" SelectedIndexChanged="applytera"></Picker>
-                <Label Grid.Row="9" Grid.Column="0" Text="Original TeraType:" HorizontalOptions="End" VerticalOptions="Center"></Label>
+                <Label Grid.Row="9" Grid.Column="0" Text="Original TeraType:" HorizontalOptions="Start" VerticalOptions="Center"></Label>
                 <Picker Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="MainTeratypepicker" Title="TeraType" SelectedIndexChanged="applymaintera"></Picker>
                 <!--form-->
                 <Label Grid.Row="10" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Form:"></Label>
@@ -109,12 +109,14 @@
                 <Label Grid.Row="16" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Scale:"/>
                 <Editor Grid.Row="16" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
                 <Picker Grid.Row="17" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
+                <Button BackgroundColor="DeepSkyBlue" Grid.Row="18" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+                <Button BackgroundColor="DeepSkyBlue" Grid.Row="18" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Refresh" Clicked="refreshmain"/>
 
                 <Editor Grid.Row="25" Grid.Column="0" Text="Box" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="boxnum"/>
                 <Editor Grid.Row="25" Grid.Column="1" Text="Slot" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="slotnum"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="18" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+          
            
 
             </Grid>
