@@ -75,7 +75,8 @@
 
                 <!--nickname-->
                 <Label Grid.Row="5" Grid.Column="0" Text="Nickname:" VerticalOptions="Center" HorizontalOptions="End"></Label>
-                <Editor Grid.Row="5" Grid.Column="1" AutoSize="TextChanges" Text="Nickname" x:Name="nickname" VerticalOptions="Center" HorizontalOptions="Start" ></Editor>
+                <Editor Grid.Row="5" Grid.Column="1" AutoSize="TextChanges" Text="Nickname" x:Name="nickname" VerticalOptions="Center" HorizontalOptions="Start" TextChanged="applynickname" ></Editor>
+                <CheckBox Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="nicknamecheck" CheckedChanged="nicknamechecker"/>
                 <!--EXP&level-->
                 <Label Grid.Row="6" Grid.Column="0" Text="EXP:" HorizontalOptions="End" VerticalOptions="Center"></Label>
                 <Editor Grid.Row="6" Grid.Column="1" AutoSize="TextChanges" Text="Exp" HorizontalOptions="Start" VerticalOptions="Center" x:Name="exp" TextChanged="applyexp"></Editor>

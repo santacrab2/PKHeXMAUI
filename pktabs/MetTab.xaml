@@ -62,6 +62,16 @@
             <!--Obedience level-->
                 <Label Grid.Row="7" Grid.Column="0" Text="Obedience Level:" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Editor Grid.Row="7" Grid.Column="1" Text="Obedience Level" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay"/>
+            <!--fateful-->
+                <Label Grid.Row="8" Grid.Column="0" Text="Fateful Encounter" />
+                <CheckBox Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="fatefulcheck" CheckedChanged="applyfateful"/>
+             <!--egg info-->
+                <Label Grid.Row="9" Grid.Column="0" Text="Was Egg"/>
+                <CheckBox Grid.Row="9" Grid.Column="1" x:Name="eggcheck" CheckedChanged="applywasegg"/>
+                <Label Grid.Row="10" Grid.Column="0" Text="Egg Location" />
+                <Picker Grid.Row="10" Grid.Column="1" x:Name="eggmetpicker" SelectedIndexChanged="applyeggmetlocation"/>
+                <Label Grid.Row="11" Grid.Column="0" Text="Egg Met Date" />
+                <DatePicker Grid.Row="11" Grid.Column="1" x:Name="eggdatepicker" DateSelected="applyeggdate"/>
             </Grid>
 
         </ScrollView>

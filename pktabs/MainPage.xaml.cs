@@ -161,6 +161,7 @@ public partial class MainPage : ContentPage
 
     private void applynickname(object sender, TextChangedEventArgs e)
     {
+       
         pk.SetNickname(pk.Nickname);
         checklegality();
     }
@@ -302,6 +303,15 @@ public partial class MainPage : ContentPage
     private void refreshmain(object sender, EventArgs e)
     {
         applymainpkinfo(pk);
+    }
+
+    private void nicknamechecker(object sender, CheckedChangedEventArgs e)
+    {
+        pk.IsNicknamed = nicknamecheck.IsChecked;
+        if(!nicknamecheck.IsChecked)
+        {
+            pk.ClearNickname();
+        }
     }
 }
 

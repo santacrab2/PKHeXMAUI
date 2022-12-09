@@ -3,7 +3,7 @@
 using System.Drawing.Drawing2D;
 using System.Windows.Input;
 using PKHeX.Core;
-using static System.Net.WebRequestMethods;
+
 using static pk9reader.MainPage;
 
 namespace pk9reader;
@@ -18,6 +18,7 @@ public partial class MetTab : ContentPage
         origingamepicker.ItemsSource = GameInfo.Strings.gamelist;
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
         metlocationpicker.ItemsSource = GameInfo.Strings.GetLocationNames(9, GameVersion.SV).ToArray();
+        eggmetpicker.ItemsSource = GameInfo.Strings.GetLocationNames(9,GameVersion.SV).ToArray();
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
         ICommand refreshCommand = new Command(() =>
@@ -30,7 +31,7 @@ public partial class MetTab : ContentPage
         if(pk.Species !=0)
             applymetinfo(pk);
     }
-
+    public static string ballspriteurl;
     public void applymetinfo(PK9 pkm)
     {
         mettabpic.Source = spriteurl;
@@ -38,10 +39,16 @@ public partial class MetTab : ContentPage
         battleversionpicker.SelectedIndex = pkm.BattleVersion>-1?pkm.BattleVersion:0;
         metlocationpicker.SelectedIndex = pkm.Met_Location>-1?pkm.Met_Location:0;
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
-        ballimage.Source = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(pkm.Ball>-1?(Ball)pkm.Ball:"Poke")}.png";
+        ballspriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(pkm.Ball>-1?(Ball)pkm.Ball:"Poke")}.png";
+        ballimage.Source = ballspriteurl;
         metdatepicker.Date = pkm.MetDate != null?(DateTime)pkm.MetDate:DateTime.Now;
         metleveldisplay.Text = pkm.Met_Level>-1?pkm.Met_Level.ToString():"0";
         obedienceleveldisplay.Text = pkm.Obedience_Level>-1?pkm.Obedience_Level.ToString():"0";
+        fatefulcheck.IsChecked = pkm.FatefulEncounter;
+        eggcheck.IsChecked = pk.IsEgg;
+        eggdatepicker.Date = pkm.EggMetDate != null?(DateTime)pk.EggMetDate:DateTime.MinValue;
+        eggmetpicker.SelectedIndex = pkm.Egg_Location > -1 ? pkm.Egg_Location:0;
+        
     }
 
     public void applyorigingame(object sender, EventArgs e)
@@ -64,7 +71,8 @@ public partial class MetTab : ContentPage
     {
 
         pk.Ball = ballpicker.SelectedIndex;
-        ballimage.Source = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(Ball)pk.Ball}.png";
+        ballspriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(Ball)pk.Ball}.png";
+        ballimage.Source = ballspriteurl;
     }
 
     private void applymetdate(object sender, DateChangedEventArgs e)
@@ -84,6 +92,26 @@ public partial class MetTab : ContentPage
     {
         if (obedienceleveldisplay.Text.Length > 0)
             pk.Obedience_Level = (byte)int.Parse(obedienceleveldisplay.Text);
+    }
+
+    private void applyfateful(object sender, CheckedChangedEventArgs e)
+    {
+        pk.FatefulEncounter = fatefulcheck.IsChecked;
+    }
+
+    private void applywasegg(object sender, CheckedChangedEventArgs e)
+    {
+        pk.IsEgg = eggcheck.IsChecked;
+    }
+
+    private void applyeggmetlocation(object sender, EventArgs e)
+    {
+        pk.Egg_Location = eggmetpicker.SelectedIndex;
+    }
+
+    private void applyeggdate(object sender, DateChangedEventArgs e)
+    {
+        pk.EggMetDate = eggdatepicker.Date;
     }
 }
 
