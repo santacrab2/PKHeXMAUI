@@ -48,42 +48,49 @@
                 <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="IVs"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="EVs"/>
                 <Label Grid.Row="1" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="Stats"/>
+                <Label Grid.Row="1" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Hyper Trained"/>
                 <!--HP-->
                 <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="HP:"/>
                 <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="hpbasedisplay"/>
                 <Editor Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPIV" TextChanged="applyhpIV"/>
                 <Editor Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPEV" TextChanged="applyhpEV"/>
                 <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalhpdisplay"/>
+                <CheckBox Grid.Row="2" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="hpHyper" CheckedChanged="applyHPhyper"/>
                 <!--ATK-->
                 <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Atk:"/>
                 <Editor IsReadOnly="True" Grid.Row="3" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="atkbasedisplay"/>
                 <Editor Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkIV" TextChanged="applyatkIV"/>
                 <Editor Grid.Row="3" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkEV" TextChanged="applyatkEV"/>
                 <Editor IsReadOnly="True" Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalatkdisplay"/>
+                <CheckBox Grid.Row="3" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="ATKHyper" CheckedChanged="applyATKhyper"/>
                 <!--DEF-->
                 <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Def:"/>
                 <Editor IsReadOnly="True" Grid.Row="4" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="defbasedisplay"/>
                 <Editor Grid.Row="4" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFIV" TextChanged="applydefIV"/>
                 <Editor Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFEV" TextChanged="applydefEV"/>
                 <Editor IsReadOnly="True" Grid.Row="4" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totaldefdisplay"/>
+                <CheckBox Grid.Row="4" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFHyper" CheckedChanged="applyDEFhyper"/>
                 <!--SPA-->
                 <Label Grid.Row="5" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="SpA:"/>
                 <Editor IsReadOnly="True" Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="spabasedisplay"/>
                 <Editor Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAIV" TextChanged="applyspaIV"/>
                 <Editor Grid.Row="5" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAEV" TextChanged="applyspaEV"/>
                 <Editor IsReadOnly="True" Grid.Row="5" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalspadisplay"/>
+                <CheckBox Grid.Row="5" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAHyper" CheckedChanged="applySPAhyper"/>
                 <!--SPD-->
                 <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="SpD:"/>
                 <Editor IsReadOnly="True" Grid.Row="6" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="spdbasedisplay"/>
                 <Editor Grid.Row="6" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDIV" TextChanged="applyspdIV"/>
                 <Editor Grid.Row="6" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDEV" TextChanged="applyspdEV"/>
                 <Editor IsReadOnly="True" Grid.Row="6" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalspddisplay"/>
+                <CheckBox Grid.Row="6" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDHyper" CheckedChanged="applySPDhyper"/>
                 <!--SPE-->
                 <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Spe:"/>
                 <Editor IsReadOnly="True" Grid.Row="7" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="spebasedisplay"/>
                 <Editor Grid.Row="7" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEIV" TextChanged="applyspeIV"/>
                 <Editor Grid.Row="7" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEEV" TextChanged="applyspeEV"/>
                 <Editor IsReadOnly="True" Grid.Row="7" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalspedisplay"/>
+                <CheckBox Grid.Row="7" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEHyper" CheckedChanged="applySPEhyper"/>
                 <!--Totals-->
                 <Label Grid.Row="8" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Total:"/>
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalbasedisplay"/>

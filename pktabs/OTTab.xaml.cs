@@ -9,6 +9,7 @@ public partial class OTTab : ContentPage
 	public OTTab()
 	{
 		InitializeComponent();
+        htlanguagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
         ICommand refreshCommand = new Command(() =>
         {
             if (pk.Species != 0)
@@ -27,7 +28,13 @@ public partial class OTTab : ContentPage
         TIDdisplay.Text = pkm.TrainerID7.ToString();
         otdisplay.Text = pkm.OT_Name;
         ecdisplay.Text = $"{pkm.EncryptionConstant:X}";
-
+        htname.Text = pkm.HT_Name;
+        htlanguagepicker.SelectedIndex = pkm.HT_Language;
+        switch(pkm.CurrentHandler)
+        {
+            case 0:  OTcurrentcheck.IsChecked = true;break;
+            case 1: HTcurrentcheck.IsChecked = true; break;
+        };
 
     }
 
@@ -55,5 +62,25 @@ public partial class OTTab : ContentPage
     private void applyec(object sender, TextChangedEventArgs e)
     {
         pk.EncryptionConstant = Convert.ToUInt32(ecdisplay.Text,16);
+    }
+
+    private void applyHT(object sender, TextChangedEventArgs e)
+    {
+        pk.HT_Name = htname.Text;
+    }
+
+    private void applyhtlanguage(object sender, EventArgs e)
+    {
+        pk.HT_Language = (byte)htlanguagepicker.SelectedIndex;
+    }
+
+    private void MakeOTCurrent(object sender, CheckedChangedEventArgs e)
+    {
+        pk.CurrentHandler = 0;
+    }
+
+    private void MakeHTCurrent(object sender, CheckedChangedEventArgs e)
+    {
+        pk.CurrentHandler = 1;
     }
 }

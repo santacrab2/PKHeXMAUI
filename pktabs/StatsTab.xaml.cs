@@ -21,31 +21,38 @@ public partial class StatsTab : ContentPage
 
 	public void applystatsinfo(PK9 pkm)
 	{
+        pkm.ResetPartyStats();
         statpic.Source = spriteurl;
         hpbasedisplay.Text = pkm.PersonalInfo.HP.ToString();
         HPIV.Text = pkm.IV_HP.ToString();
         HPEV.Text = pkm.EV_HP.ToString();
         totalhpdisplay.Text = pkm.Stat_HPCurrent.ToString();
+        hpHyper.IsChecked = pk.IsHyperTrained(0);
         atkbasedisplay.Text = pkm.PersonalInfo.ATK.ToString();
         AtkIV.Text = pkm.IV_ATK.ToString();
         AtkEV.Text = pkm.EV_ATK.ToString();
         totalatkdisplay.Text = pkm.Stat_ATK.ToString();
+        ATKHyper.IsChecked = pkm.IsHyperTrained(1);
         defbasedisplay.Text = pkm.PersonalInfo.DEF.ToString();
         DEFIV.Text = pkm.IV_DEF.ToString();
         DEFEV.Text = pkm.EV_DEF.ToString();
         totaldefdisplay.Text = pkm.Stat_DEF.ToString();
+        DEFHyper.IsChecked = pkm.IsHyperTrained(2);
         spabasedisplay.Text = pkm.PersonalInfo.SPA.ToString();
         SPAIV.Text = pkm.IV_SPA.ToString();
         SPAEV.Text = pkm.EV_SPA.ToString();
         totalspadisplay.Text = pkm.Stat_SPA.ToString();
+        SPAHyper.IsChecked = pkm.IsHyperTrained(3);
         spdbasedisplay.Text = pkm.PersonalInfo.SPD.ToString();
         SPDIV.Text = pkm.IV_SPD.ToString();
         SPDEV.Text = pkm.EV_SPD.ToString();
         totalspddisplay.Text = pkm.Stat_SPD.ToString();
+        SPDHyper.IsChecked = pkm.IsHyperTrained(4);
         spebasedisplay.Text = pkm.PersonalInfo.SPE.ToString();
         SPEIV.Text = pkm.IV_SPE.ToString();
         SPEEV.Text = pkm.EV_SPE.ToString();
         totalspedisplay.Text = pkm.Stat_SPE.ToString();
+        SPEHyper.IsChecked = pk.IsHyperTrained(5);
         totalbasedisplay.Text = pkm.PersonalInfo.GetBaseStatTotal().ToString();
         totalIVdisplay.Text = pkm.IVTotal.ToString();
         totalEVdisplay.Text = pkm.EVTotal.ToString();
@@ -244,5 +251,30 @@ public partial class StatsTab : ContentPage
         
         EffortValues.SetMax(ivs,pk);
         pk.SetEVs(ivs);
+    }
+
+    private void applyHPhyper(object sender, CheckedChangedEventArgs e)
+    {
+        pk.HyperTrainInvert(0);
+    }
+    private void applyATKhyper(object sender, CheckedChangedEventArgs e)
+    {
+        pk.HyperTrainInvert(1);
+    }
+    private void applyDEFhyper(object sender, CheckedChangedEventArgs e)
+    {
+        pk.HyperTrainInvert(2);
+    }
+    private void applySPAhyper(object sender, CheckedChangedEventArgs e)
+    {
+        pk.HyperTrainInvert(3);
+    }
+    private void applySPDhyper(object sender, CheckedChangedEventArgs e)
+    {
+        pk.HyperTrainInvert(4);
+    }
+    private void applySPEhyper(object sender, CheckedChangedEventArgs e)
+    {
+        pk.HyperTrainInvert(5);
     }
 }

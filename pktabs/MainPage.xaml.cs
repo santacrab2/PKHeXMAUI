@@ -101,6 +101,7 @@ public partial class MainPage : ContentPage
         spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         pic.Source = spriteurl;
         languagepicker.SelectedIndex = pkm.Language;
+        nicknamecheck.IsChecked = pkm.IsNicknamed;
         checklegality();
 
 
@@ -108,8 +109,8 @@ public partial class MainPage : ContentPage
     }
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
-        
-            await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{(Species)pk.Species}.pk9", pk.DecryptedPartyData);
+        pk.ResetPartyStats();
+        await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{pk.FileName}", pk.DecryptedPartyData);
         
     }
 
@@ -154,16 +155,20 @@ public partial class MainPage : ContentPage
 
     private void rollpid(object sender, EventArgs e) 
     { 
+        
         pk.SetPIDGender(pk.Gender);
+        pk.SetRandomEC();
         displaypid.Text = $"{pk.PID:X}";
         checklegality();
     }
 
     private void applynickname(object sender, TextChangedEventArgs e)
     {
-       
-        pk.SetNickname(pk.Nickname);
-        checklegality();
+        if (pk.IsNicknamed)
+        {
+            pk.SetNickname(pk.Nickname);
+            checklegality();
+        }
     }
 
     private void turnshiny(object sender, EventArgs e)
@@ -238,6 +243,7 @@ public partial class MainPage : ContentPage
 
     private async void inject(object sender, EventArgs e)
     {
+        pk.ResetPartyStats();
         IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
         var off = await botBase.PointerRelative(jumps);
         await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))));

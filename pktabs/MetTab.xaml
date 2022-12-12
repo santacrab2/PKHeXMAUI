@@ -67,7 +67,7 @@
                 <CheckBox Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="fatefulcheck" CheckedChanged="applyfateful"/>
              <!--egg info-->
                 <Label Grid.Row="9" Grid.Column="0" Text="Was Egg"/>
-                <CheckBox Grid.Row="9" Grid.Column="1" x:Name="eggcheck" CheckedChanged="applywasegg"/>
+                <CheckBox Grid.Row="9" Grid.Column="1" x:Name="eggcheck" CheckedChanged="wasegg"/>
                 <Label Grid.Row="10" Grid.Column="0" Text="Egg Location" />
                 <Picker Grid.Row="10" Grid.Column="1" x:Name="eggmetpicker" SelectedIndexChanged="applyeggmetlocation"/>
                 <Label Grid.Row="11" Grid.Column="0" Text="Egg Met Date" />

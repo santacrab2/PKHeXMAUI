@@ -45,6 +45,7 @@
                 />
                 <!--OT-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Trainer Information"/>
+                <CheckBox Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="OTcurrentcheck" CheckedChanged="MakeOTCurrent"/>
                 <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="SID:"/>
                 <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" AutoSize="TextChanges" x:Name="SIDdisplay" TextChanged="applySID"/>
                 <Label Grid.Row="2" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Text="TID:"/>
@@ -54,6 +55,13 @@
               <!--EC-->
                 <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Encryption Constant"/>
                 <Editor Grid.Row="4" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="ecdisplay" TextChanged="applyec"/>
+                <!--Hidden trainer-->
+                <Label Grid.Row="5" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Hidden Trainer"/>
+                <CheckBox Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HTcurrentcheck" CheckedChanged="MakeHTCurrent"/>
+                <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="HT Name:"/>
+                <Editor Grid.Row="6" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="htname" TextChanged="applyHT"/>
+                <Label Grid.Row="6" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center" Text="Language"/>
+                <Picker Grid.Row="6" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="htlanguagepicker" SelectedIndexChanged="applyhtlanguage"/>
 
             </Grid>
         </ScrollView>

@@ -45,8 +45,8 @@ public partial class MetTab : ContentPage
         metleveldisplay.Text = pkm.Met_Level>-1?pkm.Met_Level.ToString():"0";
         obedienceleveldisplay.Text = pkm.Obedience_Level>-1?pkm.Obedience_Level.ToString():"0";
         fatefulcheck.IsChecked = pkm.FatefulEncounter;
-        eggcheck.IsChecked = pk.IsEgg;
-        eggdatepicker.Date = pkm.EggMetDate != null?(DateTime)pk.EggMetDate:DateTime.MinValue;
+        eggcheck.IsChecked = pkm.WasEgg;
+        eggdatepicker.Date = pkm.EggMetDate != null?(DateTime)pk.EggMetDate:DateTime.UnixEpoch;
         eggmetpicker.SelectedIndex = pkm.Egg_Location > -1 ? pkm.Egg_Location:0;
         
     }
@@ -99,10 +99,7 @@ public partial class MetTab : ContentPage
         pk.FatefulEncounter = fatefulcheck.IsChecked;
     }
 
-    private void applywasegg(object sender, CheckedChangedEventArgs e)
-    {
-        pk.IsEgg = eggcheck.IsChecked;
-    }
+  
 
     private void applyeggmetlocation(object sender, EventArgs e)
     {
@@ -112,6 +109,20 @@ public partial class MetTab : ContentPage
     private void applyeggdate(object sender, DateChangedEventArgs e)
     {
         pk.EggMetDate = eggdatepicker.Date;
+    }
+
+    private void wasegg(object sender, CheckedChangedEventArgs e)
+    {
+        if(eggcheck.IsChecked)
+        {
+            pk.Egg_Location = EncounterSuggestion.GetSuggestedEncounterEggLocationEgg(pk, true);
+            pk.EggMetDate = DateTime.Now;
+        }
+        else
+        {
+            pk.Egg_Location = LocationEdits.GetNoneLocation(pk);
+            pk.EggMetDate = null;
+        }
     }
 }
 

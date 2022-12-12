@@ -12,7 +12,10 @@ public partial class AttacksTab : ContentPage
 	public AttacksTab()
 	{
 		InitializeComponent();
-     
+        move1ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
+        move2ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
+        move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
+        move4ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         ICommand refreshCommand = new Command(() =>
         {
             if (pk.Species != 0)
@@ -26,7 +29,7 @@ public partial class AttacksTab : ContentPage
     public static List<Move> movlist = new();
 	public void applyattackinfo(PK9 pkm)
 	{
-       
+        attackpic.Source = spriteurl;
         movlist = new();
        foreach(var mov in datasourcefiltered.Moves)
         {
@@ -45,7 +48,7 @@ public partial class AttacksTab : ContentPage
         rmove2.ItemsSource = movlist;
         rmove3.ItemsSource = movlist;
         rmove4.ItemsSource = movlist;
-        attackpic.Source = spriteurl;
+    
         move1.SelectedItem = (Move)pkm.Move1;
         move2.SelectedItem = (Move)pkm.Move2;
         move3.SelectedItem = (Move)pkm.Move3;
@@ -54,6 +57,14 @@ public partial class AttacksTab : ContentPage
         rmove2.SelectedItem = (Move)pkm.RelearnMove2;
         rmove3.SelectedItem = (Move)pkm.RelearnMove3;
         rmove4.SelectedItem = (Move)pkm.RelearnMove4;
+        move1pp.Text = pkm.GetMovePP(pkm.Move1, pkm.Move1_PPUps).ToString();
+        move2pp.Text = pkm.GetMovePP(pkm.Move2, pkm.Move2_PPUps).ToString();
+        move3pp.Text = pkm.GetMovePP(pkm.Move3, pkm.Move3_PPUps).ToString();
+        move4pp.Text = pkm.GetMovePP(pkm.Move4, pkm.Move4_PPUps).ToString();
+        move1ppups.SelectedIndex = pkm.Move1_PPUps;
+        move2ppups.SelectedIndex = pkm.Move2_PPUps;
+        move3ppups.SelectedIndex = pkm.Move3_PPUps;
+        move4ppups.SelectedIndex = pkm.Move4_PPUps;
     }
 
     private void applymove1(object sender, EventArgs e)
@@ -103,4 +114,23 @@ public partial class AttacksTab : ContentPage
         rmove3.SelectedItem = (Move)pk.RelearnMove3;
         rmove4.SelectedItem = (Move)pk.RelearnMove4;
     }
+
+    private void applymove1ppups(object sender, EventArgs e)
+    {
+        pk.Move1_PPUps = move1ppups.SelectedIndex;
+    }
+    private void applymove2ppups(object sender, EventArgs e)
+    {
+        pk.Move2_PPUps = move2ppups.SelectedIndex;
+    }
+    private void applymove3ppups(object sender, EventArgs e)
+    {
+        pk.Move3_PPUps = move3ppups.SelectedIndex;
+    }
+    private void applymove4ppups(object sender, EventArgs e)
+    {
+        pk.Move4_PPUps = move4ppups.SelectedIndex;
+    }
+
+
 }
