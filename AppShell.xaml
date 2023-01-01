@@ -19,5 +19,8 @@
         <Tab Title="Box">
             <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
         </Tab>
+        <Tab Title="Raids">
+            <ShellContent Title="Raids" ContentTemplate="{DataTemplate local:RaidViewer}"/>
+        </Tab>
     </TabBar>
 </Shell>

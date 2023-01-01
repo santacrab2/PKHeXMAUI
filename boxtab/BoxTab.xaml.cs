@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Internals;
 using PKHeX.Core;
 using static pk9reader.MainPage;
 
@@ -12,6 +13,10 @@ public partial class BoxTab : ContentPage
 	public BoxTab()
 	{
 		InitializeComponent();
+        for(int k = 1; k < 31; k++)
+        {
+            boxnum.Items.Add(k.ToString());
+        }
         ICommand refreshCommand = new Command(() =>
         {
 			
@@ -21,16 +26,18 @@ public partial class BoxTab : ContentPage
         boxrefresh.Command = refreshCommand;
 
     }
+    public static IList<boxsprite> boxsprites = new List<boxsprite>();
+    
 	public void fillbox()
 	{
 		
-		IList<boxsprite> boxsprites = new List<boxsprite>();
-		foreach (var boxpk in sav.GetBoxData(int.Parse(boxnum.Text)))
+		boxsprites = new List<boxsprite>();
+		foreach (var boxpk in sav.GetBoxData(boxnum.SelectedIndex))
 		{
 			var boxinfo = new boxsprite(boxpk);
 			boxsprites.Add(boxinfo);
 		}
-		boxview.ItemsSource= boxsprites;
+		
         boxview.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
@@ -43,6 +50,7 @@ public partial class BoxTab : ContentPage
             grid.Add(image);
             return grid;
         });
+        boxview.ItemsSource = boxsprites;
 
 
     }
@@ -51,8 +59,12 @@ public partial class BoxTab : ContentPage
     {
         IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
         var off = await botBase.PointerRelative(jumps);
-        var bytes = await botBase.ReadBytesAsync((uint)off+(uint.Parse(boxnum.Text)*10320), 10320);
-		sav.SetBoxBinary(bytes, int.Parse(boxnum.Text));
+        for (int i = 0; i < 30; i++)
+        {
+            var bytes = await botBase.ReadBytesAsync((uint)off + (uint)(i * 10320), 10320);
+
+            sav.SetBoxBinary(bytes, i);
+        }
    
 		
 		
@@ -62,9 +74,26 @@ public partial class BoxTab : ContentPage
     {
         foreach(boxsprite b in e.CurrentSelection)
         {
-            pk = (PK9)b.pkm;
+            if (b.pkm.Species != 0)
+            {
+                pk = (PK9)b.pkm;
+            }
+        
         }
         
+    }
+
+    private async void injectboxtab(object sender, EventArgs e)
+    {
+        pk.ResetPartyStats();
+        IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
+        var off = await botBase.PointerRelative(jumps);
+        await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (uint)(344 * 30 * boxnum.SelectedIndex) + ((uint)(344 * boxsprites.IndexOf((boxsprite)boxview.SelectedItem) )));
+    }
+
+    private void changebox(object sender, EventArgs e)
+    {
+        fillbox();
     }
 }
 public class boxsprite
@@ -73,7 +102,14 @@ public class boxsprite
 	{
 		pkm = pk9;
 		species = $"{(Species)pk9.Species}";
-		url= $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+        if (pk9.Species == 0)
+            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+        else if (pk9.IsShiny)
+            url = $"https://www.serebii.net/Shiny/SV/{pk9.Species}.png";
+        else if(pk9.Form != 0)
+            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+        else
+            url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species}.png";
     }
 	public PKM pkm { get; set; }
 	public string url { get; set; }

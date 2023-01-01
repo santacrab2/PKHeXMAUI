@@ -48,7 +48,17 @@
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiAsset Include="Resources\Assets\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Remove="Resources\Assets\AboutAssets.txt" />
+	  <MauiAsset Remove="Resources\Assets\encounter_gem_paldea.pkl" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Assets\AboutAssets.txt" />
+	  <EmbeddedResource Include="Resources\Assets\encounter_gem_paldea.pkl" />
 	</ItemGroup>
 
 
@@ -64,7 +74,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="PKHeX.Core" Version="22.12.1" />
+		<PackageReference Include="PKHeX.Core" Version="22.12.19" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
 	</ItemGroup>
 
@@ -87,6 +97,9 @@
 	  <Compile Update="pktabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Raidtabs\RaidViewer.xaml.cs">
+	    <DependentUpon>RaidViewer.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -103,6 +116,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="pktabs\StatsTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Raidtabs\RaidViewer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

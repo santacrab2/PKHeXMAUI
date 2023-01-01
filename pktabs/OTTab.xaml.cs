@@ -32,8 +32,8 @@ public partial class OTTab : ContentPage
         htlanguagepicker.SelectedIndex = pkm.HT_Language;
         switch(pkm.CurrentHandler)
         {
-            case 0:  OTcurrentcheck.IsChecked = true;break;
-            case 1: HTcurrentcheck.IsChecked = true; break;
+            case 0:  OTcurrentcheck.IsChecked = true; HTcurrentcheck.IsChecked = false; break;
+            case 1: HTcurrentcheck.IsChecked = true; OTcurrentcheck.IsChecked = false; break;
         };
 
     }

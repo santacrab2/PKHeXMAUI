@@ -6,9 +6,10 @@
     <RefreshView x:Name="boxrefresh">
         <ScrollView>
             <StackLayout>
-                <Button Text="Read Box" x:Name="readbox" Clicked="readboxdata" BackgroundColor="DeepSkyBlue" />
-                <Editor FontSize="18" Text="Box number" x:Name="boxnum"  />
-                <CollectionView HeightRequest="1000" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
+                <Button Text="Read All Boxes" x:Name="readbox" Clicked="readboxdata" BackgroundColor="DeepSkyBlue" />
+                <Button Text="Inject" x:Name="injectboxt" Clicked="injectboxtab" BackgroundColor="DeepSkyBlue"/>
+                <Picker FontSize="18"  x:Name="boxnum" SelectedIndexChanged="changebox" />
+                <CollectionView HeightRequest="500" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
               
 
             </StackLayout>

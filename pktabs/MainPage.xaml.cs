@@ -5,6 +5,7 @@ using PKHeX.Core.AutoMod;
 using static pk9reader.MetTab;
 using System.Windows.Input;
 
+
 namespace pk9reader;
 
 public partial class MainPage : ContentPage
@@ -14,7 +15,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-
+        
         APILegality.SetAllLegalRibbons = false;
         APILegality.UseTrainerData = true;
         APILegality.AllowTrainerOverride = true;
@@ -32,6 +33,7 @@ public partial class MainPage : ContentPage
         languagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
         ICommand refreshCommand = new Command(() =>
         {
+         
             checklegality();
             mainrefresh.IsRefreshing = false;
             
@@ -50,6 +52,7 @@ public partial class MainPage : ContentPage
     public static FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
+
     public async void pk9picker_Clicked(object sender, EventArgs e)
     {
         
@@ -98,7 +101,14 @@ public partial class MainPage : ContentPage
         genderdisplay.SelectedIndex = pkm.Gender;
         helditempicker.SelectedIndex = helditempicker.Items.IndexOf(GameInfo.Strings.Item[pkm.HeldItem]);
         formpicker.SelectedIndex = pkm.Form;
-        spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
+        if (pkm.Species == 0)
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
+        else if (pkm.IsShiny)
+            spriteurl = $"https://www.serebii.net/Shiny/SV/{pkm.Species}.png";
+        else if (pkm.Form != 0)
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
+        else
+            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pkm.Species}.png";
         pic.Source = spriteurl;
         languagepicker.SelectedIndex = pkm.Language;
         nicknamecheck.IsChecked = pkm.IsNicknamed;
@@ -148,7 +158,14 @@ public partial class MainPage : ContentPage
             formpicker.Items.Add(form);
         }
         formpicker.SelectedIndex = pk.Form;
-        spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+        if (pk.Species == 0)
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+        else if (pk.IsShiny)
+            spriteurl = $"https://www.serebii.net/Shiny/SV/{pk.Species}.png";
+        else if (pk.Form != 0)
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+        else
+            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pk.Species}.png";
         pic.Source = spriteurl;
         checklegality();
     }
@@ -223,13 +240,20 @@ public partial class MainPage : ContentPage
 
     private void applyability(object sender, EventArgs e) { pk.SetAbility(abilitypicker.SelectedIndex); checklegality(); }
 
-        private void botbaseconnect(object sender, EventArgs e)
+        private async void botbaseconnect(object sender, EventArgs e)
     {
         
         if (!SwitchConnection.Connected)
         {
-            SwitchConnection.Connect(IP.Text,6000);
-            connect.Text = "disconnect";
+            try
+            {
+                SwitchConnection.Connect(IP.Text, 6000);
+                connect.Text = "loading";
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Connection Error", "Ensure you are on WiFi and that your IP is correct", "cancel");
+            }
         
           
         }
@@ -238,6 +262,17 @@ public partial class MainPage : ContentPage
             SwitchConnection.Disconnect(true);
             connect.Text = "connect";
            SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
+        }
+        if (SwitchConnection.Connected)
+        {
+            var temp = (SAV9SV)sav;
+            var info = temp.MyStatus;
+            var off = await botBase.PointerRelative(new long[] { 0x4384B18, 0x148, 0x40 });
+            var read = await botBase.ReadBytesAsync((uint)off, info.Data.Length);
+            read.CopyTo(info.Data, 0);
+            
+            sav = temp;
+            connect.Text = "disconnect";
         }
     }
 
@@ -318,6 +353,13 @@ public partial class MainPage : ContentPage
         {
             pk.ClearNickname();
         }
+    }
+    private static byte[] DecryptBlock(uint key, byte[] block)
+    {
+        var rng = new SCXorShift32(key);
+        for (int i = 0; i < block.Length; i++)
+            block[i] = (byte)(block[i] ^ rng.Next());
+        return block;
     }
 }
 
