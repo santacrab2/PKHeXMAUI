@@ -104,11 +104,11 @@ public partial class MainPage : ContentPage
         if (pkm.Species == 0)
             spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         else if (pkm.IsShiny)
-            spriteurl = $"https://www.serebii.net/Shiny/SV/{pkm.Species}.png";
+            spriteurl = $"https://www.serebii.net/Shiny/SV/{pkm.Species:000}.png";
         else if (pkm.Form != 0)
             spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         else
-            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pkm.Species}.png";
+            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pkm.Species:000}.png";
         pic.Source = spriteurl;
         languagepicker.SelectedIndex = pkm.Language;
         nicknamecheck.IsChecked = pkm.IsNicknamed;
@@ -161,11 +161,11 @@ public partial class MainPage : ContentPage
         if (pk.Species == 0)
             spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
         else if (pk.IsShiny)
-            spriteurl = $"https://www.serebii.net/Shiny/SV/{pk.Species}.png";
+            spriteurl = $"https://www.serebii.net/Shiny/SV/{pk.Species:000}.png";
         else if (pk.Form != 0)
             spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
         else
-            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pk.Species}.png";
+            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pk.Species:000}.png";
         pic.Source = spriteurl;
         checklegality();
     }

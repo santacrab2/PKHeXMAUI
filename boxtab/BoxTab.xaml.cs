@@ -105,11 +105,11 @@ public class boxsprite
         if (pk9.Species == 0)
             url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
         else if (pk9.IsShiny)
-            url = $"https://www.serebii.net/Shiny/SV/{pk9.Species}.png";
+            url = $"https://www.serebii.net/Shiny/SV/{pk9.Species:000}.png";
         else if(pk9.Form != 0)
             url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
         else
-            url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species}.png";
+            url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species:000}.png";
     }
 	public PKM pkm { get; set; }
 	public string url { get; set; }

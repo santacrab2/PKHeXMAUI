@@ -39,12 +39,15 @@ public partial class RaidViewer : ContentPage
             image.SetBinding(Image.SourceProperty, "url");
             image.SetBinding(Image.BackgroundColorProperty, "bgcolor");
             grid.Add(image);
-            Label teratype = new Label() { HorizontalTextAlignment = TextAlignment.Start };
+            Label teratype = new Label() { HorizontalTextAlignment = TextAlignment.Start, Margin = new Thickness(20,0,0,0) };
             teratype.SetBinding(Label.TextProperty, "pkm.TeraTypeOriginal");
             grid.Add(teratype);
             Label loc = new Label() { HorizontalTextAlignment = TextAlignment.End };
             loc.SetBinding(Label.TextProperty, "location");
             grid.Add(loc);
+            Label sta = new Label() { HorizontalTextAlignment = TextAlignment.End, VerticalTextAlignment = TextAlignment.End};
+            sta.SetBinding(Label.TextProperty, "Stars");
+            grid.Add(sta);
             return grid;
         });
 
@@ -71,7 +74,7 @@ public partial class RaidViewer : ContentPage
         if (stars < 6) xoro.NextInt(100);
         return (int)xoro.NextInt(max);
     }
-    public int getxoronextint(uint seed, ulong rand)
+    public static int getxoronextint(uint seed, ulong rand)
     {
         var xoro = new Xoroshiro128Plus(seed);
 
@@ -206,7 +209,7 @@ public partial class RaidViewer : ContentPage
                 TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, encounter.TeraType, encounter.Species, encounter.Form),
             };
 
-            Encounter9RNG.GenerateData(pk5, param5, EncounterCriteria.Unrestricted, raid.Seed, true);
+            Encounter9RNG.GenerateData(pk5, param5, EncounterCriteria.Unrestricted, raid.Seed);
 
             returnlist.Add(new raidsprite(pk5, raid));break;
                 case TeraRaidContentType.Black6:
@@ -260,7 +263,7 @@ public partial class RaidViewer : ContentPage
                         TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, encounter.TeraType, encounter.Species, encounter.Form),
                     };
 
-                    Encounter9RNG.GenerateData(pk6, param6, EncounterCriteria.Unrestricted, raid.Seed, true);
+                    Encounter9RNG.GenerateData(pk6, param6, EncounterCriteria.Unrestricted, raid.Seed);
 
                     returnlist.Add(new raidsprite(pk6, raid)); break;
                 case TeraRaidContentType.Might7:
@@ -310,7 +313,7 @@ public partial class RaidViewer : ContentPage
                         TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, mencounter.TeraType, mencounter.Species, mencounter.Form),
                     };
 
-                    Encounter9RNG.GenerateData(pk7, param7, EncounterCriteria.Unrestricted, raid.Seed, true);
+                    Encounter9RNG.GenerateData(pk7, param7, EncounterCriteria.Unrestricted, raid.Seed);
 
                     returnlist.Add(new raidsprite(pk7, raid)); break;
 
@@ -521,6 +524,7 @@ public partial class RaidViewer : ContentPage
         foreach (var s in e.CurrentSelection)
         {
             mainpk = (raidsprite)s;
+            pk = (PK9)mainpk.pkm;
         }
     }
     public static Color GetTypeSpriteColor(byte type)
@@ -579,6 +583,7 @@ public partial class RaidViewer : ContentPage
         };
     public raidsprite(PK9 pk9, TeraRaidDetail raid)
         {
+        
             location = raid.AreaID == 0?Area[1]: Area[raid.AreaID - 1];
             bgcolor =RaidViewer.GetTypeSpriteColor((byte)pk9.TeraTypeOriginal);
             Raid = raid;
@@ -587,12 +592,24 @@ public partial class RaidViewer : ContentPage
             if (pk9.Species == 0)
                 url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
             else if (pk9.IsShiny)
-                url = $"https://www.serebii.net/Shiny/SV/{pk9.Species}.png";
+                url = $"https://www.serebii.net/Shiny/SV/{pk9.Species:000}.png";
             else if (pk9.Form != 0)
                 url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
             else
-                url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species}.png";
-        }
+                url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species:000}.png";
+
+        var starxoro = RaidViewer.getxoronextint(raid.Seed, 100);
+        var stars = starxoro switch
+        {
+            <= 30 => 3,
+            <= 70 => 4,
+            > 70 => 5,
+        };
+        if (raid.Content == TeraRaidContentType.Black6)
+            stars = 6;
+        Stars = stars.ToString();
+    }
+        public string Stars { get; set; }
         public string location { get; set; }
         public Color bgcolor { get; set; }
         public PKM pkm { get; set; }
