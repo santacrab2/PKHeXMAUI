@@ -524,7 +524,7 @@ public partial class RaidViewer : ContentPage
         foreach (var s in e.CurrentSelection)
         {
             mainpk = (raidsprite)s;
-            pk = (PK9)mainpk.pkm;
+            
         }
     }
     public static Color GetTypeSpriteColor(byte type)

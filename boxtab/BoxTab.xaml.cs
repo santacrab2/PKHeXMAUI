@@ -57,17 +57,21 @@ public partial class BoxTab : ContentPage
 
     private async void readboxdata(object sender, EventArgs e)
     {
+        readbox.Text = "loading...";
         IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
         var off = await botBase.PointerRelative(jumps);
+        var bytes = await botBase.ReadBytesAsync((uint)off, 309600);
         for (int i = 0; i < 30; i++)
         {
-            var bytes = await botBase.ReadBytesAsync((uint)off + (uint)(i * 10320), 10320);
+            var datz = new byte[10320];
+            Array.Copy(bytes, i * 10320, datz, 0, 10320);
 
-            sav.SetBoxBinary(bytes, i);
+            sav.SetBoxBinary(datz,i);
         }
-   
-		
-		
+        readbox.Text = "Read All Boxes";
+
+
+
     }
 
     private async void applypkfrombox(object sender, SelectionChangedEventArgs e)
