@@ -53,7 +53,7 @@
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Save" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
-                <Editor Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.0" AutoSize="TextChanges" x:Name="IP"></Editor>
+                <Editor Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP"></Editor>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="3" HorizontalOptions="End" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
                 <!--PID-->
                 <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="End"></Label>

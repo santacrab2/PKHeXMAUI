@@ -553,9 +553,16 @@ public partial class RaidViewer : ContentPage
         };
 
     }
-    
+
+    private async void takeascreenshot(object sender, EventArgs e)
+    {
+        sceenshotbutton.Text = "loading...";
+        var screenarray = await botBase.Screengrab(CancellationToken.None);
+        await File.WriteAllBytesAsync("/storage/emulated/0/Pictures/RaidScreenshot.jpg",screenarray);
+        sceenshotbutton.Text = "screenshot";
+    }   
 }
-    public class raidsprite
+public class raidsprite
     {
     public static string[] Area = new string[] {
             "South Province (Area 1)",

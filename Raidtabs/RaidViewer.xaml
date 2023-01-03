@@ -8,6 +8,7 @@
         <ScrollView>
             <StackLayout>
                 <Button Text="Shinify" x:Name="testlab" Clicked="shinify"></Button>
+                <Button Text="Screenshot" x:Name="sceenshotbutton" Clicked="takeascreenshot"/>
                 <CollectionView HeightRequest="500" WidthRequest="400" x:Name="raidview" SelectionMode="Single" SelectionChanged="update" ></CollectionView>
             </StackLayout>
         </ScrollView>

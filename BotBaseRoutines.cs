@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Text;
 using SysBot.Base;
-
+using static pk9reader.MainPage;
 using System.Diagnostics;
 
 
@@ -224,6 +224,26 @@ namespace pk9reader
                 await Task.Delay(waitInterval).ConfigureAwait(false);
             } while (sw.ElapsedMilliseconds < waitms);
             return false;
+        }
+        public async Task<byte[]> Screengrab(CancellationToken token)
+        {
+            List<byte> flexBuffer = new();
+            int received = 0;
+
+            await SendAsync(SwitchCommand.Screengrab()).ConfigureAwait(false);
+            await Task.Delay(SwitchConnection.ReceiveBufferSize / DelayFactor + BaseDelay, token).ConfigureAwait(false);
+            while (SwitchConnection.Available > 0)
+            {
+                byte[] buffer = new byte[SwitchConnection.ReceiveBufferSize];
+                received += SwitchConnection.Receive(buffer, 0, SwitchConnection.ReceiveBufferSize, SocketFlags.None);
+                flexBuffer.AddRange(buffer);
+                await Task.Delay(MaximumTransferSize / DelayFactor + BaseDelay, token).ConfigureAwait(false);
+            }
+
+            byte[] data = new byte[flexBuffer.Count];
+            flexBuffer.CopyTo(data);
+            var result = data.SliceSafe(0, received);
+            return SysBot.Base.Decoder.ConvertHexByteStringToBytes(result);
         }
     }
 }
