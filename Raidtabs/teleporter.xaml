@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pk9reader.teleporter"
+             Title="teleporter">
+    <VerticalStackLayout>
+        <Button Text="read location" Clicked="readloc"/>
+        <Label x:Name="xlab" Text="0"/>
+        <Label x:Name="ylab" Text="0"/>
+        <Label x:Name="zlab" Text="0"/>
+        <Button Text="teleport to above" Clicked="telep"/>
+    </VerticalStackLayout>
+</ContentPage>

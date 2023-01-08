@@ -57,8 +57,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="deps\RaidLocations.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <EmbeddedResource Include="Resources\Assets\AboutAssets.txt" />
 	  <EmbeddedResource Include="Resources\Assets\encounter_gem_paldea.pkl" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Include="deps\RaidLocations.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
 	</ItemGroup>
 
 
@@ -119,6 +129,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Raidtabs\RaidViewer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Raidtabs\teleporter.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
