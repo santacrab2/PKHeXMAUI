@@ -538,7 +538,12 @@ public partial class RaidViewer : ContentPage
         
         var telporteroff = await botBase.PointerRelative(telporterpointer);
         var x = BitConverter.GetBytes((float)mainpk.coords[0]);
-        var y = BitConverter.GetBytes((float)mainpk.coords[1]+50);
+        float yarr;
+        if (mainpk.Raid.AreaID != 2 || mainpk.Raid.AreaID != 5 || mainpk.Raid.AreaID != 6 || mainpk.Raid.AreaID != 7 || mainpk.Raid.AreaID != 8 || mainpk.Raid.AreaID != 9)
+            yarr = (float)mainpk.coords[1] + 50;
+        else
+            yarr = (float)mainpk.coords[1] + 30;
+        var y = BitConverter.GetBytes(yarr);
         var z = BitConverter.GetBytes((float)mainpk.coords[2]);
         var XYZ = x.Concat(y).ToArray();
         XYZ = XYZ.Concat(z).ToArray();
