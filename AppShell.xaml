@@ -21,7 +21,7 @@
         </Tab>
         <Tab Title="Raids">
             <ShellContent Title="Raids" ContentTemplate="{DataTemplate local:RaidViewer}"/>
-         
+            
         </Tab>
     </TabBar>
 </Shell>

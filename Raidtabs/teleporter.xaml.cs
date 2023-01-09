@@ -18,7 +18,7 @@ public partial class teleporter : ContentPage
     public static byte[] recentcoords;
     private async void readloc(object sender, EventArgs e)
     {
-        var telporterpointer = new long[] { 0x43A7828, 0x140, 0xE8, 0x48, 0x160, 0x30, 0x260 };
+        var telporterpointer = new long[] { 0x43A75B0, 0x2A8, 0x0, 0x0, 0x80 };
         var teleporteroff = await botBase.PointerRelative(telporterpointer);
         var co = await botBase.ReadBytesAsync((uint)teleporteroff, 12);
         recentcoords = co;
@@ -27,12 +27,5 @@ public partial class teleporter : ContentPage
         zlab.Text = $"{BitConverter.ToString(co, 8,4)}";
     }
 
-    private async void telep(object sender, EventArgs e)
-    {
-        var telporterpointer = new long[] { 0x43A7828, 0x140, 0xE8, 0x48, 0x160, 0x30, 0x260 };
-        var teleporteroff = await botBase.PointerRelative(telporterpointer);
-        await botBase.WriteBytesAsync(recentcoords, (uint)teleporteroff - 0x10);
-        await botBase.WriteBytesAsync(recentcoords, (uint)teleporteroff);
-    
-    }
+
 }

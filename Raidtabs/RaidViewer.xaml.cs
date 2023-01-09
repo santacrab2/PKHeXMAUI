@@ -537,19 +537,22 @@ public partial class RaidViewer : ContentPage
         var telporterpointer = new long[] { 0x43A75B0,0x2A8,0x0,0x0,0x80};
         
         var telporteroff = await botBase.PointerRelative(telporterpointer);
+     
+       
+        teleportbutton.Text = "teleporting...";
+       
         var x = BitConverter.GetBytes((float)mainpk.coords[0]);
         float yarr;
-        if (mainpk.Raid.AreaID != 2 || mainpk.Raid.AreaID != 5 || mainpk.Raid.AreaID != 6 || mainpk.Raid.AreaID != 7 || mainpk.Raid.AreaID != 8 || mainpk.Raid.AreaID != 9)
-            yarr = (float)mainpk.coords[1] + 50;
+        if (mainpk.Raid.AreaID != 1 || mainpk.Raid.AreaID != 4 || mainpk.Raid.AreaID != 5 || mainpk.Raid.AreaID != 6 || mainpk.Raid.AreaID != 7 || mainpk.Raid.AreaID != 8)
+            yarr = (float)(mainpk.coords[1] + 50);
         else
-            yarr = (float)mainpk.coords[1] + 30;
+            yarr = (float)(mainpk.coords[1] + 30);
         var y = BitConverter.GetBytes(yarr);
         var z = BitConverter.GetBytes((float)mainpk.coords[2]);
         var XYZ = x.Concat(y).ToArray();
         XYZ = XYZ.Concat(z).ToArray();
         await botBase.WriteBytesAsync(XYZ, (uint)telporteroff);
-       
-      
+        teleportbutton.Text = "Teleport";
     }
     public static Color GetTypeSpriteColor(byte type)
     {
