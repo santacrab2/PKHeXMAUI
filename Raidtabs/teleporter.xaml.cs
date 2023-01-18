@@ -27,5 +27,19 @@ public partial class teleporter : ContentPage
         zlab.Text = $"{BitConverter.ToString(co, 8,4)}";
     }
 
+    private async void teleloc(object sender, EventArgs e)
+    {
 
+        var telporterpointer = new long[] { 0x43A75B0, 0x2A8, 0x0, 0x0, 0x80 };
+        var teleporteroff = await botBase.PointerRelative(telporterpointer);
+        var x = BitConverter.ToUInt32(recentcoords, 0);
+        var xbit = BitConverter.GetBytes(x);
+        var y = BitConverter.ToUInt32(recentcoords, 4) + 30;
+        var ybit = BitConverter.GetBytes(y);
+        var z = BitConverter.ToUInt32(recentcoords, 8);
+        var zbit = BitConverter.GetBytes(z);
+        var xyz = xbit.Concat(ybit).ToArray();
+        xyz = xyz.Concat(zbit).ToArray();
+        await botBase.WriteBytesAsync(xyz, (uint)teleporteroff);
+    }
 }

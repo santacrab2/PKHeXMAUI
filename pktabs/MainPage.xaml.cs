@@ -1,4 +1,4 @@
-﻿
+﻿using static System.Buffers.Binary.BinaryPrimitives;
 using PKHeX.Core;
 using System.Net.Sockets;
 using PKHeX.Core.AutoMod;
@@ -78,7 +78,13 @@ public partial class MainPage : ContentPage
         
         specieslabel.SelectedIndex = specieslabel.Items.IndexOf(SpeciesName.GetSpeciesName(pkm.Species,2));
         displaypid.Text = $"{pkm.PID:X}";
-        nickname.Text = pkm.Nickname;
+
+        if (pkm.IsNicknamed)
+        {
+            nickname.Text = pkm.Nickname;
+        }
+        else
+            nickname.Text = SpeciesName.GetSpeciesName(pkm.Species, 2);
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
         naturepicker.SelectedIndex = pkm.Nature;
@@ -238,8 +244,8 @@ public partial class MainPage : ContentPage
         checklegality();
     }
 
-    private void applyability(object sender, EventArgs e) { pk.SetAbility(abilitypicker.SelectedIndex); checklegality(); }
-
+    private void applyability(object sender, EventArgs e) { pk.RefreshAbility(abilitypicker.SelectedIndex); checklegality(); }
+    public static bool reconnect = false;
         private async void botbaseconnect(object sender, EventArgs e)
     {
         
@@ -262,18 +268,22 @@ public partial class MainPage : ContentPage
             SwitchConnection.Disconnect(true);
             connect.Text = "connect";
            SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
+            return;
         }
-        if (SwitchConnection.Connected)
+        if (SwitchConnection.Connected && reconnect == false)
         {
+            reconnect = true;
             var temp = (SAV9SV)sav;
             var info = temp.MyStatus;
             var off = await botBase.PointerRelative(new long[] { 0x4384B18, 0x148, 0x40 });
             var read = await botBase.ReadBytesAsync((uint)off, info.Data.Length);
             read.CopyTo(info.Data, 0);
+            await DownloadEventData();
             
             sav = temp;
             connect.Text = "disconnect";
         }
+        connect.Text = "disconnect";
     }
 
     private async void inject(object sender, EventArgs e)
@@ -354,12 +364,40 @@ public partial class MainPage : ContentPage
             pk.ClearNickname();
         }
     }
-    private static byte[] DecryptBlock(uint key, byte[] block)
+    private async Task DownloadEventData()
     {
-        var rng = new SCXorShift32(key);
-        for (int i = 0; i < block.Length; i++)
-            block[i] = (byte)(block[i] ^ rng.Next());
-        return block;
+        var token = new CancellationToken();
+        var temp = (SAV9SV)sav;
+        var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
+
+        if (KBCATEventRaidIdentifier.Type is SCTypeCode.None)
+            BlockUtil.EditBlock(KBCATEventRaidIdentifier, SCTypeCode.Object, BitConverter.GetBytes((uint)1));
+
+        var KBCATFixedRewardItemArray = temp.Accessor.FindOrDefault(Blocks.KBCATFixedRewardItemArray.Key);
+        var rewardItemBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATFixedRewardItemArray, token).ConfigureAwait(false);
+
+        if (KBCATFixedRewardItemArray.Type is not SCTypeCode.None)
+            KBCATFixedRewardItemArray.ChangeData(rewardItemBlock);
+        else
+            BlockUtil.EditBlock(KBCATFixedRewardItemArray, SCTypeCode.Object, rewardItemBlock);
+
+        var KBCATLotteryRewardItemArray = temp.Accessor.FindOrDefault(Blocks.KBCATLotteryRewardItemArray.Key);
+        var lotteryItemBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATLotteryRewardItemArray, token).ConfigureAwait(false);
+
+        if (KBCATLotteryRewardItemArray.Type is not SCTypeCode.None)
+            KBCATLotteryRewardItemArray.ChangeData(lotteryItemBlock);
+        else
+            BlockUtil.EditBlock(KBCATLotteryRewardItemArray, SCTypeCode.Object, lotteryItemBlock);
+
+        var KBCATRaidEnemyArray = temp.Accessor.FindOrDefault(Blocks.KBCATRaidEnemyArray.Key);
+        var raidEnemyBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATRaidEnemyArray, token).ConfigureAwait(false);
+
+        if (KBCATRaidEnemyArray.Type is not SCTypeCode.None)
+            KBCATRaidEnemyArray.ChangeData(raidEnemyBlock);
+        else
+            BlockUtil.EditBlock(KBCATRaidEnemyArray, SCTypeCode.Object, raidEnemyBlock);
+        sav = temp;
     }
+
 }
 

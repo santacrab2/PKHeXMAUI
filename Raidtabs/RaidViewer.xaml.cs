@@ -6,10 +6,7 @@ using static PKHeX.Core.Encounters9;
 
 
 using static pk9reader.MainPage;
-
-
-
-
+using Microsoft.Maui.Graphics;
 
 namespace pk9reader;
 
@@ -40,20 +37,40 @@ public partial class RaidViewer : ContentPage
             grid.Add(image);
             Label teratype = new Label() { HorizontalTextAlignment = TextAlignment.Start, Margin = new Thickness(20, 0, 0, 0) };
             teratype.SetBinding(Label.TextProperty, "pkm.TeraTypeOriginal");
+            teratype.SetBinding(Label.TextColorProperty, "shines");
             grid.Add(teratype);
             Label loc = new Label() { HorizontalTextAlignment = TextAlignment.End };
             loc.SetBinding(Label.TextProperty, "location");
+            loc.SetBinding(Label.TextColorProperty, "shines");
             grid.Add(loc);
             Label sta = new Label() { HorizontalTextAlignment = TextAlignment.End, VerticalTextAlignment = TextAlignment.End };
             sta.SetBinding(Label.TextProperty, "Stars");
+            sta.SetBinding(Label.TextColorProperty, "shines");
             grid.Add(sta);
+            
             return grid;
         });
         initializedicts();
+        var temp = (SAV9SV)sav;
+        var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
+        if (KBCATEventRaidIdentifier.Type is not SCTypeCode.None && BitConverter.ToUInt32(KBCATEventRaidIdentifier.Data) > 0)
+        {
+            try
+            {
+                var events = Offsets.GetEventEncounterDataFromSAV(temp);
+                dist = EncounterDist9.GetArray(events[0]);
+                might = EncounterMight9.GetArray(events[1]);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
 
     }
     public static Dictionary<string, double[]> denloc;
-
+    public static EncounterDist9[] dist;
+    public static EncounterMight9[] might;
     public static raidsprite mainpk;
     public uint getpid(uint seed)
     {
@@ -117,9 +134,9 @@ public partial class RaidViewer : ContentPage
 
 
 
-
-                    //var dist = EncounterDist9.GetArray( tempsave.Blocks.GetBlock(0x520A1B0).Data);
-                    foreach (var theencounter in Dist)
+                    
+                   // var dist = EncounterDist9.GetArray( tempsave.Blocks.GetBlock(0x520A1B0).Data);
+                    foreach (var theencounter in dist)
                     {
                         var maxd = game is GameVersion.SL ? theencounter.GetRandRateTotalScarlet(3) : theencounter.GetRandRateTotalViolet(3);
                         var min = game is GameVersion.SL ? theencounter.GetRandRateMinScarlet(3) : theencounter.GetRandRateMinViolet(3);
@@ -272,19 +289,14 @@ public partial class RaidViewer : ContentPage
                 case TeraRaidContentType.Might7:
                     var game7 = GameVersion.SL;
 
-
-
-
-
-                    //var dist = EncounterDist9.GetArray( tempsave.Blocks.GetBlock(0x520A1B0).Data);
-                    foreach (var theencounter in Might)
+                    foreach (var theencounter in might)
                     {
-                        var maxd = game7 is GameVersion.SL ? theencounter.RandRate3TotalScarlet : theencounter.GetRandRateTotalViolet(3);
+                        var maxm = game7 is GameVersion.SL ? theencounter.GetRandRateTotalScarlet(3) : theencounter.GetRandRateTotalViolet(3);
                         var min = game7 is GameVersion.SL ? theencounter.GetRandRateMinScarlet(3) : theencounter.GetRandRateMinViolet(3);
-                        if (min >= 0 && maxd > 0)
+                        if (min >= 0 && maxm > 0)
                         {
 
-                            var rateRandd = getxororandrate(raid.Seed, (uint)maxd, 5);
+                            var rateRandd = getxororandrate(raid.Seed, maxm, 5);
                             if ((uint)(rateRandd - min) < theencounter.RandRate)
                             {
                                 mencounter = theencounter; break;
@@ -292,8 +304,6 @@ public partial class RaidViewer : ContentPage
 
                         }
                     }
-                    if (mencounter == null)
-                        mencounter = Might[1];
                     var param7 = new GenerateParam9()
                     {
 
@@ -335,7 +345,7 @@ public partial class RaidViewer : ContentPage
     private async void shinify(object sender, EventArgs e)
     {
         testlab.Text = "searching";
-
+        await Task.Delay(500);
 
         ulong seed = (ulong)mainpk.Raid.Seed;
         while (!mainpk.pkm.IsShiny)
@@ -554,6 +564,7 @@ public partial class RaidViewer : ContentPage
         await botBase.WriteBytesAsync(XYZ, (uint)telporteroff);
         teleportbutton.Text = "Teleport";
     }
+
     public static Color GetTypeSpriteColor(byte type)
     {
         return (sbyte)type switch
@@ -3039,7 +3050,7 @@ public partial class RaidViewer : ContentPage
 
             if (pk9.Species == 0)
                 url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
-            else if (pk9.IsShiny)
+            else if (pk9.IsShiny && pk9.Form==0)
                 url = $"https://www.serebii.net/Shiny/SV/{pk9.Species:000}.png";
             else if (pk9.Form != 0)
                 url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
@@ -3055,7 +3066,10 @@ public partial class RaidViewer : ContentPage
             };
             if (raid.Content == TeraRaidContentType.Black6)
                 stars = 6;
+            if(raid.Content == TeraRaidContentType.Might7)
+                stars = 7;
             Stars = stars.ToString();
+            shines = pk9.IsShiny ? Colors.Yellow : default;
         }
         public string Stars { get; set; }
         public string location { get; set; }
@@ -3064,6 +3078,7 @@ public partial class RaidViewer : ContentPage
         public string url { get; set; }
         public double[] coords { get; set; }
         public TeraRaidDetail Raid { get; set; }
+        public Color shines { get; set; }
 
     }
 

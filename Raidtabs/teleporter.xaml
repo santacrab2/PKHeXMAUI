@@ -8,6 +8,6 @@
         <Label x:Name="xlab" Text="0" FontSize="18"/>
         <Label x:Name="ylab" Text="0" FontSize="18"/>
         <Label x:Name="zlab" Text="0" FontSize="18"/>
-       
+        <Button Text="teleport to above" Clicked="teleloc"/>
     </VerticalStackLayout>
 </ContentPage>

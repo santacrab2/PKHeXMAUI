@@ -10,7 +10,7 @@
                 <Button Text="Shinify" x:Name="testlab" Clicked="shinify"></Button>
                 <Button Text="Teleport" x:Name="teleportbutton" Clicked="teleport"/>
                 <Button Text="Screenshot" x:Name="sceenshotbutton" Clicked="takeascreenshot"/>
-                <CollectionView HeightRequest="500" WidthRequest="400" x:Name="raidview" SelectionMode="Single" SelectionChanged="update" ></CollectionView>
+                <CollectionView HeightRequest="450" WidthRequest="400" x:Name="raidview" SelectionMode="Single" SelectionChanged="update" ></CollectionView>
             </StackLayout>
         </ScrollView>
     </RefreshView>

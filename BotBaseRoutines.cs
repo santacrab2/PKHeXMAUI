@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using PKHeX.Core;
+using SysBot.Base;
+using static System.Buffers.Binary.BinaryPrimitives;
 using System.Net.Sockets;
 using System.Text;
-using SysBot.Base;
 using static pk9reader.MainPage;
 using System.Diagnostics;
 
@@ -244,6 +242,83 @@ namespace pk9reader
             flexBuffer.CopyTo(data);
             var result = data.SliceSafe(0, received);
             return SysBot.Base.Decoder.ConvertHexByteStringToBytes(result);
+        }
+        public async Task<byte[]> ReadDecryptedBlock(DataBlock block, int size, CancellationToken token)
+        {
+           
+
+          
+            var data = await botBase.PointerPeek(size, block.Pointer!).ConfigureAwait(false);
+        
+            return data;
+        }
+
+        public async Task WriteDecryptedBlock(byte[] data, DataBlock block, CancellationToken token)
+        {
+            
+
+            await botBase.PointerPoke(data, block.Pointer!).ConfigureAwait(false);
+           
+        }
+
+        //Thanks to Lincoln-LM (original scblock code) and Architdate (ported C# reference code)!!
+        //https://github.com/Lincoln-LM/sv-live-map/blob/e0f4a30c72ef81f1dc175dae74e2fd3d63b0e881/sv_live_map_core/nxreader/raid_reader.py#L168
+        //https://github.com/LegoFigure11/RaidCrawler/blob/2e1832ae89e5ac39dcc25ccf2ae911ef0f634580/MainWindow.cs#L199
+
+        public async Task<byte[]?> ReadEncryptedBlock(DataBlock block, CancellationToken token)
+        {
+            
+
+          
+            var address = await GetBlockAddress(block, token).ConfigureAwait(false);
+            var header = await botBase.ReadBytesAbsoluteAsync(address, 5).ConfigureAwait(false);
+            header = BlockUtil.DecryptBlock(block.Key, header);
+            var size = ReadUInt32LittleEndian(header.AsSpan()[1..]);
+            var data = await botBase.ReadBytesAbsoluteAsync(address, 5 + (int)size);
+            var res = BlockUtil.DecryptBlock(block.Key, data)[5..];
+      
+            return res;
+        }
+
+        public async Task<byte[]> ReadEncryptedBlock(DataBlock block, int size, CancellationToken token)
+        {
+            
+
+         
+            var address = await GetBlockAddress(block, token).ConfigureAwait(false);
+            var data = await botBase.ReadBytesAbsoluteAsync(address, size).ConfigureAwait(false);
+            var res = BlockUtil.DecryptBlock(block.Key, data);
+ 
+            return res;
+        }
+
+        private async Task<ulong> GetBlockAddress(DataBlock block, CancellationToken token)
+        {
+            var read_key = ReadUInt32LittleEndian(await botBase.PointerPeek(4, block.Pointer!).ConfigureAwait(false));
+            if (read_key == block.Key)
+                return await botBase.PointerAll(PreparePointer(block.Pointer!)).ConfigureAwait(false);
+            var direction = block.Key > read_key ? 1 : -1;
+            var base_offset = block.Pointer![block.Pointer.Count - 1];
+            for (var offset = base_offset; offset < base_offset + 0x1000 && offset > base_offset - 0x1000; offset += direction * 0x20)
+            {
+                var pointer = block.Pointer!.ToArray();
+                pointer[^1] = offset;
+                read_key = ReadUInt32LittleEndian(await botBase.PointerPeek(4, pointer).ConfigureAwait(false));
+                if (read_key == block.Key)
+                    return await botBase.PointerAll(PreparePointer(pointer)).ConfigureAwait(false);
+            }
+            throw new ArgumentOutOfRangeException("Save block not found in range +- 0x1000");
+        }
+
+        private static IEnumerable<long> PreparePointer(IEnumerable<long> pointer)
+        {
+            var count = pointer.Count();
+            var p = new long[count + 1];
+            for (var i = 0; i < pointer.Count(); i++)
+                p[i] = pointer.ElementAt(i);
+            p[count - 1] += 8;
+            p[count] = 0x0;
+            return p;
         }
     }
 }

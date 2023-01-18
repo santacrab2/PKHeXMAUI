@@ -95,6 +95,9 @@
 	  <Reference Include="PKHeX.Drawing.PokeSprite">
 	    <HintPath>..\LGPETradeBot\SysBot.Pokemon\deps\PKHeX.Drawing.PokeSprite.dll</HintPath>
 	  </Reference>
+	  <Reference Include="pkNX.Structures.FlatBuffers">
+	    <HintPath>deps\pkNX.Structures.FlatBuffers.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<ItemGroup>

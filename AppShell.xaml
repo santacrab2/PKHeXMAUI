@@ -21,7 +21,8 @@
         </Tab>
         <Tab Title="Raids">
             <ShellContent Title="Raids" ContentTemplate="{DataTemplate local:RaidViewer}"/>
-            
+            <ShellContent Title="Manual Teleport" ContentTemplate="{DataTemplate local:teleporter}"/>
+
         </Tab>
     </TabBar>
 </Shell>
