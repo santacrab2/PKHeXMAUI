@@ -1,0 +1,13 @@
+
+// ReSharper disable UnusedMember.Global
+
+namespace pkNX.Structures.FlatBuffers;
+
+
+public enum DataType
+{
+    NORMAL = 0,
+    ITEM = 1,
+    WAZA = 2,
+    MULTI = 3,
+}

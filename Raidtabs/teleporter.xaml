@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pk9reader.teleporter"
              Title="teleporter">
-    <VerticalStackLayout>
-        <Button Text="read location" Clicked="readloc"/>
-        <Label x:Name="xlab" Text="0" FontSize="18"/>
-        <Label x:Name="ylab" Text="0" FontSize="18"/>
-        <Label x:Name="zlab" Text="0" FontSize="18"/>
-        <Button Text="teleport to above" Clicked="teleloc"/>
-    </VerticalStackLayout>
+    <RefreshView x:Name="teleportrefresh">
+        <VerticalStackLayout>
+            <Button Text="read location" Clicked="readloc"/>
+            <Label x:Name="xlab" Text="0" FontSize="18"/>
+            <Label x:Name="ylab" Text="0" FontSize="18"/>
+            <Label x:Name="zlab" Text="0" FontSize="18"/>
+            <Button Text="teleport to above" Clicked="teleloc"/>
+        </VerticalStackLayout>
+    </RefreshView>
 </ContentPage>

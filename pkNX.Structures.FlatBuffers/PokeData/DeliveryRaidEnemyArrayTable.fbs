@@ -1,0 +1,93 @@
+﻿include "PokeDataBattle.fbs";
+include "RaidBossExtraActType.fbs";
+include "RaidBossExtraTimingType.fbs";
+attribute "fs_serializer";
+
+namespace pkNX.Structures.FlatBuffers;
+enum RaidRomType : short
+{
+	   BOTH = 0,
+    TYPE_A = 1,
+    TYPE_B = 2,
+}
+table DeliveryRaidEnemyArray (fs_serializer)
+{
+	Table : [ DeliveryRaidEnemyTable];
+}
+
+table DeliveryRaidEnemyTable 
+{
+	RaidEnemyinfo : RaidEnemyInfo;
+}
+
+table RaidTimeData
+{
+	IsActive : bool;
+	GameLimit : int;
+	ClientLimit : int;
+	CommandLimit: int;
+	PokeReviveTime : int;
+	AiIntervalTime : int;
+	AiIntervalRand : int;
+}
+
+table RaidEnemyInfo
+{
+	RomVer : RaidRomType;
+	No : int;
+	DeliveryGroupID : byte;
+	Difficulty : int;
+	Rate : byte;
+	DropTableFix : ulong;
+	DropTableRandom : ulong;
+	CaptureRate : byte;
+	CaptureLv : byte;
+	BossPokePara : PokeDataBattle;
+	BossPokeSize : RaidBossSizeData;
+	BossDesc : RaidBossData;
+	RaidTimedata : RaidTimeData;
+
+
+}
+table RaidBossSizeData
+{
+	HeightType : SizeType;
+	HeightValue : short;
+	WeightType : SizeType;
+	WeightValue : short;
+	ScaleType : SizeType;
+	ScaleValue : short;
+
+}
+
+table RaidBossExtraData
+{
+	Timming : RaidBossExtraTimingType;
+	Action : RaidBossExtraActType;
+	Value : short;
+	Wazano: WazaID;
+}
+
+table RaidBossData
+{
+	 HpCoef : short;
+     PowerChargeTrigerHp : byte;
+     PowerChargeTrigerTime :byte;
+     PowerChargeLimitTime :short;
+     PowerChargeCancelDamage :byte;
+    PowerChargePenaltyTime :short;
+    PowerChargePenaltyAction : WazaID;
+     PowerChargeDamageRate : byte;
+ PowerChargeGemDamageRate : byte;
+     PowerChargeChangeGemDamageRate : byte;
+    ExtraAction1 : RaidBossExtraData;
+     ExtraAction2 : RaidBossExtraData;
+     ExtraAction3 : RaidBossExtraData;
+     ExtraAction4 : RaidBossExtraData;
+     ExtraAction5 : RaidBossExtraData;
+     ExtraAction6 : RaidBossExtraData;
+    DoubleActionTriggerHp :byte;
+ DoubleActionTriggerTime :byte;
+DoubleActionRate : byte;
+}
+

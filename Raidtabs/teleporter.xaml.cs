@@ -14,7 +14,20 @@ public partial class teleporter : ContentPage
 	public teleporter()
 	{
 		InitializeComponent();
-	}
+        xlab.Text = $"{BitConverter.ToString(recentcoords, 0, 4)}";
+        ylab.Text = $"{BitConverter.ToString(recentcoords, 4, 4)}";
+        zlab.Text = $"{BitConverter.ToString(recentcoords, 8, 4)}";
+        ICommand refreshCommand = new Command(() =>
+        {
+
+            xlab.Text = $"{BitConverter.ToString(recentcoords, 0, 4)}";
+            ylab.Text = $"{BitConverter.ToString(recentcoords, 4, 4)}";
+            zlab.Text = $"{BitConverter.ToString(recentcoords, 8, 4)}";
+            teleportrefresh.IsRefreshing = false;
+
+        });
+        teleportrefresh.Command = refreshCommand;
+    }
     public static byte[] recentcoords;
     private async void readloc(object sender, EventArgs e)
     {

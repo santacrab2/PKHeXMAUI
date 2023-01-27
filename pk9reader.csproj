@@ -52,6 +52,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="pkNX.Structures.FlatBuffers\**" />
+	  <Compile Remove="pkNX.Structures.FlatBuffers\**" />
+	  <EmbeddedResource Remove="pkNX.Structures.FlatBuffers\**" />
+	  <MauiCss Remove="pkNX.Structures.FlatBuffers\**" />
+	  <MauiXaml Remove="pkNX.Structures.FlatBuffers\**" />
+	  <None Remove="pkNX.Structures.FlatBuffers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiAsset Remove="Resources\Assets\AboutAssets.txt" />
 	  <MauiAsset Remove="Resources\Assets\encounter_gem_paldea.pkl" />
 	</ItemGroup>
@@ -94,9 +103,6 @@
 	  </Reference>
 	  <Reference Include="PKHeX.Drawing.PokeSprite">
 	    <HintPath>..\LGPETradeBot\SysBot.Pokemon\deps\PKHeX.Drawing.PokeSprite.dll</HintPath>
-	  </Reference>
-	  <Reference Include="pkNX.Structures.FlatBuffers">
-	    <HintPath>deps\pkNX.Structures.FlatBuffers.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 
@@ -141,6 +147,10 @@
 
 	<ItemGroup>
 	  <MauiIcon Include="Resources\AppIcon\icon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="pkNX.Structures.FlatBuffers\pkNX.Structures.FlatBuffers.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 
 
+using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Windows.Input;
 using PKHeX.Core;
@@ -41,12 +42,14 @@ public partial class MetTab : ContentPage
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
         ballspriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(pkm.Ball>-1?(Ball)pkm.Ball:"Poke")}.png";
         ballimage.Source = ballspriteurl;
-        metdatepicker.Date = pkm.MetDate != null?(DateTime)pkm.MetDate:DateTime.Now;
+        var metdate = (DateOnly)pkm.MetDate;
+        metdatepicker.Date = pkm.MetDate != null?metdate.ToDateTime(TimeOnly.Parse("10:00 PM")) :DateTime.Now;
         metleveldisplay.Text = pkm.Met_Level>-1?pkm.Met_Level.ToString():"0";
         obedienceleveldisplay.Text = pkm.Obedience_Level>-1?pkm.Obedience_Level.ToString():"0";
         fatefulcheck.IsChecked = pkm.FatefulEncounter;
         eggcheck.IsChecked = pkm.WasEgg;
-        eggdatepicker.Date = pkm.EggMetDate != null?(DateTime)pk.EggMetDate:DateTime.UnixEpoch;
+        var eggmetdate = (DateOnly)pkm.EggMetDate;
+        eggdatepicker.Date = pkm.EggMetDate != null?eggmetdate.ToDateTime(TimeOnly.Parse("10:00 PM")):DateTime.UnixEpoch;
         eggmetpicker.SelectedIndex = pkm.Egg_Location > -1 ? pkm.Egg_Location:0;
         
     }
@@ -77,7 +80,7 @@ public partial class MetTab : ContentPage
 
     private void applymetdate(object sender, DateChangedEventArgs e)
     {
-        pk.MetDate = metdatepicker.Date;
+        pk.MetDate = DateOnly.FromDateTime( metdatepicker.Date);
     }
 
     private void applymetlevel(object sender, TextChangedEventArgs e)
@@ -108,7 +111,7 @@ public partial class MetTab : ContentPage
 
     private void applyeggdate(object sender, DateChangedEventArgs e)
     {
-        pk.EggMetDate = eggdatepicker.Date;
+        pk.EggMetDate = DateOnly.FromDateTime(eggdatepicker.Date);
     }
 
     private void wasegg(object sender, CheckedChangedEventArgs e)
@@ -116,7 +119,7 @@ public partial class MetTab : ContentPage
         if(eggcheck.IsChecked)
         {
             pk.Egg_Location = EncounterSuggestion.GetSuggestedEncounterEggLocationEgg(pk, true);
-            pk.EggMetDate = DateTime.Now;
+            pk.EggMetDate = DateOnly.FromDayNumber(DateTime.Now.Day);
         }
         else
         {

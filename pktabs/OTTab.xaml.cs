@@ -25,7 +25,7 @@ public partial class OTTab : ContentPage
 	{
         OTpic.Source = spriteurl;
         SIDdisplay.Text = pkm.TrainerSID7.ToString();
-        TIDdisplay.Text = pkm.TrainerID7.ToString();
+        TIDdisplay.Text = pkm.TrainerTID7.ToString();
         otdisplay.Text = pkm.OT_Name;
         ecdisplay.Text = $"{pkm.EncryptionConstant:X}";
         htname.Text = pkm.HT_Name;
@@ -42,7 +42,7 @@ public partial class OTTab : ContentPage
     {
         if(SIDdisplay.Text.Length > 0)
         {
-            pk.TrainerSID7 = int.Parse(SIDdisplay.Text);
+            pk.TrainerSID7 = uint.Parse(SIDdisplay.Text);
         }
     }
 
@@ -50,7 +50,7 @@ public partial class OTTab : ContentPage
     {
         if(TIDdisplay.Text.Length > 0)
         {
-            pk.TrainerID7 = int.Parse(TIDdisplay.Text);
+            pk.TrainerTID7 = uint.Parse(TIDdisplay.Text);
         }
     }
 

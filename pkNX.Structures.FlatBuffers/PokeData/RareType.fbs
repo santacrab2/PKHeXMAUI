@@ -1,0 +1,11 @@
+
+
+namespace pkNX.Structures.FlatBuffers;
+
+
+enum RareType : int
+{
+    DEFAULT = 0,
+    NO_RARE = 1,
+    RARE = 2,
+}

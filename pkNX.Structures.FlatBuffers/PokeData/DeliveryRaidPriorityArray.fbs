@@ -1,0 +1,28 @@
+﻿attribute "fs_serializer";
+
+namespace pkNX.Structures.FlatBuffers;
+
+table DeliveryPriorityArray
+{
+	Table : [DeliveryRaidPriority];
+}
+
+table DeliveryRaidPriority
+{
+	VersionNo : int;
+	DeliveryGroupId : DeliveryGroupID;
+}
+
+table DeliveryGroupID
+{
+	GroupID1 : byte;
+	GroupID2 : byte;
+	GroupID3 : byte;
+	GroupID4 : byte;
+	GroupID5 : byte;
+	GroupID6 : byte;
+	GroupID7 : byte;
+	GroupID8 : byte;
+	GroupID9 : byte;
+	GroupID10 : byte;
+}

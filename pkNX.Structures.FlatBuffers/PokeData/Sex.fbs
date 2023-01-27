@@ -1,0 +1,11 @@
+
+
+namespace pkNX.Structures.FlatBuffers;
+
+
+enum Sex : int
+{
+    MALE = 0,
+    FEMALE = 1,
+    UNKNOWN = 2,
+}

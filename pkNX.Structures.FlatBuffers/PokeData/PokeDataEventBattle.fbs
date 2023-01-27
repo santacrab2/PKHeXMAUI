@@ -1,0 +1,42 @@
+﻿include "WazaSet.fbs";
+include "WazaID.fbs";
+include "GemType.fbs";
+include "SeikakuType.fbs";
+include "BallType.fbs";
+include "WazaType.fbs";
+include "DevID.fbs";
+include "SexType.fbs";
+include "GemType.fbs";
+include "TokuseiType.fbs";
+include "TalentType.fbs";
+include "RareType.fbs";
+include "SizeType.fbs";
+include "RibbonType.fbs";
+attribute "fs_serializer";
+
+namespace pkNX.Structures.FlatBuffers;
+
+table PokeDataEventBattle
+{
+		DevId : DevID;
+	FormId : short;
+	Sex : SexType;
+	Level : int;
+	Raretype : RareType;
+	Talenttype : TalentType;
+	TalentvNum : byte;
+	DropItemnum : byte;
+	Seikaku : SeikakuType;
+	SeikakuHosei : SeikakuType;
+	Tokusei : TokuseiType;
+	Wazatype : WazaType;
+	Waza1 : WazaSet;
+	Waza2 : WazaSet;
+	Waza3 : WazaSet;
+	Waza4 : WazaSet;
+	Gemtype : GemType;
+	ScaleType : SizeType;
+	ScaleValue : short;
+	Ribbonset : RibbonType;
+
+}

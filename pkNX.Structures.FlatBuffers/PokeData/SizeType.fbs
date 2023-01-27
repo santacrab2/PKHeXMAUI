@@ -1,0 +1,1 @@
+namespace pkNX.Structures.FlatBuffers; enum SizeType : int { RANDOM = 0, XS = 1, S = 2, }

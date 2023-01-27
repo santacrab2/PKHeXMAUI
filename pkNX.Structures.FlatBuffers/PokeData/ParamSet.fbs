@@ -1,0 +1,12 @@
+﻿
+namespace pkNX.Structures.FlatBuffers;
+
+table ParamSet
+{
+	HP : int;
+	ATK : int;
+	DEF : int;
+	SPA : int;
+	SPD : int;
+	SPE : int;
+}

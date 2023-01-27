@@ -4,42 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using pkNX.Structures.FlatBuffers;
-
 namespace pk9reader
 {
     public class Offsets
     {
-        public static byte[][] GetEventEncounterDataFromSAV(PKHeX.Core.SAV9SV sav)
+        public static byte[][] GetEventEncounterDataFromSAV(PKHeX.Core.SAV9SV sav2)
         {
             byte[][] res = null!;
             var type2list = new List<byte[]>();
             var type3list = new List<byte[]>();
 
-            var KBCATRaidEnemyArray = sav.Accessor.FindOrDefault(Blocks.KBCATRaidEnemyArray.Key).Data;
+            var KBCATRaidEnemyArray = sav2.Accessor.FindOrDefault(Blocks.KBCATRaidEnemyArray.Key).Data;
 
-            var tableEncounters = FlatBufferConverter.DeserializeFrom<DeliveryRaidEnemyTableArray>(KBCATRaidEnemyArray);
+            var tableEncounters = FlatBufferConverter.DeserializeFrom<DeliveryRaidEnemyArray>(KBCATRaidEnemyArray);
 
             var byGroupID = tableEncounters.Table
-                .Where(z => z.RaidEnemyInfo.Rate != 0)
-                .GroupBy(z => z.RaidEnemyInfo.DeliveryGroupID);
+                .Where(z => z.RaidEnemyinfo.Rate != 0)
+                .GroupBy(z => z.RaidEnemyinfo.DeliveryGroupID);
 
             bool isNot7Star = false;
             foreach (var group in byGroupID)
             {
                 var items = group.ToArray();
-                if (items.Any(z => z.RaidEnemyInfo.Difficulty > 7))
-                    throw new Exception($"Undocumented difficulty {items.First(z => z.RaidEnemyInfo.Difficulty > 7).RaidEnemyInfo.Difficulty}");
+                if (items.Any(z => z.RaidEnemyinfo.Difficulty > 7))
+                    throw new Exception($"Undocumented difficulty {items.First(z => z.RaidEnemyinfo.Difficulty > 7).RaidEnemyinfo.Difficulty}");
 
-                if (items.All(z => z.RaidEnemyInfo.Difficulty == 7))
+                if (items.All(z => z.RaidEnemyinfo.Difficulty == 7))
                 {
-                    if (items.Any(z => z.RaidEnemyInfo.CaptureRate != 2))
-                        throw new Exception($"Undocumented 7 star capture rate {items.First(z => z.RaidEnemyInfo.CaptureRate != 2).RaidEnemyInfo.CaptureRate}");
+                    if (items.Any(z => z.RaidEnemyinfo.CaptureRate != 2))
+                        throw new Exception($"Undocumented 7 star capture rate {items.First(z => z.RaidEnemyinfo.CaptureRate != 2).RaidEnemyinfo.CaptureRate}");
                     AddToList(items, type3list, RaidSerializationFormat.Type3);
                     continue;
                 }
 
-                if (items.Any(z => z.RaidEnemyInfo.Difficulty == 7))
-                    throw new Exception($"Mixed difficulty {items.First(z => z.RaidEnemyInfo.Difficulty > 7).RaidEnemyInfo.Difficulty}");
+                if (items.Any(z => z.RaidEnemyinfo.Difficulty == 7))
+                    throw new Exception($"Mixed difficulty {items.First(z => z.RaidEnemyinfo.Difficulty > 7).RaidEnemyinfo.Difficulty}");
                 if (isNot7Star)
                     throw new Exception("Already saw a not-7-star group. How do we differentiate this slot determination from prior?");
                 isNot7Star = true;
@@ -57,7 +56,7 @@ namespace pk9reader
             Span<ushort> weightTotalV = stackalloc ushort[StageStars.Length];
             foreach (var enc in table)
             {
-                var info = enc.RaidEnemyInfo;
+                var info = enc.RaidEnemyinfo;
                 if (info.Rate == 0)
                     continue;
                 var difficulty = info.Difficulty;
@@ -76,7 +75,7 @@ namespace pk9reader
             Span<ushort> weightMinV = stackalloc ushort[StageStars.Length];
             foreach (var enc in table)
             {
-                var info = enc.RaidEnemyInfo;
+                var info = enc.RaidEnemyinfo;
                 if (info.Rate == 0)
                     continue;
                 var difficulty = info.Difficulty;
@@ -114,7 +113,7 @@ namespace pk9reader
             if (format == RaidSerializationFormat.Type3)
                 enc.SerializeType3(bw);
 
-            enc.SerializeTeraFinder(bw);
+           enc.SerializeTeraFinder(bw);
 
             var bin = ms.ToArray();
             if (!list.Any(z => z.SequenceEqual(bin)))
@@ -129,4 +128,5 @@ namespace pk9reader
             new [] { 3, 4, 5, 6, 7 },
         };
     }
+
 }

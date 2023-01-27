@@ -226,22 +226,42 @@ namespace pk9reader
         public async Task<byte[]> Screengrab(CancellationToken token)
         {
             List<byte> flexBuffer = new();
-            int received = 0;
+            SwitchConnection.ReceiveTimeout = 1_000;
 
             await SendAsync(SwitchCommand.Screengrab()).ConfigureAwait(false);
             await Task.Delay(SwitchConnection.ReceiveBufferSize / DelayFactor + BaseDelay, token).ConfigureAwait(false);
-            while (SwitchConnection.Available > 0)
+
+            int available = SwitchConnection.Available;
+            do
             {
-                byte[] buffer = new byte[SwitchConnection.ReceiveBufferSize];
-                received += SwitchConnection.Receive(buffer, 0, SwitchConnection.ReceiveBufferSize, SocketFlags.None);
-                flexBuffer.AddRange(buffer);
+                byte[] buffer = new byte[available];
+                try
+                {
+                    SwitchConnection.Receive(buffer, available, SocketFlags.None);
+                    flexBuffer.AddRange(buffer);
+                }
+                catch (Exception ex)
+                {
+                    
+                    return Array.Empty<byte>();
+                }
+
                 await Task.Delay(MaximumTransferSize / DelayFactor + BaseDelay, token).ConfigureAwait(false);
+                available = SwitchConnection.Available;
+            } while (flexBuffer.Count == 0 || flexBuffer.Last() != (byte)'\n');
+
+            SwitchConnection.ReceiveTimeout = 0;
+            var result = Array.Empty<byte>();
+            try
+            {
+                result = SysBot.Base.Decoder.ConvertHexByteStringToBytes(flexBuffer.ToArray());
+            }
+            catch (Exception e)
+            {
+                
             }
 
-            byte[] data = new byte[flexBuffer.Count];
-            flexBuffer.CopyTo(data);
-            var result = data.SliceSafe(0, received);
-            return SysBot.Base.Decoder.ConvertHexByteStringToBytes(result);
+            return result;
         }
         public async Task<byte[]> ReadDecryptedBlock(DataBlock block, int size, CancellationToken token)
         {

@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using PKHeX.Core.AutoMod;
 using static pk9reader.MetTab;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 
 namespace pk9reader;
@@ -280,6 +281,16 @@ public partial class MainPage : ContentPage
             read.CopyTo(info.Data, 0);
             await DownloadEventData();
             
+            var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
+            if (KBCATEventRaidIdentifier.Type is not SCTypeCode.None && BitConverter.ToUInt32(KBCATEventRaidIdentifier.Data) > 0)
+            {
+                
+                    var events = Offsets.GetEventEncounterDataFromSAV(temp);
+                    RaidViewer.dist = EncounterRaid9.GetEncounters(EncounterDist9.GetArray(events[0]));
+                    RaidViewer.might = EncounterRaid9.GetEncounters(EncounterMight9.GetArray(events[1]));
+                
+           
+            }
             sav = temp;
             connect.Text = "disconnect";
         }

@@ -51,26 +51,12 @@ public partial class RaidViewer : ContentPage
             return grid;
         });
         initializedicts();
-        var temp = (SAV9SV)sav;
-        var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
-        if (KBCATEventRaidIdentifier.Type is not SCTypeCode.None && BitConverter.ToUInt32(KBCATEventRaidIdentifier.Data) > 0)
-        {
-            try
-            {
-                var events = Offsets.GetEventEncounterDataFromSAV(temp);
-                dist = EncounterDist9.GetArray(events[0]);
-                might = EncounterMight9.GetArray(events[1]);
-            }
-            catch (Exception)
-            {
-
-            }
-        }
+       
 
     }
     public static Dictionary<string, double[]> denloc;
-    public static EncounterDist9[] dist;
-    public static EncounterMight9[] might;
+    public static EncounterRaid9[] dist;
+    public static EncounterRaid9[] might;
     public static raidsprite mainpk;
     public uint getpid(uint seed)
     {
@@ -118,8 +104,8 @@ public partial class RaidViewer : ContentPage
         raiddata.CopyTo(raidblock.Data, 0);
         var raidspawn = tempsave.Raid;
         var allraids = raidspawn.GetAllRaids();
-        EncounterMight9 mencounter = null;
-        EncounterDist9 dencounter = null;
+        EncounterRaid9 mencounter = null;
+        EncounterRaid9 dencounter = null;
         EncounterTera9 encounter = null;
         int i = 0;
         foreach (var raid in allraids)
@@ -152,7 +138,7 @@ public partial class RaidViewer : ContentPage
                         }
                     }
                     if (dencounter == null)
-                        dencounter = Dist[1];
+                        dencounter = dist[1];
                     var param = new GenerateParam9()
                     {
 
@@ -161,7 +147,7 @@ public partial class RaidViewer : ContentPage
                         RollCount = 1,
                         Height = 0,
                         Weight = 0,
-                        Ability = dencounter.Ability,
+                        //Ability = dencounter.Ability,
                         Shiny = dencounter.Shiny,
                         Nature = dencounter.Nature,
                         IVs = dencounter.IVs,
@@ -170,7 +156,7 @@ public partial class RaidViewer : ContentPage
                     {
                         Species = dencounter.Species,
                         Form = dencounter.Form,
-                        TrainerID7 = sav.TrainerID7,
+                        TrainerTID7 = sav.TrainerTID7,
                         TrainerSID7 = sav.TrainerSID7,
                         TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, dencounter.TeraType, dencounter.Species, dencounter.Form),
                     };
@@ -224,7 +210,7 @@ public partial class RaidViewer : ContentPage
                     {
                         Species = encounter.Species,
                         Form = encounter.Form,
-                        TrainerID7 = sav.TrainerID7,
+                        TrainerTID7 = sav.TrainerTID7,
                         TrainerSID7 = sav.TrainerSID7,
                         TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, encounter.TeraType, encounter.Species, encounter.Form),
                     };
@@ -278,7 +264,7 @@ public partial class RaidViewer : ContentPage
                     {
                         Species = encounter.Species,
                         Form = encounter.Form,
-                        TrainerID7 = sav.TrainerID7,
+                        TrainerTID7 = sav.TrainerTID7,
                         TrainerSID7 = sav.TrainerSID7,
                         TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, encounter.TeraType, encounter.Species, encounter.Form),
                     };
@@ -312,7 +298,7 @@ public partial class RaidViewer : ContentPage
                         RollCount = 1,
                         Height = 0,
                         Weight = 0,
-                        Ability = mencounter.Ability,
+                        //Ability = mencounter.Ability,
                         Shiny = mencounter.Shiny,
                         Nature = mencounter.Nature,
                         IVs = mencounter.IVs,
@@ -321,7 +307,7 @@ public partial class RaidViewer : ContentPage
                     {
                         Species = mencounter.Species,
                         Form = mencounter.Form,
-                        TrainerID7 = sav.TrainerID7,
+                        TrainerTID7 = sav.TrainerTID7,
                         TrainerSID7 = sav.TrainerSID7,
                         TeraTypeOriginal = (MoveType)Tera9RNG.GetTeraType(raid.Seed, mencounter.TeraType, mencounter.Species, mencounter.Form),
                     };
@@ -449,9 +435,9 @@ public partial class RaidViewer : ContentPage
 
 
 
-                    EncounterDist9 dencounter = null;
+                    EncounterRaid9 dencounter = null;
                     //var dist = EncounterDist9.GetArray( tempsave.Blocks.GetBlock(0x520A1B0).Data);
-                    foreach (var theencounter in Dist)
+                    foreach (var theencounter in dist)
                     {
                         var maxd = game is GameVersion.SL ? theencounter.GetRandRateTotalScarlet(3) : theencounter.GetRandRateTotalViolet(3);
                         var min = game is GameVersion.SL ? theencounter.GetRandRateMinScarlet(3) : theencounter.GetRandRateMinViolet(3);
@@ -484,9 +470,9 @@ public partial class RaidViewer : ContentPage
 
 
 
-                    EncounterMight9 mencounter = null;
+                    EncounterRaid9 mencounter = null;
                     //var dist = EncounterDist9.GetArray( tempsave.Blocks.GetBlock(0x520A1B0).Data);
-                    foreach (var theencounter in Might)
+                    foreach (var theencounter in might)
                     {
                         var maxd = game is GameVersion.SL ? theencounter.GetRandRateTotalScarlet(3) : theencounter.GetRandRateTotalViolet(3);
                         var min = game is GameVersion.SL ? theencounter.GetRandRateMinScarlet(3) : theencounter.GetRandRateMinViolet(3);
@@ -538,6 +524,15 @@ public partial class RaidViewer : ContentPage
         foreach (var s in e.CurrentSelection)
         {
             mainpk = (raidsprite)s;
+            var backx = mainpk.coords2[0];
+            var backxbit = BitConverter.GetBytes(backx);
+            var backy = mainpk.coords2[1];
+            var backybit = BitConverter.GetBytes(backy);
+            var backz = mainpk.coords2[2];
+            var backzbit = BitConverter.GetBytes(backz);
+            var backxyz = backxbit.Concat(backybit).ToArray();
+            backxyz = backxyz.Concat(backzbit).ToArray();
+            teleporter.recentcoords = backxyz;
 
         }
     }
@@ -3038,10 +3033,14 @@ public partial class RaidViewer : ContentPage
             var found = RaidViewer.denloc.TryGetValue($"{raid.AreaID}-{raid.SpawnPointID}", out var result);
             if (found)
             {
-            coords = result;
+                coords = result;
             }
-        
-       
+            found = RaidViewer.denloc.TryGetValue($"{raid.AreaID}-{raid.SpawnPointID}_", out var result2);
+            if (found)
+            {
+                coords2 = result2;
+            }
+
             location = raid.AreaID == 0 ? Area[1] : Area[raid.AreaID - 1];
        
             bgcolor = RaidViewer.GetTypeSpriteColor((byte)pk9.TeraTypeOriginal);
@@ -3077,6 +3076,7 @@ public partial class RaidViewer : ContentPage
         public PKM pkm { get; set; }
         public string url { get; set; }
         public double[] coords { get; set; }
+        public double[] coords2 { get; set; }
         public TeraRaidDetail Raid { get; set; }
         public Color shines { get; set; }
 

@@ -1,0 +1,52 @@
+﻿include "WazaSet.fbs";
+include "WazaID.fbs";
+include "GemType.fbs";
+include "SeikakuType.fbs";
+include "BallType.fbs";
+include "WazaType.fbs";
+include "DevID.fbs";
+include "SexType.fbs";
+include "GemType.fbs";
+include "TokuseiType.fbs";
+include "TalentType.fbs";
+include "RareType.fbs";
+include "SizeType.fbs";
+include "ParamSet.fbs";
+include "ItemID.fbs";
+attribute "fs_serializer";
+
+namespace pkNX.Structures.FlatBuffers;
+
+table PokeDataBattle
+{
+	DevId : DevID;
+	FormId : short;
+	Sex : SexType;
+	Level : int;
+	ItemId : ItemIDs;
+	BallId : BallType;
+	Wazatype : WazaType;
+	Waza1 : WazaSet;
+	Waza2 : WazaSet;
+	Waza3 : WazaSet;
+	Waza4 : WazaSet;
+	Gemtype : GemType;
+	Seikaku : SeikakuType;
+	Tokusei : TokuseiType;
+	Talenttype : TalentType;
+	TalentValue : ParamSet;
+	TalentvNum : byte;
+	EffortValue : ParamSet;
+	Raretype : RareType;
+	ScaleType : SizeType;
+	ScaleValue : short;
+
+
+}
+
+enum RaidSerializationFormat : int
+{
+	BaseRom =0,
+	Type2 = 1,
+	Type3 = 2,
+}
