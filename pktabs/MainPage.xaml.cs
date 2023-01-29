@@ -5,6 +5,7 @@ using PKHeX.Core.AutoMod;
 using static pk9reader.MetTab;
 using System.Windows.Input;
 using System.Collections.Generic;
+using System.Numerics;
 
 
 namespace pk9reader;
@@ -65,7 +66,7 @@ public partial class MainPage : ContentPage
     }
     public void checklegality()
     {
-        la = new(pk);
+        la = new(pk,sav.Personal);
         legality.Text = la.Valid ? "✔" : "⚠";
         legality.BackgroundColor = la.Valid ? Colors.Green : Colors.Red;
         
@@ -85,7 +86,7 @@ public partial class MainPage : ContentPage
         MainTeratypepicker.SelectedIndex = (int)pkm.TeraTypeOriginal;
         
       
-        abilitypicker.SelectedIndex = pkm.AbilityNumber;
+        abilitypicker.SelectedIndex =pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
         Heightdisplay.Text = $"{pkm.HeightScalar}";
         Weightdisplay.Text = $"{pkm.WeightScalar}";
@@ -128,7 +129,7 @@ public partial class MainPage : ContentPage
             abilitypicker.Items.Add($"{(Ability)abili}");
 
         }
-        abilitypicker.SelectedIndex = pk.Ability;
+        abilitypicker.SelectedIndex = 0;
         if(pk.PersonalInfo.Genderless && genderdisplay.SelectedIndex != 2)
         {
             pk.Gender = 2;
@@ -232,7 +233,14 @@ public partial class MainPage : ContentPage
         checklegality();
     }
 
-    private void applyability(object sender, EventArgs e) { pk.AbilityNumber = abilitypicker.SelectedIndex; }
+    private void applyability(object sender, EventArgs e)
+    {
+        if (abilitypicker.SelectedIndex != -1)
+        {
+            var abil = pk.PersonalInfo.GetAbilityAtIndex(abilitypicker.SelectedIndex);
+            pk.SetAbility(abil);
+        }
+    }
     public static bool reconnect = false;
         private async void botbaseconnect(object sender, EventArgs e)
     {
