@@ -61,9 +61,6 @@ public partial class MainPage : ContentPage
         var bytes= File.ReadAllBytes(pkfile.FullPath);
         pk = new(bytes);
         applymainpkinfo(pk);
-      
-
-
         checklegality();
     }
     public void checklegality()
@@ -79,13 +76,7 @@ public partial class MainPage : ContentPage
         
         specieslabel.SelectedIndex = specieslabel.Items.IndexOf(SpeciesName.GetSpeciesName(pkm.Species,2));
         displaypid.Text = $"{pkm.PID:X}";
-
-        if (pkm.IsNicknamed)
-        {
-            nickname.Text = pkm.Nickname;
-        }
-        else
-            nickname.Text = SpeciesName.GetSpeciesName(pkm.Species, 2);
+        nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
         naturepicker.SelectedIndex = pkm.Nature;
@@ -100,7 +91,7 @@ public partial class MainPage : ContentPage
             abilitypicker.Items.Add($"{(Ability)abili}");
 
         }
-        abilitypicker.SelectedIndex = pkm.Ability;
+        abilitypicker.SelectedIndex = pkm.AbilityNumber;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
         Heightdisplay.Text = $"{pkm.HeightScalar}";
         Weightdisplay.Text = $"{pkm.WeightScalar}";
@@ -166,13 +157,13 @@ public partial class MainPage : ContentPage
         }
         formpicker.SelectedIndex = pk.Form;
         if (pk.Species == 0)
-            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.SpeciesInternal:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
         else if (pk.IsShiny)
-            spriteurl = $"https://www.serebii.net/Shiny/SV/{pk.Species:000}.png";
+            spriteurl = $"https://www.serebii.net/Shiny/SV/new/{pk.Species:000}.png";
         else if (pk.Form != 0)
-            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.Species:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk.SpeciesInternal:0000}{(pk.Form != 0 ? $"-{pk.Form:00}" : "")}.png";
         else
-            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pk.Species:000}.png";
+            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/new/{pk.Species:000}.png";
         pic.Source = spriteurl;
         checklegality();
     }
@@ -245,7 +236,7 @@ public partial class MainPage : ContentPage
         checklegality();
     }
 
-    private void applyability(object sender, EventArgs e) { pk.RefreshAbility(abilitypicker.SelectedIndex); checklegality(); }
+    private void applyability(object sender, EventArgs e) { pk.AbilityNumber = abilitypicker.SelectedIndex; }
     public static bool reconnect = false;
         private async void botbaseconnect(object sender, EventArgs e)
     {
@@ -284,10 +275,16 @@ public partial class MainPage : ContentPage
             var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
             if (KBCATEventRaidIdentifier.Type is not SCTypeCode.None && BitConverter.ToUInt32(KBCATEventRaidIdentifier.Data) > 0)
             {
-                
+                try
+                {
                     var events = Offsets.GetEventEncounterDataFromSAV(temp);
                     RaidViewer.dist = EncounterRaid9.GetEncounters(EncounterDist9.GetArray(events[0]));
                     RaidViewer.might = EncounterRaid9.GetEncounters(EncounterMight9.GetArray(events[1]));
+                }
+                catch(Exception ex)
+                {
+                    await DisplayAlert("Error", $"Error Downloading Event Data, If there is no Event, Ignore. Error Code: {ex.Message}", "Cancel");
+                }
                 
            
             }
@@ -337,11 +334,18 @@ public partial class MainPage : ContentPage
         checklegality();
     }
 
-    private void legalize(object sender, EventArgs e)
+    private async void legalize(object sender, EventArgs e)
     {
-        pk = (PK9)pk.Legalize();
-        checklegality();
-        applymainpkinfo(pk);
+        try
+        {
+            pk = (PK9)pk.Legalize();
+            checklegality();
+            applymainpkinfo(pk);
+        }
+        catch(Exception j)
+        {
+            await DisplayAlert("error", j.Message, "ok");
+        }
     }
 
     private async void displaylegalitymessage(object sender, EventArgs e)

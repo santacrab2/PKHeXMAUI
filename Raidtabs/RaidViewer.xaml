@@ -7,9 +7,9 @@
     <RefreshView x:Name="raidrefresh">
         <ScrollView>
             <StackLayout>
-                <Button Text="Shinify" x:Name="testlab" Clicked="shinify"></Button>
-                <Button Text="Teleport" x:Name="teleportbutton" Clicked="teleport"/>
-                <Button Text="Screenshot" x:Name="sceenshotbutton" Clicked="takeascreenshot"/>
+                <Button Text="Shinify" x:Name="testlab" Clicked="shinify" BackgroundColor="DeepSkyBlue" BorderColor="Black" BorderWidth="2"></Button>
+                <Button Text="Teleport" x:Name="teleportbutton" Clicked="teleport" BackgroundColor="DeepSkyBlue" BorderColor="Black" BorderWidth="2"/>
+                <Button Text="Screenshot" x:Name="sceenshotbutton" Clicked="takeascreenshot" BackgroundColor="DeepSkyBlue" BorderColor="Black" BorderWidth="2"/>
                 <CollectionView HeightRequest="450" WidthRequest="400" x:Name="raidview" SelectionMode="Single" SelectionChanged="update" ></CollectionView>
             </StackLayout>
         </ScrollView>

@@ -93,7 +93,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="PKHeX.Core" Version="22.12.19" />
+		<PackageReference Include="PKHeX.Core" Version="23.1.26" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
 	</ItemGroup>
 

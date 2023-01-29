@@ -147,7 +147,7 @@ public partial class RaidViewer : ContentPage
                         RollCount = 1,
                         Height = 0,
                         Weight = 0,
-                        //Ability = dencounter.Ability,
+                        Ability = dencounter.Ability,
                         Shiny = dencounter.Shiny,
                         Nature = dencounter.Nature,
                         IVs = dencounter.IVs,
@@ -298,7 +298,7 @@ public partial class RaidViewer : ContentPage
                         RollCount = 1,
                         Height = 0,
                         Weight = 0,
-                        //Ability = mencounter.Ability,
+                        Ability = mencounter.Ability,
                         Shiny = mencounter.Shiny,
                         Nature = mencounter.Nature,
                         IVs = mencounter.IVs,
@@ -524,15 +524,18 @@ public partial class RaidViewer : ContentPage
         foreach (var s in e.CurrentSelection)
         {
             mainpk = (raidsprite)s;
-            var backx = mainpk.coords2[0];
-            var backxbit = BitConverter.GetBytes(backx);
-            var backy = mainpk.coords2[1];
-            var backybit = BitConverter.GetBytes(backy);
-            var backz = mainpk.coords2[2];
-            var backzbit = BitConverter.GetBytes(backz);
-            var backxyz = backxbit.Concat(backybit).ToArray();
-            backxyz = backxyz.Concat(backzbit).ToArray();
-            teleporter.recentcoords = backxyz;
+            if (mainpk.coords2.Length != 0)
+            {
+                var backx = mainpk.coords2[0];
+                var backxbit = BitConverter.GetBytes(backx);
+                var backy = mainpk.coords2[1];
+                var backybit = BitConverter.GetBytes(backy);
+                var backz = mainpk.coords2[2];
+                var backzbit = BitConverter.GetBytes(backz);
+                var backxyz = backxbit.Concat(backybit).ToArray();
+                backxyz = backxyz.Concat(backzbit).ToArray();
+                teleporter.recentcoords = backxyz;
+            }
 
         }
     }
@@ -3040,6 +3043,8 @@ public partial class RaidViewer : ContentPage
             {
                 coords2 = result2;
             }
+            else
+                coords2 = Array.Empty<double>();
 
             location = raid.AreaID == 0 ? Area[1] : Area[raid.AreaID - 1];
        
@@ -3048,13 +3053,13 @@ public partial class RaidViewer : ContentPage
             pkm = pk9;
 
             if (pk9.Species == 0)
-                url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+                url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.SpeciesInternal:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
             else if (pk9.IsShiny && pk9.Form==0)
-                url = $"https://www.serebii.net/Shiny/SV/{pk9.Species:000}.png";
+                url = $"https://www.serebii.net/Shiny/SV/new/{pk9.Species:000}.png";
             else if (pk9.Form != 0)
-                url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+                url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.SpeciesInternal:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
             else
-                url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species:000}.png";
+                url = $"https://www.serebii.net/scarletviolet/pokemon/new/{pk9.Species:000}.png";
 
             var starxoro = RaidViewer.getxoronextint(raid.Seed, 100);
             var stars = starxoro switch
@@ -3068,7 +3073,8 @@ public partial class RaidViewer : ContentPage
             if(raid.Content == TeraRaidContentType.Might7)
                 stars = 7;
             Stars = stars.ToString();
-            shines = pk9.IsShiny ? Colors.Yellow : default;
+            var noshinecolor = Application.Current.RequestedTheme == AppTheme.Light ? Colors.Black : Colors.White;
+            shines = pk9.IsShiny ? Colors.Yellow : noshinecolor;
         }
         public string Stars { get; set; }
         public string location { get; set; }

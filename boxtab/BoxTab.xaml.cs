@@ -34,7 +34,7 @@ public partial class BoxTab : ContentPage
 		boxsprites = new List<boxsprite>();
 		foreach (var boxpk in sav.GetBoxData(boxnum.SelectedIndex))
 		{
-			var boxinfo = new boxsprite(boxpk);
+			var boxinfo = new boxsprite((PK9)boxpk);
 			boxsprites.Add(boxinfo);
 		}
 		
@@ -100,18 +100,18 @@ public partial class BoxTab : ContentPage
 }
 public class boxsprite
 {
-	public boxsprite(PKM pk9)
+	public boxsprite(PK9 pk9)
 	{
 		pkm = pk9;
 		species = $"{(Species)pk9.Species}";
         if (pk9.Species == 0)
-            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.SpeciesInternal:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
         else if (pk9.IsShiny)
-            url = $"https://www.serebii.net/Shiny/SV/{pk9.Species:000}.png";
+            url = $"https://www.serebii.net/Shiny/SV/new/{pk9.Species:000}.png";
         else if(pk9.Form != 0)
-            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pk9.SpeciesInternal:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
         else
-            url = $"https://www.serebii.net/scarletviolet/pokemon/{pk9.Species:000}.png";
+            url = $"https://www.serebii.net/scarletviolet/pokemon/new/{pk9.Species:000}.png";
     }
 	public PKM pkm { get; set; }
 	public string url { get; set; }
