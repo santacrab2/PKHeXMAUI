@@ -40,7 +40,7 @@ public partial class MainPage : ContentPage
             
         });
         mainrefresh.Command = refreshCommand;
-       
+        checklegality();
 
 
 
@@ -68,6 +68,7 @@ public partial class MainPage : ContentPage
         la = new(pk);
         legality.Text = la.Valid ? "✔" : "⚠";
         legality.BackgroundColor = la.Valid ? Colors.Green : Colors.Red;
+        
     }
     public void applymainpkinfo(PK9 pkm)
     {
@@ -172,11 +173,13 @@ public partial class MainPage : ContentPage
 
     private void applynickname(object sender, TextChangedEventArgs e)
     {
-        if (pk.IsNicknamed)
+
+        if (nickname.Text != ((Species)pk.Species).ToString())
         {
-            pk.SetNickname(pk.Nickname);
+            pk.SetNickname(nickname.Text);
             checklegality();
         }
+        
     }
 
     private void turnshiny(object sender, EventArgs e)

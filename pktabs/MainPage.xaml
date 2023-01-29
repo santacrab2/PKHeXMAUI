@@ -48,7 +48,7 @@
                    VerticalOptions="Start"
                        
                 />
-                <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="⚠" x:Name="legality" BackgroundColor="Red" Clicked="displaylegalitymessage"/>
+                <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="⚠" x:Name="legality" Clicked="displaylegalitymessage"/>
 
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>

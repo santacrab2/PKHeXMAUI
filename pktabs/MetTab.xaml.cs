@@ -42,13 +42,15 @@ public partial class MetTab : ContentPage
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
         ballspriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(pkm.Ball>-1?(Ball)pkm.Ball:"Poke")}.png";
         ballimage.Source = ballspriteurl;
-        var metdate = (DateOnly)pkm.MetDate;
+       
+        var metdate = pkm.MetDate!=null? (DateOnly)pkm.MetDate:DateOnly.MinValue;
         metdatepicker.Date = pkm.MetDate != null?metdate.ToDateTime(TimeOnly.Parse("10:00 PM")) :DateTime.Now;
         metleveldisplay.Text = pkm.Met_Level>-1?pkm.Met_Level.ToString():"0";
         obedienceleveldisplay.Text = pkm.Obedience_Level>-1?pkm.Obedience_Level.ToString():"0";
         fatefulcheck.IsChecked = pkm.FatefulEncounter;
         eggcheck.IsChecked = pkm.WasEgg;
-        var eggmetdate = (DateOnly)pkm.EggMetDate;
+        
+        var eggmetdate = pkm.EggMetDate!=null? (DateOnly)pkm.EggMetDate:DateOnly.MinValue;
         eggdatepicker.Date = pkm.EggMetDate != null?eggmetdate.ToDateTime(TimeOnly.Parse("10:00 PM")):DateTime.UnixEpoch;
         eggmetpicker.SelectedIndex = pkm.Egg_Location > -1 ? pkm.Egg_Location:0;
         
