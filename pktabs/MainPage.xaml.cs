@@ -83,14 +83,7 @@ public partial class MainPage : ContentPage
         Teratypepicker.SelectedIndex = (int)pkm.TeraTypeOverride == 0x13 ? (int)pkm.TeraTypeOriginal : (int)pkm.TeraTypeOverride;
         MainTeratypepicker.SelectedIndex = (int)pkm.TeraTypeOriginal;
         
-        if (abilitypicker.Items.Count() != 0)
-            abilitypicker.Items.Clear();
-        for (int i = 0; i < 3; i++)
-        {
-            var abili = pkm.PersonalInfo.GetAbilityAtIndex(i);
-            abilitypicker.Items.Add($"{(Ability)abili}");
-
-        }
+      
         abilitypicker.SelectedIndex = pkm.AbilityNumber;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
         Heightdisplay.Text = $"{pkm.HeightScalar}";
