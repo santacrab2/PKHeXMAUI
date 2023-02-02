@@ -4,25 +4,25 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:pk9reader">
-    <TabBar>
-        <Tab Title="Pk9 Editor">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
+        <Tab Title="pk editor" Icon="iconp.png">
             <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"  />
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
 
-            <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}" Route="StatsTab"></ShellContent>
+            <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}"></ShellContent>
 
-            <ShellContent Title="Attacks" ContentTemplate="{DataTemplate local:AttacksTab}" Route="AttackTab"></ShellContent>
+            <ShellContent Title="Attacks" ContentTemplate="{DataTemplate local:AttacksTab}"></ShellContent>
 
-            <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}" Route="OTTab"></ShellContent>
+            <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
-        <Tab Title="Box">
-            <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
-        </Tab>
-        <Tab Title="Raids">
-            <ShellContent Title="Raids" ContentTemplate="{DataTemplate local:RaidViewer}"/>
+
+        <ShellContent Icon="poke.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
+ 
+        <Tab Title="Raids" Icon="ribbonmarkmightiest.png">
+        <ShellContent Title="Raids" ContentTemplate="{DataTemplate local:RaidViewer}"/>
             <ShellContent Title="Manual Teleport" ContentTemplate="{DataTemplate local:teleporter}"/>
-
         </Tab>
-    </TabBar>
+
+    </FlyoutItem>
 </Shell>
