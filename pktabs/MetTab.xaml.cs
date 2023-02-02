@@ -76,7 +76,7 @@ public partial class MetTab : ContentPage
     {
 
         pk.Ball = ballpicker.SelectedIndex;
-        ballspriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(Ball)pk.Ball}.png";
+        ballspriteurl = $"{((Ball)pk.Ball).ToString().ToLower()}.png";
         ballimage.Source = ballspriteurl;
     }
 

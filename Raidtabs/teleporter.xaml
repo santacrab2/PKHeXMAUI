@@ -6,12 +6,13 @@
     <RefreshView x:Name="teleportrefresh">
         <ScrollView>
         <VerticalStackLayout>
-            <Button Text="read location" Clicked="readloc"/>
+            <Button Text="read location" Clicked="readloc" BackgroundColor="DeepSkyBlue"/>
             <Label x:Name="xlab" Text="0" FontSize="18"/>
             <Label x:Name="ylab" Text="0" FontSize="18"/>
             <Label x:Name="zlab" Text="0" FontSize="18"/>
-            <Button Text="teleport to above" Clicked="teleloc"/>
-        </VerticalStackLayout>
+            <Button Text="teleport to above" Clicked="teleloc" BackgroundColor="DeepSkyBlue"/>
+            <Button x:Name="allshinybutton" Text="Shinify All" Clicked="Shinifyall" BackgroundColor="DeepSkyBlue" BorderColor="Black" BorderWidth="2"/>
+            </VerticalStackLayout>
         </ScrollView>
     </RefreshView>
 </ContentPage>

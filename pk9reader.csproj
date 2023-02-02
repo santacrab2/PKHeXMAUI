@@ -39,7 +39,6 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Include="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 		<MauiImage Include="Resources\Images\iconp.png" BaseSize="168,208" />
 		 
 		
@@ -67,6 +66,166 @@
 
 	<ItemGroup>
 	  <None Remove="deps\RaidLocations.json" />
+	  <None Remove="Resources\Images\ribbonability.png" />
+	  <None Remove="Resources\Images\ribbonabilitydouble.png" />
+	  <None Remove="Resources\Images\ribbonabilitygreat.png" />
+	  <None Remove="Resources\Images\ribbonabilitymulti.png" />
+	  <None Remove="Resources\Images\ribbonabilitypair.png" />
+	  <None Remove="Resources\Images\ribbonabilityworld.png" />
+	  <None Remove="Resources\Images\ribbonalert.png" />
+	  <None Remove="Resources\Images\ribbonartist.png" />
+	  <None Remove="Resources\Images\ribbonbattlerexpert.png" />
+	  <None Remove="Resources\Images\ribbonbattleroyale.png" />
+	  <None Remove="Resources\Images\ribbonbattlerskillful.png" />
+	  <None Remove="Resources\Images\ribbonbattletreegreat.png" />
+	  <None Remove="Resources\Images\ribbonbattletreemaster.png" />
+	  <None Remove="Resources\Images\ribbonbestfriends.png" />
+	  <None Remove="Resources\Images\ribbonbirthday.png" />
+	  <None Remove="Resources\Images\ribboncareless.png" />
+	  <None Remove="Resources\Images\ribbonchampionalola.png" />
+	  <None Remove="Resources\Images\ribbonchampionbattle.png" />
+	  <None Remove="Resources\Images\ribbonchampiong3.png" />
+	  <None Remove="Resources\Images\ribbonchampiong6hoenn.png" />
+	  <None Remove="Resources\Images\ribbonchampiongalar.png" />
+	  <None Remove="Resources\Images\ribbonchampionkalos.png" />
+	  <None Remove="Resources\Images\ribbonchampionnational.png" />
+	  <None Remove="Resources\Images\ribbonchampionpaldea.png" />
+	  <None Remove="Resources\Images\ribbonchampionregional.png" />
+	  <None Remove="Resources\Images\ribbonchampionsinnoh.png" />
+	  <None Remove="Resources\Images\ribbonchampionworld.png" />
+	  <None Remove="Resources\Images\ribbonclassic.png" />
+	  <None Remove="Resources\Images\ribbonconteststar.png" />
+	  <None Remove="Resources\Images\ribboncountmemorybattle.png" />
+	  <None Remove="Resources\Images\ribboncountmemorybattle2.png" />
+	  <None Remove="Resources\Images\ribboncountmemorycontest.png" />
+	  <None Remove="Resources\Images\ribboncountmemorycontest2.png" />
+	  <None Remove="Resources\Images\ribboncountry.png" />
+	  <None Remove="Resources\Images\ribbondowncast.png" />
+	  <None Remove="Resources\Images\ribbonearth.png" />
+	  <None Remove="Resources\Images\ribboneffort.png" />
+	  <None Remove="Resources\Images\ribbonevent.png" />
+	  <None Remove="Resources\Images\ribbonfootprint.png" />
+	  <None Remove="Resources\Images\ribbong3beauty.png" />
+	  <None Remove="Resources\Images\ribbong3beautyhyper.png" />
+	  <None Remove="Resources\Images\ribbong3beautymaster.png" />
+	  <None Remove="Resources\Images\ribbong3beautysuper.png" />
+	  <None Remove="Resources\Images\ribbong3cool.png" />
+	  <None Remove="Resources\Images\ribbong3coolhyper.png" />
+	  <None Remove="Resources\Images\ribbong3coolmaster.png" />
+	  <None Remove="Resources\Images\ribbong3coolsuper.png" />
+	  <None Remove="Resources\Images\ribbong3cute.png" />
+	  <None Remove="Resources\Images\ribbong3cutehyper.png" />
+	  <None Remove="Resources\Images\ribbong3cutemaster.png" />
+	  <None Remove="Resources\Images\ribbong3cutesuper.png" />
+	  <None Remove="Resources\Images\ribbong3smart.png" />
+	  <None Remove="Resources\Images\ribbong3smarthyper.png" />
+	  <None Remove="Resources\Images\ribbong3smartmaster.png" />
+	  <None Remove="Resources\Images\ribbong3smartsuper.png" />
+	  <None Remove="Resources\Images\ribbong3tough.png" />
+	  <None Remove="Resources\Images\ribbong3toughhyper.png" />
+	  <None Remove="Resources\Images\ribbong3toughmaster.png" />
+	  <None Remove="Resources\Images\ribbong3toughsuper.png" />
+	  <None Remove="Resources\Images\ribbong4beauty.png" />
+	  <None Remove="Resources\Images\ribbong4beautygreat.png" />
+	  <None Remove="Resources\Images\ribbong4beautymaster.png" />
+	  <None Remove="Resources\Images\ribbong4beautyultra.png" />
+	  <None Remove="Resources\Images\ribbong4cool.png" />
+	  <None Remove="Resources\Images\ribbong4coolgreat.png" />
+	  <None Remove="Resources\Images\ribbong4coolmaster.png" />
+	  <None Remove="Resources\Images\ribbong4coolultra.png" />
+	  <None Remove="Resources\Images\ribbong4cute.png" />
+	  <None Remove="Resources\Images\ribbong4cutegreat.png" />
+	  <None Remove="Resources\Images\ribbong4cutemaster.png" />
+	  <None Remove="Resources\Images\ribbong4cuteultra.png" />
+	  <None Remove="Resources\Images\ribbong4smart.png" />
+	  <None Remove="Resources\Images\ribbong4smartgreat.png" />
+	  <None Remove="Resources\Images\ribbong4smartmaster.png" />
+	  <None Remove="Resources\Images\ribbong4smartultra.png" />
+	  <None Remove="Resources\Images\ribbong4tough.png" />
+	  <None Remove="Resources\Images\ribbong4toughgreat.png" />
+	  <None Remove="Resources\Images\ribbong4toughmaster.png" />
+	  <None Remove="Resources\Images\ribbong4toughultra.png" />
+	  <None Remove="Resources\Images\ribbongorgeous.png" />
+	  <None Remove="Resources\Images\ribbongorgeousroyal.png" />
+	  <None Remove="Resources\Images\ribbonhisui.png" />
+	  <None Remove="Resources\Images\ribbonlegend.png" />
+	  <None Remove="Resources\Images\ribbonmarkabsentminded.png" />
+	  <None Remove="Resources\Images\ribbonmarkalpha.png" />
+	  <None Remove="Resources\Images\ribbonmarkangry.png" />
+	  <None Remove="Resources\Images\ribbonmarkblizzard.png" />
+	  <None Remove="Resources\Images\ribbonmarkcalmness.png" />
+	  <None Remove="Resources\Images\ribbonmarkcharismatic.png" />
+	  <None Remove="Resources\Images\ribbonmarkcloudy.png" />
+	  <None Remove="Resources\Images\ribbonmarkcrafty.png" />
+	  <None Remove="Resources\Images\ribbonmarkcurry.png" />
+	  <None Remove="Resources\Images\ribbonmarkdawn.png" />
+	  <None Remove="Resources\Images\ribbonmarkdestiny.png" />
+	  <None Remove="Resources\Images\ribbonmarkdry.png" />
+	  <None Remove="Resources\Images\ribbonmarkdusk.png" />
+	  <None Remove="Resources\Images\ribbonmarkexcited.png" />
+	  <None Remove="Resources\Images\ribbonmarkferocious.png" />
+	  <None Remove="Resources\Images\ribbonmarkfishing.png" />
+	  <None Remove="Resources\Images\ribbonmarkflustered.png" />
+	  <None Remove="Resources\Images\ribbonmarkgourmand.png" />
+	  <None Remove="Resources\Images\ribbonmarkhumble.png" />
+	  <None Remove="Resources\Images\ribbonmarkintellectual.png" />
+	  <None Remove="Resources\Images\ribbonmarkintense.png" />
+	  <None Remove="Resources\Images\ribbonmarkitemfinder.png" />
+	  <None Remove="Resources\Images\ribbonmarkjittery.png" />
+	  <None Remove="Resources\Images\ribbonmarkjoyful.png" />
+	  <None Remove="Resources\Images\ribbonmarkjumbo.png" />
+	  <None Remove="Resources\Images\ribbonmarkkindly.png" />
+	  <None Remove="Resources\Images\ribbonmarklunchtime.png" />
+	  <None Remove="Resources\Images\ribbonmarkmightiest.png" />
+	  <None Remove="Resources\Images\ribbonmarkmini.png" />
+	  <None Remove="Resources\Images\ribbonmarkmisty.png" />
+	  <None Remove="Resources\Images\ribbonmarkpartner.png" />
+	  <None Remove="Resources\Images\ribbonmarkpeeved.png" />
+	  <None Remove="Resources\Images\ribbonmarkprideful.png" />
+	  <None Remove="Resources\Images\ribbonmarkpumpedup.png" />
+	  <None Remove="Resources\Images\ribbonmarkrainy.png" />
+	  <None Remove="Resources\Images\ribbonmarkrare.png" />
+	  <None Remove="Resources\Images\ribbonmarkrowdy.png" />
+	  <None Remove="Resources\Images\ribbonmarksandstorm.png" />
+	  <None Remove="Resources\Images\ribbonmarkscowling.png" />
+	  <None Remove="Resources\Images\ribbonmarksleepytime.png" />
+	  <None Remove="Resources\Images\ribbonmarkslump.png" />
+	  <None Remove="Resources\Images\ribbonmarksmiley.png" />
+	  <None Remove="Resources\Images\ribbonmarksnowy.png" />
+	  <None Remove="Resources\Images\ribbonmarkstormy.png" />
+	  <None Remove="Resources\Images\ribbonmarkteary.png" />
+	  <None Remove="Resources\Images\ribbonmarkthorny.png" />
+	  <None Remove="Resources\Images\ribbonmarktitan.png" />
+	  <None Remove="Resources\Images\ribbonmarkuncommon.png" />
+	  <None Remove="Resources\Images\ribbonmarkunsure.png" />
+	  <None Remove="Resources\Images\ribbonmarkupbeat.png" />
+	  <None Remove="Resources\Images\ribbonmarkvigor.png" />
+	  <None Remove="Resources\Images\ribbonmarkzeroenergy.png" />
+	  <None Remove="Resources\Images\ribbonmarkzonedout.png" />
+	  <None Remove="Resources\Images\ribbonmasterbeauty.png" />
+	  <None Remove="Resources\Images\ribbonmastercleverness.png" />
+	  <None Remove="Resources\Images\ribbonmastercoolness.png" />
+	  <None Remove="Resources\Images\ribbonmastercuteness.png" />
+	  <None Remove="Resources\Images\ribbonmasterrank.png" />
+	  <None Remove="Resources\Images\ribbonmastertoughness.png" />
+	  <None Remove="Resources\Images\ribbonnational.png" />
+	  <None Remove="Resources\Images\ribbononceinalifetime.png" />
+	  <None Remove="Resources\Images\ribbonpremier.png" />
+	  <None Remove="Resources\Images\ribbonrecord.png" />
+	  <None Remove="Resources\Images\ribbonrelax.png" />
+	  <None Remove="Resources\Images\ribbonroyal.png" />
+	  <None Remove="Resources\Images\ribbonshock.png" />
+	  <None Remove="Resources\Images\ribbonsmile.png" />
+	  <None Remove="Resources\Images\ribbonsnooze.png" />
+	  <None Remove="Resources\Images\ribbonsouvenir.png" />
+	  <None Remove="Resources\Images\ribbonspecial.png" />
+	  <None Remove="Resources\Images\ribbontowermaster.png" />
+	  <None Remove="Resources\Images\ribbontraining.png" />
+	  <None Remove="Resources\Images\ribbontwinklingstar.png" />
+	  <None Remove="Resources\Images\ribbonvictory.png" />
+	  <None Remove="Resources\Images\ribbonwinning.png" />
+	  <None Remove="Resources\Images\ribbonwishing.png" />
+	  <None Remove="Resources\Images\ribbonworld.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -101,8 +260,8 @@
 	  <Reference Include="PKHeX.Core.AutoMod">
 	    <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
 	  </Reference>
-	  <Reference Include="PKHeX.Drawing.PokeSprite">
-	    <HintPath>..\LGPETradeBot\SysBot.Pokemon\deps\PKHeX.Drawing.PokeSprite.dll</HintPath>
+	  <Reference Include="PKHeX.Drawing.Misc">
+	    <HintPath>..\PKHeX\PKHeX.Drawing.Misc\bin\Release\net7.0-windows\PKHeX.Drawing.Misc.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 
@@ -112,6 +271,9 @@
 	  </Compile>
 	  <Compile Update="pktabs\MetTab.xaml.cs">
 	    <DependentUpon>MetTab.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="pktabs\RibbonSelector.xaml.cs">
+	    <DependentUpon>RibbonSelector.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="pktabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
@@ -129,6 +291,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="pktabs\MetTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\RibbonSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="pktabs\OTTab.xaml">

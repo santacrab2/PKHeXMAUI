@@ -6,7 +6,7 @@ using static pk9reader.MetTab;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Numerics;
-
+using pkNX.Structures.FlatBuffers;
 
 namespace pk9reader;
 
@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-        
+        ipaddy = IP.Text;
         APILegality.SetAllLegalRibbons = false;
         APILegality.UseTrainerData = true;
         APILegality.AllowTrainerOverride = true;
@@ -54,7 +54,7 @@ public partial class MainPage : ContentPage
     public static FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
-
+    public static string ipaddy = "";
     public async void pk9picker_Clicked(object sender, EventArgs e)
     {
         
@@ -95,13 +95,13 @@ public partial class MainPage : ContentPage
         helditempicker.SelectedIndex = helditempicker.Items.IndexOf(GameInfo.Strings.Item[pkm.HeldItem]);
         formpicker.SelectedIndex = pkm.Form;
         if (pkm.Species == 0)
-            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.SpeciesInternal:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         else if (pkm.IsShiny)
-            spriteurl = $"https://www.serebii.net/Shiny/SV/{pkm.Species:000}.png";
+            spriteurl = $"https://www.serebii.net/Shiny/SV/new/{pkm.Species:000}.png";
         else if (pkm.Form != 0)
-            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.Species:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
+            spriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{pkm.SpeciesInternal:0000}{(pkm.Form != 0 ? $"-{pkm.Form:00}" : "")}.png";
         else
-            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/{pkm.Species:000}.png";
+            spriteurl = $"https://www.serebii.net/scarletviolet/pokemon/new/{pkm.Species:000}.png";
         pic.Source = spriteurl;
         languagepicker.SelectedIndex = pkm.Language;
         nicknamecheck.IsChecked = pkm.IsNicknamed;
@@ -242,7 +242,7 @@ public partial class MainPage : ContentPage
         }
     }
     public static bool reconnect = false;
-        private async void botbaseconnect(object sender, EventArgs e)
+    private async void botbaseconnect(object sender, EventArgs e)
     {
         
         if (!SwitchConnection.Connected)
@@ -274,13 +274,20 @@ public partial class MainPage : ContentPage
             var off = await botBase.PointerRelative(new long[] { 0x4384B18, 0x148, 0x40 });
             var read = await botBase.ReadBytesAsync((uint)off, info.Data.Length);
             read.CopyTo(info.Data, 0);
-            await DownloadEventData();
+            var KBCATEventRaidPriority = temp.Accessor.FindOrDefault(Blocks.KBCATRaidPriorityArray.Key);
+            var raidpriorityblock = await botBase.ReadEncryptedBlock(Blocks.KBCATRaidPriorityArray, CancellationToken.None);
+            if (KBCATEventRaidPriority.Type is not SCTypeCode.None)
+                KBCATEventRaidPriority.ChangeData(raidpriorityblock);
+            else
+                BlockUtil.EditBlock(KBCATEventRaidPriority, SCTypeCode.Object, raidpriorityblock);
             
-            var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
-            if (KBCATEventRaidIdentifier.Type is not SCTypeCode.None && BitConverter.ToUInt32(KBCATEventRaidIdentifier.Data) > 0)
+           
+            var KBCATEventRaidPriority2 = FlatBufferConverter.DeserializeFrom<DeliveryPriorityArray>(KBCATEventRaidPriority.Data);
+            if (KBCATEventRaidPriority2.Table[0].VersionNo != 0)
             {
                 try
                 {
+                    await DownloadEventData();
                     var events = Offsets.GetEventEncounterDataFromSAV(temp);
                     RaidViewer.dist = EncounterRaid9.GetEncounters(EncounterDist9.GetArray(events[0]));
                     RaidViewer.might = EncounterRaid9.GetEncounters(EncounterMight9.GetArray(events[1]));
@@ -300,10 +307,26 @@ public partial class MainPage : ContentPage
 
     private async void inject(object sender, EventArgs e)
     {
-        pk.ResetPartyStats();
-        IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
-        var off = await botBase.PointerRelative(jumps);
-        await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))));
+        try
+        {
+            pk.ResetPartyStats();
+            IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
+            var off = await botBase.PointerRelative(jumps);
+            await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))));
+        }
+        catch (Exception)
+        {
+            if (SwitchConnection.Connected)
+            {
+                await SwitchConnection.DisconnectAsync(true);
+            }
+            if (!SwitchConnection.Connected)
+            {
+
+                await SwitchConnection.ConnectAsync(ipaddy, 6000);
+            }
+            inject(sender, e);
+        }
     }
 
     private void changelevel(object sender, TextChangedEventArgs e)
@@ -329,13 +352,29 @@ public partial class MainPage : ContentPage
 
     private async void read(object sender, EventArgs e)
     {
-        IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0,0x0};
-        var off = await botBase.PointerRelative(jumps);
-        var bytes = await botBase.ReadBytesAsync((uint)off+(344*30*uint.Parse(boxnum.Text)+(344*uint.Parse(slotnum.Text))),344);
-        pk = new(bytes);
+        try
+        {
+            IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
+            var off = await botBase.PointerRelative(jumps);
+            var bytes = await botBase.ReadBytesAsync((uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))), 344);
+            pk = new(bytes);
 
-        applymainpkinfo(pk);
-        checklegality();
+            applymainpkinfo(pk);
+            checklegality();
+        }
+        catch (Exception)
+        {
+            if (SwitchConnection.Connected)
+            {
+                await SwitchConnection.DisconnectAsync(true);
+            }
+            if (!SwitchConnection.Connected)
+            {
+
+                await SwitchConnection.ConnectAsync(ipaddy, 6000);
+            }
+            read(sender, e);
+        }
     }
 
     private async void legalize(object sender, EventArgs e)
@@ -387,10 +426,7 @@ public partial class MainPage : ContentPage
     {
         var token = new CancellationToken();
         var temp = (SAV9SV)sav;
-        var KBCATEventRaidIdentifier = temp.Accessor.FindOrDefault(Blocks.KBCATEventRaidIdentifier.Key);
-
-        if (KBCATEventRaidIdentifier.Type is SCTypeCode.None)
-            BlockUtil.EditBlock(KBCATEventRaidIdentifier, SCTypeCode.Object, BitConverter.GetBytes((uint)1));
+       
 
         var KBCATFixedRewardItemArray = temp.Accessor.FindOrDefault(Blocks.KBCATFixedRewardItemArray.Key);
         var rewardItemBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATFixedRewardItemArray, token).ConfigureAwait(false);

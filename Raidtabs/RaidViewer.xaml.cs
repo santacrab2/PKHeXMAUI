@@ -7,6 +7,7 @@ using static PKHeX.Core.Encounters9;
 
 using static pk9reader.MainPage;
 using Microsoft.Maui.Graphics;
+using System.Reflection.Metadata.Ecma335;
 
 namespace pk9reader;
 
@@ -92,12 +93,32 @@ public partial class RaidViewer : ContentPage
     }
     public async Task<List<raidsprite>> raidlist()
     {
-
+        
         List<raidsprite> returnlist = new();
         SAV9SV tempsave = (SAV9SV)sav;
-        var raidpointer = new List<long> { 0x4384B18, 0x180, 0x40 };
-        var raidoff = await botBase.PointerRelative(raidpointer);
-        byte[] raiddata = await botBase.ReadBytesAsync((uint)raidoff, 0x910);
+        byte[] raiddata = Array.Empty<byte>();
+        try
+        {
+            var raidpointer = new List<long> { 0x4384B18, 0x180, 0x40 };
+            var raidoff = await botBase.PointerRelative(raidpointer);
+            raiddata = await botBase.ReadBytesAsync((uint)raidoff, 0x910);
+        }
+        catch (Exception)
+        {
+            if (SwitchConnection.Connected)
+            {
+                await SwitchConnection.DisconnectAsync(true);
+            }
+            if (!SwitchConnection.Connected)
+            {
+                
+                await SwitchConnection.ConnectAsync(ipaddy, 6000);
+            }
+            var raidpointer = new List<long> { 0x4384B18, 0x180, 0x40 };
+            var raidoff = await botBase.PointerRelative(raidpointer);
+            raiddata = await botBase.ReadBytesAsync((uint)raidoff, 0x910);
+            
+        }
 
         var accessor = tempsave.Blocks;
         var raidblock = accessor.GetBlock(0xCAAC8800);
@@ -513,9 +534,27 @@ public partial class RaidViewer : ContentPage
             }
 
         }
-        var raidpointer = new List<long> { 0x4384B18, 0x180, 0x40 };
-        var raidoff = await botBase.PointerRelative(raidpointer);
-        await botBase.WriteBytesAsync(tempsave.Raid.Data, (uint)raidoff);
+        try
+        {
+            var raidpointer = new List<long> { 0x4384B18, 0x180, 0x40 };
+            var raidoff = await botBase.PointerRelative(raidpointer);
+            await botBase.WriteBytesAsync(tempsave.Raid.Data, (uint)raidoff);
+        }
+        catch (Exception)
+        {
+            if (SwitchConnection.Connected)
+            {
+                await SwitchConnection.DisconnectAsync(true);
+            }
+            if (!SwitchConnection.Connected)
+            {
+
+                await SwitchConnection.ConnectAsync(ipaddy, 6000);
+            }
+            var raidpointer = new List<long> { 0x4384B18, 0x180, 0x40 };
+            var raidoff = await botBase.PointerRelative(raidpointer);
+            await botBase.WriteBytesAsync(tempsave.Raid.Data, (uint)raidoff);
+        }
         testlab.Text = "Shinify";
     }
 
@@ -526,12 +565,12 @@ public partial class RaidViewer : ContentPage
             mainpk = (raidsprite)s;
             if (mainpk.coords2.Length != 0)
             {
-                var backx = mainpk.coords2[0];
-                var backxbit = BitConverter.GetBytes(backx);
-                var backy = mainpk.coords2[1];
-                var backybit = BitConverter.GetBytes(backy);
-                var backz = mainpk.coords2[2];
-                var backzbit = BitConverter.GetBytes(backz);
+                
+                var backxbit = BitConverter.GetBytes((float)mainpk.coords2[0]);
+                
+                var backybit = BitConverter.GetBytes((float)mainpk.coords2[1]);
+               
+                var backzbit = BitConverter.GetBytes((float)mainpk.coords2[2]);
                 var backxyz = backxbit.Concat(backybit).ToArray();
                 backxyz = backxyz.Concat(backzbit).ToArray();
                 teleporter.recentcoords = backxyz;
@@ -541,25 +580,41 @@ public partial class RaidViewer : ContentPage
     }
     public async void teleport(object sender, EventArgs e)
     {
+        try
+        {
+            var telporterpointer = new long[] { 0x43A75B0, 0x2A8, 0x0, 0x0, 0x80 };
 
-        var telporterpointer = new long[] { 0x43A75B0,0x2A8,0x0,0x0,0x80};
-        
-        var telporteroff = await botBase.PointerRelative(telporterpointer);
-     
-       
-        teleportbutton.Text = "teleporting...";
-       
-        var x = BitConverter.GetBytes((float)mainpk.coords[0]);
-        float yarr;
-        if (mainpk.Raid.AreaID != 1 || mainpk.Raid.AreaID != 4 || mainpk.Raid.AreaID != 5 || mainpk.Raid.AreaID != 6 || mainpk.Raid.AreaID != 7 || mainpk.Raid.AreaID != 8)
-            yarr = (float)(mainpk.coords[1] + 50);
-        else
-            yarr = (float)(mainpk.coords[1] + 30);
-        var y = BitConverter.GetBytes(yarr);
-        var z = BitConverter.GetBytes((float)mainpk.coords[2]);
-        var XYZ = x.Concat(y).ToArray();
-        XYZ = XYZ.Concat(z).ToArray();
-        await botBase.WriteBytesAsync(XYZ, (uint)telporteroff);
+            var telporteroff = await botBase.PointerRelative(telporterpointer);
+
+
+            teleportbutton.Text = "teleporting...";
+
+            var x = BitConverter.GetBytes((float)mainpk.coords[0]);
+            float yarr;
+            if (mainpk.Raid.AreaID != 1 || mainpk.Raid.AreaID != 4 || mainpk.Raid.AreaID != 5 || mainpk.Raid.AreaID != 6 || mainpk.Raid.AreaID != 7 || mainpk.Raid.AreaID != 8)
+                yarr = (float)(mainpk.coords[1] + 50);
+            else
+                yarr = (float)(mainpk.coords[1] + 30);
+            var y = BitConverter.GetBytes(yarr);
+            var z = BitConverter.GetBytes((float)mainpk.coords[2]);
+            var XYZ = x.Concat(y).ToArray();
+            XYZ = XYZ.Concat(z).ToArray();
+            await botBase.WriteBytesAsync(XYZ, (uint)telporteroff);
+        }
+        catch (Exception)
+        {
+            if (SwitchConnection.Connected)
+            {
+                await SwitchConnection.DisconnectAsync(true);
+            }
+            if (!SwitchConnection.Connected)
+            {
+
+                await SwitchConnection.ConnectAsync(ipaddy, 6000);
+            }
+            teleport(sender, e);
+
+        }
         teleportbutton.Text = "Teleport";
     }
 
@@ -592,10 +647,26 @@ public partial class RaidViewer : ContentPage
 
     private async void takeascreenshot(object sender, EventArgs e)
     {
-        sceenshotbutton.Text = "loading...";
-        var screenarray = await botBase.Screengrab(CancellationToken.None);
-        await File.WriteAllBytesAsync("/storage/emulated/0/Pictures/RaidScreenshot.jpg", screenarray);
-        sceenshotbutton.Text = "screenshot";
+        try
+        {
+            sceenshotbutton.Text = "loading...";
+            var screenarray = await botBase.Screengrab(CancellationToken.None);
+            await File.WriteAllBytesAsync("/storage/emulated/0/Pictures/RaidScreenshot.jpg", screenarray);
+            sceenshotbutton.Text = "screenshot";
+        }
+        catch (Exception)
+        {
+            if (SwitchConnection.Connected)
+            {
+                await SwitchConnection.DisconnectAsync(true);
+            }
+            if (!SwitchConnection.Connected)
+            {
+
+                await SwitchConnection.ConnectAsync(ipaddy, 6000);
+            }
+            takeascreenshot(sender, e);
+        }
     }
     public async Task initializedicts()
     {

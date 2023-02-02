@@ -2,7 +2,7 @@
 
 namespace pkNX.Structures.FlatBuffers;
 
-table DeliveryPriorityArray
+table DeliveryPriorityArray (fs_serializer)
 {
 	Table : [DeliveryRaidPriority];
 }

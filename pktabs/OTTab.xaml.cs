@@ -83,4 +83,14 @@ public partial class OTTab : ContentPage
     {
         pk.CurrentHandler = 1;
     }
+
+    private void applyotgender(object sender, EventArgs e)
+    {
+        pk.OT_Gender = (byte)otgenderpicker.SelectedIndex;
+    }
+
+    private void openribbons(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new RibbonSelector());
+    }
 }
