@@ -1,10 +1,14 @@
-﻿namespace pk9reader;
+﻿using PKHeX.Core;
+
+namespace pk9reader;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
+	public AppShell(SaveFile sav)
 	{
-		InitializeComponent();
+        AppSaveFile = sav;
+        InitializeComponent();
 		
 	}
+	public static SaveFile AppSaveFile { get; set; }
 }

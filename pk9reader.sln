@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pk9reader", "pk9reader.csproj", "{4D19D051-8A5E-4613-879F-8EF625259AB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pkNX.Structures.FlatBuffers", "pkNX.Structures.FlatBuffers\pkNX.Structures.FlatBuffers.csproj", "{BA249F8E-5BC9-4567-8DB1-4BAB9D13E83B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,10 +17,6 @@ Global
 		{4D19D051-8A5E-4613-879F-8EF625259AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D19D051-8A5E-4613-879F-8EF625259AB8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D19D051-8A5E-4613-879F-8EF625259AB8}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{BA249F8E-5BC9-4567-8DB1-4BAB9D13E83B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA249F8E-5BC9-4567-8DB1-4BAB9D13E83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA249F8E-5BC9-4567-8DB1-4BAB9D13E83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA249F8E-5BC9-4567-8DB1-4BAB9D13E83B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

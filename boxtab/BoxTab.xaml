@@ -6,8 +6,7 @@
     <RefreshView x:Name="boxrefresh">
         <ScrollView>
             <StackLayout>
-                <Button Text="Read All Boxes" x:Name="readbox" Clicked="readboxdata" BackgroundColor="DeepSkyBlue" BorderColor="Black" BorderWidth="2" />
-                <Button Text="Inject" x:Name="injectboxt" Clicked="injectboxtab" BackgroundColor="DeepSkyBlue" BorderColor="Black" BorderWidth="2"/>
+                
                 <Picker FontSize="18"  x:Name="boxnum" SelectedIndexChanged="changebox" />
                 <CollectionView HeightRequest="500" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
               

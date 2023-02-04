@@ -1,6 +1,6 @@
 using PKHeX.Core;
 using PKHeX.Drawing.Misc;
-using pkNX.Structures.FlatBuffers;
+
 using System.ComponentModel;
 using System.Windows.Input;
 using static pk9reader.MainPage;

@@ -6,7 +6,7 @@ using static pk9reader.MetTab;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Numerics;
-using pkNX.Structures.FlatBuffers;
+
 
 namespace pk9reader;
 
@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-        ipaddy = IP.Text;
+  
         APILegality.SetAllLegalRibbons = false;
         APILegality.UseTrainerData = true;
         APILegality.AllowTrainerOverride = true;
@@ -48,9 +48,9 @@ public partial class MainPage : ContentPage
 
     }
     public static LegalityAnalysis la;
-    public static BotBaseRoutines botBase = new();
+
     public static PK9 pk = new();
-    public static SaveFile sav = (SAV9SV) new();
+    public static SaveFile sav = AppShell.AppSaveFile;
     public static FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
@@ -242,92 +242,7 @@ public partial class MainPage : ContentPage
         }
     }
     public static bool reconnect = false;
-    private async void botbaseconnect(object sender, EventArgs e)
-    {
-        
-        if (!SwitchConnection.Connected)
-        {
-            try
-            {
-                SwitchConnection.Connect(IP.Text, 6000);
-                connect.Text = "loading";
-            }
-            catch (Exception)
-            {
-                await DisplayAlert("Connection Error", "Ensure you are on WiFi and that your IP is correct", "cancel");
-            }
-        
-          
-        }
-        else
-        {
-            SwitchConnection.Disconnect(true);
-            connect.Text = "connect";
-           SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            return;
-        }
-        if (SwitchConnection.Connected && reconnect == false)
-        {
-            reconnect = true;
-            var temp = (SAV9SV)sav;
-            var info = temp.MyStatus;
-            var off = await botBase.PointerRelative(new long[] { 0x4384B18, 0x148, 0x40 });
-            var read = await botBase.ReadBytesAsync((uint)off, info.Data.Length);
-            read.CopyTo(info.Data, 0);
-            var KBCATEventRaidPriority = temp.Accessor.FindOrDefault(Blocks.KBCATRaidPriorityArray.Key);
-            var raidpriorityblock = await botBase.ReadEncryptedBlock(Blocks.KBCATRaidPriorityArray, CancellationToken.None);
-            if (KBCATEventRaidPriority.Type is not SCTypeCode.None)
-                KBCATEventRaidPriority.ChangeData(raidpriorityblock);
-            else
-                BlockUtil.EditBlock(KBCATEventRaidPriority, SCTypeCode.Object, raidpriorityblock);
-            
-           
-            var KBCATEventRaidPriority2 = FlatBufferConverter.DeserializeFrom<DeliveryPriorityArray>(KBCATEventRaidPriority.Data);
-            if (KBCATEventRaidPriority2.Table[0].VersionNo != 0)
-            {
-                try
-                {
-                    await DownloadEventData();
-                    var events = Offsets.GetEventEncounterDataFromSAV(temp);
-                    RaidViewer.dist = EncounterRaid9.GetEncounters(EncounterDist9.GetArray(events[0]));
-                    RaidViewer.might = EncounterRaid9.GetEncounters(EncounterMight9.GetArray(events[1]));
-                }
-                catch(Exception ex)
-                {
-                    await DisplayAlert("Error", $"Error Downloading Event Data, If there is no Event, Ignore. Error Code: {ex.Message}", "Cancel");
-                }
-                
-           
-            }
-            sav = temp;
-            connect.Text = "disconnect";
-        }
-        connect.Text = "disconnect";
-    }
-
-    private async void inject(object sender, EventArgs e)
-    {
-        try
-        {
-            pk.ResetPartyStats();
-            IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
-            var off = await botBase.PointerRelative(jumps);
-            await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))));
-        }
-        catch (Exception)
-        {
-            if (SwitchConnection.Connected)
-            {
-                await SwitchConnection.DisconnectAsync(true);
-            }
-            if (!SwitchConnection.Connected)
-            {
-
-                await SwitchConnection.ConnectAsync(ipaddy, 6000);
-            }
-            inject(sender, e);
-        }
-    }
+    
 
     private void changelevel(object sender, TextChangedEventArgs e)
     {
@@ -350,32 +265,7 @@ public partial class MainPage : ContentPage
 
         private void applygender(object sender, EventArgs e) { pk.SetGender(genderdisplay.SelectedIndex); checklegality(); }
 
-    private async void read(object sender, EventArgs e)
-    {
-        try
-        {
-            IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
-            var off = await botBase.PointerRelative(jumps);
-            var bytes = await botBase.ReadBytesAsync((uint)off + (344 * 30 * uint.Parse(boxnum.Text) + (344 * uint.Parse(slotnum.Text))), 344);
-            pk = new(bytes);
-
-            applymainpkinfo(pk);
-            checklegality();
-        }
-        catch (Exception)
-        {
-            if (SwitchConnection.Connected)
-            {
-                await SwitchConnection.DisconnectAsync(true);
-            }
-            if (!SwitchConnection.Connected)
-            {
-
-                await SwitchConnection.ConnectAsync(ipaddy, 6000);
-            }
-            read(sender, e);
-        }
-    }
+    
 
     private async void legalize(object sender, EventArgs e)
     {
@@ -422,37 +312,6 @@ public partial class MainPage : ContentPage
             pk.ClearNickname();
         }
     }
-    private async Task DownloadEventData()
-    {
-        var token = new CancellationToken();
-        var temp = (SAV9SV)sav;
-       
-
-        var KBCATFixedRewardItemArray = temp.Accessor.FindOrDefault(Blocks.KBCATFixedRewardItemArray.Key);
-        var rewardItemBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATFixedRewardItemArray, token).ConfigureAwait(false);
-
-        if (KBCATFixedRewardItemArray.Type is not SCTypeCode.None)
-            KBCATFixedRewardItemArray.ChangeData(rewardItemBlock);
-        else
-            BlockUtil.EditBlock(KBCATFixedRewardItemArray, SCTypeCode.Object, rewardItemBlock);
-
-        var KBCATLotteryRewardItemArray = temp.Accessor.FindOrDefault(Blocks.KBCATLotteryRewardItemArray.Key);
-        var lotteryItemBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATLotteryRewardItemArray, token).ConfigureAwait(false);
-
-        if (KBCATLotteryRewardItemArray.Type is not SCTypeCode.None)
-            KBCATLotteryRewardItemArray.ChangeData(lotteryItemBlock);
-        else
-            BlockUtil.EditBlock(KBCATLotteryRewardItemArray, SCTypeCode.Object, lotteryItemBlock);
-
-        var KBCATRaidEnemyArray = temp.Accessor.FindOrDefault(Blocks.KBCATRaidEnemyArray.Key);
-        var raidEnemyBlock = await botBase.ReadEncryptedBlock(Blocks.KBCATRaidEnemyArray, token).ConfigureAwait(false);
-
-        if (KBCATRaidEnemyArray.Type is not SCTypeCode.None)
-            KBCATRaidEnemyArray.ChangeData(raidEnemyBlock);
-        else
-            BlockUtil.EditBlock(KBCATRaidEnemyArray, SCTypeCode.Object, raidEnemyBlock);
-        sav = temp;
-    }
-
+   
 }
 

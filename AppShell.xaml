@@ -5,8 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:pk9reader">
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
+
         <Tab Title="pk editor" Icon="iconp.png">
-            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"  />
+            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"/>
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
 
@@ -18,11 +19,7 @@
         </Tab>
 
         <ShellContent Icon="poke.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
- 
-        <Tab Title="Raids" Icon="ribbonmarkmightiest.png">
-        <ShellContent Title="Raids" ContentTemplate="{DataTemplate local:RaidViewer}"/>
-            <ShellContent Title="Manual Teleport" ContentTemplate="{DataTemplate local:teleporter}"/>
-        </Tab>
-
     </FlyoutItem>
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:HomePage}"/>
+    
 </Shell>

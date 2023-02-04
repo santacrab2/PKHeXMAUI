@@ -55,41 +55,6 @@ public partial class BoxTab : ContentPage
 
 
     }
-
-    private async void readboxdata(object sender, EventArgs e)
-    {
-        try
-        {
-            IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
-            var off = await botBase.PointerRelative(jumps);
-            for (int i = 0; i < 30; i++)
-            {
-                readbox.Text = $"reading box {i + 1}";
-                var bytes = await botBase.ReadBytesAsync((uint)off + (uint)(i * 10320), 10320);
-
-                sav.SetBoxBinary(bytes, i);
-                if (sav.GetBoxData(i)[0].Species == 0)
-                    break;
-            }
-        }
-        catch (Exception)
-        {
-            if (SwitchConnection.Connected)
-            {
-                await SwitchConnection.DisconnectAsync(true);
-            }
-            if (!SwitchConnection.Connected)
-            {
-
-                await SwitchConnection.ConnectAsync(ipaddy, 6000);
-            }
-            readboxdata(sender, e);
-        }
-        readbox.Text = "read all boxes";
-
-
-    }
-
     private async void applypkfrombox(object sender, SelectionChangedEventArgs e)
     {
         foreach(boxsprite b in e.CurrentSelection)
@@ -103,29 +68,7 @@ public partial class BoxTab : ContentPage
         
     }
 
-    private async void injectboxtab(object sender, EventArgs e)
-    {
-        try
-        {
-            pk.ResetPartyStats();
-            IEnumerable<long> jumps = new long[] { 0x4384B18, 0x128, 0x9B0, 0x0 };
-            var off = await botBase.PointerRelative(jumps);
-            await botBase.WriteBytesAsync(pk.EncryptedPartyData, (uint)off + (uint)(344 * 30 * boxnum.SelectedIndex) + ((uint)(344 * boxsprites.IndexOf((boxsprite)boxview.SelectedItem))));
-        }
-        catch (Exception)
-        {
-            if (SwitchConnection.Connected)
-            {
-                await SwitchConnection.DisconnectAsync(true);
-            }
-            if (!SwitchConnection.Connected)
-            {
-
-                await SwitchConnection.ConnectAsync(ipaddy, 6000);
-            }
-            injectboxtab(sender, e);
-        }
-    }
+    
 
     private void changebox(object sender, EventArgs e)
     {

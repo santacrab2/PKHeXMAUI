@@ -239,16 +239,6 @@
 	  </MauiAsset>
 	</ItemGroup>
 
-
-
-
-
-	
-
-	<ItemGroup>
-	  <None Include="SysBot.Base\SysBot.Base.csproj" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -269,6 +259,15 @@
 	  <Compile Update="boxtab\BoxTab.xaml.cs">
 	    <DependentUpon>BoxTab.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="HomeShell.xaml.cs">
+	    <DependentUpon>HomeShell.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="pktabs\PK9Editor.xaml.cs">
+	    <DependentUpon>PK9Editor.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="pktabs\MetTab.xaml.cs">
 	    <DependentUpon>MetTab.xaml</DependentUpon>
 	  </Compile>
@@ -278,13 +277,16 @@
 	  <Compile Update="pktabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Raidtabs\RaidViewer.xaml.cs">
-	    <DependentUpon>RaidViewer.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="boxtab\BoxTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="HomeShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="pktabs\AttacksTab.xaml">
@@ -302,20 +304,10 @@
 	  <MauiXaml Update="pktabs\StatsTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Raidtabs\RaidViewer.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Raidtabs\teleporter.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiIcon Include="Resources\AppIcon\icon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="pkNX.Structures.FlatBuffers\pkNX.Structures.FlatBuffers.csproj" />
 	</ItemGroup>
 
 </Project>

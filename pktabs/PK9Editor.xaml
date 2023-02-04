@@ -53,8 +53,6 @@
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start"     VerticalOptions="Center" Text="Save" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
-                <Editor Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP"></Editor>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
                 <!--PID-->
                 <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <Editor Grid.Row="3" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID" Grid.ColumnSpan="2" WidthRequest="96"></Editor>
@@ -113,12 +111,6 @@
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="18" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
                 <Button BackgroundColor="DeepSkyBlue" Grid.Row="18" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Refresh" Clicked="refreshmain"/>
 
-                <Editor Grid.Row="25" Grid.Column="0" Text="Box" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="boxnum"/>
-                <Editor Grid.Row="25" Grid.Column="1" Text="Slot" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="slotnum"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="25" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
-          
-           
 
             </Grid>
         </RefreshView>
