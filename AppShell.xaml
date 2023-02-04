@@ -20,6 +20,6 @@
 
         <ShellContent Icon="poke.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
     </FlyoutItem>
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:HomePage}"/>
+  
     
 </Shell>
