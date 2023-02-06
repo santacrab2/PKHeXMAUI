@@ -27,7 +27,7 @@ public partial class AttacksTab : ContentPage
             applyattackinfo(pk);
     }
     public static List<Move> movlist = new();
-	public void applyattackinfo(PK9 pkm)
+	public void applyattackinfo(PKM pkm)
 	{
         attackpic.Source = spriteurl;
         movlist = new();

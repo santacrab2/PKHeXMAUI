@@ -7,8 +7,10 @@ public partial class AppShell : Shell
 	public AppShell(SaveFile sav)
 	{
         AppSaveFile = sav;
-        InitializeComponent();
 		
-	}
+        InitializeComponent();
+        pkeditortab.Items.Insert(0, new MainPage());
+
+    }
 	public static SaveFile AppSaveFile { get; set; }
 }

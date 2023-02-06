@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:pk9reader">
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
 
-        <Tab Title="pk editor" Icon="iconp.png">
-            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"/>
+        <Tab x:Name="pkeditortab" Title="pk editor" Icon="iconp.png">
+            
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
 
@@ -20,6 +20,6 @@
 
         <ShellContent Icon="poke.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
     </FlyoutItem>
-  
-    
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:HomePage}"/>
+
 </Shell>

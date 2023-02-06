@@ -16,7 +16,9 @@ public partial class MainPage : ContentPage
     
 	public MainPage()
 	{
-		InitializeComponent();
+        sav = AppShell.AppSaveFile;
+        datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
+        InitializeComponent();
   
         APILegality.SetAllLegalRibbons = false;
         APILegality.UseTrainerData = true;
@@ -28,6 +30,7 @@ public partial class MainPage : ContentPage
         specieslabel.ItemsSource = (System.Collections.IList)datasourcefiltered.Species;
         specieslabel.ItemDisplayBinding = new Binding("Text");
         naturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
+        statnaturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
         Teratypepicker.ItemsSource= Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
@@ -50,8 +53,8 @@ public partial class MainPage : ContentPage
     public static LegalityAnalysis la;
 
     public static PK9 pk = new();
-    public static SaveFile sav = AppShell.AppSaveFile;
-    public static FilteredGameDataSource datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
+    public static SaveFile sav;
+    public static FilteredGameDataSource datasourcefiltered;
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
     public static string ipaddy = "";
@@ -312,6 +315,10 @@ public partial class MainPage : ContentPage
             pk.ClearNickname();
         }
     }
-   
+
+    private void applystatnature(object sender, EventArgs e)
+    {
+        pk.StatNature = statnaturepicker.SelectedIndex; checklegality();
+    }
 }
 

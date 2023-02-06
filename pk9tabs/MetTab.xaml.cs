@@ -18,8 +18,8 @@ public partial class MetTab : ContentPage
         mettabpic.Source = spriteurl;
         origingamepicker.ItemsSource = GameInfo.Strings.gamelist;
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
-        metlocationpicker.ItemsSource = GameInfo.Strings.GetLocationNames(9, GameVersion.SV).ToArray();
-        eggmetpicker.ItemsSource = GameInfo.Strings.GetLocationNames(9,GameVersion.SV).ToArray();
+        metlocationpicker.ItemsSource = GameInfo.Strings.GetLocationNames(sav.Generation, (GameVersion)sav.Game).ToArray();
+        eggmetpicker.ItemsSource = GameInfo.Strings.GetLocationNames(sav.Generation,(GameVersion)sav.Game).ToArray();
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
         ICommand refreshCommand = new Command(() =>
@@ -37,7 +37,7 @@ public partial class MetTab : ContentPage
     {
         mettabpic.Source = spriteurl;
         origingamepicker.SelectedIndex = pkm.Version > -1?pkm.Version:0;
-        battleversionpicker.SelectedIndex = pkm.BattleVersion>-1?pkm.BattleVersion:0;
+        battleversionpicker.SelectedIndex = pkm.BattleVersion;
         metlocationpicker.SelectedIndex = pkm.Met_Location>-1?pkm.Met_Location:0;
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
         ballspriteurl = $"https://raw.githubusercontent.com/santacrab2/Resources/main/Pokeballs/{(pkm.Ball>-1?(Ball)pkm.Ball:"Poke")}.png";
@@ -51,7 +51,7 @@ public partial class MetTab : ContentPage
         eggcheck.IsChecked = pkm.WasEgg;
         
         var eggmetdate = pkm.EggMetDate!=null? (DateOnly)pkm.EggMetDate:DateOnly.MinValue;
-        eggdatepicker.Date = pkm.EggMetDate != null?eggmetdate.ToDateTime(TimeOnly.Parse("10:00 PM")):DateTime.UnixEpoch;
+        eggdatepicker.Date = pkm.EggMetDate != null?eggmetdate.ToDateTime(TimeOnly.Parse("10:00 PM")):DateTime.Now;
         eggmetpicker.SelectedIndex = pkm.Egg_Location > -1 ? pkm.Egg_Location:0;
         
     }

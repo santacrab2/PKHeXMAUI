@@ -265,16 +265,16 @@
 	  <Compile Update="HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="pktabs\PK9Editor.xaml.cs">
-	    <DependentUpon>PK9Editor.xaml</DependentUpon>
+	  <Compile Update="pk9tabs\PKTab.xaml.cs">
+	    <DependentUpon>PKTab.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="pktabs\MetTab.xaml.cs">
+	  <Compile Update="pk9tabs\MetTab.xaml.cs">
 	    <DependentUpon>MetTab.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="pktabs\RibbonSelector.xaml.cs">
+	  <Compile Update="pkmtabs\RibbonSelector.xaml.cs">
 	    <DependentUpon>RibbonSelector.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="pktabs\StatsTab.xaml.cs">
+	  <Compile Update="pk9tabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -289,19 +289,19 @@
 	  <MauiXaml Update="HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="pktabs\AttacksTab.xaml">
+	  <MauiXaml Update="pk9tabs\AttacksTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="pktabs\MetTab.xaml">
+	  <MauiXaml Update="pk9tabs\MetTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="pktabs\RibbonSelector.xaml">
+	  <MauiXaml Update="pkmtabs\RibbonSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="pktabs\OTTab.xaml">
+	  <MauiXaml Update="pk9tabs\OTTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="pktabs\StatsTab.xaml">
+	  <MauiXaml Update="pk9tabs\StatsTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

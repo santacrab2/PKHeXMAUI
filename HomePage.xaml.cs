@@ -18,8 +18,11 @@ public partial class HomePage : ContentPage
 		App.Current.MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)selected.Value,"PKHeX"));
     }
 
-    private void updatesave(object sender, EventArgs e)
+    private async void opensavefile(object sender, EventArgs e)
     {
-
+        var savefile = await FilePicker.PickAsync();
+        var savefilebytes = File.ReadAllBytes(savefile.FullPath);
+        var savefileobj = FileUtil.GetSupportedFile(savefilebytes, "");
+        App.Current.MainPage = new AppShell((SaveFile)savefileobj);
     }
 }

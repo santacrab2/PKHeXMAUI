@@ -4,7 +4,8 @@
              x:Class="pk9reader.HomePage"
              Title="HomePage">
     <VerticalStackLayout>
-        <Picker x:Name="SaveVersionPicker" Title="Save Version" SelectedIndexChanged="updatesave"></Picker>
-        <Button x:Name="openeditor" Text="Open" Clicked="openeditorclicked"></Button>
+        <Picker x:Name="SaveVersionPicker" Title="Save Version"></Picker>
+        <Button x:Name="openeditor" Text="Start" Clicked="openeditorclicked"></Button>
+        <Button x:Name="savefileloader" Text="Open" Clicked="opensavefile"></Button>
     </VerticalStackLayout>
 </ContentPage>

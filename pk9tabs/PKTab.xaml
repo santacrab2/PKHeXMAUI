@@ -83,6 +83,8 @@
                 <!--Nature-->
                 <Label Grid.Row="7" Grid.Column="0" Text="Nature:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <Picker Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Title="Nature" x:Name="naturepicker" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="applynature"></Picker>
+                <Label Grid.Row="7" Grid.Column="2" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start"/>
+                <Picker Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Title="Stat Nature" x:Name="statnaturepicker" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="applystatnature"/>
                 <!--TeraType-->
                 <Label Grid.Row="8" Grid.Column="0" Text="Override TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>
                 <Picker Grid.Row="8" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType" SelectedIndexChanged="applytera"></Picker>
