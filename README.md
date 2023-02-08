@@ -1,8 +1,14 @@
-# pk mobile tool
+# PKHeX MAUI(Mobile)
 
-Proof of Concept for a livhex/pkeditor mobile in MAUI
+This project is simply applying the public PKHeX code library to a cross platform interface. 
 
-This is just a project for me to work on while learning MAUI as its something ill personally use, not intended for mass consumption.
-That being said, if its useful for you then fantastic! Simply download the APK in the releases and it will install on your Android device. 
+Huge Thanks to all those who have contributed to PKHeX in anyway, especially but not limited to:
+Kurt(Kaphotics)
+Anubis(Lusamine)
+Architdate
+
+*AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT SERVER*
+Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. 
 
 Support Discord: [The Sea Tavern](https://www.piplup.net)
+
