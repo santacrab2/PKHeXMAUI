@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pk9reader.Cosmeticstab"
+             Title="Cosmeticstab">
+    <ScrollView>
+        <RefreshView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+
+
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.Row="0"
+                x:FieldModifier="public"
+                x:Name="pic"
+                Source="iconp.png"
+                HeightRequest="50"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                       
+                />
+                <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
+                <!--Height/Weight-->
+                <Label Grid.Row="14" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:"></Label>
+                <Editor Grid.Row="14" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight"/>
+                <Label Grid.Row="15" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:"/>
+                <Editor Grid.Row="15" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight"/>
+                <Label Grid.Row="16" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:"/>
+                <Editor Grid.Row="16" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
+            </Grid>
+        </RefreshView>
+    </ScrollView>
+</ContentPage>

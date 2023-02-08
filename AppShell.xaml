@@ -8,13 +8,14 @@
 
         <Tab x:Name="pkeditortab" Title="pk editor" Icon="iconp.png">
             
+            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"/>
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
 
             <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}"></ShellContent>
 
-            <ShellContent Title="Attacks" ContentTemplate="{DataTemplate local:AttacksTab}"></ShellContent>
-
+            <ShellContent Title="Moves" ContentTemplate="{DataTemplate local:AttacksTab}"></ShellContent>
+            <ShellContent Title="Cosmetic" ContentTemplate="{DataTemplate local:Cosmeticstab}"></ShellContent>
             <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
 
