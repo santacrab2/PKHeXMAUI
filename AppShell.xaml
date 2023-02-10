@@ -4,9 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:pk9reader">
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="100">
+                <Image HeightRequest="100" Source="iconp.png"></Image>
+                
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
-
-        <Tab x:Name="pkeditortab" Title="pk editor" Icon="iconp.png">
+        
+        <Tab x:Name="pkeditortab" Title="pk editor" Icon="bag_pcitems.png">
             
             <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"/>
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
@@ -19,8 +28,8 @@
             <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
 
-        <ShellContent Icon="poke.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
+        <ShellContent Icon="ball4.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
     </FlyoutItem>
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:HomePage}"/>
+    <ShellContent Icon="main.png" Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>
 
 </Shell>

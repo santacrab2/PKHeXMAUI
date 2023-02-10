@@ -1,0 +1,218 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>PKHeXMAUI</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>pk9reader</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>pk9reader</ApplicationId>
+		<ApplicationIdGuid>df8a5c06-c9c7-4853-8e8d-ea0ceb7b8e41</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
+	  <ApplicationTitle>PKHeXMAUI</ApplicationTitle>
+	  <ApplicationId>com.PKHeX.maui</ApplicationId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\icon.png" ForegroundFile="Resources\AppIcon\icon.png" />
+	
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\bg009.png" BaseSize="250,250" Color="Black" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Include="Resources\Images\generalicons\*" />
+		<MauiImage Include="Resources\Images\balls\*" />
+		<MauiImage Include="Resources\Images\SVSprites\*" />
+		<MauiImage Include="Resources\Images\NonShinySprites\*" />
+		<MauiImage Include="Resources\Images\generalicons\gender_0.png" />
+		<MauiImage Include="Resources\Images\generalicons\gender_1.png" />
+		<MauiImage Include="Resources\Images\generalicons\gender_2.png" />
+		<MauiImage Include="Resources\Images\iconp.png" BaseSize="168,208" />
+		<MauiImage Include="Resources\Images\Ribbons\*" />
+		<MauiImage Include="Resources\Images\ShinySprites\*" />
+		<MauiImage Include="Resources\Images\SVItemSprites\*" />
+		<MauiImage Include="Resources\Images\ItemSprites\*" />
+		<MauiImage Include="Resources\Images\teratypes\*" />
+		
+		
+		 
+		
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Assets\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Remove="pkNX.Structures.FlatBuffers\**" />
+	  <Compile Remove="pkNX.Structures.FlatBuffers\**" />
+	  <EmbeddedResource Remove="pkNX.Structures.FlatBuffers\**" />
+	  <MauiCss Remove="pkNX.Structures.FlatBuffers\**" />
+	  <MauiXaml Remove="pkNX.Structures.FlatBuffers\**" />
+	  <None Remove="pkNX.Structures.FlatBuffers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Remove="Resources\Assets\AboutAssets.txt" />
+	  <MauiAsset Remove="Resources\Assets\encounter_gem_paldea.pkl" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\generalicons\Bag_PCItems.png" />
+	  <None Remove="Resources\Images\generalicons\main.png" />
+	  <None Remove="Resources\Images\generalicons\tr_129.png" />
+	  <None Remove="Resources\Images\generalicons\valid.png" />
+	  <None Remove="Resources\Images\generalicons\warn.png" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Assets\AboutAssets.txt" />
+	  <EmbeddedResource Include="Resources\Assets\encounter_gem_paldea.pkl" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Include="deps\RaidLocations.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui.Core" Version="3.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="PKHeX.Core" Version="23.1.26" />
+		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="PKHeX.Core.AutoMod">
+	    <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="boxtab\BoxTab.xaml.cs">
+	    <DependentUpon>BoxTab.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="commonpktabs\TREditor.xaml.cs">
+	    <DependentUpon>TREditor.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="HomeShell.xaml.cs">
+	    <DependentUpon>HomeShell.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="pktabs\PKTab.xaml.cs">
+	    <DependentUpon>PKTab.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="pktabs\MetTab.xaml.cs">
+	    <DependentUpon>MetTab.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="commonpktabs\RibbonSelector.xaml.cs">
+	    <DependentUpon>RibbonSelector.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="pktabs\StatsTab.xaml.cs">
+	    <DependentUpon>StatsTab.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="boxtab\BoxTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="commonpktabs\TREditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="HomeShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\AttacksTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\Cosmeticstab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\MetTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="commonpktabs\RibbonSelector.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\OTTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="pktabs\StatsTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\icon.png" />
+	</ItemGroup>
+
+</Project>

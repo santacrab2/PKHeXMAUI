@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pk9reader.HomePage"
-             Title="HomePage">
+             Title="Save Settings">
     <VerticalStackLayout>
-        <Picker x:Name="SaveVersionPicker" Title="Save Version"></Picker>
-        <Button x:Name="openeditor" Text="Start" Clicked="openeditorclicked"></Button>
-        <Button x:Name="savefileloader" Text="Open" Clicked="opensavefile"></Button>
+        <Picker x:Name="SaveVersionPicker" Title="Scarlet" SelectedIndexChanged="applynewsave"></Picker>
+      
+        <Button x:Name="savefileloader" Text="Open Save" Clicked="opensavefile"></Button>
     </VerticalStackLayout>
 </ContentPage>

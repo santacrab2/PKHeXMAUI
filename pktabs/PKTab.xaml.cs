@@ -1,11 +1,10 @@
-﻿using static System.Buffers.Binary.BinaryPrimitives;
+﻿
 using PKHeX.Core;
 using System.Net.Sockets;
 using PKHeX.Core.AutoMod;
-using static pk9reader.MetTab;
+
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Numerics;
+
 
 namespace pk9reader;
 
@@ -31,8 +30,7 @@ public partial class MainPage : ContentPage
         specieslabel.ItemDisplayBinding = new Binding("Text");
         naturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
         statnaturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
-        Teratypepicker.ItemsSource= Enum.GetValues(typeof(MoveType));
-        MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
+      
         helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
         helditempicker.ItemDisplayBinding= new Binding("Text");
         languagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
@@ -70,12 +68,13 @@ public partial class MainPage : ContentPage
     public void checklegality()
     {
         la = new(pk,sav.Personal);
-        legality.Text = la.Valid ? "✔" : "⚠";
-        legality.BackgroundColor = la.Valid ? Colors.Green : Colors.Red;
+        legality.Source = la.Valid ? "valid.png" : "warn.png";
+        
         
     }
     public void applymainpkinfo(PKM pkm)
     {
+        itemsprite.IsVisible = false;
         if (pkm.IsShiny)
             shinybutton.Text = "★";
         
@@ -85,15 +84,7 @@ public partial class MainPage : ContentPage
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
         naturepicker.SelectedIndex = pkm.Nature;
-        if (pkm is PK9 pk9)
-        {
-            OvTeralabel.IsVisible = true;
-            OrTeralabel.IsVisible = true;
-            Teratypepicker.IsVisible = true;
-            MainTeratypepicker.IsVisible = true;
-            Teratypepicker.SelectedIndex = (int)pk9.TeraTypeOverride == 0x13 ? (int)pk9.TeraTypeOriginal : (int)pk9.TeraTypeOverride;
-            MainTeratypepicker.SelectedIndex = (int)pk9.TeraTypeOriginal;
-        }
+    
         
       
         abilitypicker.SelectedIndex =pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
@@ -101,6 +92,14 @@ public partial class MainPage : ContentPage
       
         genderdisplay.Source = $"gender_{pkm.Gender}.png";
         helditempicker.SelectedIndex = helditempicker.Items.IndexOf(GameInfo.Strings.Item[pkm.HeldItem]);
+        if (pkm.HeldItem > 0)
+        {
+            itemsprite.IsVisible = true;
+            if (sav is SAV9SV)
+                itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            else
+                itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
+        }
         formpicker.SelectedIndex = pkm.Form;
         if (sav is SAV9SV)
         {
@@ -140,9 +139,25 @@ public partial class MainPage : ContentPage
     }
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
+#if ANDROID
         pk.ResetPartyStats();
-        await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{pk.FileName}", pk.DecryptedPartyData);
-        
+
+        if (OperatingSystem.IsAndroidVersionAtLeast(30))
+        {
+
+            await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{pk.FileName}", pk.DecryptedPartyData);
+        }
+        else
+        {
+            if (OperatingSystem.IsAndroidVersionAtLeast(29))
+            {
+                
+                await File.WriteAllBytesAsync($"/storage/emulated/0/Android/data/com.PKHeX.maui/{pk.FileName}", pk.DecryptedPartyData);
+            }
+            else 
+                await File.WriteAllBytesAsync($"/storage/emulated/0/{pk.FileName}", pk.DecryptedPartyData);
+        }
+#endif
     }
 
     private void specieschanger(object sender, EventArgs e) 
@@ -154,7 +169,7 @@ public partial class MainPage : ContentPage
         pk.Species = (ushort)test.Value;
         if (abilitypicker.Items.Count() != 0)
             abilitypicker.Items.Clear();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
         {
             var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
             abilitypicker.Items.Add($"{(Ability)abili}");
@@ -277,9 +292,7 @@ public partial class MainPage : ContentPage
 
     private void applynature(object sender, EventArgs e) { pk.Nature = naturepicker.SelectedIndex; checklegality(); }
 
-        private void applytera(object sender, EventArgs e) { if (pk is PK9 pk9) { pk9.TeraTypeOverride = (MoveType)Teratypepicker.SelectedIndex; checklegality(); } }
-
-        private void applymaintera(object sender, EventArgs e) { if(pk is PK9 pk9) pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex; checklegality(); }
+        
 
     private void applyform(object sender, EventArgs e) 
     {
@@ -319,6 +332,14 @@ public partial class MainPage : ContentPage
     {
         ComboItem helditemtoapply = (ComboItem)helditempicker.SelectedItem;
         pk.ApplyHeldItem(helditemtoapply.Value, EntityContext.Gen8);
+        if (pk.HeldItem > 0)
+        {
+            itemsprite.IsVisible = true;
+            if (sav is SAV9SV)
+                itemsprite.Source = $"aitem_{pk.HeldItem}.png";
+            else
+                itemsprite.Source = $"bitem_{pk.HeldItem}.png";
+        }
         checklegality();
     }
 
@@ -452,6 +473,16 @@ public partial class MainPage : ContentPage
     private void applyisegg(object sender, CheckedChangedEventArgs e)
     {
         pk.IsEgg = iseggcheck.IsChecked;
+    }
+
+    private void applyinfection(object sender, CheckedChangedEventArgs e)
+    {
+        pk.PKRS_Infected = infectedcheck.IsChecked;
+    }
+
+    private void applycure(object sender, CheckedChangedEventArgs e)
+    {
+        pk.PKRS_Cured = curedcheck.IsChecked;
     }
 }
 

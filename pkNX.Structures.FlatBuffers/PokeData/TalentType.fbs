@@ -1,1 +1,0 @@
-namespace pkNX.Structures.FlatBuffers; enum TalentType :int{ RANDOM = 0, V_NUM = 1, VALUE = 2, }

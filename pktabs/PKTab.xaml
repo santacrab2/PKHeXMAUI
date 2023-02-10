@@ -49,15 +49,16 @@
                        
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
-                <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="⚠" x:Name="legality" Clicked="displaylegalitymessage"/>
+                <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+                <ImageButton Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="legality" Clicked="displaylegalitymessage" Source="warn.png" HeightRequest="24"/>
 
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Open" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start"     VerticalOptions="Center" Text="Save" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
+                <Button  Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Open PKM" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
+                <Button  Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
+                <Button  Grid.Row="1" Grid.Column="3" HorizontalOptions="Start"     VerticalOptions="Center" Text="Save PKM" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
                 <!--PID-->
                 <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <Editor Grid.Row="3" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID" Grid.ColumnSpan="2" WidthRequest="96"></Editor>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
+                <Button  Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
                 <!--Species-->
                 <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <Picker  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Title="Species" x:Name="specieslabel" HorizontalOptions="Center" SelectedIndexChanged="specieschanger"/>
@@ -79,11 +80,7 @@
                 <Picker Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Title="Nature" x:Name="naturepicker" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="applynature"></Picker>
                 <Label Grid.Row="7" Grid.Column="2" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start"/>
                 <Picker Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Title="Stat Nature" x:Name="statnaturepicker" HorizontalOptions="End" VerticalOptions="Center" SelectedIndexChanged="applystatnature"/>
-                <!--TeraType-->
-                <Label x:Name="OvTeralabel" IsVisible="false" Grid.Row="8" Grid.Column="0" Text="Override TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-                <Picker IsVisible="false" Grid.Row="8" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType" SelectedIndexChanged="applytera"></Picker>
-                <Label x:Name="OrTeralabel" IsVisible="false" Grid.Row="9" Grid.Column="0" Text="Original TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-                <Picker IsVisible="false" Grid.Row="9" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" x:Name="MainTeratypepicker" Title="TeraType" SelectedIndexChanged="applymaintera"></Picker>
+               
                 <!--form-->
                 <Label x:Name="formlabel" IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Form:"></Label>
                 <Picker IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" x:Name="formpicker" Title="Form" SelectedIndexChanged="applyform"></Picker>
@@ -100,10 +97,15 @@
                <!--Language-->
                 <Label Text="Language:" Grid.Row="14" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Picker Grid.Row="14" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
+                <!--checkboxes-->
                 <CheckBox x:Name="iseggcheck" Grid.Row="15" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyisegg"></CheckBox>
                 <Label Text="IsEgg" Grid.Row="15" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="16" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
-                <Button BackgroundColor="DeepSkyBlue" Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Refresh" Clicked="refreshmain"/>
+                <CheckBox x:Name="infectedcheck" Grid.Row="15" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyinfection"/>
+                <Label Text="Infected" Grid.Row="15" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"/>
+                <CheckBox x:Name="curedcheck" Grid.Row="15" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applycure"/>
+                <Label Text="Cured" Grid.Row="15" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Button  Grid.Row="16" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Refresh" Clicked="refreshmain"/>
 
 
             </Grid>

@@ -76,7 +76,7 @@
                 <Picker Grid.Row="10" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove4" SelectedIndexChanged="applyrmove4"/>
                 
                 <!--helpful buttons-->
-                <Button Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves" BackgroundColor="DeepSkyBlue" WidthRequest="150"/>
+                <Button Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves"  WidthRequest="150"/>
 
 
             </Grid>

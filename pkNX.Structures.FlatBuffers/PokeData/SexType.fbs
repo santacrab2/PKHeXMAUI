@@ -1,2 +1,0 @@
-namespace pkNX.Structures.FlatBuffers;
-enum SexType:int { DEFAULT = 0, MALE = 1, FEMALE = 2, }

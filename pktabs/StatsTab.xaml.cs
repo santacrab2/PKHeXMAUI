@@ -6,9 +6,12 @@ namespace pk9reader;
 
 public partial class StatsTab : ContentPage
 {
+    public bool moveonce = true;
 	public StatsTab()
 	{
 		InitializeComponent();
+        Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
+        MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         ICommand refreshCommand = new Command(() =>
         {
             if (pk.Species != 0)
@@ -69,7 +72,25 @@ public partial class StatsTab : ContentPage
         totalbasedisplay.Text = pkm.PersonalInfo.GetBaseStatTotal().ToString();
         totalIVdisplay.Text = pkm.IVTotal.ToString();
         totalEVdisplay.Text = pkm.EVTotal.ToString();
-
+        if (pkm is ITeraType tera)
+        {
+            OvTeralabel.IsVisible = true;
+            OrTeralabel.IsVisible = true;
+            Teratypepicker.IsVisible = true;
+            MainTeratypepicker.IsVisible = true;
+            if ((int)tera.TeraTypeOverride != 0x13)
+            {
+                Teratypepicker.SelectedIndex = (int)tera.TeraTypeOverride;
+                if (moveonce)
+                {
+                    teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
+                    moveonce = false;
+                }
+            }
+            MainTeratypepicker.SelectedIndex = (int)tera.TeraTypeOriginal;
+            teratypeimage.IsVisible = true;
+            teratypeimage.Source = $"gem_{(int)tera.TeraType:00}";
+        }
 
     }
 
@@ -295,5 +316,36 @@ public partial class StatsTab : ContentPage
     {
         if (pk is IHyperTrain hpt)
             hpt.HyperTrainInvert(5);
+    }
+    private void applytera(object sender, EventArgs e) 
+    {
+        if (pk is ITeraType pk9)
+        {
+            if (Teratypepicker.SelectedIndex == 18)
+            {
+                pk9.TeraTypeOverride = (MoveType)0x13;
+                teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY + 50);
+                moveonce = true;
+            }
+            else
+            {
+                pk9.TeraTypeOverride = (MoveType)Teratypepicker.SelectedIndex;
+                if (moveonce)
+                {
+                    teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
+                    moveonce = false;
+                }
+            }
+            teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
+        }
+    }
+
+    private void applymaintera(object sender, EventArgs e) 
+    {
+        if (pk is ITeraType pk9)
+        {
+            pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
+            teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
+        }
     }
 }

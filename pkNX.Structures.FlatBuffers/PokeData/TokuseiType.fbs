@@ -1,3 +1,0 @@
-namespace pkNX.Structures.FlatBuffers; 
-enum TokuseiType : int 
-{ RANDOM_12 = 0, RANDOM_123 = 1, SET_1 = 2, }

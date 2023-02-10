@@ -34,6 +34,7 @@
                     <ColumnDefinition Width="50"></ColumnDefinition>
                     <ColumnDefinition Width="50"></ColumnDefinition>
                     <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Grid.Row="0"
                 x:FieldModifier="Public"
@@ -49,7 +50,7 @@
                 <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="IVs"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="EVs"/>
                 <Label Grid.Row="1" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="Stats"/>
-                <Label Grid.Row="1" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Hyper Trained"/>
+                <Label Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Hyper Trained"/>
                 <!--HP-->
                 <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="HP:"/>
                 <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="hpbasedisplay"/>
@@ -97,11 +98,17 @@
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalbasedisplay"/>
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalIVdisplay"/>
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalEVdisplay"/>
+                <!--TeraType-->
+                <Label x:Name="OvTeralabel" IsVisible="false" Grid.Row="9" Grid.Column="0" Text="Override TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                <Picker IsVisible="false" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="End" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType" SelectedIndexChanged="applytera"></Picker>
+                <Label x:Name="OrTeralabel" IsVisible="false" Grid.Row="10" Grid.Column="0" Text="Original TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                <Picker IsVisible="false" Grid.Row="10" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="End" VerticalOptions="Center" x:Name="MainTeratypepicker" Title="TeraType" SelectedIndexChanged="applymaintera"></Picker>
+                <Image x:Name="teratypeimage" IsVisible="false" Grid.Row="10" Grid.Column="5" HeightRequest="64" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <!--IVbuttons-->
-                <Button BackgroundColor="DeepSkyBlue" WidthRequest="150" Grid.Row="9" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random IVs" Clicked="randomizeivs" />
-                <Button BackgroundColor="DeepSkyBlue" WidthRequest="150" Grid.Row="9" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Perfect IVs" Clicked="perfectivs"/>
-                <Button BackgroundColor="DeepSkyBlue" WidthRequest="150" Grid.Row="10" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random EVs" Clicked="randomizeevs"/>
-                <Button BackgroundColor="DeepSkyBlue" WidthRequest="150" Grid.Row="10" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Suggested Evs" Clicked="suggestedevs"/>
+                <Button  WidthRequest="150" Grid.Row="11" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random IVs" Clicked="randomizeivs" />
+                <Button  WidthRequest="150" Grid.Row="11" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Perfect IVs" Clicked="perfectivs"/>
+                <Button  WidthRequest="150" Grid.Row="12" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random EVs" Clicked="randomizeevs"/>
+                <Button WidthRequest="150" Grid.Row="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Suggested Evs" Clicked="suggestedevs"/>
 
 
 

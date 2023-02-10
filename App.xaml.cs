@@ -1,4 +1,6 @@
-﻿namespace pk9reader;
+﻿using PKHeX.Core;
+
+namespace pk9reader;
 
 public partial class App : Application
 {
@@ -6,6 +8,6 @@ public partial class App : Application
 	{
 		InitializeComponent();
 		
-		MainPage = new HomeShell();
+		MainPage = new AppShell(new SAV9SV());
 	}
 }

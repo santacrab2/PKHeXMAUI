@@ -6,8 +6,8 @@
     <RefreshView x:Name="ribbonrefresh">
     <VerticalStackLayout>
         <CollectionView HeightRequest="500" WidthRequest="400" x:Name="ribboncollection" SelectionMode="Multiple" ></CollectionView>
-        <Button x:Name="applyribbons" Text="Apply" BackgroundColor="DeepSkyBlue" Clicked="applyribbonsandclose"></Button>
-        <Button x:Name="close" Text="Close" BackgroundColor="DeepSkyBlue" Clicked="closer"/>
+        <Button x:Name="applyribbons" Text="Apply" Clicked="applyribbonsandclose"></Button>
+        <Button x:Name="close" Text="Close" Clicked="closer"/>
     </VerticalStackLayout>
     </RefreshView>
 </ContentPage>

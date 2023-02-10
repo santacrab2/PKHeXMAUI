@@ -2,6 +2,7 @@
 
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Input;
 using PKHeX.Core;
 
@@ -18,8 +19,10 @@ public partial class MetTab : ContentPage
         mettabpic.Source = spriteurl;
         origingamepicker.ItemsSource = GameInfo.Strings.gamelist;
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
-        metlocationpicker.ItemsSource = GameInfo.Strings.GetLocationNames(sav.Generation, (GameVersion)sav.Game).ToArray();
-        eggmetpicker.ItemsSource = GameInfo.Strings.GetLocationNames(sav.Generation,(GameVersion)sav.Game).ToArray();
+        metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+        metlocationpicker.ItemDisplayBinding = new Binding("Text");
+        eggmetpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context, true);
+        eggmetpicker.ItemDisplayBinding = new Binding("Text");
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
         ICommand refreshCommand = new Command(() =>
@@ -43,10 +46,12 @@ public partial class MetTab : ContentPage
         origingamepicker.SelectedIndex = pkm.Version > -1?pkm.Version:0;
         if (pkm is IBattleVersion bv)
         {
+            battleversionlabel.IsVisible = true;
             battleversionpicker.IsVisible = true;
             battleversionpicker.SelectedIndex = bv.BattleVersion;
         }
-        metlocationpicker.SelectedIndex = pkm.Met_Location>-1?pkm.Met_Location:0;
+        
+        metlocationpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context).Where(z=>z.Value == pkm.Met_Location).FirstOrDefault();
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
         ballspriteurl = $"{(pkm.Ball>-1?$"{pkm.Ball}":"ball4")}.png";
         ballimage.Source = ballspriteurl;
@@ -56,6 +61,7 @@ public partial class MetTab : ContentPage
         metleveldisplay.Text = pkm.Met_Level>-1?pkm.Met_Level.ToString():"0";
         if (pkm is IObedienceLevel ob)
         {
+            obediencelevellabel.IsVisible = true;
             obedienceleveldisplay.IsVisible = true;
             obedienceleveldisplay.Text = ob.Obedience_Level.ToString();
         }
@@ -64,7 +70,10 @@ public partial class MetTab : ContentPage
         
         var eggmetdate = pkm.EggMetDate!=null? (DateOnly)pkm.EggMetDate:DateOnly.MinValue;
         eggdatepicker.Date = pkm.EggMetDate != null?eggmetdate.ToDateTime(TimeOnly.Parse("10:00 PM")):DateTime.Now;
-        eggmetpicker.SelectedIndex = pkm.Egg_Location > -1 ? pkm.Egg_Location:0;
+        if(pkm.Egg_Location > -1)
+        {
+            eggmetpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context,true).Where(z => z.Value == pkm.Egg_Location).FirstOrDefault();
+        }
         
     }
 
@@ -82,7 +91,8 @@ public partial class MetTab : ContentPage
 
     private void applymetlocation(object sender, EventArgs e)
     {
-        pk.Met_Location= (byte)metlocationpicker.SelectedIndex;
+        var metlocation = (ComboItem)metlocationpicker.SelectedItem;
+        pk.Met_Location = metlocation.Value;
     }
 
     private void givebackballs(object sender, EventArgs e)
@@ -124,7 +134,8 @@ public partial class MetTab : ContentPage
 
     private void applyeggmetlocation(object sender, EventArgs e)
     {
-        pk.Egg_Location = eggmetpicker.SelectedIndex;
+        var egglocation = (ComboItem)eggmetpicker.SelectedItem;
+        pk.Egg_Location = egglocation.Value;
     }
 
     private void applyeggdate(object sender, DateChangedEventArgs e)

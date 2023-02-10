@@ -10,7 +10,9 @@ public partial class RibbonSelector : ContentPage
     public RibbonSelector()
     {
         InitializeComponent();
-        var ribbs = RibbonInfo.GetRibbonInfo(pk);
+        var clone = pk.Clone();
+        RibbonApplicator.SetAllValidRibbons(clone);
+        var ribbs = RibbonInfo.GetRibbonInfo(clone);
       
         ribboncollection.ItemTemplate = new DataTemplate(() =>
         {
@@ -32,17 +34,19 @@ public partial class RibbonSelector : ContentPage
         List<Ribbonstuff> idk = new();
         foreach(var fg in ribbs)
         {
-            idk.Add(new Ribbonstuff(fg));
+            if(fg.HasRibbon)
+                idk.Add(new Ribbonstuff(fg));
         }
         ribboncollection.ItemsSource= idk;
         ICommand refreshCommand = new Command(async () =>
         {
-            var itemso = RibbonInfo.GetRibbonInfo(pk);
-            ribboncollection.ItemsSource = itemso;
+            clone = pk.Clone();
+            RibbonApplicator.SetAllValidRibbons(clone);
+            var itemso = RibbonInfo.GetRibbonInfo(clone);
             List<Ribbonstuff> idk = new();
             foreach (var fg in itemso)
             {
-               
+               if(fg.HasRibbon)
                 idk.Add(new Ribbonstuff(fg));
             }
             ribboncollection.ItemsSource = idk;
@@ -89,8 +93,20 @@ public class Ribbonstuff
 {
     public Ribbonstuff(RibbonInfo rib)
     {
-        if (rib.HasRibbon)
-            bg = Colors.Gold;
+        for (int c = 0; c < 110; c++)
+        {
+            var ribtest = (RibbonIndex)c;
+            if (rib.Name.Replace("Ribbon", "") == ribtest.ToString())
+            {
+                if (pk is IRibbonIndex ri)
+                {
+                    if (ri.GetRibbon(c))
+                        bg = Colors.Gold;
+                }
+            }
+        }
+       
+         
         typer = rib.Type;
         Name = rib.Name.Replace("Ribbon","");
         spritename = $"{rib.Name}.png";
