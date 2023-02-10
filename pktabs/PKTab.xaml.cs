@@ -94,8 +94,7 @@ public partial class MainPage : ContentPage
                 itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
         }
         formpicker.SelectedIndex = pkm.Form;
-        if (sav is SAV9SV)
-        {
+      
             if (pkm.Species == 0)
                 spriteurl = $"a_egg.png";
             else 
@@ -105,22 +104,8 @@ public partial class MainPage : ContentPage
             else
                 shinysparklessprite.IsVisible= false;
         
-        }
-        else
-        {
-
-            if (pkm.IsShiny)
-            {
-                shinysparklessprite.IsVisible = true;
-                spriteurl = $"b_{pkm.Species}{(pkm.Form != 0 ? $"_{pkm.Form}" : "")}s.png";
-            }
-            else
-            {
-                shinysparklessprite.IsVisible = false;
-                spriteurl = $"b_{pkm.Species}{(pkm.Form > 0 ? $"_{pkm.Form}" : "")}.png";
-            }
-
-        }
+        
+      
         pic.Source = spriteurl;
     
         languagepicker.SelectedIndex = pkm.Language;
@@ -201,8 +186,7 @@ public partial class MainPage : ContentPage
                 formargstepper.Text = fa.FormArgument.ToString();
             }
         }
-        if (sav is SAV9SV)
-        {
+     
             if (pk.Species == 0)
                 spriteurl = $"a_egg.png";
             else
@@ -212,22 +196,8 @@ public partial class MainPage : ContentPage
             else
                 shinysparklessprite.IsVisible = false;
 
-        }
-        else
-        {
-
-            if (pk.IsShiny)
-            {
-                shinysparklessprite.IsVisible = true;
-                spriteurl = $"b_{pk.Species}{(pk.Form != 0 ? $"_{pk.Form}" : "")}s.png";
-            }
-            else
-            {
-                shinysparklessprite.IsVisible = false;
-                spriteurl = $"b_{pk.Species}{(pk.Form > 0 ? $"_{pk.Form}" : "")}.png";
-            }
-
-        }
+        
+      
         pic.Source = spriteurl;
         checklegality();
     }
@@ -290,8 +260,7 @@ public partial class MainPage : ContentPage
     private void applyform(object sender, EventArgs e) 
     {
         pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
-        if (sav is SAV9SV)
-        {
+       
             if (pk.Species == 0)
                 spriteurl = $"a_egg.png";
             else
@@ -301,30 +270,16 @@ public partial class MainPage : ContentPage
             else
                 shinysparklessprite.IsVisible = false;
 
-        }
-        else
-        {
-
-            if (pk.IsShiny)
-            {
-                shinysparklessprite.IsVisible = true;
-                spriteurl = $"b_{pk.Species}{(pk.Form != 0 ? $"_{pk.Form}" : "")}s.png";
-            }
-            else
-            {
-                shinysparklessprite.IsVisible = false;
-                spriteurl = $"b_{pk.Species}{(pk.Form > 0 ? $"_{pk.Form}" : "")}.png";
-            }
-
-        }
+       
         pic.Source = spriteurl;
         checklegality();
     }
 
     private void applyhelditem(object sender, EventArgs e) 
     {
+        itemsprite.IsVisible = false;
         ComboItem helditemtoapply = (ComboItem)helditempicker.SelectedItem;
-        pk.ApplyHeldItem(helditemtoapply.Value, EntityContext.Gen8);
+        pk.ApplyHeldItem(helditemtoapply.Value, sav.Context);
         if (pk.HeldItem > 0)
         {
             itemsprite.IsVisible = true;
@@ -333,6 +288,7 @@ public partial class MainPage : ContentPage
             else
                 itemsprite.Source = $"bitem_{pk.HeldItem}.png";
         }
+        
         checklegality();
     }
 
