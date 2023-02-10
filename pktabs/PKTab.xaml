@@ -5,7 +5,7 @@
              Title="Main">
     
         <ScrollView>
-        <RefreshView x:Name="mainrefresh">
+       
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -105,11 +105,11 @@
                 <CheckBox x:Name="curedcheck" Grid.Row="15" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applycure"/>
                 <Label Text="Cured" Grid.Row="15" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Button  Grid.Row="16" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
-                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Refresh" Clicked="refreshmain"/>
+                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmain"/>
 
 
             </Grid>
-        </RefreshView>
+        
     </ScrollView>
     
 

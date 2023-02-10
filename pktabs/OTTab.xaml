@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pk9reader.OTTab"
              Title="OT">
-    <RefreshView x:Name="otrefresh">
+  
         <ScrollView>
 
             <Grid>
@@ -72,9 +72,11 @@
                 <Editor Grid.Row="6" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="htname" TextChanged="applyHT" AutoSize="TextChanges"/>
                 <Label Grid.Row="6" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Language:"/>
                 <Picker IsVisible="false" Grid.Row="6" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="htlanguagepicker" SelectedIndexChanged="applyhtlanguage"/>
-                <Button Grid.Row="7" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" x:Name="ribbons" Text="Ribbons" Clicked="openribbons"></Button>
+            <!--Reload-->
+            <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshOT"/>
 
-            </Grid>
+
+        </Grid>
         </ScrollView>
-    </RefreshView>
+
 </ContentPage>

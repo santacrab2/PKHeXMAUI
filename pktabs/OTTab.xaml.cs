@@ -10,13 +10,7 @@ public partial class OTTab : ContentPage
 	{
 		InitializeComponent();
         htlanguagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
-        ICommand refreshCommand = new Command(() =>
-        {
-            if (pk.Species != 0)
-                applyotinfo(pk);
-            otrefresh.IsRefreshing = false;
-        });
-        otrefresh.Command = refreshCommand;
+        
         if (pk.Species != 0)
             applyotinfo(pk);
     }
@@ -98,8 +92,9 @@ public partial class OTTab : ContentPage
         pk.OT_Gender = (byte)otgenderpicker.SelectedIndex;
     }
 
-    private void openribbons(object sender, EventArgs e)
+    private void refreshOT(object sender, EventArgs e)
     {
-        Navigation.PushModalAsync(new RibbonSelector());
+        if(pk.Species !=0)
+            applyotinfo(pk);
     }
 }

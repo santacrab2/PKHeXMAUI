@@ -25,13 +25,7 @@ public partial class MetTab : ContentPage
         eggmetpicker.ItemDisplayBinding = new Binding("Text");
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
-        ICommand refreshCommand = new Command(() =>
-        {
-            if(pk.Species !=0)
-                applymetinfo(pk);
-            metrefresh.IsRefreshing = false;
-        });
-        metrefresh.Command = refreshCommand;
+        
         if(pk.Species !=0)
             applymetinfo(pk);
     }
@@ -155,6 +149,12 @@ public partial class MetTab : ContentPage
             pk.Egg_Location = LocationEdits.GetNoneLocation(pk);
             pk.EggMetDate = null;
         }
+    }
+
+    private void refreshmet(object sender, EventArgs e)
+    {
+        if(pk.Species != 0)
+            applymetinfo(pk);
     }
 }
 

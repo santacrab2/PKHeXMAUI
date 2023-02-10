@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pk9reader.AttacksTab"
              Title="Attacks">
-    <RefreshView x:Name="attackrefresh">
+   
         <ScrollView>
        
             <Grid>
@@ -77,10 +77,13 @@
                 
                 <!--helpful buttons-->
                 <Button Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves"  WidthRequest="150"/>
+                <Button Grid.Row="11" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Relearn Flags" Clicked="openTReditor" Grid.ColumnSpan="2"/>
+                
+                <!--Reload-->
+                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmoves"/>
 
-
-            </Grid>
+        </Grid>
        
     </ScrollView>
-    </RefreshView>
+   
 </ContentPage>

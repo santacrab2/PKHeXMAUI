@@ -24,7 +24,6 @@ public partial class RibbonSelector : ContentPage
             grid.Add(ribbonname);
             Image allthetests = new Image() { HeightRequest = 50, WidthRequest = 50, HorizontalOptions = LayoutOptions.Start, Margin = new Thickness(50, 0, 0, 0) };
             allthetests.SetBinding(Image.SourceProperty, "spritename");
-            allthetests.SetBinding(BackgroundColorProperty, "bg");
             grid.Add(allthetests);
             
             
@@ -37,28 +36,38 @@ public partial class RibbonSelector : ContentPage
             if(fg.HasRibbon)
                 idk.Add(new Ribbonstuff(fg));
         }
-        ribboncollection.ItemsSource= idk;
-        ICommand refreshCommand = new Command(async () =>
+        var selectedribbonslist = new List<object>();
+        var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
+        int o = 0;
+        foreach(var pkrib in pkhasribbonslist)
         {
-            clone = pk.Clone();
-            RibbonApplicator.SetAllValidRibbons(clone);
-            var itemso = RibbonInfo.GetRibbonInfo(clone);
-            List<Ribbonstuff> idk = new();
-            foreach (var fg in itemso)
+            if (pkrib.HasRibbon)
             {
-               if(fg.HasRibbon)
-                idk.Add(new Ribbonstuff(fg));
+                foreach(var imrunningoutofnames in idk)
+                {
+                    if(imrunningoutofnames.index== o)
+                    {
+                        selectedribbonslist.Add(imrunningoutofnames);
+                    }
+                }
             }
-            ribboncollection.ItemsSource = idk;
-          
-            ribbonrefresh.IsRefreshing = false;
-        });
-        ribbonrefresh.Command = refreshCommand;
+            o++;
+        }
+        ribboncollection.ItemsSource= idk;
+        ribboncollection.UpdateSelectedItems(selectedribbonslist);
+        
         
     }
 
     private void applyribbonsandclose(object sender, EventArgs e)
     {
+        for (int c = 0; c < 110; c++)
+        {
+            if (pk is IRibbonIndex ri)
+                ri.SetRibbon(c, false);
+                
+
+        }
 
         foreach (var ribs in ribboncollection.SelectedItems)
         {
@@ -70,12 +79,10 @@ public partial class RibbonSelector : ContentPage
                 {
                     if (pk is IRibbonIndex ri)
                     {
-                        if (ri.GetRibbon(c))
-                            ri.SetRibbon(c, false);
-                        else
-                            ri.SetRibbon(c);
+                        ri.SetRibbon(c);
                     }
                 }
+            
             }
         }
         Navigation.PopModalAsync();
@@ -98,11 +105,7 @@ public class Ribbonstuff
             var ribtest = (RibbonIndex)c;
             if (rib.Name.Replace("Ribbon", "") == ribtest.ToString())
             {
-                if (pk is IRibbonIndex ri)
-                {
-                    if (ri.GetRibbon(c))
-                        bg = Colors.Gold;
-                }
+                index = c;
             }
         }
        
@@ -114,5 +117,5 @@ public class Ribbonstuff
     public string Name { get; set; }
    public string spritename { get; set; }
     public RibbonValueType typer{ get; set; }
-    public Color bg { get; set; } = Colors.Transparent;
+    public int index { get; set; }
 }

@@ -16,13 +16,7 @@ public partial class AttacksTab : ContentPage
         move2ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move4ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
-        ICommand refreshCommand = new Command(() =>
-        {
-            if (pk.Species != 0)
-                applyattackinfo(pk);
-            attackrefresh.IsRefreshing = false;
-        });
-        attackrefresh.Command = refreshCommand;
+    
         if(pk.Species != 0)
             applyattackinfo(pk);
     }
@@ -136,5 +130,14 @@ public partial class AttacksTab : ContentPage
         pk.Move4_PPUps = move4ppups.SelectedIndex;
     }
 
+    private void openTReditor(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new TREditor());
+    }
 
+    private void refreshmoves(object sender, EventArgs e)
+    {
+        if (pk.Species != 0)
+            applyattackinfo(pk);
+    }
 }

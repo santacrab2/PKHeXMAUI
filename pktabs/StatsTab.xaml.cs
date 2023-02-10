@@ -12,14 +12,8 @@ public partial class StatsTab : ContentPage
 		InitializeComponent();
         Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
-        ICommand refreshCommand = new Command(() =>
-        {
-            if (pk.Species != 0)
-                applystatsinfo(pk);
-            statrefresh.IsRefreshing = false;
-        });
-        statrefresh.Command = refreshCommand;
-        applystatsinfo(pk);
+        if(pk.Species !=0)
+            applystatsinfo(pk);
     }
 
 	public void applystatsinfo(PKM pkm)
@@ -347,5 +341,11 @@ public partial class StatsTab : ContentPage
             pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
             teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
         }
+    }
+
+    private void refreshstats(object sender, EventArgs e)
+    {
+        if (pk.Species != 0)
+            applystatsinfo(pk);
     }
 }

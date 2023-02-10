@@ -4,7 +4,7 @@
              x:Class="pk9reader.Cosmeticstab"
              Title="Cosmeticstab">
     <ScrollView>
-        <RefreshView>
+       
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -49,13 +49,16 @@
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
                 <!--Height/Weight-->
-                <Label Grid.Row="14" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:"></Label>
-                <Editor Grid.Row="14" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight"/>
-                <Label Grid.Row="15" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:"/>
-                <Editor Grid.Row="15" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight"/>
-                <Label Grid.Row="16" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:"/>
-                <Editor Grid.Row="16" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:"></Label>
+                <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight"/>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:"/>
+                <Editor Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight"/>
+                <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:"/>
+                <Editor Grid.Row="3" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
+                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="Ribbons" Clicked="openribbons"></Button>
+                <!--Reload-->
+                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshcosmetics"/>
             </Grid>
-        </RefreshView>
+        
     </ScrollView>
 </ContentPage>

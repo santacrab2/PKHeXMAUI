@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pk9reader.StatsTab"
              Title="Stats">
-    <RefreshView x:Name="statrefresh">
+    
         <ScrollView>
        
             <Grid>
@@ -44,7 +44,7 @@
                    HorizontalOptions="Start"
                    VerticalOptions="Start"
                 />
-                <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
+                <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="Start"/>
                 <!--IVS/EVS-->
                 <Label Text="Base" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="IVs"/>
@@ -109,13 +109,15 @@
                 <Button  WidthRequest="150" Grid.Row="11" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Perfect IVs" Clicked="perfectivs"/>
                 <Button  WidthRequest="150" Grid.Row="12" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random EVs" Clicked="randomizeevs"/>
                 <Button WidthRequest="150" Grid.Row="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Suggested Evs" Clicked="suggestedevs"/>
+            <!--Reload-->
+            <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshstats" Grid.ColumnSpan="3"/>
 
 
 
 
-            </Grid>
+        </Grid>
 
         </ScrollView>
-    </RefreshView>
+    
 
 </ContentPage>

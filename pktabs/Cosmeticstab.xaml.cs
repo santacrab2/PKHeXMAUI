@@ -77,4 +77,13 @@ public partial class Cosmeticstab : ContentPage
          
         }
     }
+    private void openribbons(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new RibbonSelector());
+    }
+
+    private void refreshcosmetics(object sender, EventArgs e)
+    {
+        applycomsetics(pk);
+    }
 }
