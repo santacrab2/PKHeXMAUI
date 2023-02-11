@@ -48,7 +48,7 @@
                        
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
-            <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+                <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
             <!--Height/Weight-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:"></Label>
                 <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight"/>
@@ -56,8 +56,27 @@
                 <Editor Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight"/>
                 <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:"/>
                 <Editor Grid.Row="3" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
+                <!--Ribbons and Memories-->
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="Ribbons" Clicked="openribbons"></Button>
-                <!--Reload-->
+                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="End" x:Name="memoriesbutton" Text="Memories" Clicked="openmemories"/>
+                <!--Contest Stats-->
+                <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Contest Stats"/>
+                <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Cool"/>
+                <Editor x:Name="Coolstats" Grid.Row="7" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycoolness"/>
+                <Label Grid.Row="6" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Beauty"/>
+            <Editor x:Name="Beautystats" Grid.Row="7" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makepretty"/>
+            <Label Grid.Row="6" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Cute"/>
+            <Editor x:Name="Cutestats" Grid.Row="7" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycuteness"/>
+
+            <Label Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Clever"/>
+            <Editor x:Name="Cleverstats" Grid.Row="9" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makesmart"/>
+            <Label Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Tough"/>
+            <Editor x:Name="toughstats" Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="GoToTheGym"/>
+            <Label Grid.Row="8" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Sheen"/>
+            <Editor x:Name="sheenstats" Grid.Row="9" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="MakeMeSparkle"/>
+
+
+            <!--Reload-->
                 <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshcosmetics"/>
             </Grid>
         

@@ -41,7 +41,7 @@ public partial class Cosmeticstab : ContentPage
     {
         if (Heightdisplay.Text.Length > 0)
         {
-            if (!int.TryParse(Heightdisplay.Text, out var result))
+            if (!byte.TryParse(Heightdisplay.Text, out var result))
                 return;
             if (result > 255)
             {
@@ -51,7 +51,7 @@ public partial class Cosmeticstab : ContentPage
             if (pk is IScaledSize sz)
             {
 
-                sz.HeightScalar = (byte)result;
+                sz.HeightScalar = result;
                
             }
         }
@@ -61,7 +61,7 @@ public partial class Cosmeticstab : ContentPage
     {
         if (Weightdisplay.Text.Length > 0)
         {
-            if (!int.TryParse(Weightdisplay.Text, out var result))
+            if (!byte.TryParse(Weightdisplay.Text, out var result))
                 return;
             if (result > 255)
             {
@@ -70,7 +70,7 @@ public partial class Cosmeticstab : ContentPage
             }
             if (pk is IScaledSize sz)
             {
-                sz.WeightScalar = (byte)result;
+                sz.WeightScalar = result;
 
             }
         }
@@ -78,7 +78,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void applyscale(object sender, TextChangedEventArgs e)
     {
-        if (!int.TryParse(scaledisplay.Text, out var result))
+        if (!byte.TryParse(scaledisplay.Text, out var result))
             return;
         if (result > 255)
         {
@@ -87,7 +87,7 @@ public partial class Cosmeticstab : ContentPage
         }
         if (pk is IScaledSize3 sz3)
         {
-            sz3.Scale = (byte)result;
+            sz3.Scale = result;
          
         }
     }
@@ -99,5 +99,106 @@ public partial class Cosmeticstab : ContentPage
     private void refreshcosmetics(object sender, EventArgs e)
     {
         applycomsetics(pk);
+    }
+
+    private void openmemories(object sender, EventArgs e)
+    {
+
+    }
+
+    private void applycoolness(object sender, TextChangedEventArgs e)
+    {
+        if(pk is IContestStats CTstats)
+        {
+            if (!byte.TryParse(Coolstats.Text,out var result))
+                return;
+            if (result > 255) 
+            { 
+                result = 255;
+                Coolstats.Text = result.ToString();
+            }
+            CTstats.CNT_Cool = result;
+            
+        }
+    }
+
+    private void makepretty(object sender, TextChangedEventArgs e)
+    {
+        if (pk is IContestStats CTstats)
+        {
+            if (!byte.TryParse(Beautystats.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                Beautystats.Text = result.ToString();
+            }
+            CTstats.CNT_Beauty = result;
+
+        }
+    }
+
+    private void applycuteness(object sender, TextChangedEventArgs e)
+    {
+        if (pk is IContestStats CTstats)
+        {
+            if (!byte.TryParse(Cutestats.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                Cutestats.Text = result.ToString();
+            }
+            CTstats.CNT_Cute = result;
+
+        }
+    }
+
+    private void makesmart(object sender, TextChangedEventArgs e)
+    {
+        if (pk is IContestStats CTstats)
+        {
+            if (!byte.TryParse(Cleverstats.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                Cleverstats.Text = result.ToString();
+            }
+            CTstats.CNT_Smart = result;
+
+        }
+    }
+
+    private void GoToTheGym(object sender, TextChangedEventArgs e)
+    {
+        if (pk is IContestStats CTstats)
+        {
+            if (!byte.TryParse(toughstats.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                toughstats.Text = result.ToString();
+            }
+            CTstats.CNT_Tough = result;
+
+        }
+    }
+
+    private void MakeMeSparkle(object sender, TextChangedEventArgs e)
+    {
+        if (pk is IContestStats CTstats)
+        {
+            if (!byte.TryParse(sheenstats.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                sheenstats.Text = result.ToString();
+            }
+            CTstats.CNT_Sheen = result;
+
+        }
     }
 }
