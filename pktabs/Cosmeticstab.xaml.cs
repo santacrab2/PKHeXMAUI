@@ -8,10 +8,24 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
+        if (pk.Species != 0)
+            applycomsetics(pk);
 	}
 
 	public void applycomsetics(PKM pkm)
 	{
+        if (pkm.HeldItem > 0)
+        {
+            itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            itemsprite.IsVisible = true;
+        }
+        else
+            itemsprite.IsVisible = false;
+        if (pkm.IsShiny)
+            shinysparklessprite.IsVisible = true;
+        else
+            shinysparklessprite.IsVisible = false;
+        pic.Source = spriteurl;
         if (pkm is IScaledSize ssz)
         {
             Heightdisplay.Text = $"{ssz.HeightScalar}";

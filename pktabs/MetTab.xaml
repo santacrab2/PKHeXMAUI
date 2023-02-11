@@ -40,7 +40,8 @@
                    HorizontalOptions="Start"
                    VerticalOptions="Start"/>
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
-                <!--Origin Game-->
+            <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+            <!--Origin Game-->
             <Label Grid.Row="1" Grid.Column="0" Text="Origin Game:" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="origingamepicker" SelectedIndexChanged="applyorigingame" WidthRequest="152"/>
             <!--Battle Version-->

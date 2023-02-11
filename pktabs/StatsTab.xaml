@@ -41,11 +41,13 @@
                 x:Name="statpic"
                 Source="iconp.png"
                 HeightRequest="50"
+                 Grid.ColumnSpan="2"
                    HorizontalOptions="Start"
                    VerticalOptions="Start"
                 />
-                <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="Start"/>
-                <!--IVS/EVS-->
+                <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
+            <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" Grid.ColumnSpan="2" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+            <!--IVS/EVS-->
                 <Label Text="Base" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="IVs"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="EVs"/>

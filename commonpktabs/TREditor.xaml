@@ -7,6 +7,7 @@
         <CollectionView HeightRequest="500" WidthRequest="400" x:Name="trcollection" SelectionMode="Multiple" ></CollectionView>
         <Button x:Name="applytrs" Text="Apply" Clicked="applytrsandclose"></Button>
         <Button x:Name="applyalltrs" Text="Apply All" Clicked="applyalltrsandclose"/>
+        <Button x:Name="removealltrs" Text="Remove All" Clicked="removealltrsandclose"/>
         <Button x:Name="close" Text="Close" Clicked="closer"/>
     </VerticalStackLayout>
 </ContentPage>

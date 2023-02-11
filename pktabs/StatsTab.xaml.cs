@@ -18,6 +18,13 @@ public partial class StatsTab : ContentPage
 
 	public void applystatsinfo(PKM pkm)
 	{
+        if (pkm.HeldItem > 0)
+        {
+            itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            itemsprite.IsVisible = true;
+        }
+        else
+            itemsprite.IsVisible = false;
         pkm.ResetPartyStats();
         if (pkm.IsShiny)
             shinysparklessprite.IsVisible = true;

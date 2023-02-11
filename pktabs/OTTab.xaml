@@ -44,7 +44,8 @@
                    VerticalOptions="Start"
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
-                <!--OT-->
+            <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+            <!--OT-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Original Trainer" WidthRequest="152"/>
                 <CheckBox Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="OTcurrentcheck" CheckedChanged="MakeOTCurrent"/>
                 <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="SID:"/>

@@ -48,7 +48,8 @@
                        
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
-                <!--Height/Weight-->
+            <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+            <!--Height/Weight-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:"></Label>
                 <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight"/>
                 <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:"/>

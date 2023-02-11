@@ -23,6 +23,13 @@ public partial class AttacksTab : ContentPage
     public static List<Move> movlist = new();
 	public void applyattackinfo(PKM pkm)
 	{
+        if (pkm.HeldItem > 0)
+        {
+            itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            itemsprite.IsVisible = true;
+        }
+        else
+            itemsprite.IsVisible=false;
         if (pkm.IsShiny)
             shinysparklessprite.IsVisible = true;
         else

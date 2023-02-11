@@ -81,6 +81,19 @@ public partial class TREditor : ContentPage
         }
         Navigation.PopModalAsync();
     }
+
+    private void removealltrsandclose(object sender, EventArgs e)
+    {
+        if (pk is ITechRecord tr)
+        {
+            var indexes = tr.Permit.RecordPermitIndexes;
+            for (int i = 0; i < indexes.Length; i++)
+            {
+                tr.SetMoveRecordFlag(i, false);
+            }
+        }
+        Navigation.PopModalAsync();
+    }
 }
 
 public class TREditorItem
