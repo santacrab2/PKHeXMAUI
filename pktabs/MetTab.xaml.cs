@@ -17,11 +17,12 @@ public partial class MetTab : ContentPage
 		InitializeComponent();
       
         mettabpic.Source = spriteurl;
-        origingamepicker.ItemsSource = GameInfo.Strings.gamelist;
+        origingamepicker.ItemsSource = (List<ComboItem>)datasourcefiltered.Games;
+        origingamepicker.ItemDisplayBinding = new Binding("Text");
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
-        metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+        metlocationpicker.ItemsSource = (List<ComboItem>)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
         metlocationpicker.ItemDisplayBinding = new Binding("Text");
-        eggmetpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context, true);
+        eggmetpicker.ItemsSource = (List<ComboItem>)GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context, true);
         eggmetpicker.ItemDisplayBinding = new Binding("Text");
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
@@ -52,7 +53,7 @@ public partial class MetTab : ContentPage
             battleversionpicker.SelectedIndex = bv.BattleVersion;
         }
         
-        metlocationpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context).Where(z=>z.Value == pkm.Met_Location).FirstOrDefault();
+        metlocationpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)pkm.Version, pkm.Context).Where(z=>z.Value == pkm.Met_Location).FirstOrDefault();
         ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
         ballspriteurl = $"{(pkm.Ball>-1?$"{pkm.Ball}":"ball4")}.png";
         ballimage.Source = ballspriteurl;
@@ -80,8 +81,10 @@ public partial class MetTab : ContentPage
 
     public void applyorigingame(object sender, EventArgs e)
     {
-        pk.Version = origingamepicker.SelectedIndex;
-
+        var version = (ComboItem)origingamepicker.SelectedItem;
+        pk.Version = version.Value;
+        metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+        metlocationpicker.ItemDisplayBinding = new Binding("Text");
     }
 
     private void applybattleversion(object sender, EventArgs e)
