@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

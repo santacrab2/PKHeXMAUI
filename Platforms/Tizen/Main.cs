@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 class Program : MauiApplication
 {

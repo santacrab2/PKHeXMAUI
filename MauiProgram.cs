@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public static class MauiProgram
 {

@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 [Application]
 public class MainApplication : MauiApplication

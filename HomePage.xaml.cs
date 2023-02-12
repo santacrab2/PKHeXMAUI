@@ -1,6 +1,6 @@
 using PKHeX.Core;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public partial class HomePage : ContentPage
 {

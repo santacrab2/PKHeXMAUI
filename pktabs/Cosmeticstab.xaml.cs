@@ -1,7 +1,7 @@
 using PKHeX.Core;
-using static pk9reader.MainPage;
+using static PKHeXMAUI.MainPage;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public partial class Cosmeticstab : ContentPage
 {
@@ -103,7 +103,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void openmemories(object sender, EventArgs e)
     {
-
+        Navigation.PushModalAsync(new MemoriesAmie());
     }
 
     private void applycoolness(object sender, TextChangedEventArgs e)

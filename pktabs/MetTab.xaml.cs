@@ -6,9 +6,9 @@ using System.Linq;
 using System.Windows.Input;
 using PKHeX.Core;
 
-using static pk9reader.MainPage;
+using static PKHeXMAUI.MainPage;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public partial class MetTab : ContentPage
 {
@@ -17,12 +17,12 @@ public partial class MetTab : ContentPage
 		InitializeComponent();
       
         mettabpic.Source = spriteurl;
-        origingamepicker.ItemsSource = (List<ComboItem>)datasourcefiltered.Games;
+        origingamepicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Games;
         origingamepicker.ItemDisplayBinding = new Binding("Text");
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
-        metlocationpicker.ItemsSource = (List<ComboItem>)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+        metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
         metlocationpicker.ItemDisplayBinding = new Binding("Text");
-        eggmetpicker.ItemsSource = (List<ComboItem>)GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context, true);
+        eggmetpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList(sav.Version, sav.Context, true);
         eggmetpicker.ItemDisplayBinding = new Binding("Text");
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
@@ -45,7 +45,7 @@ public partial class MetTab : ContentPage
         else
             shinysparklessprite.IsVisible = false;
         mettabpic.Source = spriteurl;
-        origingamepicker.SelectedIndex = pkm.Version > -1?pkm.Version:0;
+        origingamepicker.SelectedItem = datasourcefiltered.Games.Where(z => z.Value == pkm.Version).FirstOrDefault();
         if (pkm is IBattleVersion bv)
         {
             battleversionlabel.IsVisible = true;

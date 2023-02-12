@@ -4,10 +4,10 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Internals;
 using System.Linq;
 using PKHeX.Core;
-using static pk9reader.MainPage;
+using static PKHeXMAUI.MainPage;
 
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public partial class BoxTab : ContentPage
 {

@@ -1,8 +1,8 @@
 
 using PKHeX.Core;
 
-using static pk9reader.MainPage;
-namespace pk9reader;
+using static PKHeXMAUI.MainPage;
+namespace PKHeXMAUI;
 
 public partial class TREditor : ContentPage
 {

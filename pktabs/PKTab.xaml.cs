@@ -6,7 +6,7 @@ using PKHeX.Core.AutoMod;
 using System.Windows.Input;
 
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {

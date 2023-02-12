@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="pk9reader.AppShell"
+    x:Class="PKHeXMAUI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:pk9reader">
+    xmlns:local="clr-namespace:PKHeXMAUI">
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid HeightRequest="100">

@@ -1,10 +1,10 @@
 using System;
 using System.Windows.Input;
 using PKHeX.Core;
-using static pk9reader.MainPage;
+using static PKHeXMAUI.MainPage;
 
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 
 public partial class AttacksTab : ContentPage

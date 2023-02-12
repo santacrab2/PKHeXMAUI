@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace pk9reader;
+namespace PKHeXMAUI;
 
 public class Program
 {

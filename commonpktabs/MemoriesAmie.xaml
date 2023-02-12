@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MemoriesAmie"
+             Title="Memories"
+            BarBackgroundColor="#303030"
+            SelectedTabColor="#C8C8C8"
+            UnselectedTabColor="#919191"
+            BarTextColor="White">
+    <ContentPage Title="OTMemories" x:Name="OTMemories">
+            
+            <VerticalStackLayout>
+                <Label x:Name="MemoriesWithOT" />
+                <Label Text="Friendship:" />
+                <Editor x:Name="Friendshipeditor" />
+                <Label Text="Memory Type" />
+                <Picker x:Name="MemoryTypePicker" Title="Memory Type"/>
+                <Button Text="Save" x:Name="savememories" Clicked="SaveMemoriesAndClose"/>
+                <Button Text="Close" x:Name="closememories" Clicked="CloseMemories"/>
+            </VerticalStackLayout>
+        </ContentPage>
+
+
+        <ContentPage x:Name="NotOTMemories" Title="HTMemories">
+            <VerticalStackLayout>
+                <Label x:Name="MemoriesWithHT" />
+                <Label Text="Friendship:" />
+                <Editor x:Name="HTFriendshipeditor" />
+                <Label Text="Memory Type" />
+                <Picker x:Name="HTMemoryTypePicker" Title="Memory Type"/>
+                <Button Text="Save" x:Name="savememories2" Clicked="SaveMemoriesAndClose"/>
+                <Button Text="Close" x:Name="closememories2" Clicked="CloseMemories"/>
+        </VerticalStackLayout>
+        </ContentPage>
+        <ContentPage x:Name="Other" Title="Other">
+        <VerticalStackLayout>
+            <Label Text="Current Handler:"></Label>
+            <Editor IsReadOnly="True" x:Name="chlabel"></Editor>
+            <Label Text="Fullness:"></Label>
+            <Editor x:Name="fullnesseditor"/>
+            <Label Text="Enjoyment:"/>
+            <Editor x:Name="EnjoymentEditor"/>
+            <Button Text="Save" x:Name="savememories3" Clicked="SaveMemoriesAndClose"/>
+            <Button Text="Close" x:Name="closememories3" Clicked="CloseMemories"/>
+        </VerticalStackLayout>
+    </ContentPage>
+  
+</TabbedPage>
