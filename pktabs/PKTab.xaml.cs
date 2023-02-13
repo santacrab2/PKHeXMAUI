@@ -119,11 +119,12 @@ public partial class MainPage : ContentPage
     {
 #if ANDROID
         pk.ResetPartyStats();
-
+        string path = "";
         if (OperatingSystem.IsAndroidVersionAtLeast(30))
         {
 
             await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{pk.FileName}", pk.DecryptedPartyData);
+            path = "/storage/emulated/0/Documents/";
         }
         else
         {
@@ -131,10 +132,15 @@ public partial class MainPage : ContentPage
             {
                 
                 await File.WriteAllBytesAsync($"/storage/emulated/0/Android/data/com.PKHeX.maui/{pk.FileName}", pk.DecryptedPartyData);
+                path="/storage/emulated/0/Android/data/com.PKHeX.maui/";
             }
-            else 
+            else
+            {
                 await File.WriteAllBytesAsync($"/storage/emulated/0/{pk.FileName}", pk.DecryptedPartyData);
+                path = "/storage/emulated/0/";
+            }
         }
+        await DisplayAlert("Saved",$"{pk.Nickname} has been saved to {path}", "ok");
 #endif
     }
 
