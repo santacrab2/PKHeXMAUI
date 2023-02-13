@@ -95,15 +95,18 @@ public partial class MetTab : ContentPage
 
     private void applymetlocation(object sender, EventArgs e)
     {
-        var metlocation = (ComboItem)metlocationpicker.SelectedItem;
-        pk.Met_Location = metlocation.Value;
+        if (metlocationpicker.SelectedItem != null)
+        {
+            var metlocation = (ComboItem)metlocationpicker.SelectedItem;
+            pk.Met_Location = metlocation.Value;
+        }
     }
 
     private void givebackballs(object sender, EventArgs e)
     {
 
         pk.Ball = ballpicker.SelectedIndex;
-        ballspriteurl = $"{((Ball)pk.Ball).ToString().ToLower()}.png";
+        ballspriteurl = $"ball{pk.Ball}.png";
         ballimage.Source = ballspriteurl;
     }
 
