@@ -96,7 +96,6 @@ public partial class StatsTab : ContentPage
         {
             gvlabel.IsVisible = true;
             HPGV.IsVisible = true;
-           
             HPGV.Text = gb.GV_HP.ToString();
             AtkGV.IsVisible = true;
             AtkGV.Text = gb.GV_ATK.ToString();
@@ -109,7 +108,17 @@ public partial class StatsTab : ContentPage
             SPEGV.IsVisible = true;
             SPEGV.Text = gb.GV_SPE.ToString();
         }
-
+        if(pkm is IDynamaxLevel dmax)
+        {
+            dmaxlabel.IsVisible = true;
+            dmaxleveleditor.IsVisible = true;
+            dmaxleveleditor.Text = dmax.DynamaxLevel.ToString();
+        }
+        if(pkm is IGigantamax gmax)
+        {
+            gmaxlabel.IsVisible = true;
+            GmaxCheck.IsVisible = true;
+        }
     }
 
     private void applyhpIV(object sender, TextChangedEventArgs e)
@@ -462,6 +471,31 @@ public partial class StatsTab : ContentPage
                     gb.GV_SPE = result;
                 totalhpdisplay.Text = pk.Stat_SPE.ToString();
             }
+        }
+    }
+
+    private void applydmaxlevel(object sender, TextChangedEventArgs e)
+    {
+        if (dmaxleveleditor.Text.Length > 0)
+        {
+            if(byte.TryParse(dmaxleveleditor.Text,out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IDynamaxLevel dmax)
+                    dmax.DynamaxLevel = result;
+            }
+        }
+    }
+
+    private void applygmax(object sender, CheckedChangedEventArgs e)
+    {
+        if(pk is IGigantamax gmax)
+        {
+            if (gmax.CanToggleGigantamax(pk.Species, pk.Form))
+                gmax.CanGigantamax = GmaxCheck.IsChecked;
+            else
+                GmaxCheck.IsChecked = false;
         }
     }
 }
