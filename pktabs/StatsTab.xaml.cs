@@ -119,6 +119,18 @@ public partial class StatsTab : ContentPage
             gmaxlabel.IsVisible = true;
             GmaxCheck.IsVisible = true;
         }
+        if(pkm is IAlpha alpha)
+        {
+            alphalabel.IsVisible = true;
+            Alphacheck.IsVisible = true;
+            Alphacheck.IsChecked = alpha.IsAlpha;
+        }
+        if(pkm is INoble noble)
+        {
+            noblelabel.IsVisible = true;
+            Noblecheck.IsVisible = true;
+            Noblecheck.IsChecked = noble.IsNoble;
+        }
     }
 
     private void applyhpIV(object sender, TextChangedEventArgs e)
@@ -497,5 +509,19 @@ public partial class StatsTab : ContentPage
             else
                 GmaxCheck.IsChecked = false;
         }
+    }
+
+    private void applyalhpastatus(object sender, CheckedChangedEventArgs e)
+    {
+        if(pk is IAlpha alpha)
+        {
+            alpha.IsAlpha = Alphacheck.IsChecked;
+        }
+    }
+
+    private void applynoblestatus(object sender, CheckedChangedEventArgs e)
+    {
+        if (pk is INoble noble)
+            noble.IsNoble = Noblecheck.IsChecked;
     }
 }
