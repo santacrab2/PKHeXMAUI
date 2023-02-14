@@ -55,15 +55,9 @@
                 <Label Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="OT:" Margin="0,0,24,0"/>
                 <Editor Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="otdisplay" TextChanged="applyot" Grid.ColumnSpan="2" AutoSize="TextChanges" WidthRequest="120"/>
                 <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="OT Gender:"/>
-                <Picker Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="otgenderpicker" SelectedIndexChanged="applyotgender">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>♂</x:String>
-                            <x:String>♀</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-                <!--EC-->
+            <ImageButton HeightRequest="32" Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="otgenderpicker" Clicked="applyotgender"/>
+
+            <!--EC-->
                 <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Encryption Constant:" WidthRequest="152"/>
                 <Editor Grid.Row="4" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="ecdisplay" TextChanged="applyec" AutoSize="TextChanges"/>
                 <!--Hidden trainer-->
@@ -73,6 +67,13 @@
                 <Editor Grid.Row="6" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="htname" TextChanged="applyHT" AutoSize="TextChanges"/>
                 <Label Grid.Row="6" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Language:"/>
                 <Picker IsVisible="false" Grid.Row="6" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="htlanguagepicker" SelectedIndexChanged="applyhtlanguage"/>
+                <!--Extra Bytes-->
+            <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Extra Bytes:"/>
+            <Picker Grid.Row="7" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="extrabytespicker" SelectedIndexChanged="extrabytestuff"/>
+            <Editor Grid.Row="7" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="extrabytesvalue" TextChanged="applyextrabytesvalue"/>
+            <!--HomeTracker-->
+            <Label Grid.Row="8" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Home Tracker:"/>
+            <Editor x:Name="trackereditor" Grid.Row="8" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" TextChanged="applyhometracker"/>
             <!--Reload-->
             <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshOT"/>
 

@@ -25,7 +25,7 @@ public partial class AttacksTab : ContentPage
 	{
         if (pkm.HeldItem > 0)
         {
-            itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            itemsprite.Source = itemspriteurl;
             itemsprite.IsVisible = true;
         }
         else

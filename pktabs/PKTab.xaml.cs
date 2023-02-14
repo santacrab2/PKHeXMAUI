@@ -49,6 +49,7 @@ public partial class MainPage : ContentPage
     public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
     public static string ipaddy = "";
+    public static string itemspriteurl = "";
     public async void pk9picker_Clicked(object sender, EventArgs e)
     {
         
@@ -89,9 +90,15 @@ public partial class MainPage : ContentPage
         {
             itemsprite.IsVisible = true;
             if (sav is SAV9SV)
+            {
+                itemspriteurl = $"aitem_{pkm.HeldItem}.png"; 
                 itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            }
             else
+            {
+                itemspriteurl = $"bitem_{pkm.HeldItem}.png";
                 itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
+            }
         }
         formpicker.SelectedIndex = pkm.Form;
       
@@ -290,9 +297,15 @@ public partial class MainPage : ContentPage
         {
             itemsprite.IsVisible = true;
             if (sav is SAV9SV)
+            {
+                itemspriteurl = $"aitem_{pk.HeldItem}.png";
                 itemsprite.Source = $"aitem_{pk.HeldItem}.png";
+            }
             else
+            {
+                itemspriteurl = $"bitem_{pk.HeldItem}.png";
                 itemsprite.Source = $"bitem_{pk.HeldItem}.png";
+            }
         }
         
         checklegality();

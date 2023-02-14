@@ -10,6 +10,7 @@ public partial class OTTab : ContentPage
 	{
 		InitializeComponent();
         htlanguagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
+
         
         if (pk.Species != 0)
             applyotinfo(pk);
@@ -19,7 +20,7 @@ public partial class OTTab : ContentPage
 	{
         if (pkm.HeldItem > 0)
         {
-            itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            itemsprite.Source = itemspriteurl;
             itemsprite.IsVisible = true;
         }
         else
@@ -44,7 +45,17 @@ public partial class OTTab : ContentPage
             case 0:  OTcurrentcheck.IsChecked = true; HTcurrentcheck.IsChecked = false; break;
             case 1: HTcurrentcheck.IsChecked = true; OTcurrentcheck.IsChecked = false; break;
         };
-
+        if (pkm is IHomeTrack home)
+            trackereditor.Text = home.Tracker.ToString("X16");
+        extrabytespicker.Items.Clear();
+        foreach (var b in pkm.ExtraBytes)
+            extrabytespicker.Items.Add($"0x{b:X2}");
+        extrabytespicker.SelectedIndex = 0;
+        var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
+        var value = pkm.Data[offset];
+        
+        extrabytesvalue.Text = value.ToString();
+        otgenderpicker.Source = $"gender_{pkm.OT_Gender}.png";
     }
 
     private void applySID(object sender, TextChangedEventArgs e)
@@ -96,12 +107,45 @@ public partial class OTTab : ContentPage
 
     private void applyotgender(object sender, EventArgs e)
     {
-        pk.OT_Gender = (byte)otgenderpicker.SelectedIndex;
+        if (pk.OT_Gender == 0)
+        {
+            pk.OT_Gender = 1;
+            otgenderpicker.Source = "gender_1.png";
+        }
+        else
+        {
+            pk.OT_Gender = 0;
+            otgenderpicker.Source = "gender_0.png";
+        }
     }
 
     private void refreshOT(object sender, EventArgs e)
     {
         if(pk.Species !=0)
             applyotinfo(pk);
+    }
+
+    private void applyhometracker(object sender, TextChangedEventArgs e)
+    {
+        if (ulong.TryParse(trackereditor.Text, out var result)) 
+        {
+            if (pk is IHomeTrack home)
+            {
+                home.Tracker = result;
+             } 
+        }
+    }
+
+    private void extrabytestuff(object sender, EventArgs e)
+    {
+        var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
+        var value = pk.Data[offset];
+        extrabytesvalue.Text = value.ToString();
+    }
+
+    private void applyextrabytesvalue(object sender, TextChangedEventArgs e)
+    {
+        var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
+        pk.Data[offset] = Convert.ToByte(extrabytesvalue.Text);
     }
 }

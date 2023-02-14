@@ -16,7 +16,7 @@ public partial class Cosmeticstab : ContentPage
 	{
         if (pkm.HeldItem > 0)
         {
-            itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+            itemsprite.Source = itemspriteurl;
             itemsprite.IsVisible = true;
         }
         else
