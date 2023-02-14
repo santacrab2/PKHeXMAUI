@@ -92,6 +92,23 @@ public partial class StatsTab : ContentPage
             teratypeimage.IsVisible = true;
             teratypeimage.Source = $"gem_{(int)tera.TeraType:00}";
         }
+        if(pkm is IGanbaru gb)
+        {
+            gvlabel.IsVisible = true;
+            HPGV.IsVisible = true;
+           
+            HPGV.Text = gb.GV_HP.ToString();
+            AtkGV.IsVisible = true;
+            AtkGV.Text = gb.GV_ATK.ToString();
+            DEFGV.IsVisible = true;
+            DEFGV.Text = gb.GV_DEF.ToString();
+            SPAGV.IsVisible = true;
+            SPAGV.Text = gb.GV_SPA.ToString();
+            SPDGV.IsVisible = true;
+            SPDGV.Text = gb.GV_SPD.ToString();
+            SPEGV.IsVisible = true;
+            SPEGV.Text = gb.GV_SPE.ToString();
+        }
 
     }
 
@@ -99,13 +116,15 @@ public partial class StatsTab : ContentPage
     {
         if (HPIV.Text.Length > 0)
         {
-
-            if (int.Parse(HPIV.Text) > 31)
-                HPIV.Text = "31";
-            pk.IV_HP = int.Parse(HPIV.Text);
-            totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+            if (int.TryParse(HPIV.Text, out var result))
+            {
+                if (result > 31)
+                    result = 31;
+                pk.IV_HP = result;
+                totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
+                totalIVdisplay.Text = pk.IVTotal.ToString();
+                totalEVdisplay.Text = pk.EVTotal.ToString();
+            }
         }
     }
 
@@ -354,5 +373,95 @@ public partial class StatsTab : ContentPage
     {
         if (pk.Species != 0)
             applystatsinfo(pk);
+    }
+
+    private void applyhpGV(object sender, TextChangedEventArgs e)
+    {
+        if(HPGV.Text.Length > 0)
+        {
+            if(byte.TryParse(HPGV.Text,out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IGanbaru gb)
+                    gb.GV_HP= result;
+                totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
+            }
+        }
+    }
+
+    private void applyatkGV(object sender, TextChangedEventArgs e)
+    {
+        if (AtkGV.Text.Length > 0)
+        {
+            if (byte.TryParse(AtkGV.Text, out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IGanbaru gb)
+                    gb.GV_ATK = result;
+                totalhpdisplay.Text = pk.Stat_ATK.ToString();
+            }
+        }
+    }
+
+    private void applydefGV(object sender, TextChangedEventArgs e)
+    {
+        if (DEFGV.Text.Length > 0)
+        {
+            if (byte.TryParse(DEFGV.Text, out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IGanbaru gb)
+                    gb.GV_DEF = result;
+                totalhpdisplay.Text = pk.Stat_DEF.ToString();
+            }
+        }
+    }
+
+    private void applyspaGV(object sender, TextChangedEventArgs e)
+    {
+        if (SPAGV.Text.Length > 0)
+        {
+            if (byte.TryParse(SPAGV.Text, out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IGanbaru gb)
+                    gb.GV_SPA = result;
+                totalhpdisplay.Text = pk.Stat_SPA.ToString();
+            }
+        }
+    }
+
+    private void applyspdGV(object sender, TextChangedEventArgs e)
+    {
+        if (SPDGV.Text.Length > 0)
+        {
+            if (byte.TryParse(SPDGV.Text, out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IGanbaru gb)
+                    gb.GV_SPD = result;
+                totalhpdisplay.Text = pk.Stat_SPD.ToString();
+            }
+        }
+    }
+
+    private void applyspeGV(object sender, TextChangedEventArgs e)
+    {
+        if (SPEGV.Text.Length > 0)
+        {
+            if (byte.TryParse(SPEGV.Text, out var result))
+            {
+                if (result > 10)
+                    result = 10;
+                if (pk is IGanbaru gb)
+                    gb.GV_SPE = result;
+                totalhpdisplay.Text = pk.Stat_SPE.ToString();
+            }
+        }
     }
 }

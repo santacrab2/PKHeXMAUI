@@ -33,6 +33,11 @@ public partial class MainPage : ContentPage
       
         helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
         helditempicker.ItemDisplayBinding= new Binding("Text");
+        if (datasourcefiltered.Items.Count() > 0)
+        {
+            helditempicker.IsVisible = true;
+            helditemlabel.IsVisible = true;
+        }
         languagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
   
         checklegality();

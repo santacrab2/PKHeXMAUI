@@ -105,7 +105,7 @@ public partial class MetTab : ContentPage
     private void givebackballs(object sender, EventArgs e)
     {
 
-        pk.Ball = ballpicker.SelectedIndex;
+        pk.Ball = (int)(Ball)ballpicker.SelectedItem;
         ballspriteurl = $"ball{pk.Ball}.png";
         ballimage.Source = ballspriteurl;
     }
