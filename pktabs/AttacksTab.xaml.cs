@@ -19,6 +19,16 @@ public partial class AttacksTab : ContentPage
     
         if(pk.Species != 0)
             applyattackinfo(pk);
+        if (pk is IMoveShop8Mastery)
+            moveshopbutton.IsVisible = true;
+        if(pk is PA8 pa8)
+        {
+            AlphaMasteredLabel.IsVisible = true;
+            AlphaMasteredPicker.IsVisible = true;
+            AlphaMasteredPicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Moves;
+            AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
+            AlphaMasteredPicker.SelectedItem = datasourcefiltered.Moves.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
+        }
     }
     public static List<Move> movlist = new();
 	public void applyattackinfo(PKM pkm)
@@ -146,5 +156,15 @@ public partial class AttacksTab : ContentPage
     {
         if (pk.Species != 0)
             applyattackinfo(pk);
+    }
+
+    private void openMoveShopEditor(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new MoveShopEditor());
+    }
+
+    private void applyAlphaMasteredMove(object sender, EventArgs e)
+    {
+
     }
 }

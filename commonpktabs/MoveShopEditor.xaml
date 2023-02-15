@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MoveShopEditor"
+             Title="MoveShopEditor">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Index"/>
+            <Label Grid.Column="1" Text="Move"/>
+            <Label Grid.Column="2" Text="Purchased"/>
+            <Label Grid.Column="3" Text="Mastered"/>
+        </Grid>
+        <CollectionView x:Name="moveshopcollection" HeightRequest="500" WidthRequest="400"/>
+        <Button x:Name="GiveAll" Text="Give All" Clicked="GiveAllMoveShop"/>
+        <Button x:Name="RemoveAll" Text="RemoveAll" Clicked="RemoveAllMoveShop"/>
+        <Button Text="Save" Clicked="SaveMoveShop"/>
+        <Button Text="Close" Clicked="CloseUpShop"/>
+    </VerticalStackLayout>
+</ContentPage>

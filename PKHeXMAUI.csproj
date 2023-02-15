@@ -185,6 +185,9 @@
 	  <MauiXaml Update="commonpktabs\MemoriesAmie.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="commonpktabs\MoveShopEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="commonpktabs\TREditor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

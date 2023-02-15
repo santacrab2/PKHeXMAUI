@@ -122,12 +122,13 @@
             <Label x:Name="dmaxlabel" IsVisible="false" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" Text="Dynamax Level:"/>
             <Editor x:Name="dmaxleveleditor" IsVisible="false" Grid.Row="13" Grid.Column="2" TextChanged="applydmaxlevel"/>
             <CheckBox x:Name="GmaxCheck" IsVisible="false" Grid.Row="13" Grid.Column="3" CheckedChanged="applygmax"/>
-            <Label x:Name="gmaxlabel" IsVisible="false" Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2" Text="Gigantamax"/>
+            <Label x:Name="gmaxlabel" IsVisible="false" Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Gigantamax"/>
                 <!--Alpha/Noble-->
-            <CheckBox x:Name="Alphacheck" IsVisible="false" Grid.Row="14" Grid.Column="0" CheckedChanged="applyalhpastatus"/>
-            <Label x:Name="alphalabel" IsVisible="false" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2" Text="Alpha"/>
+            <CheckBox x:Name="Alphacheck" IsVisible="false" Grid.Row="14" Grid.Column="0"  CheckedChanged="applyalhpastatus"/>
+            <Label x:Name="alphalabel" IsVisible="false" Grid.Row="14" Grid.Column="1" VerticalOptions="Center" Grid.ColumnSpan="2" Text="Alpha"/>
             <CheckBox x:Name="Noblecheck" IsVisible="false" Grid.Row="14" Grid.Column="3" CheckedChanged="applynoblestatus"/>
-            <Label x:Name="noblelabel" IsVisible="false" Grid.Row="14" Grid.Column="4" Grid.ColumnSpan="2" Text="Noble"/>
+            <Label x:Name="noblelabel" VerticalOptions="Center" IsVisible="false" Grid.Row="14" Grid.Column="4" Grid.ColumnSpan="2" Text="Noble"/>
+ 
             <!--Reload-->
             <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshstats" Grid.ColumnSpan="3"/>
 

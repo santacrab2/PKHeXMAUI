@@ -72,17 +72,20 @@
                 <Picker Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4ppups" SelectedIndexChanged="applymove4ppups"/>
              
                 <!--Relearn Moves-->
-                <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Relearn Moves"/>
-                <Picker Grid.Row="7" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove1" SelectedIndexChanged="applyrmove1"/>
-                <Picker Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove2" SelectedIndexChanged="applyrmove2"/>
-                <Picker Grid.Row="9" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove3" SelectedIndexChanged="applyrmove3"/>
-                <Picker Grid.Row="10" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove4" SelectedIndexChanged="applyrmove4"/>
+                <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Relearn Moves"/>
+                <Picker Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove1" SelectedIndexChanged="applyrmove1"/>
+                <Picker Grid.Row="9" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove2" SelectedIndexChanged="applyrmove2"/>
+                <Picker Grid.Row="10" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove3" SelectedIndexChanged="applyrmove3"/>
+                <Picker Grid.Row="11" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove4" SelectedIndexChanged="applyrmove4"/>
                 
                 <!--helpful buttons-->
-                <Button Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves"  WidthRequest="150"/>
-                <Button Grid.Row="11" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Relearn Flags" Clicked="openTReditor" Grid.ColumnSpan="2"/>
-                
-                <!--Reload-->
+                <Button Grid.Row="6" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves"  WidthRequest="150"/>
+                <Button Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Relearn Flags" Clicked="openTReditor" Grid.ColumnSpan="2"/>
+                <Button x:Name="moveshopbutton" IsVisible="false" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Move Shop" Clicked="openMoveShopEditor"/>
+            <!--Alpha Mastered-->
+            <Label x:Name="AlphaMasteredLabel" IsVisible="false" Grid.Row="13" Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="2" Text="Alpha Mastered:"/>
+            <Picker x:Name="AlphaMasteredPicker" IsVisible="false" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center" SelectedIndexChanged="applyAlphaMasteredMove"/>
+            <!--Reload-->
                 <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmoves"/>
 
         </Grid>
