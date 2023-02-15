@@ -12,6 +12,8 @@ public partial class StatsTab : ContentPage
 		InitializeComponent();
         Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
+        if (pk is IAwakened)
+            EvLabel.Text = "AVs";
         if(pk.Species !=0)
             applystatsinfo(pk);
     }
@@ -33,7 +35,10 @@ public partial class StatsTab : ContentPage
         statpic.Source = spriteurl;
         hpbasedisplay.Text = pkm.PersonalInfo.HP.ToString();
         HPIV.Text = pkm.IV_HP.ToString();
-        HPEV.Text = pkm.EV_HP.ToString();
+        if (pkm is IAwakened woke)
+            HPEV.Text = woke.AV_HP.ToString();
+        else
+            HPEV.Text = pkm.EV_HP.ToString();
         totalhpdisplay.Text = pkm.Stat_HPCurrent.ToString();
         if(pkm is IHyperTrain hpt)
         {
@@ -47,27 +52,42 @@ public partial class StatsTab : ContentPage
         
         atkbasedisplay.Text = pkm.PersonalInfo.ATK.ToString();
         AtkIV.Text = pkm.IV_ATK.ToString();
-        AtkEV.Text = pkm.EV_ATK.ToString();
+        if (pkm is IAwakened wokeattack)
+            AtkEV.Text = wokeattack.AV_ATK.ToString();
+        else
+            AtkEV.Text = pkm.EV_ATK.ToString();
         totalatkdisplay.Text = pkm.Stat_ATK.ToString();
         
         defbasedisplay.Text = pkm.PersonalInfo.DEF.ToString();
         DEFIV.Text = pkm.IV_DEF.ToString();
-        DEFEV.Text = pkm.EV_DEF.ToString();
+        if (pkm is IAwakened wokeDEF)
+            DEFEV.Text = wokeDEF.AV_DEF.ToString();
+        else
+            DEFEV.Text = pkm.EV_DEF.ToString();
         totaldefdisplay.Text = pkm.Stat_DEF.ToString();
       
         spabasedisplay.Text = pkm.PersonalInfo.SPA.ToString();
         SPAIV.Text = pkm.IV_SPA.ToString();
-        SPAEV.Text = pkm.EV_SPA.ToString();
+        if (pkm is IAwakened wokeSPA)
+           SPAEV.Text = wokeSPA.AV_SPA.ToString();
+        else
+            SPAEV.Text = pkm.EV_SPA.ToString();
         totalspadisplay.Text = pkm.Stat_SPA.ToString();
        
         spdbasedisplay.Text = pkm.PersonalInfo.SPD.ToString();
         SPDIV.Text = pkm.IV_SPD.ToString();
-        SPDEV.Text = pkm.EV_SPD.ToString();
+        if (pkm is IAwakened wokeSPD)
+            SPDEV.Text = wokeSPD.AV_SPD.ToString();
+        else
+            SPDEV.Text = pkm.EV_SPD.ToString();
         totalspddisplay.Text = pkm.Stat_SPD.ToString();
         
         spebasedisplay.Text = pkm.PersonalInfo.SPE.ToString();
         SPEIV.Text = pkm.IV_SPE.ToString();
-        SPEEV.Text = pkm.EV_SPE.ToString();
+        if (pkm is IAwakened wokeSPE)
+            SPEEV.Text = wokeSPE.AV_SPE.ToString();
+        else
+            SPEEV.Text = pkm.EV_SPE.ToString();
         totalspedisplay.Text = pkm.Stat_SPE.ToString();
       
         totalbasedisplay.Text = pkm.PersonalInfo.GetBaseStatTotal().ToString();

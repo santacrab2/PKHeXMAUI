@@ -165,6 +165,8 @@ public partial class AttacksTab : ContentPage
 
     private void applyAlphaMasteredMove(object sender, EventArgs e)
     {
-
+        var selectedmove = (ComboItem)AlphaMasteredPicker.SelectedItem;
+        if (pk is PA8 pa8)
+            pa8.AlphaMove = (ushort)selectedmove.Value;
     }
 }

@@ -48,11 +48,10 @@ public partial class Cosmeticstab : ContentPage
                 result = 255;
                 Heightdisplay.Text = $"{result}";
             }
-            if (pk is IScaledSize sz)
+            if (pk is IScaledSizeValue sz)
             {
-
                 sz.HeightScalar = result;
-               
+                sz.ResetHeight();
             }
         }
     }
@@ -68,10 +67,10 @@ public partial class Cosmeticstab : ContentPage
                 result = 255;
                 Weightdisplay.Text = $"{result}";
             }
-            if (pk is IScaledSize sz)
+            if (pk is IScaledSizeValue sz)
             {
                 sz.WeightScalar = result;
-
+                sz.ResetWeight();
             }
         }
     }
@@ -88,7 +87,8 @@ public partial class Cosmeticstab : ContentPage
         if (pk is IScaledSize3 sz3)
         {
             sz3.Scale = result;
-         
+            if (pk is ICombatPower cp)
+                cp.ResetCP();
         }
     }
     private void openribbons(object sender, EventArgs e)

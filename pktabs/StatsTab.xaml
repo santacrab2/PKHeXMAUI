@@ -50,7 +50,7 @@
             <!--IVS/EVS-->
                 <Label Text="Base" Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                 <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="IVs"/>
-                <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="EVs"/>
+                <Label x:Name="EvLabel" Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="EVs"/>
             <Label IsVisible="false" x:Name="gvlabel" Grid.Row="1" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="GVs"/>
             <Label Grid.Row="1" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" Text="Stats" x:Name="statslabel"/>
                 <Label Grid.Row="1" Grid.Column="6"  HorizontalOptions="Start" VerticalOptions="Center" Text="Hyper" x:Name="hyperlabel"/>
