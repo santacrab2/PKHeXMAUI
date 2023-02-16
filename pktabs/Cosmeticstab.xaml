@@ -52,11 +52,15 @@
             <!--Height/Weight-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:"></Label>
                 <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight"/>
-                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:"/>
+            <Editor IsReadOnly="True" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="HeightAbsoluteEditor"/>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:"/>
                 <Editor Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight"/>
-                <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:"/>
+            <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="WeightAbsoluteEditor"/>
+            <!--Scale/CP-->
+                <Label x:Name="scalelabel" Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:"/>
                 <Editor Grid.Row="3" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale"/>
-                <!--Ribbons and Memories-->
+                <Image IsVisible="false" Grid.Column="1" Grid.Row="3" x:Name="SizeMarkImage" HeightRequest="32"/>
+            <!--Ribbons and Memories-->
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="Ribbons" Clicked="openribbons"></Button>
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="End" x:Name="memoriesbutton" Text="Memories" Clicked="openmemories"/>
                 <!--Contest Stats-->

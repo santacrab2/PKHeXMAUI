@@ -1,4 +1,5 @@
 using PKHeX.Core;
+using System.Globalization;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
@@ -8,12 +9,15 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
+        if(pk is ICombatPower)
+            scalelabel.Text = "CP:";
         if (pk.Species != 0)
             applycomsetics(pk);
 	}
 
 	public void applycomsetics(PKM pkm)
 	{
+        SizeMarkImage.IsVisible = false;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
@@ -26,22 +30,37 @@ public partial class Cosmeticstab : ContentPage
         else
             shinysparklessprite.IsVisible = false;
         pic.Source = spriteurl;
-        if (pkm is IScaledSize ssz)
+        if (pkm is IScaledSizeValue ssz)
         {
             Heightdisplay.Text = $"{ssz.HeightScalar}";
+            HeightAbsoluteEditor.Text = ssz.HeightAbsolute.ToString("R",CultureInfo.InvariantCulture);
             Weightdisplay.Text = $"{ssz.WeightScalar}";
+            WeightAbsoluteEditor.Text = ssz.WeightAbsolute.ToString();
         }
         if (pkm is IScaledSize3 ssz3)
         {
-            scaledisplay.IsVisible = true;
             scaledisplay.Text = $"{ssz3.Scale}";
+            if(ssz3.Scale == 0)
+            {
+                SizeMarkImage.IsVisible = true;
+                SizeMarkImage.Source = "ribbonmarkmini.png";
+            }
+            if(ssz3.Scale == 255)
+            {
+                SizeMarkImage.IsVisible = true;
+                SizeMarkImage.Source = "ribbonmarkjumbo.png";
+            }
+        }
+        else if(pkm is ICombatPower cp)
+        {
+            scaledisplay.Text = cp.Stat_CP.ToString();
         }
     }
     private void applyheight(object sender, TextChangedEventArgs e)
     {
         if (Heightdisplay.Text.Length > 0)
         {
-            if (!byte.TryParse(Heightdisplay.Text, out var result))
+            if (!int.TryParse(Heightdisplay.Text, out var result))
                 return;
             if (result > 255)
             {
@@ -50,8 +69,9 @@ public partial class Cosmeticstab : ContentPage
             }
             if (pk is IScaledSizeValue sz)
             {
-                sz.HeightScalar = result;
+                sz.HeightScalar = (byte)result;
                 sz.ResetHeight();
+                sz.ResetWeight();
             }
         }
     }
@@ -201,4 +221,5 @@ public partial class Cosmeticstab : ContentPage
 
         }
     }
+
 }
