@@ -13,7 +13,11 @@ public partial class StatsTab : ContentPage
         Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         if (pk is IAwakened)
+        {
             EvLabel.Text = "AVs";
+            randomEv.Text = "Random AVs";
+            suggestedEv.Text = "Suggested AVs";
+        }
         if(pk.Species !=0)
             applystatsinfo(pk);
     }
@@ -92,7 +96,10 @@ public partial class StatsTab : ContentPage
       
         totalbasedisplay.Text = pkm.PersonalInfo.GetBaseStatTotal().ToString();
         totalIVdisplay.Text = pkm.IVTotal.ToString();
-        totalEVdisplay.Text = pkm.EVTotal.ToString();
+        if (pk is IAwakened awake)
+            totalEVdisplay.Text = awake.AwakeningSum().ToString();
+        else
+            totalEVdisplay.Text = pkm.EVTotal.ToString();
         if (pkm is ITeraType tera)
         {
             OvTeralabel.IsVisible = true;
@@ -159,6 +166,7 @@ public partial class StatsTab : ContentPage
         {
             if (int.TryParse(HPIV.Text, out var result))
             {
+
                 if (result > 31)
                     result = 31;
                 pk.IV_HP = result;
@@ -174,12 +182,27 @@ public partial class StatsTab : ContentPage
         if (HPEV.Text.Length > 0)
         {
 
-            if (int.Parse(HPEV.Text) > 252)
-                HPEV.Text = "252";
-            pk.EV_HP = int.Parse(HPEV.Text);
-            totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+            if (byte.TryParse(HPEV.Text, out var result))
+            {
+                if (pk is IAwakened woke)
+                {
+                    if (result > 200)
+                        result = 200;
+                    woke.AV_HP = result;
+                    totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = woke.AwakeningSum().ToString();
+                }
+                else
+                {
+                    if (result > 252)
+                        result = 252;
+                    pk.EV_HP = result;
+                    totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = pk.EVTotal.ToString();
+                }
+            }
         }
     }
 
@@ -202,13 +225,27 @@ public partial class StatsTab : ContentPage
     {
         if (AtkEV.Text.Length > 0)
         {
-
-            if (int.Parse(AtkEV.Text) > 252)
-                AtkEV.Text = "252";
-            pk.EV_ATK = int.Parse(AtkEV.Text);
-            totalatkdisplay.Text = pk.Stat_ATK.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+            if (byte.TryParse(AtkEV.Text, out var result))
+            {
+                if (pk is IAwakened woke)
+                {
+                    if (result > 200)
+                        result = 200;
+                    woke.AV_ATK = result;
+                    totalatkdisplay.Text = pk.Stat_ATK.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = woke.AwakeningSum().ToString();
+                }
+                else
+                {
+                    if (result > 252)
+                        result = 252;
+                    pk.EV_ATK = result;
+                    totalatkdisplay.Text = pk.Stat_ATK.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = pk.EVTotal.ToString();
+                }
+            }
         }
     }
 
@@ -229,12 +266,27 @@ public partial class StatsTab : ContentPage
     {
         if (DEFEV.Text.Length > 0)
         {
-            if (int.Parse(DEFEV.Text) > 252)
-                DEFEV.Text = "252";
-            pk.EV_DEF = int.Parse(DEFEV.Text);
-            totaldefdisplay.Text = pk.Stat_DEF.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+            if (byte.TryParse(DEFEV.Text, out byte value))
+            {
+                if (pk is IAwakened woke)
+                {
+                    if (value > 200)
+                        value = 200;
+                    woke.AV_DEF = value;
+                    totaldefdisplay.Text = pk.Stat_DEF.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = woke.AwakeningSum().ToString();
+                }
+                else
+                {
+                    if (value > 252)
+                        value = 252;
+                    pk.EV_DEF = value;
+                    totaldefdisplay.Text = pk.Stat_DEF.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = pk.EVTotal.ToString();
+                }
+            }
         }
     }
 
@@ -256,12 +308,27 @@ public partial class StatsTab : ContentPage
         if (SPAEV.Text.Length > 0)
         {
 
-            if (int.Parse(SPAEV.Text) > 252)
-                SPAEV.Text = "252";
-            pk.EV_SPA = int.Parse(SPAEV.Text);
-            totalspadisplay.Text = pk.Stat_SPA.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+            if (byte.TryParse(SPAEV.Text, out var result))
+            {
+                if (pk is IAwakened woke)
+                {
+                    if (result > 200)
+                        result = 200;
+                    woke.AV_SPA = result;
+                    totalspadisplay.Text = pk.Stat_SPA.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = woke.AwakeningSum().ToString();
+                }
+                else
+                {
+                    if (result > 252)
+                        result = 252;
+                    pk.EV_SPA = result;
+                    totalspadisplay.Text = pk.Stat_SPA.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = pk.EVTotal.ToString();
+                }
+            }
         }
     }
 
@@ -282,12 +349,27 @@ public partial class StatsTab : ContentPage
     {
         if (SPDEV.Text.Length > 0)
         {
-            if (int.Parse(SPDEV.Text) > 252)
-                SPDEV.Text = "252";
-            pk.EV_SPD = int.Parse(SPDEV.Text);
-            totalspddisplay.Text = pk.Stat_SPD.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+            if (byte.TryParse(SPDEV.Text, out var result))
+            {
+                if (pk is IAwakened woke)
+                {
+                    if (result > 200)
+                        result = 200;
+                    woke.AV_SPD = result;
+                    totalspddisplay.Text = pk.Stat_SPD.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = woke.AwakeningSum().ToString();
+                }
+                else
+                {
+                    if (result > 252)
+                        result = 252;
+                    pk.EV_SPD = result;
+                    totalspddisplay.Text = pk.Stat_SPD.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = pk.EVTotal.ToString();
+                }
+            }
         }
     }
 
@@ -309,13 +391,28 @@ public partial class StatsTab : ContentPage
     {
         if (SPEEV.Text.Length > 0)
         {
-            
-            if (int.Parse(SPEEV.Text) > 252)
-                SPEEV.Text = "252";
-            pk.EV_SPE = int.Parse(SPEEV.Text);
-            totalspedisplay.Text = pk.Stat_SPE.ToString();
-            totalIVdisplay.Text = pk.IVTotal.ToString();
-            totalEVdisplay.Text = pk.EVTotal.ToString();
+
+            if (byte.TryParse(SPEEV.Text, out var result))
+            {
+                if (pk is IAwakened woke)
+                {
+                    if (result > 200)
+                        result = 200;
+                    woke.AV_SPE = result;
+                    totalspedisplay.Text = pk.Stat_SPE.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = woke.AwakeningSum().ToString();
+                }
+                else
+                {
+                    if (result > 252)
+                        result = 252;
+                    pk.EV_SPE = result;
+                    totalspedisplay.Text = pk.Stat_SPE.ToString();
+                    totalIVdisplay.Text = pk.IVTotal.ToString();
+                    totalEVdisplay.Text = pk.EVTotal.ToString();
+                }
+            }
         }
     }
 
@@ -334,18 +431,32 @@ public partial class StatsTab : ContentPage
 
     private void randomizeevs(object sender, EventArgs e)
     {
-        Span<int> ivs = stackalloc int[6];
-       
-        EffortValues.SetRandom(ivs, 9);
-        pk.SetEVs(ivs);
+        if (pk is IAwakened woke)
+        {
+           woke.AwakeningSetRandom();
+        }
+        else
+        {
+            Span<int> ivs = stackalloc int[6];
+
+            EffortValues.SetRandom(ivs, 9);
+            pk.SetEVs(ivs);
+        }
     }
 
     private void suggestedevs(object sender, EventArgs e)
     {
-        Span<int> ivs = stackalloc int[6];
-        
-        EffortValues.SetMax(ivs,pk);
-        pk.SetEVs(ivs);
+        if (pk is IAwakened woke)
+        {
+            woke.SetSuggestedAwakenedValues(pk);
+        }
+        else
+        {
+            Span<int> ivs = stackalloc int[6];
+
+            EffortValues.SetMax(ivs, pk);
+            pk.SetEVs(ivs);
+        }
     }
 
     private void applyHPhyper(object sender, CheckedChangedEventArgs e)

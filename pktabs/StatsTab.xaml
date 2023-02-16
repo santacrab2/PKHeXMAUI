@@ -116,8 +116,8 @@
                 <!--IVbuttons-->
                 <Button  WidthRequest="150" Grid.Row="11" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random IVs" Clicked="randomizeivs" />
                 <Button  WidthRequest="150" Grid.Row="11" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Perfect IVs" Clicked="perfectivs"/>
-                <Button  WidthRequest="150" Grid.Row="12" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random EVs" Clicked="randomizeevs"/>
-                <Button WidthRequest="150" Grid.Row="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Suggested Evs" Clicked="suggestedevs"/>
+                <Button x:Name="randomEv"  WidthRequest="150" Grid.Row="12" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Random EVs" Clicked="randomizeevs"/>
+                <Button x:Name="suggestedEv" WidthRequest="150" Grid.Row="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Suggested Evs" Clicked="suggestedevs"/>
                 <!--Dynamax-->
             <Label x:Name="dmaxlabel" IsVisible="false" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" Text="Dynamax Level:"/>
             <Editor x:Name="dmaxleveleditor" IsVisible="false" Grid.Row="13" Grid.Column="2" TextChanged="applydmaxlevel"/>
