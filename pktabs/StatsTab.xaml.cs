@@ -18,6 +18,43 @@ public partial class StatsTab : ContentPage
             randomEv.Text = "Random AVs";
             suggestedEv.Text = "Suggested AVs";
         }
+        if(pk is ITeraType) 
+        {
+            OvTeralabel.IsVisible = true;
+            OrTeralabel.IsVisible = true;
+            Teratypepicker.IsVisible = true;
+            MainTeratypepicker.IsVisible = true;
+        }
+        if(pk is IGanbaru)
+        {
+            gvlabel.IsVisible = true;
+            HPGV.IsVisible = true;
+            AtkGV.IsVisible = true;
+            DEFGV.IsVisible = true;
+            SPDGV.IsVisible= true;
+            SPAGV.IsVisible= true;
+            SPEGV.IsVisible= true;
+        }
+        if(pk is IDynamaxLevel)
+        {
+            dmaxlabel.IsVisible = true;
+            dmaxleveleditor.IsVisible = true;
+        }
+        if(pk is IGigantamax)
+        {
+            gmaxlabel.IsVisible = true;
+            GmaxCheck.IsVisible = true;
+        }
+        if(pk is IAlpha )
+        {
+            alphalabel.IsVisible = true;
+            Alphacheck.IsVisible = true;
+        }
+        if(pk is INoble)
+        {
+            noblelabel.IsVisible = true;
+            Noblecheck.IsVisible=true;
+        }
         if(pk.Species !=0)
             applystatsinfo(pk);
     }
@@ -145,6 +182,7 @@ public partial class StatsTab : ContentPage
         {
             gmaxlabel.IsVisible = true;
             GmaxCheck.IsVisible = true;
+            GmaxCheck.IsChecked = gmax.CanGigantamax;
         }
         if(pkm is IAlpha alpha)
         {

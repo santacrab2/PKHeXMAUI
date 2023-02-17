@@ -16,7 +16,7 @@ public partial class MainPage : ContentPage
 	{
         sav = AppShell.AppSaveFile;
         datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
-        pk = EntityBlank.GetBlank(sav);
+        pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
         InitializeComponent();
   
         APILegality.SetAllLegalRibbons = false;

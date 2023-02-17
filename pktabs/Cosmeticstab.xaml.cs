@@ -1,5 +1,6 @@
 using PKHeX.Core;
 using System.Globalization;
+using System.Runtime.Intrinsics.X86;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
@@ -14,9 +15,12 @@ public partial class Cosmeticstab : ContentPage
         if (pk.Species != 0)
             applycomsetics(pk);
 	}
+    private static readonly string[] SizeClass = Enum.GetNames(typeof(PokeSize));
+    private static readonly string[] SizeClassDetailed = Enum.GetNames(typeof(PokeSizeDetailed));
 
-	public void applycomsetics(PKM pkm)
+    public void applycomsetics(PKM pkm)
 	{
+        
         SizeMarkImage.IsVisible = false;
         if (pkm.HeldItem > 0)
         {
@@ -30,22 +34,27 @@ public partial class Cosmeticstab : ContentPage
         else
             shinysparklessprite.IsVisible = false;
         pic.Source = spriteurl;
-        if (pkm is IScaledSizeValue ssz)
+        if (pkm is IScaledSize ss)
         {
-            Heightdisplay.Text = $"{ssz.HeightScalar}";
-            HeightAbsoluteEditor.Text = ssz.HeightAbsolute.ToString("R",CultureInfo.InvariantCulture);
-            Weightdisplay.Text = $"{ssz.WeightScalar}";
-            WeightAbsoluteEditor.Text = ssz.WeightAbsolute.ToString();
+            Heightdisplay.Text = $"{ss.HeightScalar}";
+            if(pkm is IScaledSizeValue sv)
+                HeightAbsoluteEditor.Text = sv.HeightAbsolute.ToString();
+            HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.HeightScalar)];
+            Weightdisplay.Text = $"{ss.WeightScalar}";
+            if (pkm is IScaledSizeValue sv2)
+                WeightAbsoluteEditor.Text = sv2.WeightAbsolute.ToString();
+            WeightDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.WeightScalar)];
         }
-        if (pkm is IScaledSize3 ssz3)
+        if (pkm is IScaledSize3 scale)
         {
-            scaledisplay.Text = $"{ssz3.Scale}";
-            if(ssz3.Scale == 0)
+            scaledisplay.Text = $"{scale.Scale}";
+            ScaleDetailLabel.Text = SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(scale.Scale)];
+            if (scale.Scale == 0)
             {
                 SizeMarkImage.IsVisible = true;
                 SizeMarkImage.Source = "ribbonmarkmini.png";
             }
-            if(ssz3.Scale == 255)
+            if(scale.Scale == 255)
             {
                 SizeMarkImage.IsVisible = true;
                 SizeMarkImage.Source = "ribbonmarkjumbo.png";
@@ -67,11 +76,15 @@ public partial class Cosmeticstab : ContentPage
                 result = 255;
                 Heightdisplay.Text = $"{result}";
             }
-            if (pk is IScaledSizeValue sz)
+            if (pk is IScaledSize ss)
             {
-                sz.HeightScalar = (byte)result;
-                sz.ResetHeight();
-                sz.ResetWeight();
+                ss.HeightScalar = (byte)result;
+                if (pk is IScaledSizeValue sv)
+                {
+                    sv.ResetHeight();
+                    sv.ResetWeight();
+                }
+                HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.HeightScalar)];
             }
         }
     }
@@ -80,17 +93,19 @@ public partial class Cosmeticstab : ContentPage
     {
         if (Weightdisplay.Text.Length > 0)
         {
-            if (!byte.TryParse(Weightdisplay.Text, out var result))
+            if (!int.TryParse(Weightdisplay.Text, out var result))
                 return;
             if (result > 255)
             {
                 result = 255;
                 Weightdisplay.Text = $"{result}";
             }
-            if (pk is IScaledSizeValue sz)
+            if (pk is IScaledSize ss)
             {
-                sz.WeightScalar = result;
-                sz.ResetWeight();
+                ss.WeightScalar = (byte)result;
+                if(pk is IScaledSizeValue sv)
+                    sv.ResetWeight();
+                HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.WeightScalar)];
             }
         }
     }
@@ -107,6 +122,7 @@ public partial class Cosmeticstab : ContentPage
         if (pk is IScaledSize3 sz3)
         {
             sz3.Scale = result;
+            ScaleDetailLabel.Text= SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(sz3.Scale)];
             if (pk is ICombatPower cp)
                 cp.ResetCP();
         }
