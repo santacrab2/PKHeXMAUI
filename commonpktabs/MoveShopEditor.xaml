@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PKHeXMAUI.MoveShopEditor"
              Title="MoveShopEditor">
+    <ScrollView>
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -25,4 +26,5 @@
         <Button Text="Save" Clicked="SaveMoveShop"/>
         <Button Text="Close" Clicked="CloseUpShop"/>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
