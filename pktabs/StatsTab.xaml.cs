@@ -12,50 +12,7 @@ public partial class StatsTab : ContentPage
 		InitializeComponent();
         Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
-        if (pk is IAwakened)
-        {
-            EvLabel.Text = "AVs";
-            randomEv.Text = "Random AVs";
-            suggestedEv.Text = "Suggested AVs";
-        }
-        if(pk is ITeraType) 
-        {
-            OvTeralabel.IsVisible = true;
-            OrTeralabel.IsVisible = true;
-            Teratypepicker.IsVisible = true;
-            MainTeratypepicker.IsVisible = true;
-        }
-        if(pk is IGanbaru)
-        {
-            gvlabel.IsVisible = true;
-            HPGV.IsVisible = true;
-            AtkGV.IsVisible = true;
-            DEFGV.IsVisible = true;
-            SPDGV.IsVisible= true;
-            SPAGV.IsVisible= true;
-            SPEGV.IsVisible= true;
-        }
-        if(pk is IDynamaxLevel)
-        {
-            dmaxlabel.IsVisible = true;
-            dmaxleveleditor.IsVisible = true;
-        }
-        if(pk is IGigantamax)
-        {
-            gmaxlabel.IsVisible = true;
-            GmaxCheck.IsVisible = true;
-        }
-        if(pk is IAlpha )
-        {
-            alphalabel.IsVisible = true;
-            Alphacheck.IsVisible = true;
-        }
-        if(pk is INoble)
-        {
-            noblelabel.IsVisible = true;
-            Noblecheck.IsVisible=true;
-        }
-        if(pk.Species !=0)
+      
             applystatsinfo(pk);
     }
 
@@ -74,6 +31,12 @@ public partial class StatsTab : ContentPage
         else
             shinysparklessprite.IsVisible = false;
         statpic.Source = spriteurl;
+        if (pk is IAwakened)
+        {
+            EvLabel.Text = "AVs";
+            randomEv.Text = "Random AVs";
+            suggestedEv.Text = "Suggested AVs";
+        }
         hpbasedisplay.Text = pkm.PersonalInfo.HP.ToString();
         HPIV.Text = pkm.IV_HP.ToString();
         if (pkm is IAwakened woke)

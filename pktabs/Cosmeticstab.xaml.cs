@@ -10,10 +10,7 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
-        if(pk is ICombatPower)
-            scalelabel.Text = "CP:";
-        if (pk.Species != 0)
-            applycomsetics(pk);
+        applycomsetics(pk);
 	}
     private static readonly string[] SizeClass = Enum.GetNames(typeof(PokeSize));
     private static readonly string[] SizeClassDetailed = Enum.GetNames(typeof(PokeSizeDetailed));
@@ -62,6 +59,7 @@ public partial class Cosmeticstab : ContentPage
         }
         else if(pkm is ICombatPower cp)
         {
+            scalelabel.Text = "CP:";
             scaledisplay.Text = cp.Stat_CP.ToString();
         }
     }

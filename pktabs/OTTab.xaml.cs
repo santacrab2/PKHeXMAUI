@@ -10,10 +10,7 @@ public partial class OTTab : ContentPage
 	{
 		InitializeComponent();
         htlanguagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
-
-        
-        if (pk.Species != 0)
-            applyotinfo(pk);
+        applyotinfo(pk);
     }
 
 	public void applyotinfo(PKM pkm)

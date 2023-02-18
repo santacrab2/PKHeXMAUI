@@ -27,7 +27,7 @@ public partial class MetTab : ContentPage
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
         
-        if(pk.Species !=0)
+       
             applymetinfo(pk);
     }
     public static string ballspriteurl;

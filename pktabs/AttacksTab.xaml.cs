@@ -17,18 +17,9 @@ public partial class AttacksTab : ContentPage
         move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move4ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
     
-        if(pk.Species != 0)
+        //if(pk.Species != 0)
             applyattackinfo(pk);
-        if (pk is IMoveShop8Mastery)
-            moveshopbutton.IsVisible = true;
-        if(pk is PA8 pa8)
-        {
-            AlphaMasteredLabel.IsVisible = true;
-            AlphaMasteredPicker.IsVisible = true;
-            AlphaMasteredPicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Moves;
-            AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
-            AlphaMasteredPicker.SelectedItem = datasourcefiltered.Moves.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
-        }
+        
     }
     public static List<Move> movlist = new();
 	public void applyattackinfo(PKM pkm)
@@ -80,6 +71,16 @@ public partial class AttacksTab : ContentPage
         move2ppups.SelectedIndex = pkm.Move2_PPUps;
         move3ppups.SelectedIndex = pkm.Move3_PPUps;
         move4ppups.SelectedIndex = pkm.Move4_PPUps;
+        if (pk is IMoveShop8Mastery)
+            moveshopbutton.IsVisible = true;
+        if (pk is PA8 pa8)
+        {
+            AlphaMasteredLabel.IsVisible = true;
+            AlphaMasteredPicker.IsVisible = true;
+            AlphaMasteredPicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Moves;
+            AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
+            AlphaMasteredPicker.SelectedItem = datasourcefiltered.Moves.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
+        }
     }
 
     private void applymove1(object sender, EventArgs e)
