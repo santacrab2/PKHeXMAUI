@@ -12,7 +12,7 @@ public partial class StatsTab : ContentPage
 		InitializeComponent();
         Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
-      
+        HiddenPowerPicker.ItemsSource = Enum.GetValues(typeof(MoveType));
             applystatsinfo(pk);
     }
 
@@ -159,8 +159,14 @@ public partial class StatsTab : ContentPage
             Noblecheck.IsVisible = true;
             Noblecheck.IsChecked = noble.IsNoble;
         }
+        if((byte)pkm.Context <= 7 || pkm is PB8 || pkm is PB7)
+        {
+            HiddenPowerPicker.IsVisible = true;
+            HiddenPLabel.IsVisible = true;
+            HiddenPowerPicker.SelectedItem = (MoveType)pkm.HPType;
+        }
     }
-
+   
     private void applyhpIV(object sender, TextChangedEventArgs e)
     {
         if (HPIV.Text.Length > 0)
@@ -655,5 +661,12 @@ public partial class StatsTab : ContentPage
     {
         if (pk is INoble noble)
             noble.IsNoble = Noblecheck.IsChecked;
+    }
+
+    private void applyHiddenPower(object sender, EventArgs e)
+    {
+
+        pk.HPType = HiddenPowerPicker.SelectedIndex;
+        HiddenPower.SetIVs(HiddenPowerPicker.SelectedIndex, pk.IVs, pk.Context);
     }
 }

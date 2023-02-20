@@ -107,7 +107,10 @@
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalbasedisplay"/>
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalIVdisplay"/>
                 <Editor IsReadOnly="True" Grid.Row="8" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalEVdisplay"/>
-                <!--TeraType-->
+                <!--Hidden Power-->
+            <Label x:Name="HiddenPLabel" IsVisible="false" Grid.Row="9" Grid.Column="0" Text="Hidden Power" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Picker x:Name="HiddenPowerPicker" IsVisible="false" Grid.Row="9" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" SelectedIndexChanged="applyHiddenPower"/>
+            <!--TeraType-->
                 <Label x:Name="OvTeralabel" IsVisible="false" Grid.Row="9" Grid.Column="0" Text="Override TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>
                 <Picker IsVisible="false" Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2" HorizontalOptions="End" VerticalOptions="Center" x:Name="Teratypepicker" Title="TeraType" SelectedIndexChanged="applytera"></Picker>
                 <Label x:Name="OrTeralabel" IsVisible="false" Grid.Row="10" Grid.Column="0" Text="Original TeraType:" WidthRequest="152" HorizontalOptions="Start" VerticalOptions="Center"></Label>

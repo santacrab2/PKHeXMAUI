@@ -105,11 +105,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="FlatBuffers\**" />
 	  <AndroidResource Remove="pkNX.Structures.FlatBuffers\**" />
+	  <Compile Remove="FlatBuffers\**" />
 	  <Compile Remove="pkNX.Structures.FlatBuffers\**" />
+	  <EmbeddedResource Remove="FlatBuffers\**" />
 	  <EmbeddedResource Remove="pkNX.Structures.FlatBuffers\**" />
+	  <MauiCss Remove="FlatBuffers\**" />
 	  <MauiCss Remove="pkNX.Structures.FlatBuffers\**" />
+	  <MauiXaml Remove="FlatBuffers\**" />
 	  <MauiXaml Remove="pkNX.Structures.FlatBuffers\**" />
+	  <None Remove="FlatBuffers\**" />
 	  <None Remove="pkNX.Structures.FlatBuffers\**" />
 	</ItemGroup>
 
