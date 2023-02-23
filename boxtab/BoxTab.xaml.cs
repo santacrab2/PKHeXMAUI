@@ -45,13 +45,17 @@ public partial class BoxTab : ContentPage
             Grid grid = new Grid { Padding = 10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-
-            Image image = new Image() { HeightRequest = 100, WidthRequest = 100 };
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            Image image = new Image() { HeightRequest = 75, WidthRequest = 75, HorizontalOptions = LayoutOptions.Center,VerticalOptions = LayoutOptions.Start };
             image.SetBinding(Image.SourceProperty, "url");
             grid.Add(image);
             return grid;
         });
+        boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
         boxview.ItemsSource = boxsprites;
 
 
