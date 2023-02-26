@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MedalEditor"
+             Title="Medal Editor">
+    <ScrollView>
+        <VerticalStackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <CollectionView x:Name="rankside" WidthRequest="200" HeightRequest="400" Grid.Row="0" Grid.Column="0"></CollectionView>
+            <CollectionView x:Name="distsuperside" WidthRequest="200" HeightRequest="400" Grid.Column="1" Grid.Row="0"></CollectionView>
+        </Grid>
+            <Button Text="Save" Clicked="SaveST"></Button>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

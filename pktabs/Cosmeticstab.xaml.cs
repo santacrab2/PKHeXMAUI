@@ -236,4 +236,8 @@ public partial class Cosmeticstab : ContentPage
         }
     }
 
+    private async void openmedaleditor(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new MedalEditor());
+    }
 }

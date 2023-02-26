@@ -67,7 +67,8 @@
             <!--Ribbons and Memories-->
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="Ribbons" Clicked="openribbons"></Button>
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="End" x:Name="memoriesbutton" Text="Memories" Clicked="openmemories"/>
-                <!--Contest Stats-->
+                <Button Grid.Row ="4" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="MedalEditorButton" Text="Medals" Clicked="openmedaleditor"/>
+            <!--Contest Stats-->
                 <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Contest Stats"/>
                 <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Cool"/>
                 <Editor x:Name="Coolstats" Grid.Row="7" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycoolness"/>

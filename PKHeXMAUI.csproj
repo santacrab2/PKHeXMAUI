@@ -164,6 +164,9 @@
 	  <Compile Update="commonpktabs\MemoriesAmie.xaml.cs">
 	    <DependentUpon>MemoriesAmie.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="commonpktabs\MedalEditor.xaml.cs">
+	    <DependentUpon>MedalEditor.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="commonpktabs\TREditor.xaml.cs">
 	    <DependentUpon>TREditor.xaml</DependentUpon>
 	  </Compile>
@@ -192,6 +195,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="commonpktabs\MoveShopEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="commonpktabs\MedalEditor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="commonpktabs\TREditor.xaml">
