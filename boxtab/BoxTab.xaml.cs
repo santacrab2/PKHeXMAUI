@@ -25,7 +25,7 @@ public partial class BoxTab : ContentPage
             boxrefresh.IsRefreshing = false;
         });
         boxrefresh.Command = refreshCommand;
-
+       
     }
     public static IList<boxsprite> boxsprites = new List<boxsprite>();
     
@@ -43,21 +43,21 @@ public partial class BoxTab : ContentPage
         boxview.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            Image image = new Image() { HeightRequest = 75, WidthRequest = 75, HorizontalOptions = LayoutOptions.Center,VerticalOptions = LayoutOptions.Start };
+            grid.RowDefinitions.Add(new RowDefinition { Height = 50 });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
+            Image image = new Image() { Aspect = Aspect.AspectFill };
             image.SetBinding(Image.SourceProperty, "url");
             grid.Add(image);
             return grid;
         });
         boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
         boxview.ItemsSource = boxsprites;
-
+        
 
     }
     private async void applypkfrombox(object sender, SelectionChangedEventArgs e)
@@ -66,7 +66,7 @@ public partial class BoxTab : ContentPage
         {
             if (b.pkm.Species != 0)
             {
-                pk = (PK9)b.pkm;
+                pk = b.pkm;
             }
         
         }

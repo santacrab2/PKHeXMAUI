@@ -8,8 +8,16 @@
             <StackLayout>
                 
                 <Picker FontSize="18"  x:Name="boxnum" SelectedIndexChanged="changebox" />
-                <CollectionView HeightRequest="500" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
-              
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill"></Image>
+                        <CollectionView HeightRequest="375" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
+                </Grid>
 
             </StackLayout>
         </ScrollView>

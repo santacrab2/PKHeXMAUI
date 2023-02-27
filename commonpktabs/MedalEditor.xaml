@@ -5,7 +5,7 @@
              Title="Medal Editor">
     <ScrollView>
         <VerticalStackLayout>
-        <Grid>
+            <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -13,6 +13,7 @@
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+               
             <CollectionView x:Name="rankside" WidthRequest="200" HeightRequest="400" Grid.Row="0" Grid.Column="0"></CollectionView>
             <CollectionView x:Name="distsuperside" WidthRequest="200" HeightRequest="400" Grid.Column="1" Grid.Row="0"></CollectionView>
         </Grid>
