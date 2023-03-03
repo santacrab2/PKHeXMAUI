@@ -186,6 +186,7 @@ public partial class MainPage : ContentPage
             pk.ClearNickname();
         if (formpicker.Items.Count != 0)
             formpicker.Items.Clear();
+        pk.Form = 0;
         var str = GameInfo.Strings;
         var forms = FormConverter.GetFormList(pk.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, pk.Context);
         if (forms[0] != "")
