@@ -74,7 +74,15 @@ public partial class MedalEditor : ContentPage
 
     private void ApplyAllST(object sender, EventArgs e)
     {
-
+        if (pk is ISuperTrain super) 
+        {
+            foreach (var reg in SuperTrainInfo)
+            {
+                reg.CompletedRegimen = true;
+                ReflectUtil.SetValue(super, reg.text, reg.CompletedRegimen);
+                Navigation.PopModalAsync();
+            }
+        }
     }
 }
 
