@@ -10,11 +10,17 @@ public partial class OTTab : ContentPage
 	{
 		InitializeComponent();
         htlanguagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
+       
+        CountryPicker.ItemsSource = Util.GetCountryRegionList("countries", GameInfo.CurrentLanguage);
+        CountryPicker.ItemDisplayBinding= new Binding("Text");
+        DSregionPicker.ItemsSource = datasourcefiltered.ConsoleRegions.ToList();
+        DSregionPicker.ItemDisplayBinding = new Binding("Text");
         applyotinfo(pk);
     }
 
 	public void applyotinfo(PKM pkm)
 	{
+        countrylabel.IsVisible = false;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
@@ -53,6 +59,21 @@ public partial class OTTab : ContentPage
         
         extrabytesvalue.Text = value.ToString();
         otgenderpicker.Source = $"gender_{pkm.OT_Gender}.png";
+        if(pk is IRegionOrigin regionOrigin)
+        {
+            countrylabel.IsVisible = true;
+            CountryPicker.IsVisible = true;
+            var selectedCountry = Util.GetCountryRegionList("countries", GameInfo.CurrentLanguage).Where(z => z.Value == regionOrigin.Country).FirstOrDefault();
+            CountryPicker.SelectedItem = selectedCountry;
+            subregionlabel.IsVisible = true;
+            subregionPicker.IsVisible = true;
+            if (regionOrigin.Country != 0)
+                subregionPicker.SelectedItem = Util.GetCountryRegionList($"sr_{selectedCountry.Value:000}", GameInfo.CurrentLanguage).Where(z => z.Value == regionOrigin.Region).FirstOrDefault();
+            DSregion.IsVisible = true;
+            DSregionPicker.IsVisible = true;
+            DSregionPicker.SelectedItem = datasourcefiltered.ConsoleRegions.ToList().Where(z=>z.Value == regionOrigin.ConsoleRegion).FirstOrDefault();
+
+        }
     }
 
     private void applySID(object sender, TextChangedEventArgs e)
@@ -144,5 +165,40 @@ public partial class OTTab : ContentPage
     {
         var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
         pk.Data[offset] = Convert.ToByte(extrabytesvalue.Text);
+    }
+
+    private void applyCountry(object sender, EventArgs e)
+    {
+        if(pk is IRegionOrigin regionOrigin)
+        {
+            var country = (ComboItem)CountryPicker.SelectedItem;
+            regionOrigin.Country = (byte)country.Value;
+            if (CountryPicker.SelectedIndex != 0)
+            {
+                subregionPicker.ItemsSource = Util.GetCountryRegionList($"sr_{country.Value:000}", GameInfo.CurrentLanguage);
+                subregionPicker.ItemDisplayBinding = new Binding("Text");
+            }
+            else
+                subregionPicker.Items.Clear();
+        }
+    }
+
+    private void applySubregion(object sender, EventArgs e)
+    {
+        if (pk is IRegionOrigin regionOrigin)
+        {
+            var subregion = (ComboItem)CountryPicker.SelectedItem;
+            regionOrigin.Region = (byte)subregion.Value;
+        }
+
+    }
+
+    private void apply3DSregion(object sender, EventArgs e)
+    {
+        if (pk is IRegionOrigin regionOrigin)
+        {
+            var subregion = (ComboItem)DSregionPicker.SelectedItem;
+            regionOrigin.ConsoleRegion = (byte)subregion.Value;
+        }
     }
 }
