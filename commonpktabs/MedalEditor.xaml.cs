@@ -70,6 +70,7 @@ public partial class MedalEditor : ContentPage
             foreach(var reg in DistSuperTrain)
                 ReflectUtil.SetValue(super,reg.text, reg.CompletedRegimen);
         }
+        Navigation.PopModalAsync();
     }
 
     private void ApplyAllST(object sender, EventArgs e)
@@ -83,6 +84,24 @@ public partial class MedalEditor : ContentPage
                 Navigation.PopModalAsync();
             }
         }
+    }
+
+    private void RemoveAllST(object sender, EventArgs e)
+    {
+        if (pk is ISuperTrain super)
+        {
+            foreach (var reg in SuperTrainInfo)
+            {
+                reg.CompletedRegimen = false;
+                ReflectUtil.SetValue(super, reg.text, reg.CompletedRegimen);
+                Navigation.PopModalAsync();
+            }
+        }
+    }
+
+    private void CloseST(object sender, EventArgs e)
+    {
+        Navigation.PopModalAsync();
     }
 }
 

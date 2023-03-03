@@ -18,7 +18,9 @@
             <CollectionView x:Name="distsuperside" WidthRequest="200" HeightRequest="400" Grid.Column="1" Grid.Row="0"></CollectionView>
         </Grid>
             <Button Text="Apply All" Clicked="ApplyAllST"></Button>
+            <Button Text="Remove All" Clicked="RemoveAllST"/>
             <Button Text="Save" Clicked="SaveST"></Button>
+            <Button Text="Cancel" Clicked="CloseST"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

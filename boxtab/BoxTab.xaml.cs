@@ -50,9 +50,13 @@ public partial class BoxTab : ContentPage
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            Image image = new Image() { Aspect = Aspect.AspectFill, HeightRequest = 50 };
+            Image image = new Image() { WidthRequest = 50, HeightRequest = 50 };
+            Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
+            shinysp.TranslateTo(shinysp.TranslationX + 15, shinysp.TranslationY);
             image.SetBinding(Image.SourceProperty, "url");
+            shinysp.SetBinding(Image.IsVisibleProperty, "shiny");
             grid.Add(image);
+            grid.Add(shinysp);
             return grid;
         });
         boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
@@ -87,15 +91,13 @@ public class boxsprite
 		pkm = pk9;
 		species = $"{(Species)pk9.Species}";
         if (pk9.Species == 0)
-            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{(pk9).Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
-        else if (pk9.IsShiny)
-            url = $"https://www.serebii.net/Shiny/SV/new/{pk9.Species:000}.png";
-        else if(pk9.Form != 0)
-            url = $"https://raw.githubusercontent.com/santacrab2/Resources/main/gen9sprites/{(pk9).Species:0000}{(pk9.Form != 0 ? $"-{pk9.Form:00}" : "")}.png";
+            url = $"";
         else
-            url = $"https://www.serebii.net/scarletviolet/pokemon/new/{pk9.Species:000}.png";
+            url = $"a_{pkm.Species}{(pkm.Form > 0 ? $"_{pkm.Form}" : "")}.png";
+        shiny = (pk9.IsShiny && pk9.Species != 0);
     }
 	public PKM pkm { get; set; }
 	public string url { get; set; }
 	public string species { get; set; }
+    public bool shiny { get; set; }
 }
