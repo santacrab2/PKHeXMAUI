@@ -71,6 +71,11 @@ public partial class MedalEditor : ContentPage
                 ReflectUtil.SetValue(super,reg.text, reg.CompletedRegimen);
         }
     }
+
+    private void ApplyAllST(object sender, EventArgs e)
+    {
+
+    }
 }
 
 public class RegimenInfo

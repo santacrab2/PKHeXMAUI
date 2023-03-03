@@ -17,6 +17,7 @@
             <CollectionView x:Name="rankside" WidthRequest="200" HeightRequest="400" Grid.Row="0" Grid.Column="0"></CollectionView>
             <CollectionView x:Name="distsuperside" WidthRequest="200" HeightRequest="400" Grid.Column="1" Grid.Row="0"></CollectionView>
         </Grid>
+            <Button Text="Apply All" Clicked="ApplyAllST"></Button>
             <Button Text="Save" Clicked="SaveST"></Button>
         </VerticalStackLayout>
     </ScrollView>

@@ -43,14 +43,14 @@ public partial class BoxTab : ContentPage
         boxview.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
-            grid.RowDefinitions.Add(new RowDefinition { Height = 50 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 50 });
-            Image image = new Image() { Aspect = Aspect.AspectFill };
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            Image image = new Image() { Aspect = Aspect.AspectFill, HeightRequest = 50 };
             image.SetBinding(Image.SourceProperty, "url");
             grid.Add(image);
             return grid;
