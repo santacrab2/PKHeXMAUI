@@ -8,7 +8,10 @@
             <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
@@ -16,7 +19,13 @@
                
             <CollectionView x:Name="rankside" WidthRequest="200" HeightRequest="400" Grid.Row="0" Grid.Column="0"></CollectionView>
             <CollectionView x:Name="distsuperside" WidthRequest="200" HeightRequest="400" Grid.Column="1" Grid.Row="0"></CollectionView>
-        </Grid>
+                <CheckBox x:Name="SuperUnlockedCheck" HorizontalOptions="End" Grid.Column="0" Grid.Row="1" CheckedChanged="UnlockSuperTraining" IsVisible="false"/>
+                <Label x:Name="SuperUnlockLabel" Grid.Column="1" Grid.Row="1" Text="Secret Training Unlocked" IsVisible="false"/>
+                <CheckBox x:Name="SecretCompleteCheck" HorizontalOptions="End" Grid.Column="0" Grid.Row="2" CheckedChanged="CompleteSecretTraining" IsVisible="false"/>
+                <Label x:Name="SecretCompleteLabel" Grid.Column="1" Grid.Row="2"  Text="Secret Training Complete" IsVisible="false"/>
+                <Label x:Name="LastBagLabel" Grid.Column="0" Grid.Row="3" Text="Last Used Bag:" IsVisible="false"/>
+                <Picker x:Name="BagPicker" Grid.Column="1" Grid.Row="3" IsVisible="false"/>
+            </Grid>
             <Button Text="Apply All" Clicked="ApplyAllST"></Button>
             <Button Text="Remove All" Clicked="RemoveAllST"/>
             <Button Text="Save" Clicked="SaveST"></Button>

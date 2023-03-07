@@ -13,6 +13,7 @@ public partial class MedalEditor : ContentPage
 	public MedalEditor()
 	{
 		InitializeComponent();
+        DistSuperTrain = new();
         SuperTrainInfo = new();
         if (pk is ISuperTrain pk7)
         {
@@ -49,6 +50,16 @@ public partial class MedalEditor : ContentPage
             return grid;
         });
         distsuperside.ItemsSource = DistSuperTrain;
+        if(pk is PK6 pk6)
+        {
+            SuperUnlockLabel.IsVisible = true;
+            SuperUnlockedCheck.IsVisible = true;
+            SecretCompleteCheck.IsVisible = true;
+            SecretCompleteLabel.IsVisible = true;
+            BagPicker.IsVisible = true;
+            LastBagLabel.IsVisible = true;
+            BagPicker.ItemsSource = GameInfo.Strings.trainingbags;
+        }
     }
     private static IEnumerable<RegimenInfo> GetBooleanRegimenNames(ISuperTrain super, string propertyPrefix)
     {
@@ -102,6 +113,21 @@ public partial class MedalEditor : ContentPage
     private void CloseST(object sender, EventArgs e)
     {
         Navigation.PopModalAsync();
+    }
+
+    private void UnlockSuperTraining(object sender, CheckedChangedEventArgs e)
+    {
+        if(pk is PK6 pk6)
+        {
+            pk6.SecretSuperTrainingUnlocked = SuperUnlockedCheck.IsChecked;
+        }
+    }
+
+    private void CompleteSecretTraining(object sender, CheckedChangedEventArgs e)
+    {
+        if(pk is PK6 pk6) 
+            pk6.SecretSuperTrainingComplete = SecretCompleteCheck.IsChecked;
+
     }
 }
 
