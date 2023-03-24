@@ -18,6 +18,7 @@ public partial class Cosmeticstab : ContentPage
     public void applycomsetics(PKM pkm)
 	{
         MedalEditorButton.IsVisible = pkm is ISuperTrain;
+        memoriesbutton.IsVisible = pkm is ITrainerMemories;
         SizeMarkImage.IsVisible = false;
         if (pkm.HeldItem > 0)
         {

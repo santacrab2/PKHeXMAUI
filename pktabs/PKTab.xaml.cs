@@ -122,6 +122,13 @@ public partial class MainPage : ContentPage
     
         languagepicker.SelectedIndex = pkm.Language;
         nicknamecheck.IsChecked = pkm.IsNicknamed;
+        if(pkm is PK5 pk5)
+        {
+            NSparkleLabel.IsVisible = true;
+            NSparkleCheckbox.IsVisible = true;
+            NSparkleActiveLabel.IsVisible = true;
+            NSparkleCheckbox.IsChecked = pk5.NSparkle;
+        }
         checklegality();
 
 
@@ -457,6 +464,12 @@ public partial class MainPage : ContentPage
     private void applycure(object sender, CheckedChangedEventArgs e)
     {
         pk.PKRS_Cured = curedcheck.IsChecked;
+    }
+
+    private void applySparkle(object sender, CheckedChangedEventArgs e)
+    {
+        if (pk is PK5 pk5)
+            pk5.NSparkle = NSparkleCheckbox.IsChecked;
     }
 }
 

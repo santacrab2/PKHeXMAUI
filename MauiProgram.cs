@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 
@@ -17,7 +17,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-        builder.UseMauiApp<App>().UseMauiCommunityToolkitCore();
+       
         builder.ConfigureLifecycleEvents(events =>
         {
 #if ANDROID

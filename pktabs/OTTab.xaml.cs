@@ -37,17 +37,26 @@ public partial class OTTab : ContentPage
         TIDdisplay.Text = pkm.TrainerTID7.ToString();
         otdisplay.Text = pkm.OT_Name;
         ecdisplay.Text = $"{pkm.EncryptionConstant:X}";
-        htname.Text = pkm.HT_Name;
-        if (pkm is IHandlerLanguage htl)
+        if (pkm.Generation > 5)
         {
-            htlanguagepicker.IsVisible = true;
-            htlanguagepicker.SelectedIndex = htl.HT_Language;
+            htname.IsVisible = true;
+            HTLabel.IsVisible = true;
+            HTcurrentcheck.IsVisible = true;
+            HTNameLabel.IsVisible = true;
+            
+            htname.Text = pkm.HT_Name;
+            if (pkm is IHandlerLanguage htl)
+            {
+                htlanguagelabel.IsVisible = true;
+                htlanguagepicker.IsVisible = true;
+                htlanguagepicker.SelectedIndex = htl.HT_Language;
+            }
+            switch (pkm.CurrentHandler)
+            {
+                case 0: OTcurrentcheck.IsChecked = true; HTcurrentcheck.IsChecked = false; break;
+                case 1: HTcurrentcheck.IsChecked = true; OTcurrentcheck.IsChecked = false; break;
+            };
         }
-        switch(pkm.CurrentHandler)
-        {
-            case 0:  OTcurrentcheck.IsChecked = true; HTcurrentcheck.IsChecked = false; break;
-            case 1: HTcurrentcheck.IsChecked = true; OTcurrentcheck.IsChecked = false; break;
-        };
         if (pkm is IHomeTrack home)
             trackereditor.Text = home.Tracker.ToString("X16");
         extrabytespicker.Items.Clear();

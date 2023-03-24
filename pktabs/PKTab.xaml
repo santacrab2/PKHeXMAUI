@@ -104,9 +104,12 @@
                 <Label Text="Infected" Grid.Row="15" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"/>
                 <CheckBox x:Name="curedcheck" Grid.Row="15" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applycure"/>
                 <Label Text="Cured" Grid.Row="15" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
-                <Button  Grid.Row="16" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
-                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmain"/>
-
+            <Label Grid.Row="16" Grid.Column="0" x:Name="NSparkleLabel" IsVisible="false" Text="N's Sparkle" HorizontalOptions="End" VerticalOptions="Center"/>
+            <CheckBox Grid.Row="16" Grid.Column="1" x:Name="NSparkleCheckbox" IsVisible="false" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applySparkle"/>
+            <Label Grid.Row="16" Grid.Column="2" x:Name="NSparkleActiveLabel" IsVisible="false" Text="Active" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Button  Grid.Row="17" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+                <Button Grid.Row="17" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmain"/>
+                
 
             </Grid>
         
