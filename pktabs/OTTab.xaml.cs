@@ -6,6 +6,7 @@ namespace PKHeXMAUI;
 
 public partial class OTTab : ContentPage
 {
+    public bool SkipEvent = false;
 	public OTTab()
 	{
 		InitializeComponent();
@@ -20,6 +21,7 @@ public partial class OTTab : ContentPage
 
 	public void applyotinfo(PKM pkm)
 	{
+        SkipEvent = true;
         countrylabel.IsVisible = false;
         if (pkm.HeldItem > 0)
         {
@@ -83,11 +85,12 @@ public partial class OTTab : ContentPage
             DSregionPicker.SelectedItem = datasourcefiltered.ConsoleRegions.ToList().Where(z=>z.Value == regionOrigin.ConsoleRegion).FirstOrDefault();
 
         }
+        SkipEvent = false;
     }
 
     private void applySID(object sender, TextChangedEventArgs e)
     {
-        if(SIDdisplay.Text.Length > 0)
+        if(SIDdisplay.Text.Length > 0 && !SkipEvent)
         {
             pk.TrainerSID7 = uint.Parse(SIDdisplay.Text);
         }
@@ -95,7 +98,7 @@ public partial class OTTab : ContentPage
 
     private void applyTID(object sender, TextChangedEventArgs e)
     {
-        if(TIDdisplay.Text.Length > 0)
+        if(TIDdisplay.Text.Length > 0 && !SkipEvent)
         {
             pk.TrainerTID7 = uint.Parse(TIDdisplay.Text);
         }
@@ -103,33 +106,38 @@ public partial class OTTab : ContentPage
 
     private void applyot(object sender, TextChangedEventArgs e)
     {
-        pk.OT_Name = otdisplay.Text;
+        if(!SkipEvent)
+            pk.OT_Name = otdisplay.Text;
     }
 
     private void applyec(object sender, TextChangedEventArgs e)
     {
-        pk.EncryptionConstant = Convert.ToUInt32(ecdisplay.Text,16);
+        if (!SkipEvent)
+            pk.EncryptionConstant = Convert.ToUInt32(ecdisplay.Text,16);
     }
 
     private void applyHT(object sender, TextChangedEventArgs e)
     {
-        pk.HT_Name = htname.Text;
+        if (!SkipEvent)
+            pk.HT_Name = htname.Text;
     }
 
     private void applyhtlanguage(object sender, EventArgs e)
     {
-        if(pk is IHandlerLanguage htl)
+        if(pk is IHandlerLanguage htl && !SkipEvent)
             htl.HT_Language = (byte)htlanguagepicker.SelectedIndex;
     }
 
     private void MakeOTCurrent(object sender, CheckedChangedEventArgs e)
     {
-        pk.CurrentHandler = 0;
+        if (!SkipEvent)
+            pk.CurrentHandler = 0;
     }
 
     private void MakeHTCurrent(object sender, CheckedChangedEventArgs e)
     {
-        pk.CurrentHandler = 1;
+        if (!SkipEvent)
+            pk.CurrentHandler = 1;
     }
 
     private void applyotgender(object sender, EventArgs e)
@@ -154,7 +162,7 @@ public partial class OTTab : ContentPage
 
     private void applyhometracker(object sender, TextChangedEventArgs e)
     {
-        if (ulong.TryParse(trackereditor.Text, out var result)) 
+        if (ulong.TryParse(trackereditor.Text, out var result) && !SkipEvent) 
         {
             if (pk is IHomeTrack home)
             {
@@ -165,20 +173,26 @@ public partial class OTTab : ContentPage
 
     private void extrabytestuff(object sender, EventArgs e)
     {
-        var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
-        var value = pk.Data[offset];
-        extrabytesvalue.Text = value.ToString();
+        if (!SkipEvent)
+        {
+            var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
+            var value = pk.Data[offset];
+            extrabytesvalue.Text = value.ToString();
+        }
     }
 
     private void applyextrabytesvalue(object sender, TextChangedEventArgs e)
     {
-        var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
-        pk.Data[offset] = Convert.ToByte(extrabytesvalue.Text);
+        if (!SkipEvent)
+        {
+            var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
+            pk.Data[offset] = Convert.ToByte(extrabytesvalue.Text);
+        }
     }
 
     private void applyCountry(object sender, EventArgs e)
     {
-        if(pk is IRegionOrigin regionOrigin)
+        if(pk is IRegionOrigin regionOrigin && !SkipEvent)
         {
             var country = (ComboItem)CountryPicker.SelectedItem;
             regionOrigin.Country = (byte)country.Value;
@@ -194,7 +208,7 @@ public partial class OTTab : ContentPage
 
     private void applySubregion(object sender, EventArgs e)
     {
-        if (pk is IRegionOrigin regionOrigin)
+        if (pk is IRegionOrigin regionOrigin && !SkipEvent)
         {
             var subregion = (ComboItem)CountryPicker.SelectedItem;
             regionOrigin.Region = (byte)subregion.Value;
@@ -204,7 +218,7 @@ public partial class OTTab : ContentPage
 
     private void apply3DSregion(object sender, EventArgs e)
     {
-        if (pk is IRegionOrigin regionOrigin)
+        if (pk is IRegionOrigin regionOrigin && !SkipEvent)
         {
             var subregion = (ComboItem)DSregionPicker.SelectedItem;
             regionOrigin.ConsoleRegion = (byte)subregion.Value;

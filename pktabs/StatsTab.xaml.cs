@@ -6,6 +6,7 @@ namespace PKHeXMAUI;
 
 public partial class StatsTab : ContentPage
 {
+    public bool SkipEvent = false;
     public bool moveonce = true;
 	public StatsTab()
 	{
@@ -18,6 +19,7 @@ public partial class StatsTab : ContentPage
 
 	public void applystatsinfo(PKM pkm)
 	{
+        SkipEvent = true;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
@@ -165,11 +167,12 @@ public partial class StatsTab : ContentPage
             HiddenPLabel.IsVisible = true;
             HiddenPowerPicker.SelectedItem = (MoveType)pkm.HPType;
         }
+        SkipEvent = false;
     }
    
     private void applyhpIV(object sender, TextChangedEventArgs e)
     {
-        if (HPIV.Text.Length > 0)
+        if (HPIV.Text.Length > 0 && !SkipEvent)
         {
             if (int.TryParse(HPIV.Text, out var result))
             {
@@ -186,7 +189,7 @@ public partial class StatsTab : ContentPage
 
     private void applyhpEV(object sender, TextChangedEventArgs e)
     {
-        if (HPEV.Text.Length > 0)
+        if (HPEV.Text.Length > 0 && !SkipEvent)
         {
 
             if (byte.TryParse(HPEV.Text, out var result))
@@ -215,7 +218,7 @@ public partial class StatsTab : ContentPage
 
     private void applyatkIV(object sender, TextChangedEventArgs e)
     {
-        if (AtkIV.Text.Length > 0)
+        if (AtkIV.Text.Length > 0 && !SkipEvent)
         {
           
             if (int.Parse(AtkIV.Text) > 31)
@@ -230,7 +233,7 @@ public partial class StatsTab : ContentPage
 
     private void applyatkEV(object sender, TextChangedEventArgs e)
     {
-        if (AtkEV.Text.Length > 0)
+        if (AtkEV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(AtkEV.Text, out var result))
             {
@@ -258,7 +261,7 @@ public partial class StatsTab : ContentPage
 
     private void applydefIV(object sender, TextChangedEventArgs e)
     {
-        if (DEFIV.Text.Length > 0)
+        if (DEFIV.Text.Length > 0 && !SkipEvent)
         {
             if (int.Parse(DEFIV.Text) > 31)
                 DEFIV.Text = "31";
@@ -271,7 +274,7 @@ public partial class StatsTab : ContentPage
 
     private void applydefEV(object sender, TextChangedEventArgs e)
     {
-        if (DEFEV.Text.Length > 0)
+        if (DEFEV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(DEFEV.Text, out byte value))
             {
@@ -299,7 +302,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspaIV(object sender, TextChangedEventArgs e)
     {
-        if (SPAIV.Text.Length > 0)
+        if (SPAIV.Text.Length > 0 && !SkipEvent)
         {
             if (int.Parse(SPAIV.Text) > 31)
                 SPAIV.Text = "31";
@@ -312,7 +315,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspaEV(object sender, TextChangedEventArgs e)
     {
-        if (SPAEV.Text.Length > 0)
+        if (SPAEV.Text.Length > 0 && !SkipEvent)
         {
 
             if (byte.TryParse(SPAEV.Text, out var result))
@@ -341,7 +344,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspdIV(object sender, TextChangedEventArgs e)
     {
-        if (SPDIV.Text.Length > 0)
+        if (SPDIV.Text.Length > 0 && !SkipEvent)
         {
             if (int.Parse(SPDIV.Text) > 31)
                 SPDIV.Text = "31";
@@ -354,7 +357,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspdEV(object sender, TextChangedEventArgs e)
     {
-        if (SPDEV.Text.Length > 0)
+        if (SPDEV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(SPDEV.Text, out var result))
             {
@@ -382,7 +385,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspeIV(object sender, TextChangedEventArgs e)
     {
-        if (SPEIV.Text.Length > 0)
+        if (SPEIV.Text.Length > 0 && !SkipEvent)
         {
             if (int.Parse(SPEIV.Text) > 31)
                 SPEIV.Text = "31";
@@ -396,7 +399,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspeEV(object sender, TextChangedEventArgs e)
     {
-        if (SPEEV.Text.Length > 0)
+        if (SPEEV.Text.Length > 0 && !SkipEvent)
         {
 
             if (byte.TryParse(SPEEV.Text, out var result))
@@ -468,37 +471,37 @@ public partial class StatsTab : ContentPage
 
     private void applyHPhyper(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is IHyperTrain hpt)
+        if(pk is IHyperTrain hpt && !SkipEvent)
             hpt.HyperTrainInvert(0);
     }
     private void applyATKhyper(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is IHyperTrain hpt)
+        if(pk is IHyperTrain hpt && !SkipEvent)
             hpt.HyperTrainInvert(1);
     }
     private void applyDEFhyper(object sender, CheckedChangedEventArgs e)
     {
-        if (pk is IHyperTrain hpt)
+        if (pk is IHyperTrain hpt && !SkipEvent)
             hpt.HyperTrainInvert(2);
     }
     private void applySPAhyper(object sender, CheckedChangedEventArgs e)
     {
-        if (pk is IHyperTrain hpt)
+        if (pk is IHyperTrain hpt && !SkipEvent)
             hpt.HyperTrainInvert(3);
     }
     private void applySPDhyper(object sender, CheckedChangedEventArgs e)
     {
-        if (pk is IHyperTrain hpt)
+        if (pk is IHyperTrain hpt && !SkipEvent)
             hpt.HyperTrainInvert(4);
     }
     private void applySPEhyper(object sender, CheckedChangedEventArgs e)
     {
-        if (pk is IHyperTrain hpt)
+        if (pk is IHyperTrain hpt && !SkipEvent)
             hpt.HyperTrainInvert(5);
     }
     private void applytera(object sender, EventArgs e) 
     {
-        if (pk is ITeraType pk9)
+        if (pk is ITeraType pk9 && !SkipEvent)
         {
             if (Teratypepicker.SelectedIndex == 18)
             {
@@ -514,6 +517,8 @@ public partial class StatsTab : ContentPage
                     teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
                     moveonce = false;
                 }
+
+                
             }
             teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
         }
@@ -521,11 +526,12 @@ public partial class StatsTab : ContentPage
 
     private void applymaintera(object sender, EventArgs e) 
     {
-        if (pk is ITeraType pk9)
+        if (pk is ITeraType pk9 && !SkipEvent)
         {
             pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
             teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
         }
+
     }
 
     private void refreshstats(object sender, EventArgs e)
@@ -536,7 +542,7 @@ public partial class StatsTab : ContentPage
 
     private void applyhpGV(object sender, TextChangedEventArgs e)
     {
-        if(HPGV.Text.Length > 0)
+        if(HPGV.Text.Length > 0 && !SkipEvent)
         {
             if(byte.TryParse(HPGV.Text,out var result))
             {
@@ -551,7 +557,7 @@ public partial class StatsTab : ContentPage
 
     private void applyatkGV(object sender, TextChangedEventArgs e)
     {
-        if (AtkGV.Text.Length > 0)
+        if (AtkGV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(AtkGV.Text, out var result))
             {
@@ -566,7 +572,7 @@ public partial class StatsTab : ContentPage
 
     private void applydefGV(object sender, TextChangedEventArgs e)
     {
-        if (DEFGV.Text.Length > 0)
+        if (DEFGV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(DEFGV.Text, out var result))
             {
@@ -581,7 +587,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspaGV(object sender, TextChangedEventArgs e)
     {
-        if (SPAGV.Text.Length > 0)
+        if (SPAGV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(SPAGV.Text, out var result))
             {
@@ -596,7 +602,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspdGV(object sender, TextChangedEventArgs e)
     {
-        if (SPDGV.Text.Length > 0)
+        if (SPDGV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(SPDGV.Text, out var result))
             {
@@ -611,7 +617,7 @@ public partial class StatsTab : ContentPage
 
     private void applyspeGV(object sender, TextChangedEventArgs e)
     {
-        if (SPEGV.Text.Length > 0)
+        if (SPEGV.Text.Length > 0 && !SkipEvent)
         {
             if (byte.TryParse(SPEGV.Text, out var result))
             {
@@ -626,7 +632,7 @@ public partial class StatsTab : ContentPage
 
     private void applydmaxlevel(object sender, TextChangedEventArgs e)
     {
-        if (dmaxleveleditor.Text.Length > 0)
+        if (dmaxleveleditor.Text.Length > 0 && !SkipEvent)
         {
             if(byte.TryParse(dmaxleveleditor.Text,out var result))
             {
@@ -640,7 +646,7 @@ public partial class StatsTab : ContentPage
 
     private void applygmax(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is IGigantamax gmax)
+        if(pk is IGigantamax gmax && !SkipEvent)
         {
             if (gmax.CanToggleGigantamax(pk.Species, pk.Form))
                 gmax.CanGigantamax = GmaxCheck.IsChecked;
@@ -651,7 +657,7 @@ public partial class StatsTab : ContentPage
 
     private void applyalhpastatus(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is IAlpha alpha)
+        if(pk is IAlpha alpha && !SkipEvent)
         {
             alpha.IsAlpha = Alphacheck.IsChecked;
         }
@@ -659,14 +665,16 @@ public partial class StatsTab : ContentPage
 
     private void applynoblestatus(object sender, CheckedChangedEventArgs e)
     {
-        if (pk is INoble noble)
+        if (pk is INoble noble && !SkipEvent)
             noble.IsNoble = Noblecheck.IsChecked;
     }
 
     private void applyHiddenPower(object sender, EventArgs e)
     {
-
-        pk.HPType = HiddenPowerPicker.SelectedIndex;
-        HiddenPower.SetIVs(HiddenPowerPicker.SelectedIndex, pk.IVs, pk.Context);
+        if (!SkipEvent)
+        {
+            pk.HPType = HiddenPowerPicker.SelectedIndex;
+            HiddenPower.SetIVs(HiddenPowerPicker.SelectedIndex, pk.IVs, pk.Context);
+        }
     }
 }

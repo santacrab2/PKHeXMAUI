@@ -11,14 +11,14 @@ namespace PKHeXMAUI;
 public partial class MainPage : ContentPage
 {
 
-    
+    public bool SkipTextChange = false;
 	public MainPage()
 	{
         sav = AppShell.AppSaveFile;
         datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
         InitializeComponent();
-  
+        Permissions.RequestAsync<Permissions.StorageWrite>();
         APILegality.SetAllLegalRibbons = false;
         APILegality.UseTrainerData = true;
         APILegality.AllowTrainerOverride = true;
@@ -73,6 +73,7 @@ public partial class MainPage : ContentPage
     }
     public void applymainpkinfo(PKM pkm)
     {
+        SkipTextChange = true;
         itemsprite.IsVisible = false;
         if (pkm.IsShiny)
             shinybutton.Text = "★";
@@ -83,8 +84,9 @@ public partial class MainPage : ContentPage
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
         naturepicker.SelectedIndex = pkm.Nature;
-    
-        
+        iseggcheck.IsChecked = pk.IsEgg;
+        infectedcheck.IsChecked = pk.PKRS_Infected;
+        curedcheck.IsChecked = pk.PKRS_Cured;
       
         abilitypicker.SelectedIndex =pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
@@ -130,7 +132,7 @@ public partial class MainPage : ContentPage
             NSparkleCheckbox.IsChecked = pk5.NSparkle;
         }
         checklegality();
-
+        SkipTextChange = false;
 
 
     }
@@ -165,6 +167,7 @@ public partial class MainPage : ContentPage
 
     private void specieschanger(object sender, EventArgs e) 
     {
+        SkipTextChange = true;
         formargstepper.IsVisible = false;
         formlabel.IsVisible = false;
         formpicker.IsVisible = false;
@@ -226,6 +229,7 @@ public partial class MainPage : ContentPage
       
         pic.Source = spriteurl;
         checklegality();
+        SkipTextChange = false;
     }
 
     private void rollpid(object sender, EventArgs e) 
@@ -240,7 +244,7 @@ public partial class MainPage : ContentPage
     private void applynickname(object sender, TextChangedEventArgs e)
     {
 
-        if (nickname.Text != ((Species)pk.Species).ToString())
+        if (nickname.Text != SpeciesName.GetSpeciesNameGeneration(pk.Species, pk.Language, pk.Format) && !SkipTextChange)
         {
             pk.SetNickname(nickname.Text);
             checklegality();
@@ -267,26 +271,31 @@ public partial class MainPage : ContentPage
 
     private void applyexp(object sender, TextChangedEventArgs e)
     {
-        if(exp.Text.Length > 0)
+        if (!SkipTextChange)
         {
-            if (!uint.TryParse(exp.Text, out var result))
-                return;
-            pk.EXP = result;
-            var newlevel = Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth);
-            pk.CurrentLevel = newlevel;
-            leveldisplay.Text = $"{pk.CurrentLevel}";
+            if (exp.Text.Length > 0)
+            {
+                if (!uint.TryParse(exp.Text, out var result))
+                    return;
+                pk.EXP = result;
+                var newlevel = Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth);
+                pk.CurrentLevel = newlevel;
+                leveldisplay.Text = $"{pk.CurrentLevel}";
+            }
+            checklegality();
         }
-        checklegality();
     }
 
-    private void applynature(object sender, EventArgs e) { pk.Nature = naturepicker.SelectedIndex; checklegality(); }
+    private void applynature(object sender, EventArgs e) { if (!SkipTextChange) { pk.Nature = naturepicker.SelectedIndex; checklegality(); } }
 
         
 
     private void applyform(object sender, EventArgs e) 
     {
-        pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
-       
+        if (!SkipTextChange)
+        {
+            pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
+
             if (pk.Species == 0)
                 spriteurl = $"a_egg.png";
             else
@@ -296,40 +305,47 @@ public partial class MainPage : ContentPage
             else
                 shinysparklessprite.IsVisible = false;
 
-       
-        pic.Source = spriteurl;
-        checklegality();
+
+            pic.Source = spriteurl;
+            checklegality();
+        }
     }
 
     private void applyhelditem(object sender, EventArgs e) 
     {
-        itemsprite.IsVisible = false;
-        ComboItem helditemtoapply = (ComboItem)helditempicker.SelectedItem;
-        pk.ApplyHeldItem(helditemtoapply.Value, sav.Context);
-        if (pk.HeldItem > 0)
+        if (!SkipTextChange)
         {
-            itemsprite.IsVisible = true;
-            if (sav is SAV9SV)
+            itemsprite.IsVisible = false;
+            ComboItem helditemtoapply = (ComboItem)helditempicker.SelectedItem;
+            pk.ApplyHeldItem(helditemtoapply.Value, sav.Context);
+            if (pk.HeldItem > 0)
             {
-                itemspriteurl = $"aitem_{pk.HeldItem}.png";
-                itemsprite.Source = $"aitem_{pk.HeldItem}.png";
+                itemsprite.IsVisible = true;
+                if (sav is SAV9SV)
+                {
+                    itemspriteurl = $"aitem_{pk.HeldItem}.png";
+                    itemsprite.Source = $"aitem_{pk.HeldItem}.png";
+                }
+                else
+                {
+                    itemspriteurl = $"bitem_{pk.HeldItem}.png";
+                    itemsprite.Source = $"bitem_{pk.HeldItem}.png";
+                }
             }
-            else
-            {
-                itemspriteurl = $"bitem_{pk.HeldItem}.png";
-                itemsprite.Source = $"bitem_{pk.HeldItem}.png";
-            }
+
+            checklegality();
         }
-        
-        checklegality();
     }
 
     private void applyability(object sender, EventArgs e)
     {
-        if (abilitypicker.SelectedIndex != -1)
+        if (!SkipTextChange)
         {
-            var abil = pk.PersonalInfo.GetAbilityAtIndex(abilitypicker.SelectedIndex);
-            pk.SetAbility(abil);
+            if (abilitypicker.SelectedIndex != -1)
+            {
+                var abil = pk.PersonalInfo.GetAbilityAtIndex(abilitypicker.SelectedIndex);
+                pk.SetAbility(abil);
+            }
         }
     }
     public static bool reconnect = false;
@@ -337,30 +353,37 @@ public partial class MainPage : ContentPage
 
     private void changelevel(object sender, TextChangedEventArgs e)
     {
-        if (leveldisplay.Text.Length > 0)
+        if (!SkipTextChange)
         {
-            if (!int.TryParse(leveldisplay.Text, out var result))
-                return;
-            pk.CurrentLevel = result;
-            exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
-            pk.EXP = Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth);
+            if (leveldisplay.Text.Length > 0 && !SkipTextChange)
+            {
+                if (!int.TryParse(leveldisplay.Text, out var result))
+                    return;
+                pk.CurrentLevel = result;
+                exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
+                pk.EXP = Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth);
+
+                checklegality();
+            }
         }
-        checklegality();
     }
 
-    private void applyfriendship(object sender, TextChangedEventArgs e) 
+        private void applyfriendship(object sender, TextChangedEventArgs e) 
     {
-        if (!int.TryParse(Friendshipdisplay.Text, out var result))
-            return;
-        if(result > 255)
+        if (!SkipTextChange)
         {
-            result = 255;
-            Friendshipdisplay.Text = $"{result}";
-        }
-        if (Friendshipdisplay.Text.Length > 0)
-        {
-            pk.CurrentFriendship = result;
-            checklegality();
+            if (!int.TryParse(Friendshipdisplay.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                Friendshipdisplay.Text = $"{result}";
+            }
+            if (Friendshipdisplay.Text.Length > 0)
+            {
+                pk.CurrentFriendship = result;
+                checklegality();
+            }
         }
     }
 
@@ -413,7 +436,8 @@ public partial class MainPage : ContentPage
 
     private void applylang(object sender, EventArgs e)
     {
-        pk.Language = languagepicker.SelectedIndex; checklegality();
+        if(!SkipTextChange)
+            pk.Language = languagepicker.SelectedIndex; checklegality();
     }
 
     private void refreshmain(object sender, EventArgs e)
@@ -423,53 +447,94 @@ public partial class MainPage : ContentPage
 
     private void nicknamechecker(object sender, CheckedChangedEventArgs e)
     {
-        pk.IsNicknamed = nicknamecheck.IsChecked;
-        if(!nicknamecheck.IsChecked)
+        if (!SkipTextChange)
         {
-            pk.ClearNickname();
+            pk.IsNicknamed = nicknamecheck.IsChecked;
+            if (!nicknamecheck.IsChecked)
+            {
+                pk.ClearNickname();
+            }
         }
     }
 
     private void applystatnature(object sender, EventArgs e)
     {
-        pk.StatNature = statnaturepicker.SelectedIndex; checklegality();
+        if(!SkipTextChange)
+            pk.StatNature = statnaturepicker.SelectedIndex; checklegality();
     }
 
     private void applyformarg(object sender, TextChangedEventArgs e)
     {
-        if (!uint.TryParse(formargstepper.Text, out var formargu))
-            return;
-        if(pk is IFormArgument fa)
+        if (!SkipTextChange)
         {
-            if (fa.FormArgumentMaximum > 0 && formargu > fa.FormArgumentMaximum)
+            if (!uint.TryParse(formargstepper.Text, out var formargu))
+                return;
+            if (pk is IFormArgument fa)
             {
-                formargu = fa.FormArgumentMaximum;
-                formargstepper.Text = $"{formargu}";
+                if (fa.FormArgumentMaximum > 0 && formargu > fa.FormArgumentMaximum)
+                {
+                    formargu = fa.FormArgumentMaximum;
+                    formargstepper.Text = $"{formargu}";
+                }
+                fa.FormArgument = formargu;
             }
-           fa.FormArgument= formargu;
         }
         
     }
 
     private void applyisegg(object sender, CheckedChangedEventArgs e)
     {
-        pk.IsEgg = iseggcheck.IsChecked;
+        if (!SkipTextChange)
+            pk.IsEgg = iseggcheck.IsChecked;
+        if (pk.IsEgg)
+        {
+            SkipTextChange = true;
+            FriendshipLabel.Text = "Hatch Counter:";
+            pk.CurrentFriendship = 1;
+            Friendshipdisplay.Text = pk.CurrentFriendship.ToString();
+            pk.SetNickname("Egg");
+            pk.Version = 0;
+            pk.Met_Location = 0;
+            pk.Move1_PPUps= 0;
+            pk.Move2_PPUps = 0;
+            pk.Move3_PPUps = 0;
+            pk.Move4_PPUps = 0;
+            if (pk is ITeraType tera)
+                tera.TeraTypeOverride = (MoveType)0x13;
+            
+            SkipTextChange = false;
+        }
+        else
+        {
+            SkipTextChange = true;
+            FriendshipLabel.Text = "FriendShip:";
+            
+            Friendshipdisplay.Text = pk.CurrentFriendship.ToString();
+            pk.ClearNickname();
+            SkipTextChange = false;
+        }
     }
 
     private void applyinfection(object sender, CheckedChangedEventArgs e)
     {
-        pk.PKRS_Infected = infectedcheck.IsChecked;
+        if (!SkipTextChange)
+            pk.PKRS_Infected = infectedcheck.IsChecked;
     }
 
     private void applycure(object sender, CheckedChangedEventArgs e)
     {
-        pk.PKRS_Cured = curedcheck.IsChecked;
+        if (!SkipTextChange)
+            pk.PKRS_Cured = curedcheck.IsChecked;
     }
 
     private void applySparkle(object sender, CheckedChangedEventArgs e)
     {
-        if (pk is PK5 pk5)
-            pk5.NSparkle = NSparkleCheckbox.IsChecked;
+        if (!SkipTextChange)
+        {
+            if (pk is PK5 pk5)
+                pk5.NSparkle = NSparkleCheckbox.IsChecked;
+        }
     }
 }
+
 

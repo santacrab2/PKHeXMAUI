@@ -92,7 +92,7 @@
                 <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Ability:"></Label>
                 <Picker Grid.Row="12" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="abilitypicker" Title="Ability" SelectedIndexChanged="applyability"></Picker>
                 <!--friendship-->
-                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="FriendShip:"></Label>
+                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="FriendShip:" x:Name="FriendshipLabel"></Label>
                 <Editor Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" x:Name="Friendshipdisplay" TextChanged="applyfriendship"></Editor>
                <!--Language-->
                 <Label Text="Language:" Grid.Row="14" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center"/>

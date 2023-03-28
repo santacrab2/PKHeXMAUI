@@ -5,6 +5,7 @@ namespace PKHeXMAUI;
 
 public partial class Cosmeticstab : ContentPage
 {
+    public bool SkipEvent = false;
 	public Cosmeticstab()
 	{
 		InitializeComponent();
@@ -15,6 +16,7 @@ public partial class Cosmeticstab : ContentPage
 
     public void applycomsetics(PKM pkm)
 	{
+        SkipEvent = true;
         MedalEditorButton.IsVisible = pkm is ISuperTrain;
         memoriesbutton.IsVisible = pkm is ITrainerMemories;
         SizeMarkImage.IsVisible = false;
@@ -103,10 +105,11 @@ public partial class Cosmeticstab : ContentPage
             CrownCheckbox.IsChecked = pk4.ShinyLeaf== 6;
 
         }
+        SkipEvent = false;
     }
     private void applyheight(object sender, TextChangedEventArgs e)
     {
-        if (Heightdisplay.Text.Length > 0)
+        if (Heightdisplay.Text.Length > 0 && !SkipEvent)
         {
             if (!int.TryParse(Heightdisplay.Text, out var result))
                 return;
@@ -130,7 +133,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void applyweight(object sender, TextChangedEventArgs e)
     {
-        if (Weightdisplay.Text.Length > 0)
+        if (Weightdisplay.Text.Length > 0 && !SkipEvent)
         {
             if (!int.TryParse(Weightdisplay.Text, out var result))
                 return;
@@ -151,19 +154,22 @@ public partial class Cosmeticstab : ContentPage
 
     private void applyscale(object sender, TextChangedEventArgs e)
     {
-        if (!byte.TryParse(scaledisplay.Text, out var result))
-            return;
-        if (result > 255)
+        if (!SkipEvent)
         {
-            result = 255;
-            scaledisplay.Text = $"{result}";
-        }
-        if (pk is IScaledSize3 sz3)
-        {
-            sz3.Scale = result;
-            ScaleDetailLabel.Text= SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(sz3.Scale)];
-            if (pk is ICombatPower cp)
-                cp.ResetCP();
+            if (!byte.TryParse(scaledisplay.Text, out var result))
+                return;
+            if (result > 255)
+            {
+                result = 255;
+                scaledisplay.Text = $"{result}";
+            }
+            if (pk is IScaledSize3 sz3)
+            {
+                sz3.Scale = result;
+                ScaleDetailLabel.Text = SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(sz3.Scale)];
+                if (pk is ICombatPower cp)
+                    cp.ResetCP();
+            }
         }
     }
     private void openribbons(object sender, EventArgs e)
@@ -183,7 +189,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void applycoolness(object sender, TextChangedEventArgs e)
     {
-        if(pk is IContestStats CTstats)
+        if(pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(Coolstats.Text,out var result))
                 return;
@@ -199,7 +205,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void makepretty(object sender, TextChangedEventArgs e)
     {
-        if (pk is IContestStats CTstats)
+        if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(Beautystats.Text, out var result))
                 return;
@@ -215,7 +221,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void applycuteness(object sender, TextChangedEventArgs e)
     {
-        if (pk is IContestStats CTstats)
+        if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(Cutestats.Text, out var result))
                 return;
@@ -231,7 +237,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void makesmart(object sender, TextChangedEventArgs e)
     {
-        if (pk is IContestStats CTstats)
+        if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(Cleverstats.Text, out var result))
                 return;
@@ -247,7 +253,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void GoToTheGym(object sender, TextChangedEventArgs e)
     {
-        if (pk is IContestStats CTstats)
+        if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(toughstats.Text, out var result))
                 return;
@@ -263,7 +269,7 @@ public partial class Cosmeticstab : ContentPage
 
     private void MakeMeSparkle(object sender, TextChangedEventArgs e)
     {
-        if (pk is IContestStats CTstats)
+        if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(sheenstats.Text, out var result))
                 return;
@@ -284,31 +290,81 @@ public partial class Cosmeticstab : ContentPage
 
     private void ApplyLeaf1(object sender, CheckedChangedEventArgs e)
     {
-
+        if(!SkipEvent)
+        {
+            if(pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 1)
+                    pk4.ShinyLeaf = 1;
+            }
+        }
     }
     private void ApplyLeaf2(object sender, CheckedChangedEventArgs e)
     {
+        if (!SkipEvent)
+        {
+            if (pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 2)
+                    pk4.ShinyLeaf = 2;
+            }
+        }
 
     }
     private void ApplyLeaf3(object sender, CheckedChangedEventArgs e)
     {
-
+        if (!SkipEvent)
+        {
+            if (pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 3)
+                    pk4.ShinyLeaf = 3;
+            }
+        }
     }
     private void ApplyLeaf4(object sender, CheckedChangedEventArgs e)
     {
-
+        if (!SkipEvent)
+        {
+            if (pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 4)
+                    pk4.ShinyLeaf = 4;
+            }
+        }
     }
     private void ApplyLeaf5(object sender, CheckedChangedEventArgs e)
     {
-
+        if (!SkipEvent)
+        {
+            if (pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 5)
+                    pk4.ShinyLeaf = 5;
+            }
+        }
     }
     private void ApplyLeaf6(object sender, CheckedChangedEventArgs e)
     {
-
+        if (!SkipEvent)
+        {
+            if (pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 6)
+                    pk4.ShinyLeaf = 6;
+            }
+        }
     }
     private void ApplyCrown(object sender, CheckedChangedEventArgs e)
     {
-
+        if (!SkipEvent)
+        {
+            if (pk is PK4 pk4)
+            {
+                if (pk4.ShinyLeaf < 6)
+                    pk4.ShinyLeaf = 6;
+            }
+        }
     }
 
 }

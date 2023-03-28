@@ -12,6 +12,7 @@ namespace PKHeXMAUI;
 
 public partial class MetTab : ContentPage
 {
+    public bool SkipEvent = false;
 	public MetTab()
 	{
 		InitializeComponent();
@@ -33,6 +34,7 @@ public partial class MetTab : ContentPage
     public static string ballspriteurl;
     public void applymetinfo(PKM pkm)
     {
+        SkipEvent = true;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
@@ -76,26 +78,33 @@ public partial class MetTab : ContentPage
         {
             eggmetpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context,true).Where(z => z.Value == pkm.Egg_Location).FirstOrDefault();
         }
-        
+        SkipEvent = false;
     }
 
     public void applyorigingame(object sender, EventArgs e)
     {
-        var version = (ComboItem)origingamepicker.SelectedItem;
-        pk.Version = version.Value;
-        metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
-        metlocationpicker.ItemDisplayBinding = new Binding("Text");
+        if (!SkipEvent)
+        {
+            var version = (ComboItem)origingamepicker.SelectedItem;
+            pk.Version = version.Value;
+            metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+            metlocationpicker.ItemDisplayBinding = new Binding("Text");
+        }
     }
 
     private void applybattleversion(object sender, EventArgs e)
     {
-        if(pk is IBattleVersion bv)
-            bv.BattleVersion = (byte)battleversionpicker.SelectedIndex;
+        if (!SkipEvent)
+        {
+            if (pk is IBattleVersion bv)
+                bv.BattleVersion = (byte)battleversionpicker.SelectedIndex;
+        }
     }
 
     private void applymetlocation(object sender, EventArgs e)
     {
-        if (metlocationpicker.SelectedItem != null)
+
+        if (metlocationpicker.SelectedItem != null && !SkipEvent)
         {
             var metlocation = (ComboItem)metlocationpicker.SelectedItem;
             pk.Met_Location = metlocation.Value;
@@ -104,20 +113,23 @@ public partial class MetTab : ContentPage
 
     private void givebackballs(object sender, EventArgs e)
     {
-
-        pk.Ball = (int)(Ball)ballpicker.SelectedItem;
-        ballspriteurl = $"ball{pk.Ball}.png";
-        ballimage.Source = ballspriteurl;
+        if (!SkipEvent)
+        {
+            pk.Ball = (int)(Ball)ballpicker.SelectedItem;
+            ballspriteurl = $"ball{pk.Ball}.png";
+            ballimage.Source = ballspriteurl;
+        }
     }
 
     private void applymetdate(object sender, DateChangedEventArgs e)
     {
-        pk.MetDate = DateOnly.FromDateTime( metdatepicker.Date);
+        if(!SkipEvent)
+            pk.MetDate = DateOnly.FromDateTime( metdatepicker.Date);
     }
 
     private void applymetlevel(object sender, TextChangedEventArgs e)
     {
-        if(metleveldisplay.Text.Length > 0)
+        if(metleveldisplay.Text.Length > 0 && !SkipEvent)
         {
             pk.Met_Level = int.Parse(metleveldisplay.Text);
         }
@@ -125,7 +137,7 @@ public partial class MetTab : ContentPage
 
     private void applyobediencelevel(object sender, TextChangedEventArgs e)
     {
-        if (pk is IObedienceLevel ob)
+        if (pk is IObedienceLevel ob && !SkipEvent)
         {
             if (obedienceleveldisplay.Text.Length > 0)
                 ob.Obedience_Level = (byte)int.Parse(obedienceleveldisplay.Text);
@@ -134,33 +146,41 @@ public partial class MetTab : ContentPage
 
     private void applyfateful(object sender, CheckedChangedEventArgs e)
     {
-        pk.FatefulEncounter = fatefulcheck.IsChecked;
+        if(!SkipEvent)
+            pk.FatefulEncounter = fatefulcheck.IsChecked;
     }
 
   
 
     private void applyeggmetlocation(object sender, EventArgs e)
     {
-        var egglocation = (ComboItem)eggmetpicker.SelectedItem;
-        pk.Egg_Location = egglocation.Value;
+        if (!SkipEvent)
+        {
+            var egglocation = (ComboItem)eggmetpicker.SelectedItem;
+            pk.Egg_Location = egglocation.Value;
+        }
     }
 
     private void applyeggdate(object sender, DateChangedEventArgs e)
     {
+        if(!SkipEvent)
         pk.EggMetDate = DateOnly.FromDateTime(eggdatepicker.Date);
     }
 
     private void wasegg(object sender, CheckedChangedEventArgs e)
     {
-        if(eggcheck.IsChecked)
+        if (!SkipEvent)
         {
-            pk.Egg_Location = EncounterSuggestion.GetSuggestedEncounterEggLocationEgg(pk, true);
-            pk.EggMetDate = DateOnly.FromDayNumber(DateTime.Now.Day);
-        }
-        else
-        {
-            pk.Egg_Location = LocationEdits.GetNoneLocation(pk);
-            pk.EggMetDate = null;
+            if (eggcheck.IsChecked)
+            {
+                pk.Egg_Location = EncounterSuggestion.GetSuggestedEncounterEggLocationEgg(pk, true);
+                pk.EggMetDate = DateOnly.FromDayNumber(DateTime.Now.Day);
+            }
+            else
+            {
+                pk.Egg_Location = LocationEdits.GetNoneLocation(pk);
+                pk.EggMetDate = null;
+            }
         }
     }
 

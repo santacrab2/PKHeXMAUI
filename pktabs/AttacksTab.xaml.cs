@@ -9,6 +9,7 @@ namespace PKHeXMAUI;
 
 public partial class AttacksTab : ContentPage
 {
+    public bool SkipEvent = false;
 	public AttacksTab()
 	{
 		InitializeComponent();
@@ -24,6 +25,7 @@ public partial class AttacksTab : ContentPage
     public static List<Move> movlist = new();
 	public void applyattackinfo(PKM pkm)
 	{
+        SkipEvent = true;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
@@ -81,44 +83,55 @@ public partial class AttacksTab : ContentPage
             AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
             AlphaMasteredPicker.SelectedItem = datasourcefiltered.Moves.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
         }
+        SkipEvent = false;
     }
 
     private void applymove1(object sender, EventArgs e)
     {
-        pk.Move1 = move1.SelectedIndex > 0? (ushort)(Move)move1.SelectedItem:pk.Move1;
+        if(!SkipEvent)
+            pk.Move1 = move1.SelectedIndex >= 0? (ushort)(Move)move1.SelectedItem:pk.Move1;
     }
     private void applymove2(object sender, EventArgs e)
     {
-        pk.Move2 = move2.SelectedIndex > 0? (ushort)(Move)move2.SelectedItem:pk.Move2;
+        if (!SkipEvent)
+            pk.Move2 = move2.SelectedIndex >= 0? (ushort)(Move)move2.SelectedItem:pk.Move2;
     }
     private void applymove3(object sender, EventArgs e)
     {
-        pk.Move3 = move3.SelectedIndex > 0 ? (ushort)(Move)move3.SelectedItem : pk.Move3;
+        if (!SkipEvent)
+            pk.Move3 = move3.SelectedIndex >= 0 ? (ushort)(Move)move3.SelectedItem : pk.Move3;
     }
     private void applymove4(object sender, EventArgs e)
     {
-        pk.Move4 = move4.SelectedIndex > 0 ? (ushort)(Move)move4.SelectedItem : pk.Move4;
+        if (!SkipEvent)
+            pk.Move4 = move4.SelectedIndex >= 0 ? (ushort)(Move)move4.SelectedItem : pk.Move4;
     }
     private void applyrmove1(object sender, EventArgs e)
     {
-        pk.RelearnMove1 = rmove1.SelectedIndex > 0 ? (ushort)(Move)rmove1.SelectedItem : pk.RelearnMove1;
+        if (!SkipEvent)
+            pk.RelearnMove1 = rmove1.SelectedIndex >= 0 ? (ushort)(Move)rmove1.SelectedItem : pk.RelearnMove1;
     }
     private void applyrmove2(object sender, EventArgs e)
     {
-        pk.RelearnMove2 = rmove2.SelectedIndex > 0 ? (ushort)(Move)rmove2.SelectedItem : pk.RelearnMove2;
+        if (!SkipEvent)
+            pk.RelearnMove2 = rmove2.SelectedIndex >= 0 ? (ushort)(Move)rmove2.SelectedItem : pk.RelearnMove2;
     }
     private void applyrmove3(object sender, EventArgs e)
     {
-        pk.RelearnMove3 = rmove3.SelectedIndex > 0 ? (ushort)(Move)rmove3.SelectedItem : pk.RelearnMove3;
+        if (!SkipEvent)
+            pk.RelearnMove3 = rmove3.SelectedIndex >= 0 ? (ushort)(Move)rmove3.SelectedItem : pk.RelearnMove3;
     }
     private void applyrmove4(object sender, EventArgs e)
     {
-        pk.RelearnMove4 = rmove4.SelectedIndex > 0 ? (ushort)(Move)rmove4.SelectedItem : pk.RelearnMove4;
+        if (!SkipEvent)
+            pk.RelearnMove4 = rmove4.SelectedIndex >= 0 ? (ushort)(Move)rmove4.SelectedItem : pk.RelearnMove4;
     }
 
     private void setsuggmoves(object sender, EventArgs e)
     {
-        var m = pk.GetMoveSet(true);
+        SkipEvent = true;
+        var m = new ushort[4];
+        pk.GetMoveSet(m,true);
         pk.SetMoves(m);
         pk.HealPP();
         move1.SelectedItem = (Move)pk.Move1;
@@ -129,23 +142,28 @@ public partial class AttacksTab : ContentPage
         rmove2.SelectedItem = (Move)pk.RelearnMove2;
         rmove3.SelectedItem = (Move)pk.RelearnMove3;
         rmove4.SelectedItem = (Move)pk.RelearnMove4;
+        SkipEvent = false;
     }
 
     private void applymove1ppups(object sender, EventArgs e)
     {
-        pk.Move1_PPUps = move1ppups.SelectedIndex;
+        if (!SkipEvent)
+            pk.Move1_PPUps = move1ppups.SelectedIndex;
     }
     private void applymove2ppups(object sender, EventArgs e)
     {
-        pk.Move2_PPUps = move2ppups.SelectedIndex;
+        if (!SkipEvent)
+            pk.Move2_PPUps = move2ppups.SelectedIndex;
     }
     private void applymove3ppups(object sender, EventArgs e)
     {
-        pk.Move3_PPUps = move3ppups.SelectedIndex;
+        if (!SkipEvent)
+            pk.Move3_PPUps = move3ppups.SelectedIndex;
     }
     private void applymove4ppups(object sender, EventArgs e)
     {
-        pk.Move4_PPUps = move4ppups.SelectedIndex;
+        if (!SkipEvent)
+            pk.Move4_PPUps = move4ppups.SelectedIndex;
     }
 
     private void openTReditor(object sender, EventArgs e)
@@ -166,8 +184,32 @@ public partial class AttacksTab : ContentPage
 
     private void applyAlphaMasteredMove(object sender, EventArgs e)
     {
-        var selectedmove = (ComboItem)AlphaMasteredPicker.SelectedItem;
-        if (pk is PA8 pa8)
-            pa8.AlphaMove = (ushort)selectedmove.Value;
+        if (!SkipEvent)
+        {
+            var selectedmove = (ComboItem)AlphaMasteredPicker.SelectedItem;
+            if (pk is PA8 pa8)
+                pa8.AlphaMove = (ushort)selectedmove.Value;
+        }
+    }
+
+    private void applyPP1(object sender, TextChangedEventArgs e)
+    {
+        
+            pk.Move1_PP = int.Parse(move1pp.Text);
+    }
+    private void applyPP2(object sender, TextChangedEventArgs e)
+    {
+        
+            pk.Move2_PP = int.Parse(move2pp.Text);
+    }
+    private void applyPP3(object sender, TextChangedEventArgs e)
+    {
+        
+            pk.Move3_PP = int.Parse(move3pp.Text);
+    }
+    private void applyPP4(object sender, TextChangedEventArgs e)
+    {
+        
+            pk.Move4_PP = int.Parse(move4pp.Text);
     }
 }
