@@ -1,6 +1,4 @@
 using PKHeX.Core;
-using System.Globalization;
-using System.Runtime.Intrinsics.X86;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
@@ -34,18 +32,33 @@ public partial class Cosmeticstab : ContentPage
         pic.Source = spriteurl;
         if (pkm is IScaledSize ss)
         {
+            HeightLabel.IsVisible = true;
+            Heightdisplay.IsVisible = true;
             Heightdisplay.Text = $"{ss.HeightScalar}";
-            if(pkm is IScaledSizeValue sv)
+            if (pkm is IScaledSizeValue sv)
+            {
+                HeightAbsoluteEditor.IsVisible = true;
                 HeightAbsoluteEditor.Text = sv.HeightAbsolute.ToString();
+            }
+            HeighDetailLabel.IsVisible = true;
             HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.HeightScalar)];
+            WeightLabel.IsVisible = true;
+            Weightdisplay.IsVisible = true;
             Weightdisplay.Text = $"{ss.WeightScalar}";
             if (pkm is IScaledSizeValue sv2)
+            {
+                WeightAbsoluteEditor.IsVisible = true;
                 WeightAbsoluteEditor.Text = sv2.WeightAbsolute.ToString();
+            }
+            WeightDetailLabel.IsVisible = true;
             WeightDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.WeightScalar)];
         }
         if (pkm is IScaledSize3 scale)
         {
+            scaledisplay.IsVisible = true;
+            scalelabel.IsVisible = true;
             scaledisplay.Text = $"{scale.Scale}";
+            ScaleDetailLabel.IsVisible = true;
             ScaleDetailLabel.Text = SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(scale.Scale)];
             if (scale.Scale == 0)
             {
@@ -60,8 +73,35 @@ public partial class Cosmeticstab : ContentPage
         }
         else if(pkm is ICombatPower cp)
         {
+            scalelabel.IsVisible = true;
+            scaledisplay.IsVisible = true;
             scalelabel.Text = "CP:";
             scaledisplay.Text = cp.Stat_CP.ToString();
+        }
+        if(pkm is PK4 pk4)
+        {
+            LeafCheckBox1.IsVisible = true;
+            LeafSprite1.IsVisible = true;
+            LeafCheckBox1.IsChecked = pk4.ShinyLeaf > 0;
+            LeafCheckBox2.IsVisible = true;
+            LeafSprite2.IsVisible = true;
+            LeafCheckBox2.IsChecked = pk4.ShinyLeaf > 1;
+            LeafCheckBox3.IsVisible = true;
+            LeafSprite3.IsVisible = true;
+            LeafCheckBox3.IsChecked = pk4.ShinyLeaf > 2;
+            LeafCheckBox4.IsVisible = true;
+            LeafSprite4.IsVisible = true;
+            LeafCheckBox4.IsChecked = pk4.ShinyLeaf > 3;
+            LeafCheckBox5.IsVisible = true;
+            LeafSprite5.IsVisible = true;
+            LeafCheckBox5.IsChecked = pk4.ShinyLeaf > 4;
+            LeafCheckBox6.IsVisible = true;
+            LeafSprite6.IsVisible = true;
+            LeafCheckBox6.IsChecked = pk4.ShinyLeaf > 5;
+            CrownCheckbox.IsVisible = true;
+            CrownSprite.IsVisible = true;
+            CrownCheckbox.IsChecked = pk4.ShinyLeaf== 6;
+
         }
     }
     private void applyheight(object sender, TextChangedEventArgs e)
@@ -241,4 +281,34 @@ public partial class Cosmeticstab : ContentPage
     {
         await Navigation.PushModalAsync(new MedalEditor());
     }
+
+    private void ApplyLeaf1(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+    private void ApplyLeaf2(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+    private void ApplyLeaf3(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+    private void ApplyLeaf4(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+    private void ApplyLeaf5(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+    private void ApplyLeaf6(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+    private void ApplyCrown(object sender, CheckedChangedEventArgs e)
+    {
+
+    }
+
 }

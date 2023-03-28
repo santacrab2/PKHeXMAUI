@@ -17,7 +17,7 @@ public partial class AttacksTab : ContentPage
         move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move4ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
     
-        //if(pk.Species != 0)
+        if(pk.Species != 0)
             applyattackinfo(pk);
         
     }
