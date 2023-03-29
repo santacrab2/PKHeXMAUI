@@ -18,6 +18,7 @@ public partial class Cosmeticstab : ContentPage
     public void applycomsetics(PKM pkm)
 	{
         SkipEvent = true;
+        eggsprite.IsVisible = pkm.IsEgg;
         MedalEditorButton.IsVisible = pkm is ISuperTrain;
         memoriesbutton.IsVisible = pkm is ITrainerMemories;
         SizeMarkImage.IsVisible = false;

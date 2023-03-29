@@ -489,6 +489,7 @@ public partial class MainPage : ContentPage
         if (pk.IsEgg)
         {
             SkipTextChange = true;
+            eggsprite.IsVisible= true;
             FriendshipLabel.Text = "Hatch Counter:";
             pk.CurrentFriendship = EggStateLegality.GetMinimumEggHatchCycles(pk);
             
@@ -523,7 +524,7 @@ public partial class MainPage : ContentPage
         {
             SkipTextChange = true;
             FriendshipLabel.Text = "FriendShip:";
-            
+            eggsprite.IsVisible = false;
             Friendshipdisplay.Text = pk.CurrentFriendship.ToString();
             pk.ClearNickname();
             SkipTextChange = false;

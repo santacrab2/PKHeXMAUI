@@ -50,7 +50,8 @@
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
                 <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
-                <ImageButton Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="legality" Clicked="displaylegalitymessage" Source="warn.png" HeightRequest="24"/>
+            <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
+            <ImageButton Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="legality" Clicked="displaylegalitymessage" Source="warn.png" HeightRequest="24"/>
 
                 <Button  Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Open PKM" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
                 <Button  Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>

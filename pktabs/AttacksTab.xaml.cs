@@ -17,7 +17,7 @@ public partial class AttacksTab : ContentPage
         move2ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move4ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
-    
+        eggsprite.IsVisible = pk.IsEgg;
         if(pk.Species != 0)
             applyattackinfo(pk);
         
@@ -26,6 +26,7 @@ public partial class AttacksTab : ContentPage
 	public void applyattackinfo(PKM pkm)
 	{
         SkipEvent = true;
+        eggsprite.IsVisible = pkm.IsEgg;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;

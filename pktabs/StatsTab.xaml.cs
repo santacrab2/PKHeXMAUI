@@ -20,6 +20,7 @@ public partial class StatsTab : ContentPage
 	public void applystatsinfo(PKM pkm)
 	{
         SkipEvent = true;
+        eggsprite.IsVisible = pkm.IsEgg;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;

@@ -22,6 +22,7 @@ public partial class OTTab : ContentPage
 	public void applyotinfo(PKM pkm)
 	{
         SkipEvent = true;
+        eggsprite.IsVisible = pkm.IsEgg;
         countrylabel.IsVisible = false;
         if (pkm.HeldItem > 0)
         {

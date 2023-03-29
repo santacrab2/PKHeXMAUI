@@ -35,6 +35,7 @@ public partial class MetTab : ContentPage
     public void applymetinfo(PKM pkm)
     {
         SkipEvent = true;
+        eggsprite.IsVisible = pkm.IsEgg;
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
