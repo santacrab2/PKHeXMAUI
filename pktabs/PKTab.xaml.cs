@@ -490,18 +490,33 @@ public partial class MainPage : ContentPage
         {
             SkipTextChange = true;
             FriendshipLabel.Text = "Hatch Counter:";
-            pk.CurrentFriendship = 1;
-            Friendshipdisplay.Text = pk.CurrentFriendship.ToString();
-            pk.SetNickname("Egg");
-            pk.Version = 0;
-            pk.Met_Location = 0;
+            pk.CurrentFriendship = EggStateLegality.GetMinimumEggHatchCycles(pk);
+            
+            pk.SetNickname(SpeciesName.GetEggName(pk.Language, pk.Format));
+            if (pk is PK9)
+                pk.Version = 0;
+            pk.Met_Location = LocationEdits.GetNoneLocation(pk);
             pk.Move1_PPUps= 0;
             pk.Move2_PPUps = 0;
             pk.Move3_PPUps = 0;
             pk.Move4_PPUps = 0;
+            pk.Move1_PP = pk.GetMovePP(pk.Move1, 0);
+            pk.Move2_PP = pk.GetMovePP(pk.Move2, 0);
+            pk.Move3_PP = pk.GetMovePP(pk.Move3, 0);
+            pk.Move4_PP = pk.GetMovePP(pk.Move4, 0);
             if (pk is ITeraType tera)
                 tera.TeraTypeOverride = (MoveType)0x13;
-            
+            if (pk.Format >= 6)
+                pk.ClearMemories();
+            if(pk.CurrentHandler == 1)
+            {
+                pk.CurrentHandler = 0;
+                if (pk is IHandlerLanguage hl)
+                    hl.HT_Language = 0;
+                pk.HT_Name = string.Empty;
+                pk.HT_Friendship = 0;
+            }
+
             SkipTextChange = false;
         }
         else

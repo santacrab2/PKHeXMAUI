@@ -9,11 +9,12 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
+        Flags = new[]{ LeafCheckBox1, LeafCheckBox2, LeafCheckBox3, LeafCheckBox4, LeafCheckBox5, CrownCheckbox };
         applycomsetics(pk);
 	}
     private static readonly string[] SizeClass = Enum.GetNames(typeof(PokeSize));
     private static readonly string[] SizeClassDetailed = Enum.GetNames(typeof(PokeSizeDetailed));
-
+    private readonly CheckBox[] Flags;
     public void applycomsetics(PKM pkm)
 	{
         SkipEvent = true;
@@ -84,25 +85,23 @@ public partial class Cosmeticstab : ContentPage
         {
             LeafCheckBox1.IsVisible = true;
             LeafSprite1.IsVisible = true;
-            LeafCheckBox1.IsChecked = pk4.ShinyLeaf > 0;
+            
             LeafCheckBox2.IsVisible = true;
             LeafSprite2.IsVisible = true;
-            LeafCheckBox2.IsChecked = pk4.ShinyLeaf > 1;
+            
             LeafCheckBox3.IsVisible = true;
             LeafSprite3.IsVisible = true;
-            LeafCheckBox3.IsChecked = pk4.ShinyLeaf > 2;
+         
             LeafCheckBox4.IsVisible = true;
             LeafSprite4.IsVisible = true;
-            LeafCheckBox4.IsChecked = pk4.ShinyLeaf > 3;
+          
             LeafCheckBox5.IsVisible = true;
             LeafSprite5.IsVisible = true;
-            LeafCheckBox5.IsChecked = pk4.ShinyLeaf > 4;
-            LeafCheckBox6.IsVisible = true;
-            LeafSprite6.IsVisible = true;
-            LeafCheckBox6.IsChecked = pk4.ShinyLeaf > 5;
+            
             CrownCheckbox.IsVisible = true;
             CrownSprite.IsVisible = true;
-            CrownCheckbox.IsChecked = pk4.ShinyLeaf== 6;
+            for (int i = 0; i < Flags.Length; i++)
+                Flags[i].IsChecked = ((pk4.ShinyLeaf >> i) & 1) == 1;
 
         }
         SkipEvent = false;
@@ -294,77 +293,16 @@ public partial class Cosmeticstab : ContentPage
         {
             if(pk is PK4 pk4)
             {
-                if (pk4.ShinyLeaf < 1)
-                    pk4.ShinyLeaf = 1;
+                int value = 0;
+                for (int i = 0; i < Flags.Length; i++)
+                {
+                    if (Flags[i].IsChecked)
+                        value |= 1 << i;
+                }
+                pk4.ShinyLeaf = value;
             }
         }
     }
-    private void ApplyLeaf2(object sender, CheckedChangedEventArgs e)
-    {
-        if (!SkipEvent)
-        {
-            if (pk is PK4 pk4)
-            {
-                if (pk4.ShinyLeaf < 2)
-                    pk4.ShinyLeaf = 2;
-            }
-        }
-
-    }
-    private void ApplyLeaf3(object sender, CheckedChangedEventArgs e)
-    {
-        if (!SkipEvent)
-        {
-            if (pk is PK4 pk4)
-            {
-                if (pk4.ShinyLeaf < 3)
-                    pk4.ShinyLeaf = 3;
-            }
-        }
-    }
-    private void ApplyLeaf4(object sender, CheckedChangedEventArgs e)
-    {
-        if (!SkipEvent)
-        {
-            if (pk is PK4 pk4)
-            {
-                if (pk4.ShinyLeaf < 4)
-                    pk4.ShinyLeaf = 4;
-            }
-        }
-    }
-    private void ApplyLeaf5(object sender, CheckedChangedEventArgs e)
-    {
-        if (!SkipEvent)
-        {
-            if (pk is PK4 pk4)
-            {
-                if (pk4.ShinyLeaf < 5)
-                    pk4.ShinyLeaf = 5;
-            }
-        }
-    }
-    private void ApplyLeaf6(object sender, CheckedChangedEventArgs e)
-    {
-        if (!SkipEvent)
-        {
-            if (pk is PK4 pk4)
-            {
-                if (pk4.ShinyLeaf < 6)
-                    pk4.ShinyLeaf = 6;
-            }
-        }
-    }
-    private void ApplyCrown(object sender, CheckedChangedEventArgs e)
-    {
-        if (!SkipEvent)
-        {
-            if (pk is PK4 pk4)
-            {
-                if (pk4.ShinyLeaf < 6)
-                    pk4.ShinyLeaf = 6;
-            }
-        }
-    }
+ 
 
 }

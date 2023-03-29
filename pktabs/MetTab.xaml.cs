@@ -178,6 +178,7 @@ public partial class MetTab : ContentPage
             }
             else
             {
+                
                 pk.Egg_Location = LocationEdits.GetNoneLocation(pk);
                 pk.EggMetDate = null;
             }
