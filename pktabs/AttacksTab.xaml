@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.AttacksTab"
              Title="Attacks">
    
@@ -49,35 +50,35 @@
             <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
                 <!--labels-->
             <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Moves"/>
-                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="PP"/>
-                <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="PP Ups"/>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="PP"/>
+                <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="PP Ups"/>
                
                 <!--Move1-->
-                <Picker Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1" SelectedIndexChanged="applymove1"/>
-                <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1pp" IsReadOnly="True" TextChanged="applyPP1"/>
-                <Picker Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1ppups" SelectedIndexChanged="applymove1ppups"/>
+            <inputs:SfComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="move1" SelectionChanged="applymove1" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+                <Editor Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1pp" IsReadOnly="True" TextChanged="applyPP1"/>
+                <Picker Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1ppups" SelectedIndexChanged="applymove1ppups"/>
             
                 <!--move 2-->
-                <Picker Grid.Row="3" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move2" SelectedIndexChanged="applymove2"/>
-                <Editor Grid.Row="3" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move2pp" IsReadOnly="True" TextChanged="applyPP2"/>
-                <Picker Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move2ppups" SelectedIndexChanged="applymove2ppups"/>
+            <inputs:SfComboBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="move2" SelectionChanged="applymove2" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+                <Editor Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move2pp" IsReadOnly="True" TextChanged="applyPP2"/>
+                <Picker Grid.Row="3" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move2ppups" SelectedIndexChanged="applymove2ppups"/>
             
                 <!--move 3-->
-                <Picker Grid.Row="4" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move3" SelectedIndexChanged="applymove3"/>
-            <Editor Grid.Row="4" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move3pp" IsReadOnly="True" TextChanged="applyPP3"/>
-                <Picker Grid.Row="4" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move3ppups" SelectedIndexChanged="applymove3ppups"/>
+            <inputs:SfComboBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="move3" SelectionChanged="applymove3" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+            <Editor Grid.Row="4" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move3pp" IsReadOnly="True" TextChanged="applyPP3"/>
+                <Picker Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move3ppups" SelectedIndexChanged="applymove3ppups"/>
           
                 <!--move 4-->
-                <Picker Grid.Row="5" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4" SelectedIndexChanged="applymove4"/>
-            <Editor Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4pp" IsReadOnly="True" TextChanged="applyPP4"/>
-                <Picker Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4ppups" SelectedIndexChanged="applymove4ppups"/>
+            <inputs:SfComboBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="move4" SelectionChanged="applymove4" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+            <Editor Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4pp" IsReadOnly="True" TextChanged="applyPP4"/>
+                <Picker Grid.Row="5" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move4ppups" SelectedIndexChanged="applymove4ppups"/>
              
                 <!--Relearn Moves-->
                 <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Text="Relearn Moves"/>
-                <Picker Grid.Row="8" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove1" SelectedIndexChanged="applyrmove1"/>
-                <Picker Grid.Row="9" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove2" SelectedIndexChanged="applyrmove2"/>
-                <Picker Grid.Row="10" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove3" SelectedIndexChanged="applyrmove3"/>
-                <Picker Grid.Row="11" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" x:Name="rmove4" SelectedIndexChanged="applyrmove4"/>
+            <inputs:SfComboBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="rmove1" SelectionChanged="applyrmove1" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+            <inputs:SfComboBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="rmove2" SelectionChanged="applyrmove2" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+            <inputs:SfComboBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="rmove3" SelectionChanged="applyrmove3" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+            <inputs:SfComboBox Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="rmove4" SelectionChanged="applyrmove4" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
                 
                 <!--helpful buttons-->
                 <Button Grid.Row="6" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves"  WidthRequest="150"/>
@@ -85,7 +86,7 @@
                 <Button x:Name="moveshopbutton" IsVisible="false" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Move Shop" Clicked="openMoveShopEditor"/>
             <!--Alpha Mastered-->
             <Label x:Name="AlphaMasteredLabel" IsVisible="false" Grid.Row="13" Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="2" Text="Alpha Mastered:"/>
-            <Picker x:Name="AlphaMasteredPicker" IsVisible="false" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center" SelectedIndexChanged="applyAlphaMasteredMove"/>
+            <inputs:SfComboBox x:Name="AlphaMasteredPicker" IsVisible="false" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center" SelectionChanged="applyAlphaMasteredMove" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
             <!--Reload-->
                 <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmoves"/>
 

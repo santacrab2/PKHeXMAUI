@@ -1,6 +1,9 @@
 using System;
 using System.Windows.Input;
 using PKHeX.Core;
+
+using Syncfusion.Maui.Inputs;
+using Syncfusion.Maui.DataSource.Extensions;
 using static PKHeXMAUI.MainPage;
 
 
@@ -22,7 +25,7 @@ public partial class AttacksTab : ContentPage
             applyattackinfo(pk);
         
     }
-    public static List<Move> movlist = new();
+    public static List<ComboItem> movlist = new();
 	public void applyattackinfo(PKM pkm)
 	{
         SkipEvent = true;
@@ -46,7 +49,7 @@ public partial class AttacksTab : ContentPage
             p.ReloadMoves(new LegalityAnalysis(pkm));
             if (p.CanLearn((ushort)mov.Value))
             {
-                movlist.Add((Move)mov.Value);
+                movlist.Add(mov);
             }
         }
         move1.ItemsSource = movlist;
@@ -58,14 +61,14 @@ public partial class AttacksTab : ContentPage
         rmove3.ItemsSource = movlist;
         rmove4.ItemsSource = movlist;
     
-        move1.SelectedItem = (Move)pkm.Move1;
-        move2.SelectedItem = (Move)pkm.Move2;
-        move3.SelectedItem = (Move)pkm.Move3;
-        move4.SelectedItem = (Move)pkm.Move4;
-        rmove1.SelectedItem = (Move)pkm.RelearnMove1;
-        rmove2.SelectedItem = (Move)pkm.RelearnMove2;
-        rmove3.SelectedItem = (Move)pkm.RelearnMove3;
-        rmove4.SelectedItem = (Move)pkm.RelearnMove4;
+        move1.SelectedItem = movlist.Where(z=>z.Value== pkm.Move1).FirstOrDefault();
+        move2.SelectedItem = movlist.Where(z => z.Value == pkm.Move2).FirstOrDefault();
+        move3.SelectedItem = movlist.Where(z => z.Value == pkm.Move3).FirstOrDefault();
+        move4.SelectedItem = movlist.Where(z => z.Value == pkm.Move4).FirstOrDefault();
+        rmove1.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove1).FirstOrDefault();
+        rmove2.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove2).FirstOrDefault();
+        rmove3.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove3).FirstOrDefault();
+        rmove4.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove4).FirstOrDefault();
         move1pp.Text = pkm.GetMovePP(pkm.Move1, pkm.Move1_PPUps).ToString();
         move2pp.Text = pkm.GetMovePP(pkm.Move2, pkm.Move2_PPUps).ToString();
         move3pp.Text = pkm.GetMovePP(pkm.Move3, pkm.Move3_PPUps).ToString();
@@ -80,9 +83,9 @@ public partial class AttacksTab : ContentPage
         {
             AlphaMasteredLabel.IsVisible = true;
             AlphaMasteredPicker.IsVisible = true;
-            AlphaMasteredPicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Moves;
-            AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
-            AlphaMasteredPicker.SelectedItem = datasourcefiltered.Moves.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
+            AlphaMasteredPicker.ItemsSource = movlist;
+            AlphaMasteredPicker.DisplayMemberPath = "Text";
+            AlphaMasteredPicker.SelectedItem = movlist.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
         }
         SkipEvent = false;
     }
@@ -90,42 +93,42 @@ public partial class AttacksTab : ContentPage
     private void applymove1(object sender, EventArgs e)
     {
         if(!SkipEvent)
-            pk.Move1 = move1.SelectedIndex >= 0? (ushort)(Move)move1.SelectedItem:pk.Move1;
+            pk.Move1 = move1.SelectedIndex >= 0? (ushort)((ComboItem)move1.SelectedItem).Value:pk.Move1;
     }
     private void applymove2(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.Move2 = move2.SelectedIndex >= 0? (ushort)(Move)move2.SelectedItem:pk.Move2;
+            pk.Move2 = move2.SelectedIndex >= 0? (ushort)((ComboItem)move2.SelectedItem).Value:pk.Move2;
     }
     private void applymove3(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.Move3 = move3.SelectedIndex >= 0 ? (ushort)(Move)move3.SelectedItem : pk.Move3;
+            pk.Move3 = move3.SelectedIndex >= 0 ? (ushort)((ComboItem)move3.SelectedItem).Value : pk.Move3;
     }
     private void applymove4(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.Move4 = move4.SelectedIndex >= 0 ? (ushort)(Move)move4.SelectedItem : pk.Move4;
+            pk.Move4 = move4.SelectedIndex >= 0 ? (ushort)((ComboItem)move4.SelectedItem).Value : pk.Move4;
     }
     private void applyrmove1(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove1 = rmove1.SelectedIndex >= 0 ? (ushort)(Move)rmove1.SelectedItem : pk.RelearnMove1;
+            pk.RelearnMove1 = rmove1.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove1.SelectedItem).Value : pk.RelearnMove1;
     }
     private void applyrmove2(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove2 = rmove2.SelectedIndex >= 0 ? (ushort)(Move)rmove2.SelectedItem : pk.RelearnMove2;
+            pk.RelearnMove2 = rmove2.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove2.SelectedItem).Value : pk.RelearnMove2;
     }
     private void applyrmove3(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove3 = rmove3.SelectedIndex >= 0 ? (ushort)(Move)rmove3.SelectedItem : pk.RelearnMove3;
+            pk.RelearnMove3 = rmove3.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove3.SelectedItem).Value : pk.RelearnMove3;
     }
     private void applyrmove4(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove4 = rmove4.SelectedIndex >= 0 ? (ushort)(Move)rmove4.SelectedItem : pk.RelearnMove4;
+            pk.RelearnMove4 = rmove4.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove4.SelectedItem).Value : pk.RelearnMove4;
     }
 
     private void setsuggmoves(object sender, EventArgs e)
@@ -212,5 +215,14 @@ public partial class AttacksTab : ContentPage
     {
         
             pk.Move4_PP = int.Parse(move4pp.Text);
+    }
+
+    private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        SfComboBox box = (SfComboBox)sender;
+        if (box.IsDropDownOpen)
+            box.TextColor = Colors.Black;
+        else
+            box.TextColor = Colors.White;
     }
 }

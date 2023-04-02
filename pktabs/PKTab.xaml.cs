@@ -4,7 +4,8 @@ using System.Net.Sockets;
 using PKHeX.Core.AutoMod;
 
 using System.Windows.Input;
-
+using Syncfusion.Maui.Inputs;
+using Syncfusion.Maui.DataSource.Extensions;
 
 namespace PKHeXMAUI;
 
@@ -26,13 +27,13 @@ public partial class MainPage : ContentPage
         APILegality.SetMatchingBalls = true;
         Legalizer.EnableEasterEggs = false;
         
-        specieslabel.ItemsSource = (System.Collections.IList)datasourcefiltered.Species;
-        specieslabel.ItemDisplayBinding = new Binding("Text");
-        naturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
-        statnaturepicker.ItemsSource = Enum.GetValues(typeof(Nature));
+        specieslabel.ItemsSource = datasourcefiltered.Species;
+        
+        naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
+        statnaturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
       
-        helditempicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Items;
-        helditempicker.ItemDisplayBinding= new Binding("Text");
+        helditempicker.ItemsSource = datasourcefiltered.Items;
+        helditempicker.DisplayMemberPath= "Text";
         if (datasourcefiltered.Items.Count() > 0)
         {
             helditempicker.IsVisible = true;
@@ -78,7 +79,7 @@ public partial class MainPage : ContentPage
         if (pkm.IsShiny)
             shinybutton.Text = "★";
         
-        specieslabel.SelectedIndex = specieslabel.Items.IndexOf(SpeciesName.GetSpeciesName(pkm.Species,2));
+        specieslabel.SelectedItem = datasourcefiltered.Species.Where(z => z.Text== SpeciesName.GetSpeciesName(pkm.Species,2)).FirstOrDefault();
         displaypid.Text = $"{pkm.PID:X}";
         nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
@@ -92,7 +93,7 @@ public partial class MainPage : ContentPage
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
       
         genderdisplay.Source = $"gender_{pkm.Gender}.png";
-        helditempicker.SelectedIndex = helditempicker.Items.IndexOf(GameInfo.Strings.Item[pkm.HeldItem]);
+        helditempicker.SelectedItem = datasourcefiltered.Items.Where(z=>z.Text== (GameInfo.Strings.Item[pkm.HeldItem])).FirstOrDefault();
         if (pkm.HeldItem > 0)
         {
             itemsprite.IsVisible = true;
@@ -167,55 +168,56 @@ public partial class MainPage : ContentPage
 
     private void specieschanger(object sender, EventArgs e) 
     {
-        SkipTextChange = true;
-        formargstepper.IsVisible = false;
-        formlabel.IsVisible = false;
-        formpicker.IsVisible = false;
-        ComboItem test = (ComboItem)specieslabel.SelectedItem;
-        pk.Species = (ushort)test.Value;
-        if (abilitypicker.Items.Count() != 0)
-            abilitypicker.Items.Clear();
-        for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
+        if (!SkipTextChange)
         {
-            var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
-            abilitypicker.Items.Add($"{(Ability)abili}");
+            formargstepper.IsVisible = false;
+            formlabel.IsVisible = false;
+            formpicker.IsVisible = false;
+            ComboItem test = (ComboItem)specieslabel.SelectedItem ?? new ComboItem("None", 0);
+            pk.Species = (ushort)test.Value;
+            if (abilitypicker.Items.Count() != 0)
+                abilitypicker.Items.Clear();
+            for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
+            {
+                var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
+                abilitypicker.Items.Add($"{(Ability)abili}");
 
-        }
-        abilitypicker.SelectedIndex = 0;
-        if(pk.PersonalInfo.Genderless && genderdisplay.Source != (ImageSource)"gender_2.png" )
-        {
-            pk.Gender = 2;
-            genderdisplay.Source = "gender_2.png";
-        }
-        if(pk.PersonalInfo.IsDualGender && genderdisplay.Source == (ImageSource)"gender_2.png")
-        {
-            pk.Gender = 0;
-            genderdisplay.Source = "gender_0.png";
-        }
-        if(!pk.IsNicknamed)
-            pk.ClearNickname();
-        if (formpicker.Items.Count != 0)
-            formpicker.Items.Clear();
-        pk.Form = 0;
-        var str = GameInfo.Strings;
-        var forms = FormConverter.GetFormList(pk.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, pk.Context);
-        if (forms[0] != "")
-        {
-            formlabel.IsVisible = true;
-            formpicker.IsVisible = true;
-           
-            foreach (var form in forms)
-            {
-                formpicker.Items.Add(form);
             }
-            formpicker.SelectedIndex = pk.Form;
-           if(pk is IFormArgument fa)
+            abilitypicker.SelectedIndex = 0;
+            if (pk.PersonalInfo.Genderless && genderdisplay.Source != (ImageSource)"gender_2.png")
             {
-                formargstepper.IsVisible = true;
-                formargstepper.Text = fa.FormArgument.ToString();
+                pk.Gender = 2;
+                genderdisplay.Source = "gender_2.png";
             }
-        }
-     
+            if (pk.PersonalInfo.IsDualGender && genderdisplay.Source == (ImageSource)"gender_2.png")
+            {
+                pk.Gender = 0;
+                genderdisplay.Source = "gender_0.png";
+            }
+            if (!pk.IsNicknamed)
+                pk.ClearNickname();
+            if (formpicker.Items.Count != 0)
+                formpicker.Items.Clear();
+            pk.Form = 0;
+            var str = GameInfo.Strings;
+            var forms = FormConverter.GetFormList(pk.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, pk.Context);
+            if (forms[0] != "")
+            {
+                formlabel.IsVisible = true;
+                formpicker.IsVisible = true;
+
+                foreach (var form in forms)
+                {
+                    formpicker.Items.Add(form);
+                }
+                formpicker.SelectedIndex = pk.Form;
+                if (pk is IFormArgument fa)
+                {
+                    formargstepper.IsVisible = true;
+                    formargstepper.Text = fa.FormArgument.ToString();
+                }
+            }
+
             if (pk.Species == 0)
                 spriteurl = $"a_egg.png";
             else
@@ -225,11 +227,11 @@ public partial class MainPage : ContentPage
             else
                 shinysparklessprite.IsVisible = false;
 
-        
-      
-        pic.Source = spriteurl;
-        checklegality();
-        SkipTextChange = false;
+
+
+            pic.Source = spriteurl;
+            checklegality();
+        }
     }
 
     private void rollpid(object sender, EventArgs e) 
@@ -550,6 +552,15 @@ public partial class MainPage : ContentPage
             if (pk is PK5 pk5)
                 pk5.NSparkle = NSparkleCheckbox.IsChecked;
         }
+    }
+
+    private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        SfComboBox box = (SfComboBox)sender;
+        if (box.IsDropDownOpen)
+            box.TextColor = Colors.Black;
+        else
+            box.TextColor = Colors.White;
     }
 }
 

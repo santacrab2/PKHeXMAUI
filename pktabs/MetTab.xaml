@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.MetTab"
             >
    
@@ -50,7 +51,7 @@
                 <Picker IsVisible="false" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="battleversionpicker" SelectedIndexChanged="applybattleversion" WidthRequest="152"/>
             <!--Met Location-->
                 <Label Grid.Row="3" Grid.Column="0" Text="Met Location:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Picker  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="metlocationpicker" HorizontalOptions="Start" VerticalOptions="Center" SelectedIndexChanged="applymetlocation" WidthRequest="176"/>
+            <inputs:SfComboBox  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="metlocationpicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applymetlocation"  Placeholder="Met Location" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" />
             <!--Ball-->
                 <Label Grid.Row="4" Grid.Column="0" Text="Ball:" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Picker Grid.Row="4" Grid.Column="0" x:Name="ballpicker" HorizontalOptions="Center" Grid.ColumnSpan="2" WidthRequest="96" VerticalOptions="Center" SelectedIndexChanged="givebackballs"/>

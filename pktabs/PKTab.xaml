@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.MainPage"
              Title="Main">
     
@@ -62,7 +63,7 @@
                 <Button  Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
                 <!--Species-->
                 <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-                <Picker  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Title="Species" x:Name="specieslabel" HorizontalOptions="Center" SelectedIndexChanged="specieschanger"/>
+                <inputs:SfComboBox  Grid.Row="4" Grid.Column="1" Placeholder="Species" x:Name="specieslabel" HorizontalOptions="Start" SelectionChanged="specieschanger" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" />
                 <!--gender-->
                 <ImageButton Source="gender_0.png" Grid.Row="3" Grid.Column="2" WidthRequest="32" HeightRequest="32"  x:Name="genderdisplay" HorizontalOptions="Start" Clicked="swapgender"/>
 
@@ -78,9 +79,9 @@
                 <Editor Grid.Row="6" Grid.Column="1" Text="0" HorizontalOptions="End" VerticalOptions="Center" x:Name="leveldisplay" TextChanged="changelevel"></Editor>
                 <!--Nature-->
                 <Label Grid.Row="7" Grid.Column="0" Text="Nature:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-                <Picker Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Title="Nature" x:Name="naturepicker" HorizontalOptions="Center" VerticalOptions="Center" SelectedIndexChanged="applynature"></Picker>
+            <inputs:SfComboBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" WidthRequest="150" Placeholder="Nature" x:Name="naturepicker" HorizontalOptions="End" VerticalOptions="Center" SelectionChanged="applynature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"  ></inputs:SfComboBox>
                 <Label Grid.Row="7" Grid.Column="2" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <Picker Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" Title="Stat Nature" x:Name="statnaturepicker" HorizontalOptions="End" VerticalOptions="Center" SelectedIndexChanged="applystatnature"/>
+            <inputs:SfComboBox Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" WidthRequest="125" Placeholder="Stat Nature" x:Name="statnaturepicker" HorizontalOptions="End" VerticalOptions="Center" SelectionChanged="applystatnature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent" />
                
                 <!--form-->
                 <Label x:Name="formlabel" IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Form:"></Label>
@@ -88,7 +89,7 @@
                 <Editor IsVisible="false" Grid.Row="10" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="formargstepper" TextChanged="applyformarg"></Editor>
                 <!--held item-->
                 <Label x:Name="helditemlabel" IsVisible="false" Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Held Item:" Margin="0,0,48,0" WidthRequest="96"></Label>
-                <Picker IsVisible="false" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="helditempicker" Margin="48,0,0,0" Title="Held Item" SelectedIndexChanged="applyhelditem"></Picker>
+            <inputs:SfComboBox IsVisible="false" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2"  HorizontalOptions="Start" VerticalOptions="Center" x:Name="helditempicker" Margin="48,0,0,0" Placeholder="Held Item" SelectionChanged="applyhelditem" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"></inputs:SfComboBox>
                 <!--ability-->
                 <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Ability:"></Label>
                 <Picker Grid.Row="12" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="abilitypicker" Title="Ability" SelectedIndexChanged="applyability"></Picker>

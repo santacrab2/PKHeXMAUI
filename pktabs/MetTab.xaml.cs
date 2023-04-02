@@ -1,5 +1,6 @@
 
-
+using Syncfusion.Maui.Inputs;
+using Syncfusion.Maui.DataSource.Extensions;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -21,8 +22,8 @@ public partial class MetTab : ContentPage
         origingamepicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Games;
         origingamepicker.ItemDisplayBinding = new Binding("Text");
         battleversionpicker.ItemsSource = GameInfo.Strings.gamelist;
-        metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
-        metlocationpicker.ItemDisplayBinding = new Binding("Text");
+        metlocationpicker.ItemsSource = GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+        metlocationpicker.DisplayMemberPath = "Text";
         eggmetpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList(sav.Version, sav.Context, true);
         eggmetpicker.ItemDisplayBinding = new Binding("Text");
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
@@ -88,8 +89,8 @@ public partial class MetTab : ContentPage
         {
             var version = (ComboItem)origingamepicker.SelectedItem;
             pk.Version = version.Value;
-            metlocationpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
-            metlocationpicker.ItemDisplayBinding = new Binding("Text");
+            metlocationpicker.ItemsSource = GameInfo.GetLocationList((GameVersion)pk.Version, pk.Context);
+            metlocationpicker.DisplayMemberPath = "Text";
         }
     }
 
@@ -190,6 +191,15 @@ public partial class MetTab : ContentPage
     {
         if(pk.Species != 0)
             applymetinfo(pk);
+    }
+
+    private void ChangeComboBoxFontColor(object sender, PropertyChangedEventArgs e)
+    {
+        SfComboBox box = (SfComboBox)sender;
+        if (box.IsDropDownOpen)
+            box.TextColor = Colors.Black;
+        else
+            box.TextColor = Colors.White;
     }
 }
 
