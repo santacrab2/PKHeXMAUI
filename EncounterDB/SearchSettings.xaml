@@ -4,7 +4,35 @@
               xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.SearchSettings"
              Title="Search Settings">
-    <VerticalStackLayout>
-        <inputs:SfComboBox IsEditable="True" x:Name="EncSpecies" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="Shiny"></Label>
+            <CheckBox x:Name="ShinyCheck"/>
+            <Label Text="Is Egg"/>
+            <CheckBox x:Name="EggCheck"/>
+            <inputs:SfComboBox Placeholder="Species" IsEditable="True" x:Name="EncSpecies" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <Label Text="Move 1"/>
+            <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncMove1" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <Label Text="Move 2"/>
+            <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncMove2" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <Label Text="Move 3"/>
+            <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncMove3" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <Label Text="Move 4"/>
+            <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncMove4" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <Label Text="OT Version"/>
+            <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncVersion" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <Label Text="As Egg"/>
+            <CheckBox HorizontalOptions="Start" x:Name="AsEggCheck" IsChecked="True"/>
+            <Label Text="Mystery"/>
+            <CheckBox HorizontalOptions="Start" x:Name="MysteryCheck" IsChecked="True"/>
+            <Label Text="Static"/>
+            <CheckBox HorizontalOptions="Start" x:Name="StaticCheck" IsChecked="True"/>
+            <Label Text="Trade"/>
+            <CheckBox HorizontalOptions="Start" x:Name="TradeCheck" IsChecked="True"/>
+            <Label Text="Slot"/>
+            <CheckBox HorizontalOptions="Start" x:Name="SlotCheck" IsChecked="True"/>
+            <Button Text="Save" Clicked="SaveSearchSettings"/>
+            <Button Text="Cancel" Clicked="CloseSearchSettings"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

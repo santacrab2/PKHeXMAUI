@@ -6,5 +6,7 @@
              Title="Encounter Database">
     <VerticalStackLayout>
         <Button Text="Search Settings" Clicked="SetSearchSettings"/>
+        <Button Text="Search" Clicked="SearchEncountersClick"/>
+        <CollectionView HeightRequest="375" WidthRequest="400" x:Name="EncounterCollection" SelectionMode="Single" ></CollectionView>
     </VerticalStackLayout>
 </ContentPage>
