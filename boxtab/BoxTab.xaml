@@ -16,7 +16,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill"></Image>
-                        <CollectionView HeightRequest="375" WidthRequest="400" x:Name="boxview" SelectionMode="Single" SelectionChanged="applypkfrombox"></CollectionView>
+                        <CollectionView HeightRequest="375" WidthRequest="400" x:Name="boxview" SelectionMode="Single" ></CollectionView>
                 </Grid>
 
             </StackLayout>

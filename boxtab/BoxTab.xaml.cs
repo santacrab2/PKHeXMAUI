@@ -57,27 +57,49 @@ public partial class BoxTab : ContentPage
             shinysp.SetBinding(Image.IsVisibleProperty, "shiny");
             grid.Add(image);
             grid.Add(shinysp);
-            return grid;
+            SwipeView swipe = new();
+            SwipeItem view = new()
+            {
+                Text = "View",
+                BackgroundColor = Colors.DeepSkyBlue,
+                IconImageSource = "load.png"
+            };
+            view.Invoked += applypkfrombox;
+            swipe.BottomItems.Add(view);
+            SwipeItem Set = new()
+            {
+                Text = "Set",
+                BackgroundColor = Colors.Green,
+                IconImageSource = "dump.png"
+            };
+            Set.Invoked += inject;
+            swipe.TopItems.Add(Set);
+            swipe.Content = grid;
+            return swipe;
         });
+      
         boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
         boxview.ItemsSource = boxsprites;
         
 
     }
-    private async void applypkfrombox(object sender, SelectionChangedEventArgs e)
+    private async void applypkfrombox(object sender, EventArgs e)
     {
-        foreach(boxsprite b in e.CurrentSelection)
-        {
-            if (b.pkm.Species != 0)
+        
+            if (((boxsprite)boxview.SelectedItem).pkm.Species != 0)
             {
-                pk = b.pkm;
+                pk = ((boxsprite)boxview.SelectedItem).pkm;
             }
         
-        }
+        
         
     }
+    private async void inject(object sender, EventArgs e)
+    {
+        sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+    }
 
-    
+
 
     private void changebox(object sender, EventArgs e)
     {
