@@ -7,7 +7,7 @@ namespace PKHeXMAUI;
 
 public partial class EncounterDB : ContentPage
 {
-    private readonly TrainerDatabase Trainers;
+  
     public static PKHeX.Core.Searching.SearchSettings encSettings;
 	public EncounterDB()
 	{
@@ -56,8 +56,7 @@ public partial class EncounterDB : ContentPage
     public void applyencpk(object sender, EventArgs e)
     {
         IEncounterInfo enc = ((EncounterSprite)EncounterCollection.SelectedItem).EncounterInfo;
-        var trainer = Trainers.GetTrainer(enc.Version, enc.Generation <= 2 ? (LanguageID)sav.Language : LanguageID.English) ?? sav;
-        pk = enc.ConvertToPKM(trainer,EncounterCriteria.Unrestricted);
+        pk = enc.ConvertToPKM(sav,EncounterCriteria.Unrestricted);
     }
     private void SearchEncountersClick(object sender, EventArgs e)
     {
