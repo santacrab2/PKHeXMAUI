@@ -51,7 +51,7 @@
             <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
             <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
                 <!--Affixed Ribbon-->
-            <ImageButton Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Source="ribbon_affix_none.png" IsVisible="False" Clicked="OpenRibbonEditor" x:Name="AffixedRibbonSprite"/>
+            <ImageButton Grid.Row="2" Grid.Column="3" VerticalOptions="End" HorizontalOptions="Start" Source="ribbon_affix_none.png" IsVisible="False" Clicked="OpenRibbonEditor" x:Name="AffixedRibbonSprite"/>
             <!--Height-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:" IsVisible="false" x:Name="HeightLabel"></Label>
             <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight" IsVisible="false"/>
