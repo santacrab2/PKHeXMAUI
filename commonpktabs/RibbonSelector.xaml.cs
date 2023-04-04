@@ -7,13 +7,14 @@ namespace PKHeXMAUI;
 
 public partial class RibbonSelector : ContentPage
 {
+    public static bool ApplicatorMode = false;
     public RibbonSelector()
     {
+        
         InitializeComponent();
-        var clone = pk.Clone();
-        RibbonApplicator.SetAllValidRibbons(clone);
-        var ribbs = RibbonInfo.GetRibbonInfo(clone);
-      
+        if (ApplicatorMode)
+            applyribbons.IsVisible = false;
+
         ribboncollection.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
@@ -24,12 +25,26 @@ public partial class RibbonSelector : ContentPage
             grid.Add(ribbonname);
             Image allthetests = new Image() { HeightRequest = 50, WidthRequest = 50, HorizontalOptions = LayoutOptions.Start, Margin = new Thickness(50, 0, 0, 0) };
             allthetests.SetBinding(Image.SourceProperty, "spritename");
+            Image AffixedSprite = new Image() { HeightRequest = 16, WidthRequest = 16, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.End, Margin = new Thickness(50, 0, 0, 0), Source = "valid.png" };
+            AffixedSprite.SetBinding(Image.IsVisibleProperty, "affixed");
             grid.Add(allthetests);
-            
-            
-            return grid;
+            grid.Add(AffixedSprite);
+            SwipeView Swipe = new();
+            SwipeItem affix = new()
+            {
+                Text = "Affix",
+                BackgroundColor = Colors.DeepSkyBlue,
+                IconImageSource = "ribbon_affix_noneb.png"
+            };
+            affix.Invoked += AffixRibbon;
+            Swipe.LeftItems.Add(affix);
+            Swipe.Content = grid;
+            return Swipe;
             
         });
+        var clone = pk.Clone();
+        RibbonApplicator.SetAllValidRibbons(clone);
+        var ribbs = RibbonInfo.GetRibbonInfo(clone);
         List<Ribbonstuff> idk = new();
         foreach(var fg in ribbs)
         {
@@ -53,12 +68,76 @@ public partial class RibbonSelector : ContentPage
             }
             o++;
         }
-        ribboncollection.ItemsSource= idk;
-        ribboncollection.UpdateSelectedItems(selectedribbonslist);
+        if (!ApplicatorMode)
+        {
+            ribboncollection.SelectionMode = SelectionMode.Multiple;
+            ribboncollection.ItemsSource = idk;
+            ribboncollection.UpdateSelectedItems(selectedribbonslist);
+        }
+        else
+        {
+            ribboncollection.SelectionMode = SelectionMode.Single;
+            ribboncollection.ItemsSource = selectedribbonslist;
+        }
         
         
     }
-
+    public void Refresh()
+    {
+        var clone = pk.Clone();
+        RibbonApplicator.SetAllValidRibbons(clone);
+        var ribbs = RibbonInfo.GetRibbonInfo(clone);
+        List<Ribbonstuff> idk = new();
+        foreach (var fg in ribbs)
+        {
+            if (fg.HasRibbon)
+                idk.Add(new Ribbonstuff(fg));
+        }
+        var selectedribbonslist = new List<object>();
+        var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
+        int o = 0;
+        foreach (var pkrib in pkhasribbonslist)
+        {
+            if (pkrib.HasRibbon)
+            {
+                foreach (var imrunningoutofnames in idk)
+                {
+                    if (imrunningoutofnames.index == o)
+                    {
+                        selectedribbonslist.Add(imrunningoutofnames);
+                    }
+                }
+            }
+            o++;
+        }
+        if (!ApplicatorMode)
+        {
+            ribboncollection.SelectionMode = SelectionMode.Multiple;
+            ribboncollection.ItemsSource = idk;
+            ribboncollection.UpdateSelectedItems(selectedribbonslist);
+        }
+        else
+        {
+            ribboncollection.SelectionMode = SelectionMode.Single;
+            ribboncollection.ItemsSource = selectedribbonslist;
+        }
+        ribboncollection.ScrollTo(0);
+    }
+    private void AffixRibbon(object sender,EventArgs e)
+    {
+        if (ribboncollection.SelectedItem == null)
+            return;
+        if(pk is IRibbonSetAffixed a)
+        {
+            
+            var ribbon = (Ribbonstuff)ribboncollection.SelectedItem;
+            if (a.AffixedRibbon == -1)
+                a.AffixedRibbon = (sbyte)ribbon.index;
+            else
+                a.AffixedRibbon = -1;
+        }
+        Refresh();
+    }
     private void applyribbonsandclose(object sender, EventArgs e)
     {
         for (int c = 0; c < 110; c++)
@@ -109,7 +188,10 @@ public class Ribbonstuff
             }
         }
        
-         
+        if(pk is IRibbonSetAffixed af)
+        {
+            affixed = af.AffixedRibbon == index;
+        }
         typer = rib.Type;
         Name = rib.Name.Replace("Ribbon","");
         spritename = $"{rib.Name}.png";
@@ -118,4 +200,5 @@ public class Ribbonstuff
    public string spritename { get; set; }
     public RibbonValueType typer{ get; set; }
     public int index { get; set; }
+    public bool affixed { get; set; }
 }

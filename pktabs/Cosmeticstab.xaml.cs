@@ -105,6 +105,14 @@ public partial class Cosmeticstab : ContentPage
                 Flags[i].IsChecked = ((pk4.ShinyLeaf >> i) & 1) == 1;
 
         }
+        if(pk is IRibbonSetAffixed a)
+        {
+            AffixedRibbonSprite.IsVisible = true;
+            if (a.AffixedRibbon != -1)
+                AffixedRibbonSprite.Source = $"ribbon{((RibbonIndex)a.AffixedRibbon).ToString().ToLower()}.png";
+            else
+                AffixedRibbonSprite.Source = "ribbon_affix_none.png";
+        }
         SkipEvent = false;
     }
     private void applyheight(object sender, TextChangedEventArgs e)
@@ -174,6 +182,7 @@ public partial class Cosmeticstab : ContentPage
     }
     private void openribbons(object sender, EventArgs e)
     {
+        RibbonSelector.ApplicatorMode = false;
         Navigation.PushModalAsync(new RibbonSelector());
     }
 
@@ -304,6 +313,10 @@ public partial class Cosmeticstab : ContentPage
             }
         }
     }
- 
 
+    private void OpenRibbonEditor(object sender, EventArgs e)
+    {
+        RibbonSelector.ApplicatorMode = true;
+        Navigation.PushModalAsync(new RibbonSelector());
+    }
 }

@@ -84,7 +84,8 @@ public partial class MainPage : ContentPage
         nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
-        naturepicker.SelectedIndex = pkm.Nature;
+        naturepicker.SelectedItem = (Nature)pkm.Nature;
+        statnaturepicker.SelectedItem = (Nature)pkm.StatNature;
         iseggcheck.IsChecked = pk.IsEgg;
         infectedcheck.IsChecked = pk.PKRS_Infected;
         curedcheck.IsChecked = pk.PKRS_Cured;

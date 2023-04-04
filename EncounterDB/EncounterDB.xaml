@@ -7,6 +7,14 @@
     <VerticalStackLayout>
         <Button Text="Search Settings" Clicked="SetSearchSettings"/>
         <Button Text="Search" Clicked="SearchEncountersClick"/>
-        <CollectionView HeightRequest="375" WidthRequest="400" x:Name="EncounterCollection" SelectionMode="Single" ></CollectionView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <CollectionView HeightRequest="375" WidthRequest="400" x:Name="EncounterCollection" SelectionMode="Single" ></CollectionView>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
