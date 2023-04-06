@@ -13,21 +13,21 @@ namespace PKHeXMAUI;
 public partial class AttacksTab : ContentPage
 {
     public bool SkipEvent = false;
-	public AttacksTab()
-	{
-		InitializeComponent();
+    public AttacksTab()
+    {
+        InitializeComponent();
         move1ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move2ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move4ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         eggsprite.IsVisible = pk.IsEgg;
-        if(pk.Species != 0)
+        if (pk.Species != 0)
             applyattackinfo(pk);
-        
+
     }
     public static List<ComboItem> movlist = new();
-	public void applyattackinfo(PKM pkm)
-	{
+    public void applyattackinfo(PKM pkm)
+    {
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;
         if (pkm.HeldItem > 0)
@@ -36,14 +36,14 @@ public partial class AttacksTab : ContentPage
             itemsprite.IsVisible = true;
         }
         else
-            itemsprite.IsVisible=false;
+            itemsprite.IsVisible = false;
         if (pkm.IsShiny)
             shinysparklessprite.IsVisible = true;
         else
             shinysparklessprite.IsVisible = false;
         attackpic.Source = spriteurl;
         movlist = new();
-       foreach(var mov in datasourcefiltered.Moves)
+        foreach (var mov in datasourcefiltered.Moves)
         {
             LegalMoveInfo p = new();
             p.ReloadMoves(new LegalityAnalysis(pkm));
@@ -60,8 +60,8 @@ public partial class AttacksTab : ContentPage
         rmove2.ItemsSource = movlist;
         rmove3.ItemsSource = movlist;
         rmove4.ItemsSource = movlist;
-    
-        move1.SelectedItem = movlist.Where(z=>z.Value== pkm.Move1).FirstOrDefault();
+
+        move1.SelectedItem = movlist.Where(z => z.Value == pkm.Move1).FirstOrDefault();
         move2.SelectedItem = movlist.Where(z => z.Value == pkm.Move2).FirstOrDefault();
         move3.SelectedItem = movlist.Where(z => z.Value == pkm.Move3).FirstOrDefault();
         move4.SelectedItem = movlist.Where(z => z.Value == pkm.Move4).FirstOrDefault();
@@ -77,6 +77,14 @@ public partial class AttacksTab : ContentPage
         move2ppups.SelectedIndex = pkm.Move2_PPUps;
         move3ppups.SelectedIndex = pkm.Move3_PPUps;
         move4ppups.SelectedIndex = pkm.Move4_PPUps;
+        move1Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move1, pkm.Context):00}";
+        move2Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move2, pkm.Context):00}";
+        move3Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move3, pkm.Context):00}";
+        move4Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move4, pkm.Context):00}";
+        move1Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move1, pkm.Context):00}";
+        move2Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move2, pkm.Context):00}";
+        move3Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move3, pkm.Context):00}";
+        move4Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move4, pkm.Context):00}";
         if (pk is IMoveShop8Mastery)
             moveshopbutton.IsVisible = true;
         if (pk is PA8 pa8)
@@ -92,23 +100,39 @@ public partial class AttacksTab : ContentPage
 
     private void applymove1(object sender, EventArgs e)
     {
-        if(!SkipEvent)
-            pk.Move1 = move1.SelectedIndex >= 0? (ushort)((ComboItem)move1.SelectedItem).Value:pk.Move1;
+        if (!SkipEvent)
+        {
+            pk.Move1 = move1.SelectedIndex >= 0 ? (ushort)((ComboItem)move1.SelectedItem).Value : pk.Move1;
+            move1Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move1, pk.Context):00}";
+            move1Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move1, pk.Context):00}";
+        }
     }
     private void applymove2(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.Move2 = move2.SelectedIndex >= 0? (ushort)((ComboItem)move2.SelectedItem).Value:pk.Move2;
+        {
+            pk.Move2 = move2.SelectedIndex >= 0 ? (ushort)((ComboItem)move2.SelectedItem).Value : pk.Move2;
+            move2Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move2, pk.Context):00}";
+            move2Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move2, pk.Context):00}";
+        }
     }
     private void applymove3(object sender, EventArgs e)
     {
         if (!SkipEvent)
+        {
             pk.Move3 = move3.SelectedIndex >= 0 ? (ushort)((ComboItem)move3.SelectedItem).Value : pk.Move3;
+            move3Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move3, pk.Context):00}";
+            move3Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move3, pk.Context):00}";
+        }
     }
     private void applymove4(object sender, EventArgs e)
     {
         if (!SkipEvent)
+        {
             pk.Move4 = move4.SelectedIndex >= 0 ? (ushort)((ComboItem)move4.SelectedItem).Value : pk.Move4;
+            move4Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move4, pk.Context):00}";
+            move4Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move4, pk.Context):00}";
+        }
     }
     private void applyrmove1(object sender, EventArgs e)
     {
@@ -135,7 +159,7 @@ public partial class AttacksTab : ContentPage
     {
         SkipEvent = true;
         var m = new ushort[4];
-        pk.GetMoveSet(m,true);
+        pk.GetMoveSet(m, true);
         pk.SetMoves(m);
         pk.HealPP();
         move1.SelectedItem = (Move)pk.Move1;
@@ -198,23 +222,23 @@ public partial class AttacksTab : ContentPage
 
     private void applyPP1(object sender, TextChangedEventArgs e)
     {
-        
-            pk.Move1_PP = int.Parse(move1pp.Text);
+
+        pk.Move1_PP = int.Parse(move1pp.Text);
     }
     private void applyPP2(object sender, TextChangedEventArgs e)
     {
-        
-            pk.Move2_PP = int.Parse(move2pp.Text);
+
+        pk.Move2_PP = int.Parse(move2pp.Text);
     }
     private void applyPP3(object sender, TextChangedEventArgs e)
     {
-        
-            pk.Move3_PP = int.Parse(move3pp.Text);
+
+        pk.Move3_PP = int.Parse(move3pp.Text);
     }
     private void applyPP4(object sender, TextChangedEventArgs e)
     {
-        
-            pk.Move4_PP = int.Parse(move4pp.Text);
+
+        pk.Move4_PP = int.Parse(move4pp.Text);
     }
 
     private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -224,5 +248,30 @@ public partial class AttacksTab : ContentPage
             box.TextColor = Colors.Black;
         else
             box.TextColor = Colors.White;
+    }
+
+    private async void DisplayMoveInfo1(object sender, EventArgs e)
+    {
+        var value = pk.Move1;
+        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        await DisplayAlert($"{(Move)value}", details, "cancel");
+    }
+    private async void DisplayMoveInfo2(object sender, EventArgs e)
+    {
+        var value = pk.Move2;
+        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        await DisplayAlert($"{(Move)value}", details, "cancel");
+    }
+    private async void DisplayMoveInfo3(object sender, EventArgs e)
+    {
+        var value = pk.Move3;
+        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        await DisplayAlert($"{(Move)value}", details, "cancel");
+    }
+    private async void DisplayMoveInfo4(object sender, EventArgs e)
+    {
+        var value = pk.Move4;
+        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        await DisplayAlert($"{(Move)value}", details, "cancel");
     }
 }
