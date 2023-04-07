@@ -78,7 +78,7 @@
 		<MauiSplashScreen Include="Resources\Splash\bg009.png" BaseSize="250,250" Color="Black" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Include="Resources\Images\**" />
 		<MauiImage Include="Resources\Images\generalicons\*" />
 		<MauiImage Include="Resources\Images\balls\*" />
 		<MauiImage Include="Resources\Images\SVSprites\*" />
