@@ -58,9 +58,11 @@ public partial class MainPage : ContentPage
     public static string itemspriteurl = "";
     public async void pk9picker_Clicked(object sender, EventArgs e)
     {
-        
+
         var pkfile = await FilePicker.PickAsync();
-        var bytes= File.ReadAllBytes(pkfile.FullPath);
+        if (pkfile is null)
+            return;
+        var bytes = File.ReadAllBytes(pkfile.FullPath);
         pk = EntityFormat.GetFromBytes(bytes);
         applymainpkinfo(pk);
         checklegality();
