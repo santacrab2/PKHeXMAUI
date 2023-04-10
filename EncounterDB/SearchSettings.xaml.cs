@@ -9,13 +9,21 @@ public partial class SearchSettings : ContentPage
 	public SearchSettings()
 	{
 		InitializeComponent();
-		EncSpecies.ItemsSource = datasourcefiltered.Species;
-		EncMove1.ItemsSource = datasourcefiltered.Moves;
-        EncMove2.ItemsSource = datasourcefiltered.Moves;
-        EncMove3.ItemsSource = datasourcefiltered.Moves;
-        EncMove4.ItemsSource = datasourcefiltered.Moves;
-        EncVersion.ItemsSource = datasourcefiltered.Games;
-      
+        var Any = new ComboItem("Any", 0);
+        var EncSpeciesList = datasourcefiltered.Species.ToList();
+        EncSpeciesList.Insert(0, Any);
+        EncSpecies.ItemsSource = EncSpeciesList;
+        var EncMoveList = datasourcefiltered.Moves.ToList();
+        EncMoveList.RemoveAt(0); EncMoveList.Insert(0, Any);
+        EncMove1.ItemsSource = EncMoveList;
+        EncMove2.ItemsSource = EncMoveList;
+        EncMove3.ItemsSource = EncMoveList;
+        EncMove4.ItemsSource = EncMoveList;
+        var EncVersionList = datasourcefiltered.Games.ToList();
+        EncVersionList.RemoveAt(EncVersionList.Count - 1); EncVersionList.Insert(0, Any);
+        EncVersion.ItemsSource = EncVersionList;
+
+
     }
 
 

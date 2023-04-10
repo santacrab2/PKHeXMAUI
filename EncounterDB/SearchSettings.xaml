@@ -10,7 +10,7 @@
             <CheckBox x:Name="ShinyCheck"/>
             <Label Text="Is Egg"/>
             <CheckBox x:Name="EggCheck"/>
-            <inputs:SfComboBox Placeholder="Species" IsEditable="True" x:Name="EncSpecies" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
+            <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncSpecies" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
             <Label Text="Move 1"/>
             <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncMove1" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
             <Label Text="Move 2"/>

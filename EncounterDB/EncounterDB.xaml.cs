@@ -56,7 +56,8 @@ public partial class EncounterDB : ContentPage
     public void applyencpk(object sender, EventArgs e)
     {
         IEncounterInfo enc = ((EncounterSprite)EncounterCollection.SelectedItem).EncounterInfo;
-        pk = enc.ConvertToPKM(sav,EncounterCriteria.Unrestricted);
+        var pkm = enc.ConvertToPKM(sav, EncounterCriteria.Unrestricted);
+        pk = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
     }
     private void SearchEncountersClick(object sender, EventArgs e)
     {

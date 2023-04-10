@@ -91,7 +91,14 @@ public partial class MainPage : ContentPage
         iseggcheck.IsChecked = pk.IsEgg;
         infectedcheck.IsChecked = pk.PKRS_Infected;
         curedcheck.IsChecked = pk.PKRS_Cured;
-      
+        if (abilitypicker.Items.Count() != 0)
+            abilitypicker.Items.Clear();
+        for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
+        {
+            var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
+            abilitypicker.Items.Add($"{(Ability)abili}");
+
+        }
         abilitypicker.SelectedIndex =pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
       
