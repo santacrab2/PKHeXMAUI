@@ -14,10 +14,17 @@ public partial class StatsTab : ContentPage
         Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         HiddenPowerPicker.ItemsSource = Enum.GetValues(typeof(MoveType));
-            applystatsinfo(pk);
+        ICommand refreshCommand = new Command(async () =>
+        {
+
+            await applystatsinfo(pk);
+            StatsRefresh.IsRefreshing = false;
+        });
+        StatsRefresh.Command = refreshCommand;
+        applystatsinfo(pk);
     }
 
-	public void applystatsinfo(PKM pkm)
+	public async Task applystatsinfo(PKM pkm)
 	{
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;

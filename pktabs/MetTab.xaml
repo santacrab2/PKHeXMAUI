@@ -4,10 +4,10 @@
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.MetTab"
             >
-   
-    <ScrollView>
-       
-            <Grid>
+    <RefreshView x:Name="MetRefresh">
+        <ScrollView>
+
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -32,55 +32,54 @@
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
+
             <Image Grid.Column="0" Grid.Row="0"
                 x:Name="mettabpic"
                 HeightRequest="50"
                    HorizontalOptions="Start"
                    VerticalOptions="Start"/>
-                <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
+            <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="Start"/>
             <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
             <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
             <!--Origin Game-->
             <Label Grid.Row="1" Grid.Column="0" Text="Origin Game:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="origingamepicker" SelectedIndexChanged="applyorigingame" WidthRequest="152"/>
+            <Picker Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="origingamepicker" SelectedIndexChanged="applyorigingame" WidthRequest="152"/>
             <!--Battle Version-->
-                <Label x:Name="battleversionlabel" IsVisible="false" Grid.Row="2" Grid.Column="0" Text="Battle Version:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Picker IsVisible="false" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="battleversionpicker" SelectedIndexChanged="applybattleversion" WidthRequest="152"/>
+            <Label x:Name="battleversionlabel" IsVisible="false" Grid.Row="2" Grid.Column="0" Text="Battle Version:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Picker IsVisible="false" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="battleversionpicker" SelectedIndexChanged="applybattleversion" WidthRequest="152"/>
             <!--Met Location-->
-                <Label Grid.Row="3" Grid.Column="0" Text="Met Location:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Label Grid.Row="3" Grid.Column="0" Text="Met Location:" HorizontalOptions="Start" VerticalOptions="Center"/>
             <inputs:SfComboBox  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="metlocationpicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applymetlocation"  Placeholder="Met Location" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" />
             <!--Ball-->
-                <Label Grid.Row="4" Grid.Column="0" Text="Ball:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Picker Grid.Row="4" Grid.Column="0" x:Name="ballpicker" HorizontalOptions="Center" Grid.ColumnSpan="2" WidthRequest="96" VerticalOptions="Center" SelectedIndexChanged="givebackballs"/>
-                <Image Grid.Row="4" Grid.Column="2" x:Name="ballimage" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="32" Source="ball4.png" x:FieldModifier="Public"/>
-                <!--Met Date-->
-                <Label Grid.Row="5" Grid.Column="0" Text="Met Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <DatePicker Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="metdatepicker" DateSelected="applymetdate" HorizontalOptions="Center"/>
+            <Label Grid.Row="4" Grid.Column="0" Text="Ball:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Picker Grid.Row="4" Grid.Column="0" x:Name="ballpicker" HorizontalOptions="Center" Grid.ColumnSpan="2" WidthRequest="96" VerticalOptions="Center" SelectedIndexChanged="givebackballs"/>
+            <Image Grid.Row="4" Grid.Column="2" x:Name="ballimage" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="32" Source="ball4.png" x:FieldModifier="Public"/>
+            <!--Met Date-->
+            <Label Grid.Row="5" Grid.Column="0" Text="Met Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <DatePicker Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="metdatepicker" DateSelected="applymetdate" HorizontalOptions="Center"/>
             <!--Met Level-->
-                <Label Grid.Row="6" Grid.Column="0" Text="Met Level:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Editor Grid.Row="6" Grid.Column="0" Text="Met Level" AutoSize="TextChanges" HorizontalOptions="Center" Grid.ColumnSpan="2" VerticalOptions="Center" TextChanged="applymetlevel" x:Name="metleveldisplay"/>
+            <Label Grid.Row="6" Grid.Column="0" Text="Met Level:" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Editor Grid.Row="6" Grid.Column="0" Text="Met Level" AutoSize="TextChanges" HorizontalOptions="Center" Grid.ColumnSpan="2" VerticalOptions="Center" TextChanged="applymetlevel" x:Name="metleveldisplay"/>
             <!--Obedience level-->
-                <Label x:Name="obediencelevellabel" IsVisible="false" Grid.Row="7" Grid.Column="0" Text="Obedience Level:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="152"/>
-                <Editor IsVisible="false" Grid.Row="7" Grid.Column="1" Text="Obedience Level" Grid.ColumnSpan="2" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay"/>
+            <Label x:Name="obediencelevellabel" IsVisible="false" Grid.Row="7" Grid.Column="0" Text="Obedience Level:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="152"/>
+            <Editor IsVisible="false" Grid.Row="7" Grid.Column="1" Text="Obedience Level" Grid.ColumnSpan="2" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay"/>
             <!--fateful-->
-                <Label Grid.Row="8" Grid.Column="0" Text="Fateful Encounter" WidthRequest="152" HorizontalOptions="Start"/>
-                <CheckBox Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="fatefulcheck" CheckedChanged="applyfateful"/>
-             <!--egg info-->
-                <Label Grid.Row="9" Grid.Column="0" Text="Was Egg"/>
-                <CheckBox Grid.Row="9" Grid.Column="1" x:Name="eggcheck" CheckedChanged="wasegg"/>
-                <Label Grid.Row="10" Grid.Column="0" Text="Egg Location" />
-                <Picker Grid.Row="10" Grid.Column="1" x:Name="eggmetpicker" SelectedIndexChanged="applyeggmetlocation"/>
-                <Label Grid.Row="11" Grid.Column="0" Text="Egg Met Date" />
-                <DatePicker Grid.Row="11" Grid.Column="1" x:Name="eggdatepicker" DateSelected="applyeggdate"/>
-                <!--Reload-->
-                <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmet"/>
-            </Grid>
+            <Label Grid.Row="8" Grid.Column="0" Text="Fateful Encounter" WidthRequest="152" HorizontalOptions="Start"/>
+            <CheckBox Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="fatefulcheck" CheckedChanged="applyfateful"/>
+            <!--egg info-->
+            <Label Grid.Row="9" Grid.Column="0" Text="Was Egg"/>
+            <CheckBox Grid.Row="9" Grid.Column="1" x:Name="eggcheck" CheckedChanged="wasegg"/>
+            <Label Grid.Row="10" Grid.Column="0" Text="Egg Location" />
+            <Picker Grid.Row="10" Grid.Column="1" x:Name="eggmetpicker" SelectedIndexChanged="applyeggmetlocation"/>
+            <Label Grid.Row="11" Grid.Column="0" Text="Egg Met Date" />
+            <DatePicker Grid.Row="11" Grid.Column="1" x:Name="eggdatepicker" DateSelected="applyeggdate"/>
 
-        </ScrollView>
-  
+        </Grid>
 
+    </ScrollView>
+
+    </RefreshView>
 
 </ContentPage>

@@ -377,7 +377,6 @@
     <Style TargetType="Page" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BackgroundColor" Value="{StaticResource Gray600}" />
-       
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
@@ -391,14 +390,22 @@
         <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource White}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource White}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Gray200}" />
+        
+        
     </Style>
-
+    <Style TargetType="Label"
+       Class="FlyoutItemLabelStyle">
+        <Setter Property="TextColor"
+            Value="White" />
+        
+    </Style>
     <Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{StaticResource Gray700}"/>
         <Setter Property="BarTextColor" Value="{StaticResource White}" />
         <Setter Property="IconColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
         
     </Style>
+   
 
   
 </ResourceDictionary>

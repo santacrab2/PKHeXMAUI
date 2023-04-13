@@ -28,12 +28,18 @@ public partial class MetTab : ContentPage
         eggmetpicker.ItemDisplayBinding = new Binding("Text");
         ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
-        
-       
-            applymetinfo(pk);
+
+        ICommand refreshCommand = new Command(async () =>
+        {
+
+            await applymetinfo(pk);
+            MetRefresh.IsRefreshing = false;
+        });
+        MetRefresh.Command = refreshCommand;
+        applymetinfo(pk);
     }
     public static string ballspriteurl;
-    public void applymetinfo(PKM pkm)
+    public async Task applymetinfo(PKM pkm)
     {
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;

@@ -1,4 +1,5 @@
 using PKHeX.Core;
+using System.Windows.Input;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
@@ -11,11 +12,18 @@ public partial class Cosmeticstab : ContentPage
 		InitializeComponent();
         Flags = new[]{ LeafCheckBox1, LeafCheckBox2, LeafCheckBox3, LeafCheckBox4, LeafCheckBox5, CrownCheckbox };
         applycomsetics(pk);
-	}
+        ICommand refreshCommand = new Command(async () =>
+        {
+
+            await applycomsetics(pk);
+            CosmeticsRefresh.IsRefreshing = false;
+        });
+        CosmeticsRefresh.Command = refreshCommand;
+    }
     private static readonly string[] SizeClass = Enum.GetNames(typeof(PokeSize));
     private static readonly string[] SizeClassDetailed = Enum.GetNames(typeof(PokeSizeDetailed));
     private readonly CheckBox[] Flags;
-    public void applycomsetics(PKM pkm)
+    public async Task applycomsetics(PKM pkm)
 	{
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;

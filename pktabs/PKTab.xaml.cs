@@ -19,6 +19,13 @@ public partial class MainPage : ContentPage
         datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
         InitializeComponent();
+        ICommand refreshCommand = new Command(async () =>
+        {
+
+            await applymainpkinfo(pk);
+            PKRefresh.IsRefreshing = false;
+        });
+        PKRefresh.Command = refreshCommand;
         Permissions.RequestAsync<Permissions.StorageWrite>();
         APILegality.SetAllLegalRibbons = false;
         APILegality.UseTrainerData = true;
@@ -74,7 +81,7 @@ public partial class MainPage : ContentPage
         
         
     }
-    public void applymainpkinfo(PKM pkm)
+    public async Task applymainpkinfo(PKM pkm)
     {
         SkipTextChange = true;
         itemsprite.IsVisible = false;
@@ -571,6 +578,29 @@ public partial class MainPage : ContentPage
             box.TextColor = Colors.Black;
         else
             box.TextColor = Colors.White;
+    }
+
+    private async void ImportShowdown(object sender, EventArgs e)
+    {
+        if (!Clipboard.HasText)
+        {
+            await DisplayAlert("Showdown", "No showdown text found on clipboard", "cancel");
+            return;
+        }
+        var doit = await DisplayAlert("Showdown", $"Apply this set?\n{await Clipboard.GetTextAsync()}", "Yes", "cancel");
+        if (!doit)
+            return;
+        var set = new ShowdownSet(await Clipboard.GetTextAsync());
+        var pkm = Legalizer.GetLegalFromSet(sav, set, out var msg);
+        if(msg == LegalizationResult.Regenerated)
+        {
+            pk = pkm;
+            applymainpkinfo(pk);
+        }
+        else
+        {
+            await DisplayAlert("Showdown", "I could not legalize the provided Showdown Set","cancel");
+        }
     }
 }
 

@@ -4,7 +4,7 @@
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.AttacksTab"
              Title="Attacks">
-
+    <RefreshView x:Name="AttackRefresh">
     <ScrollView>
 
         <Grid>
@@ -95,11 +95,10 @@
             <!--Alpha Mastered-->
             <Label x:Name="AlphaMasteredLabel" IsVisible="false" Grid.Row="13" Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="2" Text="Alpha Mastered:"/>
             <inputs:SfComboBox x:Name="AlphaMasteredPicker" IsVisible="false" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center" SelectionChanged="applyAlphaMasteredMove" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
-            <!--Reload-->
-            <Button Grid.Row="16" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Reload" Clicked="refreshmoves"/>
+           
 
         </Grid>
 
     </ScrollView>
-
+    </RefreshView>
 </ContentPage>

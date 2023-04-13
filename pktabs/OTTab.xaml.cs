@@ -16,10 +16,17 @@ public partial class OTTab : ContentPage
         CountryPicker.ItemDisplayBinding= new Binding("Text");
         DSregionPicker.ItemsSource = datasourcefiltered.ConsoleRegions.ToList();
         DSregionPicker.ItemDisplayBinding = new Binding("Text");
+        ICommand refreshCommand = new Command(async () =>
+        {
+
+            await applyotinfo(pk);
+            OTRefresh.IsRefreshing = false;
+        });
+        OTRefresh.Command = refreshCommand;
         applyotinfo(pk);
     }
 
-	public void applyotinfo(PKM pkm)
+	public async Task applyotinfo(PKM pkm)
 	{
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;
@@ -63,8 +70,8 @@ public partial class OTTab : ContentPage
         if (pkm is IHomeTrack home)
             trackereditor.Text = home.Tracker.ToString("X16");
         extrabytespicker.Items.Clear();
-        foreach (var b in pkm.ExtraBytes)
-            extrabytespicker.Items.Add($"0x{b:X2}");
+        for (var i=0;i<pkm.ExtraBytes.Length;i++)
+            extrabytespicker.Items.Add($"0x{pkm.ExtraBytes[i]:X2}");
         extrabytespicker.SelectedIndex = 0;
         var offset = Convert.ToInt32((string)extrabytespicker.SelectedItem, 16);
         var value = pkm.Data[offset];

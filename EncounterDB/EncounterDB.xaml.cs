@@ -71,7 +71,7 @@ public partial class EncounterDB : ContentPage
     }
     public List<IEncounterInfo> GetEncounters()
     {
-        if (encSettings is { Species: 0, Moves.Count: 0 })
+        if (encSettings is { Species: 0, Moves.Count: 0 } || encSettings is null)
             return new List<IEncounterInfo>();
         var pk = sav.BlankPKM;
 

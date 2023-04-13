@@ -23,10 +23,16 @@ public partial class AttacksTab : ContentPage
         eggsprite.IsVisible = pk.IsEgg;
         if (pk.Species != 0)
             applyattackinfo(pk);
+        ICommand refreshCommand = new Command(async () =>
+        {
 
+            await applyattackinfo(pk);
+            AttackRefresh.IsRefreshing = false;
+        });
+        AttackRefresh.Command = refreshCommand;
     }
     public static List<ComboItem> movlist = new();
-    public void applyattackinfo(PKM pkm)
+    public async Task applyattackinfo(PKM pkm)
     {
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;
