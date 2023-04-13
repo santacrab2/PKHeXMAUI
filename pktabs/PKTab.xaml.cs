@@ -602,6 +602,11 @@ public partial class MainPage : ContentPage
             await DisplayAlert("Showdown", "I could not legalize the provided Showdown Set","cancel");
         }
     }
+
+    private void ExportShowdown(object sender, EventArgs e)
+    {
+        Clipboard.SetTextAsync(ShowdownParsing.GetShowdownText(pk));
+    }
 }
 
 

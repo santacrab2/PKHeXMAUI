@@ -109,8 +109,9 @@
                 <Label Grid.Row="16" Grid.Column="0" x:Name="NSparkleLabel" IsVisible="false" Text="N's Sparkle" HorizontalOptions="End" VerticalOptions="Center"/>
                 <CheckBox Grid.Row="16" Grid.Column="1" x:Name="NSparkleCheckbox" IsVisible="false" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applySparkle"/>
                 <Label Grid.Row="16" Grid.Column="2" x:Name="NSparkleActiveLabel" IsVisible="false" Text="Active" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Button  Grid.Row="17" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
-                <Button Grid.Row="17" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Import Showdown" Clicked="ImportShowdown"/>
+                <Button  Grid.Row="17" Grid.Column="0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="legalize" Clicked="legalize"/>
+                <Button Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Import Showdown" Clicked="ImportShowdown"/>
+                <Button Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="Export Showdown" Clicked="ExportShowdown"/>
 
 
             </Grid>
