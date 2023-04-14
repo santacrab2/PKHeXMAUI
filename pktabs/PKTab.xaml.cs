@@ -334,6 +334,8 @@ public partial class MainPage : ContentPage
     {
         if (!SkipTextChange)
         {
+            if (helditempicker.SelectedItem is null)
+                return;
             itemsprite.IsVisible = false;
             ComboItem helditemtoapply = (ComboItem)helditempicker.SelectedItem;
             pk.ApplyHeldItem(helditemtoapply.Value, sav.Context);
