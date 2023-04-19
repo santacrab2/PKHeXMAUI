@@ -30,8 +30,8 @@
         </Tab>
 
         <ShellContent Icon="ball4.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
+    
+        <ShellContent Icon="main.png" Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>
+        <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
     </FlyoutItem>
-    <ShellContent Icon="main.png" Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>
-    <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
-
 </Shell>

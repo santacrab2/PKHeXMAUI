@@ -51,7 +51,7 @@
             <Picker IsVisible="false" Grid.Row="2" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center" x:Name="battleversionpicker" SelectedIndexChanged="applybattleversion" WidthRequest="152"/>
             <!--Met Location-->
             <Label Grid.Row="3" Grid.Column="0" Text="Met Location:" HorizontalOptions="Start" VerticalOptions="Center"/>
-            <inputs:SfComboBox  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="metlocationpicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applymetlocation"  Placeholder="Met Location" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" />
+            <inputs:SfComboBox  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="metlocationpicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applymetlocation"  Placeholder="Met Location" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" MaxDropDownHeight="1000"/>
             <!--Ball-->
             <Label Grid.Row="4" Grid.Column="0" Text="Ball:" HorizontalOptions="Start" VerticalOptions="Center"/>
             <Picker Grid.Row="4" Grid.Column="0" x:Name="ballpicker" HorizontalOptions="Center" Grid.ColumnSpan="2" WidthRequest="96" VerticalOptions="Center" SelectedIndexChanged="givebackballs"/>

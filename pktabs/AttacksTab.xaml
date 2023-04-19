@@ -55,7 +55,7 @@
 
             <!--Move1-->
             <ImageButton Grid.Row="2" Grid.Column="0" Source="type_icon_01.png" WidthRequest="25" HeightRequest="25" HorizontalOptions="Start" x:Name="move1Type" Clicked="DisplayMoveInfo1"/>
-            <inputs:SfComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1" SelectionChanged="applymove1" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
+            <inputs:SfComboBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1" SelectionChanged="applymove1" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" MaxDropDownHeight="600"/>
             <ImageButton Grid.Row="2" Grid.Column="1" Source="attack_category_00.png" HorizontalOptions="End" WidthRequest="25" HeightRequest="25" x:Name="move1Cat" Clicked="DisplayMoveInfo1"/>
             <Editor Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1pp" IsReadOnly="True" TextChanged="applyPP1"/>
             <Picker Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="move1ppups" SelectedIndexChanged="applymove1ppups"/>
