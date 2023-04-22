@@ -13,7 +13,8 @@ public partial class MainPage : ContentPage
 {
 
     public bool SkipTextChange = false;
-	public MainPage()
+    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744 };
+    public MainPage()
 	{
         sav = AppShell.AppSaveFile;
         datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
@@ -130,7 +131,7 @@ public partial class MainPage : ContentPage
             if (pkm.Species == 0)
                 spriteurl = $"a_egg.png";
             else 
-                spriteurl = $"a_{pkm.Species}{(pkm.Form >0?$"_{pkm.Form}":"")}.png";
+                spriteurl = $"a_{pkm.Species}{((pkm.Form >0&&!NoFormSpriteSpecies.Contains(pkm.Species))?$"_{pkm.Form}":"")}.png";
             if (pkm.IsShiny)
                 shinysparklessprite.IsVisible = true;
             else
@@ -238,7 +239,7 @@ public partial class MainPage : ContentPage
             if (pk.Species == 0)
                 spriteurl = $"a_egg.png";
             else
-                spriteurl = $"a_{pk.Species}{(pk.Form > 0 ? $"_{pk.Form}" : "")}.png";
+                spriteurl = $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
             if (pk.IsShiny)
                 shinysparklessprite.IsVisible = true;
             else
@@ -318,7 +319,7 @@ public partial class MainPage : ContentPage
             if (pk.Species == 0)
                 spriteurl = $"a_egg.png";
             else
-                spriteurl = $"a_{pk.Species}{(pk.Form > 0 ? $"_{pk.Form}" : "")}.png";
+                spriteurl = $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
             if (pk.IsShiny)
                 shinysparklessprite.IsVisible = true;
             else

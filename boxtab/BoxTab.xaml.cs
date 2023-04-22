@@ -115,10 +115,11 @@ public class boxsprite
         if (pk9.Species == 0)
             url = $"";
         else
-            url = $"a_{pkm.Species}{(pkm.Form > 0 ? $"_{pkm.Form}" : "")}.png";
+            url = $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         shiny = (pk9.IsShiny && pk9.Species != 0);
     }
-	public PKM pkm { get; set; }
+    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744 };
+    public PKM pkm { get; set; }
 	public string url { get; set; }
 	public string species { get; set; }
     public bool shiny { get; set; }
