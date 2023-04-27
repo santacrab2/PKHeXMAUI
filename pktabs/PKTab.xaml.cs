@@ -28,13 +28,17 @@ public partial class MainPage : ContentPage
         });
         PKRefresh.Command = refreshCommand;
         Permissions.RequestAsync<Permissions.StorageWrite>();
-        APILegality.SetAllLegalRibbons = false;
+        APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
         APILegality.UseTrainerData = true;
         APILegality.AllowTrainerOverride = true;
-        APILegality.UseTrainerData = true;
-        APILegality.SetMatchingBalls = true;
-        Legalizer.EnableEasterEggs = false;
-        
+        APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
+        Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
+        APILegality.PrioritizeGame = PluginSettings.PrioritizeGame;
+        APILegality.PrioritizeGameVersion = PluginSettings.PrioritizeGameVersion;
+        APILegality.SetBattleVersion = PluginSettings.SetBattleVersion;
+        APILegality.ForceSpecifiedBall = true;
+
+
         specieslabel.ItemsSource = datasourcefiltered.Species;
         
         naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
@@ -447,6 +451,8 @@ public partial class MainPage : ContentPage
     {
         applymainpkinfo(pk);
         checklegality();
+        if (la.Valid && PSettings.IgnoreLegalPopup)
+            return;
         var makelegal = await DisplayAlert("Legality Report", la.Report(), "legalize","ok");
         if (makelegal)
         {
@@ -594,7 +600,7 @@ public partial class MainPage : ContentPage
         if (!doit)
             return;
         var set = new ShowdownSet(await Clipboard.GetTextAsync());
-        var pkm = Legalizer.GetLegalFromSet(sav, set, out var msg);
+        var pkm = sav.GetLegalFromSet( set, out var msg);
         if(msg == LegalizationResult.Regenerated)
         {
             pk = pkm;
@@ -602,6 +608,8 @@ public partial class MainPage : ContentPage
         }
         else
         {
+            if (PluginSettings.EnableMemesForIllegalSets)
+                applymainpkinfo(pkm);
             await DisplayAlert("Showdown", "I could not legalize the provided Showdown Set","cancel");
         }
     }

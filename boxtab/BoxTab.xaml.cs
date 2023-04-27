@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Internals;
 using System.Linq;
 using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 using static PKHeXMAUI.MainPage;
 
 
@@ -74,6 +75,14 @@ public partial class BoxTab : ContentPage
             };
             Set.Invoked += inject;
             swipe.TopItems.Add(Set);
+            SwipeItem Delete = new()
+            {
+                Text = "Delete",
+                BackgroundColor = Colors.Red,
+                IconImageSource = "delete.png"
+            };
+            Delete.Invoked += del;
+            swipe.LeftItems.Add(Delete);
             swipe.Content = grid;
             return swipe;
         });
@@ -97,8 +106,32 @@ public partial class BoxTab : ContentPage
     private async void inject(object sender, EventArgs e)
     {
         sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+        fillbox();
     }
-
+    private async void del(object sender, EventArgs e)
+    {
+       
+        sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+        fillbox();
+    }
+    private async void Generateliving(object sender, EventArgs e)
+    {
+        livingdexbutton.Text = "loading...";
+        await Task.Delay(100);
+        ModLogic.SetAlpha = PluginSettings.LivingDexSetAlpha;
+        ModLogic.IncludeForms = PluginSettings.LivingDexAllForms;
+        ModLogic.NativeOnly = true;
+        ModLogic.SetShiny = PluginSettings.LivingDexSetShiny;
+        copyboxdata();
+        livingdexbutton.Text = "Generate";
+    }
+    private void copyboxdata()
+    {
+        Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
+        Span<PKM> bd = sav.BoxData.ToArray();
+        pkms.CopyTo(bd);
+        sav.BoxData = bd.ToArray();
+    }
 
 
     private void changebox(object sender, EventArgs e)

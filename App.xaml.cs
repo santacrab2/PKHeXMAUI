@@ -10,6 +10,9 @@ public partial class App : Application
         InitializeComponent();
 
         var Version = Preferences.Default.Get("SaveFile", 50);
-        MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)Version, "PKHeX"));
+        if (PSettings.RememberLastSave)
+            MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)Version, "PKHeX"));
+        else
+            MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)50, "PKHeX"));
     }
 }

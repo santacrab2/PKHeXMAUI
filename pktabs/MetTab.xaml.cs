@@ -26,7 +26,16 @@ public partial class MetTab : ContentPage
         metlocationpicker.DisplayMemberPath = "Text";
         eggmetpicker.ItemsSource = (System.Collections.IList)GameInfo.GetLocationList(sav.Version, sav.Context, true);
         eggmetpicker.ItemDisplayBinding = new Binding("Text");
-        ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
+        if (PSettings.DisplayLegalBallsOnly)
+        {
+            var PokemonBalls = BallApplicator.GetLegalBalls(pk);
+            if (PokemonBalls.Count() != 0)
+                ballpicker.ItemsSource = PokemonBalls.ToList();
+            else
+                ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
+        }
+        else
+            ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
 
 
         ICommand refreshCommand = new Command(async () =>
@@ -43,6 +52,14 @@ public partial class MetTab : ContentPage
     {
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;
+        if (PSettings.DisplayLegalBallsOnly)
+        {
+            var PokemonsBalls = BallApplicator.GetLegalBalls(pkm).ToList();
+            if (PokemonsBalls.Count != 0)
+                ballpicker.ItemsSource = PokemonsBalls;
+            else
+                ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
+        }
         if (pkm.HeldItem > 0)
         {
             itemsprite.Source = itemspriteurl;
@@ -64,7 +81,7 @@ public partial class MetTab : ContentPage
         }
         
         metlocationpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)pkm.Version, pkm.Context).Where(z=>z.Value == pkm.Met_Location).FirstOrDefault();
-        ballpicker.SelectedIndex = pkm.Ball>-1?pkm.Ball:0;
+        ballpicker.SelectedItem = pkm.Ball > -1 ? (Ball)pkm.Ball : (Ball)0;
         ballspriteurl = $"{(pkm.Ball>-1?$"ball{pkm.Ball}":"ball4")}.png";
         ballimage.Source = ballspriteurl;
        

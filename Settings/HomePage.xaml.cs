@@ -5,15 +5,16 @@ namespace PKHeXMAUI;
 public partial class HomePage : ContentPage
 {
     public bool SkipRefresh = false;
-    public HomePage()
+	public HomePage()
 	{
 		InitializeComponent();
         var noSelectVersions = new[] { GameVersion.GO, (GameVersion)0 };
         SaveVersionPicker.ItemsSource = GameInfo.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
         SaveVersionPicker.ItemDisplayBinding = new Binding("Text");
         SkipRefresh = true;
-        SaveVersionPicker.SelectedItem = GameInfo.VersionDataSource.Where(z => (GameVersion)z.Value == MainPage.sav.Version).FirstOrDefault();
+        SaveVersionPicker.SelectedItem = GameInfo.VersionDataSource.Where(z =>(GameVersion) z.Value == MainPage.sav.Version).FirstOrDefault();
         SkipRefresh = false;
+
     }
 
 
