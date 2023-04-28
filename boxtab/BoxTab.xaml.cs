@@ -50,11 +50,15 @@ public partial class BoxTab : ContentPage
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             Image image = new Image() { WidthRequest = 50, HeightRequest = 50 };
             Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
-            shinysp.TranslateTo(shinysp.TranslationX + 15, shinysp.TranslationY);
+            shinysp.TranslateTo(shinysp.TranslationX + 20, shinysp.TranslationY);
+            Image ItemSprite = new Image() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
+            ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
+            ItemSprite.TranslateTo(ItemSprite.TranslationX + 20, ItemSprite.TranslationY);
             image.SetBinding(Image.SourceProperty, "url");
             shinysp.SetBinding(Image.IsVisibleProperty, "shiny");
             grid.Add(image);
             grid.Add(shinysp);
+            grid.Add(ItemSprite);
             SwipeView swipe = new();
             SwipeItem view = new()
             {
@@ -128,10 +132,21 @@ public class boxsprite
         else
             url = $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         shiny = (pk9.IsShiny && pk9.Species != 0);
+        if (sav is SAV9SV)
+        {
+            ItemResource = $"aitem_{pkm.HeldItem}.png";
+            
+        }
+        else
+        {
+            ItemResource = $"bitem_{pkm.HeldItem}.png";
+          
+        }
     }
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744 };
     public PKM pkm { get; set; }
 	public string url { get; set; }
 	public string species { get; set; }
     public bool shiny { get; set; }
+    public string ItemResource { get; set; }
 }
