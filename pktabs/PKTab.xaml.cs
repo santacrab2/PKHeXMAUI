@@ -17,7 +17,8 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
         sav = AppShell.AppSaveFile;
-        datasourcefiltered = new(sav, new GameDataSource(GameInfo.Strings));
+        GameInfo.FilteredSources = new FilteredGameDataSource(sav, GameInfo.Sources);
+        datasourcefiltered = GameInfo.FilteredSources;
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
         InitializeComponent();
         ICommand refreshCommand = new Command(async () =>
@@ -29,7 +30,7 @@ public partial class MainPage : ContentPage
         PKRefresh.Command = refreshCommand;
         Permissions.RequestAsync<Permissions.StorageWrite>();
         APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
-        APILegality.UseTrainerData = true;
+        APILegality.UseTrainerData = false;
         APILegality.AllowTrainerOverride = true;
         APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
         Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
@@ -37,8 +38,9 @@ public partial class MainPage : ContentPage
         APILegality.PrioritizeGameVersion = PluginSettings.PrioritizeGameVersion;
         APILegality.SetBattleVersion = PluginSettings.SetBattleVersion;
         APILegality.ForceSpecifiedBall = true;
-
-
+        APILegality.Timeout = 15;
+        APILegality.UseXOROSHIRO = true;
+      
         specieslabel.ItemsSource = datasourcefiltered.Species;
         
         naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));

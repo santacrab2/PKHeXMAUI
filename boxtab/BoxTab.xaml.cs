@@ -15,10 +15,7 @@ public partial class BoxTab : ContentPage
 	public BoxTab()
 	{
 		InitializeComponent();
-        for(int k = 1; k < 31; k++)
-        {
-            boxnum.Items.Add(k.ToString());
-        }
+        boxnum.ItemsSource = Enumerable.Range(1, 32).ToArray();
         ICommand refreshCommand = new Command(() =>
         {
 			
@@ -26,7 +23,7 @@ public partial class BoxTab : ContentPage
             boxrefresh.IsRefreshing = false;
         });
         boxrefresh.Command = refreshCommand;
-       
+        boxnum.SelectedIndex = 0;
     }
     public static IList<boxsprite> boxsprites = new List<boxsprite>();
     
@@ -34,7 +31,7 @@ public partial class BoxTab : ContentPage
 	{
 		
 		boxsprites = new List<boxsprite>();
-       if(sav.GetBoxData(boxnum.SelectedIndex).Count() == 0) { sav.SetBoxBinary(BitConverter.GetBytes(0),boxnum.SelectedIndex); }
+       //if(sav.GetBoxData(boxnum.SelectedIndex).Count() == 0) { sav.SetBoxBinary(BitConverter.GetBytes(0),boxnum.SelectedIndex); }
 		foreach (var boxpk in sav.GetBoxData(boxnum.SelectedIndex))
 		{
 			var boxinfo = new boxsprite(boxpk);
@@ -114,25 +111,6 @@ public partial class BoxTab : ContentPage
         sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
         fillbox();
     }
-    private async void Generateliving(object sender, EventArgs e)
-    {
-        livingdexbutton.Text = "loading...";
-        await Task.Delay(100);
-        ModLogic.SetAlpha = PluginSettings.LivingDexSetAlpha;
-        ModLogic.IncludeForms = PluginSettings.LivingDexAllForms;
-        ModLogic.NativeOnly = true;
-        ModLogic.SetShiny = PluginSettings.LivingDexSetShiny;
-        copyboxdata();
-        livingdexbutton.Text = "Generate";
-    }
-    private void copyboxdata()
-    {
-        Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
-        Span<PKM> bd = sav.BoxData.ToArray();
-        pkms.CopyTo(bd);
-        sav.BoxData = bd.ToArray();
-    }
-
 
     private void changebox(object sender, EventArgs e)
     {

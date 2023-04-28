@@ -61,15 +61,15 @@ public partial class PKHeXSettings : ContentPage
 }
 public class PSettings 
 {
-	public static bool IgnoreLegalPopup { get =>  Preferences.Default.Get("IgnoreLegalPopup", false);  set => Preferences.Set("IgnoreLegalPopup", IgnoreLegalPopup); }
-	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true); set => Preferences.Set("RememberLastSave", RememberLastSave); }
-	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false); set => Preferences.Set("DisplayLegalBallsOnly", DisplayLegalBallsOnly); }
+	public static bool IgnoreLegalPopup { get => Preferences.Get("IgnoreLegalPopup",false); }
+	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
+	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
 	
 }
 public class EncounterSettings
 {
-	public static bool FilterUnavailableSpecies { get => Preferences.Default.Get("FilterUnavailableSpecies", false); set => Preferences.Set("FilterUnavailableSpecies", FilterUnavailableSpecies); }
-	public static bool UsePkEditorAsCriteria { get => Preferences.Default.Get("UsePkEditorAsCriteria", false); set => Preferences.Set("UsePkEditorAsCriteria", UsePkEditorAsCriteria); }
+	public static bool FilterUnavailableSpecies { get => Preferences.Default.Get("FilterUnavailableSpecies", false); }
+	public static bool UsePkEditorAsCriteria { get => Preferences.Default.Get("UsePkEditorAsCriteria", false); }
 }
 
 public class GenericCollection

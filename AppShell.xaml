@@ -28,8 +28,10 @@
             <ShellContent Title="Cosmetic" ContentTemplate="{DataTemplate local:Cosmeticstab}"></ShellContent>
             <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
-
-        <ShellContent Icon="ball4.png" Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
+        <Tab Title="Box/Party" Icon="ball4.png">
+            <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
+            <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
+        </Tab>
 
         <Tab Icon="main.png" Title="Settings">
             <ShellContent Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>

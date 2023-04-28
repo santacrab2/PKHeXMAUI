@@ -62,17 +62,13 @@ public partial class ALMSettings : ContentPage
 
 public class PluginSettings
 {
-    public static bool ForceSpecifiedBall { get; set; }
-  
-	public static bool PrioritizeGame { get; set; }
-	public static GameVersion PrioritizeGameVersion { get; set; }
-	public static bool SetAllLegalRibbons { get; set; }
-	public static bool SetBattleVersion { get; set; }
-	public static bool SetBallByColor { get; set; }
-	public static bool EnableMemesForIllegalSets { get; set; }
-	public static bool LivingDexAllForms { get; set; }
-	//public static bool LivingDexNativeOnly { get; set; }
-    public static bool LivingDexSetAlpha { get; set; }
-    public static bool LivingDexSetShiny { get; set; }
+   
+    public static bool PrioritizeGame { get => Preferences.Default.Get("PrioritizeGame", false);  }
+    public static GameVersion PrioritizeGameVersion { get => (GameVersion)Preferences.Default.Get("PrioritizeGameVersion", 50);  }
+    public static bool SetAllLegalRibbons { get => Preferences.Default.Get("SetAllLegalRibbons", false);  }
+    public static bool SetBattleVersion { get => Preferences.Default.Get("SetBattleVersion", true);  }
+    public static bool SetBallByColor { get => Preferences.Default.Get("SetBallByColor", true);  }
+    public static bool EnableMemesForIllegalSets { get => Preferences.Default.Get("EnableMemesForIllegalSets", true);  }
+ 
 
 }
