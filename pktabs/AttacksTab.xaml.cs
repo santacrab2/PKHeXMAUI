@@ -281,3 +281,9 @@ public partial class AttacksTab : ContentPage
         await DisplayAlert($"{(Move)value}", details, "cancel");
     }
 }
+public enum MoveCategory
+{
+    Status,
+    Physical,
+    Special
+}

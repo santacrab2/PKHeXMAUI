@@ -38,8 +38,8 @@ public partial class MainPage : ContentPage
         APILegality.PrioritizeGameVersion = PluginSettings.PrioritizeGameVersion;
         APILegality.SetBattleVersion = PluginSettings.SetBattleVersion;
         APILegality.ForceSpecifiedBall = true;
-        APILegality.Timeout = 15;
-        APILegality.UseXOROSHIRO = true;
+        APILegality.Timeout = 45;
+        EncounterMovesetGenerator.PriorityList = new List<EncounterTypeGroup>() { EncounterTypeGroup.Slot, EncounterTypeGroup.Trade, EncounterTypeGroup.Static, EncounterTypeGroup.Mystery, EncounterTypeGroup.Egg };
       
         specieslabel.ItemsSource = datasourcefiltered.Species;
         

@@ -26,7 +26,7 @@ public partial class BoxTab : ContentPage
         boxnum.SelectedIndex = 0;
     }
     public static IList<boxsprite> boxsprites = new List<boxsprite>();
-    
+    public static int CurrentBox = 0;
 	public void fillbox()
 	{
 		
@@ -51,6 +51,8 @@ public partial class BoxTab : ContentPage
             Image image = new Image() { WidthRequest = 50, HeightRequest = 50 };
             Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
             shinysp.TranslateTo(shinysp.TranslationX + 20, shinysp.TranslationY);
+            Image Egg = new() { Source = "a_egg.png", HeightRequest = 50, WidthRequest = 50, VerticalOptions = LayoutOptions.End };
+            Egg.SetBinding(Image.IsVisibleProperty, "pkm.IsEgg");
             Image ItemSprite = new Image() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
             ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
             ItemSprite.TranslateTo(ItemSprite.TranslationX + 20, ItemSprite.TranslationY);
@@ -59,6 +61,7 @@ public partial class BoxTab : ContentPage
             grid.Add(image);
             grid.Add(shinysp);
             grid.Add(ItemSprite);
+            grid.Add(Egg);
             SwipeView swipe = new();
             SwipeItem view = new()
             {
@@ -137,7 +140,9 @@ public partial class BoxTab : ContentPage
     }
     private void changebox(object sender, EventArgs e)
     {
+        CurrentBox = boxnum.SelectedIndex;
         fillbox();
+        
     }
 }
 public class boxsprite

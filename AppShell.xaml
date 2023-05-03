@@ -4,7 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PKHeXMAUI"
-    FlyoutBackgroundColor="Black">
+    FlyoutBackgroundColor="Black"
+    x:Name="TheShell"
+    Navigated="checkbox">
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid HeightRequest="100">
@@ -13,11 +15,11 @@
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
-    
+
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
-        
+
         <Tab x:Name="pkeditortab" Title="pk editor" Icon="bag_pcitems.png">
-            
+
             <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"/>
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
@@ -28,11 +30,17 @@
             <ShellContent Title="Cosmetic" ContentTemplate="{DataTemplate local:Cosmeticstab}"></ShellContent>
             <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
-        <Tab Title="Box/Party" Icon="ball4.png">
-            <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}"/>
-            <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
-        </Tab>
+    </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="BoxShell">
+            <Tab Icon="ball4.png" Title="Box/Party" >
+                <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}" />
 
+                <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
+            </Tab>
+
+        </FlyoutItem>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
         <Tab Icon="main.png" Title="Settings">
             <ShellContent Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>
             <ShellContent Title="PKHeX Settings" ContentTemplate="{DataTemplate local:PKHeXSettings}"/>
@@ -40,4 +48,46 @@
         </Tab>
         <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
     </FlyoutItem>
+    <MenuItem Text="    - Delete" x:Name="DeleteBoxes" Shell.FlyoutItemIsVisible="False" Clicked="DeleteClicked"/>
+    <MenuItem Text="        - Clear" x:Name="ClearBox" Shell.FlyoutItemIsVisible="False" Clicked="ClearBoxClicked"/>
+    <MenuItem Text="        - Eggs" x:Name="ClearEggs" Shell.FlyoutItemIsVisible="False" Clicked="ClearEggsClicked"/>
+    <MenuItem Text="        - Past Generation" x:Name="ClearPast" Shell.FlyoutItemIsVisible="False" Clicked="ClearPastClicked"/>
+    <MenuItem Text="        - Foreign" x:Name="ClearForeign" Shell.FlyoutItemIsVisible="False" Clicked="ClearForeignClicked"/>
+    <MenuItem Text="        - Untrained" x:Name="ClearUntrained" Shell.FlyoutItemIsVisible="False" Clicked="ClearUntrainedClicked"/>
+    <MenuItem Text="        - No Held Item" x:Name="ClearNoHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="ClearNoHeldItemClicked"/>
+    <MenuItem Text="        - Illegal" x:Name="ClearIllegal" Shell.FlyoutItemIsVisible="False" Clicked="ClearIllegalClicked"/>
+    <MenuItem Text="        - Clones" x:Name="ClearClones" Shell.FlyoutItemIsVisible="False" Clicked="ClearClonesClicked"/>
+    <MenuItem Text="    - Sort Boxes" x:Name="SortBoxes" Shell.FlyoutItemIsVisible="false" Clicked="SortClick" ></MenuItem>
+    <MenuItem Text="        - Pokedex No" x:Name="SortSpecies" Shell.FlyoutItemIsVisible="false" Clicked="SortBySpecies"/>
+    <MenuItem Text="        - Pokedex No (Reverse)" x:Name="SortSpeciesReverse" Shell.FlyoutItemIsVisible="False" Clicked="SortSpeciesReverseClicked"/>
+    <MenuItem Text="        - Level (low to high)" x:Name="SortLevellohi" Shell.FlyoutItemIsVisible="False" Clicked="SortLevellohiClicked"/>
+    <MenuItem Text="        - Level (high to low)" x:Name="SortLevelhilo" Shell.FlyoutItemIsVisible="False" Clicked="SortLevelhiloClicked"/>
+    <MenuItem Text="        - Met Date" x:Name="SortMetDate" Shell.FlyoutItemIsVisible="False" Clicked="SortMetDateClicked"/>
+    <MenuItem Text="        - Species Name" x:Name="SortSpeciesName" Shell.FlyoutItemIsVisible="False" Clicked="SortSpeciesNameClicked"/>
+    <MenuItem Text="        - Shiny" x:Name="SortShiny" Shell.FlyoutItemIsVisible="False" Clicked="SortShinyClicked"/>
+    <MenuItem Text="        - Random" x:Name="SortRandom" Shell.FlyoutItemIsVisible="False" Clicked="SortRandomClicked"/>
+    <MenuItem Text="    - Sort Boxes (Advanced)" x:Name="SortBoxesAdvanced" Shell.FlyoutItemIsVisible="False" Clicked="SortBoxesAdvancedClicked"/>
+    <MenuItem Text="        - Usage" x:Name="SortUsage" Shell.FlyoutItemIsVisible="False" Clicked="SortUsageClicked"/>
+    <MenuItem Text="        - IV Potential" x:Name="SortIV" Shell.FlyoutItemIsVisible="False" Clicked="SortIVClicked"/>
+    <MenuItem Text="        - EV Training" x:Name="SortEV" Shell.FlyoutItemIsVisible="False" Clicked="SortEVClicked"/>
+    <MenuItem Text="        - Ownership" x:Name="SortOwnership" Shell.FlyoutItemIsVisible="False" Clicked="SortOwnershipClicked"/>
+    <MenuItem Text="        - Type" x:Name="SortType" Shell.FlyoutItemIsVisible="False" Clicked="SortTypeClicked"/>
+    <MenuItem Text="        - Tera Type" x:Name="SortTera" Shell.FlyoutItemIsVisible="False" Clicked="SortTeraClicked"/>
+    <MenuItem Text="        - Version" x:Name="SortVersion" Shell.FlyoutItemIsVisible="False" Clicked="SortVersionClicked"/>
+    <MenuItem Text="        - Base Stat Total" x:Name="SortBaseStat" Shell.FlyoutItemIsVisible="False" Clicked="SortBaseStatClicked"/>
+    <MenuItem Text="        - Scale" x:Name="SortScale" Shell.FlyoutItemIsVisible="False" Clicked="SortScaleClicked"/>
+    <MenuItem Text="        - Ribbon Count" x:Name="SortRibbonCount" Shell.FlyoutItemIsVisible="False" Clicked="SortRibbonClicked"/>
+    <MenuItem Text="        - Mark Count" x:Name="SortMarkCount" Shell.FlyoutItemIsVisible="False" Clicked="SortMarkClicked"/>
+    <MenuItem Text="        - Legal" x:Name="SortLegal" Shell.FlyoutItemIsVisible="False" Clicked="SortLegalClicked"/>
+    <MenuItem Text="        - Encounter Type" x:Name="SortEncounter" Shell.FlyoutItemIsVisible="False" Clicked="SortEncounterClicked"/>
+    <MenuItem Text="    - Modify" x:Name="ModifyBoxes" Shell.FlyoutItemIsVisible="False" Clicked="ModifyBoxesClicked"/>
+    <MenuItem Text="        - Hatch Eggs" x:Name="HatchEggs" Shell.FlyoutItemIsVisible="False" Clicked="HatchEggsClicked"/>
+    <MenuItem Text="        - Max Friendship" x:Name="MaxFriendship" Shell.FlyoutItemIsVisible="False" Clicked="MaxFriendshipClicked"/>
+    <MenuItem Text="        - Max Level" x:Name="MaxLevel" Shell.FlyoutItemIsVisible="False" Clicked="MaxLevelClicked"/>
+    <MenuItem Text="        - Reset Moves" x:Name="ResetMoves" Shell.FlyoutItemIsVisible="False" Clicked="ResetMovesClicked"/>
+    <MenuItem Text="        - Randomize Moves" x:Name="RandomizeMoves" Shell.FlyoutItemIsVisible="False" Clicked="RandomizeMovesClicked"/>
+    <MenuItem Text="        - Hyper Train" x:Name="HyperTrain" Shell.FlyoutItemIsVisible="False" Clicked="HyperTrainClicked"/>
+    <MenuItem Text="        - Remove Nicknames" x:Name="RemoveNicknames" Shell.FlyoutItemIsVisible="False" Clicked="RemoveNicknamesClicked"/>
+    <MenuItem Text="        - Delete Held Item" x:Name="DeleteHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="DeleteHeldItemClicked"/>
+    <MenuItem Text="        - Heal (Stats/PP)" x:Name="Heal" Shell.FlyoutItemIsVisible="False" Clicked="HealClicked"/>
 </Shell>
