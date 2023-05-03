@@ -66,9 +66,12 @@ public class PluginSettings
     public static bool PrioritizeGame { get => Preferences.Default.Get("PrioritizeGame", false);  }
     public static GameVersion PrioritizeGameVersion { get => (GameVersion)Preferences.Default.Get("PrioritizeGameVersion", 50);  }
     public static bool SetAllLegalRibbons { get => Preferences.Default.Get("SetAllLegalRibbons", false);  }
-    public static bool SetBattleVersion { get => Preferences.Default.Get("SetBattleVersion", true);  }
-    public static bool SetBallByColor { get => Preferences.Default.Get("SetBallByColor", true);  }
-    public static bool EnableMemesForIllegalSets { get => Preferences.Default.Get("EnableMemesForIllegalSets", true);  }
- 
+    public static bool SetBattleVersion { get => Preferences.Default.Get("SetBattleVersion", false);  }
+    public static bool SetBallByColor { get => Preferences.Default.Get("SetBallByColor", false);  }
+    public static bool EnableMemesForIllegalSets { get => Preferences.Default.Get("EnableMemesForIllegalSets", false);  }
+    public static bool LivingDexAllForms { get => Preferences.Get("LivingDexAllForms", false); }
+    public static bool LivingDexNativeOnly { get => Preferences.Get("LivingDexNativeOnly", false); }
+    public static bool LivingDexSetAlpha { get => Preferences.Get("LivingDexSetAlpha", false); }
+    public static bool LivingDexSetShiny { get => Preferences.Get("LivingDexSetShiny", false); }
 
 }
