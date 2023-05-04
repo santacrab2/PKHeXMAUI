@@ -51,6 +51,9 @@
     <!--Hidden PK Editor Menus-->
     <MenuItem Text="    - Open PKM" x:Name="OpenPKM" Shell.FlyoutItemIsVisible="False" Clicked="OpenPKMClicked"/>
     <MenuItem Text="    - Save PKM" x:Name="SavePKM" Shell.FlyoutItemIsVisible="False" Clicked="SavePKMClicked"/>
+    <MenuItem Text="    - Legalize" x:Name="thelegalizer" Shell.FlyoutItemIsVisible="False" Clicked="LegalizePKM"/>
+    <MenuItem Text="    - Import Showdown" x:Name="impshow" Shell.FlyoutItemIsVisible="False" Clicked="ImpShowClicked"/>
+    <MenuItem Text="    - Export Showdown" x:Name="expshow" Shell.FlyoutItemIsVisible="False" Clicked="ExpShowClicked"/>
     <!--Hidden Box Menus-->
     <MenuItem Text="    - Delete" x:Name="DeleteBoxes" Shell.FlyoutItemIsVisible="False" Clicked="DeleteClicked"/>
     <MenuItem Text="        - Clear" x:Name="ClearBox" Shell.FlyoutItemIsVisible="False" Clicked="ClearBoxClicked"/>

@@ -37,11 +37,17 @@ public partial class AppShell : Shell
         {
             Shell.SetFlyoutItemIsVisible(OpenPKM, true);
             Shell.SetFlyoutItemIsVisible(SavePKM, true);
+            Shell.SetFlyoutItemIsVisible(thelegalizer, true);
+            Shell.SetFlyoutItemIsVisible(impshow, true);
+            Shell.SetFlyoutItemIsVisible(expshow, true);
         }
         else
         {
             Shell.SetFlyoutItemIsVisible(OpenPKM, false);
             Shell.SetFlyoutItemIsVisible(SavePKM, false);
+            Shell.SetFlyoutItemIsVisible(thelegalizer, false);
+            Shell.SetFlyoutItemIsVisible(impshow, false);
+            Shell.SetFlyoutItemIsVisible(expshow, false);
         }
     }
     public bool SortExpanded = false;
@@ -455,6 +461,24 @@ public partial class AppShell : Shell
     {
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).pk9saver_Clicked(sender, e);
+    }
+
+    private void LegalizePKM(object sender, EventArgs e)
+    {
+        TheShell.FlyoutIsPresented = false;
+        ((MainPage)TheShell.CurrentPage).legalize(sender, e);
+    }
+
+    private void ImpShowClicked(object sender, EventArgs e)
+    {
+        TheShell.FlyoutIsPresented = false;
+        ((MainPage)TheShell.CurrentPage).ImportShowdown(sender, e);
+    }
+
+    private void ExpShowClicked(object sender, EventArgs e)
+    {
+        TheShell.FlyoutIsPresented = false;
+        ((MainPage)TheShell.CurrentPage).ExportShowdown(sender, e);
     }
 }
 public class BoxManipulatorMAUI : BoxManipulator

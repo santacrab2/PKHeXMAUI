@@ -438,7 +438,7 @@ public partial class MainPage : ContentPage
 
     }   
 
-    private async void legalize(object sender, EventArgs e)
+    public async void legalize(object sender, EventArgs e)
     {
         try
         {
@@ -594,7 +594,7 @@ public partial class MainPage : ContentPage
             box.TextColor = Colors.White;
     }
 
-    private async void ImportShowdown(object sender, EventArgs e)
+    public async void ImportShowdown(object sender, EventArgs e)
     {
         if (!Clipboard.HasText)
         {
@@ -619,7 +619,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void ExportShowdown(object sender, EventArgs e)
+    public void ExportShowdown(object sender, EventArgs e)
     {
         Clipboard.SetTextAsync(ShowdownParsing.GetShowdownText(pk));
     }
