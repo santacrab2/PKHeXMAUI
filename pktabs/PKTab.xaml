@@ -33,10 +33,10 @@
 
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
-                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
 
 
                 </Grid.ColumnDefinitions>
@@ -54,13 +54,13 @@
                 <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
                 <ImageButton Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="legality" Clicked="displaylegalitymessage" Source="warn.png" HeightRequest="24"/>
 
-                <Button  Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="Open PKM" x:Name="pk9picker" Clicked="pk9picker_Clicked"/>
+                
                 <Button  Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
-                <Button  Grid.Row="1" Grid.Column="3" HorizontalOptions="Start"     VerticalOptions="Center" Text="Save PKM" x:Name="pk9saver" Clicked="pk9saver_Clicked"/>
+               
                 <!--PID-->
                 <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <Editor Grid.Row="3" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID" Grid.ColumnSpan="2" WidthRequest="96"></Editor>
-                <Button  Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
+                <Button  Grid.Row="3" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
                 <!--Species-->
                 <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <inputs:SfComboBox  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Species" x:Name="specieslabel" HorizontalOptions="Start" SelectionChanged="specieschanger" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" />

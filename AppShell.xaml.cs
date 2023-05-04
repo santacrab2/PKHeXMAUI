@@ -16,7 +16,7 @@ public partial class AppShell : Shell
     public BoxManipulator manip = new BoxManipulatorMAUI();
     private void checkbox(object sender, ShellNavigatedEventArgs e)
     {
-        if (TheShell.CurrentItem == BoxShell)
+        if (TheShell.CurrentPage.GetType() == typeof(BoxTab))
         {
 
             Shell.SetFlyoutItemIsVisible(DeleteBoxes, true);
@@ -25,13 +25,23 @@ public partial class AppShell : Shell
             Shell.SetFlyoutItemIsVisible(ModifyBoxes, true);
 
         }
-        else
+        else 
         {
             Shell.SetFlyoutItemIsVisible(DeleteBoxes, false);
             Shell.SetFlyoutItemIsVisible(SortBoxes, false);
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, false);
             Shell.SetFlyoutItemIsVisible(ModifyBoxes, false);
-
+            
+        }
+        if (TheShell.CurrentItem == PKShell)
+        {
+            Shell.SetFlyoutItemIsVisible(OpenPKM, true);
+            Shell.SetFlyoutItemIsVisible(SavePKM, true);
+        }
+        else
+        {
+            Shell.SetFlyoutItemIsVisible(OpenPKM, false);
+            Shell.SetFlyoutItemIsVisible(SavePKM, false);
         }
     }
     public bool SortExpanded = false;
@@ -433,6 +443,18 @@ public partial class AppShell : Shell
     private void ClearClonesClicked(object sender, EventArgs e)
     {
         ManipulateBoxes("Clear", "Clear clones in All boxes", "Clear clones in the Current box", BoxManipType.DeleteClones);
+    }
+
+    private void OpenPKMClicked(object sender, EventArgs e)
+    {
+        TheShell.FlyoutIsPresented = false;
+        ((MainPage)TheShell.CurrentPage).pk9picker_Clicked(sender, e);
+    }
+
+    private void SavePKMClicked(object sender, EventArgs e)
+    {
+        TheShell.FlyoutIsPresented = false;
+        ((MainPage)TheShell.CurrentPage).pk9saver_Clicked(sender, e);
     }
 }
 public class BoxManipulatorMAUI : BoxManipulator

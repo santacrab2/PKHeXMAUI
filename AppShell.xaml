@@ -16,11 +16,11 @@
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="PKShell">
 
         <Tab x:Name="pkeditortab" Title="pk editor" Icon="bag_pcitems.png">
 
-            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}"/>
+            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" x:Name="PKPage"/>
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
 
@@ -33,7 +33,7 @@
     </FlyoutItem>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="BoxShell">
             <Tab Icon="ball4.png" Title="Box/Party" >
-                <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}" />
+                <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}" x:Name="BoxPage" />
 
                 <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
             </Tab>
@@ -48,6 +48,10 @@
         </Tab>
         <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
     </FlyoutItem>
+    <!--Hidden PK Editor Menus-->
+    <MenuItem Text="    - Open PKM" x:Name="OpenPKM" Shell.FlyoutItemIsVisible="False" Clicked="OpenPKMClicked"/>
+    <MenuItem Text="    - Save PKM" x:Name="SavePKM" Shell.FlyoutItemIsVisible="False" Clicked="SavePKMClicked"/>
+    <!--Hidden Box Menus-->
     <MenuItem Text="    - Delete" x:Name="DeleteBoxes" Shell.FlyoutItemIsVisible="False" Clicked="DeleteClicked"/>
     <MenuItem Text="        - Clear" x:Name="ClearBox" Shell.FlyoutItemIsVisible="False" Clicked="ClearBoxClicked"/>
     <MenuItem Text="        - Eggs" x:Name="ClearEggs" Shell.FlyoutItemIsVisible="False" Clicked="ClearEggsClicked"/>
