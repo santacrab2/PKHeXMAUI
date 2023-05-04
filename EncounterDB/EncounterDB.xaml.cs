@@ -9,9 +9,9 @@ public partial class EncounterDB : ContentPage
 {
   
     public static PKHeX.Core.Searching.SearchSettings encSettings;
-	public EncounterDB()
-	{
-		InitializeComponent();
+    public EncounterDB()
+    {
+        InitializeComponent();
         EncounterCollection.ItemTemplate = new DataTemplate(() =>
         {
             
@@ -50,7 +50,7 @@ public partial class EncounterDB : ContentPage
 
     private void SetSearchSettings(object sender, EventArgs e)
     {
-		Navigation.PushModalAsync(new SearchSettings());
+        Navigation.PushModalAsync(new SearchSettings());
     }
 
     public void applyencpk(object sender, EventArgs e)
@@ -150,6 +150,7 @@ public class EncounterSprite
 {
    public IEncounterInfo EncounterInfo { get; set; }
     public string url { get; set; }
+    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
 
     public EncounterSprite(IEncounterInfo info)
     {
@@ -158,7 +159,7 @@ public class EncounterSprite
         if (info.Species == 0)
             url = $"";
         else
-            url = $"a_{info.Species}{(info.Form > 0 ? $"_{info.Form}" : "")}.png";
+           url = $"a_{info.Species}{((info.Form > 0 && !NoFormSpriteSpecies.Contains(info.Species)) ? $"_{info.Form}" : "")}.png";
     }
 
  
