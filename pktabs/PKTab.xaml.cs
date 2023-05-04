@@ -53,7 +53,7 @@ public partial class MainPage : ContentPage
             helditempicker.IsVisible = true;
             helditemlabel.IsVisible = true;
         }
-        languagepicker.ItemsSource = Enum.GetValues(typeof(LanguageID));
+        languagepicker.ItemsSource = Enum.GetNames(typeof(LanguageID));
   
         checklegality();
 
@@ -194,6 +194,7 @@ public partial class MainPage : ContentPage
     {
         if (!SkipTextChange)
         {
+            pk = EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version);
             formargstepper.IsVisible = false;
             formlabel.IsVisible = false;
             formpicker.IsVisible = false;
