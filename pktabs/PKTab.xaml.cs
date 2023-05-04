@@ -2,16 +2,17 @@
 using PKHeX.Core;
 using System.Net.Sockets;
 using PKHeX.Core.AutoMod;
-
+using Octokit;
 using System.Windows.Input;
 using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
+using System.Net.Http.Headers;
 
 namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-
+    public static string Version = "v23.5.2";
     public bool SkipTextChange = false;
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744 };
     public MainPage()
@@ -21,6 +22,7 @@ public partial class MainPage : ContentPage
         datasourcefiltered = GameInfo.FilteredSources;
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
         InitializeComponent();
+        
         ICommand refreshCommand = new Command(async () =>
         {
 
@@ -56,7 +58,7 @@ public partial class MainPage : ContentPage
         languagepicker.ItemsSource = Enum.GetNames(typeof(LanguageID));
   
         checklegality();
-
+        CheckForUpdate();
 
 
 
@@ -620,6 +622,63 @@ public partial class MainPage : ContentPage
     private void ExportShowdown(object sender, EventArgs e)
     {
         Clipboard.SetTextAsync(ShowdownParsing.GetShowdownText(pk));
+    }
+    private static async Task<bool> IsUpdateAvailable()
+    {
+        var currentVersion = ParseVersion(Version);
+        var latestVersion = ParseVersion(await GetLatestVersion());
+
+        if (latestVersion[0] > currentVersion[0])
+            return true;
+        else if (latestVersion[0] == currentVersion[0])
+        {
+            if (latestVersion[1] > currentVersion[1])
+                return true;
+            else if (latestVersion[1] == currentVersion[1])
+            {
+                if (latestVersion[2] > currentVersion[2])
+                    return true;
+            }
+        }
+        return false;
+    }
+    private static async Task<string> GetLatestVersion()
+    {
+        try
+        {
+            return await GetLatest();
+        }
+        catch (Exception)
+        {
+            return "0.0.0";
+        }
+    }
+
+    private static async Task<string> GetLatest()
+    {
+        var client = new GitHubClient(new Octokit.ProductHeaderValue("PKHeXMAUI"));
+        var release = await client.Repository.Release.GetLatest("santacrab2", "PKHeXMAUI");
+        return release.Name;
+    }
+
+    private static int[] ParseVersion(string version)
+    {
+        var v = new int[3];
+        v[0] = int.Parse($"{version[1] + version[2]}");
+        v[1] = int.Parse($"{version[4]}");
+        v[2] = int.Parse($"{version[6]}");
+        return v;
+    }
+    public async void CheckForUpdate()
+    {
+        if (await IsUpdateAvailable())
+        {
+            var Update = await DisplayAlert("Update", "Update is available", "Update", "Cancel");
+            if (Update)
+            {
+               await Browser.OpenAsync("https://github.com/santacrab2/PKHeXMAUI/releases/latest");
+            }
+        }
     }
 }
 
