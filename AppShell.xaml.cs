@@ -31,7 +31,15 @@ public partial class AppShell : Shell
             Shell.SetFlyoutItemIsVisible(SortBoxes, false);
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, false);
             Shell.SetFlyoutItemIsVisible(ModifyBoxes, false);
-            
+            DeleteExpanded = true;
+            DeleteClicked(sender, e);
+            SortExpanded = true;
+            SortClick(sender, e);
+            SortAdvancedExpanded = true;
+            SortBoxesAdvancedClicked(sender, e);
+            ModifyExpanded = true;
+            ModifyBoxesClicked(sender, e);
+
         }
         if (TheShell.CurrentItem == PKShell)
         {
