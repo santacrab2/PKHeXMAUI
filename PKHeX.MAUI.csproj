@@ -195,6 +195,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="boxtab\BatchEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="boxtab\BoxTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

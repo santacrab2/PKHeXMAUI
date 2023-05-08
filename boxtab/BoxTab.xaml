@@ -19,6 +19,7 @@
                         <CollectionView HeightRequest="375" WidthRequest="400" x:Name="boxview" SelectionMode="Single" ></CollectionView>
                 </Grid>
                 <Button x:Name="livingdexbutton" Text="Generate Living Dex" Clicked="Generateliving"/>
+                <Button x:Name="BatchEditorOpenButton" Text="Batch Editor" Clicked="openBatchEditor"/>
             </StackLayout>
         </ScrollView>
       

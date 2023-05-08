@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             x:Class="PKHeXMAUI.BatchEditor"
+             Title="BatchEditor">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Picker x:Name="BatchFormat" SelectedIndexChanged="FormatChanged"/>
+            <inputs:SfComboBox x:Name="BatchProperty" Grid.Column="1" SelectionChanged="PropertyChang" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"/>
+            <Picker x:Name="BatchEditType" Grid.Column="2"/>
+            <Label x:Name="PropertyTypeLab" Grid.Row="1" FontSize="16"/>
+            <Label x:Name="PropertyValueLab" Grid.Row="1" Grid.Column="1" FontSize="16"/>
+        </Grid>
+        
+        <Button Text="Add" x:Name="AddButton" Clicked="AddButton_Clicked"/>
+        <Editor AutoSize="TextChanges" x:Name="BatchText" HeightRequest="300"/>
+        <Button Text="Apply" x:Name="ApplyButton" Clicked="ApplyBatchChanges"/>
+        <Button Text="Cancel" x:Name="CloseButton" Clicked="CloseButtonClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

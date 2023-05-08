@@ -144,6 +144,11 @@ public partial class BoxTab : ContentPage
         fillbox();
         
     }
+
+    private void openBatchEditor(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new BatchEditor());
+    }
 }
 public class boxsprite
 {

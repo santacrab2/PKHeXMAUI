@@ -12,7 +12,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.5.4";
+    public static string Version = "v23.5.8";
     public bool SkipTextChange = false;
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
     public MainPage()
@@ -197,6 +197,7 @@ public partial class MainPage : ContentPage
         if (!SkipTextChange)
         {
             pk = EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version);
+            pk.Language = sav.Language;
             formargstepper.IsVisible = false;
             formlabel.IsVisible = false;
             formpicker.IsVisible = false;
@@ -277,6 +278,10 @@ public partial class MainPage : ContentPage
         {
             pk.SetNickname(nickname.Text);
             checklegality();
+        }
+        else if (!SkipTextChange)
+        {
+            nicknamecheck.IsChecked = false;
         }
         
     }
