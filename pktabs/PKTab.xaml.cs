@@ -12,7 +12,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.5.8";
+    public static string Version = "v23.05.8";
     public bool SkipTextChange = false;
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
     public MainPage()
@@ -670,8 +670,8 @@ public partial class MainPage : ContentPage
     {
         var v = new int[3];
         v[0] = int.Parse($"{version[1] + version[2]}");
-        v[1] = int.Parse($"{version[4]}");
-        v[2] = int.Parse($"{version[6]}");
+        v[1] = int.Parse($"{version[4] + version[5]}");
+        v[2] = int.Parse($"{version[7..]}");
         return v;
     }
     public async void CheckForUpdate()
