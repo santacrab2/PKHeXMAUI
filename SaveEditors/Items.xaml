@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+             x:Class="PKHeXMAUI.Items"
+            x:Name="ItemsMain"
+             Title="Items"
+             BarBackgroundColor="#303030"
+            SelectedTabColor="#C8C8C8"
+            UnselectedTabColor="#919191"
+            BarTextColor="White">
+    <ContentPage Title="Items">
+        <ScrollView>
+            <StackLayout>
+                <Button Text="Save Items" Clicked="SaveItemsClicked" x:Name="saveitems"></Button>
+                <Button Text="Cancel" Clicked="CloseItems"/>
+            </StackLayout>
+        </ScrollView>
+            
+    </ContentPage>
+
+</TabbedPage>

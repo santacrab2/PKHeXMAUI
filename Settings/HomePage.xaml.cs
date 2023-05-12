@@ -35,4 +35,9 @@ public partial class HomePage : ContentPage
             App.Current.MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)selected.Value, "PKHeX"));
         }
     }
+
+    private void OpenItems(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new Items());
+    }
 }
