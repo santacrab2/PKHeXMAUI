@@ -75,10 +75,10 @@ public partial class Items : TabbedPage
             ItemCollection.ItemsSource = infolist;
             Button GiveAll = new() { Text = "Give All" };
             GiveAll.Clicked += GiveAll_Clicked;
-            ToolTipProperties.SetText(GiveAll, "Gives you every item for this bag at the Count below even if you don't have it");
+            ToolTipProperties.SetText(GiveAll, "Gives you every item for this bag at the Count above even if you don't have it");
             Button ModifyAll = new() { Text = "Modify All" };
             ModifyAll.Clicked += ModifyAll_Clicked;
-            ToolTipProperties.SetText(ModifyAll, "Gives you the Count below for any item you already have");
+            ToolTipProperties.SetText(ModifyAll, "Gives you the Count above for any item you already have");
             Editor GiveCount = new() { Text = "995" };
             GiveCount.TextChanged += SetCount;
             Button ClearAll = new() { Text = "Clear All" };

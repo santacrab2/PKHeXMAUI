@@ -12,7 +12,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.05.8";
+    public static string Version = "v23.05.12";
     public bool SkipTextChange = false;
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
     public MainPage()
