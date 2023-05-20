@@ -9,6 +9,7 @@ public partial class AppShell : Shell
         AppSaveFile = sav;
 		
         InitializeComponent();
+        
        
 
     }
