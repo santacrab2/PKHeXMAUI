@@ -11,58 +11,23 @@ public partial class ALMSettings : ContentPage
 		InitializeComponent();
         foreach (var p in new PluginSettings().GetType().GetProperties())
             props.Add(new GenericCollection(p));
-        
-        ALMSettingsCollection.ItemTemplate = new DataTemplate(() =>
-        {
-            Grid grid = new Grid() { Padding = 10, Margin = 10 };
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
 
-            Label Label_settings = new();
-            Label_settings.SetBinding(Label.TextProperty, "prop.Name");
-            grid.Add(Label_settings);
-            SfComboBox SettingBool = new() { HorizontalOptions = LayoutOptions.Center };
-            SettingBool.SetBinding(SfComboBox.PlaceholderProperty, "prop.Name");
-            SettingBool.SetBinding(SfComboBox.ItemsSourceProperty, "proparray");
-            SettingBool.PropertyChanged += GetSettingBool;
-            SettingBool.SelectionChanged += ApplySettingBool;
-            grid.Add(SettingBool, 1);
-
-            return grid;
-        });
+        ALMSettingsCollection.ItemTemplate = new GenericCollectionSelector();
 
 
         ALMSettingsCollection.ItemsSource = props;
     }
-    public string LastBox = "";
-    public void GetSettingBool(object sender, EventArgs e)
-    {
-        var box = (SfComboBox)sender;
-        if (box.Placeholder != LastBox)
-        {
-            if (box.Placeholder != "PrioritizeGameVersion")
-                box.SelectedItem = Preferences.Get(box.Placeholder,false);
-            else
-                box.SelectedItem = (GameVersion)Preferences.Get(box.Placeholder, 0);
-            LastBox = box.Placeholder;
-        }
-    }
+  
+    
 
-    public void ApplySettingBool(object sender, EventArgs e)
-    {
-        var box = (SfComboBox)sender;
-        if(box.SelectedItem is Boolean)
-            Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
-        else
-            Preferences.Set(box.Placeholder, (int)(GameVersion)box.SelectedItem);
-
-    }
+  
 }
 
 public class PluginSettings
 {
-   
+    public static string DefaultOT { get => Preferences.Get("DefaultOT", "ALM"); }
+    public static string DefaultTID { get => Preferences.Get("DefaultTID", "12345"); }
+    public static string DefaultSID { get => Preferences.Get("DefaultSID", "54321"); }
     public static bool PrioritizeGame { get => Preferences.Default.Get("PrioritizeGame", false);  }
     public static GameVersion PrioritizeGameVersion { get => (GameVersion)Preferences.Default.Get("PrioritizeGameVersion", 50);  }
     public static bool SetAllLegalRibbons { get => Preferences.Default.Get("SetAllLegalRibbons", false);  }

@@ -12,7 +12,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.05.12";
+    public static string Version = "v23.05.27";
     public bool SkipTextChange = false;
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
     public MainPage()
@@ -42,7 +42,15 @@ public partial class MainPage : ContentPage
         APILegality.ForceSpecifiedBall = true;
         APILegality.Timeout = 45;
         EncounterMovesetGenerator.PriorityList = new List<EncounterTypeGroup>() { EncounterTypeGroup.Slot, EncounterTypeGroup.Trade, EncounterTypeGroup.Static, EncounterTypeGroup.Mystery, EncounterTypeGroup.Egg };
-      
+        TrainerSettings.DefaultOT = PluginSettings.DefaultOT;
+        var IsSIDdigits = ushort.TryParse(PluginSettings.DefaultSID, out var SID);
+        if (IsSIDdigits)
+            TrainerSettings.DefaultSID16 = SID;
+        var IsTIDdigits = ushort.TryParse(PluginSettings.DefaultTID, out var TID);
+        if (IsTIDdigits)
+            TrainerSettings.DefaultTID16 = TID;
+        TrainerSettings.Clear();
+        TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)sav.Version, (LanguageID)sav.Language));
         specieslabel.ItemsSource = datasourcefiltered.Species;
         
         naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));

@@ -42,7 +42,7 @@ public partial class AppShell : Shell
             ModifyBoxesClicked(sender, e);
 
         }
-        if (TheShell.CurrentItem == PKShell)
+        if (TheShell.CurrentPage.GetType() == typeof(MainPage))
         {
             Shell.SetFlyoutItemIsVisible(OpenPKM, true);
             Shell.SetFlyoutItemIsVisible(SavePKM, true);
