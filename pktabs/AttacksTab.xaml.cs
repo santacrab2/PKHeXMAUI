@@ -1,11 +1,9 @@
 using System;
 using System.Windows.Input;
 using PKHeX.Core;
-
 using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
 using static PKHeXMAUI.MainPage;
-
 
 namespace PKHeXMAUI;
 
@@ -30,6 +28,7 @@ public partial class AttacksTab : ContentPage
             AttackRefresh.IsRefreshing = false;
         });
         AttackRefresh.Command = refreshCommand;
+
     }
     public static List<ComboItem> movlist = new();
     public async Task applyattackinfo(PKM pkm)
@@ -59,22 +58,30 @@ public partial class AttacksTab : ContentPage
             }
         }
         move1.ItemsSource = movlist;
+        move1.ItemDisplayBinding = new Binding("Text");
         move2.ItemsSource = movlist;
+        move2.ItemDisplayBinding = new Binding("Text");
         move3.ItemsSource = movlist;
+        move3.ItemDisplayBinding = new Binding("Text");
         move4.ItemsSource = movlist;
+        move4.ItemDisplayBinding = new Binding("Text");
         rmove1.ItemsSource = movlist;
+        rmove1.ItemDisplayBinding = new Binding("Text");
         rmove2.ItemsSource = movlist;
+        rmove2.ItemDisplayBinding = new Binding("Text");
         rmove3.ItemsSource = movlist;
+        rmove3.ItemDisplayBinding = new Binding("Text");
         rmove4.ItemsSource = movlist;
+        rmove4.ItemDisplayBinding = new Binding("Text");
 
-        move1.SelectedItem = movlist.Where(z => z.Value == pkm.Move1).FirstOrDefault();
-        move2.SelectedItem = movlist.Where(z => z.Value == pkm.Move2).FirstOrDefault();
-        move3.SelectedItem = movlist.Where(z => z.Value == pkm.Move3).FirstOrDefault();
-        move4.SelectedItem = movlist.Where(z => z.Value == pkm.Move4).FirstOrDefault();
-        rmove1.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove1).FirstOrDefault();
-        rmove2.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove2).FirstOrDefault();
-        rmove3.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove3).FirstOrDefault();
-        rmove4.SelectedItem = movlist.Where(z => z.Value == pkm.RelearnMove4).FirstOrDefault();
+        move1.SelectedItem = movlist.Find(z => z.Value == pkm.Move1);
+        move2.SelectedItem = movlist.Find(z => z.Value == pkm.Move2);
+        move3.SelectedItem = movlist.Find(z => z.Value == pkm.Move3);
+        move4.SelectedItem = movlist.Find(z => z.Value == pkm.Move4);
+        rmove1.SelectedItem = movlist.Find(z => z.Value == pkm.RelearnMove1);
+        rmove2.SelectedItem = movlist.Find(z => z.Value == pkm.RelearnMove2);
+        rmove3.SelectedItem = movlist.Find(z => z.Value == pkm.RelearnMove3);
+        rmove4.SelectedItem = movlist.Find(z => z.Value == pkm.RelearnMove4);
         move1pp.Text = pkm.GetMovePP(pkm.Move1, pkm.Move1_PPUps).ToString();
         move2pp.Text = pkm.GetMovePP(pkm.Move2, pkm.Move2_PPUps).ToString();
         move3pp.Text = pkm.GetMovePP(pkm.Move3, pkm.Move3_PPUps).ToString();
@@ -98,8 +105,8 @@ public partial class AttacksTab : ContentPage
             AlphaMasteredLabel.IsVisible = true;
             AlphaMasteredPicker.IsVisible = true;
             AlphaMasteredPicker.ItemsSource = movlist;
-            AlphaMasteredPicker.DisplayMemberPath = "Text";
-            AlphaMasteredPicker.SelectedItem = movlist.Where(z => z.Value == pa8.AlphaMove).FirstOrDefault();
+            AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
+            AlphaMasteredPicker.SelectedItem = movlist.Find(z => z.Value == pa8.AlphaMove);
         }
         SkipEvent = false;
     }
@@ -245,15 +252,6 @@ public partial class AttacksTab : ContentPage
     {
 
         pk.Move4_PP = int.Parse(move4pp.Text);
-    }
-
-    private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        SfComboBox box = (SfComboBox)sender;
-        if (box.IsDropDownOpen)
-            box.TextColor = Colors.Black;
-        else
-            box.TextColor = Colors.White;
     }
 
     private async void DisplayMoveInfo1(object sender, EventArgs e)
