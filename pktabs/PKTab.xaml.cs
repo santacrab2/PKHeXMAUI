@@ -32,7 +32,7 @@ public partial class MainPage : ContentPage
         PKRefresh.Command = refreshCommand;
         Permissions.RequestAsync<Permissions.StorageWrite>();
         APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
-        APILegality.UseTrainerData = false;
+        APILegality.UseTrainerData = true;
         APILegality.AllowTrainerOverride = true;
         APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
         Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
@@ -43,6 +43,7 @@ public partial class MainPage : ContentPage
         APILegality.Timeout = 45;
         EncounterMovesetGenerator.PriorityList = new List<EncounterTypeGroup>() { EncounterTypeGroup.Slot, EncounterTypeGroup.Trade, EncounterTypeGroup.Static, EncounterTypeGroup.Mystery, EncounterTypeGroup.Egg };
         TrainerSettings.DefaultOT = PluginSettings.DefaultOT;
+        EncounterEvent.RefreshMGDB();
         var IsSIDdigits = ushort.TryParse(PluginSettings.DefaultSID, out var SID);
         if (IsSIDdigits)
             TrainerSettings.DefaultSID16 = SID;
@@ -455,7 +456,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            pk = pk.Legalize();
+            pk = sav.Legalize(pk);
             checklegality();
             applymainpkinfo(pk);
         }
@@ -474,7 +475,7 @@ public partial class MainPage : ContentPage
         var makelegal = await DisplayAlert("Legality Report", la.Report(), "legalize","ok");
         if (makelegal)
         {
-            pk = pk.Legalize();
+            pk = sav.Legalize(pk);
             checklegality();
             applymainpkinfo(pk);
         }
