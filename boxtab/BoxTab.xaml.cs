@@ -41,21 +41,21 @@ public partial class BoxTab : ContentPage
         boxview.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
-            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            Image image = new Image() { WidthRequest = 50, HeightRequest = 50 };
+            Image image = new Image() { WidthRequest = 45, HeightRequest = 45 };
             Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
             shinysp.TranslateTo(shinysp.TranslationX + 20, shinysp.TranslationY);
             Image Egg = new() { Source = "a_egg.png", HeightRequest = 50, WidthRequest = 50, VerticalOptions = LayoutOptions.End };
             Egg.SetBinding(Image.IsVisibleProperty, "pkm.IsEgg");
             Image ItemSprite = new Image() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
             ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
-            ItemSprite.TranslateTo(ItemSprite.TranslationX + 20, ItemSprite.TranslationY);
+            ItemSprite.TranslateTo(ItemSprite.TranslationX + 18, ItemSprite.TranslationY);
             image.SetBinding(Image.SourceProperty, "url");
             shinysp.SetBinding(Image.IsVisibleProperty, "shiny");
             grid.Add(image);

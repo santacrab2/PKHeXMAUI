@@ -13,10 +13,10 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill"></Image>
-                        <CollectionView HeightRequest="375" WidthRequest="400" x:Name="boxview" SelectionMode="Single" ></CollectionView>
+                        <CollectionView HeightRequest="375" x:Name="boxview" SelectionMode="Single" ></CollectionView>
                 </Grid>
                 <Button x:Name="livingdexbutton" Text="Generate Living Dex" Clicked="Generateliving"/>
                 <Button x:Name="BatchEditorOpenButton" Text="Batch Editor" Clicked="openBatchEditor"/>
