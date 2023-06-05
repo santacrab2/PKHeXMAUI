@@ -9,7 +9,7 @@
             BarTextColor="White">
     <ContentPage Title="OTMemories" x:Name="OTMemories">
             
-            <VerticalStackLayout>
+            <VerticalStackLayout x:Name="OTMemoryStack">
                 <Label x:Name="MemoriesWithOT" />
                 <Label Text="Friendship:" />
                 <Editor x:Name="Friendshipeditor" />
@@ -22,7 +22,7 @@
 
 
         <ContentPage x:Name="NotOTMemories" Title="HTMemories">
-            <VerticalStackLayout>
+            <VerticalStackLayout x:Name="HTMemoryStack">
                 <Label x:Name="MemoriesWithHT" />
                 <Label Text="Friendship:" />
                 <Editor x:Name="HTFriendshipeditor" />

@@ -172,7 +172,7 @@ public class boxsprite
           
         }
     }
-    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
+    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892 };
     public PKM pkm { get; set; }
 	public string url { get; set; }
 	public string species { get; set; }
