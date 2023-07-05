@@ -31,6 +31,7 @@
             <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
     </FlyoutItem>
+    
     <!--Hidden PK Editor Menus-->
     <MenuItem Text="    - Open PKM" x:Name="OpenPKM" Shell.FlyoutItemIsVisible="False" Clicked="OpenPKMClicked"/>
     <MenuItem Text="    - Save PKM" x:Name="SavePKM" Shell.FlyoutItemIsVisible="False" Clicked="SavePKMClicked"/>
@@ -44,7 +45,8 @@
                 <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
             </Tab>
 
-        </FlyoutItem>
+    </FlyoutItem>
+    
     <!--Hidden Box Menus-->
     <MenuItem Text="    - Delete" x:Name="DeleteBoxes" Shell.FlyoutItemIsVisible="False" Clicked="DeleteClicked"/>
     <MenuItem Text="        - Clear" x:Name="ClearBox" Shell.FlyoutItemIsVisible="False" Clicked="ClearBoxClicked"/>
@@ -88,6 +90,7 @@
     <MenuItem Text="        - Remove Nicknames" x:Name="RemoveNicknames" Shell.FlyoutItemIsVisible="False" Clicked="RemoveNicknamesClicked"/>
     <MenuItem Text="        - Delete Held Item" x:Name="DeleteHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="DeleteHeldItemClicked"/>
     <MenuItem Text="        - Heal (Stats/PP)" x:Name="Heal" Shell.FlyoutItemIsVisible="False" Clicked="HealClicked"/>
+    
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
         <Tab Icon="main.png" Title="Settings">
             <ShellContent Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>
