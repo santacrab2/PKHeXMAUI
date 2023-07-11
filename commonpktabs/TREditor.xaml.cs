@@ -77,7 +77,7 @@ public partial class TREditor : ContentPage
     {
         if(pk is ITechRecord tr)
         {
-            TechnicalRecordApplicator.SetRecordFlags(tr);
+            tr.SetRecordFlagsAll();
         }
         Navigation.PopModalAsync();
     }

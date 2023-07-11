@@ -51,7 +51,7 @@
                        
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="Start"/>
-                <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+                <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="End" IsVisible="false"/>
                 <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
                 <ImageButton Grid.Row="0" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="legality" Clicked="displaylegalitymessage" Source="warn.png" HeightRequest="24"/>
 
@@ -66,7 +66,7 @@
                 <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <inputs:SfComboBox  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Species" x:Name="specieslabel" SelectionChanged="specieschanger" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent"/>
                 <!--gender-->
-                <ImageButton Source="gender_0.png" Grid.Row="3" Grid.Column="2" WidthRequest="32" HeightRequest="32"  x:Name="genderdisplay" HorizontalOptions="Start" Clicked="swapgender"/>
+                <ImageButton Source="gender_0.png" Grid.Row="3" Grid.Column="3" WidthRequest="32" HeightRequest="32"  x:Name="genderdisplay" HorizontalOptions="Start" Clicked="swapgender"/>
 
 
                 <!--nickname-->
@@ -82,31 +82,31 @@
                 <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Nature:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <inputs:SfComboBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Nature" x:Name="naturepicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applynature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"></inputs:SfComboBox>
                 <Label Grid.Row="7" Grid.Column="3" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <inputs:SfComboBox Grid.Row="7" Grid.Column="4" Placeholder="Stat Nature" x:Name="statnaturepicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applystatnature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent" />
+                <inputs:SfComboBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Placeholder="Stat Nature" x:Name="statnaturepicker" VerticalOptions="Center" SelectionChanged="applystatnature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent" />
 
                 <!--form-->
                 <Label x:Name="formlabel" IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Form:"></Label>
                 <Picker IsVisible="false" Grid.Row="10" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="formpicker" Title="Form" SelectedIndexChanged="applyform"></Picker>
                 <Editor IsVisible="false" Grid.Row="10" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="formargstepper" TextChanged="applyformarg"></Editor>
                 <!--held item-->
-                <Label x:Name="helditemlabel" IsVisible="false" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Held Item:" Margin="0,0,48,0"></Label>
-                <inputs:SfComboBox IsVisible="false" Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="helditempicker" Margin="48,0,0,0" Placeholder="Held Item" SelectionChanged="applyhelditem" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"></inputs:SfComboBox>
+                <Label x:Name="helditemlabel" IsVisible="false" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Held Item:" Margin="0,0,48,0"></Label>
+                <inputs:SfComboBox IsVisible="false" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalOptions="Center" x:Name="helditempicker" Margin="48,0,0,0" Placeholder="Held Item" SelectionChanged="applyhelditem" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"></inputs:SfComboBox>
                 <!--ability-->
                 <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Ability:"></Label>
-                <Picker Grid.Row="12" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="abilitypicker" Title="Ability" SelectedIndexChanged="applyability"></Picker>
+                <Picker Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="abilitypicker" Title="Ability" SelectedIndexChanged="applyability"></Picker>
                 <!--friendship-->
-                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="FriendShip:" x:Name="FriendshipLabel"></Label>
-                <Editor Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Friendshipdisplay" TextChanged="applyfriendship"></Editor>
+                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" Grid.ColumnSpan="2" VerticalOptions="Center" Text="FriendShip:" x:Name="FriendshipLabel"></Label>
+                <Editor Grid.Row="13" Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Friendshipdisplay" TextChanged="applyfriendship"></Editor>
                 <!--Language-->
-                <Label Text="Language:" Grid.Row="14" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Picker Grid.Row="14" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
+                <Label Text="Language:" Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Picker Grid.Row="14" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
                 <!--checkboxes-->
                 <CheckBox x:Name="iseggcheck" Grid.Row="15" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyisegg"></CheckBox>
-                <Label Text="IsEgg" Grid.Row="15" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center"/>
-                <CheckBox x:Name="infectedcheck" Grid.Row="15" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyinfection"/>
-                <Label Text="Infected" Grid.Row="15" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"/>
-                <CheckBox x:Name="curedcheck" Grid.Row="15" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applycure"/>
-                <Label Text="Cured" Grid.Row="15" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Label Text="IsEgg" Grid.Row="15" Grid.Column="1" VerticalOptions="Center"/>
+                <CheckBox x:Name="infectedcheck" Grid.Row="15" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyinfection"/>
+                <Label Text="Infected" Grid.Row="15" Grid.Column="3"  VerticalOptions="Center"/>
+                <CheckBox x:Name="curedcheck" Grid.Row="15" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applycure"/>
+                <Label Text="Cured" Grid.Row="15" Grid.Column="5"  VerticalOptions="Center"/>
                 <Label Grid.Row="16" Grid.Column="0" x:Name="NSparkleLabel" IsVisible="false" Text="N's Sparkle" HorizontalOptions="End" VerticalOptions="Center"/>
                 <CheckBox Grid.Row="16" Grid.Column="1" x:Name="NSparkleCheckbox" IsVisible="false" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applySparkle"/>
                 <Label Grid.Row="16" Grid.Column="2" x:Name="NSparkleActiveLabel" IsVisible="false" Text="Active" HorizontalOptions="Start" VerticalOptions="Center"/>
