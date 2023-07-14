@@ -30,6 +30,9 @@ public partial class EncounterDB : ContentPage
             shinysp.SetBinding(Image.IsVisibleProperty, "EncounterInfo.IsShiny");
             Image EggSprite = new() { Source = "a_egg.png", HeightRequest=40, WidthRequest=40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.End };
             EggSprite.SetBinding(Image.IsVisibleProperty, "EncounterInfo.EggEncounter");
+            Image AlphaSprite = new() { Source = "ribbonmarkalpha.png", HeightRequest = 40, WidthRequest = 40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Start };
+            AlphaSprite.SetBinding(Image.IsVisibleProperty, "Alpha");
+            grid.Add(AlphaSprite);
             grid.Add(image);
             grid.Add(shinysp);
             grid.Add(EggSprite);
@@ -151,11 +154,13 @@ public class EncounterSprite
    public IEncounterInfo EncounterInfo { get; set; }
     public string url { get; set; }
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
+    public bool Alpha { get; set; }
 
     public EncounterSprite(IEncounterInfo info)
     {
-        
+
         EncounterInfo = info;
+        Alpha = info is IAlphaReadOnly{IsAlpha:true };
         if (info.Species == 0)
             url = $"";
         else
