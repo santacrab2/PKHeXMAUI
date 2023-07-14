@@ -55,7 +55,7 @@
                 <!--Ball-->
                 <Label Grid.Row="4" Grid.Column="0" Text="Ball:" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Picker Grid.Row="4" Grid.Column="1" x:Name="ballpicker" HorizontalOptions="Start" Grid.ColumnSpan="2" WidthRequest="96" VerticalOptions="Center" SelectedIndexChanged="givebackballs"/>
-                <Image Grid.Row="4" Grid.Column="2" x:Name="ballimage" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="32" x:FieldModifier="Public"/>
+                <Image Grid.Row="4" Grid.Column="2" x:Name="ballimage" HeightRequest="32"/>
                 <!--Met Date-->
                 <Label Grid.Row="5" Grid.Column="0" Text="Met Date:" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <DatePicker Grid.Row="5" Grid.Column="1" x:Name="metdatepicker" DateSelected="applymetdate" HorizontalOptions="Start"/>

@@ -32,10 +32,21 @@ public partial class EncounterDB : ContentPage
             EggSprite.SetBinding(Image.IsVisibleProperty, "EncounterInfo.EggEncounter");
             Image AlphaSprite = new() { Source = "ribbonmarkalpha.png", HeightRequest = 40, WidthRequest = 40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Start };
             AlphaSprite.SetBinding(Image.IsVisibleProperty, "Alpha");
+            Image BallSprite = new() { HeightRequest = 16, WidthRequest = 16, VerticalOptions = LayoutOptions.End, HorizontalOptions = LayoutOptions.Start };
+            BallSprite.SetBinding(Image.SourceProperty, "BallUrl");
+            BallSprite.TranslateTo(TranslationX - 10, TranslationY);
+            Image MightySprite = new() { HeightRequest = 40, WidthRequest = 40, Source = "ribbonmarkmightiest.png", VerticalOptions = LayoutOptions.Start, HorizontalOptions = LayoutOptions.Center };
+            MightySprite.SetBinding(Image.IsVisibleProperty, "Mighty");
+            Image GMaxSprite = new() { HeightRequest = 16, WidthRequest = 16, Source = "dyna.png", VerticalOptions = LayoutOptions.Start, HorizontalOptions = LayoutOptions.Center };
+            GMaxSprite.SetBinding(Image.IsVisibleProperty, "GMax");
+            grid.SetBinding(Grid.BackgroundColorProperty, "EncColor");
+            grid.Add(MightySprite);
             grid.Add(AlphaSprite);
             grid.Add(image);
             grid.Add(shinysp);
             grid.Add(EggSprite);
+            grid.Add(BallSprite);
+            grid.Add(GMaxSprite);
             SwipeView swipe = new();
             SwipeItem view = new()
             {
@@ -49,6 +60,7 @@ public partial class EncounterDB : ContentPage
             return swipe;
         });
         EncounterCollection.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
+       
     }
 
     private void SetSearchSettings(object sender, EventArgs e)
@@ -155,12 +167,25 @@ public class EncounterSprite
     public string url { get; set; }
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
     public bool Alpha { get; set; }
-
+    public string BallUrl { get; set; }
+    public bool Mighty { get; set; }
+    public bool GMax { get; set; }
+    public Color EncColor { get; set; }
     public EncounterSprite(IEncounterInfo info)
     {
 
         EncounterInfo = info;
-        Alpha = info is IAlphaReadOnly{IsAlpha:true };
+        var index = (info.GetType().Name.GetHashCode() * 0x43FD43FD);
+        EncColor = Color.FromArgb(Convert.ToString(index,16));
+        if (EncColor == Color.FromArgb("000000"))
+            EncColor = Colors.Transparent;
+        Mighty = info is EncounterMight9;
+        Alpha = info is IAlphaReadOnly { IsAlpha: true };
+        GMax = info is IGigantamaxReadOnly { CanGigantamax:true };
+        if(info is IFixedBall { FixedBall: not Ball.None }b)
+        {
+            BallUrl = $"ball{(int)b.FixedBall}.png";
+        }
         if (info.Species == 0)
             url = $"";
         else
