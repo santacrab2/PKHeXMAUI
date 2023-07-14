@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.SearchSettings"
-             Title="Search Settings">
+             Title="Search Settings"
+             >
     <ScrollView>
-        <VerticalStackLayout>
+        <VerticalStackLayout x:Name="SearchSettingsPage">
             <Label Text="Shiny"></Label>
             <CheckBox x:Name="ShinyCheck"/>
             <Label Text="Is Egg"/>
-            <CheckBox x:Name="EggCheck"/>
+            <CheckBox x:Name="EggCheck" StyleId="CheckEgg"/>
             <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncSpecies" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
             <Label Text="Move 1"/>
             <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncMove1" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
@@ -22,15 +23,15 @@
             <Label Text="OT Version"/>
             <inputs:SfComboBox SelectedIndex="0" IsEditable="True" x:Name="EncVersion" TextSearchMode="StartsWith" DisplayMemberPath="Text" BackgroundColor="Transparent" PropertyChanged="ChangeFontColor" />
             <Label Text="As Egg"/>
-            <CheckBox HorizontalOptions="Start" x:Name="AsEggCheck" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Egg" StyleId="Egg" IsChecked="True"/>
             <Label Text="Mystery"/>
-            <CheckBox HorizontalOptions="Start" x:Name="MysteryCheck" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Mystery" StyleId="Mystery" IsChecked="True"/>
             <Label Text="Static"/>
-            <CheckBox HorizontalOptions="Start" x:Name="StaticCheck" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Static" StyleId="Static" IsChecked="True"/>
             <Label Text="Trade"/>
-            <CheckBox HorizontalOptions="Start" x:Name="TradeCheck" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Trade" StyleId="Trade" IsChecked="True"/>
             <Label Text="Slot"/>
-            <CheckBox HorizontalOptions="Start" x:Name="SlotCheck" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Slot" StyleId="Slot" IsChecked="True"/>
             <Button Text="Save" Clicked="SaveSearchSettings"/>
             <Button Text="Cancel" Clicked="CloseSearchSettings"/>
         </VerticalStackLayout>

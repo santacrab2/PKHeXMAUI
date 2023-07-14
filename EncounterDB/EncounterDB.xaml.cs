@@ -79,9 +79,9 @@ public partial class EncounterDB : ContentPage
         var versions = encSettings.GetVersions(sav);
         var species = new[] { encSettings.Species };
         var results = GetAllSpeciesFormEncounters(species, sav.Personal, versions, moves, pk);
-        if (encSettings.SearchEgg != null)
+        if (encSettings.SearchEgg == true)
             results = results.Where(z => z.EggEncounter == encSettings.SearchEgg);
-        if (encSettings.SearchShiny != null)
+        if (encSettings.SearchShiny == true)
             results = results.Where(z => z.IsShiny == encSettings.SearchShiny);
         var comparer = new ReferenceComparer<IEncounterInfo>();
         results = results.Distinct(comparer);

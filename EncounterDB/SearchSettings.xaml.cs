@@ -1,6 +1,8 @@
 using static PKHeXMAUI.MainPage;
 using static PKHeXMAUI.EncounterDB;
 using PKHeX.Core;
+using System.Reflection;
+using Microsoft.Maui.Controls.Internals;
 
 namespace PKHeXMAUI;
 
@@ -60,6 +62,12 @@ public partial class SearchSettings : ContentPage
         encSettings.AddMove((ushort)((ComboItem)EncMove4.SelectedItem).Value);
         encSettings.SearchShiny = ShinyCheck.IsChecked;
         encSettings.SearchEgg= EggCheck.IsChecked;
+        EncounterMovesetGenerator.PriorityList = GetTypes();
         Navigation.PopModalAsync();
+    }
+    private EncounterTypeGroup[] GetTypes()
+    {
+        return SearchSettingsPage.Children.OfType<CheckBox>().Where(z => z.IsChecked && SearchSettingsPage.Children.IndexOf(z) >3).Select(z => z.StyleId)
+            .Select(z => (EncounterTypeGroup)Enum.Parse(typeof(EncounterTypeGroup), z)).ToArray();
     }
 }
