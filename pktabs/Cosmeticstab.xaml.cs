@@ -7,6 +7,7 @@ namespace PKHeXMAUI;
 public partial class Cosmeticstab : ContentPage
 {
     public bool SkipEvent = false;
+    public bool FirstLoad = true;
 	public Cosmeticstab()
 	{
 		InitializeComponent();
@@ -19,6 +20,7 @@ public partial class Cosmeticstab : ContentPage
             CosmeticsRefresh.IsRefreshing = false;
         });
         CosmeticsRefresh.Command = refreshCommand;
+        FirstLoad = false;
     }
     private static readonly string[] SizeClass = Enum.GetNames(typeof(PokeSize));
     private static readonly string[] SizeClassDetailed = Enum.GetNames(typeof(PokeSizeDetailed));
@@ -41,6 +43,10 @@ public partial class Cosmeticstab : ContentPage
             shinysparklessprite.IsVisible = true;
         else
             shinysparklessprite.IsVisible = false;
+        if (pkm.Species == 0)
+            spriteurl = $"a_egg.png";
+        else
+            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         pic.Source = spriteurl;
         if (pkm is IScaledSize ss)
         {

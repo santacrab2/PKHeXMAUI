@@ -14,7 +14,8 @@ public partial class MainPage : ContentPage
 {
     public static string Version = "v23.07.11";
     public bool SkipTextChange = false;
-    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892 };
+    public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892 };
+    public bool FirstLoad = true;
     public MainPage()
 	{
         sav = AppShell.AppSaveFile;
@@ -68,7 +69,7 @@ public partial class MainPage : ContentPage
   
         checklegality();
         CheckForUpdate();
-
+        FirstLoad = false;
 
 
     }
@@ -157,7 +158,9 @@ public partial class MainPage : ContentPage
         
       
         pic.Source = spriteurl;
-    
+        type1sprite.Source = $"type_icon_{pk.PersonalInfo.Type1:00}";
+        type2sprite.Source = $"type_icon_{pk.PersonalInfo.Type2:00}";
+        type2sprite.IsVisible = (pk.PersonalInfo.Type1 != pk.PersonalInfo.Type2);
         languagepicker.SelectedIndex = pkm.Language;
         nicknamecheck.IsChecked = pkm.IsNicknamed;
         if(pkm is PK5 pk5)
@@ -268,6 +271,7 @@ public partial class MainPage : ContentPage
 
             pic.Source = spriteurl;
             checklegality();
+            applymainpkinfo(pk);
         }
     }
 

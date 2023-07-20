@@ -17,6 +17,33 @@ public partial class AppShell : Shell
     public BoxManipulator manip = new BoxManipulatorMAUI();
     private void checkbox(object sender, ShellNavigatedEventArgs e)
     {
+        switch (TheShell.CurrentPage)
+        {
+            case MainPage p:
+                if (!((MainPage)TheShell.CurrentPage).FirstLoad)
+                    ((MainPage)TheShell.CurrentPage).applymainpkinfo(pk);
+                break;
+            case MetTab mettab:
+                if (!((MetTab)TheShell.CurrentPage).FirstLoad)
+                    ((MetTab)TheShell.CurrentPage).applymetinfo(pk);
+                break;
+            case AttacksTab a:
+                if (!((AttacksTab)TheShell.CurrentPage).FirstLoad)
+                    ((AttacksTab)TheShell.CurrentPage).applyattackinfo(pk);
+                break;
+            case Cosmeticstab c:
+                if (!((Cosmeticstab)TheShell.CurrentPage).FirstLoad)
+                    ((Cosmeticstab)TheShell.CurrentPage).applycomsetics(pk);
+                break;
+            case OTTab o:
+                if (!((OTTab)TheShell.CurrentPage).FirstLoad)
+                    ((OTTab)TheShell.CurrentPage).applyotinfo(pk);
+                break;
+            case StatsTab s:
+                if (!((StatsTab)TheShell.CurrentPage).FirstLoad)
+                    ((StatsTab)TheShell.CurrentPage).applystatsinfo(pk);
+                break;
+        };
         if (TheShell.CurrentPage.GetType() == typeof(BoxTab))
         {
 

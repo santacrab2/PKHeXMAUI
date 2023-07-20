@@ -11,6 +11,7 @@ namespace PKHeXMAUI;
 public partial class AttacksTab : ContentPage
 {
     public bool SkipEvent = false;
+    public bool FirstLoad = true;
     public AttacksTab()
     {
         InitializeComponent();
@@ -28,7 +29,7 @@ public partial class AttacksTab : ContentPage
             AttackRefresh.IsRefreshing = false;
         });
         AttackRefresh.Command = refreshCommand;
-
+        FirstLoad = false;
     }
     public static List<ComboItem> movlist = new();
     public async Task applyattackinfo(PKM pkm)
@@ -46,6 +47,10 @@ public partial class AttacksTab : ContentPage
             shinysparklessprite.IsVisible = true;
         else
             shinysparklessprite.IsVisible = false;
+        if (pkm.Species == 0)
+            spriteurl = $"a_egg.png";
+        else
+            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         attackpic.Source = spriteurl;
         movlist = new();
         foreach (var mov in datasourcefiltered.Moves)

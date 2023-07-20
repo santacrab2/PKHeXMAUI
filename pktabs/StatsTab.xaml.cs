@@ -8,6 +8,7 @@ public partial class StatsTab : ContentPage
 {
     public bool SkipEvent = false;
     public bool moveonce = true;
+    public bool FirstLoad = true;
 	public StatsTab()
 	{
 		InitializeComponent();
@@ -22,6 +23,7 @@ public partial class StatsTab : ContentPage
         });
         StatsRefresh.Command = refreshCommand;
         applystatsinfo(pk);
+        FirstLoad = false;
     }
 
 	public async Task applystatsinfo(PKM pkm)
@@ -40,6 +42,10 @@ public partial class StatsTab : ContentPage
             shinysparklessprite.IsVisible = true;
         else
             shinysparklessprite.IsVisible = false;
+        if (pkm.Species == 0)
+            spriteurl = $"a_egg.png";
+        else
+            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         statpic.Source = spriteurl;
         if (pk is IAwakened)
         {

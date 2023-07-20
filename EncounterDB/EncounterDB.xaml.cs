@@ -59,7 +59,7 @@ public partial class EncounterDB : ContentPage
             swipe.Content = grid;
             return swipe;
         });
-        EncounterCollection.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
+        EncounterCollection.ItemsLayout = new GridItemsLayout(5, ItemsLayoutOrientation.Vertical);
        
     }
 

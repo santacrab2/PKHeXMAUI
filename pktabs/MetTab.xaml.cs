@@ -14,6 +14,7 @@ namespace PKHeXMAUI;
 public partial class MetTab : ContentPage
 {
     public bool SkipEvent = false;
+    public bool FirstLoad = true;
 	public MetTab()
 	{
 		InitializeComponent();
@@ -46,6 +47,7 @@ public partial class MetTab : ContentPage
         });
         MetRefresh.Command = refreshCommand;
         applymetinfo(pk);
+        FirstLoad = false;
     }
     public static string ballspriteurl;
     public async Task applymetinfo(PKM pkm)
@@ -71,6 +73,10 @@ public partial class MetTab : ContentPage
             shinysparklessprite.IsVisible = true;
         else
             shinysparklessprite.IsVisible = false;
+        if (pkm.Species == 0)
+            spriteurl = $"a_egg.png";
+        else
+            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         mettabpic.Source = spriteurl;
         origingamepicker.SelectedItem = datasourcefiltered.Games.Where(z => z.Value == pkm.Version).FirstOrDefault();
         if (pkm is IBattleVersion bv)
@@ -104,6 +110,7 @@ public partial class MetTab : ContentPage
             eggmetpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context,true).Where(z => z.Value == pkm.Egg_Location).FirstOrDefault();
         }
         SkipEvent = false;
+        
     }
 
     public void applyorigingame(object sender, EventArgs e)

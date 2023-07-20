@@ -7,6 +7,7 @@ namespace PKHeXMAUI;
 public partial class OTTab : ContentPage
 {
     public bool SkipEvent = false;
+    public bool FirstLoad = true;
 	public OTTab()
 	{
 		InitializeComponent();
@@ -24,6 +25,7 @@ public partial class OTTab : ContentPage
         });
         OTRefresh.Command = refreshCommand;
         applyotinfo(pk);
+        FirstLoad = false;
     }
 
 	public async Task applyotinfo(PKM pkm)
@@ -42,6 +44,10 @@ public partial class OTTab : ContentPage
             shinysparklessprite.IsVisible = true;
         else
             shinysparklessprite.IsVisible = false;
+        if (pkm.Species == 0)
+            spriteurl = $"a_egg.png";
+        else
+            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         OTpic.Source = spriteurl;
         SIDdisplay.Text = pkm.TrainerSID7.ToString();
         TIDdisplay.Text = pkm.TrainerTID7.ToString();
