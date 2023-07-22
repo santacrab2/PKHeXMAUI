@@ -177,7 +177,7 @@ public class EncounterSprite
         EncounterInfo = info;
         var index = (info.GetType().Name.GetHashCode() * 0x43FD43FD);
         EncColor = Color.FromArgb(Convert.ToString(index,16));
-        if (EncColor == Color.FromArgb("000000"))
+        if (EncColor == Colors.Black || EncColor == null)
             EncColor = Colors.Transparent;
         Mighty = info is EncounterMight9;
         Alpha = info is IAlphaReadOnly { IsAlpha: true };

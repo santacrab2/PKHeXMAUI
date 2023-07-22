@@ -147,7 +147,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Octokit" Version="7.0.1" />
-		<PackageReference Include="PKHeX.Core" Version="23.7.9" />
+		<PackageReference Include="PKHeX.Core" Version="23.7.10" />
 		<PackageReference Include="Syncfusion.Maui.Inputs" Version="21.2.8" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
 	</ItemGroup>
