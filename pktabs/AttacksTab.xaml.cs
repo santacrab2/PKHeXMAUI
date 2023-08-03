@@ -173,22 +173,14 @@ public partial class AttacksTab : ContentPage
             pk.RelearnMove4 = rmove4.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove4.SelectedItem).Value : pk.RelearnMove4;
     }
 
-    private void setsuggmoves(object sender, EventArgs e)
+    private async void setsuggmoves(object sender, EventArgs e)
     {
-        SkipEvent = true;
         var m = new ushort[4];
         pk.GetMoveSet(m, true);
         pk.SetMoves(m);
         pk.HealPP();
-        move1.SelectedItem = (Move)pk.Move1;
-        move2.SelectedItem = (Move)pk.Move2;
-        move3.SelectedItem = (Move)pk.Move3;
-        move4.SelectedItem = (Move)pk.Move4;
-        rmove1.SelectedItem = (Move)pk.RelearnMove1;
-        rmove2.SelectedItem = (Move)pk.RelearnMove2;
-        rmove3.SelectedItem = (Move)pk.RelearnMove3;
-        rmove4.SelectedItem = (Move)pk.RelearnMove4;
-        SkipEvent = false;
+        await applyattackinfo(pk);
+        
     }
 
     private void applymove1ppups(object sender, EventArgs e)
