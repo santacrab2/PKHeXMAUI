@@ -8,6 +8,7 @@ using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
 using System.Net.Http.Headers;
 
+
 namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
@@ -84,12 +85,28 @@ public partial class MainPage : ContentPage
     public static string itemspriteurl = "";
     public async void pk9picker_Clicked(object sender, EventArgs e)
     {
-
+        EntityConverter.AllowIncompatibleConversion = PSettings.AllowIncompatibleConversion ? EntityCompatibilitySetting.AllowIncompatibleAll : EntityCompatibilitySetting.DisallowIncompatible;
         var pkfile = await FilePicker.PickAsync();
         if (pkfile is null)
             return;
         var bytes = File.ReadAllBytes(pkfile.FullPath);
         pk = EntityFormat.GetFromBytes(bytes);
+        if (pk.GetType() != sav.PKMType)
+        {
+            pk = EntityConverter.ConvertToType(pk, sav.PKMType, out var result);
+            if (result.IsSuccess() || PSettings.AllowIncompatibleConversion)
+            {
+                applymainpkinfo(pk);
+                checklegality();
+                return;
+            }
+            else
+            {
+                await DisplayAlert("Incompatible", "This PK file is incompatible with the current save file", "cancel");
+                return;
+            }
+        }
+        
         applymainpkinfo(pk);
         checklegality();
     }

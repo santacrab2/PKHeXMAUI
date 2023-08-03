@@ -65,7 +65,7 @@ public class PSettings
 	public static bool IgnoreLegalPopup { get => Preferences.Get("IgnoreLegalPopup",false); }
 	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
 	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
-	
+	public static bool AllowIncompatibleConversion { get => Preferences.Default.Get("AllowIncompatibleConversion", false); }
 }
 public class EncounterSettings
 {
