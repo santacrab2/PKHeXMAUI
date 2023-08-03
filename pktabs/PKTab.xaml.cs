@@ -161,8 +161,26 @@ public partial class MainPage : ContentPage
                 itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
             }
         }
-        formpicker.SelectedIndex = pkm.Form;
-      
+        formpicker.Items.Clear();
+        var str = GameInfo.Strings;
+        var forms = FormConverter.GetFormList(pkm.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, pkm.Context);
+        if (forms[0] != "")
+        {
+            formlabel.IsVisible = true;
+            formpicker.IsVisible = true;
+
+            foreach (var form in forms)
+            {
+                formpicker.Items.Add(form);
+            }
+            formpicker.SelectedIndex = pkm.Form;
+            if (pkm is IFormArgument fa)
+            {
+                formargstepper.IsVisible = true;
+                formargstepper.Text = fa.FormArgument.ToString();
+            }
+        }
+
             if (pkm.Species == 0)
                 spriteurl = $"a_egg.png";
             else 
