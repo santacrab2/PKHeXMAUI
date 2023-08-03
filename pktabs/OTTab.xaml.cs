@@ -49,8 +49,8 @@ public partial class OTTab : ContentPage
         else
             spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         OTpic.Source = spriteurl;
-        SIDdisplay.Text = pkm.TrainerSID7.ToString();
-        TIDdisplay.Text = pkm.TrainerTID7.ToString();
+        SIDdisplay.Text = pkm.DisplaySID.ToString();
+        TIDdisplay.Text = pkm.DisplayTID.ToString();
         otdisplay.Text = pkm.OT_Name;
         ecdisplay.Text = $"{pkm.EncryptionConstant:X}";
         if (pkm.Generation > 5)
@@ -106,7 +106,8 @@ public partial class OTTab : ContentPage
     {
         if(SIDdisplay.Text.Length > 0 && !SkipEvent)
         {
-            pk.TrainerSID7 = uint.Parse(SIDdisplay.Text);
+             uint.TryParse(SIDdisplay.Text,out var SID);
+            pk.DisplaySID = SID;
         }
     }
 
@@ -114,7 +115,8 @@ public partial class OTTab : ContentPage
     {
         if(TIDdisplay.Text.Length > 0 && !SkipEvent)
         {
-            pk.TrainerTID7 = uint.Parse(TIDdisplay.Text);
+            uint.TryParse(TIDdisplay.Text, out var TID);
+            pk.DisplayTID = TID;
         }
     }
 
@@ -127,7 +129,14 @@ public partial class OTTab : ContentPage
     private void applyec(object sender, TextChangedEventArgs e)
     {
         if (!SkipEvent)
-            pk.EncryptionConstant = Convert.ToUInt32(ecdisplay.Text,16);
+        {
+            try
+            {
+                pk.EncryptionConstant = Convert.ToUInt32(ecdisplay.Text, 16);
+            }
+            catch { }
+           
+        }
     }
 
     private void applyHT(object sender, TextChangedEventArgs e)
