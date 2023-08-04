@@ -153,14 +153,38 @@ public partial class OTTab : ContentPage
 
     private void MakeOTCurrent(object sender, CheckedChangedEventArgs e)
     {
-        if (!SkipEvent)
+        if (!SkipEvent && e.Value)
+        {
             pk.CurrentHandler = 0;
+            SkipEvent = true;
+            HTcurrentcheck.IsChecked = false;
+            SkipEvent = false;
+        }
+        else if (!SkipEvent && !e.Value)
+        {
+            pk.CurrentHandler = 1;
+            SkipEvent = true;
+            HTcurrentcheck.IsChecked = true;
+            SkipEvent = false;
+        }
     }
 
     private void MakeHTCurrent(object sender, CheckedChangedEventArgs e)
     {
-        if (!SkipEvent)
+        if (!SkipEvent && e.Value)
+        {
             pk.CurrentHandler = 1;
+            SkipEvent = true;
+            OTcurrentcheck.IsChecked = false;
+            SkipEvent = false;
+        }
+        else if(!SkipEvent && !e.Value)
+        {
+            pk.CurrentHandler = 0;
+            SkipEvent = true;
+            OTcurrentcheck.IsChecked = true;
+            SkipEvent = false;
+        }
     }
 
     private void applyotgender(object sender, EventArgs e)
