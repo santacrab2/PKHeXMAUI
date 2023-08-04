@@ -62,7 +62,7 @@
 
                 <!--PID-->
                 <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-                <Editor Grid.Row="3" Grid.Column="1" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID"></Editor>
+                <Editor Grid.Row="3" Grid.Column="1" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID" TextChanged="applyPID"></Editor>
                 <Button  Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
                 <!--Species-->
                 <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="Start"></Label>

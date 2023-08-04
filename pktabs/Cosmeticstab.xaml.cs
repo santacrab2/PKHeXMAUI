@@ -8,6 +8,8 @@ public partial class Cosmeticstab : ContentPage
 {
     public bool SkipEvent = false;
     public bool FirstLoad = true;
+    public static byte minStat = 0;
+    public static byte maxCosmStat = 255;
 	public Cosmeticstab()
 	{
 		InitializeComponent();
@@ -94,6 +96,10 @@ public partial class Cosmeticstab : ContentPage
             scalelabel.IsVisible = true;
             scaledisplay.IsVisible = true;
             scalelabel.Text = "CP:";
+            cpAutoLabel.IsVisible = true;
+            AutoCP.IsVisible = true;
+            if (AutoCP.IsChecked)
+                cp.ResetCP();
             scaledisplay.Text = cp.Stat_CP.ToString();
         }
         if(pkm is PK4 pk4)
@@ -133,22 +139,23 @@ public partial class Cosmeticstab : ContentPage
     {
         if (Heightdisplay.Text.Length > 0 && !SkipEvent)
         {
-            if (!int.TryParse(Heightdisplay.Text, out var result))
-                return;
-            if (result > 255)
+            if (int.TryParse(Heightdisplay.Text, out var result))
             {
-                result = 255;
+
+
+                result = Math.Clamp(result, 0, 255);
                 Heightdisplay.Text = $"{result}";
-            }
-            if (pk is IScaledSize ss)
-            {
-                ss.HeightScalar = (byte)result;
-                if (pk is IScaledSizeValue sv)
+                
+                if (pk is IScaledSize ss)
                 {
-                    sv.ResetHeight();
-                    sv.ResetWeight();
+                    ss.HeightScalar = (byte)result;
+                    if (pk is IScaledSizeValue sv)
+                    {
+                        sv.ResetHeight();
+                        sv.ResetWeight();
+                    }
+                    HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.HeightScalar)];
                 }
-                HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.HeightScalar)];
             }
         }
     }
@@ -157,19 +164,20 @@ public partial class Cosmeticstab : ContentPage
     {
         if (Weightdisplay.Text.Length > 0 && !SkipEvent)
         {
-            if (!int.TryParse(Weightdisplay.Text, out var result))
-                return;
-            if (result > 255)
+            if (int.TryParse(Weightdisplay.Text, out var result))
             {
-                result = 255;
+
+
+                result = Math.Clamp(result, 0, 255);
                 Weightdisplay.Text = $"{result}";
-            }
-            if (pk is IScaledSize ss)
-            {
-                ss.WeightScalar = (byte)result;
-                if(pk is IScaledSizeValue sv)
-                    sv.ResetWeight();
-                HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.WeightScalar)];
+                
+                if (pk is IScaledSize ss)
+                {
+                    ss.WeightScalar = (byte)result;
+                    if (pk is IScaledSizeValue sv)
+                        sv.ResetWeight();
+                    HeighDetailLabel.Text = SizeClass[(int)PokeSizeUtil.GetSizeRating(ss.WeightScalar)];
+                }
             }
         }
     }
@@ -178,20 +186,25 @@ public partial class Cosmeticstab : ContentPage
     {
         if (!SkipEvent)
         {
-            if (!byte.TryParse(scaledisplay.Text, out var result))
-                return;
-            if (result > 255)
+            if (int.TryParse(scaledisplay.Text, out var result))
             {
-                result = 255;
-                scaledisplay.Text = $"{result}";
+
+                if (pk is IScaledSize3 sz3)
+                {
+                    result = Math.Clamp(result, 0, 255);
+                    scaledisplay.Text = $"{result}";
+                    sz3.Scale = (byte)result;
+                    ScaleDetailLabel.Text = SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(sz3.Scale)];
+
+                }
+                if(pk is ICombatPower cp)
+                {
+                    result = Math.Clamp(result, 0, 65535);
+                    cp.Stat_CP = result;
+                    scaledisplay.Text = $"{result}";
+                }
             }
-            if (pk is IScaledSize3 sz3)
-            {
-                sz3.Scale = result;
-                ScaleDetailLabel.Text = SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(sz3.Scale)];
-                if (pk is ICombatPower cp)
-                    cp.ResetCP();
-            }
+                
         }
     }
     private void openribbons(object sender, EventArgs e)
@@ -212,17 +225,16 @@ public partial class Cosmeticstab : ContentPage
 
     private void applycoolness(object sender, TextChangedEventArgs e)
     {
-        if(pk is IContestStats CTstats && !SkipEvent)
+        if (pk is IContestStats CTstats && !SkipEvent)
         {
-            if (!byte.TryParse(Coolstats.Text,out var result))
-                return;
-            if (result > 255) 
-            { 
-                result = 255;
+            if (byte.TryParse(Coolstats.Text, out var result))
+            {
+                result = Math.Clamp(result, minStat, maxCosmStat);
                 Coolstats.Text = result.ToString();
+                
+                CTstats.CNT_Cool = result;
+
             }
-            CTstats.CNT_Cool = result;
-            
         }
     }
 
@@ -230,15 +242,14 @@ public partial class Cosmeticstab : ContentPage
     {
         if (pk is IContestStats CTstats && !SkipEvent)
         {
-            if (!byte.TryParse(Beautystats.Text, out var result))
-                return;
-            if (result > 255)
+            if (byte.TryParse(Beautystats.Text, out var result))
             {
-                result = 255;
-                Beautystats.Text = result.ToString();
-            }
-            CTstats.CNT_Beauty = result;
+                result = Math.Clamp(result, minStat, maxCosmStat);
+                    Beautystats.Text = result.ToString();
+                
+                CTstats.CNT_Beauty = result;
 
+            }
         }
     }
 
@@ -247,14 +258,13 @@ public partial class Cosmeticstab : ContentPage
         if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(Cutestats.Text, out var result))
-                return;
-            if (result > 255)
             {
-                result = 255;
-                Cutestats.Text = result.ToString();
-            }
-            CTstats.CNT_Cute = result;
+                result = Math.Clamp(result, minStat, maxCosmStat);
+                    Cutestats.Text = result.ToString();
+                
+                CTstats.CNT_Cute = result;
 
+            }
         }
     }
 
@@ -263,14 +273,13 @@ public partial class Cosmeticstab : ContentPage
         if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(Cleverstats.Text, out var result))
-                return;
-            if (result > 255)
             {
-                result = 255;
+                result = Math.Clamp(result, minStat, maxCosmStat);
                 Cleverstats.Text = result.ToString();
-            }
-            CTstats.CNT_Smart = result;
+                
+                CTstats.CNT_Smart = result;
 
+            }
         }
     }
 
@@ -279,14 +288,13 @@ public partial class Cosmeticstab : ContentPage
         if (pk is IContestStats CTstats && !SkipEvent)
         {
             if (!byte.TryParse(toughstats.Text, out var result))
-                return;
-            if (result > 255)
             {
-                result = 255;
-                toughstats.Text = result.ToString();
-            }
-            CTstats.CNT_Tough = result;
+                result = Math.Clamp(result, minStat, maxCosmStat);
+                    toughstats.Text = result.ToString();
+                
+                CTstats.CNT_Tough = result;
 
+            }
         }
     }
 
@@ -294,15 +302,14 @@ public partial class Cosmeticstab : ContentPage
     {
         if (pk is IContestStats CTstats && !SkipEvent)
         {
-            if (!byte.TryParse(sheenstats.Text, out var result))
-                return;
-            if (result > 255)
+            if (byte.TryParse(sheenstats.Text, out var result))
             {
-                result = 255;
-                sheenstats.Text = result.ToString();
-            }
-            CTstats.CNT_Sheen = result;
+                result = Math.Clamp(result, minStat, maxCosmStat);
+                    sheenstats.Text = result.ToString();
+                
+                CTstats.CNT_Sheen = result;
 
+            }
         }
     }
 
@@ -332,5 +339,14 @@ public partial class Cosmeticstab : ContentPage
     {
         RibbonSelector.ApplicatorMode = true;
         Navigation.PushModalAsync(new RibbonSelector());
+    }
+
+    private void AutoCalcCP(object sender, CheckedChangedEventArgs e)
+    {
+        if (pk is ICombatPower cp && AutoCP.IsChecked)
+        {
+            cp.ResetCP();
+            scaledisplay.Text = cp.Stat_CP.ToString();
+        }
     }
 }

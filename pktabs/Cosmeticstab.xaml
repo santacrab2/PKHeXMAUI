@@ -68,8 +68,11 @@
                 <!--Scale/CP-->
                 <Label x:Name="scalelabel" Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:" IsVisible="false"/>
                 <Editor Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale" IsVisible="false"/>
-                <Image IsVisible="false" Grid.Column="3" Grid.Row="3" HorizontalOptions="Start" x:Name="SizeMarkImage" HeightRequest="32"/>
-                <Label Grid.Row="3" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="ScaleDetailLabel" IsVisible="false"/>
+                <CheckBox Grid.Row="3" Grid.Column="1" x:Name="AutoCP" HorizontalOptions="End" IsVisible="false" CheckedChanged="AutoCalcCP"></CheckBox>
+                <Label Grid.Row="3" Grid.Column="2" Text="Auto" IsVisible="false" x:Name="cpAutoLabel"/>
+                <Label Grid.Row="3" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="ScaleDetailLabel" IsVisible="false"/>
+                <Image IsVisible="false" Grid.Column="4" Grid.Row="3" HorizontalOptions="Start" x:Name="SizeMarkImage" HeightRequest="32"/>
+               
                 <!--Ribbons and Memories-->
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="Ribbons" Clicked="openribbons" Grid.ColumnSpan="2"></Button>
                 <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="End" x:Name="memoriesbutton" Text="Memories" Clicked="openmemories" IsVisible="false" Grid.ColumnSpan="2"/>

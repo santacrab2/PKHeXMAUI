@@ -733,6 +733,17 @@ public partial class MainPage : ContentPage
             }
         }
     }
+
+    private void applyPID(object sender, TextChangedEventArgs e)
+    {
+        if(displaypid.Text.Length > 0 && !SkipTextChange)
+        {
+            if (uint.TryParse(displaypid.Text, out var result))
+            {
+                pk.PID = result;
+            }
+        }
+    }
 }
 
 
