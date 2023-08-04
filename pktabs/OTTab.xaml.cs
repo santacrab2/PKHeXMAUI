@@ -53,7 +53,7 @@ public partial class OTTab : ContentPage
         TIDdisplay.Text = pkm.DisplayTID.ToString();
         otdisplay.Text = pkm.OT_Name;
         ecdisplay.Text = $"{pkm.EncryptionConstant:X}";
-        if (pkm.Generation > 5)
+        if (sav.Generation > 5)
         {
             htname.IsVisible = true;
             HTLabel.IsVisible = true;
