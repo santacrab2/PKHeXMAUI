@@ -24,7 +24,17 @@ public partial class SearchSettings : ContentPage
         var EncVersionList = datasourcefiltered.Games.ToList();
         EncVersionList.RemoveAt(EncVersionList.Count - 1); EncVersionList.Insert(0, Any);
         EncVersion.ItemsSource = EncVersionList;
-
+        if(encSettings != null)
+        {
+            EncSpecies.SelectedItem = datasourcefiltered.Species.Where(z => (ushort)z.Value == encSettings.Species).First();
+            EncMove1.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[0]).First();
+            EncMove2.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[1]).First();
+            EncMove3.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[2]).First();
+            EncMove4.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[3]).First();
+            EncVersion.SelectedItem = EncVersionList.Where(z=>z.Value == encSettings.Version).First();
+            ShinyCheck.IsChecked = (bool)encSettings.SearchShiny;
+            EggCheck.IsChecked = (bool)encSettings.SearchEgg;
+        }
 
     }
 
