@@ -81,8 +81,8 @@
                 <Picker Grid.Row="12" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="extrabytespicker" SelectedIndexChanged="extrabytestuff"/>
                 <Editor Grid.Row="12" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="extrabytesvalue" TextChanged="applyextrabytesvalue"/>
                 <!--HomeTracker-->
-                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Home Tracker:" IsVisible="false"/>
-                <Editor x:Name="trackereditor" Grid.Row="13" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" TextChanged="applyhometracker" IsVisible="false"/>
+                <Label Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Home Tracker:" IsVisible="false" x:Name="HomeLabel"/>
+                <Editor x:Name="trackereditor" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" TextChanged="applyhometracker" IsVisible="false"/>
 
 
 

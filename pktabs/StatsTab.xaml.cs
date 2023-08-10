@@ -100,9 +100,9 @@ public partial class StatsTab : ContentPage
             hpHyper.IsChecked = hpt.IsHyperTrained(0);
             ATKHyper.IsChecked = hpt.IsHyperTrained(1);
             DEFHyper.IsChecked = hpt.IsHyperTrained(2);
-            SPAHyper.IsChecked = hpt.IsHyperTrained(3);
+            SPAHyper.IsChecked = hpt.IsHyperTrained(5);
             SPDHyper.IsChecked = hpt.IsHyperTrained(4);
-            SPEHyper.IsChecked = hpt.IsHyperTrained(5);
+            SPEHyper.IsChecked = hpt.IsHyperTrained(3);
         }
   
         if (pkm is ITeraType tera)

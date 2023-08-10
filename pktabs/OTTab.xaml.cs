@@ -74,7 +74,11 @@ public partial class OTTab : ContentPage
             };
         }
         if (pkm is IHomeTrack home)
+        {
+            HomeLabel.IsVisible = true;
+            trackereditor.IsVisible = true;
             trackereditor.Text = home.Tracker.ToString("X16");
+        }
         extrabytespicker.Items.Clear();
         for (var i=0;i<pkm.ExtraBytes.Length;i++)
             extrabytespicker.Items.Add($"0x{pkm.ExtraBytes[i]:X2}");

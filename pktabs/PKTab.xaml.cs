@@ -23,6 +23,7 @@ public partial class MainPage : ContentPage
         GameInfo.FilteredSources = new FilteredGameDataSource(sav, GameInfo.Sources);
         datasourcefiltered = GameInfo.FilteredSources;
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
+        pk.Species = sav.MaxSpeciesID;
         InitializeComponent();
         
         ICommand refreshCommand = new Command(async () =>
