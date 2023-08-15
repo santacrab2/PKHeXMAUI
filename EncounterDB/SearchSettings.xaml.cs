@@ -27,10 +27,27 @@ public partial class SearchSettings : ContentPage
         if(encSettings != null)
         {
             EncSpecies.SelectedItem = datasourcefiltered.Species.Where(z => (ushort)z.Value == encSettings.Species).First();
-            EncMove1.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[0]).First();
-            EncMove2.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[1]).First();
-            EncMove3.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[2]).First();
-            EncMove4.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[3]).First();
+            try
+            {
+                EncMove1.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[0]).First();
+            }
+            catch { }
+            try
+            {
+                EncMove2.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[1]).First();
+            }
+            catch { }
+            try
+            {
+                EncMove3.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[2]).First();
+            }
+            catch { }
+            try
+            {
+                EncMove4.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[3]).First();
+            }
+            catch { }
+            
             EncVersion.SelectedItem = EncVersionList.Where(z=>z.Value == encSettings.Version).First();
             ShinyCheck.IsChecked = (bool)encSettings.SearchShiny;
             EggCheck.IsChecked = (bool)encSettings.SearchEgg;
