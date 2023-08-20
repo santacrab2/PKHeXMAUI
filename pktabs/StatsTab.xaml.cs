@@ -492,7 +492,7 @@ public partial class StatsTab : ContentPage
     private void applySPAhyper(object sender, CheckedChangedEventArgs e)
     {
         if (pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(3);
+            hpt.HyperTrainInvert(5);
     }
     private void applySPDhyper(object sender, CheckedChangedEventArgs e)
     {
@@ -502,7 +502,7 @@ public partial class StatsTab : ContentPage
     private void applySPEhyper(object sender, CheckedChangedEventArgs e)
     {
         if (pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(5);
+            hpt.HyperTrainInvert(3);
     }
     private void applytera(object sender, EventArgs e) 
     {

@@ -27,13 +27,13 @@ public partial class SearchSettings : ContentPage
         if(encSettings != null)
         {
             EncSpecies.SelectedItem = datasourcefiltered.Species.Where(z => (ushort)z.Value == encSettings.Species).First();
-            if (encSettings.Moves.Count >0 && encSettings.Moves[0]!=0)
+            if (encSettings.Moves.Count >0)
                 EncMove1.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[0]).First();
-            if (encSettings.Moves[1] != 0)
+            if (encSettings.Moves.Count >1)
                 EncMove2.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[1]).First();
-            if (encSettings.Moves[2] != 0)
+            if (encSettings.Moves.Count>2)
                 EncMove3.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[2]).First();
-            if (encSettings.Moves[3] != 0)
+            if (encSettings.Moves.Count>3)
                 EncMove4.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[3]).First();
             
             EncVersion.SelectedItem = EncVersionList.Where(z=>z.Value == encSettings.Version).First();

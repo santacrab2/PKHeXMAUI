@@ -476,18 +476,19 @@ public partial class MainPage : ContentPage
 
     private void swapgender(object sender, EventArgs e)
     {
-
-        if (pk.Gender == 0)
+        if (!pk.PersonalInfo.Genderless)
         {
-            pk.SetGender(1);
-            genderdisplay.Source = "gender_1.png";
+            if (pk.Gender == 0)
+            {
+                pk.SetGender(1);
+                genderdisplay.Source = "gender_1.png";
+            }
+            else
+            {
+                pk.SetGender(0);
+                genderdisplay.Source = "gender_0.png";
+            }
         }
-        else
-        {
-            pk.SetGender(0);
-            genderdisplay.Source = "gender_0.png";
-        }
-
         
 
     }   
