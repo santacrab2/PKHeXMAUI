@@ -244,12 +244,16 @@ public partial class MainPage : ContentPage
     {
         if (!SkipTextChange)
         {
-            pk = EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version);
+            ComboItem test = (ComboItem)specieslabel.SelectedItem ?? new ComboItem("None", 0);
+            var tree = EvolutionTree.GetEvolutionTree(sav.Context);
+            var evos = tree.GetEvolutionsAndPreEvolutions(pk.Species, pk.Form);
+            if(!evos.Contains(((ushort)test.Value,pk.Form)))
+                pk = EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version);
             pk.Language = sav.Language;
             formargstepper.IsVisible = false;
             formlabel.IsVisible = false;
             formpicker.IsVisible = false;
-            ComboItem test = (ComboItem)specieslabel.SelectedItem ?? new ComboItem("None", 0);
+            
             pk.Species = (ushort)test.Value;
             if (abilitypicker.Items.Count() != 0)
                 abilitypicker.Items.Clear();
@@ -274,7 +278,8 @@ public partial class MainPage : ContentPage
                 pk.ClearNickname();
             if (formpicker.Items.Count != 0)
                 formpicker.Items.Clear();
-            pk.Form = 0;
+            if (!evos.Contains(((ushort)test.Value, pk.Form)))
+                pk.Form = 0;
             var str = GameInfo.Strings;
             var forms = FormConverter.GetFormList(pk.Species, str.types, str.forms, GameInfo.GenderSymbolUnicode, pk.Context);
             if (forms[0] != "")
@@ -506,7 +511,7 @@ public partial class MainPage : ContentPage
             await DisplayAlert("error", j.Message, "ok");
         }
     }
-
+   
     private async void displaylegalitymessage(object sender, EventArgs e)
     {
         applymainpkinfo(pk);
