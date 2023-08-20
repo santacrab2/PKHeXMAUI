@@ -8,10 +8,10 @@ namespace PKHeXMAUI;
 
 public partial class SearchSettings : ContentPage
 {
-	public SearchSettings()
+    public static ComboItem Any = new ComboItem("Any", 0);
+    public SearchSettings()
 	{
 		InitializeComponent();
-        var Any = new ComboItem("Any", 0);
         var EncSpeciesList = datasourcefiltered.Species.ToList();
         EncSpeciesList.Insert(0, Any);
         EncSpecies.ItemsSource = EncSpeciesList;
@@ -27,26 +27,14 @@ public partial class SearchSettings : ContentPage
         if(encSettings != null)
         {
             EncSpecies.SelectedItem = datasourcefiltered.Species.Where(z => (ushort)z.Value == encSettings.Species).First();
-            try
-            {
+            if (encSettings.Moves.Count >0 && encSettings.Moves[0]!=0)
                 EncMove1.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[0]).First();
-            }
-            catch { }
-            try
-            {
+            if (encSettings.Moves[1] != 0)
                 EncMove2.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[1]).First();
-            }
-            catch { }
-            try
-            {
+            if (encSettings.Moves[2] != 0)
                 EncMove3.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[2]).First();
-            }
-            catch { }
-            try
-            {
+            if (encSettings.Moves[3] != 0)
                 EncMove4.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[3]).First();
-            }
-            catch { }
             
             EncVersion.SelectedItem = EncVersionList.Where(z=>z.Value == encSettings.Version).First();
             ShinyCheck.IsChecked = (bool)encSettings.SearchShiny;
@@ -83,10 +71,10 @@ public partial class SearchSettings : ContentPage
             Level = (EncounterSettings.UsePkEditorAsCriteria ? pk.CurrentLevel : 0),
             Item = (EncounterSettings.UsePkEditorAsCriteria ? pk.HeldItem : 0)
         };
-        encSettings.AddMove((ushort)((ComboItem)EncMove1.SelectedItem).Value);
-        encSettings.AddMove((ushort)((ComboItem)EncMove2.SelectedItem).Value);
-        encSettings.AddMove((ushort)((ComboItem)EncMove3.SelectedItem).Value);
-        encSettings.AddMove((ushort)((ComboItem)EncMove4.SelectedItem).Value);
+        encSettings.AddMove((ushort)((ComboItem)EncMove1.SelectedItem??Any).Value);
+        encSettings.AddMove((ushort)((ComboItem)EncMove2.SelectedItem??Any).Value);
+        encSettings.AddMove((ushort)((ComboItem)EncMove3.SelectedItem??Any).Value);
+        encSettings.AddMove((ushort)((ComboItem)EncMove4.SelectedItem??Any).Value);
         encSettings.SearchShiny = ShinyCheck.IsChecked;
         encSettings.SearchEgg= EggCheck.IsChecked;
         EncounterMovesetGenerator.PriorityList = GetTypes();
