@@ -40,11 +40,14 @@ public partial class BatchEditor : ContentPage
     {
         if (!skipchange)
         {
-            PropertyTypeLab.Text = BatchEditing.GetPropertyType((string)BatchProperty.SelectedItem, BatchFormat.SelectedIndex);
-            if (BatchEditing.TryGetHasProperty(MainPage.pk, (string)BatchProperty.SelectedItem, out var pi))
+            if (BatchProperty.SelectedItem is not null)
             {
-                GetPropertyDisplayText(pi, MainPage.pk, out var display);
-                PropertyValueLab.Text = display;
+                PropertyTypeLab.Text = BatchEditing.GetPropertyType((string)BatchProperty.SelectedItem, BatchFormat.SelectedIndex);
+                if (BatchEditing.TryGetHasProperty(MainPage.pk, (string)BatchProperty.SelectedItem, out var pi))
+                {
+                    GetPropertyDisplayText(pi, MainPage.pk, out var display);
+                    PropertyValueLab.Text = display;
+                }
             }
         }
     }
