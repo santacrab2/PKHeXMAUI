@@ -435,6 +435,7 @@ public partial class StatsTab : ContentPage
     {
         
         pk.SetRandomIVs();
+        applystatsinfo(pk);
     }
 
     private void perfectivs(object sender, EventArgs e)
@@ -442,6 +443,7 @@ public partial class StatsTab : ContentPage
         Span<int> ivs = stackalloc int[6];
         ivs.Fill(pk.MaxIV);
         pk.IVs = ivs.ToArray();
+        applystatsinfo(pk);
     }
 
     private void randomizeevs(object sender, EventArgs e)
@@ -449,6 +451,7 @@ public partial class StatsTab : ContentPage
         if (pk is IAwakened woke)
         {
            woke.AwakeningSetRandom();
+            applystatsinfo(pk);
         }
         else
         {
@@ -456,6 +459,7 @@ public partial class StatsTab : ContentPage
 
             EffortValues.SetRandom(ivs, 9);
             pk.SetEVs(ivs);
+            applystatsinfo(pk);
         }
     }
 
@@ -464,6 +468,7 @@ public partial class StatsTab : ContentPage
         if (pk is IAwakened woke)
         {
             woke.SetSuggestedAwakenedValues(pk);
+            applystatsinfo(pk);
         }
         else
         {
@@ -471,6 +476,7 @@ public partial class StatsTab : ContentPage
 
             EffortValues.SetMax(ivs, pk);
             pk.SetEVs(ivs);
+            applystatsinfo(pk);
         }
     }
 
