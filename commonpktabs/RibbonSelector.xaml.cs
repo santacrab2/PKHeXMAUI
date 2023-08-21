@@ -37,7 +37,8 @@ public partial class RibbonSelector : ContentPage
                 IconImageSource = "ribbon_affix_noneb.png"
             };
             affix.Invoked += AffixRibbon;
-            Swipe.LeftItems.Add(affix);
+            if(ApplicatorMode)
+                Swipe.LeftItems.Add(affix);
             Swipe.Content = grid;
             return Swipe;
             
