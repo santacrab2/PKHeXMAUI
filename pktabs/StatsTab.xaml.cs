@@ -97,12 +97,12 @@ public partial class StatsTab : ContentPage
         totalspedisplay.Text = pkm.Stat_SPE.ToString();
         if (pkm is IHyperTrain hpt)
         {
-            hpHyper.IsChecked = hpt.IsHyperTrained(0);
-            ATKHyper.IsChecked = hpt.IsHyperTrained(1);
-            DEFHyper.IsChecked = hpt.IsHyperTrained(2);
-            SPAHyper.IsChecked = hpt.IsHyperTrained(5);
-            SPDHyper.IsChecked = hpt.IsHyperTrained(4);
-            SPEHyper.IsChecked = hpt.IsHyperTrained(3);
+            hpHyper.IsChecked = hpt.HT_HP;
+            ATKHyper.IsChecked = hpt.HT_ATK;
+            DEFHyper.IsChecked = hpt.HT_DEF;
+            SPAHyper.IsChecked = hpt.HT_SPA;
+            SPDHyper.IsChecked = hpt.HT_SPD;
+            SPEHyper.IsChecked = hpt.HT_SPE;
         }
   
         if (pkm is ITeraType tera)
@@ -476,33 +476,33 @@ public partial class StatsTab : ContentPage
 
     private void applyHPhyper(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(0);
+        if (pk is IHyperTrain hpt && !SkipEvent)
+            hpt.HT_HP = e.Value;
     }
     private void applyATKhyper(object sender, CheckedChangedEventArgs e)
     {
         if(pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(1);
+            hpt.HT_ATK = e.Value;
     }
     private void applyDEFhyper(object sender, CheckedChangedEventArgs e)
     {
         if (pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(2);
+            hpt.HT_DEF = e.Value;
     }
     private void applySPAhyper(object sender, CheckedChangedEventArgs e)
     {
         if (pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(5);
+            hpt.HT_SPA = e.Value;
     }
     private void applySPDhyper(object sender, CheckedChangedEventArgs e)
     {
         if (pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(4);
+            hpt.HT_SPD = e.Value;
     }
     private void applySPEhyper(object sender, CheckedChangedEventArgs e)
     {
         if (pk is IHyperTrain hpt && !SkipEvent)
-            hpt.HyperTrainInvert(3);
+            hpt.HT_SPE = e.Value;
     }
     private void applytera(object sender, EventArgs e) 
     {
