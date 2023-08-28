@@ -125,13 +125,22 @@ public partial class Cosmeticstab : ContentPage
                 Flags[i].IsChecked = ((pk4.ShinyLeaf >> i) & 1) == 1;
 
         }
-        if(pk is IRibbonSetAffixed a)
+        if(pkm is IRibbonSetAffixed a)
         {
             AffixedRibbonSprite.IsVisible = true;
             if (a.AffixedRibbon != -1)
                 AffixedRibbonSprite.Source = $"ribbon{((RibbonIndex)a.AffixedRibbon).ToString().ToLower()}.png";
             else
                 AffixedRibbonSprite.Source = "ribbon_affix_none.png";
+        }
+        if(pkm is IContestStats contest)
+        {
+            Coolstats.Text = $"{contest.CNT_Cool}";
+            Beautystats.Text = $"{contest.CNT_Beauty}";
+            Cutestats.Text = $"{contest.CNT_Cute}";
+            Cleverstats.Text = $"{contest.CNT_Smart}";
+            toughstats.Text = $"{contest.CNT_Tough}";
+            sheenstats.Text = $"{contest.CNT_Sheen}";
         }
         SkipEvent = false;
     }
