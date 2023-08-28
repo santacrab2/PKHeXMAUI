@@ -50,7 +50,7 @@
                 />
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="Start"/>
                 <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
-                <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="Center" VerticalOptions="End" IsVisible="false"/>
+                <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="End" IsVisible="false"/>
                 <!--labels-->
                 <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Moves"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="PP"/>

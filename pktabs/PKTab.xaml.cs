@@ -153,13 +153,29 @@ public partial class MainPage : ContentPage
             itemsprite.IsVisible = true;
             if (sav is SAV9SV)
             {
-                itemspriteurl = $"aitem_{pkm.HeldItem}.png"; 
-                itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+                if (pkm.HeldItem >= 329 && pkm.HeldItem <= 420 || pkm.HeldItem >= 2161 && pkm.HeldItem <= 2232)
+                {
+                    itemspriteurl = $"aitem_tm.png";
+                    itemsprite.Source = $"aitem_tm.png";
+                }
+                else
+                {
+                    itemspriteurl = $"aitem_{pkm.HeldItem}.png";
+                    itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+                }
             }
             else
             {
-                itemspriteurl = $"bitem_{pkm.HeldItem}.png";
-                itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
+                if (pkm.HeldItem >= 328 && pkm.HeldItem <= 419 || pkm.HeldItem >= 2160 && pkm.HeldItem <= 2231)
+                {
+                    itemspriteurl = $"bitem_tm.png";
+                    itemsprite.Source = $"bitem_tm.png";
+                }
+                else
+                {
+                    itemspriteurl = $"bitem_{pkm.HeldItem}.png";
+                    itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
+                }
             }
         }
         formpicker.Items.Clear();
