@@ -48,6 +48,10 @@ public partial class BatchEditor : ContentPage
                     GetPropertyDisplayText(pi, MainPage.pk, out var display);
                     PropertyValueLab.Text = display;
                 }
+                else
+                {
+                    PropertyValueLab.Text = "";
+                }
             }
         }
     }
