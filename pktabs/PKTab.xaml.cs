@@ -198,7 +198,12 @@ public partial class MainPage : ContentPage
         type2sprite.Source = $"type_icon_{pk.PersonalInfo.Type2:00}";
         type2sprite.IsVisible = (pk.PersonalInfo.Type1 != pk.PersonalInfo.Type2);
         languagepicker.SelectedIndex = pkm.Language;
-        nicknamecheck.IsChecked = pkm.IsNicknamed;
+        if (pkm.Species == (ushort)Species.Manaphy && pk.IsEgg) 
+        { 
+            pk.IsNicknamed = false;
+            pkm.IsNicknamed = false;
+        }
+        nicknamecheck.IsChecked =  pkm.IsNicknamed;
         if(pkm is PK5 pk5)
         {
             NSparkleLabel.IsVisible = true;

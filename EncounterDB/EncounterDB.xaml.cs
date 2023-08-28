@@ -73,6 +73,8 @@ public partial class EncounterDB : ContentPage
         IEncounterInfo enc = ((EncounterSprite)EncounterCollection.SelectedItem).EncounterInfo;
         var pkm = enc.ConvertToPKM(sav, EncounterCriteria.Unrestricted);
         pk = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
+        if (pk.Species == (ushort)Species.Manaphy && pk.IsEgg)
+            pk.IsNicknamed = false;
     }
     private void SearchEncountersClick(object sender, EventArgs e)
     {
