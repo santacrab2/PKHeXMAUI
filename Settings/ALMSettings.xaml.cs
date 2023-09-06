@@ -34,6 +34,7 @@ public class PluginSettings
     public static bool SetBattleVersion { get => Preferences.Default.Get("SetBattleVersion", false);  }
     public static bool SetBallByColor { get => Preferences.Default.Get("SetBallByColor", false);  }
     public static bool EnableMemesForIllegalSets { get => Preferences.Default.Get("EnableMemesForIllegalSets", false);  }
+    public static bool ForceLevel100For50 { get => Preferences.Default.Get("ForceLevel100For50", false); }
     public static bool LivingDexAllForms { get => Preferences.Get("LivingDexAllForms", false); }
     public static bool LivingDexNativeOnly { get => Preferences.Get("LivingDexNativeOnly", false); }
     public static bool LivingDexSetAlpha { get => Preferences.Get("LivingDexSetAlpha", false); }

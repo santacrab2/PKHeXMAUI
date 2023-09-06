@@ -1,4 +1,5 @@
 ﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 using static PKHeXMAUI.MainPage;
 namespace PKHeXMAUI;
 
@@ -7,7 +8,7 @@ public partial class AppShell : Shell
 	public AppShell(SaveFile sav)
 	{
         AppSaveFile = sav;
-		
+        APILegality.ForceLevel100for50 = PluginSettings.ForceLevel100For50;
         InitializeComponent();
         
        

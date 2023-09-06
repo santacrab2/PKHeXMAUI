@@ -127,16 +127,17 @@ public partial class BoxTab : ContentPage
         ModLogic.NativeOnly = PluginSettings.LivingDexNativeOnly;
         ModLogic.SetShiny = PluginSettings.LivingDexSetShiny;
 
-        copyboxdata();
+        await Task.Run(copyboxdata);
         fillbox();
         livingdexbutton.Text = "Generate Living Dex";
     }
-    private void copyboxdata()
+    public void copyboxdata()
     {
         Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
         Span<PKM> bd = sav.BoxData.ToArray();
         pkms.CopyTo(bd);
         sav.BoxData = bd.ToArray();
+        
     }
     private void changebox(object sender, EventArgs e)
     {
