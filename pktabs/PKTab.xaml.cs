@@ -13,7 +13,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.09.06";
+    public static string Version = "v23.09.11";
     public bool SkipTextChange = false;
     public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892 };
     public bool FirstLoad = true;
@@ -35,7 +35,7 @@ public partial class MainPage : ContentPage
         PKRefresh.Command = refreshCommand;
         Permissions.RequestAsync<Permissions.StorageWrite>();
         APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
-        APILegality.UseTrainerData = true;
+        APILegality.UseTrainerData = false;
         APILegality.AllowTrainerOverride = true;
         APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
         Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
@@ -54,7 +54,7 @@ public partial class MainPage : ContentPage
         if (IsTIDdigits)
             TrainerSettings.DefaultTID16 = TID;
         TrainerSettings.Clear();
-        TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)sav.Version, (LanguageID)sav.Language));
+       TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)sav.Version, (LanguageID)sav.Language));
         specieslabel.ItemsSource = datasourcefiltered.Species;
         
         naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
