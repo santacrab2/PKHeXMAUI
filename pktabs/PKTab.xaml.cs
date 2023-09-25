@@ -686,8 +686,9 @@ public partial class MainPage : ContentPage
         if (!doit)
             return;
         var set = new ShowdownSet(await Clipboard.GetTextAsync());
-        var pkm = sav.GetLegalFromSet( set, out var msg);
-        if(msg == LegalizationResult.Regenerated)
+        var result = sav.GetLegalFromSet(set);
+        var pkm = result.Created;
+        if(result.Status == LegalizationResult.Regenerated)
         {
             pk = pkm;
             applymainpkinfo(pk);
