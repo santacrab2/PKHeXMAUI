@@ -167,7 +167,7 @@ public class EncounterSprite
 {
    public IEncounterInfo EncounterInfo { get; set; }
     public string url { get; set; }
-    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869 };
+    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013 };
     public bool Alpha { get; set; }
     public string BallUrl { get; set; }
     public bool Mighty { get; set; }
