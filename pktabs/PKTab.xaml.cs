@@ -34,32 +34,10 @@ public partial class MainPage : ContentPage
         });
         PKRefresh.Command = refreshCommand;
         Permissions.RequestAsync<Permissions.StorageWrite>();
-        APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
-        APILegality.UseTrainerData = false;
-        APILegality.AllowTrainerOverride = true;
-        APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
-        Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
-        APILegality.PrioritizeGame = PluginSettings.PrioritizeGame;
-        APILegality.PrioritizeGameVersion = PluginSettings.PrioritizeGameVersion;
-        APILegality.SetBattleVersion = PluginSettings.SetBattleVersion;
-        APILegality.ForceSpecifiedBall = true;
-        APILegality.Timeout = 45;
-        EncounterMovesetGenerator.PriorityList = new List<EncounterTypeGroup>() { EncounterTypeGroup.Slot, EncounterTypeGroup.Trade, EncounterTypeGroup.Static, EncounterTypeGroup.Mystery, EncounterTypeGroup.Egg };
-        TrainerSettings.DefaultOT = PluginSettings.DefaultOT;
-        EncounterEvent.RefreshMGDB();
-        var IsSIDdigits = ushort.TryParse(PluginSettings.DefaultSID, out var SID);
-        if (IsSIDdigits)
-            TrainerSettings.DefaultSID16 = SID;
-        var IsTIDdigits = ushort.TryParse(PluginSettings.DefaultTID, out var TID);
-        if (IsTIDdigits)
-            TrainerSettings.DefaultTID16 = TID;
-        TrainerSettings.Clear();
-       TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)sav.Version, (LanguageID)sav.Language));
+        SetSettings();
         specieslabel.ItemsSource = datasourcefiltered.Species;
-        
         naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
         statnaturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
-      
         helditempicker.ItemsSource = datasourcefiltered.Items;
         helditempicker.DisplayMemberPath= "Text";
         if (datasourcefiltered.Items.Count() > 0)
@@ -68,12 +46,9 @@ public partial class MainPage : ContentPage
             helditemlabel.IsVisible = true;
         }
         languagepicker.ItemsSource = Enum.GetNames(typeof(LanguageID));
-  
         checklegality();
         CheckForUpdate();
         FirstLoad = false;
-
-
     }
     public static LegalityAnalysis la;
 
@@ -84,6 +59,45 @@ public partial class MainPage : ContentPage
     public static string spriteurl = "iconp.png";
     public static string ipaddy = "";
     public static string itemspriteurl = "";
+    public static void SetSettings()
+    {
+        APILegality.EnableDevMode = true;
+        APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
+        APILegality.UseTrainerData = false;
+        APILegality.AllowTrainerOverride = true;
+        APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
+        Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
+        APILegality.PrioritizeGame = PluginSettings.PrioritizeGame;
+        APILegality.PrioritizeGameVersion = PluginSettings.PrioritizeGameVersion;
+        APILegality.SetBattleVersion = PluginSettings.SetBattleVersion;
+        APILegality.ForceSpecifiedBall = true;
+        APILegality.Timeout = 45;
+        APILegality.AllowHOMETransferGeneration = PluginSettings.AllowHomeless;
+        EncounterMovesetGenerator.PriorityList = new List<EncounterTypeGroup>() { EncounterTypeGroup.Slot, EncounterTypeGroup.Trade, EncounterTypeGroup.Static, EncounterTypeGroup.Mystery, EncounterTypeGroup.Egg };
+        TrainerSettings.DefaultOT = PluginSettings.DefaultOT;
+        EncounterEvent.RefreshMGDB();
+        var IsSIDdigits = ushort.TryParse(PluginSettings.DefaultSID, out var SID);
+        if (IsSIDdigits)
+            TrainerSettings.DefaultSID16 = SID;
+        var IsTIDdigits = ushort.TryParse(PluginSettings.DefaultTID, out var TID);
+        if (IsTIDdigits)
+            TrainerSettings.DefaultTID16 = TID;
+        TrainerSettings.Clear();
+        TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)sav.Version, (LanguageID)sav.Language));
+        var startup = new LegalSettings();
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.CheckWordFilter))!.SetValue(null, startup.CheckWordFilter);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.AllowGen1Tradeback))!.SetValue(null, startup.AllowGen1Tradeback);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedTrade))!.SetValue(null, startup.NicknamedTrade);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedMysteryGift))!.SetValue(null, startup.NicknamedMysteryGift);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.RNGFrameNotFound))!.SetValue(null, startup.RNGFrameNotFound);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.Gen7TransferStarPID))!.SetValue(null, startup.Gen7TransferStarPID);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.Gen8TransferTrackerNotPresent))!.SetValue(null, startup.Gen8TransferTrackerNotPresent);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.Gen8MemoryMissingHT))!.SetValue(null, startup.Gen8MemoryMissingHT);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedAnotherSpecies))!.SetValue(null, startup.NicknamedAnotherSpecies);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.ZeroHeightWeight))!.SetValue(null, startup.ZeroHeightWeight);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.CurrentHandlerMismatch))!.SetValue(null, startup.CurrentHandlerMismatch);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.CheckActiveHandler))!.SetValue(null, startup.CheckActiveHandler);
+    }
     public async void pk9picker_Clicked(object sender, EventArgs e)
     {
         EntityConverter.AllowIncompatibleConversion = PSettings.AllowIncompatibleConversion ? EntityCompatibilitySetting.AllowIncompatibleAll : EntityCompatibilitySetting.DisallowIncompatible;

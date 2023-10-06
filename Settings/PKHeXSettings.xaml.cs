@@ -66,6 +66,7 @@ public class PSettings
 	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
 	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
 	public static bool AllowIncompatibleConversion { get => Preferences.Default.Get("AllowIncompatibleConversion", false); }
+
 }
 public class EncounterSettings
 {
@@ -93,6 +94,11 @@ public class GenericCollection
 				proparray.Add((GameVersion)g.Value);
 			}
 
+        }
+        if(p.PropertyType == typeof(Severity))
+        {
+            foreach (var s in Enum.GetValues(typeof(Severity)))
+                proparray.Add((Severity)s);
         }
 	}
 }
@@ -144,10 +150,14 @@ public class GenericCollectionSelector : DataTemplateSelector
     {
         if (sender is SfComboBox box)
         {
-            if (box.SelectedItem is Boolean)
-                Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
-            else
-                Preferences.Set(box.Placeholder, (int)(GameVersion)box.SelectedItem);
+           
+                if (box.SelectedItem is Boolean)
+                    Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
+                else if (box.SelectedItem is GameVersion)
+                    Preferences.Set(box.Placeholder, (int)(GameVersion)box.SelectedItem);
+                else
+                    Preferences.Set(box.Placeholder, (int)(Severity)box.SelectedItem);
+            
         }
         if (sender is Editor editor)
         {
@@ -167,19 +177,22 @@ public class GenericCollectionSelector : DataTemplateSelector
             TrainerSettings.Clear();
             TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)MainPage.sav.Version, (LanguageID)MainPage.sav.Language));
         }
-
+        MainPage.SetSettings();
     }
     public static string LastBox = "";
     public static void GetSettingBool(object sender, EventArgs e)
     {
         if (sender is SfComboBox box)
         {
-            if (box.Placeholder != LastBox)
+            if (box.Placeholder != LastBox && box.ItemsSource is not null)
             {
-                if (box.Placeholder != "PrioritizeGameVersion")
+                if (((List<object>)box.ItemsSource)[0] is Boolean)
                     box.SelectedItem = Preferences.Get(box.Placeholder, false);
-                else
+                else if (((List<object>)box.ItemsSource)[0] is GameVersion)
                     box.SelectedItem = (GameVersion)Preferences.Get(box.Placeholder, 0);
+                else if(((List<object>)box.ItemsSource)[0] is Severity)
+                    box.SelectedItem = (Severity)Preferences.Get(box.Placeholder,0);
+                
                 LastBox = box.Placeholder;
             }
         }

@@ -96,6 +96,7 @@
             <ShellContent Title="Save Settings" ContentTemplate="{DataTemplate local:HomePage}"/>
             <ShellContent Title="PKHeX Settings" ContentTemplate="{DataTemplate local:PKHeXSettings}"/>
             <ShellContent Title="ALM Settings" ContentTemplate="{DataTemplate local:ALMSettings}"/>
+            <ShellContent Title="Legality Settings" ContentTemplate="{DataTemplate local:LegalitySettings}"/>
         </Tab>
         <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
     </FlyoutItem>
