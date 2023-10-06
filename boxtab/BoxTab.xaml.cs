@@ -56,12 +56,16 @@ public partial class BoxTab : ContentPage
             Image ItemSprite = new Image() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
             ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
             ItemSprite.TranslateTo(ItemSprite.TranslationX + 18, ItemSprite.TranslationY);
+            Image LegalSprite = new Image() { WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start, Source = "warn.png" };
+            LegalSprite.TranslateTo(LegalSprite.TranslationX - 6, ItemSprite.TranslationY);
+            LegalSprite.SetBinding(Image.IsVisibleProperty, "legal");
             image.SetBinding(Image.SourceProperty, "url");
             shinysp.SetBinding(Image.IsVisibleProperty, "shiny");
             grid.Add(image);
             grid.Add(shinysp);
             grid.Add(ItemSprite);
             grid.Add(Egg);
+            grid.Add(LegalSprite);
             SwipeView swipe = new();
             SwipeItem view = new()
             {
@@ -98,14 +102,10 @@ public partial class BoxTab : ContentPage
     }
     private async void applypkfrombox(object sender, EventArgs e)
     {
-        
             if (((boxsprite)boxview.SelectedItem).pkm.Species != 0)
             {
                 pk = ((boxsprite)boxview.SelectedItem).pkm;
             }
-        
-        
-        
     }
     private async void inject(object sender, EventArgs e)
     {
@@ -172,6 +172,9 @@ public class boxsprite
             ItemResource = $"bitem_{pkm.HeldItem}.png";
           
         }
+        legal = !new LegalityAnalysis(pk9).Valid;
+        if (pk9.Species == 0)
+            legal = false;
     }
     public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
     public PKM pkm { get; set; }
@@ -179,4 +182,5 @@ public class boxsprite
 	public string species { get; set; }
     public bool shiny { get; set; }
     public string ItemResource { get; set; }
+    public bool legal { get; set; }
 }
