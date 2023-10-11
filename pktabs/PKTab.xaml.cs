@@ -104,26 +104,110 @@ public partial class MainPage : ContentPage
         var pkfile = await FilePicker.PickAsync();
         if (pkfile is null)
             return;
-        var bytes = File.ReadAllBytes(pkfile.FullPath);
-        pk = EntityFormat.GetFromBytes(bytes);
-        if (pk.GetType() != sav.PKMType)
+        
+        var obj = FileUtil.GetSupportedFile(pkfile.FullPath);
+        if(obj is null) return;
+        switch (obj)
         {
-            pk = EntityConverter.ConvertToType(pk, sav.PKMType, out var result);
+            case PKM pkm: OpenPKMFile(pkm);return;
+            case IPokeGroup b: OpenGroup(b); return;
+            case MysteryGift g: OpenMG(g); return;
+            case IEnumerable<byte[]> pkms: OpenPCBoxBin(pkms); return;
+            case IEncounterConvertible enc: OpenPKMFile(enc.ConvertToPKM(sav));return;
+        }
+      
+       
+    }
+    public async void OpenPCBoxBin(IEnumerable<byte[]> pkms)
+    {
+        var data = pkms.SelectMany(z => z).ToArray();
+        if (sav.GetPCBinary().Length == data.Length)
+        {
+            if (sav.IsAnySlotLockedInBox(0, sav.BoxCount - 1))
+            {
+                await DisplayAlert("Fail", "Battle Box slots prevent loading of PC data.", "cancel");
+                return;
+            }
+            if(!sav.SetPCBinary(data))
+            {
+                await DisplayAlert("Fail", "Failed to import", "cancel");
+                return;
+            }
+            await DisplayAlert("Success", "PC Binary imported.", "okay");
+            
+        } 
+        else if(sav.GetBoxBinary(sav.CurrentBox).Length == data.Length)
+        {
+            if (sav.IsAnySlotLockedInBox(0, sav.BoxCount - 1))
+            {
+                await DisplayAlert("Fail", "Battle Box slots prevent loading of Box data.", "cancel");
+                return;
+            }
+            if (!sav.SetBoxBinary(data,sav.CurrentBox))
+            {
+                await DisplayAlert("Fail", "Failed to import", "cancel");
+                return;
+            }
+            await DisplayAlert("Success", "Box Binary imported.", "okay");
+        }
+        else
+        {
+            await DisplayAlert("Fail", "Failed to import", "cancel");
+        }
+    }
+    public async void OpenMG(MysteryGift g)
+    {
+        if(!g.IsEntity) return;
+        var pkm = g.ConvertToPKM(sav);
+        OpenPKMFile(pkm);
+    }
+    public async void OpenGroup(IPokeGroup b)
+    {
+        var type = sav.PKMType;
+        int slotSkipped = 0;
+        int index = 0;
+        foreach (var x in b.Contents)
+        {
+            var i = index++;
+            if (sav.IsSlotOverwriteProtected(sav.CurrentBox, i))
+            {
+                slotSkipped++;
+                continue;
+            }
+
+            var convert = EntityConverter.ConvertToType(x, type, out _);
+            if (convert?.GetType() != type)
+            {
+                slotSkipped++;
+                continue;
+            }
+            sav.SetBoxSlotAtIndex(x, sav.CurrentBox, i);
+        }
+    }
+    public async void OpenPKMFile(PKM pkm)
+    {
+        if (pkm.GetType() != sav.PKMType)
+        {
+            var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
             if (result.IsSuccess() || PSettings.AllowIncompatibleConversion)
             {
-                applymainpkinfo(pk);
+                sav.AdaptPKM(newpkm);
+                
+                applymainpkinfo(newpkm);
                 checklegality();
+                pk = newpkm;
                 return;
             }
             else
             {
-                await DisplayAlert("Incompatible", "This PK file is incompatible with the current save file", "cancel");
+                await DisplayAlert("Incompatible", "This file is incompatible with the current save file", "cancel");
                 return;
             }
         }
-        
-        applymainpkinfo(pk);
+        sav.AdaptPKM(pkm);
+        applymainpkinfo(pkm);
         checklegality();
+        pk = pkm;
     }
     public void checklegality()
     {

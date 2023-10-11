@@ -23,7 +23,7 @@ public partial class BoxTab : ContentPage
             boxrefresh.IsRefreshing = false;
         });
         boxrefresh.Command = refreshCommand;
-        boxnum.SelectedIndex = 0;
+        boxnum.SelectedIndex = sav.CurrentBox;
     }
     public static IList<boxsprite> boxsprites = new List<boxsprite>();
     public static int CurrentBox = 0;
@@ -142,6 +142,7 @@ public partial class BoxTab : ContentPage
     private void changebox(object sender, EventArgs e)
     {
         CurrentBox = boxnum.SelectedIndex;
+        sav.CurrentBox = CurrentBox;
         fillbox();
         
     }
