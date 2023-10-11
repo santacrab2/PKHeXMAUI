@@ -13,7 +13,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.09.25";
+    public static string Version = "v23.10.6";
     public bool SkipTextChange = false;
     public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
     public bool FirstLoad = true;
@@ -61,7 +61,7 @@ public partial class MainPage : ContentPage
     public static string itemspriteurl = "";
     public static void SetSettings()
     {
-        APILegality.EnableDevMode = true;
+        
         APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
         APILegality.UseTrainerData = false;
         APILegality.AllowTrainerOverride = true;
@@ -702,7 +702,7 @@ public partial class MainPage : ContentPage
         var set = new ShowdownSet(await Clipboard.GetTextAsync());
         var result = sav.GetLegalFromSet(set);
         var pkm = result.Created;
-        if(result.Status == LegalizationResult.Regenerated)
+        if(new LegalityAnalysis(pkm).Valid)
         {
             pk = pkm;
             applymainpkinfo(pk);
