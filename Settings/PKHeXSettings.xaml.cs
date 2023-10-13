@@ -66,6 +66,8 @@ public class PSettings
 	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
 	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
 	public static bool AllowIncompatibleConversion { get => Preferences.Default.Get("AllowIncompatibleConversion", false); }
+    public static bool SetUpdatePKM { get => Preferences.Get("SetUpdatePKM", true); }
+   
 
 }
 public class EncounterSettings

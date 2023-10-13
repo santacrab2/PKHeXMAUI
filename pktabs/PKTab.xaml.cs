@@ -13,7 +13,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.10.11";
+    public static string Version = "v23.10.13";
     public bool SkipTextChange = false;
     public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
     public bool FirstLoad = true;
@@ -85,6 +85,8 @@ public partial class MainPage : ContentPage
         TrainerSettings.Clear();
         TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)sav.Version, (LanguageID)sav.Language));
         var startup = new LegalSettings();
+        SaveFile.SetUpdatePKM = PSettings.SetUpdatePKM ? PKMImportSetting.Update : PKMImportSetting.Skip;
+        ParseSettings.InitFromSaveFileData(sav);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.CheckWordFilter))!.SetValue(null, startup.CheckWordFilter);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.AllowGen1Tradeback))!.SetValue(null, startup.AllowGen1Tradeback);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedTrade))!.SetValue(null, startup.NicknamedTrade);
@@ -621,7 +623,7 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            pk = sav.Legalize(pk);
+            pk = await Task.Run(() => sav.Legalize(pk));
             checklegality();
             applymainpkinfo(pk);
         }
@@ -640,7 +642,8 @@ public partial class MainPage : ContentPage
         var makelegal = await DisplayAlert("Legality Report", la.Report(), "legalize","ok");
         if (makelegal)
         {
-            pk = sav.Legalize(pk);
+
+            pk = await Task.Run(()=>sav.Legalize(pk));
             checklegality();
             applymainpkinfo(pk);
         }
@@ -805,22 +808,26 @@ public partial class MainPage : ContentPage
     }
     private static async Task<bool> IsUpdateAvailable()
     {
-        var currentVersion = ParseVersion(Version);
-        var latestVersion = ParseVersion(await GetLatestVersion());
-
-        if (latestVersion[0] > currentVersion[0])
-            return true;
-        else if (latestVersion[0] == currentVersion[0])
+        try
         {
-            if (latestVersion[1] > currentVersion[1])
+            var currentVersion = ParseVersion(Version);
+            var latestVersion = ParseVersion(await GetLatestVersion());
+
+            if (latestVersion[0] > currentVersion[0])
                 return true;
-            else if (latestVersion[1] == currentVersion[1])
+            else if (latestVersion[0] == currentVersion[0])
             {
-                if (latestVersion[2] > currentVersion[2])
+                if (latestVersion[1] > currentVersion[1])
                     return true;
+                else if (latestVersion[1] == currentVersion[1])
+                {
+                    if (latestVersion[2] > currentVersion[2])
+                        return true;
+                }
             }
+            return false;
         }
-        return false;
+        catch { return false; };
     }
     private static async Task<string> GetLatestVersion()
     {
