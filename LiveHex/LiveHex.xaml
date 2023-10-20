@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.LiveHex"
+             Title="LiveHex">
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+
+
+            </Grid.ColumnDefinitions>
+
+
+            <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP" TextChanged="SaveUserIP" ></Editor>
+            <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="6000" AutoSize="TextChanges" x:Name="Port"></Editor>
+            <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
+            <Editor Grid.Row="2" Grid.Column="0" Text="Box" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="boxnum"/>
+            <Editor Grid.Row="2" Grid.Column="1" Text="Slot" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="slotnum"/>
+            <Button Grid.Row="2" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
+            <Button Grid.Row="2" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
+            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="Write Current Box" Clicked="WriteCurrentBox"/>
+            <Button Grid.Row="4" Text="Items" Clicked="OpenItems" x:Name="inventorybutton"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

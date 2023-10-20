@@ -156,6 +156,9 @@
 	  <Reference Include="PKHeX.Core.AutoMod">
 	    <HintPath>deps\PKHeX.Core.AutoMod.dll</HintPath>
 	  </Reference>
+	  <Reference Include="PKHeX.Core.Injection">
+	    <HintPath>deps\PKHeX.Core.Injection.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -179,6 +182,9 @@
 	  </Compile>
 	  <Compile Update="HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="LiveHex\LiveHex.xaml.cs">
+	    <DependentUpon>LiveHex.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="pktabs\PKTab.xaml.cs">
 	    <DependentUpon>PKTab.xaml</DependentUpon>
@@ -223,6 +229,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LiveHex\LiveHex.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="pktabs\AttacksTab.xaml">
