@@ -7,6 +7,10 @@ using System.Windows.Input;
 using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
 using PKHeX.Core.Injection;
+using System.Net.Http.Headers;
+
+using CommunityToolkit.Maui.Storage;
+
 
 namespace PKHeXMAUI;
 
@@ -377,6 +381,16 @@ After:
             }
         }
         await DisplayAlert("Saved",$"{pk.Nickname} has been saved to {path}", "ok");
+#else
+        pk.ResetPartyStats();
+        CancellationTokenSource source = new();
+        CancellationToken token = source.Token;
+        var result = await FolderPicker.PickAsync(token);
+        if (result.IsSuccessful)
+        {
+            await File.WriteAllBytesAsync($"{result.Folder.Path}{Path.DirectorySeparatorChar}{pk.FileName}", pk.DecryptedPartyData);
+            await DisplayAlert("Saved",$"{pk.Nickname} has been saved to {result.Folder.Path}", "ok");
+        }
 #endif
     }
 

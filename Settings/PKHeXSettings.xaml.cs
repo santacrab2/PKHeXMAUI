@@ -147,9 +147,9 @@ public class GenericCollectionSelector : DataTemplateSelector
         {
                 if (box.SelectedItem is Boolean)
                     Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
-                else if (box.SelectedItem is GameVersion version)
-                    Preferences.Set(box.Placeholder, (int)version);
-                else
+                else if (box.SelectedItem is GameVersion)
+                    Preferences.Set(box.Placeholder, (int)(GameVersion)box.SelectedItem);
+                else if (box.SelectedItem is Severity)
                     Preferences.Set(box.Placeholder, (int)(Severity)box.SelectedItem);
         }
         if (sender is Editor editor)
@@ -191,18 +191,21 @@ public class GenericCollectionSelector : DataTemplateSelector
         }
         if (sender is Editor editor)
         {
-            if (editor.Placeholder != LastBox)
+            if (editor.Placeholder != null)
             {
-                editor.Text = Preferences.Get(editor.Placeholder, "12345");
-                LastBox = editor.Placeholder;
-                var description = editor.Placeholder switch
+                if (editor.Placeholder != LastBox)
                 {
-                    "DefaultOT" => "The OT Name that will be set when you press Legalize",
-                    "DefaultTID" => "5 digit Trainer ID (Not the 7 digit display)",
-                    "DefaultSID" => "5 digit Trainer Secret ID (not the 4 digit display)",
-                    _ => ""
-                };
-                ToolTipProperties.SetText(editor, description);
+                    editor.Text = Preferences.Get(editor.Placeholder, "12345");
+                    LastBox = editor.Placeholder;
+                    var description = editor.Placeholder switch
+                    {
+                        "DefaultOT" => "The OT Name that will be set when you press Legalize",
+                        "DefaultTID" => "5 digit Trainer ID (Not the 7 digit display)",
+                        "DefaultSID" => "5 digit Trainer Secret ID (not the 4 digit display)",
+                        _ => ""
+                    };
+                    ToolTipProperties.SetText(editor, description);
+                }
             }
         }
     }

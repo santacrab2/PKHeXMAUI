@@ -1,4 +1,5 @@
 using PKHeX.Core;
+using CommunityToolkit.Maui.Storage;
 using static PKHeXMAUI.MainPage;
 namespace PKHeXMAUI;
 
@@ -6,9 +7,9 @@ public partial class HomePage : ContentPage
 {
     public bool SkipRefresh = false;
     public static string OpenPath = "ChangeMe";
-	public HomePage()
-	{
-		InitializeComponent();
+    public HomePage()
+    {
+        InitializeComponent();
         Permissions.RequestAsync<Permissions.StorageWrite>();
         var noSelectVersions = new[] { GameVersion.GO, GameVersion.Any };
         SaveVersionPicker.ItemsSource = GameInfo.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
@@ -117,6 +118,22 @@ public partial class HomePage : ContentPage
         }
         await DisplayAlert("Saved",$"Save File has been saved to {path}", "ok");
 
+
+       
+           
+#else
+        CancellationTokenSource source = new();
+        CancellationToken token = source.Token;
+
+        var ext = sav.Metadata.GetSuggestedExtension();
+        var flags = sav.Metadata.GetSuggestedFlags(ext);
+
+        var result = await FolderPicker.PickAsync($"{sav.Metadata.FilePath}", token);
+        if (result.IsSuccessful)
+        {
+            await File.WriteAllBytesAsync($"{result.Folder.Path}{Path.DirectorySeparatorChar}{sav.Metadata.FileName}", sav.Write(flags));
+            await DisplayAlert("Saved", $"Save file has been saved to {result.Folder.Path}", "ok");
+        }
 #endif
     }
 }
