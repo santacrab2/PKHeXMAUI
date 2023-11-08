@@ -11,7 +11,7 @@ public partial class LiveHex : ContentPage
 		InitializeComponent();
 		Port.Text = sav.Generation > 7 ? "6000" : "8000";
 		var validvers = RamOffsets.GetValidVersions(sav);
-		var com = RamOffsets.GetCommunicator(sav, InjectorCommunicationType.SocketNetwork);
+        ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
 		Remote = new PokeSysBotMini(validvers[0], com, false);
         var ip = Preferences.Default.Get("IP", "192.168.1.1");
         SkipTextChanges = true;
@@ -39,5 +39,34 @@ public partial class LiveHex : ContentPage
         if (!SkipTextChanges && IP.Text.Length > 0)
             Preferences.Set("IP", IP.Text);
     }
-    
+
+    private async void inject(object sender, EventArgs e)
+    {
+        if (!int.TryParse(boxnum.Text, out var box))
+        {
+            await DisplayAlert("Invalid", "Invalid Box number", "cancel");
+            return;
+        }
+        if(!int.TryParse(slotnum.Text,out var slot))
+        {
+            await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
+            return;
+        }
+        Remote.SendSlot(pk.EncryptedBoxData, box, slot);
+    }
+
+    private async void read(object sender, EventArgs e)
+    {
+        if (!int.TryParse(boxnum.Text, out var box))
+        {
+            await DisplayAlert("Invalid", "Invalid Box number", "cancel");
+            return;
+        }
+        if (!int.TryParse(slotnum.Text, out var slot))
+        {
+            await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
+            return;
+        }
+        pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box, slot));
+    }
 }

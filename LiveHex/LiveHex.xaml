@@ -38,16 +38,17 @@
 
             </Grid.ColumnDefinitions>
 
-
-            <Editor Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP" TextChanged="SaveUserIP" ></Editor>
-            <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="6000" AutoSize="TextChanges" x:Name="Port"></Editor>
+            <Label Text="IP:" Grid.Row="1" Grid.Column="0"/>
+            <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP" TextChanged="SaveUserIP" ></Editor>
+            <Label Text="Port:" Grid.Row="1" Grid.Column="2"/>
+            <Editor Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="6000" AutoSize="TextChanges" x:Name="Port"></Editor>
             <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
-            <Editor Grid.Row="2" Grid.Column="0" Text="Box" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="boxnum"/>
-            <Editor Grid.Row="2" Grid.Column="1" Text="Slot" AutoSize="TextChanges" HorizontalOptions="Center" VerticalOptions="Center" x:Name="slotnum"/>
-            <Button Grid.Row="2" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
-            <Button Grid.Row="2" Grid.Column="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
-            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="Write Current Box" Clicked="WriteCurrentBox"/>
-            <Button Grid.Row="4" Text="Items" Clicked="OpenItems" x:Name="inventorybutton"/>
+            <Label Text="Box:" Grid.Row="2" Grid.Column="0"/>
+            <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="1" x:Name="boxnum"/>
+            <Label Text="Slot:" Grid.Row="2" Grid.Column="2"/>
+            <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="3" Text="1" x:Name="slotnum"/>
+            <Button Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
+            <Button Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
         </Grid>
     </ScrollView>
 </ContentPage>
