@@ -130,6 +130,7 @@
 	  <None Remove="Resources\Images\generalicons\tr_129.png" />
 	  <None Remove="Resources\Images\generalicons\valid.png" />
 	  <None Remove="Resources\Images\generalicons\warn.png" />
+	  <None Remove="Resources\Images\SVSprites\a_901_1.png" />
 	</ItemGroup>
 
 
