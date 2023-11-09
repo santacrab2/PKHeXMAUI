@@ -118,6 +118,12 @@ public partial class BoxTab : ContentPage
     }
     private async void inject(object sender, EventArgs e)
     {
+
+        if(Remote.Connected && InjectinSlot)
+        {
+            pk.ResetPartyStats();
+            Remote.SendSlot(pk.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+        }
         sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
         fillbox();
     }
