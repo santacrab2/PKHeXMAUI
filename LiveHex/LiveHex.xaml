@@ -30,25 +30,33 @@
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
 
 
             </Grid.ColumnDefinitions>
-
+            <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
             <Label Text="IP:" Grid.Row="1" Grid.Column="0"/>
             <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP" TextChanged="SaveUserIP" ></Editor>
             <Label Text="Port:" Grid.Row="1" Grid.Column="2"/>
             <Editor Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="6000" AutoSize="TextChanges" x:Name="Port"></Editor>
-            <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
-            <Label Text="Box:" Grid.Row="2" Grid.Column="0"/>
-            <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="1" Text="1" x:Name="boxnum"/>
-            <Label Text="Slot:" Grid.Row="2" Grid.Column="2"/>
-            <Entry Keyboard="Numeric" Grid.Row="2" Grid.Column="3" Text="1" x:Name="slotnum"/>
-            <Button Grid.Row="3" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject" Clicked="inject"></Button>
-            <Button Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="read" Clicked="read"/>
+            <Label Text="PKM Editor" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="Box:" Grid.Row="3" Grid.Column="0"/>
+            <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="1" x:Name="boxnum"/>
+            <Label Text="Slot:" Grid.Row="3" Grid.Column="2"/>
+            <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="3" Text="1" x:Name="slotnum"/>
+            <Button Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject to Slot" Clicked="inject"></Button>
+            <Button Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Read from Slot" Clicked="read"/>
+            <Label Text="Offset:" Grid.Row="5" Grid.Column="0"/>
+            <Editor Grid.Row="5" Grid.Column="1" x:Name="offset"/>
+            <Button Grid.Row="6" Grid.Column="0" Text="Read from Offset" Clicked="B_ReadFromOff_Click"/>
+            <CheckBox Grid.Row="7" Grid.Column="0" x:Name="CB_ReadChangeBox" CheckedChanged="CB_ReadChangeBox_Check"/>
+            <Label Grid.Row="7" Grid.Column="1" Text="Read on Change Box"/>
+            <CheckBox Grid.Row="7" Grid.Column="2" x:Name="CB_InjectinSlot" CheckedChanged="CB_InjectinSlot_check"/>
+            <Button Grid.Row="8" Grid.Column="0" Text="Read Current Box" Clicked="B_ReadCurrentBox_Click"/>
+            <Button Grid.Row="8" Grid.Column="2" Text="Write Current Box" Clicked="B_WriteCurrentBox_Click"/>
         </Grid>
     </ScrollView>
 </ContentPage>
