@@ -6,7 +6,8 @@ using System.Linq;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using static PKHeXMAUI.MainPage;
-
+using PKHeX.Core.Injection;
+using static PKHeXMAUI.LiveHex;
 
 namespace PKHeXMAUI;
 
@@ -18,7 +19,15 @@ public partial class BoxTab : ContentPage
         boxnum.ItemsSource = Enumerable.Range(1, 32).ToArray();
         ICommand refreshCommand = new Command(() =>
         {
-			
+			if(Remote.Connected && ReadonChangeBox)
+            {
+                var box = CurrentBox;
+                var len =
+                       sav.BoxSlotCount
+                       * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
+                var data = Remote.ReadBox(box, len).AsSpan();
+                sav.SetBoxBinary(data, box);
+            }
 			fillbox();
             boxrefresh.IsRefreshing = false;
         });
@@ -143,6 +152,15 @@ public partial class BoxTab : ContentPage
     {
         CurrentBox = boxnum.SelectedIndex;
         sav.CurrentBox = CurrentBox;
+        if(Remote.Connected && ReadonChangeBox)
+        {
+            var box = BoxTab.CurrentBox;
+            var len =
+                   sav.BoxSlotCount
+                   * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
+            var data = Remote.ReadBox(box, len).AsSpan();
+            sav.SetBoxBinary(data, box);
+        }
         fillbox();
         
     }
