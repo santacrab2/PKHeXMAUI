@@ -47,16 +47,18 @@
             <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="1" x:Name="boxnum"/>
             <Label Text="Slot:" Grid.Row="3" Grid.Column="2"/>
             <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="3" Text="1" x:Name="slotnum"/>
-            <Button Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Inject to Slot" Clicked="inject"></Button>
-            <Button Grid.Row="4" Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Read from Slot" Clicked="read"/>
-            <Label Text="Offset:" Grid.Row="5" Grid.Column="0"/>
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Write to Slot" Clicked="inject"></Button>
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="Read from Slot" Clicked="read"/>
+            <Label Text="Offset/Pointer:" VerticalOptions="Center" Grid.Row="5" Grid.Column="0"/>
             <Editor Grid.Row="5" Grid.Column="1" x:Name="offset"/>
-            <Button Grid.Row="6" Grid.Column="0" Text="Read from Offset" Clicked="B_ReadFromOff_Click"/>
-            <CheckBox Grid.Row="7" Grid.Column="0" x:Name="CB_ReadChangeBox" CheckedChanged="CB_ReadChangeBox_Check"/>
-            <Label Grid.Row="7" Grid.Column="1" Text="Read on Change Box"/>
-            <CheckBox Grid.Row="7" Grid.Column="2" x:Name="CB_InjectinSlot" CheckedChanged="CB_InjectinSlot_check"/>
-            <Button Grid.Row="8" Grid.Column="0" Text="Read Current Box" Clicked="B_ReadCurrentBox_Click"/>
-            <Button Grid.Row="8" Grid.Column="2" Text="Write Current Box" Clicked="B_WriteCurrentBox_Click"/>
+            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Read from Offset/Pointer" Clicked="B_ReadFromOff_Click"/>
+            <Label Text="Boxes" Grid.Row="7"/>
+            <CheckBox Grid.Row="8" Grid.Column="0" x:Name="CB_ReadChangeBox" CheckedChanged="CB_ReadChangeBox_Check"/>
+            <Label Grid.Row="8" Grid.Column="1" Text="Read on Change Box"/>
+            <CheckBox Grid.Row="8" Grid.Column="2" x:Name="CB_InjectinSlot" CheckedChanged="CB_InjectinSlot_check"/>
+            <Label Grid.Row="8" Grid.Column="3" Text="Inject in Slot"/>
+            <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="Read Current Box" Clicked="B_ReadCurrentBox_Click"/>
+            <Button Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Text="Write Current Box" Clicked="B_WriteCurrentBox_Click"/>
         </Grid>
     </ScrollView>
 </ContentPage>

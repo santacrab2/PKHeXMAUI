@@ -2,6 +2,7 @@ namespace PKHeXMAUI;
 using PKHeX.Core;
 using PKHeX.Core.Injection;
 using static MainPage;
+using static System.Net.Mime.MediaTypeNames;
 
 public partial class LiveHex : ContentPage
 {
@@ -74,11 +75,79 @@ public partial class LiveHex : ContentPage
         pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box-1, slot-1));
     }
 
-    private void B_ReadFromOff_Click(object sender, EventArgs e)
+    private async void B_ReadFromOff_Click(object sender, EventArgs e)
     {
-        
-    }
+        if (offset.Text.StartsWith('['))
+        {
+            if (Remote.com is not ICommunicatorNX sb)
+            {
+                await DisplayAlert("Error", "Error", "cancel");
+                return;
+            }
 
+
+            ulong address = GetPointerAddress(sb);
+            if (address == 0)
+            {
+                await DisplayAlert("Error","No pointer address.","cancel");
+                return;
+            }
+
+            var size = Remote.SlotSize;
+            var data = sb.ReadBytesAbsolute(address, size);
+            var pkm = sav.GetDecryptedPKM(data);
+
+            // Since data might not actually exist at the user-specified offset, double check that the pkm data is valid.
+            if (pkm.ChecksumValid)
+                pk = pkm;
+        }
+        else
+        {
+            var txt = offset.Text;
+            var off = Util.GetHexValue64(txt);
+            if (off.ToString("X16") != txt.ToUpper().PadLeft(16, '0'))
+            {
+                await DisplayAlert("Error", "Specified offset is not a valid hex string.", "cancel");
+                return;
+            }
+             try
+            {
+                var method = RWMethod.Heap;
+                
+                var result = ReadOffset(off, method);
+                if (!result)
+                    await DisplayAlert("Error","No valid data is located at the specified offset.","cancel");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Unable to load data from the specified offset. {ex.Message}", "cancel"); ;
+            }
+        }
+    }
+    public bool ReadOffset(ulong offset, RWMethod method = RWMethod.Heap)
+    {
+        var data = ReadData(offset, method);
+        var pkm = sav.GetDecryptedPKM(data);
+
+        // Since data might not actually exist at the user-specified offset, double check that the pkm data is valid.
+        if (!pkm.ChecksumValid)
+            return false;
+
+        pk = pkm;
+        return true;
+    }
+    private byte[] ReadData(ulong offset, RWMethod method)
+    {
+        if (Remote.com is not ICommunicatorNX nx)
+            return Remote.ReadOffset(offset);
+        return method switch
+        {
+            RWMethod.Heap => Remote.ReadOffset(offset),
+            RWMethod.Main => nx.ReadBytesMain(offset, Remote.SlotSize),
+            RWMethod.Absolute => nx.ReadBytesAbsolute(offset, Remote.SlotSize),
+            _ => Remote.ReadOffset(offset),
+        };
+    }
     private void CB_ReadChangeBox_Check(object sender, CheckedChangedEventArgs e)
     {
         if(!SkipTextChanges)
@@ -107,4 +176,13 @@ public partial class LiveHex : ContentPage
         var boxData = sav.GetBoxBinary(BoxTab.CurrentBox);
         Remote.SendBox(boxData, BoxTab.CurrentBox);
     }
+    public ulong GetPointerAddress(ICommunicatorNX sb)
+    {
+        var ptr = offset.Text.Contains("[key]")
+            ? offset.Text.Replace("[key]", "").Trim()
+            : offset.Text.Trim();
+        var address = Remote.GetCachedPointer(sb, ptr, false);
+        return address;
+    }
+
 }
