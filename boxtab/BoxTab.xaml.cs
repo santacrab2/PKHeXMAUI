@@ -129,7 +129,10 @@ public partial class BoxTab : ContentPage
     }
     private async void del(object sender, EventArgs e)
     {
-       
+       if(Remote.Connected && InjectinSlot)
+        {
+            Remote.SendSlot(EntityBlank.GetBlank(sav.Generation, sav.Version).EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+        }
         sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
         fillbox();
     }
