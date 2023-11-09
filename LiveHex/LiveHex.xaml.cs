@@ -12,7 +12,7 @@ public partial class LiveHex : ContentPage
 		Port.Text = sav.Generation > 7 ? "6000" : "8000";
 		var validvers = RamOffsets.GetValidVersions(sav);
         ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
-		Remote = new PokeSysBotMini(validvers[0], com, false);
+		Remote = new PokeSysBotMini(validvers[validvers.Length-1], com, false);
         var ip = Preferences.Default.Get("IP", "192.168.1.1");
         SkipTextChanges = true;
         IP.Text = ip;
@@ -31,6 +31,7 @@ public partial class LiveHex : ContentPage
         Remote.com.IP = IP.Text;
 		Remote.com.Port = int.Parse(Port.Text);
 		Remote.com.Connect();
+        connect.Text = "Disconnect";
     }
 
  
@@ -52,7 +53,7 @@ public partial class LiveHex : ContentPage
             await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
             return;
         }
-        Remote.SendSlot(pk.EncryptedBoxData, box, slot);
+        Remote.SendSlot(pk.EncryptedBoxData, box-1, slot-1);
     }
 
     private async void read(object sender, EventArgs e)
@@ -67,6 +68,6 @@ public partial class LiveHex : ContentPage
             await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
             return;
         }
-        pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box, slot));
+        pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box-1, slot-1));
     }
 }
