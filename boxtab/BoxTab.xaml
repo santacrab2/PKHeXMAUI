@@ -11,12 +11,16 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill"></Image>
-                        <CollectionView HeightRequest="375" x:Name="boxview" SelectionMode="Single" ></CollectionView>
+                    <Image Source="load.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" IsVisible="False" x:Name="viewer"/>
+                    <Image Source="delete.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="1" IsVisible="False" x:Name="deleter"/>
+                    <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></Image>
+                    <CollectionView HeightRequest="375" x:Name="boxview" SelectionMode="Single" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ></CollectionView>
                 </Grid>
                 <Button x:Name="livingdexbutton" Text="Generate Living Dex" Clicked="Generateliving"/>
                 <Button x:Name="BatchEditorOpenButton" Text="Batch Editor" Clicked="openBatchEditor"/>

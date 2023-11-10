@@ -19,16 +19,23 @@ public partial class BoxTab : ContentPage
         boxnum.ItemsSource = Enumerable.Range(1, 32).ToArray();
         ICommand refreshCommand = new Command(() =>
         {
-			if(Remote.Connected && ReadonChangeBox)
+            try
             {
-                var box = CurrentBox;
-                var len =
-                       sav.BoxSlotCount
-                       * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
-                var data = Remote.ReadBox(box, len).AsSpan();
-                sav.SetBoxBinary(data, box);
+                if (Remote.Connected && ReadonChangeBox)
+                {
+                    var box = CurrentBox;
+                    var len =
+                           sav.BoxSlotCount
+                           * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
+                    var data = Remote.ReadBox(box, len).AsSpan();
+                    sav.SetBoxBinary(data, box);
+                }
+                fillbox();
             }
-			fillbox();
+            catch (Exception)
+            {
+                fillbox();
+            }
             boxrefresh.IsRefreshing = false;
         });
         boxrefresh.Command = refreshCommand;
@@ -50,6 +57,7 @@ public partial class BoxTab : ContentPage
         boxview.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
+            
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
@@ -69,45 +77,61 @@ public partial class BoxTab : ContentPage
             LegalSprite.TranslateTo(LegalSprite.TranslationX - 6, ItemSprite.TranslationY);
             LegalSprite.SetBinding(Image.IsVisibleProperty, "legal");
             image.SetBinding(Image.SourceProperty, "url");
+            var gesture = new DragGestureRecognizer() { CanDrag = true };
+            gesture.SetBinding(DragGestureRecognizer.DragStartingCommandParameterProperty, "boxie");
+            gesture.DragStartingCommand = new Command<boxsprite>(DragStart);
+            var drop = new DropGestureRecognizer() { AllowDrop = true };
+
+            drop.Drop += DragStop;
+            var tap = new TapGestureRecognizer();
+            tap.SetBinding(TapGestureRecognizer.CommandParameterProperty, "boxie");
+            tap.Tapped += Tapety;
             shinysp.SetBinding(Image.IsVisibleProperty, "shiny");
             grid.Add(image);
             grid.Add(shinysp);
             grid.Add(ItemSprite);
             grid.Add(Egg);
             grid.Add(LegalSprite);
-            SwipeView swipe = new();
-            SwipeItem view = new()
-            {
-                Text = "View",
-                BackgroundColor = Colors.DeepSkyBlue,
-                IconImageSource = "load.png"
-            };
-            view.Invoked += applypkfrombox;
-            swipe.BottomItems.Add(view);
-            SwipeItem Set = new()
-            {
-                Text = "Set",
-                BackgroundColor = Colors.Green,
-                IconImageSource = "dump.png"
-            };
-            Set.Invoked += inject;
-            swipe.TopItems.Add(Set);
-            SwipeItem Delete = new()
-            {
-                Text = "Delete",
-                BackgroundColor = Colors.Red,
-                IconImageSource = "delete.png"
-            };
-            Delete.Invoked += del;
-            swipe.LeftItems.Add(Delete);
-            swipe.Content = grid;
-            return swipe;
+            grid.GestureRecognizers.Add(gesture);
+            grid.GestureRecognizers.Add(tap);
+            grid.GestureRecognizers.Add(drop);
+            return grid;
         });
       
         boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
         boxview.ItemsSource = boxsprites;
         
 
+    }
+    private async void Tapety(object sender, TappedEventArgs e)
+    {
+        boxview.SelectedItem = e.Parameter;
+        var result = await DisplayActionSheet("Slot", "cancel", "Delete", new string[] { "View", "Set" });
+        switch (result)
+        {
+            case "Delete": del(sender,e); break;
+            case "View": applypkfrombox(sender, e); break;
+            case "Set": inject(sender, e); break;
+        }
+    }
+    private void DragStart(boxsprite boxslot)
+    {
+
+        boxview.SelectedItem = boxslot;
+        deleter.IsVisible = true;
+        viewer.IsVisible = true;
+    }
+    private async void DragStop(object sender, DropEventArgs e)
+    {
+        Grid theG = (sender as Element)?.Parent as Grid;
+        Image Replace = (Image)theG.Children.FirstOrDefault(x => x is Image);
+        await DisplayAlert("test", $"{Replace.Source}", "cancel");
+        var toreplace = boxsprites.FirstOrDefault(x=>x.url == Replace.Source.ToString().Replace("File: ",""));
+        var toreplaceindex = boxsprites.IndexOf((boxsprite)toreplace);
+        sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm,boxnum.SelectedIndex,toreplaceindex);
+        deleter.IsVisible = false;
+        viewer.IsVisible = false;
+        fillbox();
     }
     private async void applypkfrombox(object sender, EventArgs e)
     {
@@ -118,23 +142,38 @@ public partial class BoxTab : ContentPage
     }
     private async void inject(object sender, EventArgs e)
     {
-
-        if(Remote.Connected && InjectinSlot)
+        try
         {
-            pk.ResetPartyStats();
-            Remote.SendSlot(pk.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            if (Remote.Connected && InjectinSlot)
+            {
+                pk.ResetPartyStats();
+                Remote.SendSlot(pk.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            }
+            sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            fillbox();
         }
-        sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
-        fillbox();
+        catch (Exception)
+        {
+            sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            fillbox();
+        }
     }
     private async void del(object sender, EventArgs e)
     {
-       if(Remote.Connected && InjectinSlot)
+        try
         {
-            Remote.SendSlot(EntityBlank.GetBlank(sav.Generation, sav.Version).EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            if (Remote.Connected && InjectinSlot)
+            {
+                Remote.SendSlot(EntityBlank.GetBlank(sav.Generation, sav.Version).EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            }
+            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            fillbox();
         }
-        sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
-        fillbox();
+        catch (Exception)
+        {
+            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            fillbox();
+        }
     }
     private async void Generateliving(object sender, EventArgs e)
     {
@@ -161,16 +200,22 @@ public partial class BoxTab : ContentPage
     {
         CurrentBox = boxnum.SelectedIndex;
         sav.CurrentBox = CurrentBox;
-        if(Remote.Connected && ReadonChangeBox)
+        try
         {
-            var box = BoxTab.CurrentBox;
-            var len =
-                   sav.BoxSlotCount
-                   * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
-            var data = Remote.ReadBox(box, len).AsSpan();
-            sav.SetBoxBinary(data, box);
+            if (Remote.Connected && ReadonChangeBox)
+            {
+                var box = BoxTab.CurrentBox;
+                var len =
+                       sav.BoxSlotCount
+                       * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
+                var data = Remote.ReadBox(box, len).AsSpan();
+                sav.SetBoxBinary(data, box);
+            }
+
+            fillbox();
         }
-        fillbox();
+        catch (Exception) { fillbox(); }
+        
         
     }
 
@@ -181,10 +226,10 @@ public partial class BoxTab : ContentPage
 }
 public class boxsprite
 {
-	public boxsprite(PKM pk9)
-	{
-		pkm = pk9;
-		species = $"{(Species)pk9.Species}";
+    public boxsprite(PKM pk9)
+    {
+        pkm = pk9;
+        species = $"{(Species)pk9.Species}";
         if (pk9.Species == 0)
             url = $"";
         else
@@ -193,22 +238,22 @@ public class boxsprite
         if (sav is SAV9SV)
         {
             ItemResource = $"aitem_{pkm.HeldItem}.png";
-            
         }
         else
         {
             ItemResource = $"bitem_{pkm.HeldItem}.png";
-          
         }
         legal = !new LegalityAnalysis(pk9).Valid;
         if (pk9.Species == 0)
             legal = false;
+        boxie = this;
     }
-    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
+    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013 };
     public PKM pkm { get; set; }
-	public string url { get; set; }
-	public string species { get; set; }
+    public string url { get; set; }
+    public string species { get; set; }
     public bool shiny { get; set; }
     public string ItemResource { get; set; }
     public bool legal { get; set; }
+    public boxsprite boxie {get;set;}
 }

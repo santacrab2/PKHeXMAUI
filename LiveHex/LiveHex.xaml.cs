@@ -1,10 +1,8 @@
 namespace PKHeXMAUI;
 
-using Intents;
 using PKHeX.Core;
 using PKHeX.Core.Injection;
 using static MainPage;
-using static System.Net.Mime.MediaTypeNames;
 
 public partial class LiveHex : ContentPage
 {
