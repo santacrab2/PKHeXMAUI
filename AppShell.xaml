@@ -101,7 +101,7 @@
         <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
     </FlyoutItem>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False">
-        <Tab Title="LiveHex">
+        <Tab Icon="language.png" Title="LiveHex">
             <ShellContent Title="LiveHex" ContentTemplate="{DataTemplate local:LiveHex}"/>
         </Tab>
     </FlyoutItem>

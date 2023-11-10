@@ -651,7 +651,7 @@ public partial class StatsTab : ContentPage
     {
         if(pk is IGigantamax gmax && !SkipEvent)
         {
-            if (gmax.CanToggleGigantamax(pk.Species, pk.Form))
+            if (Gigantamax.CanToggle(pk.Species, pk.Form))
                 gmax.CanGigantamax = GmaxCheck.IsChecked;
             else
                 GmaxCheck.IsChecked = false;

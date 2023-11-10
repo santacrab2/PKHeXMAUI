@@ -1,4 +1,6 @@
 namespace PKHeXMAUI;
+
+using Intents;
 using PKHeX.Core;
 using PKHeX.Core.Injection;
 using static MainPage;
@@ -26,12 +28,19 @@ public partial class LiveHex : ContentPage
     public static bool InjectinSlot = Preferences.Get("InjectinSlot", true);
     private async void botbaseconnect(object sender, EventArgs e)
     {
+
         IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
 		if (!profiles.Contains(ConnectionProfile.WiFi))
 		{
 			await DisplayAlert("WiFi", "Please Connect to WiFi", "ok");
 			return;
 		}
+        if (connect.Text == "Disconnect")
+        {
+            Remote.com.Disconnect();
+            connect.Text = "Connect";
+            return;
+        }
         Remote.com.IP = IP.Text;
 		Remote.com.Port = int.Parse(Port.Text);
 		Remote.com.Connect();
