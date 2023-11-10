@@ -35,7 +35,7 @@ public partial class LiveHex : ContentPage
 			await DisplayAlert("WiFi", "Please Connect to WiFi", "ok");
 			return;
 		}
-        if (connect.Text == "Disconnect")
+        if (Remote.Connected)
         {
             Remote.com.Disconnect();
             connect.Text = "Connect";
