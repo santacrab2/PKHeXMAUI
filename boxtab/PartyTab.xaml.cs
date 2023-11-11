@@ -79,7 +79,7 @@ public partial class PartyTab : ContentPage
 
         foreach(var ppk in sav.PartyData)
         {
-            PartySprites.Add(new boxsprite(ppk));
+            PartySprites.Add(new boxsprite(ppk,0));
         }
         
         return PartySprites;

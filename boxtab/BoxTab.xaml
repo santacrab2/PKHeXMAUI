@@ -18,7 +18,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="load.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" IsVisible="False" x:Name="viewer"/>
+                    <Label Text="View" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_view" IsVisible="false"/>
                     <Image Source="delete.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="1" IsVisible="False" x:Name="deleter"/>
+                    <Label Text="Delete" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_delete" IsVisible="false"/>
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"></Image>
                     <CollectionView HeightRequest="375" x:Name="boxview" SelectionMode="Single" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ></CollectionView>
                 </Grid>

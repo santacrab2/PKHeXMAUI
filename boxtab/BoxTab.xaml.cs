@@ -16,6 +16,12 @@ public partial class BoxTab : ContentPage
 	public BoxTab()
 	{
 		InitializeComponent();
+        var viewdrop = new DropGestureRecognizer() { AllowDrop = true };
+        viewdrop.Drop += applypkfromboxDrop;
+        viewer.GestureRecognizers.Add(viewdrop);
+        var deldrop = new DropGestureRecognizer() { AllowDrop=true };
+        deldrop.Drop += delDrop;
+        deleter.GestureRecognizers.Add(deldrop);
         boxnum.ItemsSource = Enumerable.Range(1, 32).ToArray();
         ICommand refreshCommand = new Command(() =>
         {
@@ -47,13 +53,15 @@ public partial class BoxTab : ContentPage
 	{
 		
 		boxsprites = new List<boxsprite>();
-       //if(sav.GetBoxData(boxnum.SelectedIndex).Count() == 0) { sav.SetBoxBinary(BitConverter.GetBytes(0),boxnum.SelectedIndex); }
-		foreach (var boxpk in sav.GetBoxData(boxnum.SelectedIndex))
+        //if(sav.GetBoxData(boxnum.SelectedIndex).Count() == 0) { sav.SetBoxBinary(BitConverter.GetBytes(0),boxnum.SelectedIndex); }
+        int i = 0;
+        foreach (var boxpk in sav.GetBoxData(boxnum.SelectedIndex))
 		{
-			var boxinfo = new boxsprite(boxpk);
+			var boxinfo = new boxsprite(boxpk,i);
 			boxsprites.Add(boxinfo);
+            i++;
 		}
-		
+        
         boxview.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new Grid { Padding = 10 };
@@ -65,6 +73,8 @@ public partial class BoxTab : ContentPage
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+            Label SlotNumber = new Label() {FontSize=24};
+            SlotNumber.SetBinding(Label.TextProperty, "SlotNumber");
             Image image = new Image() { WidthRequest = 45, HeightRequest = 45 };
             Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
             shinysp.TranslateTo(shinysp.TranslationX + 20, shinysp.TranslationY);
@@ -92,6 +102,7 @@ public partial class BoxTab : ContentPage
             grid.Add(ItemSprite);
             grid.Add(Egg);
             grid.Add(LegalSprite);
+            grid.Add(SlotNumber);
             grid.GestureRecognizers.Add(gesture);
             grid.GestureRecognizers.Add(tap);
             grid.GestureRecognizers.Add(drop);
@@ -106,7 +117,8 @@ public partial class BoxTab : ContentPage
     private async void Tapety(object sender, TappedEventArgs e)
     {
         boxview.SelectedItem = e.Parameter;
-        var result = await DisplayActionSheet("Slot", "cancel", "Delete", new string[] { "View", "Set" });
+
+        var result = await DisplayActionSheet($"Slot {((boxsprite)e.Parameter).SlotNumber}", "cancel", "Delete", new string[] { "View", "Set" });
         switch (result)
         {
             case "Delete": del(sender,e); break;
@@ -118,19 +130,24 @@ public partial class BoxTab : ContentPage
     {
 
         boxview.SelectedItem = boxslot;
+        LB_view.IsVisible = true;
+        LB_delete.IsVisible = true;
+        deleter.Source = "delete.png";
         deleter.IsVisible = true;
+        viewer.Source = "load.png";
         viewer.IsVisible = true;
     }
     private async void DragStop(object sender, DropEventArgs e)
     {
         Grid theG = (sender as Element)?.Parent as Grid;
-        Image Replace = (Image)theG.Children.FirstOrDefault(x => x is Image);
-        await DisplayAlert("test", $"{Replace.Source}", "cancel");
-        var toreplace = boxsprites.FirstOrDefault(x=>x.url == Replace.Source.ToString().Replace("File: ",""));
+        Label Replace = (Label)theG.Children.FirstOrDefault(x => x is Label);
+        var toreplace = boxsprites.FirstOrDefault(x=>x.SlotNumber == Replace.Text);
         var toreplaceindex = boxsprites.IndexOf((boxsprite)toreplace);
         sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm,boxnum.SelectedIndex,toreplaceindex);
         deleter.IsVisible = false;
         viewer.IsVisible = false;
+        LB_view.IsVisible = false;
+        LB_delete.IsVisible = false;
         fillbox();
     }
     private async void applypkfrombox(object sender, EventArgs e)
@@ -139,6 +156,17 @@ public partial class BoxTab : ContentPage
             {
                 pk = ((boxsprite)boxview.SelectedItem).pkm;
             }
+    }
+    private async void applypkfromboxDrop(object sender, DropEventArgs e)
+    {
+        if (((boxsprite)boxview.SelectedItem).pkm.Species != 0)
+        {
+            pk = ((boxsprite)boxview.SelectedItem).pkm;
+        }
+        deleter.IsVisible = false;
+        viewer.IsVisible = false;
+        LB_view.IsVisible = false;
+        LB_delete.IsVisible = false;
     }
     private async void inject(object sender, EventArgs e)
     {
@@ -174,6 +202,27 @@ public partial class BoxTab : ContentPage
             sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             fillbox();
         }
+    }
+    private async void delDrop(object sender, DropEventArgs e)
+    {
+        try
+        {
+            if (Remote.Connected && InjectinSlot)
+            {
+                Remote.SendSlot(EntityBlank.GetBlank(sav.Generation, sav.Version).EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            }
+            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            fillbox();
+        }
+        catch (Exception)
+        {
+            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            fillbox();
+        }
+        deleter.IsVisible = false;
+        viewer.IsVisible = false;
+        LB_view.IsVisible = false;
+        LB_delete.IsVisible = false;
     }
     private async void Generateliving(object sender, EventArgs e)
     {
@@ -226,8 +275,9 @@ public partial class BoxTab : ContentPage
 }
 public class boxsprite
 {
-    public boxsprite(PKM pk9)
+    public boxsprite(PKM pk9,int slot)
     {
+        SlotNumber = slot.ToString();
         pkm = pk9;
         species = $"{(Species)pk9.Species}";
         if (pk9.Species == 0)
@@ -255,5 +305,6 @@ public class boxsprite
     public bool shiny { get; set; }
     public string ItemResource { get; set; }
     public bool legal { get; set; }
+    public string SlotNumber { get; set; }
     public boxsprite boxie {get;set;}
 }
