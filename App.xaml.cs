@@ -1,5 +1,5 @@
 ﻿using PKHeX.Core;
-
+using static PKHeXMAUI.MainPage;
 namespace PKHeXMAUI;
 
 public partial class App : Application
@@ -14,5 +14,27 @@ public partial class App : Application
             MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)Version, "PKHeX"));
         else
             MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)50, "PKHeX"));
+    }
+    protected override Window CreateWindow(IActivationState activationState)
+    {
+        Window window = base.CreateWindow(activationState);
+
+        window.Resumed += (s, e) =>
+        {
+            if (LiveHex.Reconnect)
+            {
+                if (!Remote.Connected)
+                {
+                    Remote.com.Connect();
+                }
+                else
+                {
+                    Remote.com.Disconnect();
+                    Remote.com.Connect();
+
+                }
+            }
+        };
+        return window;
     }
 }

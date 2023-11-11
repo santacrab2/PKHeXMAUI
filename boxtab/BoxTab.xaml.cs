@@ -1,13 +1,10 @@
-using System;
+
 using System.Windows.Input;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Internals;
-using System.Linq;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using static PKHeXMAUI.MainPage;
 using PKHeX.Core.Injection;
-using static PKHeXMAUI.LiveHex;
+
 
 namespace PKHeXMAUI;
 

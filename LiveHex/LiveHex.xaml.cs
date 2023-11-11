@@ -7,6 +7,7 @@ using static MainPage;
 public partial class LiveHex : ContentPage
 {
     public static bool SkipTextChanges = false;
+    public static bool Reconnect = false;
     public LiveHex()
 	{
 		InitializeComponent();
@@ -40,6 +41,7 @@ public partial class LiveHex : ContentPage
         Remote.com.IP = IP.Text;
 		Remote.com.Port = int.Parse(Port.Text);
 		Remote.com.Connect();
+        Reconnect = true;
         connect.Text = "Disconnect";
     }
 

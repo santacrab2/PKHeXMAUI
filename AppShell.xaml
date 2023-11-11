@@ -39,12 +39,10 @@
     <MenuItem Text="    - Import Showdown" x:Name="impshow" Shell.FlyoutItemIsVisible="False" Clicked="ImpShowClicked"/>
     <MenuItem Text="    - Export Showdown" x:Name="expshow" Shell.FlyoutItemIsVisible="False" Clicked="ExpShowClicked"/>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="BoxShell" Route="BoxShell">
-            <Tab Icon="ball4.png" Title="Box/Party" x:Name="boxtab" Route="boxtab" >
-                <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}" x:Name="BoxPage" Route="BoxPage"/>
-
-                <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
-            </Tab>
-
+        <Tab Icon="ball4.png" Title="Box/Party" x:Name="boxtab" Route="boxtab">
+            <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}" x:Name="BoxPage" Route="BoxPage"/>
+            <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
+        </Tab>
     </FlyoutItem>
     
     <!--Hidden Box Menus-->
