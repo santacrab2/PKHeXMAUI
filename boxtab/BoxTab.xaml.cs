@@ -143,7 +143,10 @@ public partial class BoxTab : ContentPage
         Label Replace = (Label)theG.Children.FirstOrDefault(x => x is Label);
         var toreplace = boxsprites.FirstOrDefault(x=>x.SlotNumber == Replace.Text);
         var toreplaceindex = boxsprites.IndexOf((boxsprite)toreplace);
-        sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm,boxnum.SelectedIndex,toreplaceindex);
+        if (boxview.SelectedItem is not null)
+            sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm, boxnum.SelectedIndex, toreplaceindex);
+        else
+            sav.SetBoxSlotAtIndex((PKM)e.Data.Properties["PKM"], boxnum.SelectedIndex, toreplaceindex);
         deleter.IsVisible = false;
         viewer.IsVisible = false;
         LB_view.IsVisible = false;

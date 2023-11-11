@@ -51,6 +51,7 @@ public partial class AppShell : Shell
             Shell.SetFlyoutItemIsVisible(SortBoxes, true);
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, true);
             Shell.SetFlyoutItemIsVisible(ModifyBoxes, true);
+            ((BoxTab)TheShell.CurrentPage).fillbox();
 
         }
         else 

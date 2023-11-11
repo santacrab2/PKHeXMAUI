@@ -41,15 +41,11 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
 
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Grid.Row="0"
-                x:FieldModifier="Public"
-                x:Name="pic"
-                Source="iconp.png"
-                HeightRequest="50"
-                   HorizontalOptions="Start"
-                   VerticalOptions="Start"
-                       
-                />
+                <Image Grid.Column="0" Grid.Row="0" x:FieldModifier="Public" x:Name="pic" Source="iconp.png" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <DragGestureRecognizer CanDrag="True" DragStarting="MainPKDrag"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Image Source="rare_icon.png" Grid.Column="0" Grid.Row="0" x:Name="shinysparklessprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="Start"/>
                 <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="End" IsVisible="false"/>
                 <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>

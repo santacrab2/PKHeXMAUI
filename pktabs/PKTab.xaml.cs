@@ -6,8 +6,7 @@ using Octokit;
 using System.Windows.Input;
 using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
-using System.Net.Http.Headers;
-
+using PKHeX.Core.Injection;
 
 namespace PKHeXMAUI;
 
@@ -17,6 +16,9 @@ public partial class MainPage : ContentPage
     public bool SkipTextChange = false;
     public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
     public bool FirstLoad = true;
+    public static PokeSysBotMini Remote;
+    public static bool ReadonChangeBox = Preferences.Get("ReadonChangeBox", true);
+    public static bool InjectinSlot = Preferences.Get("InjectinSlot", true);
     public MainPage()
 	{
         sav = AppShell.AppSaveFile;
@@ -877,6 +879,12 @@ public partial class MainPage : ContentPage
                 pk.PID = result;
             }
         }
+    }
+
+    private void MainPKDrag(object sender, DragStartingEventArgs e)
+    {
+        e.Data.Properties.Add("PKM", pk);
+        Shell.Current.GoToAsync("//BoxShell/boxtab/BoxPage");
     }
 }
 
