@@ -141,9 +141,23 @@ public partial class BoxTab : ContentPage
         var toreplace = boxsprites.FirstOrDefault(x=>x.SlotNumber == Replace.Text);
         var toreplaceindex = boxsprites.IndexOf((boxsprite)toreplace);
         if (boxview.SelectedItem is not null)
+        {
             sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm, boxnum.SelectedIndex, toreplaceindex);
+            sav.SetBoxSlotAtIndex(((boxsprite)toreplace).pkm, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            if (Remote.Connected && InjectinSlot)
+            {
+                Remote.SendSlot(((boxsprite)boxview.SelectedItem).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                Remote.SendSlot(((boxsprite)toreplace).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            }
+        }
         else
+        {
             sav.SetBoxSlotAtIndex((PKM)e.Data.Properties["PKM"], boxnum.SelectedIndex, toreplaceindex);
+            if(Remote.Connected && InjectinSlot)
+            {
+                Remote.SendSlot(((PKM)e.Data.Properties["PKM"]).EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
+            }
+        }
         deleter.IsVisible = false;
         viewer.IsVisible = false;
         LB_view.IsVisible = false;
