@@ -146,7 +146,7 @@ public partial class BoxTab : ContentPage
             sav.SetBoxSlotAtIndex(((boxsprite)toreplace).pkm, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             if (Remote.Connected && InjectinSlot)
             {
-                Remote.SendSlot(((boxsprite)boxview.SelectedItem).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                Remote.SendSlot(((boxsprite)boxview.SelectedItem).pkm.EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
                 Remote.SendSlot(((boxsprite)toreplace).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             }
         }
