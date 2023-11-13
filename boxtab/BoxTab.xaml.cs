@@ -61,16 +61,11 @@ public partial class BoxTab : ContentPage
         
         boxview.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new Grid { Padding = 10 };
-            
+            Grid grid = new Grid();
+            Border border = new Border() { Stroke = Colors.Black, StrokeThickness = 3, BackgroundColor = Colors.Transparent };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            Label SlotNumber = new Label() {FontSize=24};
+            Label SlotNumber = new Label() {FontSize=24, IsVisible = false};
             SlotNumber.SetBinding(Label.TextProperty, "SlotNumber");
             Image image = new Image() { WidthRequest = 45, HeightRequest = 45 };
             Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
@@ -103,7 +98,8 @@ public partial class BoxTab : ContentPage
             grid.GestureRecognizers.Add(gesture);
             grid.GestureRecognizers.Add(tap);
             grid.GestureRecognizers.Add(drop);
-            return grid;
+            border.Content = grid;
+            return border;
         });
       
         boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
