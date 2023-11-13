@@ -61,8 +61,8 @@ public partial class BoxTab : ContentPage
         
         boxview.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new Grid();
-            Border border = new Border() { Stroke = Colors.Black, StrokeThickness = 3, BackgroundColor = Colors.Transparent };
+            Grid grid = new Grid() { Padding = 10 };
+            Border border = new Border() { Stroke = Colors.Black, BackgroundColor = Colors.Transparent };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             Label SlotNumber = new Label() {FontSize=24, IsVisible = false};
