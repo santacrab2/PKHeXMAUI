@@ -26,6 +26,9 @@ public partial class MainPage : ContentPage
         datasourcefiltered = GameInfo.FilteredSources;
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
         pk.Species = sav.MaxSpeciesID;
+        var validvers = RamOffsets.GetValidVersions(sav);
+        ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
+        Remote = new PokeSysBotMini(validvers[validvers.Length - 1], com, false);
         InitializeComponent();
         
         ICommand refreshCommand = new Command(async () =>
@@ -885,6 +888,7 @@ public partial class MainPage : ContentPage
     {
         e.Data.Properties.Add("PKM", pk);
         Shell.Current.GoToAsync("//BoxShell/boxtab/BoxPage");
+        BoxTab.DisplayOptions();
     }
 }
 

@@ -19,6 +19,9 @@ public partial class BoxTab : ContentPage
         var deldrop = new DropGestureRecognizer() { AllowDrop=true };
         deldrop.Drop += delDrop;
         deleter.GestureRecognizers.Add(deldrop);
+        var sharedrop = new DropGestureRecognizer() { AllowDrop = true };
+        sharedrop.Drop += ShareDrop;
+        Sharer.GestureRecognizers.Add(sharedrop);
         boxnum.ItemsSource = Enumerable.Range(1, 32).ToArray();
         ICommand refreshCommand = new Command(() =>
         {
@@ -119,6 +122,19 @@ public partial class BoxTab : ContentPage
             case "Set": inject(sender, e); break;
         }
     }
+    public static void DisplayOptions()
+    {
+        var test = (BoxTab)Shell.Current.CurrentPage;
+        test.LB_view.IsVisible = true;
+        test.LB_delete.IsVisible = true;
+        test.deleter.Source = "delete.png";
+        test.deleter.IsVisible = true;
+        test.viewer.Source = "load.png";
+        test.viewer.IsVisible = true;
+        test.Sharer.Source = "export.png";
+        test.Sharer.IsVisible = true;
+        test.LB_Share.IsVisible = true;
+    }
     private void DragStart(boxsprite boxslot)
     {
 
@@ -129,6 +145,9 @@ public partial class BoxTab : ContentPage
         deleter.IsVisible = true;
         viewer.Source = "load.png";
         viewer.IsVisible = true;
+        Sharer.Source = "export.png";
+        Sharer.IsVisible = true;
+        LB_Share.IsVisible = true;
     }
     private async void DragStop(object sender, DropEventArgs e)
     {
@@ -158,6 +177,8 @@ public partial class BoxTab : ContentPage
         viewer.IsVisible = false;
         LB_view.IsVisible = false;
         LB_delete.IsVisible = false;
+        Sharer.IsVisible = false;
+        LB_Share.IsVisible = false;
         fillbox();
     }
     private async void applypkfrombox(object sender, EventArgs e)
@@ -177,6 +198,8 @@ public partial class BoxTab : ContentPage
         viewer.IsVisible = false;
         LB_view.IsVisible = false;
         LB_delete.IsVisible = false;
+        Sharer.IsVisible = false;
+        LB_Share.IsVisible = false;
     }
     private async void inject(object sender, EventArgs e)
     {
@@ -233,6 +256,28 @@ public partial class BoxTab : ContentPage
         viewer.IsVisible = false;
         LB_view.IsVisible = false;
         LB_delete.IsVisible = false;
+        Sharer.IsVisible = false;
+        LB_Share.IsVisible = false;
+    }
+    private async void ShareDrop(object sender, DropEventArgs e)
+    {
+        PKM pkm;
+        if (boxview.SelectedItem is not null)
+            pkm = ((boxsprite)boxview.SelectedItem).pkm;
+        else
+            pkm = (PKM)e.Data.Properties["PKM"];
+        var TempPath = Path.Combine(FileSystem.CacheDirectory, pkm.FileName);
+        await Share.RequestAsync(new ShareFileRequest()
+        {
+            Title = "Share PKM",
+            File = new ShareFile(TempPath)
+        });
+        deleter.IsVisible = false;
+        viewer.IsVisible = false;
+        LB_view.IsVisible = false;
+        LB_delete.IsVisible = false;
+        Sharer.IsVisible = false;
+        LB_Share.IsVisible = false;
     }
     private async void Generateliving(object sender, EventArgs e)
     {

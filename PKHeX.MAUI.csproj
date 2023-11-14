@@ -126,6 +126,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\generalicons\Bag_PCItems.png" />
+	  <None Remove="Resources\Images\generalicons\export.png" />
 	  <None Remove="Resources\Images\generalicons\language.png" />
 	  <None Remove="Resources\Images\generalicons\main.png" />
 	  <None Remove="Resources\Images\generalicons\tr_129.png" />
