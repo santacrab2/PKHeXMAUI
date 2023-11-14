@@ -21,7 +21,7 @@
                     <Image Source="load.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" IsVisible="False" x:Name="viewer"/>
                     <Label Text="View" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_view" IsVisible="false"/>
                     <Image Source="export.png" Grid.Row="0" Grid.Column="1" IsVisible="False" WidthRequest="50" HeightRequest="50" x:Name="Sharer"/>
-                    <Label Text="Share" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_Share" IsVisible="false"/>
+                    <Label Text="Share" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_Share" IsVisible="false" />
                     <Image Source="delete.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="2" IsVisible="False" x:Name="deleter"/>
                     <Label Text="Delete" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_delete" IsVisible="false"/>
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"></Image>

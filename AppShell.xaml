@@ -16,11 +16,11 @@
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="PKShell">
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="PKShell" Route="PKShell">
 
-        <Tab x:Name="pkeditortab" Title="pk editor" Icon="bag_pcitems.png">
+        <Tab x:Name="pkeditortab" Title="pk editor" Icon="bag_pcitems.png" Route="pkeditortab">
 
-            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" x:Name="PKPage"/>
+            <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" x:Name="PKPage" Route="PKPage"/>
             <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
 
 

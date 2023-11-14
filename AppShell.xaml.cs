@@ -52,7 +52,8 @@ public partial class AppShell : Shell
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, true);
             Shell.SetFlyoutItemIsVisible(ModifyBoxes, true);
             ((BoxTab)TheShell.CurrentPage).fillbox();
-
+            if (e.Previous.Location.ToString() == "//PKShell/pkeditortab/PKPage")
+                ((BoxTab)TheShell.CurrentPage).DisplayOptions();
         }
         else 
         {

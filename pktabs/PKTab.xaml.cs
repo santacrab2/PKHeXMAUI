@@ -12,7 +12,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v23.11.12";
+    public static string Version = "v23.11.14";
     public bool SkipTextChange = false;
     public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
     public bool FirstLoad = true;
@@ -888,7 +888,7 @@ public partial class MainPage : ContentPage
     {
         e.Data.Properties.Add("PKM", pk);
         Shell.Current.GoToAsync("//BoxShell/boxtab/BoxPage");
-        BoxTab.DisplayOptions();
+        
     }
 }
 
