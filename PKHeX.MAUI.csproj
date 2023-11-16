@@ -1,21 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>PKHeXMAUI</RootNamespace>
 		<UseMaui>true</UseMaui>
+		
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
-		<!-- Display name -->
-		<ApplicationTitle>pk9reader</ApplicationTitle>
-
-		<!-- App Identifier -->
-		<ApplicationId>pk9reader</ApplicationId>
 		<ApplicationIdGuid>df8a5c06-c9c7-4853-8e8d-ea0ceb7b8e41</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -78,15 +74,11 @@
 		<MauiSplashScreen Include="Resources\Splash\bg009.png" BaseSize="250,250" Color="Black" />
 
 		<!-- Images -->
-		<MauiImage Include="Resources\Images\**" />
 		<MauiImage Include="Resources\Images\generalicons\*" />
 		<MauiImage Include="Resources\Images\balls\*" />
 		<MauiImage Include="Resources\Images\SVSprites\*" />
 		<MauiImage Include="Resources\Images\NonShinySprites\*" />
-		<MauiImage Include="Resources\Images\generalicons\gender_0.png" />
-		<MauiImage Include="Resources\Images\generalicons\gender_1.png" />
-		<MauiImage Include="Resources\Images\generalicons\gender_2.png" />
-		<MauiImage Include="Resources\Images\iconp.png" BaseSize="168,208" />
+		<MauiImage Update="Resources\Images\iconp.png" />
 		<MauiImage Include="Resources\Images\Ribbons\*" />
 		<MauiImage Include="Resources\Images\ShinySprites\*" />
 		<MauiImage Include="Resources\Images\SVItemSprites\*" />
@@ -133,6 +125,22 @@
 	  <None Remove="Resources\Images\generalicons\tr_129.png" />
 	  <None Remove="Resources\Images\generalicons\valid.png" />
 	  <None Remove="Resources\Images\generalicons\warn.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1009.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1010.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1011.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1012.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1013.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1014.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1015.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1016.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017-4.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017-5.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017-6.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017-7.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017_1.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017_2.png" />
+	  <None Remove="Resources\Images\SVSprites\a_1017_3.png" />
 	  <None Remove="Resources\Images\SVSprites\a_901_1.png" />
 	</ItemGroup>
 
@@ -154,6 +162,7 @@
 		<PackageReference Include="PKHeX.Core" Version="23.10.11" />
 		<PackageReference Include="Syncfusion.Maui.Inputs" Version="22.2.12" />
 		<PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -260,9 +269,4 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\icon.png" />
-	</ItemGroup>
-
 </Project>
