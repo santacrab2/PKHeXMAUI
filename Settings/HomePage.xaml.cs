@@ -62,10 +62,6 @@ public partial class HomePage : ContentPage
         {
             try
             {
-<<<<<<< HEAD
-=======
-
->>>>>>> 3e5db92 (savefile null check)
                 path = "/storage/emulated/0/Documents/";
                 var ext = sav.Metadata.GetSuggestedExtension();
                 var flags = sav.Metadata.GetSuggestedFlags(ext);
@@ -81,10 +77,6 @@ public partial class HomePage : ContentPage
                 await File.WriteAllBytesAsync($"{path}/ChangeMe", sav.Write(flags));
                 sav.State.Edited = false;
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> 3e5db92 (savefile null check)
         }
         else
         {
