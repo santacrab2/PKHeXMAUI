@@ -9,9 +9,6 @@ public partial class AppShell : Shell
 	{
         AppSaveFile = sav;
         InitializeComponent();
-        
-       
-
     }
 	public static SaveFile AppSaveFile { get; set; }
     public BoxManipulator manip = new BoxManipulatorMAUI();
@@ -19,34 +16,33 @@ public partial class AppShell : Shell
     {
         switch (TheShell.CurrentPage)
         {
-            case MainPage p:
+            case MainPage:
                 if (!((MainPage)TheShell.CurrentPage).FirstLoad)
                     ((MainPage)TheShell.CurrentPage).applymainpkinfo(pk);
                 break;
-            case MetTab mettab:
+            case MetTab:
                 if (!((MetTab)TheShell.CurrentPage).FirstLoad)
                     ((MetTab)TheShell.CurrentPage).applymetinfo(pk);
                 break;
-            case AttacksTab a:
+            case AttacksTab:
                 if (!((AttacksTab)TheShell.CurrentPage).FirstLoad)
                     ((AttacksTab)TheShell.CurrentPage).applyattackinfo(pk);
                 break;
-            case Cosmeticstab c:
+            case Cosmeticstab:
                 if (!((Cosmeticstab)TheShell.CurrentPage).FirstLoad)
                     ((Cosmeticstab)TheShell.CurrentPage).applycomsetics(pk);
                 break;
-            case OTTab o:
+            case OTTab:
                 if (!((OTTab)TheShell.CurrentPage).FirstLoad)
                     ((OTTab)TheShell.CurrentPage).applyotinfo(pk);
                 break;
-            case StatsTab s:
+            case StatsTab:
                 if (!((StatsTab)TheShell.CurrentPage).FirstLoad)
                     ((StatsTab)TheShell.CurrentPage).applystatsinfo(pk);
                 break;
-        };
+        }
         if (TheShell.CurrentPage.GetType() == typeof(BoxTab))
         {
-
             Shell.SetFlyoutItemIsVisible(DeleteBoxes, true);
             Shell.SetFlyoutItemIsVisible(SortBoxes, true);
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, true);
@@ -55,7 +51,7 @@ public partial class AppShell : Shell
             if (e.Previous.Location.ToString() == "//PKShell/pkeditortab/PKPage")
                 ((BoxTab)TheShell.CurrentPage).DisplayOptions();
         }
-        else 
+        else
         {
             Shell.SetFlyoutItemIsVisible(DeleteBoxes, false);
             Shell.SetFlyoutItemIsVisible(SortBoxes, false);
@@ -69,7 +65,6 @@ public partial class AppShell : Shell
             SortBoxesAdvancedClicked(sender, e);
             ModifyExpanded = true;
             ModifyBoxesClicked(sender, e);
-
         }
         if (TheShell.CurrentPage.GetType() == typeof(MainPage))
         {
@@ -154,12 +149,11 @@ public partial class AppShell : Shell
             manip.Execute(manipType, BoxTab.CurrentBox, false);
         }
 
-        HideAllFlyoutItems(BoxManipUtil.GetManipCategoryName(manipType));
+        HideAllFlyoutItems(manipType.GetManipCategoryName());
     }
 
     private void HideAllFlyoutItems(string Menu)
     {
-
         if (Menu == "Delete")
         {
             Shell.SetFlyoutItemIsVisible(ClearBox, false);
@@ -216,7 +210,6 @@ public partial class AppShell : Shell
             ModifyExpanded = false;
         }
         Shell.Current.FlyoutIsPresented = false;
-
     }
     private void SortClick(object sender, EventArgs e)
     {
@@ -248,48 +241,40 @@ public partial class AppShell : Shell
     private async void SortBySpecies(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Pokedex No.", "Would you like to Sort the Current box by Pokedex No.", BoxManipType.SortSpecies);
-
     }
     private async void SortSpeciesReverseClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Reverse Pokedex No.", "Would you like to Sort the Current box by Reverse Pokedex No.", BoxManipType.SortSpeciesReverse);
-
     }
 
     private async void SortLevellohiClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Level (low to high)", "Would you like to Sort the Current box by Level (low to high)", BoxManipType.SortLevel);
-
     }
 
     private async void SortLevelhiloClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Level (high to low)", "Would you like to Sort the Current box by Level (high to low)", BoxManipType.SortLevelReverse);
-
     }
 
     private async void SortMetDateClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Met Date", "Would you like to Sort the Current box by Met Date", BoxManipType.SortDate);
-
     }
 
     private async void SortSpeciesNameClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Name", "Would you like to Sort the Current box by Name", BoxManipType.SortName);
-
     }
 
     private async void SortShinyClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Shiny", "Would you like to Sort the Current box by Shiny", BoxManipType.SortShiny);
-
     }
 
     private async void SortRandomClicked(object sender, EventArgs e)
     {
         await ManipulateBoxes("Sort", "Would you like to Sort All boxes by Random", "Would you like to Sort the Current box by Random", BoxManipType.SortRandom);
-
     }
 
     private void SortBoxesAdvancedClicked(object sender, EventArgs e)
@@ -526,7 +511,6 @@ public class BoxManipulatorMAUI : BoxManipulator
 
     protected override bool CanManipulateRegion(int start, int end, string prompt, string fail)
     {
-
         bool canModify = base.CanManipulateRegion(start, end, prompt, fail);
         if (!canModify && !string.IsNullOrEmpty(fail))
             Shell.Current.DisplayAlert("Box", fail, "cancel");

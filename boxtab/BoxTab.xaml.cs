@@ -5,7 +5,6 @@ using PKHeX.Core.AutoMod;
 using static PKHeXMAUI.MainPage;
 using PKHeX.Core.Injection;
 
-
 namespace PKHeXMAUI;
 
 public partial class BoxTab : ContentPage
@@ -51,7 +50,6 @@ public partial class BoxTab : ContentPage
     public static int CurrentBox = 0;
 	public void fillbox()
 	{
-		
 		boxsprites = new List<boxsprite>();
         //if(sav.GetBoxData(boxnum.SelectedIndex).Count() == 0) { sav.SetBoxBinary(BitConverter.GetBytes(0),boxnum.SelectedIndex); }
         int i = 0;
@@ -61,24 +59,24 @@ public partial class BoxTab : ContentPage
 			boxsprites.Add(boxinfo);
             i++;
 		}
-        
+
         boxview.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new Grid() { Padding = 10 };
-            Border border = new Border() { Stroke = Colors.Black, BackgroundColor = Colors.Transparent };
+            Grid grid = new() { Padding = 10 };
+            Border border = new() { Stroke = Colors.Black, BackgroundColor = Colors.Transparent };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            Label SlotNumber = new Label() {FontSize=24, IsVisible = false};
+            Label SlotNumber = new() {FontSize=24, IsVisible = false};
             SlotNumber.SetBinding(Label.TextProperty, "SlotNumber");
-            Image image = new Image() { WidthRequest = 45, HeightRequest = 45 };
-            Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
+            Image image = new() { WidthRequest = 45, HeightRequest = 45 };
+            Image shinysp = new() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
             shinysp.TranslateTo(shinysp.TranslationX + 20, shinysp.TranslationY);
             Image Egg = new() { Source = "a_egg.png", HeightRequest = 50, WidthRequest = 50, VerticalOptions = LayoutOptions.End };
             Egg.SetBinding(Image.IsVisibleProperty, "pkm.IsEgg");
-            Image ItemSprite = new Image() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
+            Image ItemSprite = new() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
             ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
             ItemSprite.TranslateTo(ItemSprite.TranslationX + 18, ItemSprite.TranslationY);
-            Image LegalSprite = new Image() { WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start, Source = "warn.png" };
+            Image LegalSprite = new() { WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start, Source = "warn.png" };
             LegalSprite.TranslateTo(LegalSprite.TranslationX - 6, ItemSprite.TranslationY);
             LegalSprite.SetBinding(Image.IsVisibleProperty, "legal");
             image.SetBinding(Image.SourceProperty, "url");
@@ -104,17 +102,15 @@ public partial class BoxTab : ContentPage
             border.Content = grid;
             return border;
         });
-      
+
         boxview.ItemsLayout = new GridItemsLayout(6, ItemsLayoutOrientation.Vertical);
         boxview.ItemsSource = boxsprites;
-        
-
     }
     private async void Tapety(object sender, TappedEventArgs e)
     {
         boxview.SelectedItem = e.Parameter;
 
-        var result = await DisplayActionSheet($"Slot {((boxsprite)e.Parameter).SlotNumber}", "cancel", "Delete", new string[] { "View", "Set" });
+        var result = await DisplayActionSheet($"Slot {((boxsprite)e.Parameter).SlotNumber}", "cancel", "Delete", ["View", "Set"]);
         switch (result)
         {
             case "Delete": del(sender,e); break;
@@ -124,7 +120,6 @@ public partial class BoxTab : ContentPage
     }
     public void DisplayOptions()
     {
-        
         LB_view.IsVisible = true;
         LB_delete.IsVisible = true;
         deleter.Source = "delete.png";
@@ -137,7 +132,6 @@ public partial class BoxTab : ContentPage
     }
     private void DragStart(boxsprite boxslot)
     {
-
         boxview.SelectedItem = boxslot;
         LB_view.IsVisible = true;
         LB_delete.IsVisible = true;
@@ -203,7 +197,6 @@ public partial class BoxTab : ContentPage
             LB_delete.IsVisible = false;
             Sharer.IsVisible = false;
             LB_Share.IsVisible = false;
-        
     }
     private async void inject(object sender, EventArgs e)
     {
@@ -265,15 +258,10 @@ public partial class BoxTab : ContentPage
             LB_delete.IsVisible = false;
             Sharer.IsVisible = false;
             LB_Share.IsVisible = false;
-        
     }
     private async void ShareDrop(object sender, DropEventArgs e)
     {
-        PKM pkm;
-        if (boxview.SelectedItem is not null)
-            pkm = ((boxsprite)boxview.SelectedItem).pkm;
-        else
-            pkm = (PKM)e.Data.Properties["PKM"];
+        PKM pkm = boxview.SelectedItem is not null ? ((boxsprite)boxview.SelectedItem).pkm : (PKM)e.Data.Properties["PKM"];
         var TempPath = Path.Combine(FileSystem.CacheDirectory, pkm.FileName);
         File.WriteAllBytes(TempPath, pkm.Data);
         await Share.RequestAsync(new ShareFileRequest()
@@ -307,7 +295,6 @@ public partial class BoxTab : ContentPage
         Span<PKM> bd = sav.BoxData.ToArray();
         pkms.CopyTo(bd);
         sav.BoxData = bd.ToArray();
-        
     }
     private void changebox(object sender, EventArgs e)
     {
@@ -328,8 +315,6 @@ public partial class BoxTab : ContentPage
             fillbox();
         }
         catch (Exception) { fillbox(); }
-        
-        
     }
 
     private void openBatchEditor(object sender, EventArgs e)
@@ -344,25 +329,17 @@ public class boxsprite
         SlotNumber = slot.ToString();
         pkm = pk9;
         species = $"{(Species)pk9.Species}";
-        if (pk9.Species == 0)
-            url = $"";
-        else
-            url = $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        url = pk9.Species == 0
+            ? ""
+            : $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         shiny = (pk9.IsShiny && pk9.Species != 0);
-        if (sav is SAV9SV)
-        {
-            ItemResource = $"aitem_{pkm.HeldItem}.png";
-        }
-        else
-        {
-            ItemResource = $"bitem_{pkm.HeldItem}.png";
-        }
+        ItemResource = sav is SAV9SV ? $"aitem_{pkm.HeldItem}.png" : $"bitem_{pkm.HeldItem}.png";
         legal = !new LegalityAnalysis(pk9).Valid;
         if (pk9.Species == 0)
             legal = false;
         boxie = this;
     }
-    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013 };
+    public int[] NoFormSpriteSpecies = [664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013];
     public PKM pkm { get; set; }
     public string url { get; set; }
     public string species { get; set; }

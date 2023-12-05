@@ -18,7 +18,7 @@ public partial class MetTab : ContentPage
 	public MetTab()
 	{
 		InitializeComponent();
-      
+
         mettabpic.Source = spriteurl;
         origingamepicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Games;
         origingamepicker.ItemDisplayBinding = new Binding("Text");
@@ -30,18 +30,15 @@ public partial class MetTab : ContentPage
         if (PSettings.DisplayLegalBallsOnly)
         {
             var PokemonBalls = BallApplicator.GetLegalBalls(pk);
-            if (PokemonBalls.Count() != 0)
-                ballpicker.ItemsSource = PokemonBalls.ToList();
-            else
-                ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
+            ballpicker.ItemsSource = PokemonBalls.Any() ? PokemonBalls.ToList() : Enum.GetValues(typeof(Ball));
         }
         else
+        {
             ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
-
+        }
 
         ICommand refreshCommand = new Command(async () =>
         {
-
             await applymetinfo(pk);
             MetRefresh.IsRefreshing = false;
         });
@@ -57,10 +54,7 @@ public partial class MetTab : ContentPage
         if (PSettings.DisplayLegalBallsOnly)
         {
             var PokemonsBalls = BallApplicator.GetLegalBalls(pkm).ToList();
-            if (PokemonsBalls.Count != 0)
-                ballpicker.ItemsSource = PokemonsBalls;
-            else
-                ballpicker.ItemsSource = Enum.GetValues(typeof(Ball));
+            ballpicker.ItemsSource = PokemonsBalls.Count != 0 ? PokemonsBalls : Enum.GetValues(typeof(Ball));
         }
         if (pkm.HeldItem > 0)
         {
@@ -68,29 +62,28 @@ public partial class MetTab : ContentPage
             itemsprite.IsVisible = true;
         }
         else
+        {
             itemsprite.IsVisible = false;
-        if (pkm.IsShiny)
-            shinysparklessprite.IsVisible = true;
-        else
-            shinysparklessprite.IsVisible = false;
-        if (pkm.Species == 0)
-            spriteurl = $"a_egg.png";
-        else
-            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        }
+
+        shinysparklessprite.IsVisible = pkm.IsShiny;
+        spriteurl = pkm.Species == 0
+            ? "a_egg.png"
+            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         mettabpic.Source = spriteurl;
-        origingamepicker.SelectedItem = datasourcefiltered.Games.Where(z => z.Value == pkm.Version).FirstOrDefault();
+        origingamepicker.SelectedItem = datasourcefiltered.Games.FirstOrDefault(z => z.Value == pkm.Version);
         if (pkm is IBattleVersion bv)
         {
             battleversionlabel.IsVisible = true;
             battleversionpicker.IsVisible = true;
             battleversionpicker.SelectedIndex = bv.BattleVersion;
         }
-        
-        metlocationpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)pkm.Version, pkm.Context).Where(z=>z.Value == pkm.Met_Location).FirstOrDefault();
-        ballpicker.SelectedItem = pkm.Ball > -1 ? (Ball)pkm.Ball : (Ball)0;
+
+        metlocationpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)pkm.Version, pkm.Context).FirstOrDefault(z=>z.Value == pkm.Met_Location);
+        ballpicker.SelectedItem = pkm.Ball > -1 ? (Ball)pkm.Ball : Ball.None;
         ballspriteurl = $"{(pkm.Ball>0?$"ball{pkm.Ball}":"ball4")}.png";
         ballimage.Source = ballspriteurl;
-       
+
         var metdate = pkm.MetDate!=null? (DateOnly)pkm.MetDate:DateOnly.MinValue;
         metdatepicker.Date = pkm.MetDate != null?metdate.ToDateTime(TimeOnly.Parse("10:00 PM")) :DateTime.Now;
         metleveldisplay.Text = pkm.Met_Level>-1?pkm.Met_Level.ToString():"0";
@@ -102,15 +95,14 @@ public partial class MetTab : ContentPage
         }
         fatefulcheck.IsChecked = pkm.FatefulEncounter;
         eggcheck.IsChecked = pkm.WasEgg;
-        
+
         var eggmetdate = pkm.EggMetDate!=null? (DateOnly)pkm.EggMetDate:DateOnly.MinValue;
         eggdatepicker.Date = pkm.EggMetDate != null?eggmetdate.ToDateTime(TimeOnly.Parse("10:00 PM")):DateTime.Now;
         if(pkm.Egg_Location > -1)
         {
-            eggmetpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context,true).Where(z => z.Value == pkm.Egg_Location).FirstOrDefault();
+            eggmetpicker.SelectedItem = GameInfo.GetLocationList((GameVersion)sav.Version, sav.Context,true).FirstOrDefault(z => z.Value == pkm.Egg_Location);
         }
         SkipEvent = false;
-        
     }
 
     public void applyorigingame(object sender, EventArgs e)
@@ -135,7 +127,6 @@ public partial class MetTab : ContentPage
 
     private void applymetlocation(object sender, EventArgs e)
     {
-
         if (metlocationpicker.SelectedItem != null && !SkipEvent)
         {
             var metlocation = (ComboItem)metlocationpicker.SelectedItem;
@@ -182,8 +173,6 @@ public partial class MetTab : ContentPage
             pk.FatefulEncounter = fatefulcheck.IsChecked;
     }
 
-  
-
     private void applyeggmetlocation(object sender, EventArgs e)
     {
         if (!SkipEvent)
@@ -210,7 +199,6 @@ public partial class MetTab : ContentPage
             }
             else
             {
-                
                 pk.Egg_Location = LocationEdits.GetNoneLocation(pk);
                 pk.EggMetDate = null;
             }
@@ -226,10 +214,6 @@ public partial class MetTab : ContentPage
     private void ChangeComboBoxFontColor(object sender, PropertyChangedEventArgs e)
     {
         SfComboBox box = (SfComboBox)sender;
-        if (box.IsDropDownOpen)
-            box.TextColor = Colors.Black;
-        else
-            box.TextColor = Colors.White;
+        box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
     }
 }
-

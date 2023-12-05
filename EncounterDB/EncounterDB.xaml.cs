@@ -2,20 +2,17 @@ using PKHeX.Core;
 using System.Runtime.CompilerServices;
 using static PKHeXMAUI.MainPage;
 
-
 namespace PKHeXMAUI;
 
 public partial class EncounterDB : ContentPage
 {
-  
     public static PKHeX.Core.Searching.SearchSettings encSettings;
     public EncounterDB()
     {
         InitializeComponent();
         EncounterCollection.ItemTemplate = new DataTemplate(() =>
         {
-            
-            Grid grid = new Grid { Padding = 10 };
+            Grid grid = new() { Padding = 10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
@@ -23,8 +20,8 @@ public partial class EncounterDB : ContentPage
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-            Image image = new Image() { WidthRequest = 50, HeightRequest = 50 };
-            Image shinysp = new Image() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
+            Image image = new() { WidthRequest = 50, HeightRequest = 50 };
+            Image shinysp = new() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
             shinysp.TranslateTo(shinysp.TranslationX + 15, shinysp.TranslationY);
             image.SetBinding(Image.SourceProperty, "url");
             shinysp.SetBinding(Image.IsVisibleProperty, "EncounterInfo.IsShiny");
@@ -60,7 +57,6 @@ public partial class EncounterDB : ContentPage
             return swipe;
         });
         EncounterCollection.ItemsLayout = new GridItemsLayout(5, ItemsLayoutOrientation.Vertical);
-       
     }
 
     private void SetSearchSettings(object sender, EventArgs e)
@@ -72,13 +68,13 @@ public partial class EncounterDB : ContentPage
     {
         IEncounterInfo enc = ((EncounterSprite)EncounterCollection.SelectedItem).EncounterInfo;
         var pkm = enc.ConvertToPKM(sav, EncounterCriteria.Unrestricted);
-        pk = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
+        pk = EntityConverter.ConvertToType(pkm, sav.PKMType, out _);
         if (pk.Species == (ushort)Species.Manaphy && pk.IsEgg)
             pk.IsNicknamed = false;
     }
     private void SearchEncountersClick(object sender, EventArgs e)
     {
-        List<EncounterSprite> sprites = new();
+        List<EncounterSprite> sprites = [];
         var Encounters = GetEncounters();
        foreach(var enc in Encounters)
         {
@@ -89,7 +85,7 @@ public partial class EncounterDB : ContentPage
     public List<IEncounterInfo> GetEncounters()
     {
         if (encSettings is { Species: 0, Moves.Count: 0 } || encSettings is null)
-            return new List<IEncounterInfo>();
+            return [];
         var pk = sav.BlankPKM;
 
         var moves = encSettings.Moves.ToArray();
@@ -124,20 +120,16 @@ public partial class EncounterDB : ContentPage
         var returnlist = new List<IEncounterInfo>();
         foreach (var s in species)
         {
-            
-
             var pi = pt.GetFormEntry(s, 0);
             var fc = pi.FormCount;
-           
+
             for (byte f = 0; f < fc; f++)
             {
                 if (FormInfo.IsBattleOnlyForm(s, f, pk.Format))
                     continue;
                 var encs = GetEncounters(s, f, moves, pk, versions);
-                foreach (var enc in encs)
-                    returnlist.Add(enc);
+                returnlist.AddRange(encs);
             }
-            
         }
         return returnlist;
     }
@@ -152,7 +144,7 @@ public partial class EncounterDB : ContentPage
 }
 public class ReferenceComparer<T> : IEqualityComparer<T> where T : class
 {
-    public bool Equals(T? x, T? y)
+    public bool Equals(T x, T y)
     {
         if (x == null)
             return false;
@@ -163,11 +155,11 @@ public class ReferenceComparer<T> : IEqualityComparer<T> where T : class
 
     public int GetHashCode(T obj) => RuntimeHelpers.GetHashCode(obj);
 }
-public class EncounterSprite 
+public class EncounterSprite
 {
    public IEncounterInfo EncounterInfo { get; set; }
     public string url { get; set; }
-    public int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013 };
+    public int[] NoFormSpriteSpecies = [664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013];
     public bool Alpha { get; set; }
     public string BallUrl { get; set; }
     public bool Mighty { get; set; }
@@ -175,7 +167,6 @@ public class EncounterSprite
     public Color EncColor { get; set; }
     public EncounterSprite(IEncounterInfo info)
     {
-
         EncounterInfo = info;
         var index = (info.GetType().Name.GetHashCode() * 0x43FD43FD);
         EncColor = Color.FromArgb(Convert.ToString(index,16));
@@ -188,11 +179,8 @@ public class EncounterSprite
         {
             BallUrl = $"ball{(int)b.FixedBall}.png";
         }
-        if (info.Species == 0)
-            url = $"";
-        else
-           url = $"a_{info.Species}{((info.Form > 0 && !NoFormSpriteSpecies.Contains(info.Species)) ? $"_{info.Form}" : "")}.png";
+        url = info.Species == 0
+            ? ""
+            : $"a_{info.Species}{((info.Form > 0 && !NoFormSpriteSpecies.Contains(info.Species)) ? $"_{info.Form}" : "")}.png";
     }
-
- 
 }

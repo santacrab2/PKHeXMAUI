@@ -10,7 +10,7 @@ namespace PKHeXMAUI;
 public partial class PKHeXSettings : ContentPage
 {
 	public static bool skipevent = true;
-	public static List<GenericCollection> props = new();
+	public static List<GenericCollection> props = [];
     public PKHeXSettings()
 	{
 		InitializeComponent();
@@ -20,7 +20,7 @@ public partial class PKHeXSettings : ContentPage
             props.Add(new GenericCollection(p));
         PKHeXSettingsCollection.ItemTemplate = new DataTemplate(() =>
 		{
-            Grid grid = new Grid() { Padding = 10, Margin =10 };
+            Grid grid = new() { Padding = 10, Margin =10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
@@ -34,13 +34,11 @@ public partial class PKHeXSettings : ContentPage
 			SettingBool.PropertyChanged += GetSettingBool;
             SettingBool.SelectionChanged += ApplySettingBool;
 			grid.Add(SettingBool, 1);
-			
+
 			return grid;
         });
-		
-		
+
 		PKHeXSettingsCollection.ItemsSource = props;
-		
     }
 	public string LastBox = "";
     public void GetSettingBool(object sender, EventArgs e)
@@ -57,18 +55,15 @@ public partial class PKHeXSettings : ContentPage
 	{
         var box = (SfComboBox)sender;
 		Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
-		
 	}
 }
-public class PSettings 
+public class PSettings
 {
 	public static bool IgnoreLegalPopup { get => Preferences.Get("IgnoreLegalPopup",false); }
 	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
 	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
 	public static bool AllowIncompatibleConversion { get => Preferences.Default.Get("AllowIncompatibleConversion", false); }
     public static bool SetUpdatePKM { get => Preferences.Get("SetUpdatePKM", true); }
-   
-
 }
 public class EncounterSettings
 {
@@ -79,23 +74,21 @@ public class EncounterSettings
 public class GenericCollection
 {
 	public PropertyInfo prop { get; set; }
-	public List<object> proparray { get; set; } = new();
+	public List<object> proparray { get; set; } = [];
 	public GenericCollection(PropertyInfo p)
 	{
 		prop = p;
 		if(p.PropertyType == typeof(Boolean))
 		{
-			proparray = new List<object>() { false, true };
+			proparray = [false, true];
 		}
 		if(p.PropertyType == typeof(GameVersion))
 		{
-
 			var gamelist = MainPage.datasourcefiltered.Games;
 			foreach(var g in gamelist)
 			{
 				proparray.Add((GameVersion)g.Value);
 			}
-
         }
         if(p.PropertyType == typeof(Severity))
         {
@@ -106,9 +99,9 @@ public class GenericCollection
 }
 public class GenericCollectionSelector : DataTemplateSelector
 {
-    public DataTemplate ComboTemplate = new DataTemplate(() =>
+    public DataTemplate ComboTemplate = new(() =>
     {
-        Grid grid = new Grid() { Padding = 10, Margin = 10 };
+        Grid grid = new() { Padding = 10, Margin = 10 };
         grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
@@ -126,9 +119,9 @@ public class GenericCollectionSelector : DataTemplateSelector
         return grid;
     });
 
-    public DataTemplate StringTemplate = new DataTemplate(() =>
+    public DataTemplate StringTemplate = new(() =>
     {
-        Grid grid = new Grid() { Padding = 10, Margin = 10 };
+        Grid grid = new() { Padding = 10, Margin = 10 };
         grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
@@ -152,14 +145,12 @@ public class GenericCollectionSelector : DataTemplateSelector
     {
         if (sender is SfComboBox box)
         {
-           
                 if (box.SelectedItem is Boolean)
                     Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
-                else if (box.SelectedItem is GameVersion)
-                    Preferences.Set(box.Placeholder, (int)(GameVersion)box.SelectedItem);
+                else if (box.SelectedItem is GameVersion version)
+                    Preferences.Set(box.Placeholder, (int)version);
                 else
                     Preferences.Set(box.Placeholder, (int)(Severity)box.SelectedItem);
-            
         }
         if (sender is Editor editor)
         {
@@ -194,7 +185,7 @@ public class GenericCollectionSelector : DataTemplateSelector
                     box.SelectedItem = (GameVersion)Preferences.Get(box.Placeholder, 0);
                 else if(((List<object>)box.ItemsSource)[0] is Severity)
                     box.SelectedItem = (Severity)Preferences.Get(box.Placeholder,0);
-                
+
                 LastBox = box.Placeholder;
             }
         }

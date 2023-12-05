@@ -22,7 +22,6 @@ public partial class StatsTab : ContentPage
         HiddenPowerPicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         ICommand refreshCommand = new Command(async () =>
         {
-
             await applystatsinfo(pk);
             StatsRefresh.IsRefreshing = false;
         });
@@ -41,16 +40,15 @@ public partial class StatsTab : ContentPage
             itemsprite.IsVisible = true;
         }
         else
+        {
             itemsprite.IsVisible = false;
+        }
+
         pkm.ResetPartyStats();
-        if (pkm.IsShiny)
-            shinysparklessprite.IsVisible = true;
-        else
-            shinysparklessprite.IsVisible = false;
-        if (pkm.Species == 0)
-            spriteurl = $"a_egg.png";
-        else
-            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        shinysparklessprite.IsVisible = pkm.IsShiny;
+        spriteurl = pkm.Species == 0
+            ? "a_egg.png"
+            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         statpic.Source = spriteurl;
         hpbasedisplay.Text = pkm.PersonalInfo.HP.ToString();
         HPIV.Text = pkm.IV_HP.ToString();
@@ -104,7 +102,7 @@ public partial class StatsTab : ContentPage
             SPDHyper.IsChecked = hpt.HT_SPD;
             SPEHyper.IsChecked = hpt.HT_SPE;
         }
-  
+
         if (pkm is ITeraType tera)
         {
             OvTeralabel.IsVisible = true;
@@ -172,15 +170,13 @@ public partial class StatsTab : ContentPage
         }
         SkipEvent = false;
     }
-   
+
     private void applyhpIV(object sender, TextChangedEventArgs e)
     {
-
         if (HPIV.Text.Length > 0 && !SkipEvent)
         {
             if (int.TryParse(HPIV.Text, out var result))
             {
-
                 pk.IV_HP = Math.Clamp(result,minStat,maxIV);
                 pk.ResetPartyStats();
                 totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
@@ -194,7 +190,6 @@ public partial class StatsTab : ContentPage
     {
         if (HPEV.Text.Length > 0 && !SkipEvent)
         {
-
             if (byte.TryParse(HPEV.Text, out var result))
             {
                 if (pk is IAwakened woke)
@@ -207,7 +202,6 @@ public partial class StatsTab : ContentPage
                 }
                 else
                 {
-                    
                     pk.EV_HP = Math.Clamp(result, (byte)minStat, (byte)maxEV);
                     pk.ResetPartyStats();
                     totalhpdisplay.Text = pk.Stat_HPCurrent.ToString();
@@ -222,10 +216,8 @@ public partial class StatsTab : ContentPage
     {
         if (AtkIV.Text.Length > 0 && !SkipEvent)
         {
-
             if (byte.TryParse(AtkIV.Text, out var result))
             {
-
                 pk.IV_ATK = Math.Clamp(result, (byte)minStat, (byte)maxIV);
                 pk.ResetPartyStats();
                 totalatkdisplay.Text = pk.Stat_ATK.ToString();
@@ -233,7 +225,6 @@ public partial class StatsTab : ContentPage
                 totalEVdisplay.Text = pk.EVTotal.ToString();
             }
         }
-
     }
 
     private void applyatkEV(object sender, TextChangedEventArgs e)
@@ -252,7 +243,6 @@ public partial class StatsTab : ContentPage
                 }
                 else
                 {
-                   
                     pk.EV_ATK = Math.Clamp(result, (byte)minStat, (byte)maxEV);
                     pk.ResetPartyStats();
                     totalatkdisplay.Text = pk.Stat_ATK.ToString();
@@ -269,7 +259,6 @@ public partial class StatsTab : ContentPage
         {
             if (int.TryParse(DEFIV.Text, out var result))
             {
-
                 pk.IV_DEF = Math.Clamp(result, (byte)minStat, (byte)maxIV);
                 pk.ResetPartyStats();
                 totaldefdisplay.Text = pk.Stat_DEF.ToString();
@@ -324,7 +313,6 @@ public partial class StatsTab : ContentPage
     {
         if (SPAEV.Text.Length > 0 && !SkipEvent)
         {
-
             if (byte.TryParse(SPAEV.Text, out var result))
             {
                 if (pk is IAwakened woke)
@@ -401,14 +389,12 @@ public partial class StatsTab : ContentPage
                 totalEVdisplay.Text = pk.EVTotal.ToString();
             }
         }
-
     }
 
     private void applyspeEV(object sender, TextChangedEventArgs e)
     {
         if (SPEEV.Text.Length > 0 && !SkipEvent)
         {
-
             if (byte.TryParse(SPEEV.Text, out var result))
             {
                 if (pk is IAwakened woke)
@@ -433,7 +419,6 @@ public partial class StatsTab : ContentPage
 
     private void randomizeivs(object sender, EventArgs e)
     {
-        
         pk.SetRandomIVs();
         applystatsinfo(pk);
     }
@@ -510,7 +495,7 @@ public partial class StatsTab : ContentPage
         if (pk is IHyperTrain hpt && !SkipEvent)
             hpt.HT_SPE = e.Value;
     }
-    private void applytera(object sender, EventArgs e) 
+    private void applytera(object sender, EventArgs e)
     {
         if (pk is ITeraType pk9 && !SkipEvent)
         {
@@ -528,21 +513,18 @@ public partial class StatsTab : ContentPage
                     teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
                     moveonce = false;
                 }
-
-                
             }
             teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
         }
     }
 
-    private void applymaintera(object sender, EventArgs e) 
+    private void applymaintera(object sender, EventArgs e)
     {
         if (pk is ITeraType pk9 && !SkipEvent)
         {
             pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
             teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
         }
-
     }
 
     private void refreshstats(object sender, EventArgs e)

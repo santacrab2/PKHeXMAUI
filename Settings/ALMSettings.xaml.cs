@@ -5,7 +5,7 @@ namespace PKHeXMAUI;
 
 public partial class ALMSettings : ContentPage
 {
-    public static List<GenericCollection> props = new();
+    public static List<GenericCollection> props = [];
     public ALMSettings()
 	{
 		InitializeComponent();
@@ -33,5 +33,4 @@ public class PluginSettings
     public static bool LivingDexNativeOnly { get => Preferences.Get("LivingDexNativeOnly", false); }
     public static bool LivingDexSetAlpha { get => Preferences.Get("LivingDexSetAlpha", false); }
     public static bool LivingDexSetShiny { get => Preferences.Get("LivingDexSetShiny", false); }
-
 }

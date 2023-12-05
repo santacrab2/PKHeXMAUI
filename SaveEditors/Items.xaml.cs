@@ -9,25 +9,23 @@ namespace PKHeXMAUI;
 
 public partial class Items : TabbedPage
 {
-    public static string[] itemlist = GameInfo.Strings.GetItemStrings(sav.Context, sav.Version).ToArray();
-    public List<List<itemInfo>> SourceList = new();
+    public static string[] itemlist = [.. GameInfo.Strings.GetItemStrings(sav.Context, sav.Version)];
+    public List<List<itemInfo>> SourceList = [];
     private readonly IReadOnlyList<InventoryPouch> pouches;
     private readonly SaveFile Origin;
     private readonly SaveFile SAV;
     public static int currentcount = 995;
     public Items()
 	{
-      
-        
         InitializeComponent();
-       
+
         SAV = (Origin = sav).Clone();
         pouches = sav.Inventory;
-       
+
         foreach (var pouch in pouches)
         {
             var content = new ContentPage() { Title = pouch.Type.ToString() };
-            Grid header = new Grid();
+            Grid header = [];
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
@@ -40,32 +38,36 @@ public partial class Items : TabbedPage
             header.Add(headerFav,2);
             Label headerNew = new() { Text = "New", HorizontalOptions = LayoutOptions.Center};
             header.Add(headerNew,3);
-            var ItemCollection = new CollectionView() { WidthRequest = 400, HeightRequest = 500 };
-            ItemCollection.ItemTemplate = new DataTemplate(() =>
+            var ItemCollection = new CollectionView
             {
-                Grid grid = new Grid();
+                WidthRequest = 400,
+                HeightRequest = 500,
+                ItemTemplate = new DataTemplate(() =>
+            {
+                Grid grid = [];
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-                SfComboBox itemname = new SfComboBox() { Placeholder = "(None)", IsEditable = true, TextSearchMode = ComboBoxTextSearchMode.StartsWith, BackgroundColor = Colors.Transparent, MaxDropDownHeight = 500 };
+                SfComboBox itemname = new() { Placeholder = "(None)", IsEditable = true, TextSearchMode = ComboBoxTextSearchMode.StartsWith, BackgroundColor = Colors.Transparent, MaxDropDownHeight = 500 };
                 itemname.PropertyChanged += ChangeComboBoxFontColor;
                 var pouchstrings = GetStringsForPouch(pouch.GetAllItems());
                 itemname.ItemsSource = pouchstrings;
-                itemname.SetBinding(SfComboBox.SelectedItemProperty, "name",mode:BindingMode.TwoWay);
+                itemname.SetBinding(SfComboBox.SelectedItemProperty, "name", mode: BindingMode.TwoWay);
                 itemname.IsClearButtonVisible = false;
                 grid.Add(itemname);
                 Editor itemCount = new();
-                itemCount.SetBinding(Editor.TextProperty, "count",mode:BindingMode.TwoWay);
+                itemCount.SetBinding(Editor.TextProperty, "count", mode: BindingMode.TwoWay);
                 grid.Add(itemCount, 1);
                 CheckBox ItemFavCheck = new();
-                ItemFavCheck.SetBinding(CheckBox.IsCheckedProperty, "isfav",mode:BindingMode.TwoWay);
+                ItemFavCheck.SetBinding(CheckBox.IsCheckedProperty, "isfav", mode: BindingMode.TwoWay);
                 grid.Add(ItemFavCheck, 2);
                 CheckBox ItemNewCheck = new();
                 ItemNewCheck.SetBinding(CheckBox.IsCheckedProperty, "isnew", BindingMode.TwoWay);
                 grid.Add(ItemNewCheck, 3);
                 return grid;
-            });
+            })
+            };
             var infolist = new List<itemInfo>();
             foreach(var item in pouch.Items)
             {
@@ -85,31 +87,32 @@ public partial class Items : TabbedPage
             ToolTipProperties.SetText(ClearAll, "Clears the current bag");
             ClearAll.Clicked += ClearAll_Clicked;
             var itemrefresh = new RefreshView();
-            var itemscroll = new ScrollView();
-            itemscroll.Content = new StackLayout()
+            var itemscroll = new ScrollView
             {
-                Children =
+                Content = new StackLayout()
+                {
+                    Children =
                 {
                     header, ItemCollection, GiveCount,GiveAll,ModifyAll,ClearAll
+                }
                 }
             };
             itemrefresh.Content = itemscroll;
             ICommand refreshview = new Command(async() =>
             {
-                var pindex = Array.IndexOf(ItemsMain.Children.ToArray(), ItemsMain.CurrentPage) - 1;
+                var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
                 ItemCollection.ItemsSource = SourceList[pindex];
                 itemrefresh.IsRefreshing = false;
             });
             itemrefresh.Command = refreshview;
             content.Content = itemrefresh;
             ItemsMain.Children.Add(content);
-            
         }
         ItemsMain.CurrentPageChanged += SetCount;
     }
     private void ClearAll_Clicked(object sender, EventArgs e)
     {
-        var pindex = Array.IndexOf(ItemsMain.Children.ToArray(), ItemsMain.CurrentPage) - 1;
+        var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
         var list = SourceList[pindex];
         list.Clear();
         var pouchlist = pouches[pindex];
@@ -123,13 +126,19 @@ public partial class Items : TabbedPage
     private void SetCount(object sender, EventArgs e)
     {
         if (sender is Editor ed)
-            int.TryParse(ed.Text, out currentcount);
+        {
+            var parsed = int.TryParse(ed.Text, out var count);
+            if (parsed)
+                currentcount = count;
+        }
         else
+        {
             currentcount = 995;
+        }
     }
     private void GiveAll_Clicked(object sender, EventArgs e)
     {
-        var pindex = Array.IndexOf(ItemsMain.Children.ToArray(), ItemsMain.CurrentPage)-1;
+        var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage)-1;
         var list = SourceList[pindex];
         list.Clear();
         var pouchlist = pouches[pindex];
@@ -143,7 +152,7 @@ public partial class Items : TabbedPage
     }
     private void ModifyAll_Clicked(object sender, EventArgs e)
     {
-        var pindex = Array.IndexOf(ItemsMain.Children.ToArray(), ItemsMain.CurrentPage) - 1;
+        var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
         var list = SourceList[pindex];
         list.Clear();
         var pouchlist = pouches[pindex];
@@ -158,10 +167,7 @@ public partial class Items : TabbedPage
     private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         SfComboBox box = (SfComboBox)sender;
-        if (box.IsDropDownOpen)
-            box.TextColor = Colors.Black;
-        else
-            box.TextColor = Colors.White;
+        box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
     }
     private string[] GetStringsForPouch(ReadOnlySpan<ushort> items, bool sort = true)
     {
@@ -186,19 +192,15 @@ public partial class Items : TabbedPage
         }
         SAV.Inventory = pouches;
         Origin.CopyChangesFrom(SAV);
-       
-        await Navigation.PopModalAsync();
 
+        await Navigation.PopModalAsync();
     }
     private async Task setbag(InventoryPouch pouch,int sourceindex)
     {
-        
         int ctr = 0;
         var list = SourceList[sourceindex];
             foreach (var it in list)
             {
-
-
                 var itemindex = Array.IndexOf(itemlist, it.name);
                 var validct = int.TryParse(it.count, out var itemct);
                 if (itemindex <= 0) // Compression of Empty Slots
@@ -221,7 +223,6 @@ public partial class Items : TabbedPage
 
             for (int i = ctr; i < pouch.Items.Length; i++)
                 pouch.Items[i] = pouch.GetEmpty(); // Empty Slots at the end
-
     }
 
     private void CloseItems(object sender, EventArgs e)
@@ -249,6 +250,5 @@ public class itemInfo
             isfreespace = fs.IsFreeSpace;
         if (item is IItemFreeSpaceIndex fi)
             isfreespaceindex = fi.FreeSpaceIndex;
-
     }
 }

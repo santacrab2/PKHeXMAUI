@@ -9,7 +9,7 @@ namespace PKHeXMAUI;
 public partial class LegalitySettings : ContentPage
 {
     public static bool skipevent = true;
-    public static List<GenericCollection> props = new();
+    public static List<GenericCollection> props = [];
     public LegalitySettings()
 	{
 		InitializeComponent();

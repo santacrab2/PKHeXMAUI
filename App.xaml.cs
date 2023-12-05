@@ -10,10 +10,9 @@ public partial class App : Application
         InitializeComponent();
 
         var Version = Preferences.Default.Get("SaveFile", 50);
-        if (PSettings.RememberLastSave)
-            MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)Version, "PKHeX"));
-        else
-            MainPage = new AppShell(SaveUtil.GetBlankSAV((GameVersion)50, "PKHeX"));
+        MainPage = PSettings.RememberLastSave
+            ? new AppShell(SaveUtil.GetBlankSAV((GameVersion)Version, "PKHeX"))
+            : (Page)new AppShell(SaveUtil.GetBlankSAV(GameVersion.SL, "PKHeX"));
     }
     protected override Window CreateWindow(IActivationState activationState)
     {
@@ -31,7 +30,6 @@ public partial class App : Application
                 {
                     Remote.com.Disconnect();
                     Remote.com.Connect();
-
                 }
             }
         };

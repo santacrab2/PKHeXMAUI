@@ -23,7 +23,6 @@ public partial class MemoriesAmie : TabbedPage
     public Label HTMemoryString = new() { IsVisible = false };
     public MemoriesAmie()
     {
-
         InitializeComponent();
         MemoriesWithOT.Text = $"Memories with {pk.OT_Name}(OT)";
         MemoryTypePicker.ItemsSource = memorytext.Memory;
@@ -36,8 +35,8 @@ public partial class MemoriesAmie : TabbedPage
         HTMemoryTypePicker.ItemDisplayBinding = new Binding("Text");
         if (pk is ITrainerMemories mems)
         {
-            MemoryTypePicker.SelectedItem = memorytext.Memory.Where(z => z.Value == mems.OT_Memory).FirstOrDefault();
-            HTMemoryTypePicker.SelectedItem = memorytext.Memory.Where(x => x.Value == mems.HT_Memory).FirstOrDefault();
+            MemoryTypePicker.SelectedItem = memorytext.Memory.Find(z => z.Value == mems.OT_Memory);
+            HTMemoryTypePicker.SelectedItem = memorytext.Memory.Find(x => x.Value == mems.HT_Memory);
 
             MoreThanAFeelingbox.ItemsSource = memorytext.GetMemoryFeelings(pk.Generation).ToArray();
             MoreThanAFeelingbox.SelectionChanged += UpdateMemoryString;
@@ -104,23 +103,18 @@ public partial class MemoriesAmie : TabbedPage
                 HTTextVar.IsVisible = true;
                 HTTextVarBox.IsVisible = true;
                 HTMemoryString.Text = string.Format(memorytext.Memory[mems.HT_Memory].Text, pk.Nickname, pk.OT_Name, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : HTargvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
-
             }
         }
-        if (pk.CurrentHandler == 0)
-            chlabel.Text = pk.OT_Name;
-        else
-            chlabel.Text = pk.HT_Name;
+        chlabel.Text = pk.CurrentHandler == 0 ? pk.OT_Name : pk.HT_Name;
         fullnesseditor.Text = pk.Fullness.ToString();
         EnjoymentEditor.Text = pk.Enjoyment.ToString();
     }
-    public static MemoryStrings memorytext = new MemoryStrings(GameInfo.Strings);
+    public static MemoryStrings memorytext = new(GameInfo.Strings);
 
     private void SaveMemoriesAndClose(object sender, EventArgs e)
     {
         if (int.TryParse(Friendshipeditor.Text, out var result))
         {
-
             if (result > 255)
                 result = 255;
 
@@ -146,9 +140,6 @@ public partial class MemoriesAmie : TabbedPage
             mems.HT_Feeling = (byte)HTMoreThanAFeelingbox.SelectedIndex;
             mems.HT_Intensity = (byte)HTIntenseBox.SelectedIndex;
             mems.HT_TextVar = (byte)((ComboItem)HTTextVarBox.SelectedItem).Value;
-
-
-
         }
         if (byte.TryParse(fullnesseditor.Text, out var result3))
         {
@@ -180,7 +171,6 @@ public partial class MemoriesAmie : TabbedPage
             OTTextVarBox.DisplayMemberPath = "Text";
             TextVar.Text = GetMemoryCategory(memindex, pk.Format);
 
-
             MoreThanAFeeling.IsVisible = true;
             MoreThanAFeelingbox.IsVisible = true;
 
@@ -190,12 +180,12 @@ public partial class MemoriesAmie : TabbedPage
             TextVar.IsVisible = true;
             OTTextVarBox.IsVisible = true;
 
-            MemoryString.IsVisible = true; ;
+            MemoryString.IsVisible = true;
             try
             {
                 MemoryString.Text = string.Format(memorytext.Memory[MemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
             }
-            catch (Exception) { };
+            catch (Exception) { }
         }
         else
         {
@@ -229,7 +219,6 @@ public partial class MemoriesAmie : TabbedPage
             argvals = memorytext.GetArgumentStrings(memindex, pk.Format);
             HTMemoryString.Text = string.Format(memorytext.Memory[HTMemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
         }
-
     }
     private void HTChangeMemoryDisplay(object sender, EventArgs e)
     {
@@ -241,7 +230,6 @@ public partial class MemoriesAmie : TabbedPage
             HTTextVarBox.DisplayMemberPath = "Text";
             HTTextVar.Text = GetMemoryCategory(memindex, pk.Format);
 
-
             HTMoreThanAFeeling.IsVisible = true;
             HTMoreThanAFeelingbox.IsVisible = true;
 
@@ -251,12 +239,12 @@ public partial class MemoriesAmie : TabbedPage
             HTTextVar.IsVisible = true;
             HTTextVarBox.IsVisible = true;
 
-            HTMemoryString.IsVisible = true; ;
+            HTMemoryString.IsVisible = true;
             try
             {
                 HTMemoryString.Text = string.Format(memorytext.Memory[HTMemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
             }
-            catch (Exception) { };
+            catch (Exception) { }
         }
         else
         {
@@ -272,10 +260,6 @@ public partial class MemoriesAmie : TabbedPage
     private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         SfComboBox box = (SfComboBox)sender;
-        if (box.IsDropDownOpen)
-            box.TextColor = Colors.Black;
-        else
-            box.TextColor = Colors.White;
+        box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
     }
-
 }

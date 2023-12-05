@@ -13,11 +13,10 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
-        Flags = new[]{ LeafCheckBox1, LeafCheckBox2, LeafCheckBox3, LeafCheckBox4, LeafCheckBox5, CrownCheckbox };
+        Flags = [LeafCheckBox1, LeafCheckBox2, LeafCheckBox3, LeafCheckBox4, LeafCheckBox5, CrownCheckbox];
         applycomsetics(pk);
         ICommand refreshCommand = new Command(async () =>
         {
-
             await applycomsetics(pk);
             CosmeticsRefresh.IsRefreshing = false;
         });
@@ -40,15 +39,14 @@ public partial class Cosmeticstab : ContentPage
             itemsprite.IsVisible = true;
         }
         else
+        {
             itemsprite.IsVisible = false;
-        if (pkm.IsShiny)
-            shinysparklessprite.IsVisible = true;
-        else
-            shinysparklessprite.IsVisible = false;
-        if (pkm.Species == 0)
-            spriteurl = $"a_egg.png";
-        else
-            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        }
+
+        shinysparklessprite.IsVisible = pkm.IsShiny;
+        spriteurl = pkm.Species == 0
+            ? "a_egg.png"
+            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         pic.Source = spriteurl;
         if (pkm is IScaledSize ss)
         {
@@ -106,32 +104,28 @@ public partial class Cosmeticstab : ContentPage
         {
             LeafCheckBox1.IsVisible = true;
             LeafSprite1.IsVisible = true;
-            
+
             LeafCheckBox2.IsVisible = true;
             LeafSprite2.IsVisible = true;
-            
+
             LeafCheckBox3.IsVisible = true;
             LeafSprite3.IsVisible = true;
-         
+
             LeafCheckBox4.IsVisible = true;
             LeafSprite4.IsVisible = true;
-          
+
             LeafCheckBox5.IsVisible = true;
             LeafSprite5.IsVisible = true;
-            
+
             CrownCheckbox.IsVisible = true;
             CrownSprite.IsVisible = true;
             for (int i = 0; i < Flags.Length; i++)
                 Flags[i].IsChecked = ((pk4.ShinyLeaf >> i) & 1) == 1;
-
         }
         if(pkm is IRibbonSetAffixed a)
         {
             AffixedRibbonSprite.IsVisible = true;
-            if (a.AffixedRibbon != -1)
-                AffixedRibbonSprite.Source = $"ribbon{((RibbonIndex)a.AffixedRibbon).ToString().ToLower()}.png";
-            else
-                AffixedRibbonSprite.Source = "ribbon_affix_none.png";
+            AffixedRibbonSprite.Source = a.AffixedRibbon != -1 ? (ImageSource)$"ribbon{((RibbonIndex)a.AffixedRibbon).ToString().ToLower()}.png" : (ImageSource)"ribbon_affix_none.png";
         }
         if(pkm is IContestStats contest)
         {
@@ -150,11 +144,9 @@ public partial class Cosmeticstab : ContentPage
         {
             if (int.TryParse(Heightdisplay.Text, out var result))
             {
-
-
                 result = Math.Clamp(result, 0, 255);
                 Heightdisplay.Text = $"{result}";
-                
+
                 if (pk is IScaledSize ss)
                 {
                     ss.HeightScalar = (byte)result;
@@ -175,11 +167,9 @@ public partial class Cosmeticstab : ContentPage
         {
             if (int.TryParse(Weightdisplay.Text, out var result))
             {
-
-
                 result = Math.Clamp(result, 0, 255);
                 Weightdisplay.Text = $"{result}";
-                
+
                 if (pk is IScaledSize ss)
                 {
                     ss.WeightScalar = (byte)result;
@@ -197,14 +187,12 @@ public partial class Cosmeticstab : ContentPage
         {
             if (int.TryParse(scaledisplay.Text, out var result))
             {
-
                 if (pk is IScaledSize3 sz3)
                 {
                     result = Math.Clamp(result, 0, 255);
                     scaledisplay.Text = $"{result}";
                     sz3.Scale = (byte)result;
                     ScaleDetailLabel.Text = SizeClassDetailed[(int)PokeSizeDetailedUtil.GetSizeRating(sz3.Scale)];
-
                 }
                 if(pk is ICombatPower cp)
                 {
@@ -213,7 +201,6 @@ public partial class Cosmeticstab : ContentPage
                     scaledisplay.Text = $"{result}";
                 }
             }
-                
         }
     }
     private void openribbons(object sender, EventArgs e)
@@ -240,9 +227,8 @@ public partial class Cosmeticstab : ContentPage
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                 Coolstats.Text = result.ToString();
-                
-                CTstats.CNT_Cool = result;
 
+                CTstats.CNT_Cool = result;
             }
         }
     }
@@ -255,9 +241,8 @@ public partial class Cosmeticstab : ContentPage
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     Beautystats.Text = result.ToString();
-                
-                CTstats.CNT_Beauty = result;
 
+                CTstats.CNT_Beauty = result;
             }
         }
     }
@@ -270,9 +255,8 @@ public partial class Cosmeticstab : ContentPage
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     Cutestats.Text = result.ToString();
-                
-                CTstats.CNT_Cute = result;
 
+                CTstats.CNT_Cute = result;
             }
         }
     }
@@ -285,9 +269,8 @@ public partial class Cosmeticstab : ContentPage
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                 Cleverstats.Text = result.ToString();
-                
-                CTstats.CNT_Smart = result;
 
+                CTstats.CNT_Smart = result;
             }
         }
     }
@@ -300,9 +283,8 @@ public partial class Cosmeticstab : ContentPage
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     toughstats.Text = result.ToString();
-                
-                CTstats.CNT_Tough = result;
 
+                CTstats.CNT_Tough = result;
             }
         }
     }
@@ -315,9 +297,8 @@ public partial class Cosmeticstab : ContentPage
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     sheenstats.Text = result.ToString();
-                
-                CTstats.CNT_Sheen = result;
 
+                CTstats.CNT_Sheen = result;
             }
         }
     }

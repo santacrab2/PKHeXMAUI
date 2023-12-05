@@ -9,7 +9,7 @@ public partial class TREditor : ContentPage
 	public TREditor()
 	{
 		InitializeComponent();
-        TREditorItem[] lines = Array.Empty<TREditorItem>();
+        TREditorItem[] lines = [];
         ReadOnlySpan<ushort> indexes = new();
 		if(pk is ITechRecord tr)
 		{
@@ -21,10 +21,10 @@ public partial class TREditor : ContentPage
         }
 		trcollection.ItemTemplate = new DataTemplate(() =>
 		{
-            Grid grid = new Grid { Padding = 10 };
+            Grid grid = new() { Padding = 10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = 24 });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 350 });
-            Label technicalrecordname = new Label() { HorizontalTextAlignment = TextAlignment.Center };
+            Label technicalrecordname = new() { HorizontalTextAlignment = TextAlignment.Center };
             technicalrecordname.SetBinding(Label.TextProperty, new Binding("name"));
             grid.Add(technicalrecordname);
 			return grid;
@@ -40,7 +40,6 @@ public partial class TREditor : ContentPage
             }
         }
         trcollection.UpdateSelectedItems(selectedlines);
-        
     }
 
     private void applytrsandclose(object sender, EventArgs e)
@@ -62,7 +61,6 @@ public partial class TREditor : ContentPage
                     if(selectedtrstring == names[indexes[i]])
                         tr.SetMoveRecordFlag(i, true);
                 }
-                
             }
         }
         Navigation.PopModalAsync();
@@ -96,11 +94,7 @@ public partial class TREditor : ContentPage
     }
 }
 
-public class TREditorItem
+public class TREditorItem(string rec)
 {
-	public TREditorItem(string rec)
-	{
-        name = rec;
-	}
-    public string name { get; set; }
+    public string name { get; set; } = rec;
 }

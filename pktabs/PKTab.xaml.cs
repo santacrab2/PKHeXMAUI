@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
 {
     public static string Version = "v23.11.14";
     public bool SkipTextChange = false;
-    public static int[] NoFormSpriteSpecies = new[] { 664, 665, 744, 982, 855, 854, 869,892,1012,1013 };
+    public static int[] NoFormSpriteSpecies = [664, 665, 744, 982, 855, 854, 869,892,1012,1013];
     public bool FirstLoad = true;
     public static PokeSysBotMini Remote;
     public static bool ReadonChangeBox = Preferences.Get("ReadonChangeBox", true);
@@ -28,12 +28,11 @@ public partial class MainPage : ContentPage
         pk.Species = sav.MaxSpeciesID;
         var validvers = RamOffsets.GetValidVersions(sav);
         ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
-        Remote = new PokeSysBotMini(validvers[validvers.Length - 1], com, false);
+        Remote = new PokeSysBotMini(validvers[^1], com, false);
         InitializeComponent();
-        
+
         ICommand refreshCommand = new Command(async () =>
         {
-
             await applymainpkinfo(pk);
             PKRefresh.IsRefreshing = false;
         });
@@ -45,7 +44,7 @@ public partial class MainPage : ContentPage
         statnaturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
         helditempicker.ItemsSource = datasourcefiltered.Items;
         helditempicker.DisplayMemberPath= "Text";
-        if (datasourcefiltered.Items.Count() > 0)
+        if (datasourcefiltered.Items.Count > 0)
         {
             helditempicker.IsVisible = true;
             helditemlabel.IsVisible = true;
@@ -60,13 +59,12 @@ public partial class MainPage : ContentPage
     public static PKM pk;
     public static SaveFile sav;
     public static FilteredGameDataSource datasourcefiltered;
-    public static Socket SwitchConnection = new Socket(SocketType.Stream, ProtocolType.Tcp);
+    public static Socket SwitchConnection = new(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
     public static string ipaddy = "";
     public static string itemspriteurl = "";
     public static void SetSettings()
     {
-        
         APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;
         APILegality.UseTrainerData = false;
         APILegality.AllowTrainerOverride = true;
@@ -111,7 +109,7 @@ public partial class MainPage : ContentPage
         var pkfile = await FilePicker.PickAsync();
         if (pkfile is null)
             return;
-        
+
         var obj = FileUtil.GetSupportedFile(pkfile.FullPath);
         if(obj is null) return;
         switch (obj)
@@ -122,8 +120,6 @@ public partial class MainPage : ContentPage
             case IEnumerable<byte[]> pkms: OpenPCBoxBin(pkms); return;
             case IEncounterConvertible enc: OpenPKMFile(enc.ConvertToPKM(sav));return;
         }
-      
-       
     }
     public async void OpenPCBoxBin(IEnumerable<byte[]> pkms)
     {
@@ -141,8 +137,7 @@ public partial class MainPage : ContentPage
                 return;
             }
             await DisplayAlert("Success", "PC Binary imported.", "okay");
-            
-        } 
+        }
         else if(sav.GetBoxBinary(sav.CurrentBox).Length == data.Length)
         {
             if (sav.IsAnySlotLockedInBox(0, sav.BoxCount - 1))
@@ -198,8 +193,40 @@ public partial class MainPage : ContentPage
             var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
             if (result.IsSuccess() || PSettings.AllowIncompatibleConversion)
             {
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
+Before:
                 sav.AdaptPKM(newpkm);
                 
+                applymainpkinfo(newpkm);
+After:
+                sav.AdaptPKM(newpkm);
+
+                applymainpkinfo(newpkm);
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
+Before:
+                sav.AdaptPKM(newpkm);
+                
+                applymainpkinfo(newpkm);
+After:
+                sav.AdaptPKM(newpkm);
+
+                applymainpkinfo(newpkm);
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
+Before:
+                sav.AdaptPKM(newpkm);
+                
+                applymainpkinfo(newpkm);
+After:
+                sav.AdaptPKM(newpkm);
+
+                applymainpkinfo(newpkm);
+*/
+                sav.AdaptPKM(newpkm);
+
                 applymainpkinfo(newpkm);
                 checklegality();
                 pk = newpkm;
@@ -220,8 +247,6 @@ public partial class MainPage : ContentPage
     {
         la = new(pk,sav.Personal);
         legality.Source = la.Valid ? "valid.png" : "warn.png";
-        
-        
     }
     public async Task applymainpkinfo(PKM pkm)
     {
@@ -229,8 +254,8 @@ public partial class MainPage : ContentPage
         itemsprite.IsVisible = false;
         if (pkm.IsShiny)
             shinybutton.Text = "★";
-        
-        specieslabel.SelectedItem = datasourcefiltered.Species.Where(z => z.Text== SpeciesName.GetSpeciesName(pkm.Species,2)).FirstOrDefault();
+
+        specieslabel.SelectedItem = datasourcefiltered.Species.FirstOrDefault(z => z.Text== SpeciesName.GetSpeciesName(pkm.Species,2));
         displaypid.Text = $"{pkm.PID:X}";
         nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
@@ -240,28 +265,27 @@ public partial class MainPage : ContentPage
         iseggcheck.IsChecked = pk.IsEgg;
         infectedcheck.IsChecked = pk.PKRS_Infected;
         curedcheck.IsChecked = pk.PKRS_Cured;
-        if (abilitypicker.Items.Count() != 0)
+        if (abilitypicker.Items.Count != 0)
             abilitypicker.Items.Clear();
         for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
         {
             var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
             abilitypicker.Items.Add($"{(Ability)abili}");
-
         }
         abilitypicker.SelectedIndex =pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
-      
+
         genderdisplay.Source = $"gender_{pkm.Gender}.png";
-        helditempicker.SelectedItem = datasourcefiltered.Items.Where(z=>z.Text== (GameInfo.Strings.Item[pkm.HeldItem])).FirstOrDefault();
+        helditempicker.SelectedItem = datasourcefiltered.Items.FirstOrDefault(z=>z.Text== (GameInfo.Strings.Item[pkm.HeldItem]));
         if (pkm.HeldItem > 0)
         {
             itemsprite.IsVisible = true;
             if (sav is SAV9SV)
             {
-                if (pkm.HeldItem >= 329 && pkm.HeldItem <= 420 || pkm.HeldItem >= 2161 && pkm.HeldItem <= 2232)
+                if ((pkm.HeldItem >= 329 && pkm.HeldItem <= 420) || (pkm.HeldItem >= 2161 && pkm.HeldItem <= 2232))
                 {
-                    itemspriteurl = $"aitem_tm.png";
-                    itemsprite.Source = $"aitem_tm.png";
+                    itemspriteurl = "aitem_tm.png";
+                    itemsprite.Source = "aitem_tm.png";
                 }
                 else
                 {
@@ -271,10 +295,10 @@ public partial class MainPage : ContentPage
             }
             else
             {
-                if (pkm.HeldItem >= 328 && pkm.HeldItem <= 419 || pkm.HeldItem >= 2160 && pkm.HeldItem <= 2231)
+                if ((pkm.HeldItem >= 328 && pkm.HeldItem <= 419) || (pkm.HeldItem >= 2160 && pkm.HeldItem <= 2231))
                 {
-                    itemspriteurl = $"bitem_tm.png";
-                    itemsprite.Source = $"bitem_tm.png";
+                    itemspriteurl = "bitem_tm.png";
+                    itemsprite.Source = "bitem_tm.png";
                 }
                 else
                 {
@@ -303,24 +327,18 @@ public partial class MainPage : ContentPage
             }
         }
 
-            if (pkm.Species == 0)
-                spriteurl = $"a_egg.png";
-            else 
-                spriteurl = $"a_{pkm.Species}{((pkm.Form >0&&!NoFormSpriteSpecies.Contains(pkm.Species))?$"_{pkm.Form}":"")}.png";
-            if (pkm.IsShiny)
-                shinysparklessprite.IsVisible = true;
-            else
-                shinysparklessprite.IsVisible= false;
-        
-        
-      
+            spriteurl = pkm.Species == 0
+                ? "a_egg.png"
+                : $"a_{pkm.Species}{((pkm.Form >0&&!NoFormSpriteSpecies.Contains(pkm.Species))?$"_{pkm.Form}":"")}.png";
+        shinysparklessprite.IsVisible = pkm.IsShiny;
+
         pic.Source = spriteurl;
         type1sprite.Source = $"type_icon_{pk.PersonalInfo.Type1:00}";
         type2sprite.Source = $"type_icon_{pk.PersonalInfo.Type2:00}";
         type2sprite.IsVisible = (pk.PersonalInfo.Type1 != pk.PersonalInfo.Type2);
         languagepicker.SelectedIndex = pkm.Language;
-        if (pkm.Species == (ushort)Species.Manaphy && pk.IsEgg) 
-        { 
+        if (pkm.Species == (ushort)Species.Manaphy && pk.IsEgg)
+        {
             pk.IsNicknamed = false;
             pkm.IsNicknamed = false;
         }
@@ -334,8 +352,6 @@ public partial class MainPage : ContentPage
         }
         checklegality();
         SkipTextChange = false;
-
-
     }
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
@@ -344,7 +360,6 @@ public partial class MainPage : ContentPage
         string path = "";
         if (OperatingSystem.IsAndroidVersionAtLeast(30))
         {
-
             await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{pk.FileName}", pk.DecryptedPartyData);
             path = "/storage/emulated/0/Documents/";
         }
@@ -352,7 +367,6 @@ public partial class MainPage : ContentPage
         {
             if (OperatingSystem.IsAndroidVersionAtLeast(29))
             {
-                
                 await File.WriteAllBytesAsync($"/storage/emulated/0/Android/data/com.PKHeX.maui/{pk.FileName}", pk.DecryptedPartyData);
                 path="/storage/emulated/0/Android/data/com.PKHeX.maui/";
             }
@@ -366,7 +380,7 @@ public partial class MainPage : ContentPage
 #endif
     }
 
-    private void specieschanger(object sender, EventArgs e) 
+    private void specieschanger(object sender, EventArgs e)
     {
         if (!SkipTextChange)
         {
@@ -378,16 +392,48 @@ public partial class MainPage : ContentPage
             pk.Language = sav.Language;
             formargstepper.IsVisible = false;
             formlabel.IsVisible = false;
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
+Before:
             formpicker.IsVisible = false;
             
             pk.Species = (ushort)test.Value;
-            if (abilitypicker.Items.Count() != 0)
+After:
+            formpicker.IsVisible = false;
+
+            pk.Species = (ushort)test.Value;
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
+Before:
+            formpicker.IsVisible = false;
+            
+            pk.Species = (ushort)test.Value;
+After:
+            formpicker.IsVisible = false;
+
+            pk.Species = (ushort)test.Value;
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
+Before:
+            formpicker.IsVisible = false;
+            
+            pk.Species = (ushort)test.Value;
+After:
+            formpicker.IsVisible = false;
+
+            pk.Species = (ushort)test.Value;
+*/
+            formpicker.IsVisible = false;
+
+            pk.Species = (ushort)test.Value;
+            if (abilitypicker.Items.Count != 0)
                 abilitypicker.Items.Clear();
             for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
             {
                 var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
                 abilitypicker.Items.Add($"{(Ability)abili}");
-
             }
             abilitypicker.SelectedIndex = 0;
             if (pk.PersonalInfo.Genderless && genderdisplay.Source != (ImageSource)"gender_2.png")
@@ -425,16 +471,10 @@ public partial class MainPage : ContentPage
                 }
             }
 
-            if (pk.Species == 0)
-                spriteurl = $"a_egg.png";
-            else
-                spriteurl = $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
-            if (pk.IsShiny)
-                shinysparklessprite.IsVisible = true;
-            else
-                shinysparklessprite.IsVisible = false;
-
-
+            spriteurl = pk.Species == 0
+                ? "a_egg.png"
+                : $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
+            shinysparklessprite.IsVisible = pk.IsShiny;
 
             pic.Source = spriteurl;
             checklegality();
@@ -442,9 +482,41 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void rollpid(object sender, EventArgs e) 
+    private void rollpid(object sender, EventArgs e)
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
+Before:
     { 
         
+        pk.SetPIDGender(pk.Gender);
+After:
+    {
+
+        pk.SetPIDGender(pk.Gender);
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
+Before:
+    { 
+        
+        pk.SetPIDGender(pk.Gender);
+After:
+    {
+
+        pk.SetPIDGender(pk.Gender);
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
+Before:
+    { 
+        
+        pk.SetPIDGender(pk.Gender);
+After:
+    {
+
+        pk.SetPIDGender(pk.Gender);
+*/
+    {
         pk.SetPIDGender(pk.Gender);
         pk.SetRandomEC();
         displaypid.Text = $"{pk.PID:X}";
@@ -453,7 +525,6 @@ public partial class MainPage : ContentPage
 
     private void applynickname(object sender, TextChangedEventArgs e)
     {
-
         if (nickname.Text != SpeciesName.GetSpeciesNameGeneration(pk.Species, pk.Language, pk.Format) && !SkipTextChange)
         {
             pk.SetNickname(nickname.Text);
@@ -463,7 +534,6 @@ public partial class MainPage : ContentPage
         {
             nicknamecheck.IsChecked = false;
         }
-        
     }
 
     private void turnshiny(object sender, EventArgs e)
@@ -473,7 +543,7 @@ public partial class MainPage : ContentPage
             pk.SetIsShiny(true);
             shinybutton.Text = "★";
         }
-        else 
+        else
         {
             pk.SetIsShiny(false);
             shinybutton.Text = "☆";
@@ -502,30 +572,23 @@ public partial class MainPage : ContentPage
 
     private void applynature(object sender, EventArgs e) { if (!SkipTextChange) { pk.Nature = naturepicker.SelectedIndex; checklegality(); } }
 
-        
-
-    private void applyform(object sender, EventArgs e) 
+    private void applyform(object sender, EventArgs e)
     {
         if (!SkipTextChange)
         {
             pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
 
-            if (pk.Species == 0)
-                spriteurl = $"a_egg.png";
-            else
-                spriteurl = $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
-            if (pk.IsShiny)
-                shinysparklessprite.IsVisible = true;
-            else
-                shinysparklessprite.IsVisible = false;
-
+            spriteurl = pk.Species == 0
+                ? "a_egg.png"
+                : $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
+            shinysparklessprite.IsVisible = pk.IsShiny;
 
             pic.Source = spriteurl;
             checklegality();
         }
     }
 
-    private void applyhelditem(object sender, EventArgs e) 
+    private void applyhelditem(object sender, EventArgs e)
     {
         if (!SkipTextChange)
         {
@@ -564,8 +627,46 @@ public partial class MainPage : ContentPage
             }
         }
     }
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
+Before:
     public static bool reconnect = false;
     
+
+    private void changelevel(object sender, TextChangedEventArgs e)
+After:
+    public static bool reconnect = false;
+
+
+    private void changelevel(object sender, TextChangedEventArgs e)
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
+Before:
+    public static bool reconnect = false;
+    
+
+    private void changelevel(object sender, TextChangedEventArgs e)
+After:
+    public static bool reconnect = false;
+
+
+    private void changelevel(object sender, TextChangedEventArgs e)
+*/
+
+/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
+Before:
+    public static bool reconnect = false;
+    
+
+    private void changelevel(object sender, TextChangedEventArgs e)
+After:
+    public static bool reconnect = false;
+
+
+    private void changelevel(object sender, TextChangedEventArgs e)
+*/
+    public static bool reconnect = false;
 
     private void changelevel(object sender, TextChangedEventArgs e)
     {
@@ -584,7 +685,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-        private void applyfriendship(object sender, TextChangedEventArgs e) 
+        private void applyfriendship(object sender, TextChangedEventArgs e)
     {
         if (!SkipTextChange)
         {
@@ -603,8 +704,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-   
-
     private void swapgender(object sender, EventArgs e)
     {
         if (!pk.PersonalInfo.Genderless)
@@ -620,9 +719,7 @@ public partial class MainPage : ContentPage
                 genderdisplay.Source = "gender_0.png";
             }
         }
-        
-
-    }   
+    }
 
     public async void legalize(object sender, EventArgs e)
     {
@@ -637,7 +734,7 @@ public partial class MainPage : ContentPage
             await DisplayAlert("error", j.Message, "ok");
         }
     }
-   
+
     private async void displaylegalitymessage(object sender, EventArgs e)
     {
         applymainpkinfo(pk);
@@ -647,7 +744,6 @@ public partial class MainPage : ContentPage
         var makelegal = await DisplayAlert("Legality Report", la.Report(), "legalize","ok");
         if (makelegal)
         {
-
             pk = await Task.Run(()=>sav.Legalize(pk));
             checklegality();
             applymainpkinfo(pk);
@@ -699,7 +795,6 @@ public partial class MainPage : ContentPage
                 fa.FormArgument = formargu;
             }
         }
-        
     }
 
     private void applyisegg(object sender, CheckedChangedEventArgs e)
@@ -712,7 +807,7 @@ public partial class MainPage : ContentPage
             eggsprite.IsVisible= true;
             FriendshipLabel.Text = "Hatch Counter:";
             pk.CurrentFriendship = EggStateLegality.GetMinimumEggHatchCycles(pk);
-            
+
             pk.SetNickname(SpeciesName.GetEggName(pk.Language, pk.Format));
             if (pk is PK9)
                 pk.Version = 0;
@@ -775,10 +870,7 @@ public partial class MainPage : ContentPage
     private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         SfComboBox box = (SfComboBox)sender;
-        if (box.IsDropDownOpen)
-            box.TextColor = Colors.Black;
-        else
-            box.TextColor = Colors.White;
+        box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
     }
 
     public async void ImportShowdown(object sender, EventArgs e)
@@ -819,11 +911,15 @@ public partial class MainPage : ContentPage
             var latestVersion = ParseVersion(await GetLatestVersion());
 
             if (latestVersion[0] > currentVersion[0])
+            {
                 return true;
+            }
             else if (latestVersion[0] == currentVersion[0])
             {
                 if (latestVersion[1] > currentVersion[1])
+                {
                     return true;
+                }
                 else if (latestVersion[1] == currentVersion[1])
                 {
                     if (latestVersion[2] > currentVersion[2])
@@ -832,7 +928,7 @@ public partial class MainPage : ContentPage
             }
             return false;
         }
-        catch { return false; };
+        catch { return false; }
     }
     private static async Task<string> GetLatestVersion()
     {
@@ -888,8 +984,5 @@ public partial class MainPage : ContentPage
     {
         e.Data.Properties.Add("PKM", pk);
         Shell.Current.GoToAsync("//BoxShell/boxtab/BoxPage");
-        
     }
 }
-
-

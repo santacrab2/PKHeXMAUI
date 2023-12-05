@@ -7,7 +7,6 @@ using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
 
-
 public partial class AttacksTab : ContentPage
 {
     public bool SkipEvent = false;
@@ -24,14 +23,13 @@ public partial class AttacksTab : ContentPage
             applyattackinfo(pk);
         ICommand refreshCommand = new Command(async () =>
         {
-
             await applyattackinfo(pk);
             AttackRefresh.IsRefreshing = false;
         });
         AttackRefresh.Command = refreshCommand;
         FirstLoad = false;
     }
-    public static List<ComboItem> movlist = new();
+    public static List<ComboItem> movlist = [];
     public async Task applyattackinfo(PKM pkm)
     {
         SkipEvent = true;
@@ -42,17 +40,16 @@ public partial class AttacksTab : ContentPage
             itemsprite.IsVisible = true;
         }
         else
+        {
             itemsprite.IsVisible = false;
-        if (pkm.IsShiny)
-            shinysparklessprite.IsVisible = true;
-        else
-            shinysparklessprite.IsVisible = false;
-        if (pkm.Species == 0)
-            spriteurl = $"a_egg.png";
-        else
-            spriteurl = $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        }
+
+        shinysparklessprite.IsVisible = pkm.IsShiny;
+        spriteurl = pkm.Species == 0
+            ? "a_egg.png"
+            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         attackpic.Source = spriteurl;
-        movlist = new();
+        movlist = [];
         foreach (var mov in datasourcefiltered.Moves)
         {
             LegalMoveInfo p = new();
@@ -180,7 +177,6 @@ public partial class AttacksTab : ContentPage
         pk.SetMoves(m);
         pk.HealPP();
         await applyattackinfo(pk);
-        
     }
 
     private void applymove1ppups(object sender, EventArgs e)
@@ -232,22 +228,18 @@ public partial class AttacksTab : ContentPage
 
     private void applyPP1(object sender, TextChangedEventArgs e)
     {
-
         pk.Move1_PP = int.Parse(move1pp.Text);
     }
     private void applyPP2(object sender, TextChangedEventArgs e)
     {
-
         pk.Move2_PP = int.Parse(move2pp.Text);
     }
     private void applyPP3(object sender, TextChangedEventArgs e)
     {
-
         pk.Move3_PP = int.Parse(move3pp.Text);
     }
     private void applyPP4(object sender, TextChangedEventArgs e)
     {
-
         pk.Move4_PP = int.Parse(move4pp.Text);
     }
 

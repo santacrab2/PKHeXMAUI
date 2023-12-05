@@ -23,8 +23,6 @@ public partial class BatchEditor : ContentPage
 		BatchProperty.SelectedIndex = 0;
 		BatchEditType.ItemsSource = new object[] { "Set", "==", "!=", ">", ">=", "<", "<=" };
 		BatchEditType.SelectedIndex = 0;
-
-
     }
 
     private void AddButton_Clicked(object sender, EventArgs e)
@@ -82,7 +80,6 @@ public partial class BatchEditor : ContentPage
         BatchProperty.ItemsSource = BatchEditing.Properties[format];
         skipchange = false;
         BatchProperty.SelectedIndex = 0;
-
     }
 
     private void CloseButtonClicked(object sender, EventArgs e)
@@ -92,10 +89,7 @@ public partial class BatchEditor : ContentPage
     private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         SfComboBox box = (SfComboBox)sender;
-        if (box.IsDropDownOpen)
-            box.TextColor = Colors.Black;
-        else
-            box.TextColor = Colors.White;
+        box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
     }
 
     private async void ApplyBatchChanges(object sender, EventArgs e)
@@ -161,8 +155,6 @@ public partial class BatchEditor : ContentPage
                 editor.AddSkipped();
             else
                 editor.Process(pk, Filters, Instructions);
-
-           
         }
     }
 }

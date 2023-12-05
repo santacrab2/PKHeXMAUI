@@ -4,11 +4,10 @@ namespace PKHeXMAUI;
 
 public partial class MoveShopEditor : ContentPage
 {
-	
 	public MoveShopEditor()
 	{
 		InitializeComponent();
-		MoveShopList = new();
+		MoveShopList = [];
 		moveshopcollection.ItemTemplate = new DataTemplate(() =>
 		{
 			Grid grid = new() { Padding = 10 };
@@ -37,25 +36,21 @@ public partial class MoveShopEditor : ContentPage
 			var indexes = Shop.Permit.RecordPermitIndexes;
 			for (int i = 0; i < indexes.Length; i++)
 			{
-				
 				var name = names[indexes[i]];
 				var item = new MoveShopItem(name, i, Shop);
 				MoveShopList.Add(item);
-				
             }
 		}
 		moveshopcollection.ItemsSource = MoveShopList;
-
     }
 
-	public static List<MoveShopItem> MoveShopList = new();
+	public static List<MoveShopItem> MoveShopList = [];
 
     private void GiveAllMoveShop(object sender, EventArgs e)
     {
 		if(pk is IMoveShop8Mastery master)
 		{
 			master.SetMoveShopFlags(pk);
-			
 		}
 		Navigation.PopModalAsync();
     }
@@ -89,20 +84,11 @@ public partial class MoveShopEditor : ContentPage
     }
 }
 
-public class MoveShopItem
+public class MoveShopItem(string Name, int Index, IMoveShop8Mastery master)
 {
-	public MoveShopItem(string Name,int Index, IMoveShop8Mastery master)
-	{
-		index = $"{Index + 1:00}";
-		name = Name;
-		purchased = master.GetPurchasedRecordFlag(Index);
-		mastered = master.GetMasteredRecordFlag(Index);
+    public string index { get; set; } = $"{Index + 1:00}";
+    public string name { get; set; } = Name;
 
-    }
-
-	public string index { get; set; }
-	public string name { get; set; }
-
-	public bool purchased { get; set; }
-	public bool mastered { get; set; }
+    public bool purchased { get; set; } = master.GetPurchasedRecordFlag(Index);
+    public bool mastered { get; set; } = master.GetMasteredRecordFlag(Index);
 }

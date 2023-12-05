@@ -8,7 +8,7 @@ namespace PKHeXMAUI;
 
 public partial class SearchSettings : ContentPage
 {
-    public static ComboItem Any = new ComboItem("Any", 0);
+    public static ComboItem Any = new("Any", 0);
     public SearchSettings()
 	{
 		InitializeComponent();
@@ -26,31 +26,25 @@ public partial class SearchSettings : ContentPage
         EncVersion.ItemsSource = EncVersionList;
         if(encSettings != null)
         {
-            EncSpecies.SelectedItem = datasourcefiltered.Species.Where(z => (ushort)z.Value == encSettings.Species).First();
+            EncSpecies.SelectedItem = datasourcefiltered.Species.First(z => (ushort)z.Value == encSettings.Species);
             if (encSettings.Moves.Count >0)
-                EncMove1.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[0]).First();
+                EncMove1.SelectedItem = EncMoveList.First(z => z.Value == encSettings.Moves[0]);
             if (encSettings.Moves.Count >1)
-                EncMove2.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[1]).First();
+                EncMove2.SelectedItem = EncMoveList.First(z => z.Value == encSettings.Moves[1]);
             if (encSettings.Moves.Count>2)
-                EncMove3.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[2]).First();
+                EncMove3.SelectedItem = EncMoveList.First(z => z.Value == encSettings.Moves[2]);
             if (encSettings.Moves.Count>3)
-                EncMove4.SelectedItem = EncMoveList.Where(z => z.Value == encSettings.Moves[3]).First();
-            
-            EncVersion.SelectedItem = EncVersionList.Where(z=>z.Value == encSettings.Version).First();
+                EncMove4.SelectedItem = EncMoveList.First(z => z.Value == encSettings.Moves[3]);
+
+            EncVersion.SelectedItem = EncVersionList.First(z=>z.Value == encSettings.Version);
             ShinyCheck.IsChecked = (bool)encSettings.SearchShiny;
             EggCheck.IsChecked = (bool)encSettings.SearchEgg;
         }
-
     }
-
-
 
     private void ChangeFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-		if (EncSpecies.IsDropDownOpen)
-			EncSpecies.TextColor = Colors.Black;
-		else
-			EncSpecies.TextColor = Colors.White;
+		EncSpecies.TextColor = EncSpecies.IsDropDownOpen ? Colors.Black : Colors.White;
     }
 
     private void CloseSearchSettings(object sender, EventArgs e)
@@ -60,8 +54,8 @@ public partial class SearchSettings : ContentPage
 
     private void SaveSearchSettings(object sender, EventArgs e)
     {
-        encSettings = new() 
-        { 
+        encSettings = new()
+        {
             Species = (ushort)((ComboItem)EncSpecies.SelectedItem).Value,
             Format = sav.Generation,
             Generation = sav.Generation,

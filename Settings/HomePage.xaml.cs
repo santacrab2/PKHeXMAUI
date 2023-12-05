@@ -10,25 +10,22 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
         Permissions.RequestAsync<Permissions.StorageWrite>();
-        var noSelectVersions = new[] { GameVersion.GO, (GameVersion)0 };
+        var noSelectVersions = new[] { GameVersion.GO, GameVersion.Any };
         SaveVersionPicker.ItemsSource = GameInfo.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
         SaveVersionPicker.ItemDisplayBinding = new Binding("Text");
         SkipRefresh = true;
-        SaveVersionPicker.SelectedItem = GameInfo.VersionDataSource.Where(z =>(GameVersion) z.Value == MainPage.sav.Version).FirstOrDefault();
+        SaveVersionPicker.SelectedItem = GameInfo.VersionDataSource.FirstOrDefault(z =>(GameVersion) z.Value == MainPage.sav.Version);
         SkipRefresh = false;
-
     }
-
 
     private async void opensavefile(object sender, EventArgs e)
     {
         var savefile = await FilePicker.PickAsync();
-        
+
         var savefilebytes = File.ReadAllBytes(savefile.FullPath);
         var savefileobj = (SaveFile)FileUtil.GetSupportedFile(savefilebytes, "");
         savefileobj.Metadata.SetExtraInfo(savefile.FullPath);
         App.Current.MainPage = new AppShell(savefileobj);
-        
     }
 
     private void applynewsave(object sender, EventArgs e)
@@ -38,7 +35,7 @@ public partial class HomePage : ContentPage
             var selected = (ComboItem)SaveVersionPicker.SelectedItem;
             Preferences.Set("SaveFile", selected.Value);
             var blanksav = SaveUtil.GetBlankSAV((GameVersion)selected.Value, "PKHeX");
-           
+
             App.Current.MainPage = new AppShell(blanksav);
         }
     }
@@ -50,22 +47,17 @@ public partial class HomePage : ContentPage
 
     private async void ExportSave(object sender, EventArgs e)
     {
-     
-
-      
         // Set box now that we're saving
         if (sav.HasBox)
             sav.CurrentBox = BoxTab.CurrentBox;
 
-
 #if ANDROID
-        
+
         string path = "";
         if (OperatingSystem.IsAndroidVersionAtLeast(30))
         {
             try
             {
- 
                 path = "/storage/emulated/0/Documents/";
                 var ext = sav.Metadata.GetSuggestedExtension();
                 var flags = sav.Metadata.GetSuggestedFlags(ext);
@@ -81,7 +73,6 @@ public partial class HomePage : ContentPage
                 await File.WriteAllBytesAsync($"{path}/ChangeMe", sav.Write(flags));
                 sav.State.Edited = false;
             }
-            
         }
         else
         {
@@ -126,9 +117,6 @@ public partial class HomePage : ContentPage
         }
         await DisplayAlert("Saved",$"Save File has been saved to {path}", "ok");
 
-
-       
-           
 #endif
     }
 }

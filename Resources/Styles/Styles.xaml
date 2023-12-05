@@ -393,10 +393,18 @@
         
         
     </Style>
-    <Style TargetType="Label"
-       Class="FlyoutItemLabelStyle">
-        <Setter Property="TextColor"
-            Value="White" />
+    <Style TargetType="Label" Class="FlyoutItemLabelStyle">
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
         
     </Style>
     <Style TargetType="NavigationPage">

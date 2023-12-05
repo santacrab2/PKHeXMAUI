@@ -16,14 +16,14 @@ public partial class PartyTab : ContentPage
 		InitializeComponent();
         PartyView.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new Grid { Padding = 10 };
+            Grid grid = new() { Padding = 10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
-         
-            Image image = new Image() { HeightRequest = 75, WidthRequest = 75 };
+
+            Image image = new() { HeightRequest = 75, WidthRequest = 75 };
             image.SetBinding(Image.SourceProperty, "url");
-            Image shiny = new Image() { Source = "rare_icon.png", HeightRequest = 16, WidthRequest = 16, VerticalOptions = LayoutOptions.Start };
+            Image shiny = new() { Source = "rare_icon.png", HeightRequest = 16, WidthRequest = 16, VerticalOptions = LayoutOptions.Start };
             shiny.SetBinding(Image.IsVisibleProperty, "shiny");
             shiny.TranslateTo(shiny.TranslationX + 15, TranslationY);
             grid.Add(image);
@@ -49,10 +49,9 @@ public partial class PartyTab : ContentPage
             return swipe;
         });
         PartyView.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
-     
+
         ICommand refreshCommand = new Command(async() =>
         {
-
             PartyView.ItemsSource = await fillParty();
             PartyView.ScrollTo(0);
             PartyRefresh.IsRefreshing = false;
@@ -64,25 +63,21 @@ public partial class PartyTab : ContentPage
     {
         boxsprite b = (boxsprite)PartyView.SelectedItem;
         pk = b.pkm;
-
     }
     private async void inject(object sender, EventArgs e)
     {
         sav.SetPartySlotAtIndex(pk, PartySprites.IndexOf((boxsprite)PartyView.SelectedItem));
-        
     }
-    public static List<boxsprite> PartySprites = new List<boxsprite>();
+    public static List<boxsprite> PartySprites = [];
     public async Task<List<boxsprite>> fillParty()
     {
-
-        PartySprites = new List<boxsprite>();
+        PartySprites = [];
 
         foreach(var ppk in sav.PartyData)
         {
             PartySprites.Add(new boxsprite(ppk,0));
         }
-        
-        return PartySprites;
 
+        return PartySprites;
     }
 }

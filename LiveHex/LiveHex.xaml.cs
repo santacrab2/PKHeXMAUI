@@ -14,7 +14,7 @@ public partial class LiveHex : ContentPage
 		Port.Text = sav.Generation > 7 ? "6000" : "8000";
 		var validvers = RamOffsets.GetValidVersions(sav);
         ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
-		Remote = new PokeSysBotMini(validvers[validvers.Length-1], com, false);
+		Remote = new PokeSysBotMini(validvers[^1], com, false);
         var ip = Preferences.Default.Get("IP", "192.168.1.1");
         SkipTextChanges = true;
         IP.Text = ip;
@@ -22,10 +22,9 @@ public partial class LiveHex : ContentPage
         CB_ReadChangeBox.IsChecked = ReadonChangeBox;
         SkipTextChanges = false;
     }
-	
+
     private async void botbaseconnect(object sender, EventArgs e)
     {
-
         IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
 		if (!profiles.Contains(ConnectionProfile.WiFi))
 		{
@@ -45,7 +44,6 @@ public partial class LiveHex : ContentPage
         connect.Text = "Disconnect";
     }
 
- 
     private void SaveUserIP(object sender, TextChangedEventArgs e)
     {
         if (!SkipTextChanges && IP.Text.Length > 0)
@@ -100,7 +98,6 @@ public partial class LiveHex : ContentPage
                     return;
                 }
 
-
                 ulong address = GetPointerAddress(sb);
                 if (address == 0)
                 {
@@ -127,7 +124,7 @@ public partial class LiveHex : ContentPage
                 }
                 try
                 {
-                    var method = RWMethod.Heap;
+                    const RWMethod method = RWMethod.Heap;
 
                     var result = ReadOffset(off, method);
                     if (!result)
@@ -135,14 +132,13 @@ public partial class LiveHex : ContentPage
                 }
                 catch (Exception ex)
                 {
-                    await DisplayAlert("Error", $"Unable to load data from the specified offset. {ex.Message}", "cancel"); ;
+                    await DisplayAlert("Error", $"Unable to load data from the specified offset. {ex.Message}", "cancel"); 
                 }
             }
         }
     }
     public bool ReadOffset(ulong offset, RWMethod method = RWMethod.Heap)
     {
-        
         var data = ReadData(offset, method);
         var pkm = sav.GetDecryptedPKM(data);
 
@@ -188,7 +184,6 @@ public partial class LiveHex : ContentPage
             var data = Remote.ReadBox(box, len).AsSpan();
             sav.SetBoxBinary(data, box);
         }
-        
     }
 
     private void B_WriteCurrentBox_Click(object sender, EventArgs e)
@@ -207,5 +202,4 @@ public partial class LiveHex : ContentPage
         var address = Remote.GetCachedPointer(sb, ptr, false);
         return address;
     }
-
 }

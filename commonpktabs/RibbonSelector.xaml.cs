@@ -10,22 +10,21 @@ public partial class RibbonSelector : ContentPage
     public static bool ApplicatorMode = false;
     public RibbonSelector()
     {
-        
         InitializeComponent();
         if (ApplicatorMode)
             applyribbons.IsVisible = false;
 
         ribboncollection.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new Grid { Padding = 10 };
+            Grid grid = new() { Padding = 10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 350 });
-            Label ribbonname = new Label() { HorizontalTextAlignment = TextAlignment.End };
+            Label ribbonname = new() { HorizontalTextAlignment = TextAlignment.End };
             ribbonname.SetBinding(Label.TextProperty, "Name");
             grid.Add(ribbonname);
-            Image allthetests = new Image() { HeightRequest = 50, WidthRequest = 50, HorizontalOptions = LayoutOptions.Start, Margin = new Thickness(50, 0, 0, 0) };
+            Image allthetests = new() { HeightRequest = 50, WidthRequest = 50, HorizontalOptions = LayoutOptions.Start, Margin = new Thickness(50, 0, 0, 0) };
             allthetests.SetBinding(Image.SourceProperty, "spritename");
-            Image AffixedSprite = new Image() { HeightRequest = 16, WidthRequest = 16, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.End, Margin = new Thickness(50, 0, 0, 0), Source = "valid.png" };
+            Image AffixedSprite = new() { HeightRequest = 16, WidthRequest = 16, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.End, Margin = new Thickness(50, 0, 0, 0), Source = "valid.png" };
             AffixedSprite.SetBinding(Image.IsVisibleProperty, "affixed");
             grid.Add(allthetests);
             grid.Add(AffixedSprite);
@@ -41,12 +40,11 @@ public partial class RibbonSelector : ContentPage
                 Swipe.LeftItems.Add(affix);
             Swipe.Content = grid;
             return Swipe;
-            
         });
         var clone = pk.Clone();
         RibbonApplicator.SetAllValidRibbons(clone);
         var ribbs = RibbonInfo.GetRibbonInfo(clone);
-        List<Ribbonstuff> idk = new();
+        List<Ribbonstuff> idk = [];
         foreach(var fg in ribbs)
         {
             if(fg.HasRibbon)
@@ -80,15 +78,13 @@ public partial class RibbonSelector : ContentPage
             ribboncollection.SelectionMode = SelectionMode.Single;
             ribboncollection.ItemsSource = selectedribbonslist;
         }
-        
-        
     }
     public void Refresh()
     {
         var clone = pk.Clone();
         RibbonApplicator.SetAllValidRibbons(clone);
         var ribbs = RibbonInfo.GetRibbonInfo(clone);
-        List<Ribbonstuff> idk = new();
+        List<Ribbonstuff> idk = [];
         foreach (var fg in ribbs)
         {
             if (fg.HasRibbon)
@@ -130,12 +126,8 @@ public partial class RibbonSelector : ContentPage
             return;
         if(pk is IRibbonSetAffixed a)
         {
-            
             var ribbon = (Ribbonstuff)ribboncollection.SelectedItem;
-            if (a.AffixedRibbon == -1)
-                a.AffixedRibbon = (sbyte)ribbon.index;
-            else
-                a.AffixedRibbon = -1;
+            a.AffixedRibbon = a.AffixedRibbon == -1 ? (sbyte)ribbon.index : (sbyte)-1;
         }
         Refresh();
     }
@@ -145,8 +137,6 @@ public partial class RibbonSelector : ContentPage
         {
             if (pk is IRibbonIndex ri)
                 ri.SetRibbon(c, false);
-                
-
         }
 
         foreach (var ribs in ribboncollection.SelectedItems)
@@ -162,7 +152,6 @@ public partial class RibbonSelector : ContentPage
                         ri.SetRibbon(c);
                     }
                 }
-            
             }
         }
         Navigation.PopModalAsync();
@@ -172,8 +161,6 @@ public partial class RibbonSelector : ContentPage
     {
         Navigation.PopModalAsync();
     }
-
- 
 }
 
 public class Ribbonstuff
@@ -188,7 +175,7 @@ public class Ribbonstuff
                 index = c;
             }
         }
-       
+
         if(pk is IRibbonSetAffixed af)
         {
             affixed = af.AffixedRibbon == index;
