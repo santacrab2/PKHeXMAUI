@@ -40,6 +40,11 @@ public partial class LiveHex : ContentPage
         Remote.com.IP = IP.Text;
 		Remote.com.Port = int.Parse(Port.Text);
 		Remote.com.Connect();
+        var nx = (ICommunicatorNX)Remote.com;
+        var titleid = nx.GetTitleID();
+        var gameVer = nx.GetGameInfo("version").Trim();
+        var lv = InjectionBase.GetVersionFromTitle(titleid, gameVer);
+        Remote = new PokeSysBotMini(lv, Remote.com, false);
         Reconnect = true;
         connect.Text = "Disconnect";
     }
