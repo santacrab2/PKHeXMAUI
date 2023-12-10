@@ -5,9 +5,8 @@
              Title="Save Settings">
     <VerticalStackLayout>
         <Picker x:Name="SaveVersionPicker" Title="Current Save" SelectedIndexChanged="applynewsave"></Picker>
-      
+
         <Button x:Name="savefileloader" Text="Open Save" Clicked="opensavefile"></Button>
-        <Button Text="Inventory Editor" Clicked="OpenItems"/>
         <Button Text="Export Save" Clicked="ExportSave"/>
     </VerticalStackLayout>
 </ContentPage>

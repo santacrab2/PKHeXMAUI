@@ -4,6 +4,7 @@ using PKHeX.Core;
 using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
 using System.Windows.Input;
+using PKHeX.Core.Injection;
 
 namespace PKHeXMAUI;
 
@@ -17,8 +18,28 @@ public partial class Items : TabbedPage
     public static int currentcount = 995;
     public Items()
 	{
+        
         InitializeComponent();
-
+        if (Remote.Connected)
+        {
+            var success = Remote.Injector.ReadBlockFromString(Remote, sav, "Items", out var data);
+            if(success)
+            {
+                switch (sav)
+                {
+                    case SAV9SV s: data.ToArray()[0].CopyTo(s.Items.Data, 0); break;
+                    case SAV8LA la: data.ToArray()[0].CopyTo(la.Items.Data, 0); break;
+                    case SAV8BS bs: data.ToArray()[0].CopyTo(bs.Items.Data, 0); break;
+                    case SAV8SWSH sw: data.ToArray()[0].CopyTo(sw.Items.Data, 0); break;
+                    case SAV7 s7: data.ToArray()[0].CopyTo(s7.Items.Data, 0); break;
+                    case SAV6 s6: data.ToArray()[0].CopyTo(s6.Items.Data, 0); break;
+                }
+            }
+            else
+            {
+                DisplayAlert("Error", "No Data Found, I guess", "okay...");
+            }
+        }
         SAV = (Origin = sav).Clone();
         pouches = sav.Inventory;
 

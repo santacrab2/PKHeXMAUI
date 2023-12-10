@@ -212,6 +212,9 @@
 	  <Compile Update="pktabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SaveEditors\Save Editors.xaml.cs">
+	    <DependentUpon>Save Editors.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Settings\LegalitySettings.xaml.cs">
 	    <DependentUpon>LegalitySettings.xaml</DependentUpon>
 	  </Compile>
@@ -264,6 +267,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="pktabs\StatsTab.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Save Editors.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Settings\LegalitySettings.xaml">

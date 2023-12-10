@@ -43,12 +43,6 @@ public partial class HomePage : ContentPage
             App.Current.MainPage = new AppShell(blanksav);
         }
     }
-
-    private void OpenItems(object sender, EventArgs e)
-    {
-        Navigation.PushModalAsync(new Items());
-    }
-
     private async void ExportSave(object sender, EventArgs e)
     {
         // Set box now that we're saving

@@ -102,6 +102,7 @@
         <Tab Icon="language.png" Title="LiveHex">
             <ShellContent Title="LiveHex" ContentTemplate="{DataTemplate local:LiveHex}"/>
         </Tab>
+        <ShellContent Title="Save Editors" ContentTemplate="{DataTemplate local:SaveEditors}"/>
     </FlyoutItem>
    
 </Shell>
