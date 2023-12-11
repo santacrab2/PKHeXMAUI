@@ -213,7 +213,17 @@ public partial class Items : TabbedPage
         }
         SAV.Inventory = pouches;
         Origin.CopyChangesFrom(SAV);
-
+        if (Remote.Connected)
+        {
+            if(Remote.Injector is LPBDSP)
+            {
+                Remote.Injector.WriteBlockFromString(Remote, "Items", ((SAV8BS)Origin).Items.Data, ((SAV8BS)Origin).Items);
+            }
+            else
+            {
+                Remote.Injector.WriteBlocksFromSAV(Remote, "Items", Origin);
+            }
+        }
         await Navigation.PopModalAsync();
     }
     private async Task setbag(InventoryPouch pouch,int sourceindex)
