@@ -18,7 +18,6 @@ public partial class Items : TabbedPage
     public static int currentcount = 995;
     public Items()
 	{
-        
         InitializeComponent();
         if (Remote.Connected)
         {
@@ -217,11 +216,19 @@ public partial class Items : TabbedPage
         {
             if(Remote.Injector is LPBDSP)
             {
-                Remote.Injector.WriteBlockFromString(Remote, "Items", ((SAV8BS)Origin).Items.Data, ((SAV8BS)Origin).Items);
+                try
+                {
+                    Remote.Injector.WriteBlockFromString(Remote, "Items", ((SAV8BS)Origin).Items.Data, ((SAV8BS)Origin).Items);
+                }
+                catch (Exception) { }
             }
             else
             {
-                Remote.Injector.WriteBlocksFromSAV(Remote, "Items", Origin);
+                try
+                {
+                    Remote.Injector.WriteBlocksFromSAV(Remote, "Items", Origin);
+                }
+                catch (Exception) { }
             }
         }
         await Navigation.PopModalAsync();
