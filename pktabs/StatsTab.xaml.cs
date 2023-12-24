@@ -17,8 +17,12 @@ public partial class StatsTab : ContentPage
 	public StatsTab()
 	{
 		InitializeComponent();
-        Teratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
-        MainTeratypepicker.ItemsSource = Enum.GetValues(typeof(MoveType));
+        foreach (var ty in Enum.GetNames(typeof(MoveType)))
+            Teratypepicker.Items.Add(ty);
+        Teratypepicker.Items.Add("Stellar");
+        foreach (var typ in Enum.GetNames(typeof(MoveType)))
+            MainTeratypepicker.Items.Add(typ);
+        MainTeratypepicker.Items.Add("Stellar");
         HiddenPowerPicker.ItemsSource = Enum.GetValues(typeof(MoveType));
         ICommand refreshCommand = new Command(async () =>
         {
@@ -507,7 +511,14 @@ public partial class StatsTab : ContentPage
             }
             else
             {
-                pk9.TeraTypeOverride = (MoveType)Teratypepicker.SelectedIndex;
+                if (Teratypepicker.SelectedIndex == 19)
+                {
+                    pk9.TeraTypeOverride = (MoveType)99;
+                }
+                else
+                {
+                    pk9.TeraTypeOverride = (MoveType)Teratypepicker.SelectedIndex;
+                }
                 if (moveonce)
                 {
                     teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
@@ -522,7 +533,14 @@ public partial class StatsTab : ContentPage
     {
         if (pk is ITeraType pk9 && !SkipEvent)
         {
-            pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
+            if (MainTeratypepicker.SelectedIndex == 19)
+            {
+                pk9.TeraTypeOriginal = (MoveType)99;
+            }
+            else
+            {
+                pk9.TeraTypeOriginal = (MoveType)MainTeratypepicker.SelectedIndex;
+            }
             teratypeimage.Source = $"gem_{(int)pk9.TeraType:00}";
         }
     }

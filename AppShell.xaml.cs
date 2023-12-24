@@ -65,6 +65,11 @@ public partial class AppShell : Shell
             SortBoxesAdvancedClicked(sender, e);
             ModifyExpanded = true;
             ModifyBoxesClicked(sender, e);
+            try
+            {
+                ((BoxTab)TheShell.CurrentPage).boxview.SelectedItem = null;
+            }
+            catch(Exception) { }
         }
         if (TheShell.CurrentPage.GetType() == typeof(MainPage))
         {

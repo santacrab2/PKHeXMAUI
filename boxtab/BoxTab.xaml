@@ -25,7 +25,7 @@
                     <Image Source="delete.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="2" IsVisible="False" x:Name="deleter"/>
                     <Label Text="Delete" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_delete" IsVisible="false"/>
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"></Image>
-                    <CollectionView HeightRequest="375" x:Name="boxview" SelectionMode="Single" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ></CollectionView>
+                    <CollectionView HeightRequest="375" x:Name="boxview" x:FieldModifier="public" SelectionMode="Single" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ></CollectionView>
                 </Grid>
                 <Button x:Name="livingdexbutton" Text="Generate Living Dex" Clicked="Generateliving"/>
                 <Button x:Name="BatchEditorOpenButton" Text="Batch Editor" Clicked="openBatchEditor"/>

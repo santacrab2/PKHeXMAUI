@@ -47,7 +47,7 @@ public partial class MainPage : ContentPage
         naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
         statnaturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
         helditempicker.ItemsSource = datasourcefiltered.Items;
-        helditempicker.DisplayMemberPath= "Text";
+        helditempicker.DisplayMemberPath = "Text";
         if (datasourcefiltered.Items.Count > 0)
         {
             helditempicker.IsVisible = true;
@@ -197,40 +197,7 @@ public partial class MainPage : ContentPage
             var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
             if (result.IsSuccess() || PSettings.AllowIncompatibleConversion)
             {
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
-Before:
                 sav.AdaptPKM(newpkm);
-                
-                applymainpkinfo(newpkm);
-After:
-                sav.AdaptPKM(newpkm);
-
-                applymainpkinfo(newpkm);
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
-Before:
-                sav.AdaptPKM(newpkm);
-                
-                applymainpkinfo(newpkm);
-After:
-                sav.AdaptPKM(newpkm);
-
-                applymainpkinfo(newpkm);
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
-Before:
-                sav.AdaptPKM(newpkm);
-                
-                applymainpkinfo(newpkm);
-After:
-                sav.AdaptPKM(newpkm);
-
-                applymainpkinfo(newpkm);
-*/
-                sav.AdaptPKM(newpkm);
-
                 applymainpkinfo(newpkm);
                 checklegality();
                 pk = newpkm;
@@ -280,7 +247,7 @@ After:
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
 
         genderdisplay.Source = $"gender_{pkm.Gender}.png";
-        helditempicker.SelectedItem = datasourcefiltered.Items.FirstOrDefault(z=>z.Text== (GameInfo.Strings.Item[pkm.HeldItem]));
+        helditempicker.SelectedItem = datasourcefiltered.Items.FirstOrDefault(z=>z.Value == pkm.HeldItem);
         if (pkm.HeldItem > 0)
         {
             itemsprite.IsVisible = true;
@@ -293,8 +260,8 @@ After:
                 }
                 else
                 {
-                    itemspriteurl = $"aitem_{pkm.HeldItem}.png";
-                    itemsprite.Source = $"aitem_{pkm.HeldItem}.png";
+                    itemspriteurl = $"aitem_{pkm.SpriteItem}.png";
+                    itemsprite.Source = $"aitem_{pkm.SpriteItem}.png";
                 }
             }
             else
@@ -306,8 +273,8 @@ After:
                 }
                 else
                 {
-                    itemspriteurl = $"bitem_{pkm.HeldItem}.png";
-                    itemsprite.Source = $"bitem_{pkm.HeldItem}.png";
+                    itemspriteurl = $"bitem_{pkm.SpriteItem}.png";
+                    itemsprite.Source = $"bitem_{pkm.SpriteItem}.png";
                 }
             }
         }
@@ -406,39 +373,6 @@ After:
             pk.Language = sav.Language;
             formargstepper.IsVisible = false;
             formlabel.IsVisible = false;
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
-Before:
-            formpicker.IsVisible = false;
-            
-            pk.Species = (ushort)test.Value;
-After:
-            formpicker.IsVisible = false;
-
-            pk.Species = (ushort)test.Value;
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
-Before:
-            formpicker.IsVisible = false;
-            
-            pk.Species = (ushort)test.Value;
-After:
-            formpicker.IsVisible = false;
-
-            pk.Species = (ushort)test.Value;
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
-Before:
-            formpicker.IsVisible = false;
-            
-            pk.Species = (ushort)test.Value;
-After:
-            formpicker.IsVisible = false;
-
-            pk.Species = (ushort)test.Value;
-*/
             formpicker.IsVisible = false;
 
             pk.Species = (ushort)test.Value;
@@ -497,39 +431,6 @@ After:
     }
 
     private void rollpid(object sender, EventArgs e)
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
-Before:
-    { 
-        
-        pk.SetPIDGender(pk.Gender);
-After:
-    {
-
-        pk.SetPIDGender(pk.Gender);
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
-Before:
-    { 
-        
-        pk.SetPIDGender(pk.Gender);
-After:
-    {
-
-        pk.SetPIDGender(pk.Gender);
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
-Before:
-    { 
-        
-        pk.SetPIDGender(pk.Gender);
-After:
-    {
-
-        pk.SetPIDGender(pk.Gender);
-*/
     {
         pk.SetPIDGender(pk.Gender);
         pk.SetRandomEC();
@@ -616,13 +517,13 @@ After:
                 itemsprite.IsVisible = true;
                 if (sav is SAV9SV)
                 {
-                    itemspriteurl = $"aitem_{pk.HeldItem}.png";
-                    itemsprite.Source = $"aitem_{pk.HeldItem}.png";
+                    itemspriteurl = $"aitem_{pk.SpriteItem}.png";
+                    itemsprite.Source = $"aitem_{pk.SpriteItem}.png";
                 }
                 else
                 {
-                    itemspriteurl = $"bitem_{pk.HeldItem}.png";
-                    itemsprite.Source = $"bitem_{pk.HeldItem}.png";
+                    itemspriteurl = $"bitem_{pk.SpriteItem}.png";
+                    itemsprite.Source = $"bitem_{pk.SpriteItem}.png";
                 }
             }
 
@@ -642,44 +543,6 @@ After:
         }
     }
 
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-ios)'
-Before:
-    public static bool reconnect = false;
-    
-
-    private void changelevel(object sender, TextChangedEventArgs e)
-After:
-    public static bool reconnect = false;
-
-
-    private void changelevel(object sender, TextChangedEventArgs e)
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-maccatalyst)'
-Before:
-    public static bool reconnect = false;
-    
-
-    private void changelevel(object sender, TextChangedEventArgs e)
-After:
-    public static bool reconnect = false;
-
-
-    private void changelevel(object sender, TextChangedEventArgs e)
-*/
-
-/* Unmerged change from project 'PKHeX.MAUI (net8.0-windows10.0.19041.0)'
-Before:
-    public static bool reconnect = false;
-    
-
-    private void changelevel(object sender, TextChangedEventArgs e)
-After:
-    public static bool reconnect = false;
-
-
-    private void changelevel(object sender, TextChangedEventArgs e)
-*/
     public static bool reconnect = false;
 
     private void changelevel(object sender, TextChangedEventArgs e)

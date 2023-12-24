@@ -29,9 +29,7 @@ public partial class BoxTab : ContentPage
                 if (Remote.Connected && ReadonChangeBox)
                 {
                     var box = CurrentBox;
-                    var len =
-                           sav.BoxSlotCount
-                           * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
+                    var len = sav.BoxSlotCount * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
                     var data = Remote.ReadBox(box, len).AsSpan();
                     sav.SetBoxBinary(data, box);
                 }
@@ -151,12 +149,23 @@ public partial class BoxTab : ContentPage
         var toreplaceindex = boxsprites.IndexOf((boxsprite)toreplace);
         if (boxview.SelectedItem is not null)
         {
-            sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm, boxnum.SelectedIndex, toreplaceindex);
-            sav.SetBoxSlotAtIndex(((boxsprite)toreplace).pkm, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
-            if (Remote.Connected && InjectinSlot)
+            try
             {
-                Remote.SendSlot(((boxsprite)boxview.SelectedItem).pkm.EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
-                Remote.SendSlot(((boxsprite)toreplace).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                sav.SetBoxSlotAtIndex(((boxsprite)boxview.SelectedItem).pkm, boxnum.SelectedIndex, toreplaceindex);
+                sav.SetBoxSlotAtIndex(((boxsprite)toreplace).pkm, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                if (Remote.Connected && InjectinSlot)
+                {
+                    Remote.SendSlot(((boxsprite)boxview.SelectedItem).pkm.EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
+                    Remote.SendSlot(((boxsprite)toreplace).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                }
+            }
+            catch (Exception)
+            {
+                sav.SetBoxSlotAtIndex((PKM)e.Data.Properties["PKM"], boxnum.SelectedIndex, toreplaceindex);
+                if (Remote.Connected && InjectinSlot)
+                {
+                    Remote.SendSlot(((PKM)e.Data.Properties["PKM"]).EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
+                }
             }
         }
         else
@@ -329,11 +338,9 @@ public class boxsprite
         SlotNumber = slot.ToString();
         pkm = pk9;
         species = $"{(Species)pk9.Species}";
-        url = pk9.Species == 0
-            ? ""
-            : $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        url = pk9.Species == 0 ? "" : $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         shiny = (pk9.IsShiny && pk9.Species != 0);
-        ItemResource = sav is SAV9SV ? $"aitem_{pkm.HeldItem}.png" : $"bitem_{pkm.HeldItem}.png";
+        ItemResource = sav is SAV9SV ? $"aitem_{pkm.SpriteItem}.png" : $"bitem_{pkm.SpriteItem}.png";
         legal = !new LegalityAnalysis(pk9).Valid;
         if (pk9.Species == 0)
             legal = false;
