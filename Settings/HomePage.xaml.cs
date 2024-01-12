@@ -48,89 +48,13 @@ public partial class HomePage : ContentPage
         // Set box now that we're saving
         if (sav.HasBox)
             sav.CurrentBox = BoxTab.CurrentBox;
-
-#if ANDROID
-
-        string path = "";
-        if (OperatingSystem.IsAndroidVersionAtLeast(30))
-        {
-            try
-            {
-                path = "/storage/emulated/0/Documents/";
-                var ext = sav.Metadata.GetSuggestedExtension();
-                var flags = sav.Metadata.GetSuggestedFlags(ext);
-                await File.WriteAllBytesAsync($"{path}/{sav.Metadata.FileName}", sav.Write(flags));
-                sav.State.Edited = false;
-                // sav.Metadata.SetExtraInfo($"{path}/{OpenPath}{ext}");
-            }
-            catch (Exception)
-            {
-                path = "/storage/emulated/0/Documents/";
-                var ext = sav.Metadata.GetSuggestedExtension();
-                var flags = sav.Metadata.GetSuggestedFlags(ext);
-                await File.WriteAllBytesAsync($"{path}/ChangeMe", sav.Write(flags));
-                sav.State.Edited = false;
-            }
-        }
-        else
-        {
-            if (OperatingSystem.IsAndroidVersionAtLeast(29))
-            {
-                try
-                {
-                    path = "/storage/emulated/0/Android/data/com.PKHeX.maui/";
-                    var ext = sav.Metadata.GetSuggestedExtension();
-                    var flags = sav.Metadata.GetSuggestedFlags(ext);
-                    await File.WriteAllBytesAsync($"{path}/{sav.Metadata.FileName}", sav.Write(flags));
-                    sav.State.Edited = false;
-                }
-                catch (Exception)
-                {
-                    path = "/storage/emulated/0/Android/data/com.PKHeX.maui/";
-                    var ext = sav.Metadata.GetSuggestedExtension();
-                    var flags = sav.Metadata.GetSuggestedFlags(ext);
-                    await File.WriteAllBytesAsync($"{path}/ChangeMe", sav.Write(flags));
-                    sav.State.Edited = false;
-                }
-            }
-            else
-            {
-                try
-                {
-                    path = "/storage/emulated/0/";
-                    var ext = sav.Metadata.GetSuggestedExtension();
-                    var flags = sav.Metadata.GetSuggestedFlags(ext);
-                    await File.WriteAllBytesAsync($"{path}/{sav.Metadata.FileName}", sav.Write(flags));
-                    sav.State.Edited = false;
-                }
-                catch (Exception)
-                {
-                    path = "/storage/emulated/0/";
-                    var ext = sav.Metadata.GetSuggestedExtension();
-                    var flags = sav.Metadata.GetSuggestedFlags(ext);
-                    await File.WriteAllBytesAsync($"{path}/ChangeMe", sav.Write(flags));
-                    sav.State.Edited = false;
-                }
-            }
-        }
-        await DisplayAlert("Saved", $"Save File has been saved to {path}", "ok");
-
-
-
-
-#else
-        CancellationTokenSource source = new();
-        CancellationToken token = source.Token;
-
         var ext = sav.Metadata.GetSuggestedExtension();
         var flags = sav.Metadata.GetSuggestedFlags(ext);
-
-        var result = await FolderPicker.PickAsync($"{sav.Metadata.FilePath}", token);
+        using var LiveStream = new MemoryStream(sav.Write(flags));
+        var result = await FileSaver.Default.SaveAsync(sav.Metadata.FileName, LiveStream, CancellationToken.None);
         if (result.IsSuccessful)
-        {
-            await File.WriteAllBytesAsync($"{result.Folder.Path}{Path.DirectorySeparatorChar}{sav.Metadata.FileName}", sav.Write(flags));
-            await DisplayAlert("Saved", $"Save file has been saved to {result.Folder.Path}", "ok");
-        }
-#endif
+            await DisplayAlert("Success", $"Save file was exported to {result.FilePath}", "cancel");
+        else
+            await DisplayAlert("Failure", $"Save file did not export due to {result.Exception.Message}", "cancel");
     }
 }

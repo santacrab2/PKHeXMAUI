@@ -332,9 +332,7 @@ public partial class MainPage : ContentPage
         using var CrossedStreams = new MemoryStream(pk.DecryptedPartyData);
         var result = await FileSaver.Default.SaveAsync(pk.FileName, CrossedStreams, CancellationToken.None);
         if (result.IsSuccessful)
-        {
             await DisplayAlert("Success", $"PK File saved at {result.FilePath}", "cancel");
-        }
         else
             await DisplayAlert("Failure", $"PK File did not save due to {result.Exception.Message}", "cancel");
     }
@@ -397,9 +395,7 @@ public partial class MainPage : ContentPage
                 }
             }
 
-            spriteurl = pk.Species == 0
-                ? "a_egg.png"
-                : $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
+            spriteurl = pk.Species == 0 ? "a_egg.png" : $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
             shinysparklessprite.IsVisible = pk.IsShiny;
 
             pic.Source = spriteurl;
@@ -471,11 +467,8 @@ public partial class MainPage : ContentPage
         {
             pk.Form = (byte)(formpicker.SelectedIndex >= 0 ? formpicker.SelectedIndex : pk.Form);
 
-            spriteurl = pk.Species == 0
-                ? "a_egg.png"
-                : $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
+            spriteurl = pk.Species == 0 ? "a_egg.png" : $"a_{pk.Species}{((pk.Form > 0 && !NoFormSpriteSpecies.Contains(pk.Species)) ? $"_{pk.Form}" : "")}.png";
             shinysparklessprite.IsVisible = pk.IsShiny;
-
             pic.Source = spriteurl;
             checklegality();
         }
