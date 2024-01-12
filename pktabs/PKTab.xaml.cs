@@ -10,6 +10,8 @@ using PKHeX.Core.Injection;
 using System.Net.Http.Headers;
 
 using CommunityToolkit.Maui.Storage;
+using Android.Widget;
+using System.Threading;
 
 
 namespace PKHeXMAUI;
@@ -326,39 +328,15 @@ public partial class MainPage : ContentPage
     }
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
-#if ANDROID
         pk.ResetPartyStats();
-        string path = "";
-        if (OperatingSystem.IsAndroidVersionAtLeast(30))
-        {
-            await File.WriteAllBytesAsync($"/storage/emulated/0/Documents/{pk.FileName}", pk.DecryptedPartyData);
-            path = "/storage/emulated/0/Documents/";
-        }
-        else
-        {
-            if (OperatingSystem.IsAndroidVersionAtLeast(29))
-            {
-                await File.WriteAllBytesAsync($"/storage/emulated/0/Android/data/com.PKHeX.maui/{pk.FileName}", pk.DecryptedPartyData);
-                path="/storage/emulated/0/Android/data/com.PKHeX.maui/";
-            }
-            else
-            {
-                await File.WriteAllBytesAsync($"/storage/emulated/0/{pk.FileName}", pk.DecryptedPartyData);
-                path = "/storage/emulated/0/";
-            }
-        }
-        await DisplayAlert("Saved",$"{pk.Nickname} has been saved to {path}", "ok");
-#else
-        pk.ResetPartyStats();
-        CancellationTokenSource source = new();
-        CancellationToken token = source.Token;
-        var result = await FolderPicker.PickAsync(token);
+        using var CrossedStreams = new MemoryStream(pk.DecryptedPartyData);
+        var result = await FileSaver.Default.SaveAsync(pk.FileName, CrossedStreams, CancellationToken.None);
         if (result.IsSuccessful)
         {
-            await File.WriteAllBytesAsync($"{result.Folder.Path}{Path.DirectorySeparatorChar}{pk.FileName}", pk.DecryptedPartyData);
-            await DisplayAlert("Saved",$"{pk.Nickname} has been saved to {result.Folder.Path}", "ok");
+            await DisplayAlert("Success", $"PK File saved at {result.FilePath}", "cancel");
         }
-#endif
+        else
+            await DisplayAlert("Failure", $"PK File did not save due to {result.Exception.Message}", "cancel");
     }
 
     private void specieschanger(object sender, EventArgs e)
