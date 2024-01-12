@@ -284,6 +284,8 @@ public partial class Items : TabbedPage
                 CurrentItem.itemsprite = "aitem_material.png";
             if (CurrentItem.InvItem.Index >= 2522 && CurrentItem.InvItem.Index <= 2546)
                 CurrentItem.itemsprite = "aitem_snack.png";
+            if (itemInfo.Pouch_Picnic.Contains((ushort)CurrentItem.InvItem.Index))
+                CurrentItem.itemsprite = "aitem_picnic.png";
             SourceList[pindex] = CurrentSource;
         }
     }
@@ -316,6 +318,8 @@ public class itemInfo
             itemsprite = "aitem_material.png";
         if (item.Index >= 2522 && item.Index <= 2546)
             itemsprite = "aitem_snack.png";
+        if (Pouch_Picnic.Contains((ushort)item.Index))
+            itemsprite = "aitem_picnic.png";
         InvItem = item;
     }
      public static List<ushort> Pouch_Material_SV =
@@ -346,5 +350,21 @@ public class itemInfo
         2492, 2493, 2494, 2495, 2496, 2497, 2498, 2499, 2500, 2501,
         2502, 2503, 2504, 2505, 2506, 2507, 2508, 2509, 2510, 2511,
         2512, 2513, 2514, 2515, 2516, 2517, 2518, 2519, 2520, 2521,
+    ];
+    public static List<ushort> Pouch_Picnic =
+    [
+        2311,
+        2313, 2314, 2315, 2316, 2317, 2318, 2319, 2320, 2321, 2322,
+        2323, 2324, 2325, 2326, 2327, 2329, 2330, 2331, 2332, 2333,
+        2334, 2335, 2336, 2337, 2338, 2339, 2340, 2341, 2342, 2348,
+        2349, 2350, 2351, 2352, 2353, 2354, 2355, 2356, 2357, 2358,
+        2359, 2360, 2361, 2362, 2363, 2364, 2365, 2366, 2367, 2368,
+        2369, 2370, 2371, 2372, 2373, 2374, 2375, 2376, 2377, 2378,
+        2379, 2380, 2381, 2382, 2383, 2384, 2385, 2386, 2387, 2388,
+        2389, 2390, 2391, 2392, 2393, 2394, 2395, 2396, 2397, 2398,
+        2399, 2400, 2417, 2418, 2419, 2420, 2421, 2422, 2423, 2424,
+        2425, 2426, 2427, 2428, 2429, 2430, 2431, 2432, 2433, 2434,
+        2435, 2436, 2437, 2548, 2551, 2552,
+
     ];
 }

@@ -27,7 +27,7 @@
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"></Image>
                     <CollectionView HeightRequest="375" x:Name="boxview" x:FieldModifier="public" SelectionMode="Single" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" ></CollectionView>
                 </Grid>
-                <Button x:Name="livingdexbutton" Text="Generate Living Dex" Clicked="Generateliving"/>
+                <!--<Button x:Name="livingdexbutton" Text="Generate Living Dex" Clicked="Generateliving"/>-->
                 <Button x:Name="BatchEditorOpenButton" Text="Batch Editor" Clicked="openBatchEditor"/>
             </StackLayout>
         </ScrollView>

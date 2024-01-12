@@ -287,7 +287,7 @@ public partial class BoxTab : ContentPage
     }
     private async void Generateliving(object sender, EventArgs e)
     {
-        livingdexbutton.Text = "loading...";
+        //livingdexbutton.Text = "loading...";
         await Task.Delay(100);
         ModLogic.SetAlpha = PluginSettings.LivingDexSetAlpha;
         ModLogic.IncludeForms = PluginSettings.LivingDexAllForms;
@@ -296,7 +296,7 @@ public partial class BoxTab : ContentPage
 
         await Task.Run(copyboxdata);
         fillbox();
-        livingdexbutton.Text = "Generate Living Dex";
+        //livingdexbutton.Text = "Generate Living Dex";
     }
     public void copyboxdata()
     {
