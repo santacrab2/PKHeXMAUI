@@ -1,11 +1,5 @@
-using System;
 using System.Windows.Input;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Internals;
-using System.Linq;
-using PKHeX.Core;
 using static PKHeXMAUI.MainPage;
-using Microsoft.Maui.Controls.PlatformConfiguration.GTKSpecific;
 
 namespace PKHeXMAUI;
 

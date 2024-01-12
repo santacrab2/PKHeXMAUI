@@ -1,10 +1,6 @@
-using Microsoft.Maui.Layouts;
 using PKHeX.Core;
 using System.Reflection;
-using System.Security.Cryptography;
 using Syncfusion.Maui.Inputs;
-using Syncfusion.Maui;
-using static System.Net.Mime.MediaTypeNames;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;

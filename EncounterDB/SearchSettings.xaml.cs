@@ -1,8 +1,6 @@
 using static PKHeXMAUI.MainPage;
 using static PKHeXMAUI.EncounterDB;
 using PKHeX.Core;
-using System.Reflection;
-using Microsoft.Maui.Controls.Internals;
 
 namespace PKHeXMAUI;
 

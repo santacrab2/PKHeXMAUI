@@ -2,8 +2,6 @@
 using Syncfusion.Maui.Inputs;
 using Syncfusion.Maui.DataSource.Extensions;
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Input;
 using PKHeX.Core;
 

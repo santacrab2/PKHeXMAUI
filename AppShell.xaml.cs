@@ -1,5 +1,4 @@
 ﻿using PKHeX.Core;
-using PKHeX.Core.AutoMod;
 using static PKHeXMAUI.MainPage;
 namespace PKHeXMAUI;
 

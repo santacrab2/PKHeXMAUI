@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using System;
 using PKHeX.Core;
 using static PKHeXMAUI.MainPage;
 namespace PKHeXMAUI;

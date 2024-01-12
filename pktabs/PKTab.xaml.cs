@@ -5,15 +5,8 @@ using PKHeX.Core.AutoMod;
 using Octokit;
 using System.Windows.Input;
 using Syncfusion.Maui.Inputs;
-using Syncfusion.Maui.DataSource.Extensions;
 using PKHeX.Core.Injection;
-using System.Net.Http.Headers;
-
 using CommunityToolkit.Maui.Storage;
-using Android.Widget;
-using System.Threading;
-
-
 namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage

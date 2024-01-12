@@ -1,9 +1,4 @@
-using System.Runtime.CompilerServices;
-using Syncfusion.Maui.Inputs;
-using Syncfusion.Maui.DataSource.Extensions;
-using System.Reflection;
 using PKHeX.Core;
-using PKHeX.Core.AutoMod;
 namespace PKHeXMAUI;
 
 public partial class LegalitySettings : ContentPage

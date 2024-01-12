@@ -1,5 +1,4 @@
 using PKHeX.Core;
-using Syncfusion.Maui.Inputs;
 
 namespace PKHeXMAUI;
 

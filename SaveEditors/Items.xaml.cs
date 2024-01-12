@@ -1,8 +1,6 @@
-using Microsoft.Maui.Controls;
 using static PKHeXMAUI.MainPage;
 using PKHeX.Core;
 using Syncfusion.Maui.Inputs;
-using Syncfusion.Maui.DataSource.Extensions;
 using System.Windows.Input;
 using PKHeX.Core.Injection;
 
@@ -50,14 +48,15 @@ public partial class Items : TabbedPage
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
+            header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             Label headerItem = new() { Text = "Item" };
-            header.Add(headerItem);
+            header.Add(headerItem,1);
             Label headerCount = new() { Text = "Count", HorizontalOptions = LayoutOptions.End };
-            header.Add(headerCount, 1);
+            header.Add(headerCount, 2);
             Label headerFav = new() { Text = "Fav", HorizontalOptions = LayoutOptions.End };
-            header.Add(headerFav,2);
+            header.Add(headerFav,3);
             Label headerNew = new() { Text = "New", HorizontalOptions = LayoutOptions.Center};
-            header.Add(headerNew,3);
+            header.Add(headerNew,4);
             var ItemCollection = new CollectionView
             {
                 WidthRequest = 400,
@@ -65,26 +64,31 @@ public partial class Items : TabbedPage
                 ItemTemplate = new DataTemplate(() =>
             {
                 Grid grid = [];
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 SfComboBox itemname = new() { Placeholder = "(None)", IsEditable = true, TextSearchMode = ComboBoxTextSearchMode.StartsWith, BackgroundColor = Colors.Transparent, MaxDropDownHeight = 500 };
                 itemname.PropertyChanged += ChangeComboBoxFontColor;
+                itemname.SelectionChanged += ChangeItemSprite;
                 var pouchstrings = GetStringsForPouch(pouch.GetAllItems());
                 itemname.ItemsSource = pouchstrings;
                 itemname.SetBinding(SfComboBox.SelectedItemProperty, "name", mode: BindingMode.TwoWay);
                 itemname.IsClearButtonVisible = false;
-                grid.Add(itemname);
+                grid.Add(itemname, 1);
+                Image itemsp = new() { HorizontalOptions = LayoutOptions.Start, HeightRequest = 25, WidthRequest = 25 };
+                itemsp.SetBinding(Image.SourceProperty, "itemsprite");
+                grid.Add(itemsp);
                 Editor itemCount = new();
                 itemCount.SetBinding(Editor.TextProperty, "count", mode: BindingMode.TwoWay);
-                grid.Add(itemCount, 1);
+                grid.Add(itemCount, 2);
                 CheckBox ItemFavCheck = new();
                 ItemFavCheck.SetBinding(CheckBox.IsCheckedProperty, "isfav", mode: BindingMode.TwoWay);
-                grid.Add(ItemFavCheck, 2);
+                grid.Add(ItemFavCheck, 3);
                 CheckBox ItemNewCheck = new();
                 ItemNewCheck.SetBinding(CheckBox.IsCheckedProperty, "isnew", BindingMode.TwoWay);
-                grid.Add(ItemNewCheck, 3);
+                grid.Add(ItemNewCheck, 4);
                 return grid;
             })
             };
@@ -267,6 +271,22 @@ public partial class Items : TabbedPage
     {
         Navigation.PopModalAsync();
     }
+    private void ChangeItemSprite(object sender, EventArgs e)
+    {
+        var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
+        var CurrentSource = SourceList[pindex];
+        itemInfo? CurrentItem = CurrentSource.Find(z => z.name == (string)((Syncfusion.Maui.Inputs.SelectionChangedEventArgs)e).CurrentSelection[0]);
+        if (CurrentItem is not null)
+        {
+            var lump = HeldItemLumpUtil.GetIsLump(CurrentItem.InvItem.Index, sav.Context);
+            CurrentItem.itemsprite = sav is SAV9SV ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png";
+            if (itemInfo.Pouch_Material_SV.Contains((ushort)CurrentItem.InvItem.Index))
+                CurrentItem.itemsprite = "aitem_material.png";
+            if (CurrentItem.InvItem.Index >= 2522 && CurrentItem.InvItem.Index <= 2546)
+                CurrentItem.itemsprite = "aitem_snack.png";
+            SourceList[pindex] = CurrentSource;
+        }
+    }
 }
 public class itemInfo
 {
@@ -274,8 +294,10 @@ public class itemInfo
     public string name { get; set; }
     public bool isfav { get; set; }
     public bool isnew { get; set; }
+    public string itemsprite { get; set; }
     public bool isfreespace { get; set; }
     public uint isfreespaceindex { get; set; }
+    public InventoryItem InvItem { get; set; }
     public itemInfo(InventoryItem item)
     {
         count = item.Count.ToString();
@@ -288,5 +310,41 @@ public class itemInfo
             isfreespace = fs.IsFreeSpace;
         if (item is IItemFreeSpaceIndex fi)
             isfreespaceindex = fi.FreeSpaceIndex;
+        var lump = HeldItemLumpUtil.GetIsLump(item.Index, sav.Context);
+        itemsprite = sav is SAV9SV ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{item.Index}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{item.Index}.png";
+        if (Pouch_Material_SV.Contains((ushort)item.Index))
+            itemsprite = "aitem_material.png";
+        if (item.Index >= 2522 && item.Index <= 2546)
+            itemsprite = "aitem_snack.png";
+        InvItem = item;
     }
+     public static List<ushort> Pouch_Material_SV =
+    [
+        1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965,
+        1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975,
+        1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985,
+        1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995,
+        1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+        2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+        2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025,
+        2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035,
+        2036, 2037, 2038, 2039, 2040, 2041, 2042, 2043, 2044, 2045,
+        2046, 2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055,
+        2056, 2057, 2058, 2059, 2060, 2061, 2062, 2063, 2064, 2065,
+        2066, 2067, 2068, 2069, 2070, 2071, 2072, 2073, 2074, 2075,
+        2076, 2077, 2078, 2079, 2080, 2081, 2082, 2083, 2084, 2085,
+        2086, 2087, 2088, 2089, 2090, 2091, 2092, 2093, 2094, 2095,
+        2096, 2097, 2098, 2099, 2103, 2104, 2105, 2106, 2107, 2108,
+        2109, 2110, 2111, 2112, 2113, 2114, 2115, 2116, 2117, 2118,
+        2119, 2120, 2121, 2122, 2123, 2126, 2127, 2128, 2129, 2130,
+        2131, 2132, 2133, 2134, 2135, 2136, 2137, 2156, 2157, 2158,
+        2159, 2438, 2439, 2440, 2441, 2442, 2443, 2444, 2445, 2446,
+        2447, 2448, 2449, 2450, 2451, 2452, 2453, 2454, 2455, 2456,
+        2457, 2458, 2459, 2460, 2461, 2462, 2463, 2464, 2465, 2466,
+        2467, 2468, 2469, 2470, 2471, 2472, 2473, 2474, 2475, 2476,
+        2477, 2478, 2484, 2485, 2486, 2487, 2488, 2489, 2490, 2491,
+        2492, 2493, 2494, 2495, 2496, 2497, 2498, 2499, 2500, 2501,
+        2502, 2503, 2504, 2505, 2506, 2507, 2508, 2509, 2510, 2511,
+        2512, 2513, 2514, 2515, 2516, 2517, 2518, 2519, 2520, 2521,
+    ];
 }

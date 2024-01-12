@@ -1,8 +1,5 @@
-using System;
 using System.Windows.Input;
 using PKHeX.Core;
-using Syncfusion.Maui.Inputs;
-using Syncfusion.Maui.DataSource.Extensions;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
