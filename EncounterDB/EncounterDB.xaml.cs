@@ -44,21 +44,22 @@ public partial class EncounterDB : ContentPage
             grid.Add(EggSprite);
             grid.Add(BallSprite);
             grid.Add(GMaxSprite);
-            SwipeView swipe = new();
-            SwipeItem view = new()
-            {
-                Text = "View",
-                BackgroundColor = Colors.DeepSkyBlue,
-                IconImageSource = "load.png"
-            };
-            view.Invoked += applyencpk;
-            swipe.BottomItems.Add(view);
-            swipe.Content = grid;
-            return swipe;
+            var tap = new TapGestureRecognizer();
+            tap.SetBinding(TapGestureRecognizer.CommandParameterProperty, "itsself");
+            tap.Tapped += ShowViewBox;
+            grid.GestureRecognizers.Add(tap);
+            return grid;
         });
         EncounterCollection.ItemsLayout = new GridItemsLayout(5, ItemsLayoutOrientation.Vertical);
     }
-
+    private async void ShowViewBox(object sender, TappedEventArgs e)
+    {
+        EncounterCollection.SelectedItem = (EncounterSprite)e.Parameter;
+        var view = await DisplayAlert("View Encounter", "View this encounter?", "view", "cancel");
+        if (view)
+            applyencpk(sender, e);
+        EncounterCollection.SelectedItem = null;
+    }
     private void SetSearchSettings(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new SearchSettings());
@@ -157,7 +158,8 @@ public class ReferenceComparer<T> : IEqualityComparer<T> where T : class
 }
 public class EncounterSprite
 {
-   public IEncounterInfo EncounterInfo { get; set; }
+    public EncounterSprite itsself { get; set; }
+    public IEncounterInfo EncounterInfo { get; set; }
     public string url { get; set; }
     public int[] NoFormSpriteSpecies = [664, 665, 744, 982, 855, 854, 869, 892, 1012, 1013];
     public bool Alpha { get; set; }
@@ -182,5 +184,6 @@ public class EncounterSprite
         url = info.Species == 0
             ? ""
             : $"a_{info.Species}{((info.Form > 0 && !NoFormSpriteSpecies.Contains(info.Species)) ? $"_{info.Form}" : "")}.png";
+        itsself = this;
     }
 }
