@@ -38,6 +38,8 @@ namespace PKHeXMAUI
         {
             BlockStack.Clear();
             BlockEditor_Hex.IsVisible = true;
+            BlockSummary.IsVisible = true;
+            BlockSummary.Text = SCBlockUtil.GetBlockSummary(CurrentBlock);
             var block = CurrentBlock;
             var blockName = Metadata.GetBlockName(block, out var obj);
             BlockEditor_Hex.Text = string.Join(" ", block.Data.Select(z => $"{z:X2}"));
@@ -65,6 +67,11 @@ namespace PKHeXMAUI
         private void CloseBlockEditor8(object sender, EventArgs e)
         {
             Navigation.PopModalAsync();
+        }
+        private void ChangeComboBoxFontColor(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            SfComboBox box = (SfComboBox)sender;
+            box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
         }
     }
     public class BlockDataFilter : IComboBoxFilterBehavior

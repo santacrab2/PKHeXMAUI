@@ -7,12 +7,13 @@
              Title="BlockEditor">
     <ScrollView>
     <VerticalStackLayout>
-            <inputs:SfComboBox x:Name="BlockKey_Picker" SelectionChanged="Update_BlockCV" IsClearButtonVisible="True" IsEditable="True" IsFilteringEnabled="True">
+            <inputs:SfComboBox x:Name="BlockKey_Picker" SelectionChanged="Update_BlockCV" IsClearButtonVisible="True" IsEditable="True" IsFilteringEnabled="True" BackgroundColor="Transparent" PropertyChanged="ChangeComboBoxFontColor">
                 <inputs:SfComboBox.FilterBehavior>
                     <local:BlockDataFilter/>
                 </inputs:SfComboBox.FilterBehavior>
             </inputs:SfComboBox>
-        <Editor HeightRequest="400"  x:Name="BlockEditor_Hex"/>
+            <Label x:Name="BlockSummary" IsVisible="false"/>
+            <Editor HeightRequest="400"  x:Name="BlockEditor_Hex"/>
             <Grid x:Name="BlockStack">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
