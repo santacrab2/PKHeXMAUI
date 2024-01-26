@@ -1,9 +1,9 @@
 # PKHeX MAUI(Mobile)
 
-This project is simply applying the public PKHeX code library to a cross platform interface. Currently this is only compatible with Android due to pay-wall compiling limitations of IOS/MAC. If you have access to these devices and would like to help compile, please reach out. Eventual compatibility with IOS is planned.
+This project is simply applying the public PKHeX code library to a cross platform interface. Currently this is only compiled for Android, however it is possible for a user to compile it for MACOS or IOS as well. 
 
 Huge Thanks to all those who have contributed to PKHeX in anyway, especially but not limited to:</br>
-Kurt(Kaphotics)</br>
+Kurt(Kaphotics) - [original PKHeX which this project is based on](https://github.com/kwsch/PKHeX)</br>
 Anubis(Lusamine)</br>
 Architdate</br>
 
