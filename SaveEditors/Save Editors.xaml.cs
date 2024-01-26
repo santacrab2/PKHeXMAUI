@@ -1,3 +1,5 @@
+using PKHeX.Core;
+
 namespace PKHeXMAUI;
 
 public partial class SaveEditors : ContentPage
@@ -10,5 +12,10 @@ public partial class SaveEditors : ContentPage
     private void OpenItems(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new Items());
+    }
+
+    private void OpenBlockEditor(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new BlockEditor8((ISCBlockArray)MainPage.sav));
     }
 }
