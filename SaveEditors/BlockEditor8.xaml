@@ -44,6 +44,22 @@
 
                 </Grid.RowDefinitions>
             </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Text="Export Blocks to Folder" Clicked="ExportBlocksFolder"/>
+                <Button Grid.Column="1" Text="Import Blocks from Folder" Clicked="ImportBlocksFolder"/>
+                <Button Grid.Row="1" Text="Export Current Block" Clicked="ExportCurrentBlock_Clicked"/>
+                <Button Grid.Row="1" Grid.Column="1" Text="Import Current Block" Clicked="ImportCurrentBlock_Clicked"/>
+            </Grid>
             <Button x:Name="BE_Close" Text="Close" Clicked="CloseBlockEditor8"/>
         </VerticalStackLayout>
     </ScrollView>

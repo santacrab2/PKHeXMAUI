@@ -1,5 +1,7 @@
+using CommunityToolkit.Maui.Storage;
 using PKHeX.Core;
 using Syncfusion.Maui.Inputs;
+using System.Security.Cryptography;
 namespace PKHeXMAUI
 {
 
@@ -73,12 +75,76 @@ namespace PKHeXMAUI
             SfComboBox box = (SfComboBox)sender;
             box.TextColor = box.IsDropDownOpen ? Colors.Black : Colors.White;
         }
+
+        private async void ExportBlocksFolder(object sender, EventArgs e)
+        {
+            var FolderResults = await FolderPicker.PickAsync(CancellationToken.None);
+            var path = FolderResults.Folder.Path;
+            var blocks = SAV.AllBlocks;
+            ExportAllBlocks(blocks, path);
+        }
+        private static void ExportAllBlocks(IEnumerable<SCBlock> blocks, string path)
+        {
+            foreach (var b in blocks.Where(z => z.Data.Length != 0))
+            {
+                var fn = $"{SCBlockUtil.GetBlockFileNameWithoutExtension(b)}.bin";
+                var fileName = Path.Combine(path, fn);
+                File.WriteAllBytes(fileName, b.Data);
+            }
+        }
+
+        private async void ImportBlocksFolder(object sender, EventArgs e)
+        {
+            var FolderResults = await FolderPicker.PickAsync(CancellationToken.None);
+            if (FolderResults.IsSuccessful) 
+            {
+                var failed = SCBlockUtil.ImportBlocksFromFolder(FolderResults.Folder.Path,SAV);
+                if(failed.Count != 0)
+                {
+                    var msg = string.Join(Environment.NewLine, failed);
+                    await DisplayAlert("Failed", $"Failed to import: {msg}", "cancel");
+                }
+
+            }
+        }
+
+        private void ExportCurrentBlock_Clicked(object sender, EventArgs e) => ExportSelectBlock(CurrentBlock);
+
+        private async void ExportSelectBlock(SCBlock block)
+        {
+            var name = SCBlockUtil.GetBlockFileNameWithoutExtension(block);
+            using var BlockStreams = new MemoryStream(block.Data);
+            var result = await FileSaver.SaveAsync($"{name}.bin", BlockStreams, CancellationToken.None);
+            if (result.IsSuccessful)
+                await DisplayAlert("Success", $"Block File saved at {result.FilePath}", "cancel");
+            else
+                await DisplayAlert("Failure", $"Block File did not save due to {result.Exception.Message}", "cancel");
+        }
+
+        private void ImportCurrentBlock_Clicked(object sender, EventArgs e) => ImportSelectBlock(CurrentBlock);
+        private async void ImportSelectBlock(SCBlock blockTarget)
+        {
+            var Pickedfile = await FilePicker.PickAsync();
+            if (Pickedfile is null)
+                return;
+            var key = blockTarget.Key;
+            var data = blockTarget.Data;
+            var path = Pickedfile.FileName;
+            var file = new FileInfo(path);
+            if(file.Length != data.Length)
+            {
+                await DisplayAlert("Error", string.Format(MessageStrings.MsgFileSize, $"0x{file.Length:X8}"), "cancel");
+                return;
+            }
+           var newdata = File.ReadAllBytes(path);
+            blockTarget.ChangeData(newdata);
+        }
     }
     public class BlockDataFilter : IComboBoxFilterBehavior
     {
         public List<int> GetMatchingIndexes(SfComboBox source, ComboBoxFilterInfo filterInfo)
         {
-            List<int> filteredlist = new List<int>();
+            List<int> filteredlist = [];
             List<ComboItem> SourceList = ((ComboItem[])source.ItemsSource).ToList();
             var text = filterInfo.Text;
             if (text.Length == 8)

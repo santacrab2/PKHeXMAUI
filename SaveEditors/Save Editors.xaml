@@ -4,7 +4,7 @@
              x:Class="PKHeXMAUI.SaveEditors"
              Title="Save Editors">
     <VerticalStackLayout>
-        <Button Text="Block Data" Clicked="OpenBlockEditor"/>
+        <Button x:Name="Button_BlockData" Text="Block Data" Clicked="OpenBlockEditor" IsVisible="false"/>
         <Button Text="Inventory Editor" Clicked="OpenItems"/>
     </VerticalStackLayout>
 </ContentPage>
