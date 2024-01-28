@@ -7,6 +7,7 @@ public partial class SaveEditors : ContentPage
 	public SaveEditors()
 	{
 		InitializeComponent();
+        ToggleControls();
 	}
 
     private void OpenItems(object sender, EventArgs e)
@@ -16,7 +17,7 @@ public partial class SaveEditors : ContentPage
 
     private void OpenBlockEditor(object sender, EventArgs e)
     {
-        Navigation.PushModalAsync(new BlockEditor8((ISCBlockArray)MainPage.sav));
+        Navigation.PushModalAsync(new BlockDataTab());
     }
     private void ToggleControls()
     {

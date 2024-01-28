@@ -215,6 +215,9 @@
 	  <Compile Update="SaveEditors\BlockEditor8.xaml.cs">
 	    <DependentUpon>BlockEditor8.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SaveEditors\BlockDataTab.xaml.cs">
+	    <DependentUpon>BlockDataTab.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SaveEditors\Save Editors.xaml.cs">
 	    <DependentUpon>Save Editors.xaml</DependentUpon>
 	  </Compile>
@@ -273,6 +276,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\BlockEditor8.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\BlockDataTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Save Editors.xaml">

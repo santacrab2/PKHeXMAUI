@@ -25,27 +25,42 @@ namespace PKHeXMAUI
 
         private void Update_BlockCV(object sender, Syncfusion.Maui.Inputs.SelectionChangedEventArgs e)
         {
-            try
+            if (BlockKey_Picker.SelectedItem != null)
             {
                 var key = (uint)((ComboItem)BlockKey_Picker.SelectedItem).Value;
                 CurrentBlock = SAV.Accessor.GetBlock(key);
                 UpdateBlockSummaryControls();
             }
-            catch (Exception)
+            else
             {
                 BlockStack.Clear();
+                BlockSummary.Text = string.Empty;
             }
+
         }
         private void UpdateBlockSummaryControls()
         {
             BlockStack.Clear();
             BlockEditor_Hex.IsVisible = true;
             BlockSummary.IsVisible = true;
-            BlockSummary.Text = SCBlockUtil.GetBlockSummary(CurrentBlock);
+            BlockSummary.Text = $"Block Detail:\n{SCBlockUtil.GetBlockSummary(CurrentBlock)}";
             var block = CurrentBlock;
             var blockName = Metadata.GetBlockName(block, out var obj);
             BlockEditor_Hex.Text = string.Join(" ", block.Data.Select(z => $"{z:X2}"));
-
+            if(CurrentBlock.Type.IsBoolean())
+            {
+                BlockEditor_Hex.IsVisible = false;
+                var CB_TypeToggle = new SfComboBox();
+                CB_TypeToggle.ItemsSource = new[]
+                {
+                    new ComboItem(nameof(SCTypeCode.Bool1), (int)SCTypeCode.Bool1),
+                    new ComboItem(nameof(SCTypeCode.Bool2), (int)SCTypeCode.Bool2),
+                };
+                CB_TypeToggle.SelectedIndex = (int)CurrentBlock.Type - 1;
+                CB_TypeToggle.SelectionChanged += CB_TypeToggle_SelectionChanged;
+                CB_TypeToggle.DisplayMemberPath = "Text";
+                BlockStack.Add(CB_TypeToggle);
+            }
             if (obj != null)
             {
                 var props = ReflectUtil.GetPropertiesCanWritePublicDeclared(obj.GetType());
@@ -55,15 +70,50 @@ namespace PKHeXMAUI
                     BlockEditor_Hex.IsVisible = false;
                     foreach (var prop in props)
                     {
-                        BlockStack.Add(new Label() { Text = prop }, 0, row);
+                        var propLabel = new Label() { Text = prop };
+                        BlockStack.Add(propLabel, 0, row);
                         var BlockEntry = new Entry();
                         BlockEntry.BindingContext = obj;
+                        try { BlockEntry.SetBinding(Entry.TextProperty, prop, BindingMode.TwoWay); }
+                        catch (Exception) { BlockStack.Remove(propLabel); continue; }
+                        BlockStack.Add(BlockEntry, 1, row);
+                        row++;
+                    }
+                    return;
+                }
+            }
+            var o = SCBlockMetadata.GetEditableBlockObject(block);
+            if (o != null)
+            {
+                var props = ReflectUtil.GetPropertiesPublic(o.GetType());
+                if (props.Count() > 1)
+                {
+                    int row = 0;
+                    BlockEditor_Hex.IsVisible = false;
+                    foreach (var prop in props)
+                    {
+                        BlockStack.Add(new Label() { Text = prop }, 0, row);
+                        var BlockEntry = new Entry();
+                        BlockEntry.BindingContext = o;
                         BlockEntry.SetBinding(Entry.TextProperty, prop, BindingMode.TwoWay);
                         BlockStack.Add(BlockEntry, 1, row);
                         row++;
                     }
+                    return;
                 }
+
             }
+        }
+
+        private void CB_TypeToggle_SelectionChanged(object sender, Syncfusion.Maui.Inputs.SelectionChangedEventArgs e)
+        {
+            var block = CurrentBlock;
+            var cType = block.Type;
+            var cValue = (SCTypeCode)((ComboItem)((SfComboBox)sender).SelectedItem).Value;
+            if (cType == cValue)
+                return;
+            block.ChangeBooleanType(cValue);
+            UpdateBlockSummaryControls();
         }
 
         private void CloseBlockEditor8(object sender, EventArgs e)
@@ -136,8 +186,32 @@ namespace PKHeXMAUI
                 await DisplayAlert("Error", string.Format(MessageStrings.MsgFileSize, $"0x{file.Length:X8}"), "cancel");
                 return;
             }
-           var newdata = File.ReadAllBytes(path);
+            var newdata = File.ReadAllBytes(path);
             blockTarget.ChangeData(newdata);
+        }
+
+        private async void ExportAllSingleFile(object sender, EventArgs e)
+        {
+            var folder = await FolderPicker.PickAsync(CancellationToken.None);
+            if (!folder.IsSuccessful)
+                return;
+            var path = folder.Folder.Path;
+            var blocks = SAV.Accessor.BlockInfo;
+            var option = GetExportOption();
+            SCBlockUtil.ExportAllBlocksAsSingleFile(blocks, path, option);
+        }
+        private SCBlockExportOption GetExportOption()
+        {
+            var option = SCBlockExportOption.None;
+            if (CHK_DataOnly.IsChecked)
+                option |= SCBlockExportOption.DataOnly;
+            if (CHK_Key.IsChecked)
+                option |= SCBlockExportOption.Key;
+            if (CHK_Type.IsChecked)
+                option |= SCBlockExportOption.TypeInfo;
+            if (CHK_FakeHeader.IsChecked)
+                option |= SCBlockExportOption.FakeHeader;
+            return option;
         }
     }
     public class BlockDataFilter : IComboBoxFilterBehavior
@@ -161,4 +235,5 @@ namespace PKHeXMAUI
             return filteredlist;
         }
     }
+    public partial class BlockEditor8tab { }
 }
