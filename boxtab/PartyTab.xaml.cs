@@ -1,3 +1,4 @@
+using PKHeX.Core;
 using System.Windows.Input;
 using static PKHeXMAUI.MainPage;
 
@@ -10,6 +11,7 @@ public partial class PartyTab : ContentPage
 		InitializeComponent();
         PartyView.ItemTemplate = new DataTemplate(() =>
         {
+            Border border = new() { Stroke = Colors.Black, BackgroundColor = Colors.Transparent };
             Grid grid = new() { Padding = 10 };
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
@@ -22,56 +24,70 @@ public partial class PartyTab : ContentPage
             shiny.TranslateTo(shiny.TranslationX + 15, TranslationY);
             grid.Add(image);
             grid.Add(shiny);
-            SwipeView swipe = new();
-            SwipeItem view = new()
-            {
-                Text = "View",
-                BackgroundColor = Colors.DeepSkyBlue,
-                IconImageSource = "load.png"
-            };
-            view.Invoked += ApplyPKFromParty;
-            swipe.BottomItems.Add(view);
-            SwipeItem Set = new()
-            {
-                Text = "Set",
-                BackgroundColor = Colors.Green,
-                IconImageSource = "dump.png"
-            };
-            Set.Invoked += inject;
-            swipe.TopItems.Add(Set);
-            swipe.Content = grid;
-            return swipe;
+            var tap = new TapGestureRecognizer();
+            tap.SetBinding(TapGestureRecognizer.CommandParameterProperty, "boxie");
+            tap.Tapped += Tapety;
+            grid.GestureRecognizers.Add(tap);
+            border.Content = grid;
+            return border;
         });
         PartyView.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Vertical);
 
         ICommand refreshCommand = new Command(async() =>
         {
-            PartyView.ItemsSource = await fillParty();
+            await fillParty();
             PartyView.ScrollTo(0);
             PartyRefresh.IsRefreshing = false;
         });
         PartyRefresh.Command = refreshCommand;
         fillParty();
     }
+    private async void Tapety(object sender, TappedEventArgs e)
+    {
+        PartyView.SelectedItem = e.Parameter;
+
+        var result = await DisplayActionSheet($"Slot {((boxsprite)e.Parameter).SlotNumber}", "cancel", "Delete", ["View", "Set"]);
+        switch (result)
+        {
+            case "Delete": del(sender, e); break;
+            case "View": ApplyPKFromParty(sender, e); break;
+            case "Set": inject(sender, e); break;
+        }
+    }
     private async void ApplyPKFromParty(object sender, EventArgs e)
     {
         boxsprite b = (boxsprite)PartyView.SelectedItem;
         pk = b.pkm;
+        fillParty();
     }
     private async void inject(object sender, EventArgs e)
     {
-        sav.SetPartySlotAtIndex(pk, PartySprites.IndexOf((boxsprite)PartyView.SelectedItem));
+        boxsprite b = (boxsprite)PartyView.SelectedItem;
+        sav.SetPartySlotAtIndex(pk, int.Parse(b.SlotNumber));
+        fillParty();
+    }
+    private async void del(object sender, EventArgs e)
+    {
+        boxsprite b = (boxsprite)PartyView.SelectedItem;
+        sav.DeletePartySlot(int.Parse(b.SlotNumber));
+        fillParty();
     }
     public static List<boxsprite> PartySprites = [];
-    public async Task<List<boxsprite>> fillParty()
+    public async Task fillParty()
     {
         PartySprites = [];
-
+        int i = 0;
         foreach(var ppk in sav.PartyData)
         {
-            PartySprites.Add(new boxsprite(ppk,0));
+            PartySprites.Add(new boxsprite(ppk,i));
+            i++;
         }
-
-        return PartySprites;
+        while (i < 6)
+        {
+            PartySprites.Add(new boxsprite(EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version), i));
+            i++;
+        }
+        PartyView.ItemsSource = PartySprites;
+        PartyView.ScrollTo(0);
     }
 }

@@ -39,6 +39,9 @@ public partial class AppShell : Shell
                 if (!((StatsTab)TheShell.CurrentPage).FirstLoad)
                     ((StatsTab)TheShell.CurrentPage).applystatsinfo(pk);
                 break;
+            case PartyTab:
+                ((PartyTab)TheShell.CurrentPage).fillParty();
+                break;
         }
         if (TheShell.CurrentPage.GetType() == typeof(BoxTab))
         {
