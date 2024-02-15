@@ -79,8 +79,8 @@
                 <!--Nature-->
                 <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Nature:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <inputs:SfComboBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Nature" x:Name="naturepicker" HorizontalOptions="Start" VerticalOptions="Center" SelectionChanged="applynature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent"></inputs:SfComboBox>
-                <Label Grid.Row="7" Grid.Column="3" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start"/>
-                <inputs:SfComboBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Placeholder="Stat Nature" x:Name="statnaturepicker" VerticalOptions="Center" SelectionChanged="applystatnature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent" />
+                <Label Grid.Row="7" Grid.Column="3" x:Name="Lab_StatNature" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="False"/>
+                <inputs:SfComboBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Placeholder="Stat Nature" x:Name="statnaturepicker" VerticalOptions="Center" SelectionChanged="applystatnature" PropertyChanged="ChangeComboBoxFontColor" IsEditable="True" TextSearchMode="StartsWith" BackgroundColor="Transparent" IsVisible="False"/>
 
                 <!--form-->
                 <Label x:Name="formlabel" IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Form:"></Label>

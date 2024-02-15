@@ -39,8 +39,15 @@ public partial class MainPage : ContentPage
         Permissions.RequestAsync<Permissions.StorageWrite>();
         SetSettings();
         specieslabel.ItemsSource = datasourcefiltered.Species;
-        naturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
-        statnaturepicker.ItemsSource = Enum.GetNames(typeof(Nature));
+        naturepicker.ItemsSource = datasourcefiltered.Natures;
+        naturepicker.DisplayMemberPath = "Text";
+        if (pk.Format > 7)
+        {
+            statnaturepicker.IsVisible = true;
+            Lab_StatNature.IsVisible = true;
+            statnaturepicker.ItemsSource = datasourcefiltered.Natures;
+            statnaturepicker.DisplayMemberPath = "Text";
+        }
         helditempicker.ItemsSource = datasourcefiltered.Items;
         helditempicker.DisplayMemberPath = "Text";
         if (datasourcefiltered.Items.Count > 0)
@@ -226,11 +233,11 @@ public partial class MainPage : ContentPage
         nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
-        naturepicker.SelectedItem = (Nature)pkm.Nature;
-        statnaturepicker.SelectedItem = (Nature)pkm.StatNature;
-        iseggcheck.IsChecked = pk.IsEgg;
-        infectedcheck.IsChecked = pk.PKRS_Infected;
-        curedcheck.IsChecked = pk.PKRS_Cured;
+        naturepicker.SelectedItem = datasourcefiltered.Natures.First(z => z.Value == pkm.Nature);
+        statnaturepicker.SelectedItem = datasourcefiltered.Natures.First(z => z.Value == pkm.StatNature);
+        iseggcheck.IsChecked = pkm.IsEgg;
+        infectedcheck.IsChecked = pkm.PKRS_Infected;
+        curedcheck.IsChecked = pkm.PKRS_Cured;
         if (abilitypicker.Items.Count != 0)
             abilitypicker.Items.Clear();
         for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
@@ -299,13 +306,13 @@ public partial class MainPage : ContentPage
         shinysparklessprite.IsVisible = pkm.IsShiny;
 
         pic.Source = spriteurl;
-        type1sprite.Source = $"type_icon_{pk.PersonalInfo.Type1:00}";
-        type2sprite.Source = $"type_icon_{pk.PersonalInfo.Type2:00}";
-        type2sprite.IsVisible = (pk.PersonalInfo.Type1 != pk.PersonalInfo.Type2);
+        type1sprite.Source = $"type_icon_{pkm.PersonalInfo.Type1:00}";
+        type2sprite.Source = $"type_icon_{pkm.PersonalInfo.Type2:00}";
+        type2sprite.IsVisible = (pkm.PersonalInfo.Type1 != pkm.PersonalInfo.Type2);
         languagepicker.SelectedIndex = pkm.Language;
         if (pkm.Species == (ushort)Species.Manaphy && pk.IsEgg)
         {
-            pk.IsNicknamed = false;
+            pkm.IsNicknamed = false;
             pkm.IsNicknamed = false;
         }
         nicknamecheck.IsChecked =  pkm.IsNicknamed;
@@ -452,7 +459,22 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void applynature(object sender, EventArgs e) { if (!SkipTextChange) { pk.Nature = naturepicker.SelectedIndex; checklegality(); } }
+    private void applynature(object sender, EventArgs e) 
+    { 
+        if (!SkipTextChange) 
+        {
+            if (naturepicker.SelectedItem is null)
+                return;
+            int selectedNature = ((ComboItem)naturepicker.SelectedItem).Value;
+            if (pk.Format <= 4 && pk.Nature != selectedNature)
+            {
+                pk.SetPIDNature(selectedNature);
+                displaypid.Text = $"{pk.PID:X}";
+            }
+            pk.Nature = selectedNature;
+            applymainpkinfo(pk);
+        } 
+    }
 
     private void applyform(object sender, EventArgs e)
     {
@@ -617,7 +639,8 @@ public partial class MainPage : ContentPage
     private void applystatnature(object sender, EventArgs e)
     {
         if(!SkipTextChange)
-            pk.StatNature = statnaturepicker.SelectedIndex; checklegality();
+            pk.StatNature = ((ComboItem)statnaturepicker.SelectedItem).Value;
+        checklegality();
     }
 
     private void applyformarg(object sender, TextChangedEventArgs e)
