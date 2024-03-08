@@ -48,7 +48,7 @@ public partial class OTTab : ContentPage
         OTpic.Source = spriteurl;
         SIDdisplay.Text = pkm.DisplaySID.ToString();
         TIDdisplay.Text = pkm.DisplayTID.ToString();
-        otdisplay.Text = pkm.OT_Name;
+        otdisplay.Text = pkm.OriginalTrainerName;
         ecdisplay.Text = $"{pkm.EncryptionConstant:X}";
         if (sav.Generation > 5)
         {
@@ -57,12 +57,12 @@ public partial class OTTab : ContentPage
             HTcurrentcheck.IsVisible = true;
             HTNameLabel.IsVisible = true;
 
-            htname.Text = pkm.HT_Name;
+            htname.Text = pkm.HandlingTrainerName;
             if (pkm is IHandlerLanguage htl)
             {
                 htlanguagelabel.IsVisible = true;
                 htlanguagepicker.IsVisible = true;
-                htlanguagepicker.SelectedIndex = htl.HT_Language;
+                htlanguagepicker.SelectedIndex = htl.HandlingTrainerLanguage;
             }
             switch (pkm.CurrentHandler)
             {
@@ -84,7 +84,7 @@ public partial class OTTab : ContentPage
         var value = pkm.Data[offset];
 
         extrabytesvalue.Text = value.ToString();
-        otgenderpicker.Source = $"gender_{pkm.OT_Gender}.png";
+        otgenderpicker.Source = $"gender_{pkm.OriginalTrainerGender}.png";
         if(pk is IRegionOrigin regionOrigin)
         {
             countrylabel.IsVisible = true;
@@ -125,7 +125,7 @@ public partial class OTTab : ContentPage
     private void applyot(object sender, TextChangedEventArgs e)
     {
         if(!SkipEvent)
-            pk.OT_Name = otdisplay.Text;
+            pk.OriginalTrainerName = otdisplay.Text;
     }
 
     private void applyec(object sender, TextChangedEventArgs e)
@@ -143,13 +143,13 @@ public partial class OTTab : ContentPage
     private void applyHT(object sender, TextChangedEventArgs e)
     {
         if (!SkipEvent)
-            pk.HT_Name = htname.Text;
+            pk.HandlingTrainerName = htname.Text;
     }
 
     private void applyhtlanguage(object sender, EventArgs e)
     {
         if(pk is IHandlerLanguage htl && !SkipEvent)
-            htl.HT_Language = (byte)htlanguagepicker.SelectedIndex;
+            htl.HandlingTrainerLanguage = (byte)htlanguagepicker.SelectedIndex;
     }
 
     private void MakeOTCurrent(object sender, CheckedChangedEventArgs e)
@@ -190,14 +190,14 @@ public partial class OTTab : ContentPage
 
     private void applyotgender(object sender, EventArgs e)
     {
-        if (pk.OT_Gender == 0)
+        if (pk.OriginalTrainerGender == 0)
         {
-            pk.OT_Gender = 1;
+            pk.OriginalTrainerGender = 1;
             otgenderpicker.Source = "gender_1.png";
         }
         else
         {
-            pk.OT_Gender = 0;
+            pk.OriginalTrainerGender = 0;
             otgenderpicker.Source = "gender_0.png";
         }
     }

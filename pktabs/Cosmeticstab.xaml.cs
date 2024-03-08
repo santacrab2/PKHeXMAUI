@@ -129,12 +129,12 @@ public partial class Cosmeticstab : ContentPage
         }
         if(pkm is IContestStats contest)
         {
-            Coolstats.Text = $"{contest.CNT_Cool}";
-            Beautystats.Text = $"{contest.CNT_Beauty}";
-            Cutestats.Text = $"{contest.CNT_Cute}";
-            Cleverstats.Text = $"{contest.CNT_Smart}";
-            toughstats.Text = $"{contest.CNT_Tough}";
-            sheenstats.Text = $"{contest.CNT_Sheen}";
+            Coolstats.Text = $"{contest.ContestCool}";
+            Beautystats.Text = $"{contest.ContestBeauty}";
+            Cutestats.Text = $"{contest.ContestCute}";
+            Cleverstats.Text = $"{contest.ContestSmart}";
+            toughstats.Text = $"{contest.ContestTough}";
+            sheenstats.Text = $"{contest.ContestSheen}";
         }
         SkipEvent = false;
     }
@@ -228,7 +228,7 @@ public partial class Cosmeticstab : ContentPage
                 result = Math.Clamp(result, minStat, maxCosmStat);
                 Coolstats.Text = result.ToString();
 
-                CTstats.CNT_Cool = result;
+                CTstats.ContestCool = result;
             }
         }
     }
@@ -242,7 +242,7 @@ public partial class Cosmeticstab : ContentPage
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     Beautystats.Text = result.ToString();
 
-                CTstats.CNT_Beauty = result;
+                CTstats.ContestBeauty = result;
             }
         }
     }
@@ -256,7 +256,7 @@ public partial class Cosmeticstab : ContentPage
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     Cutestats.Text = result.ToString();
 
-                CTstats.CNT_Cute = result;
+                CTstats.ContestCute = result;
             }
         }
     }
@@ -270,7 +270,7 @@ public partial class Cosmeticstab : ContentPage
                 result = Math.Clamp(result, minStat, maxCosmStat);
                 Cleverstats.Text = result.ToString();
 
-                CTstats.CNT_Smart = result;
+                CTstats.ContestSmart = result;
             }
         }
     }
@@ -284,7 +284,7 @@ public partial class Cosmeticstab : ContentPage
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     toughstats.Text = result.ToString();
 
-                CTstats.CNT_Tough = result;
+                CTstats.ContestTough = result;
             }
         }
     }
@@ -298,7 +298,7 @@ public partial class Cosmeticstab : ContentPage
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     sheenstats.Text = result.ToString();
 
-                CTstats.CNT_Sheen = result;
+                CTstats.ContestSheen = result;
             }
         }
     }

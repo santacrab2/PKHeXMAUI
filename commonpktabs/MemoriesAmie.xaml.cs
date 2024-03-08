@@ -24,19 +24,19 @@ public partial class MemoriesAmie : TabbedPage
     public MemoriesAmie()
     {
         InitializeComponent();
-        MemoriesWithOT.Text = $"Memories with {pk.OT_Name}(OT)";
+        MemoriesWithOT.Text = $"Memories with {pk.OriginalTrainerName}(OT)";
         MemoryTypePicker.ItemsSource = memorytext.Memory;
         MemoryTypePicker.ItemDisplayBinding = new Binding("Text");
 
-        Friendshipeditor.Text = pk.OT_Friendship.ToString();
-        HTFriendshipeditor.Text = pk.HT_Friendship.ToString();
-        MemoriesWithHT.Text = $"Memories with {pk.HT_Name}(Not OT)";
+        Friendshipeditor.Text = pk.OriginalTrainerFriendship.ToString();
+        HTFriendshipeditor.Text = pk.HandlingTrainerFriendship.ToString();
+        MemoriesWithHT.Text = $"Memories with {pk.HandlingTrainerName}(Not OT)";
         HTMemoryTypePicker.ItemsSource = memorytext.Memory;
         HTMemoryTypePicker.ItemDisplayBinding = new Binding("Text");
         if (pk is ITrainerMemories mems)
         {
-            MemoryTypePicker.SelectedItem = memorytext.Memory.Find(z => z.Value == mems.OT_Memory);
-            HTMemoryTypePicker.SelectedItem = memorytext.Memory.Find(x => x.Value == mems.HT_Memory);
+            MemoryTypePicker.SelectedItem = memorytext.Memory.Find(z => z.Value == mems.OriginalTrainerMemory);
+            HTMemoryTypePicker.SelectedItem = memorytext.Memory.Find(x => x.Value == mems.HandlingTrainerMemory);
 
             MoreThanAFeelingbox.ItemsSource = memorytext.GetMemoryFeelings(pk.Generation).ToArray();
             MoreThanAFeelingbox.SelectionChanged += UpdateMemoryString;
@@ -44,30 +44,30 @@ public partial class MemoriesAmie : TabbedPage
             HTMoreThanAFeelingbox.ItemsSource = memorytext.GetMemoryFeelings(pk.Generation).ToArray();
             HTMoreThanAFeelingbox.SelectionChanged += UpdateMemoryString;
             HTMoreThanAFeelingbox.PropertyChanged += ChangeComboBoxFontColor;
-            MoreThanAFeelingbox.SelectedIndex = mems.OT_Feeling;
-            HTMoreThanAFeelingbox.SelectedIndex = mems.HT_Feeling;
+            MoreThanAFeelingbox.SelectedIndex = mems.OriginalTrainerMemoryFeeling;
+            HTMoreThanAFeelingbox.SelectedIndex = mems.HandlingTrainerMemoryFeeling;
             Intensebox.ItemsSource = memorytext.GetMemoryQualities().ToArray();
             Intensebox.SelectionChanged += UpdateMemoryString;
             Intensebox.PropertyChanged += ChangeComboBoxFontColor;
             HTIntenseBox.ItemsSource = memorytext.GetMemoryQualities().ToArray();
             HTIntenseBox.SelectionChanged += UpdateMemoryString;
             HTIntenseBox.PropertyChanged += ChangeComboBoxFontColor;
-            Intensebox.SelectedIndex = mems.OT_Intensity;
-            HTIntenseBox.SelectedIndex = mems.HT_Intensity;
-            var memindex = Memories.GetMemoryArgType(mems.OT_Memory, pk.Format);
+            Intensebox.SelectedIndex = mems.OriginalTrainerMemoryIntensity;
+            HTIntenseBox.SelectedIndex = mems.HandlingTrainerMemoryIntensity;
+            var memindex = Memories.GetMemoryArgType(mems.OriginalTrainerMemory, pk.Format);
             var argvals = memorytext.GetArgumentStrings(memindex, pk.Format);
             OTTextVarBox.ItemsSource = argvals;
             OTTextVarBox.SelectionChanged += UpdateMemoryString;
             OTTextVarBox.PropertyChanged += ChangeComboBoxFontColor;
             TextVar.Text = GetMemoryCategory(memindex, pk.Format);
-            var HTmemindex = Memories.GetMemoryArgType(mems.HT_Memory, pk.Format);
+            var HTmemindex = Memories.GetMemoryArgType(mems.HandlingTrainerMemory, pk.Format);
             var HTargvals = memorytext.GetArgumentStrings(HTmemindex, pk.Format);
             HTTextVarBox.ItemsSource = HTargvals;
             HTTextVarBox.SelectionChanged += UpdateMemoryString;
             HTTextVarBox.PropertyChanged += ChangeComboBoxFontColor;
             HTTextVar.Text = GetMemoryCategory(HTmemindex, pk.Format);
-            OTTextVarBox.SelectedItem = argvals.Find(z => z.Value == mems.OT_TextVar);
-            HTTextVarBox.SelectedItem = HTargvals.Find(z => z.Value == mems.HT_TextVar);
+            OTTextVarBox.SelectedItem = argvals.Find(z => z.Value == mems.OriginalTrainerMemoryVariable);
+            HTTextVarBox.SelectedItem = HTargvals.Find(z => z.Value == mems.HandlingTrainerMemoryVariable);
             OTMemoryStack.Insert(5, TextVar);
             OTMemoryStack.Insert(6, OTTextVarBox);
             OTMemoryStack.Insert(7, Intense);
@@ -82,7 +82,7 @@ public partial class MemoriesAmie : TabbedPage
             HTMemoryStack.Insert(9, HTMoreThanAFeeling);
             HTMemoryStack.Insert(10, HTMoreThanAFeelingbox);
             HTMemoryStack.Insert(11, HTMemoryString);
-            if (mems.OT_Memory > 0)
+            if (mems.OriginalTrainerMemory > 0)
             {
                 MoreThanAFeeling.IsVisible = true;
                 MoreThanAFeelingbox.IsVisible = true;
@@ -91,9 +91,9 @@ public partial class MemoriesAmie : TabbedPage
                 MemoryString.IsVisible = true;
                 OTTextVarBox.IsVisible = true;
                 TextVar.IsVisible = true;
-                MemoryString.Text = string.Format(memorytext.Memory[mems.OT_Memory].Text, pk.Nickname, pk.OT_Name, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
+                MemoryString.Text = string.Format(memorytext.Memory[mems.OriginalTrainerMemory].Text, pk.Nickname, pk.OriginalTrainerName, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
             }
-            if (mems.HT_Memory > 0)
+            if (mems.HandlingTrainerMemory > 0)
             {
                 HTMoreThanAFeeling.IsVisible = true;
                 HTMoreThanAFeelingbox.IsVisible = true;
@@ -102,10 +102,10 @@ public partial class MemoriesAmie : TabbedPage
                 HTMemoryString.IsVisible = true;
                 HTTextVar.IsVisible = true;
                 HTTextVarBox.IsVisible = true;
-                HTMemoryString.Text = string.Format(memorytext.Memory[mems.HT_Memory].Text, pk.Nickname, pk.OT_Name, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : HTargvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
+                HTMemoryString.Text = string.Format(memorytext.Memory[mems.HandlingTrainerMemory].Text, pk.Nickname, pk.OriginalTrainerName, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : HTargvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
             }
         }
-        chlabel.Text = pk.CurrentHandler == 0 ? pk.OT_Name : pk.HT_Name;
+        chlabel.Text = pk.CurrentHandler == 0 ? pk.OriginalTrainerName : pk.HandlingTrainerName;
         fullnesseditor.Text = pk.Fullness.ToString();
         EnjoymentEditor.Text = pk.Enjoyment.ToString();
     }
@@ -113,33 +113,33 @@ public partial class MemoriesAmie : TabbedPage
 
     private void SaveMemoriesAndClose(object sender, EventArgs e)
     {
-        if (int.TryParse(Friendshipeditor.Text, out var result))
+        if (byte.TryParse(Friendshipeditor.Text, out var result))
         {
             if (result > 255)
                 result = 255;
 
-            pk.OT_Friendship = result;
+            pk.OriginalTrainerFriendship = result;
         }
-        if (int.TryParse(HTFriendshipeditor.Text, out var result2))
+        if (byte.TryParse(HTFriendshipeditor.Text, out var result2))
         {
             if (result2 > 255)
                 result2 = 255;
-            pk.HT_Friendship = result2;
+            pk.HandlingTrainerFriendship = result2;
         }
 
         if (pk is ITrainerMemories mems)
         {
             var selectedmemorytype = (ComboItem)MemoryTypePicker.SelectedItem;
-            mems.OT_Memory = (byte)selectedmemorytype.Value;
-            mems.OT_TextVar = (byte)((ComboItem)OTTextVarBox.SelectedItem).Value;
-            mems.OT_Feeling = (byte)MoreThanAFeelingbox.SelectedIndex;
-            mems.OT_Intensity = (byte)Intensebox.SelectedIndex;
+            mems.OriginalTrainerMemory = (byte)selectedmemorytype.Value;
+            mems.OriginalTrainerMemoryVariable = (byte)((ComboItem)OTTextVarBox.SelectedItem).Value;
+            mems.OriginalTrainerMemoryFeeling = (byte)MoreThanAFeelingbox.SelectedIndex;
+            mems.OriginalTrainerMemoryIntensity = (byte)Intensebox.SelectedIndex;
 
             var selectedhtmemorytype = (ComboItem)HTMemoryTypePicker.SelectedItem;
-            mems.HT_Memory = (byte)selectedhtmemorytype.Value;
-            mems.HT_Feeling = (byte)HTMoreThanAFeelingbox.SelectedIndex;
-            mems.HT_Intensity = (byte)HTIntenseBox.SelectedIndex;
-            mems.HT_TextVar = (byte)((ComboItem)HTTextVarBox.SelectedItem).Value;
+            mems.HandlingTrainerMemory = (byte)selectedhtmemorytype.Value;
+            mems.HandlingTrainerMemoryFeeling = (byte)HTMoreThanAFeelingbox.SelectedIndex;
+            mems.HandlingTrainerMemoryIntensity = (byte)HTIntenseBox.SelectedIndex;
+            mems.HandlingTrainerMemoryVariable = (byte)((ComboItem)HTTextVarBox.SelectedItem).Value;
         }
         if (byte.TryParse(fullnesseditor.Text, out var result3))
         {
@@ -183,7 +183,7 @@ public partial class MemoriesAmie : TabbedPage
             MemoryString.IsVisible = true;
             try
             {
-                MemoryString.Text = string.Format(memorytext.Memory[MemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
+                MemoryString.Text = string.Format(memorytext.Memory[MemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OriginalTrainerName, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
             }
             catch (Exception) { }
         }
@@ -212,12 +212,12 @@ public partial class MemoriesAmie : TabbedPage
         var memindex = Memories.GetMemoryArgType((byte)MemoryTypePicker.SelectedIndex, pk.Format);
         var argvals = memorytext.GetArgumentStrings(memindex, pk.Format);
         if ((SfComboBox)sender == OTTextVarBox || (SfComboBox)sender == MoreThanAFeelingbox || (SfComboBox)sender == Intensebox)
-            MemoryString.Text = string.Format(memorytext.Memory[MemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
+            MemoryString.Text = string.Format(memorytext.Memory[MemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OriginalTrainerName, (ComboItem)OTTextVarBox.SelectedItem != null ? ((ComboItem)OTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)Intensebox.SelectedItem, (string)MoreThanAFeelingbox.SelectedItem);
         if ((SfComboBox)sender == HTTextVarBox || (SfComboBox)sender == HTMoreThanAFeelingbox || (SfComboBox)sender == HTIntenseBox)
         {
             memindex = Memories.GetMemoryArgType((byte)HTMemoryTypePicker.SelectedIndex, pk.Format);
             argvals = memorytext.GetArgumentStrings(memindex, pk.Format);
-            HTMemoryString.Text = string.Format(memorytext.Memory[HTMemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
+            HTMemoryString.Text = string.Format(memorytext.Memory[HTMemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OriginalTrainerName, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
         }
     }
     private void HTChangeMemoryDisplay(object sender, EventArgs e)
@@ -242,7 +242,7 @@ public partial class MemoriesAmie : TabbedPage
             HTMemoryString.IsVisible = true;
             try
             {
-                HTMemoryString.Text = string.Format(memorytext.Memory[HTMemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OT_Name, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
+                HTMemoryString.Text = string.Format(memorytext.Memory[HTMemoryTypePicker.SelectedIndex].Text, pk.Nickname, pk.OriginalTrainerName, (ComboItem)HTTextVarBox.SelectedItem != null ? ((ComboItem)HTTextVarBox.SelectedItem).Text : argvals[0].Text, (string)HTIntenseBox.SelectedItem, (string)HTMoreThanAFeelingbox.SelectedItem);
             }
             catch (Exception) { }
         }

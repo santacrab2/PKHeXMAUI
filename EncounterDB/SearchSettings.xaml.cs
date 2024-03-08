@@ -34,7 +34,7 @@ public partial class SearchSettings : ContentPage
             if (encSettings.Moves.Count>3)
                 EncMove4.SelectedItem = EncMoveList.First(z => z.Value == encSettings.Moves[3]);
 
-            EncVersion.SelectedItem = EncVersionList.First(z=>z.Value == encSettings.Version);
+            EncVersion.SelectedItem = EncVersionList.First(z=>z.Value == (int)encSettings.Version);
             ShinyCheck.IsChecked = (bool)encSettings.SearchShiny;
             EggCheck.IsChecked = (bool)encSettings.SearchEgg;
         }
@@ -57,7 +57,7 @@ public partial class SearchSettings : ContentPage
             Species = (ushort)((ComboItem)EncSpecies.SelectedItem).Value,
             Format = sav.Generation,
             Generation = sav.Generation,
-            Version = ((ComboItem)EncVersion.SelectedItem).Value,
+            Version = (GameVersion)((ComboItem)EncVersion.SelectedItem).Value,
             Nature = (EncounterSettings.UsePkEditorAsCriteria ? pk.Nature : 0),
             Ability = (EncounterSettings.UsePkEditorAsCriteria ? pk.Ability : 0),
             Level = (EncounterSettings.UsePkEditorAsCriteria ? pk.CurrentLevel : 0),

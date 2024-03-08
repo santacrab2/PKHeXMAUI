@@ -100,9 +100,9 @@ public partial class MainPage : ContentPage
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.AllowGen1Tradeback))!.SetValue(null, startup.AllowGen1Tradeback);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedTrade))!.SetValue(null, startup.NicknamedTrade);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedMysteryGift))!.SetValue(null, startup.NicknamedMysteryGift);
-        typeof(ParseSettings).GetProperty(nameof(ParseSettings.RNGFrameNotFound))!.SetValue(null, startup.RNGFrameNotFound);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.RNGFrameNotFound3))!.SetValue(null, startup.RNGFrameNotFound);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.Gen7TransferStarPID))!.SetValue(null, startup.Gen7TransferStarPID);
-        typeof(ParseSettings).GetProperty(nameof(ParseSettings.Gen8TransferTrackerNotPresent))!.SetValue(null, startup.Gen8TransferTrackerNotPresent);
+        typeof(ParseSettings).GetProperty(nameof(ParseSettings.HOMETransferTrackerNotPresent))!.SetValue(null, startup.Gen8TransferTrackerNotPresent);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.Gen8MemoryMissingHT))!.SetValue(null, startup.Gen8MemoryMissingHT);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.NicknamedAnotherSpecies))!.SetValue(null, startup.NicknamedAnotherSpecies);
         typeof(ParseSettings).GetProperty(nameof(ParseSettings.ZeroHeightWeight))!.SetValue(null, startup.ZeroHeightWeight);
@@ -233,11 +233,11 @@ public partial class MainPage : ContentPage
         nickname.Text = pkm.Nickname;
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
-        naturepicker.SelectedItem = datasourcefiltered.Natures.First(z => z.Value == pkm.Nature);
-        statnaturepicker.SelectedItem = datasourcefiltered.Natures.First(z => z.Value == pkm.StatNature);
+        naturepicker.SelectedItem = datasourcefiltered.Natures.First(z => z.Value == (int)pkm.Nature);
+        statnaturepicker.SelectedItem = datasourcefiltered.Natures.First(z => z.Value == (int)pkm.StatNature);
         iseggcheck.IsChecked = pkm.IsEgg;
-        infectedcheck.IsChecked = pkm.PKRS_Infected;
-        curedcheck.IsChecked = pkm.PKRS_Cured;
+        infectedcheck.IsChecked = pkm.IsPokerusInfected;
+        curedcheck.IsChecked = pkm.IsPokerusCured;
         if (abilitypicker.Items.Count != 0)
             abilitypicker.Items.Clear();
         for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
@@ -466,12 +466,12 @@ public partial class MainPage : ContentPage
             if (naturepicker.SelectedItem is null)
                 return;
             int selectedNature = ((ComboItem)naturepicker.SelectedItem).Value;
-            if (pk.Format <= 4 && pk.Nature != selectedNature)
+            if (pk.Format <= 4 && (int)pk.Nature != selectedNature)
             {
-                pk.SetPIDNature(selectedNature);
+                pk.SetPIDNature((Nature)selectedNature);
                 displaypid.Text = $"{pk.PID:X}";
             }
-            pk.Nature = selectedNature;
+            pk.Nature = (Nature)selectedNature;
             applymainpkinfo(pk);
         } 
     }
@@ -537,7 +537,7 @@ public partial class MainPage : ContentPage
         {
             if (leveldisplay.Text.Length > 0 && !SkipTextChange)
             {
-                if (!int.TryParse(leveldisplay.Text, out var result))
+                if (!byte.TryParse(leveldisplay.Text, out var result))
                     return;
                 pk.CurrentLevel = result;
                 exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
@@ -552,7 +552,7 @@ public partial class MainPage : ContentPage
     {
         if (!SkipTextChange)
         {
-            if (!int.TryParse(Friendshipdisplay.Text, out var result))
+            if (!byte.TryParse(Friendshipdisplay.Text, out var result))
                 return;
             if (result > 255)
             {
@@ -639,7 +639,7 @@ public partial class MainPage : ContentPage
     private void applystatnature(object sender, EventArgs e)
     {
         if(!SkipTextChange)
-            pk.StatNature = ((ComboItem)statnaturepicker.SelectedItem).Value;
+            pk.StatNature = (Nature)((ComboItem)statnaturepicker.SelectedItem).Value;
         checklegality();
     }
 
@@ -670,12 +670,12 @@ public partial class MainPage : ContentPage
             SkipTextChange = true;
             eggsprite.IsVisible= true;
             FriendshipLabel.Text = "Hatch Counter:";
-            pk.CurrentFriendship = EggStateLegality.GetMinimumEggHatchCycles(pk);
+            pk.CurrentFriendship = (byte)EggStateLegality.GetMinimumEggHatchCycles(pk);
 
             pk.SetNickname(SpeciesName.GetEggName(pk.Language, pk.Format));
             if (pk is PK9)
                 pk.Version = 0;
-            pk.Met_Location = LocationEdits.GetNoneLocation(pk);
+            pk.MetLocation = LocationEdits.GetNoneLocation(pk);
             pk.Move1_PPUps= 0;
             pk.Move2_PPUps = 0;
             pk.Move3_PPUps = 0;
@@ -692,9 +692,9 @@ public partial class MainPage : ContentPage
             {
                 pk.CurrentHandler = 0;
                 if (pk is IHandlerLanguage hl)
-                    hl.HT_Language = 0;
-                pk.HT_Name = string.Empty;
-                pk.HT_Friendship = 0;
+                    hl.HandlingTrainerLanguage = 0;
+                pk.HandlingTrainerName = string.Empty;
+                pk.HandlingTrainerFriendship = 0;
             }
 
             SkipTextChange = false;
@@ -713,13 +713,13 @@ public partial class MainPage : ContentPage
     private void applyinfection(object sender, CheckedChangedEventArgs e)
     {
         if (!SkipTextChange)
-            pk.PKRS_Infected = infectedcheck.IsChecked;
+            pk.IsPokerusInfected = infectedcheck.IsChecked;
     }
 
     private void applycure(object sender, CheckedChangedEventArgs e)
     {
         if (!SkipTextChange)
-            pk.PKRS_Cured = curedcheck.IsChecked;
+            pk.IsPokerusCured = curedcheck.IsChecked;
     }
 
     private void applySparkle(object sender, CheckedChangedEventArgs e)

@@ -24,12 +24,12 @@ public partial class Items : TabbedPage
             {
                 switch (sav)
                 {
-                    case SAV9SV s: data.ToArray()[0].CopyTo(s.Items.Data, 0); break;
-                    case SAV8LA la: data.ToArray()[0].CopyTo(la.Items.Data, 0); break;
-                    case SAV8BS bs: data.ToArray()[0].CopyTo(bs.Items.Data, 0); break;
-                    case SAV8SWSH sw: data.ToArray()[0].CopyTo(sw.Items.Data, 0); break;
-                    case SAV7 s7: data.ToArray()[0].CopyTo(s7.Items.Data, 0); break;
-                    case SAV6 s6: data.ToArray()[0].CopyTo(s6.Items.Data, 0); break;
+                    case SAV9SV s: data.ToArray()[0].CopyTo(s.Items.Data.ToArray(), 0); break;
+                    case SAV8LA la: data.ToArray()[0].CopyTo(la.Items.Data.ToArray(), 0); break;
+                    case SAV8BS bs: data.ToArray()[0].CopyTo(bs.Items.Data.ToArray(), 0); break;
+                    case SAV8SWSH sw: data.ToArray()[0].CopyTo(sw.Items.Data.ToArray(), 0); break;
+                    case SAV7 s7: data.ToArray()[0].CopyTo(s7.Items.Data.ToArray(), 0); break;
+                    case SAV6 s6: data.ToArray()[0].CopyTo(s6.Items.Data.ToArray(), 0); break;
                 }
             }
             else
@@ -222,7 +222,7 @@ public partial class Items : TabbedPage
             {
                 try
                 {
-                    Remote.Injector.WriteBlockFromString(Remote, "Items", ((SAV8BS)Origin).Items.Data, ((SAV8BS)Origin).Items);
+                    Remote.Injector.WriteBlockFromString(Remote, "Items", ((SAV8BS)Origin).Items.Data.ToArray(), ((SAV8BS)Origin).Items);
                 }
                 catch (Exception) { }
             }
