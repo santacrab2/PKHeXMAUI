@@ -2,6 +2,11 @@ using Syncfusion.Maui.Inputs;
 using System.Reflection;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
+using Syncfusion.Maui.DataSource.Extensions;
+using System.Collections.ObjectModel;
+using Syncfusion.Maui.Core.Internals;
+using System.Text.Json;
+using System.Runtime.Serialization.Json;
 
 namespace PKHeXMAUI;
 
@@ -35,7 +40,9 @@ public partial class PKHeXSettings : ContentPage
 
 			return grid;
         });
-
+        GenericCollectionSelector.SelectedSource = JsonSerializer.Deserialize<ObservableCollection<MoveType>>(Preferences.Get("RandomTypes", string.Empty));
+        foreach (var removeType in GenericCollectionSelector.SelectedSource)
+            GenericCollectionSelector.MoveTypeOptionsSource.Remove(removeType);
 		PKHeXSettingsCollection.ItemsSource = props;
     }
 	public string LastBox = "";
@@ -54,6 +61,7 @@ public partial class PKHeXSettings : ContentPage
         var box = (SfComboBox)sender;
 		Preferences.Set(box.Placeholder, (bool)box.SelectedItem);
 	}
+
 }
 public class PSettings
 {
@@ -90,13 +98,22 @@ public class GenericCollection
         }
         if(p.PropertyType == typeof(Severity))
         {
-            foreach (var s in Enum.GetValues(typeof(Severity)))
-                proparray.Add((Severity)s);
+            foreach (var s in Enum.GetValues<Severity>())
+                proparray.Add(s);
+        }
+        if(p.PropertyType == typeof(ObservableCollection<MoveType>))
+        {
+            foreach (var l in Enum.GetValues<MoveType>())
+                proparray.Add(l);
         }
 	}
 }
 public class GenericCollectionSelector : DataTemplateSelector
 {
+    public static CollectionView Selected = new() { CanReorderItems = true, SelectionMode = SelectionMode.Single};
+    public static CollectionView Options = new() { CanReorderItems = true, SelectionMode = SelectionMode.Single };
+    public static ObservableCollection<MoveType> SelectedSource = [];
+    public static ObservableCollection<MoveType> MoveTypeOptionsSource = Enum.GetValues<MoveType>().ToObservableCollection();
     public DataTemplate ComboTemplate = new(() =>
     {
         Grid grid = new() { Padding = 10, Margin = 10 };
@@ -134,10 +151,57 @@ public class GenericCollectionSelector : DataTemplateSelector
         grid.Add(SettingString, 1);
         return grid;
     });
+    public DataTemplate RandomTypesSettingTemplate = new(() =>
+    {
+        Grid grid = new() { Padding = 10, Margin = 10 };
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = 175 });
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+        Selected.ItemTemplate = new DataTemplate(() =>
+        {
+            Grid grid = new() { Padding = 10, Margin = 10 };
+            Label type = new();
+            type.SetBinding(Label.TextProperty, ".");
+            TapGestureRecognizer Taping = new();
+            Taping.Tapped += ((ALMSettings)AppShell.Current.CurrentPage).RemoveTap;
+            grid.GestureRecognizers.Add(Taping);
+            grid.Add(type);
+            return grid;
+        });
 
+        Options.ItemTemplate = new DataTemplate(() =>
+        {
+            Grid grid = new() { Padding = 10, Margin = 10 };
+            Label type = new();
+            type.SetBinding(Label.TextProperty,".");
+            TapGestureRecognizer NotAddedTap = new();
+            NotAddedTap.Tapped += ((ALMSettings)AppShell.Current.CurrentPage).TapTapTap;
+            NotAddedTap.SetBinding(TapGestureRecognizer.CommandParameterProperty, ".");
+            grid.GestureRecognizers.Add(NotAddedTap);
+            grid.Add(type);
+            return grid;
+        });
+        Options.SetBinding(CollectionView.ItemsSourceProperty, ".");
+        Options.BindingContext = MoveTypeOptionsSource;
+        Selected.SetBinding(CollectionView.ItemsSourceProperty, ".");
+        Selected.BindingContext = SelectedSource;
+        var proplabel = new Label();
+        proplabel.SetBinding(Label.TextProperty, "prop.Name");
+        grid.Add(proplabel);
+        grid.Add(new Label() { Text = "Options" }, 1, 0);
+        grid.Add(Selected,0,1);
+        grid.Add(Options,1,1);
+        return grid;
+    });
     protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
     {
-        return ((GenericCollection)item).prop.PropertyType == typeof(string) ? StringTemplate : ComboTemplate;
+        if (((GenericCollection)item).prop.PropertyType == typeof(string))
+            return StringTemplate;
+        if (((GenericCollection)item).prop.PropertyType == typeof(ObservableCollection<MoveType>))
+            return RandomTypesSettingTemplate;
+        else
+            return ComboTemplate;
     }
     public static void ApplySettingBool(object sender, EventArgs e)
     {
@@ -168,43 +232,51 @@ public class GenericCollectionSelector : DataTemplateSelector
             TrainerSettings.Clear();
             TrainerSettings.Register(TrainerSettings.DefaultFallback((GameVersion)MainPage.sav.Version, (LanguageID)MainPage.sav.Language));
         }
+
         MainPage.SetSettings();
     }
     public static string LastBox = "";
     public static void GetSettingBool(object sender, EventArgs e)
     {
-        if (sender is SfComboBox box)
+        try
         {
-            if (box.Placeholder != LastBox && box.ItemsSource is not null)
+            if (sender is SfComboBox box)
             {
-                if (((List<object>)box.ItemsSource)[0] is Boolean)
-                    box.SelectedItem = Preferences.Get(box.Placeholder, false);
-                else if (((List<object>)box.ItemsSource)[0] is GameVersion)
-                    box.SelectedItem = (GameVersion)Preferences.Get(box.Placeholder, 0);
-                else if(((List<object>)box.ItemsSource)[0] is Severity)
-                    box.SelectedItem = (Severity)Preferences.Get(box.Placeholder,0);
-
-                LastBox = box.Placeholder;
-            }
-        }
-        if (sender is Editor editor)
-        {
-            if (editor.Placeholder != null)
-            {
-                if (editor.Placeholder != LastBox)
+                if (box.Placeholder != LastBox && box.ItemsSource is not null)
                 {
-                    editor.Text = Preferences.Get(editor.Placeholder, "12345");
-                    LastBox = editor.Placeholder;
-                    var description = editor.Placeholder switch
-                    {
-                        "DefaultOT" => "The OT Name that will be set when you press Legalize",
-                        "DefaultTID" => "5 digit Trainer ID (Not the 7 digit display)",
-                        "DefaultSID" => "5 digit Trainer Secret ID (not the 4 digit display)",
-                        _ => ""
-                    };
-                    ToolTipProperties.SetText(editor, description);
+                    if (((List<object>)box.ItemsSource)[0] is Boolean)
+                        box.SelectedItem = Preferences.Get(box.Placeholder, false);
+                    else if (((List<object>)box.ItemsSource)[0] is GameVersion)
+                        box.SelectedItem = (GameVersion)Preferences.Get(box.Placeholder, 0);
+                    else if (((List<object>)box.ItemsSource)[0] is Severity)
+                        box.SelectedItem = (Severity)Preferences.Get(box.Placeholder, 0);
+
+                    LastBox = box.Placeholder;
                 }
             }
+            if (sender is Editor editor)
+            {
+                if (editor.Placeholder != null)
+                {
+                    if (editor.Placeholder != LastBox)
+                    {
+                        editor.Text = Preferences.Get(editor.Placeholder, "12345");
+                        LastBox = editor.Placeholder;
+                        var description = editor.Placeholder switch
+                        {
+                            "DefaultOT" => "The OT Name that will be set when you press Legalize",
+                            "DefaultTID" => "5 digit Trainer ID (Not the 7 digit display)",
+                            "DefaultSID" => "5 digit Trainer Secret ID (not the 4 digit display)",
+                            _ => ""
+                        };
+                        ToolTipProperties.SetText(editor, description);
+                    }
+                }
+            }
+
         }
+        catch (Exception) { }
     }
+
+
 }

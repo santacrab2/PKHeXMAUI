@@ -114,6 +114,7 @@ public partial class BoxTab : ContentPage
             case "Delete": del(sender,e); break;
             case "View": applypkfrombox(sender, e); break;
             case "Set": inject(sender, e); break;
+            case "cancel": boxview.SelectedItem = null; break;
         }
     }
     public void DisplayOptions()
@@ -285,9 +286,9 @@ public partial class BoxTab : ContentPage
         Sharer.IsVisible = false;
         LB_Share.IsVisible = false;
     }
-    private async void Generateliving(object sender, EventArgs e)
+    private async void GenerateRandomTeam(object sender, EventArgs e)
     {
-        //livingdexbutton.Text = "loading...";
+        RandomTeamButton.Text = "loading...";
         await Task.Delay(100);
         ModLogic.SetAlpha = PluginSettings.LivingDexSetAlpha;
         ModLogic.IncludeForms = PluginSettings.LivingDexAllForms;
@@ -296,14 +297,16 @@ public partial class BoxTab : ContentPage
 
         await Task.Run(copyboxdata);
         fillbox();
-        //livingdexbutton.Text = "Generate Living Dex";
+        RandomTeamButton.Text = "Generate Random Team";
     }
     public void copyboxdata()
     {
-        Span<PKM> pkms = sav.GenerateLivingDex().ToArray();
-        Span<PKM> bd = sav.BoxData.ToArray();
-        pkms.CopyTo(bd);
-        sav.BoxData = bd.ToArray();
+        PKM[] pkms = sav.GetSixRandomMons();
+        if (sav.BoxData == null)
+            sav.BoxData = [];
+        var empties = Legalizer.FindAllEmptySlots(sav.BoxData, 0);
+        for (int i = 0; i < 6; i++)
+            sav.SetBoxSlotAtIndex(pkms[i], empties[i]);
     }
     private void changebox(object sender, EventArgs e)
     {
@@ -330,6 +333,8 @@ public partial class BoxTab : ContentPage
     {
         Navigation.PushModalAsync(new BatchEditor());
     }
+
+    private void displayOpts(object sender, DragEventArgs e) => DisplayOptions();
 }
 public class boxsprite
 {
