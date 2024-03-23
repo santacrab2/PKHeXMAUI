@@ -89,7 +89,7 @@ public partial class MetTab : ContentPage
         {
             obediencelevellabel.IsVisible = true;
             obedienceleveldisplay.IsVisible = true;
-            obedienceleveldisplay.Text = ob.Obedience_Level.ToString();
+            obedienceleveldisplay.Text = ob.ObedienceLevel.ToString();
         }
         fatefulcheck.IsChecked = pkm.FatefulEncounter;
         eggcheck.IsChecked = pkm.WasEgg;
@@ -161,7 +161,7 @@ public partial class MetTab : ContentPage
         if (pk is IObedienceLevel ob && !SkipEvent)
         {
             if (obedienceleveldisplay.Text.Length > 0)
-                ob.Obedience_Level = (byte)int.Parse(obedienceleveldisplay.Text);
+                ob.ObedienceLevel = (byte)int.Parse(obedienceleveldisplay.Text);
         }
     }
 

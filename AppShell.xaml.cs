@@ -1,4 +1,7 @@
 ﻿using PKHeX.Core;
+using PKHeX.Core.AutoMod;
+using Syncfusion.Maui.DataSource.Extensions;
+using System.Windows.Input;
 using static PKHeXMAUI.MainPage;
 namespace PKHeXMAUI;
 
@@ -8,10 +11,67 @@ public partial class AppShell : Shell
 	{
         AppSaveFile = sav;
         InitializeComponent();
+        
+        TheShell.ItemTemplate = new FlyoutCollectionSelector();
     }
 	public static SaveFile AppSaveFile { get; set; }
     public BoxManipulator manip = new BoxManipulatorMAUI();
-    private void checkbox(object sender, ShellNavigatedEventArgs e)
+    public static bool boxexpanded = false;
+    public static bool pkexpanded = false;
+    public async void DropdownExpansion(object sender, EventArgs e)
+    {
+        if (((string)((ImageButton)sender).CommandParameter) == "Box/Party")
+        {
+            if (!boxexpanded)
+            {
+                boxexpanded = true;
+                Shell.SetFlyoutItemIsVisible(DeleteBoxes, true);
+                Shell.SetFlyoutItemIsVisible(SortBoxes, true);
+                Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, true);
+                Shell.SetFlyoutItemIsVisible(ModifyBoxes, true);
+            }
+            else
+            {
+                Shell.SetFlyoutItemIsVisible(DeleteBoxes, false);
+                Shell.SetFlyoutItemIsVisible(SortBoxes, false);
+                Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, false);
+                Shell.SetFlyoutItemIsVisible(ModifyBoxes, false);
+                DeleteExpanded = true;
+                DeleteClicked(sender, e);
+                SortExpanded = true;
+                SortClick(sender, e);
+                SortAdvancedExpanded = true;
+                SortBoxesAdvancedClicked(sender, e);
+                ModifyExpanded = true;
+                ModifyBoxesClicked(sender, e);
+                boxexpanded = false;
+            }
+            return;
+        }
+        if (((string)((ImageButton)sender).CommandParameter) == "pk editor")
+        {
+            if (!pkexpanded)
+            {
+                Shell.SetFlyoutItemIsVisible(OpenPKM, true);
+                Shell.SetFlyoutItemIsVisible(SavePKM, true);
+                Shell.SetFlyoutItemIsVisible(thelegalizer, true);
+                Shell.SetFlyoutItemIsVisible(impshow, true);
+                Shell.SetFlyoutItemIsVisible(expshow, true);
+                pkexpanded = true;
+            }
+            else
+            {
+                Shell.SetFlyoutItemIsVisible(OpenPKM, false);
+                Shell.SetFlyoutItemIsVisible(SavePKM, false);
+                Shell.SetFlyoutItemIsVisible(thelegalizer, false);
+                Shell.SetFlyoutItemIsVisible(impshow, false);
+                Shell.SetFlyoutItemIsVisible(expshow, false);
+                pkexpanded = false;
+            }
+            return;
+        }
+    }
+    public async void checkbox(object sender, EventArgs e)
     {
         switch (TheShell.CurrentPage)
         {
@@ -45,6 +105,7 @@ public partial class AppShell : Shell
         }
         if (TheShell.CurrentPage.GetType() == typeof(BoxTab))
         {
+            boxexpanded = true;
             Shell.SetFlyoutItemIsVisible(DeleteBoxes, true);
             Shell.SetFlyoutItemIsVisible(SortBoxes, true);
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, true);
@@ -54,6 +115,7 @@ public partial class AppShell : Shell
         }
         else
         {
+            boxexpanded = false;
             Shell.SetFlyoutItemIsVisible(DeleteBoxes, false);
             Shell.SetFlyoutItemIsVisible(SortBoxes, false);
             Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, false);
@@ -74,14 +136,17 @@ public partial class AppShell : Shell
         }
         if (TheShell.CurrentPage.GetType() == typeof(MainPage))
         {
+            pkexpanded = true;
             Shell.SetFlyoutItemIsVisible(OpenPKM, true);
             Shell.SetFlyoutItemIsVisible(SavePKM, true);
             Shell.SetFlyoutItemIsVisible(thelegalizer, true);
             Shell.SetFlyoutItemIsVisible(impshow, true);
             Shell.SetFlyoutItemIsVisible(expshow, true);
+
         }
         else
         {
+            pkexpanded = false;
             Shell.SetFlyoutItemIsVisible(OpenPKM, false);
             Shell.SetFlyoutItemIsVisible(SavePKM, false);
             Shell.SetFlyoutItemIsVisible(thelegalizer, false);
@@ -215,7 +280,8 @@ public partial class AppShell : Shell
             Shell.SetFlyoutItemIsVisible(Heal, false);
             ModifyExpanded = false;
         }
-        Shell.Current.FlyoutIsPresented = false;
+        if(Shell.Current is not null)
+            Shell.Current.FlyoutIsPresented = false;
     }
     private void SortClick(object sender, EventArgs e)
     {
@@ -521,5 +587,62 @@ public class BoxManipulatorMAUI : BoxManipulator
         if (!canModify && !string.IsNullOrEmpty(fail))
             Shell.Current.DisplayAlert("Box", fail, "cancel");
         return canModify;
+    }
+}
+public class FlyoutCollectionSelector : DataTemplateSelector
+{
+    public DataTemplate FlyoutItemDataTemplate =  new DataTemplate(() =>
+    {
+        Grid grid = new() { Padding = 15 };
+        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
+        grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+        Label label = new() { TextColor = Colors.White, HorizontalOptions = LayoutOptions.Center };
+        label.SetBinding(Label.TextProperty, "Title");
+        grid.Add(label);
+        Image icon = new() { HorizontalOptions = LayoutOptions.Start, HeightRequest=25, WidthRequest=25 } ;
+        icon.SetBinding(Image.SourceProperty, "Icon");
+        grid.Add(icon);
+        ImageButton button = new() { BackgroundColor = Colors.White, HeightRequest=25, WidthRequest=25 };
+        button.Source = "dump.png";
+        button.SetBinding(ImageButton.CommandParameterProperty,"Title");
+        button.Clicked += ((AppShell)AppShell.Current).DropdownExpansion;
+        grid.Add(button, 1);
+        return grid;
+    });
+    public DataTemplate MenuItemDataTemplate = new DataTemplate(() =>
+    {
+        Grid grid = new() { Padding = 15};
+        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Star) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
+        grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+        Label label = new() { TextColor = Colors.White , HorizontalOptions = LayoutOptions.Center};
+        label.SetBinding(Label.TextProperty, "Title");
+        grid.Add(label);
+        Image icon = new() { HorizontalOptions = LayoutOptions.Start, HeightRequest = 25, WidthRequest = 25 };
+        icon.SetBinding(Image.SourceProperty, "Icon");
+        grid.Add(icon);
+        return grid;
+    });
+    protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+    {
+        if (item is FlyoutItem e)
+        {
+            if (e.Title == "Box/Party" || e.Title == "pk editor")
+                return FlyoutItemDataTemplate;
+            else
+                return MenuItemDataTemplate;
+        }
+        if(item is Tab t)
+        {
+            if (t.Title == "Box/Party" || t.Title == "pk editor")
+                return FlyoutItemDataTemplate;
+            else
+                return MenuItemDataTemplate;
+        }
+        else
+        {
+            return MenuItemDataTemplate;
+        }
     }
 }

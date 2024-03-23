@@ -83,7 +83,7 @@ public partial class MainPage : ContentPage
         APILegality.Timeout = 45;
         APILegality.AllowHOMETransferGeneration = PluginSettings.AllowHomeless;
         EncounterMovesetGenerator.PriorityList = new List<EncounterTypeGroup>() { EncounterTypeGroup.Slot, EncounterTypeGroup.Trade, EncounterTypeGroup.Static, EncounterTypeGroup.Mystery, EncounterTypeGroup.Egg };
-        TrainerSettings.DefaultOT = PluginSettings.DefaultOT;
+        //TrainerSettings.DefaultOT = PluginSettings.DefaultOT;
         EncounterEvent.RefreshMGDB();
         var IsSIDdigits = ushort.TryParse(PluginSettings.DefaultSID, out var SID);
         if (IsSIDdigits)

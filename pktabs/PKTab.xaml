@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:inputs="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
              x:Class="PKHeXMAUI.MainPage"
-             Title="Main">
+             Title="pk editor">
     <RefreshView x:Name="PKRefresh">
         <ScrollView>
 
