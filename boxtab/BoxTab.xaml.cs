@@ -333,7 +333,6 @@ public partial class BoxTab : ContentPage
     {
         Navigation.PushModalAsync(new BatchEditor());
     }
-
     private void displayOpts(object sender, DragEventArgs e) => DisplayOptions();
 }
 public class boxsprite
