@@ -116,10 +116,7 @@ public partial class AppShell : Shell
         else
         {
             boxexpanded = false;
-            Shell.SetFlyoutItemIsVisible(DeleteBoxes, false);
-            Shell.SetFlyoutItemIsVisible(SortBoxes, false);
-            Shell.SetFlyoutItemIsVisible(SortBoxesAdvanced, false);
-            Shell.SetFlyoutItemIsVisible(ModifyBoxes, false);
+
             DeleteExpanded = true;
             DeleteClicked(sender, e);
             SortExpanded = true;
@@ -134,25 +131,7 @@ public partial class AppShell : Shell
             }
             catch(Exception) { }
         }
-        if (TheShell.CurrentPage.GetType() == typeof(MainPage))
-        {
-            pkexpanded = true;
-            Shell.SetFlyoutItemIsVisible(OpenPKM, true);
-            Shell.SetFlyoutItemIsVisible(SavePKM, true);
-            Shell.SetFlyoutItemIsVisible(thelegalizer, true);
-            Shell.SetFlyoutItemIsVisible(impshow, true);
-            Shell.SetFlyoutItemIsVisible(expshow, true);
-
-        }
-        else
-        {
-            pkexpanded = false;
-            Shell.SetFlyoutItemIsVisible(OpenPKM, false);
-            Shell.SetFlyoutItemIsVisible(SavePKM, false);
-            Shell.SetFlyoutItemIsVisible(thelegalizer, false);
-            Shell.SetFlyoutItemIsVisible(impshow, false);
-            Shell.SetFlyoutItemIsVisible(expshow, false);
-        }
+    }
     }
     public bool SortExpanded = false;
     public bool DeleteExpanded = false;
@@ -546,32 +525,37 @@ public partial class AppShell : Shell
         ManipulateBoxes("Clear", "Clear clones in All boxes", "Clear clones in the Current box", BoxManipType.DeleteClones);
     }
 
-    private void OpenPKMClicked(object sender, EventArgs e)
+    private async void OpenPKMClicked(object sender, EventArgs e)
     {
+        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).pk9picker_Clicked(sender, e);
     }
 
     private void SavePKMClicked(object sender, EventArgs e)
     {
+        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).pk9saver_Clicked(sender, e);
     }
 
     private void LegalizePKM(object sender, EventArgs e)
     {
+        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).legalize(sender, e);
     }
 
     private void ImpShowClicked(object sender, EventArgs e)
     {
+        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).ImportShowdown(sender, e);
     }
 
     private void ExpShowClicked(object sender, EventArgs e)
     {
+        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).ExportShowdown(sender, e);
     }
