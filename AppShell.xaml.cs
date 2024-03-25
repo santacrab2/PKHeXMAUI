@@ -132,7 +132,7 @@ public partial class AppShell : Shell
             catch(Exception) { }
         }
     }
-    }
+    
     public bool SortExpanded = false;
     public bool DeleteExpanded = false;
     public bool SortAdvancedExpanded = false;

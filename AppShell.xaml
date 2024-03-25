@@ -96,8 +96,8 @@
             <ShellContent Title="Legality Settings" ContentTemplate="{DataTemplate local:LegalitySettings}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Encounter Database">
-        <ShellContent Icon="users.png" Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
+    <FlyoutItem Icon="users.png" Title="Encounter Database">
+        <ShellContent Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}"/>
     </FlyoutItem>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="LiveHexFlyout" Route="LiveHexFlyout" Title="LiveHex">
         <Tab Icon="language.png" Title="LiveHex" x:Name="livehextab" Route="livehextab">

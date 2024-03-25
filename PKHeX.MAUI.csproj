@@ -125,6 +125,7 @@
 	  <None Remove="Resources\Images\generalicons\tr_129.png" />
 	  <None Remove="Resources\Images\generalicons\valid.png" />
 	  <None Remove="Resources\Images\generalicons\warn.png" />
+	  <None Remove="Resources\Images\iconp.png" />
 	  <None Remove="Resources\Images\SVSprites\a_1009.png" />
 	  <None Remove="Resources\Images\SVSprites\a_1010.png" />
 	  <None Remove="Resources\Images\SVSprites\a_1011.png" />
@@ -157,9 +158,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Images\iconp.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Octokit" Version="9.1.2" />
-		<PackageReference Include="PKHeX.Core" Version="24.3.10" />
+		<PackageReference Include="PKHeX.Core" Version="24.3.26" />
 		<PackageReference Include="Syncfusion.Maui.Inputs" Version="22.2.12" />
 		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
