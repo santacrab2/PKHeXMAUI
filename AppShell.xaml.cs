@@ -532,28 +532,28 @@ public partial class AppShell : Shell
         ((MainPage)TheShell.CurrentPage).pk9picker_Clicked(sender, e);
     }
 
-    private void SavePKMClicked(object sender, EventArgs e)
+    private async void SavePKMClicked(object sender, EventArgs e)
     {
         await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).pk9saver_Clicked(sender, e);
     }
 
-    private void LegalizePKM(object sender, EventArgs e)
+    private async void LegalizePKM(object sender, EventArgs e)
     {
         await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).legalize(sender, e);
     }
 
-    private void ImpShowClicked(object sender, EventArgs e)
+    private async void ImpShowClicked(object sender, EventArgs e)
     {
         await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
         ((MainPage)TheShell.CurrentPage).ImportShowdown(sender, e);
     }
 
-    private void ExpShowClicked(object sender, EventArgs e)
+    private async void ExpShowClicked(object sender, EventArgs e)
     {
         await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
