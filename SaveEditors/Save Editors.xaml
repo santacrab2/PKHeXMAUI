@@ -6,5 +6,6 @@
     <VerticalStackLayout>
         <Button x:Name="Button_BlockData" Text="Block Data" Clicked="OpenBlockEditor" IsVisible="false"/>
         <Button Text="Inventory Editor" Clicked="OpenItems"/>
+        <Button x:Name="TrainerInfoButton" Text="Trainer Info" IsVisible="false" Clicked="OpenTrainerEditor"/>
     </VerticalStackLayout>
 </ContentPage>

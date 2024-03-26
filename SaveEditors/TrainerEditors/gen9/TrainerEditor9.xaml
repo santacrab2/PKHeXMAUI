@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.TrainerEditor9"
+             Title="TrainerEditor9">
+    <VerticalStackLayout>
+        <Grid Padding="10">
+        
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Trainer Name:" HorizontalOptions="End" VerticalOptions="Center"></Label>
+            <Entry x:Name="TrainerNameEditor" Grid.Column="1"/>
+            <Picker x:Name="TrainerGenderPicker" Grid.Column="2"/>
+        </Grid>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="SID:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Entry x:Name="TrainerSIDEditor" Grid.Column="1"/>
+            <Label Text="TID:" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Entry x:Name="TrainerTIDEditor" Grid.Column="3" />
+        </Grid>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Text="$:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Entry x:Name="TrainerMoneyEditor" Grid.Column="1"/>
+            <Button x:Name="MoneyButton" Text="+" Clicked="MaxMoney" Grid.Column="2"/>
+            <Label Text="LP:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1"/>
+            <Entry x:Name="TrainerLPEditor" Grid.Row="1" Grid.Column="1"/>
+            <Button x:Name="LPButton" Text="+" Clicked="MaxLP" Grid.Column="2" Grid.Row="1"/>
+        </Grid>
+        <Picker x:Name="VersionPicker" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Language:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Picker x:Name="LanguagePicker" Grid.Column="1"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

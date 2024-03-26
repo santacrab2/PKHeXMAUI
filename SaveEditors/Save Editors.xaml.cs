@@ -24,5 +24,12 @@ public partial class SaveEditors : ContentPage
         if (!MainPage.sav.State.Exportable || MainPage.sav is BulkStorage)
             return;
         Button_BlockData.IsVisible = true;
+        if (MainPage.sav is SAV9SV)
+            TrainerInfoButton.IsVisible = true;
+    }
+
+    private void OpenTrainerEditor(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new TrainerTab9());
     }
 }
