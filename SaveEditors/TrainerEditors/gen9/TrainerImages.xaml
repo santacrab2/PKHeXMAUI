@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.TrainerImages"
+             Title="TrainerImages">
+    <VerticalStackLayout>
+        <Image x:Name="MainTrainerImage" HorizontalOptions="Fill"/>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="CurrTrainerIcon" HorizontalOptions="Fill"/>
+            <Image x:Name="InitialTrainerIcon" Grid.Column="1" HorizontalOptions="Fill"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

@@ -21,6 +21,13 @@ public partial class TrainerEditor9 : ContentPage
 		LanguagePicker.ItemsSource = (List<ComboItem>)GameInfo.LanguageDataSource(MainPage.sav.Generation);
 		LanguagePicker.ItemDisplayBinding = new Binding("Text");
 		LanguagePicker.SelectedItem = ((List<ComboItem>)GameInfo.LanguageDataSource(MainPage.sav.Generation)).Find(z=>z.Value == MainPage.sav.Language);
+		TrainerMinutesEditor.Text = MainPage.sav.PlayedMinutes.ToString();
+		TrainerHoursEditor.Text = MainPage.sav.PlayedHours.ToString();
+		TrainerSecondsEditor.Text = MainPage.sav.PlayedMinutes.ToString();
+		GameStartedPicker.Date = ((SAV9SV)MainPage.sav).EnrollmentDate.Timestamp;
+		LastSavedPicker.Date = ((SAV9SV)MainPage.sav).LastSaved.Timestamp;
+		LastSavedTimePicker.Time = ((SAV9SV)MainPage.sav).LastSaved.Timestamp.TimeOfDay;
+
     }
 
     private void MaxMoney(object sender, EventArgs e)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.TrainerEditor9Misc"
+             Title="Misc">
+    <VerticalStackLayout>
+        <Label Text="Map Position" HorizontalOptions="Center"/>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Text="X Coordinate:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Entry x:Name="TrainerXCoordinateEditor" Grid.Column="1"/>
+            <Label Text="Y Coordinate:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1"/>
+            <Entry x:Name="TrainerYCoordinateEditor" Grid.Column="1" Grid.Row="1"/>
+            <Label Text="Z Coordinate:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2"/>
+            <Entry x:Name="TrainerZCoordinateEditor" Grid.Column="1" Grid.Row="2"/>
+            <Label Text="Rotation:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="3"/>
+            <Entry x:Name="TrainerRotationEditor" Grid.Column="1" Grid.Row="3"/>
+        </Grid>
+        <Button x:Name="AllFlyButton" Text="Unlock All Fly Locations" Clicked="UnlockFlyLocations"/>
+        <Button x:Name="StakesButton" Text="Collect All Stakes" Clicked="CollectStakes"/>
+        <Button x:Name="TMRecipeButton" Text="Unlock All TM Recipes" Clicked="UnlockTMRecipes"/>
+        <Button x:Name="BikeButton" Text="Unlock All Bike Upgrades" Clicked="UnlockBike"/>
+        <Button x:Name="FashionButton" Text="Unlock All Fashion" Clicked="UnlockFashion"/>
+    </VerticalStackLayout>
+</ContentPage>

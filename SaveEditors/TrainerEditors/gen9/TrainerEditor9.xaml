@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PKHeXMAUI.TrainerEditor9"
-             Title="TrainerEditor9">
+             Title="Overview">
     <VerticalStackLayout>
         <Grid Padding="10">
         
@@ -53,5 +53,36 @@
             <Label Text="Language:" HorizontalOptions="End" VerticalOptions="Center"/>
             <Picker x:Name="LanguagePicker" Grid.Column="1"/>
         </Grid>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Text="Hrs:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Entry x:Name="TrainerHoursEditor" Grid.Column="1"/>
+            <Label Text="Min:" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="2"/>
+            <Entry x:Name="TrainerMinutesEditor" Grid.Column="3"/>
+            <Label Text="Sec:" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="4"/>
+            <Entry x:Name="TrainerSecondsEditor" Grid.Column="5"/>
+        </Grid>
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Text="Game Started:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <DatePicker x:Name="GameStartedPicker" Grid.Column="1"/>
+            <Label Text="Last Saved:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1"/>
+            <DatePicker x:Name="LastSavedPicker" Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+        <TimePicker x:Name="LastSavedTimePicker" HorizontalOptions="Center" VerticalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
