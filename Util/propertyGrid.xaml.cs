@@ -322,10 +322,11 @@ public partial class propertyGrid : ContentView
         Label L_intern = new() { Text = CurrentProperty.PropertyType.ToString() + "▽" };
         Expander E_intern = new() { Header = L_intern };
         Grid A_stack = [];
-        IEnumerable PropertyArray = (IEnumerable?)CurrentProperty?.GetValue(CurrentItem) ?? new List<object>();
-        for (int i =0;i<PropertyArray.Cast<object>().Count();i++)
+        ICollection PropertyArray = (ICollection?)CurrentProperty?.GetValue(CurrentItem) ?? new List<object>();
+        var PropertyArrayList = PropertyArray.Cast<object>().ToArray();
+        for (int i =0;i<PropertyArray.Count;i++)
         {
-            var PropertyArrayItem = PropertyArray.Cast<object>().ToArray()[i];
+            var PropertyArrayItem = PropertyArrayList[i];
            var PAItemProperties = PropertyArrayItem.GetType().GetProperties().OrderBy(z=>z.Name).ToArray();
            for (int a =0;a<PAItemProperties.Length;a++)
             {
@@ -356,10 +357,11 @@ public partial class propertyGrid : ContentView
         Expander E_intern = new() { Header = L_intern };
         if (Value == null) return E_intern;
         Grid A_stack = [];
-        IEnumerable PropertyArray = (IEnumerable?)CurrentProperty?.GetValue(Value) ?? new List<object>();
-        for (int i = 0; i < PropertyArray.Cast<object>().Count(); i++)
+        ICollection PropertyArray = (ICollection?)CurrentProperty?.GetValue(Value) ?? new List<object>();
+        var PropertyArrayList = PropertyArray.Cast<object>().ToList();
+        for (int i = 0; i < PropertyArray.Count; i++)
         {
-            var PropertyArrayItem = PropertyArray.Cast<object>().ToList()[i];
+            var PropertyArrayItem = PropertyArrayList[i];
             
                 Label L_prop = new() { Text = PropertyArrayItem.ToString() };
                 A_stack.Add(L_prop, 0, i);
