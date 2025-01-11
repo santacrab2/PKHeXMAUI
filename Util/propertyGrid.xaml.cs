@@ -324,7 +324,7 @@ public partial class propertyGrid : ContentView
         Grid A_stack = [];
         ICollection PropertyArray = (ICollection?)CurrentProperty?.GetValue(CurrentItem) ?? new List<object>();
         var PropertyArrayList = PropertyArray.Cast<object>().ToArray();
-        for (int i =0;i<PropertyArray.Count;i++)
+        for (int i =0;i<Math.Min(PropertyArray.Count,10);i++)
         {
             var PropertyArrayItem = PropertyArrayList[i];
            var PAItemProperties = PropertyArrayItem.GetType().GetProperties().OrderBy(z=>z.Name).ToArray();
@@ -359,7 +359,7 @@ public partial class propertyGrid : ContentView
         Grid A_stack = [];
         ICollection PropertyArray = (ICollection?)CurrentProperty?.GetValue(Value) ?? new List<object>();
         var PropertyArrayList = PropertyArray.Cast<object>().ToList();
-        for (int i = 0; i < PropertyArray.Count; i++)
+        for (int i = 0; i < Math.Min(10,PropertyArray.Count); i++)
         {
             var PropertyArrayItem = PropertyArrayList[i];
             

@@ -104,8 +104,11 @@ public partial class MemoriesAmie : TabbedPage
             }
         }
         chlabel.Text = pk.CurrentHandler == 0 ? pk.OriginalTrainerName : pk.HandlingTrainerName;
-        fullnesseditor.Text = pk.Fullness.ToString();
-        EnjoymentEditor.Text = pk.Enjoyment.ToString();
+        if(pk is IFullnessEnjoyment fullness)
+        {
+            fullnesseditor.Text = fullness.Fullness.ToString();
+            EnjoymentEditor.Text = fullness.Enjoyment.ToString();
+        }
     }
     public static MemoryStrings memorytext = new(GameInfo.Strings);
 
@@ -143,13 +146,15 @@ public partial class MemoriesAmie : TabbedPage
         {
             if (result3 > 255)
                 result3 = 255;
-            pk.Fullness = result3;
+            if (pk is IFullnessEnjoyment f)
+                f.Fullness = result3;
         }
         if (byte.TryParse(EnjoymentEditor.Text, out var result4))
         {
             if (result4 > 255)
                 result4 = 255;
-            pk.Enjoyment = result4;
+            if( pk is IFullnessEnjoyment f)
+                f.Enjoyment = result4;
         }
         Navigation.PopModalAsync();
     }
