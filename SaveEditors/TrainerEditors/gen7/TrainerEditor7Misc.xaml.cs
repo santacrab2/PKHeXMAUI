@@ -40,7 +40,7 @@ public partial class TrainerEditor7Misc : ContentPage
         SkinColorPicker.ItemsSource = Enum.GetNames<PlayerSkinColor7>();
         SkinColorPicker.SelectedIndex = SAV.MyStatus.DressUpSkinColor;
         UnlockFashionPicker.ItemsSource = new object[] { "New Game", "All Legal", "Everything" };
-        DaysRefreshedEntry.Text = SAV.Misc.DaysFromRefreshed.ToString();
+        DaysRefreshedEntry.Number = SAV.Misc.DaysFromRefreshed;
         if (SAV is not SAV7USUM)
             BattleStyles.RemoveAt(BattleStyles.Count - 1); // remove Nihilist
         BallThrowPicker.ItemsSource = BattleStyles;
@@ -51,11 +51,11 @@ public partial class TrainerEditor7Misc : ContentPage
         BattleStlyeDisplayPicker.SelectedIndex = 0;
         ThrowsUnlockedCollection.IsVisible = BattleStlyeDisplayPicker.IsVisible = SAV is SAV7SM;
         StampCollection.ItemsSource = Enum.GetNames<Stamp7>().Select(z => z.Replace("_", " "));
-        TThumbUpEntry.Text = SAV.PokeFinder.ThumbsTotalValue.ToString();
-        RThumbsupEntry.Text = SAV.PokeFinder.ThumbsHighValue.ToString();
+        TThumbUpEntry.Number = SAV.PokeFinder.ThumbsTotalValue;
+        RThumbsupEntry.Number = SAV.PokeFinder.ThumbsHighValue;
         CameraVersionPicker.ItemsSource = new object[] { "1", "2", "3", "4", "5" };
         CameraVersionPicker.SelectedIndex = SAV.PokeFinder.CameraVersion;
-        SnapCountEntry.Text = SAV.PokeFinder.SnapCount.ToString();
+        SnapCountEntry.Number = SAV.PokeFinder.SnapCount;
         GyroCheck.IsChecked = SAV.PokeFinder.GyroFlag;
         FPNameEntry.Text = SAV.Festa.FestivalPlazaName;
         MegaUnlockCheck.IsChecked = SAV.MyStatus.MegaUnlocked;
@@ -113,8 +113,7 @@ public partial class TrainerEditor7Misc : ContentPage
         var skin = SkinColorPicker.SelectedIndex & 1;
         if (SAV.Gender == skin)
             SAV.MyStatus.DressUpSkinColor = SkinColorPicker.SelectedIndex;
-        var parsed = int.TryParse(DaysRefreshedEntry.Text, out var result);
-        if (parsed) SAV.Misc.DaysFromRefreshed = result;
+        SAV.Misc.DaysFromRefreshed = (int)DaysRefreshedEntry.Number;
         SAV.MyStatus.BallThrowType = (byte)BallThrowPicker.SelectedIndex;
         if(SAV is SAV7SM)
         {
@@ -125,12 +124,9 @@ public partial class TrainerEditor7Misc : ContentPage
             for (int i = 1; i < BattleStyles.Count; i++)
                 SAV.EventWork.SetEventFlag(learnedStart + i, ThrowsLearnedCollection.SelectedItems.Contains(BattleStyles[i]));
         }
-        parsed = int.TryParse(TThumbUpEntry.Text, out result);
-        if (parsed) SAV.PokeFinder.ThumbsTotalValue = (uint)result;
-        parsed = int.TryParse(RThumbsupEntry.Text, out result);
-        if (parsed) SAV.PokeFinder.ThumbsHighValue = (uint)result;
-        parsed = int.TryParse(SnapCountEntry.Text, out result);
-        if (parsed) SAV.PokeFinder.SnapCount = (uint)result;
+        SAV.PokeFinder.ThumbsTotalValue = (uint)TThumbUpEntry.Number;
+        SAV.PokeFinder.ThumbsHighValue = (uint)RThumbsupEntry.Number;
+        SAV.PokeFinder.SnapCount = (uint)SnapCountEntry.Number;
         SAV.PokeFinder.GyroFlag = GyroCheck.IsChecked;
         SAV.PokeFinder.CameraVersion = (ushort)CameraVersionPicker.SelectedIndex;
         SAV.Festa.FestivalPlazaName = FPNameEntry.Text;

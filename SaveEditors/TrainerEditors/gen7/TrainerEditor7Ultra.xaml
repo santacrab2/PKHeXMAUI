@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor7Ultra"
              Title="TrainerEditor7Ultra">
     <VerticalStackLayout>
@@ -24,18 +25,18 @@
             </Grid.RowDefinitions>
             <Label Text="Surf Scores"/>
             <Label Text="Melemele:" Grid.Row="1" VerticalOptions="Center"/>
-            <Entry x:Name="MeleSurfScoreEntry" Grid.Row="1" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="MeleSurfScoreEntry" Grid.Row="1" Grid.Column="1"/>
             <Label Text="Akala:" Grid.Row="2" VerticalOptions="Center"/>
-            <Entry x:Name="AkaSurfScoreEntry" Grid.Row="2" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="AkaSurfScoreEntry" Grid.Row="2" Grid.Column="1"/>
             <Label Text="Ula'ula:" Grid.Row="3" VerticalOptions="Center"/>
-            <Entry x:Name="UlaSurfScoreEntry" Grid.Row="3" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="UlaSurfScoreEntry" Grid.Row="3" Grid.Column="1"/>
             <Label Text="Poni:" Grid.Row="4" VerticalOptions="Center"/>
-            <Entry x:Name="PoniSurfScoreEntry" Grid.Row="4" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="PoniSurfScoreEntry" Grid.Row="4" Grid.Column="1"/>
             <Label Text="Rotom" Grid.Row="5" VerticalOptions="Center"/>
             <Label Text="Rotom OT:" Grid.Row="6" VerticalOptions="Center"/>
             <Entry x:Name="RotomOTEntry" Grid.Row="6" Grid.Column="1"/>
             <Label Text="Affection:" Grid.Row="7" VerticalOptions="Center"/>
-            <Entry x:Name="AffectionEntry" Grid.Row="7" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="AffectionEntry" Grid.Row="7" Grid.Column="1"/>
             <CheckBox x:Name="Loto1Check" Grid.Row="8"/>
             <Label Text="Loto 1" Grid.Row="8" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="Loto2Check" Grid.Row="9"/>

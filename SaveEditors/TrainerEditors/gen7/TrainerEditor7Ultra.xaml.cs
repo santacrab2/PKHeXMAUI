@@ -9,28 +9,23 @@ public partial class TrainerEditor7Ultra : ContentPage
 	public TrainerEditor7Ultra()
 	{
 		InitializeComponent();
-		MeleSurfScoreEntry.Text = SAV.Misc.GetSurfScore(0).ToString();
-		AkaSurfScoreEntry.Text = SAV.Misc.GetSurfScore(1).ToString();
-		UlaSurfScoreEntry.Text = SAV.Misc.GetSurfScore(2).ToString();
-		PoniSurfScoreEntry.Text = SAV.Misc.GetSurfScore(3).ToString();
+		MeleSurfScoreEntry.Number = SAV.Misc.GetSurfScore(0);
+		AkaSurfScoreEntry.Number = SAV.Misc.GetSurfScore(1);
+		UlaSurfScoreEntry.Number = SAV.Misc.GetSurfScore(2);
+		PoniSurfScoreEntry.Number = SAV.Misc.GetSurfScore(3);
 		RotomOTEntry.Text = SAV.FieldMenu.RotomOT;
-		AffectionEntry.Text = SAV.FieldMenu.RotomAffection.ToString();
+		AffectionEntry.Number = SAV.FieldMenu.RotomAffection;
 		Loto1Check.IsChecked = SAV.FieldMenu.RotomLoto1;
 		Loto2Check.IsChecked = SAV.FieldMenu.RotomLoto2;
 	}
 	public void SaveTE7U()
 	{
-		var parsed = int.TryParse(MeleSurfScoreEntry.Text, out var result);
-		if (parsed) SAV.Misc.SetSurfScore(0, result);
-		parsed = int.TryParse(AkaSurfScoreEntry.Text, out result);
-		if (parsed) SAV.Misc.SetSurfScore(1, result);
-		parsed = int.TryParse(UlaSurfScoreEntry.Text, out result);
-		if (parsed) SAV.Misc.SetSurfScore(2, result);
-		parsed = int.TryParse(PoniSurfScoreEntry.Text, out result);
-		if (parsed) SAV.Misc.SetSurfScore(3, result);
+		SAV.Misc.SetSurfScore(0, (int)MeleSurfScoreEntry.Number);
+		SAV.Misc.SetSurfScore(1, (int)AkaSurfScoreEntry.Number);
+		SAV.Misc.SetSurfScore(2, (int)UlaSurfScoreEntry.Number);
+		SAV.Misc.SetSurfScore(3, (int)PoniSurfScoreEntry.Number);
 		SAV.FieldMenu.RotomOT = RotomOTEntry.Text;
-		parsed = int.TryParse(AffectionEntry.Text, out result);
-		if (parsed) SAV.FieldMenu.RotomAffection = (ushort)result;
+		SAV.FieldMenu.RotomAffection = (ushort)AffectionEntry.Number;
 		SAV.FieldMenu.RotomLoto1 = Loto1Check.IsChecked;
 		SAV.FieldMenu.RotomLoto2 = Loto2Check.IsChecked;
 	}

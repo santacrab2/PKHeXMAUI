@@ -17,12 +17,12 @@ public partial class TrainerEditor7Map : ContentPage
         FlyMapData = [];
         UnmaskData = [];
         var sit = SAV.Situation;
-        CurrentMapEntry.Text = sit.M.ToString();
-        RotationEntry.Text = (Math.Atan2(SAV.Situation.RZ, SAV.Situation.RW) * 360.0 / Math.PI).ToString();
+        CurrentMapEntry.Number = sit.M;
+        RotationEntry.Number = (decimal)(Math.Atan2(SAV.Situation.RZ, SAV.Situation.RW) * 360.0 / Math.PI);
 
-        XCoordEntry.Text = (sit.X / 60.0).ToString();
-        YCoordEntry.Text = (sit.Y / 60.0).ToString();
-        ZCoordEntry.Text = (sit.Z / 60.0).ToString();
+        XCoordEntry.Number = (decimal)(sit.X / 60.0);
+        YCoordEntry.Number = (decimal)(sit.Y / 60.0);
+        ZCoordEntry.Number = (decimal)(sit.Z / 60.0);
         FlyDestinationCV.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new() { Padding = 10 };
@@ -124,24 +124,16 @@ public partial class TrainerEditor7Map : ContentPage
 
     public void SaveTE7M()
     {
-        var parsed = int.TryParse(CurrentMapEntry.Text, out var result);
-        if (parsed) SAV.Situation.M = result;
-        parsed = int.TryParse(XCoordEntry.Text, out result);
-        if(parsed) SAV.Situation.X = result * 60;
-        parsed = int.TryParse(ZCoordEntry.Text, out result);
-        if (parsed) SAV.Situation.Z = result * 60;
-        parsed = int.TryParse(YCoordEntry.Text, out result);
-        if (parsed) SAV.Situation.Y = result * 60;
-        parsed = int.TryParse(RotationEntry.Text, out result);
-        if (parsed)
-        {
-            result = (int)((double)result * Math.PI / 360.0);
-            SAV.Situation.RX = 0;
-            SAV.Situation.RZ = (float)Math.Sin(result);
-            SAV.Situation.RY = 0;
-            SAV.Situation.RW = (float)Math.Cos(result);
-            SAV.Situation.UpdateOverworldCoordinates();
-        }
+        SAV.Situation.M = (int)CurrentMapEntry.Number;
+        SAV.Situation.X = (int)XCoordEntry.Number * 60;
+        SAV.Situation.Z = (int)ZCoordEntry.Number * 60;
+        SAV.Situation.Y = (int)YCoordEntry.Number * 60;
+        var result = (int)((double)RotationEntry.Number * Math.PI / 360.0);
+        SAV.Situation.RX = 0;
+        SAV.Situation.RZ = (float)Math.Sin(result);
+        SAV.Situation.RY = 0;
+        SAV.Situation.RW = (float)Math.Cos(result);
+        SAV.Situation.UpdateOverworldCoordinates();
     }
 }
 public class WhyYouNoTakeGenericsDataTemplate(string s, bool b)

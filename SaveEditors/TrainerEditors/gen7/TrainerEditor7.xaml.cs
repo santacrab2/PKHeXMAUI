@@ -50,8 +50,8 @@ public partial class TrainerEditor7 : ContentPage
         var index = ((ComboItem?)CountryPicker.SelectedItem)?.Value??0;
         RegionPicker.SelectedItem = Util.GetCountryRegionList($"sr_{index:000}", GameInfo.CurrentLanguage).FirstOrDefault(z => z.Value == SAV.Region);
         LanguagePicker.SelectedIndex = SAV.Language - 1;
-        BPEntry.Text = SAV.Misc.BP.ToString();
-        FCEntry.Text = SAV.Festa.FestaCoins.ToString();
+        BPEntry.Number = SAV.Misc.BP;
+        FCEntry.Number = SAV.Festa.FestaCoins;
         HrsPlayedEntry.Text = SAV.PlayedHours.ToString();
         MinPlayedEntry.Text = SAV.PlayedMinutes.ToString();
         SecPlayedEntry.Text = SAV.PlayedSeconds.ToString();
@@ -98,7 +98,7 @@ public partial class TrainerEditor7 : ContentPage
         Editing = true;
         int index = TrainerPropPicker.SelectedIndex;
         int val = SAV.GetRecord(index);
-        TPEntry.Text = val.ToString();
+        TPEntry.Number = val;
         int offset = SAV.GetRecordOffset(index);
         OffsetValueLabel.Text = $"0x{offset:X3}";
         Editing = false;
@@ -109,8 +109,7 @@ public partial class TrainerEditor7 : ContentPage
         if (Editing)
             return;
         int index = TrainerPropPicker.SelectedIndex;
-        var parsed = int.TryParse(TPEntry.Text, out var result);
-        if (parsed) SAV.SetRecord(index, result);
+        SAV.SetRecord(index, (int)TPEntry.Number);
     }
     public void SaveTE7()
     {
@@ -138,9 +137,7 @@ public partial class TrainerEditor7 : ContentPage
         if (SAV.Played.LastSavedDate.HasValue)
             SAV.Played.LastSavedDate = LSDatePicker.Date.AddSeconds(LSTimePicker.Time.TotalSeconds);
         SAV.Misc.Vivillon = VivillonPicker.SelectedIndex;
-        parsed = int.TryParse(BPEntry.Text, out result);
-        if (parsed) SAV.Misc.BP = (uint)result;
-        parsed = int.TryParse(FCEntry.Text, out result);
-        if (parsed) SAV.Festa.FestaCoins = result;
+        SAV.Misc.BP = (uint)BPEntry.Number;
+        SAV.Festa.FestaCoins = (int)FCEntry.Number;
     }
 }

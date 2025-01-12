@@ -15,29 +15,24 @@ public partial class TrainerEditor6BadgeMap : ContentPage
         for (int i = 0; i < 8; i++)
             cba[i].IsChecked = (badgeval & (1 << i)) != 0;
         var sit = SAV.Situation;
-        CurrentMapEntry.Text = sit.M.ToString();
-        RotationEntry.Text = sit.R.ToString();
+        CurrentMapEntry.Number = sit.M;
+        RotationEntry.Number = sit.R;
         try
         {
-            XCoordEntry.Text = (sit.X / 18.0).ToString();
-            YCoordEntry.Text = (sit.Y / 18.0).ToString();
-            ZCoordEntry.Text = (sit.Z / 18.0).ToString();
+            XCoordEntry.Number = (decimal)(sit.X / 18.0);
+            YCoordEntry.Number = (decimal)(sit.Y / 18.0);
+            ZCoordEntry.Number = (decimal)(sit.Z / 18.0);
         }
         catch (Exception) { MapGrid.IsVisible = false; }
     }
     public void SaveBadgeMap()
     {
         var sit = SAV.Situation;
-        var parsed = int.TryParse(CurrentMapEntry.Text, out var result);
-        if (parsed) sit.M = result;
-        parsed = float.TryParse(XCoordEntry.Text, out _);
-        if (parsed) sit.X = result * 18;
-        parsed = float.TryParse(YCoordEntry.Text, out _);
-        if (parsed) sit.Y = result * 18;
-        parsed = float.TryParse(ZCoordEntry.Text, out _);
-        if (parsed) sit.Z = result * 18;
-        parsed = int.TryParse(RotationEntry.Text, out result);
-        if (parsed) sit.R = result;
+        sit.M = (int)CurrentMapEntry.Number;
+        sit.X = (int)XCoordEntry.Number * 18;
+        sit.Y = (int)YCoordEntry.Number * 18;
+        sit.Z = (int)ZCoordEntry.Number * 18;
+        sit.R = (int)RotationEntry.Number;
         int badgeval = 0;
         for (int i = 0; i < 8; i++)
             badgeval |= (cba[i].IsChecked ? 1 : 0) << i;

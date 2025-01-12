@@ -82,7 +82,7 @@ public partial class TrainerEditor6 : ContentPage
 		Editing = true;
         int index = TrainerPropPicker.SelectedIndex;
         int val = SAV.GetRecord(index);
-		TPEntry.Text = val.ToString();
+		TPEntry.Number = val;
         int offset = SAV.GetRecordOffset(index);
 		OffsetValueLabel.Text = $"0x{offset:X3}";
 		Editing = false;
@@ -93,8 +93,7 @@ public partial class TrainerEditor6 : ContentPage
 		if (Editing)
 			return;
 		int index = TrainerPropPicker.SelectedIndex;
-		var parsed = int.TryParse(TPEntry.Text, out var result);
-		if(parsed) SAV.SetRecord(index, result);
+		SAV.SetRecord(index, (int)TPEntry.Number);
     }
 	public void SaveTE6()
 	{

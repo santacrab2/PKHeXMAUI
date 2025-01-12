@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor8aMap"
              Title="TrainerEditor8aMap">
     <VerticalStackLayout>
@@ -19,13 +20,13 @@
             <Label Text="Current Map:"/>
             <Entry Grid.Column="1" x:Name="TE8aCMapEntry"/>
             <Label Text="X Coordinate:" Grid.Row="1"/>
-            <Entry Grid.Row="1" Grid.Column="1" x:Name="TE8aXEntry"/>
+            <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="TE8aXEntry"/>
             <Label Grid.Row="2" Text="Z Coordinate:"/>
-            <Entry Grid.Row="2" Grid.Column="1" x:Name="TE8aZEntry"/>
+            <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="TE8aZEntry"/>
             <Label Grid.Row="3" Text="Y Coordinates:"/>
-            <Entry Grid.Row="3" Grid.Column="1" x:Name="TE8aYEntry"/>
+            <l:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="TE8aYEntry"/>
             <Label Grid.Row="4" Text="Rotation:"/>
-            <Entry Grid.Row="4" Grid.Column="1" x:Name="TE8aREntry"/>
+            <l:NumericUpDown Grid.Row="4" Grid.Column="1" x:Name="TE8aREntry"/>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

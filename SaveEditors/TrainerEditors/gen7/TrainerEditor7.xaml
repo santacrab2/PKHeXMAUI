@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor7"
              Title="Overview">
     <ScrollView>
@@ -98,12 +99,12 @@
                 </Grid.RowDefinitions>
                 <Label Text="Stats" VerticalOptions="Center"/>
                 <Label Text="BP:" VerticalOptions="Center" Grid.Row="1"/>
-                <Entry x:Name="BPEntry" Grid.Row="1" Grid.Column="1"/>
+                <l:NumericUpDown x:Name="BPEntry" Grid.Row="1" Grid.Column="1"/>
                 <Label Text="FestaCoins:" VerticalOptions="Center" Grid.Row="2"/>
-                <Entry x:Name="FCEntry" Grid.Row="2" Grid.Column="1"/>
+                <l:NumericUpDown x:Name="FCEntry" Grid.Row="2" Grid.Column="1"/>
                 <Picker x:Name="TrainerPropPicker" Grid.Row="3" SelectedIndexChanged="GetStats"/>
                 <Label Text="Value:" VerticalOptions="Center" Grid.Row="4"/>
-                <Entry x:Name="TPEntry" Grid.Row="4" Grid.Column="1" TextChanged="ChangeStats"/>
+                <l:NumericUpDown x:Name="TPEntry" Grid.Row="4" Grid.Column="1" ValueChanged="ChangeStats"/>
                 <Label Text="Offset:" Grid.Row="5"/>
                 <Label x:Name="OffsetValueLabel" Grid.Row="5" Grid.Column="1"/>
             </Grid>

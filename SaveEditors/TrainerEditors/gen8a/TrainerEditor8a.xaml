@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor8a"
              Title="Overview">
     <VerticalStackLayout>
@@ -47,13 +48,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Text="Current Merit Points:" HorizontalOptions="End" VerticalOptions="Center"/>
-            <Entry Grid.Column="1" x:Name="TE8aCMPEntry"/>
+            <l:NumericUpDown Grid.Column="1" x:Name="TE8aCMPEntry"/>
             <Label Grid.Row="1" Text="Earned Merit Points:" HorizontalOptions="End" VerticalOptions="Center"/>
-            <Entry Grid.Row="1" Grid.Column="1" x:Name="TE8aEMPEntry"/>
+            <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="TE8aEMPEntry"/>
             <Label Grid.Row="2" Text="Galaxy Rank:" HorizontalOptions="End" VerticalOptions="Center"/>
-            <Entry Grid.Row="2" Grid.Column="1" x:Name="TE8aGREntry"/>
+            <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="TE8aGREntry"/>
             <Label Grid.Row="3" Text="Satchel Upgrades:" HorizontalOptions="End" VerticalOptions="Center"/>
-            <Entry Grid.Row="3" Grid.Column="1" x:Name="TE8aSUEntry"/>
+            <l:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="TE8aSUEntry"/>
         </Grid>
         <Grid Padding="10">
             <Grid.ColumnDefinitions>
