@@ -88,7 +88,7 @@ public partial class TrainerEditor6 : ContentPage
 		Editing = false;
     }
 
-    private void ChangeStats(object sender, TextChangedEventArgs e)
+    private void ChangeStats(object sender, EventArgs e)
     {
 		if (Editing)
 			return;
