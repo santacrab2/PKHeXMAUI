@@ -611,6 +611,8 @@ public partial class AppShell : Shell
                 sav.AdaptPKM(pkm);
                 sav.SetBoxSlotAtIndex(pkm, sav.NextOpenBoxSlot());
             }
+            if (TheShell.CurrentPage is BoxTab tab)
+                tab.fillbox();
         }
     }
 
