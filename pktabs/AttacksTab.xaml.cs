@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using PKHeX.Core;
 using static PKHeXMAUI.MainPage;
-
+using System.Collections;
 namespace PKHeXMAUI;
 
 public partial class AttacksTab : ContentPage
@@ -26,7 +26,7 @@ public partial class AttacksTab : ContentPage
         AttackRefresh.Command = refreshCommand;
         FirstLoad = false;
     }
-    public static List<ComboItem> movlist = [];
+    public static List<MoveDisplay> movlist = [];
     public async Task applyattackinfo(PKM pkm)
     {
         SkipEvent = true;
@@ -44,34 +44,33 @@ public partial class AttacksTab : ContentPage
         shinysparklessprite.IsVisible = pkm.IsShiny;
         spriteurl = pkm.Species == 0
             ? "a_egg.png"
-            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+            : $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
         attackpic.Source = spriteurl;
         movlist = [];
-        foreach (var mov in datasourcefiltered.Moves)
+        LegalMoveSource<ComboItem> p = new(new LegalMoveComboSource());
+        p.ChangeMoveSource(datasourcefiltered.Moves);
+        p.ReloadMoves(new LegalityAnalysis(pkm));
+        foreach(var move in p.Display.DataSource)
         {
-            LegalMoveInfo p = new();
-            p.ReloadMoves(new LegalityAnalysis(pkm));
-            if (p.CanLearn((ushort)mov.Value))
-            {
-                movlist.Add(mov);
-            }
+            var valid = p.Info.CanLearn((ushort)move.Value);
+            movlist.Add(new MoveDisplay(move, valid));
         }
-        move1.ItemsSource = movlist;
-        move1.ItemDisplayBinding = new Binding("Text");
-        move2.ItemsSource = movlist;
-        move2.ItemDisplayBinding = new Binding("Text");
-        move3.ItemsSource = movlist;
-        move3.ItemDisplayBinding = new Binding("Text");
-        move4.ItemsSource = movlist;
-        move4.ItemDisplayBinding = new Binding("Text");
-        rmove1.ItemsSource = movlist;
-        rmove1.ItemDisplayBinding = new Binding("Text");
-        rmove2.ItemsSource = movlist;
-        rmove2.ItemDisplayBinding = new Binding("Text");
-        rmove3.ItemsSource = movlist;
-        rmove3.ItemDisplayBinding = new Binding("Text");
-        rmove4.ItemsSource = movlist;
-        rmove4.ItemDisplayBinding = new Binding("Text");
+        move1.ItemSource = movlist;
+        move1.DisplayMemberPath = "Text";
+        move2.ItemSource = movlist;
+        move2.DisplayMemberPath = "Text";
+        move3.ItemSource = movlist;
+        move3.DisplayMemberPath = "Text";
+        move4.ItemSource = movlist;
+        move4.DisplayMemberPath = "Text";
+        rmove1.ItemSource = movlist;
+        rmove1.DisplayMemberPath = "Text";
+        rmove2.ItemSource = movlist;
+        rmove2.DisplayMemberPath = "Text";
+        rmove3.ItemSource = movlist;
+        rmove3.DisplayMemberPath = "Text";
+        rmove4.ItemSource = movlist;
+        rmove4.DisplayMemberPath = "Text";
 
         move1.SelectedItem = movlist.Find(z => z.Value == pkm.Move1);
         move2.SelectedItem = movlist.Find(z => z.Value == pkm.Move2);
@@ -103,8 +102,8 @@ public partial class AttacksTab : ContentPage
         {
             AlphaMasteredLabel.IsVisible = true;
             AlphaMasteredPicker.IsVisible = true;
-            AlphaMasteredPicker.ItemsSource = movlist;
-            AlphaMasteredPicker.ItemDisplayBinding = new Binding("Text");
+            AlphaMasteredPicker.ItemSource = movlist;
+            AlphaMasteredPicker.DisplayMemberPath = "Text";
             AlphaMasteredPicker.SelectedItem = movlist.Find(z => z.Value == pa8.AlphaMove);
         }
         SkipEvent = false;
@@ -114,7 +113,18 @@ public partial class AttacksTab : ContentPage
     {
         if (!SkipEvent)
         {
-            pk.Move1 = move1.SelectedIndex >= 0 ? (ushort)((ComboItem)move1.SelectedItem).Value : pk.Move1;
+            if (move1.SelectedIndex >= 0 && move1.SelectedItem != null)
+            {
+                var valueProperty = move1.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(move1.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.Move1 = (ushort)intValue;
+                    }
+                }
+            }
             move1Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move1, pk.Context):00}";
             move1Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move1, pk.Context):00}";
         }
@@ -123,7 +133,18 @@ public partial class AttacksTab : ContentPage
     {
         if (!SkipEvent)
         {
-            pk.Move2 = move2.SelectedIndex >= 0 ? (ushort)((ComboItem)move2.SelectedItem).Value : pk.Move2;
+            if (move2.SelectedIndex >= 0 && move2.SelectedItem != null)
+            {
+                var valueProperty = move2.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(move2.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.Move2 = (ushort)intValue;
+                    }
+                }
+            }
             move2Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move2, pk.Context):00}";
             move2Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move2, pk.Context):00}";
         }
@@ -132,7 +153,18 @@ public partial class AttacksTab : ContentPage
     {
         if (!SkipEvent)
         {
-            pk.Move3 = move3.SelectedIndex >= 0 ? (ushort)((ComboItem)move3.SelectedItem).Value : pk.Move3;
+            if (move3.SelectedIndex >= 0 && move3.SelectedItem != null)
+            {
+                var valueProperty = move3.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(move3.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.Move3 = (ushort)intValue;
+                    }
+                }
+            }
             move3Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move3, pk.Context):00}";
             move3Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move3, pk.Context):00}";
         }
@@ -141,7 +173,18 @@ public partial class AttacksTab : ContentPage
     {
         if (!SkipEvent)
         {
-            pk.Move4 = move4.SelectedIndex >= 0 ? (ushort)((ComboItem)move4.SelectedItem).Value : pk.Move4;
+            if (move4.SelectedIndex >= 0 && move4.SelectedItem != null)
+            {
+                var valueProperty = move4.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(move4.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.Move4 = (ushort)intValue;
+                    }
+                }
+            }
             move4Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move4, pk.Context):00}";
             move4Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move4, pk.Context):00}";
         }
@@ -149,22 +192,78 @@ public partial class AttacksTab : ContentPage
     private void applyrmove1(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove1 = rmove1.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove1.SelectedItem).Value : pk.RelearnMove1;
+        {
+            if (rmove1.SelectedIndex >= 0 && rmove1.SelectedItem != null)
+            {
+                var valueProperty = rmove1.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(rmove1.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.RelearnMove1 = (ushort)intValue;
+                    }
+                }
+            }
+            applyattackinfo(pk);
+        }
     }
     private void applyrmove2(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove2 = rmove2.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove2.SelectedItem).Value : pk.RelearnMove2;
+        {
+            if (rmove2.SelectedIndex >= 0 && rmove2.SelectedItem != null)
+            {
+                var valueProperty = rmove2.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(rmove2.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.RelearnMove2 = (ushort)intValue;
+                    }
+                }
+            }
+            applyattackinfo(pk);
+        }
     }
     private void applyrmove3(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove3 = rmove3.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove3.SelectedItem).Value : pk.RelearnMove3;
+        {
+            if (rmove3.SelectedIndex >= 0 && rmove3.SelectedItem != null)
+            {
+                var valueProperty = rmove3.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(rmove3.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.RelearnMove3 = (ushort)intValue;
+                    }
+                }
+            }
+            applyattackinfo(pk);
+        }
     }
     private void applyrmove4(object sender, EventArgs e)
     {
         if (!SkipEvent)
-            pk.RelearnMove4 = rmove4.SelectedIndex >= 0 ? (ushort)((ComboItem)rmove4.SelectedItem).Value : pk.RelearnMove4;
+        {
+            if (rmove4.SelectedIndex >= 0 && rmove4.SelectedItem != null)
+            {
+                var valueProperty = rmove4.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(rmove4.SelectedItem);
+                    if (value is int intValue)
+                    {
+                        pk.RelearnMove4 = (ushort)intValue;
+                    }
+                }
+            }
+            applyattackinfo(pk);
+        }
     }
 
     private async void setsuggmoves(object sender, EventArgs e)
@@ -229,9 +328,18 @@ public partial class AttacksTab : ContentPage
     {
         if (!SkipEvent)
         {
-            var selectedmove = (ComboItem)AlphaMasteredPicker.SelectedItem;
-            if (pk is PA8 pa8)
-                pa8.AlphaMove = (ushort)selectedmove.Value;
+            if (AlphaMasteredPicker.SelectedIndex >= 0 && AlphaMasteredPicker.SelectedItem != null)
+            {
+                var valueProperty = AlphaMasteredPicker.SelectedItem.GetType().GetProperty("Value");
+                if (valueProperty != null)
+                {
+                    var value = valueProperty.GetValue(move1.SelectedItem);
+                    if (value is int intValue && pk is PA8 pa8)
+                    {
+                        pa8.AlphaMove = (ushort)intValue;
+                    }
+                }
+            }
         }
     }
 
@@ -282,4 +390,10 @@ public enum MoveCategory
     Status,
     Physical,
     Special
+}
+public class MoveDisplay(ComboItem move, bool valid)
+{
+    public string Text { get; init; } = move.Text;
+    public int Value { get; init; } = move.Value;
+    public bool Valid { get; init; } = valid;
 }

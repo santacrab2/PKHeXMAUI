@@ -29,7 +29,7 @@ public partial class MainPage : ContentPage
     public static bool EditingTrash = false;
     public MainPage()
 	{
-        sav = AppShell.AppSaveFile??SaveUtil.GetBlankSAV(EntityContext.Gen9,"");
+        sav = AppShell.AppSaveFile;
         GameInfo.FilteredSources = new FilteredGameDataSource(sav, GameInfo.Sources);
         datasourcefiltered = GameInfo.FilteredSources;
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);

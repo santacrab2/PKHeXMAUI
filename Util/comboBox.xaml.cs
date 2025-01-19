@@ -4,6 +4,7 @@ using Android.Widget;
 using Microsoft.Maui.Platform;
 using PKHeX.Core;
 using System.Collections;
+using System.Globalization;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace PKHeXMAUI;
@@ -69,6 +70,16 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
             Label label = new();
             label.SetBinding(Label.TextProperty, new Binding(DisplayMemberPath));
             label.TextColor = Colors.Black;
+            picker.ItemTemplate = new DataTemplate(() =>
+            {
+                ViewCell cell = new();
+                Label label = new();
+                label.SetBinding(Label.TextProperty, new Binding(DisplayMemberPath));
+                label.SetBinding(Label.BackgroundColorProperty, new Binding("Valid", converter: new BoolToColorConverter()));
+                label.TextColor = Colors.Black;
+                cell.View = label;
+                return cell;
+            });
             cell.View = label;
             return cell;
         });
@@ -222,5 +233,18 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
         var parentView = this.entry.ToPlatform(this.Handler.MauiContext);
         popupWindow.ShowAsDropDown(parentView);
 #endif
+    }
+}
+
+internal class BoolToColorConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return (bool)value ? Colors.Green : Colors.White;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

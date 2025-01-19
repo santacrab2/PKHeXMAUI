@@ -44,7 +44,7 @@ namespace PKHeXMAUI
             BlockSummary.Text = $"Block Detail:\n{SCBlockUtil.GetBlockSummary(CurrentBlock)}";
             var block = CurrentBlock;
             var blockName = Metadata.GetBlockName(block, out var obj);
-            BlockEditor_Hex.Text = string.Join(" ", block.Data.Select(z => $"{z:X2}"));
+            BlockEditor_Hex.Text = string.Join(" ", block.Data.ToArray().Select(z => $"{z:X2}"));
             if(CurrentBlock.Type.IsBoolean())
             {
                 BlockEditor_Hex.IsVisible = false;
@@ -161,7 +161,7 @@ namespace PKHeXMAUI
         private async void ExportSelectBlock(SCBlock block)
         {
             var name = SCBlockUtil.GetBlockFileNameWithoutExtension(block);
-            await using var BlockStreams = new MemoryStream(block.Data);
+            await using var BlockStreams = new MemoryStream(block.Data.ToArray());
             var result = await FileSaver.SaveAsync($"{name}.bin", BlockStreams, CancellationToken.None);
             if (result.IsSuccessful)
                 await DisplayAlert("Success", $"Block File saved at {result.FilePath}", "cancel");
