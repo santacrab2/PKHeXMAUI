@@ -53,7 +53,7 @@ public partial class LiveHex : ContentPage
             }
             var lv = InjectionBase.GetVersionFromTitle(titleid, gameVer);
             Remote = new PokeSysBotMini(lv, Remote.com, false);
-            if (!IsPKMDataValid(sav.GetDecryptedPKM(Remote.ReadSlot(0, 0))))
+            if (!IsPKMDataValid(sav.GetDecryptedPKM(Remote.ReadSlot(0, 0).ToArray())))
             {
                 if (InjectionBase.CheckRAMShift(Remote, out var errorMessage))
                 {
@@ -76,7 +76,7 @@ public partial class LiveHex : ContentPage
                 try
                 {
                     Remote = new PokeSysBotMini(version, Remote.com, false);
-                    var data = sav.GetDecryptedPKM(Remote.ReadSlot(0, 0));
+                    var data = sav.GetDecryptedPKM(Remote.ReadSlot(0, 0).ToArray());
                     valid = IsPKMDataValid(data);
                     if (valid)
                     {
@@ -148,7 +148,7 @@ public partial class LiveHex : ContentPage
                 await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
                 return;
             }
-            pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box - 1, slot - 1))??EntityBlank.GetBlank(sav.Generation);
+            pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box - 1, slot - 1).ToArray())??EntityBlank.GetBlank(sav.Generation);
         }
     }
 
@@ -206,7 +206,7 @@ public partial class LiveHex : ContentPage
     public bool ReadOffset(ulong offset, RWMethod method = RWMethod.Heap)
     {
         var data = ReadData(offset, method);
-        var pkm = sav.GetDecryptedPKM(data);
+        var pkm = sav.GetDecryptedPKM(data.ToArray());
 
         // Since data might not actually exist at the user-specified offset, double check that the pkm data is valid.
         if (!pkm.ChecksumValid)
@@ -215,7 +215,7 @@ public partial class LiveHex : ContentPage
         pk = pkm;
         return true;
     }
-    private byte[] ReadData(ulong offset, RWMethod method)
+    private Span<byte> ReadData(ulong offset, RWMethod method)
     {
         if (Remote.com is not ICommunicatorNX nx)
             return Remote.ReadOffset(offset);
@@ -247,7 +247,7 @@ public partial class LiveHex : ContentPage
             var len =
                    sav.BoxSlotCount
                    * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
-            var data = Remote.ReadBox(box, len).AsSpan();
+            var data = Remote.ReadBox(box, len);
             sav.SetBoxBinary(data, box);
         }
     }

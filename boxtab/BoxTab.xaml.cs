@@ -29,7 +29,7 @@ public partial class BoxTab : ContentPage
                 {
                     var box = CurrentBox;
                     var len = sav.BoxSlotCount * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
-                    var data = Remote.ReadBox(box, len).AsSpan();
+                    var data = Remote.ReadBox(box, len);
                     sav.SetBoxBinary(data, box);
                 }
                 fillbox();
@@ -318,7 +318,7 @@ public partial class BoxTab : ContentPage
                 var len =
                        sav.BoxSlotCount
                        * (RamOffsets.GetSlotSize(Remote.Version) + RamOffsets.GetGapSize(Remote.Version));
-                var data = Remote.ReadBox(box, len).AsSpan();
+                var data = Remote.ReadBox(box, len);
                 sav.SetBoxBinary(data, box);
             }
 
