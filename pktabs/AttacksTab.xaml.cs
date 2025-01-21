@@ -8,9 +8,11 @@ public partial class AttacksTab : ContentPage
 {
     public bool SkipEvent = false;
     public bool FirstLoad = true;
+    public comboBox[] moveboxes = [];
     public AttacksTab()
     {
         InitializeComponent();
+        moveboxes = [move1, move2, move3, move4, rmove1, rmove2, rmove3, rmove4];
         move1ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move2ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move3ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
@@ -205,7 +207,7 @@ public partial class AttacksTab : ContentPage
                     }
                 }
             }
-            applyattackinfo(pk);
+            refreshmoveboxelist();
         }
     }
     private void applyrmove2(object sender, EventArgs e)
@@ -224,7 +226,7 @@ public partial class AttacksTab : ContentPage
                     }
                 }
             }
-            applyattackinfo(pk);
+            refreshmoveboxelist();
         }
     }
     private void applyrmove3(object sender, EventArgs e)
@@ -243,7 +245,7 @@ public partial class AttacksTab : ContentPage
                     }
                 }
             }
-            applyattackinfo(pk);
+            refreshmoveboxelist();
         }
     }
     private void applyrmove4(object sender, EventArgs e)
@@ -262,7 +264,7 @@ public partial class AttacksTab : ContentPage
                     }
                 }
             }
-            applyattackinfo(pk);
+            refreshmoveboxelist();
         }
     }
 
@@ -383,6 +385,22 @@ public partial class AttacksTab : ContentPage
         var value = pk.Move4;
         var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
         await DisplayAlert($"{(Move)value}", details, "cancel");
+    }
+    public void refreshmoveboxelist()
+    {
+        movlist = [];
+        LegalMoveSource<ComboItem> p = new(new LegalMoveComboSource());
+        p.ChangeMoveSource(datasourcefiltered.Moves);
+        p.ReloadMoves(new LegalityAnalysis(pk));
+        foreach (var move in p.Display.DataSource)
+        {
+            var valid = p.Info.CanLearn((ushort)move.Value);
+            movlist.Add(new MoveDisplay(move, valid));
+        }
+        foreach (var box in moveboxes)
+        {
+            box.ItemSource = movlist;
+        }
     }
 }
 public enum MoveCategory

@@ -10,7 +10,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v25.01.12";
+    public static string Version = "v25.01.20";
     public static PKM pk = EntityBlank.GetBlank(9);
     public static LegalityAnalysis la = new(pk);
     public static SaveFile sav = AppShell.AppSaveFile??SaveUtil.GetBlankSAV(EntityContext.Gen9,"");
