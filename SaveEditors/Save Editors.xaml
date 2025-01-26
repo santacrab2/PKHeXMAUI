@@ -14,5 +14,6 @@
         <Button x:Name="GSBallButton" Text="Enable GS Ball Event(Virtual Console)" IsVisible="False" Clicked="EnableGSBallEvent"/>
         <Button x:Name="B_Misc" Text="Misc" IsVisible="False" Clicked="OpenMisc3Editor"/>
         <Button x:Name="B_Roamer" Text="Roamer" IsVisible="False" Clicked="OpenRoamerEditor"/>
+        <Button x:Name="B_Chatter" Text="Chatter" IsVisible="False" Clicked="OpenChatterEditor"/>
     </VerticalStackLayout>
 </ContentPage>

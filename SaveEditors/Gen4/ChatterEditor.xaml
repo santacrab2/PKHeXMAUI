@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.ChatterEditor"
+             Title="ChatterEditor">
+    <ScrollView>
+        <Grid ColumnDefinitions="*,*" RowDefinitions="2*,*">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*">
+                <Button Text="Play Recording" Clicked="B_PlayRecording_Click"/>
+                <CheckBox x:Name="CHK_Initialized" CheckedChanged="CHK_Initialized_CheckChanged" Grid.Row="1"/>
+                <Label Text="Initialized" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="Confusion %:" Grid.Row="2" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Entry x:Name="Entry_Confusion" Keyboard="Numeric" Grid.Row="2" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Grid>
+            <Grid Grid.Column="1" RowDefinitions="*,*,*">
+                <Button Text="Import .pcm" Clicked="B_Importpcm_clicked"/>
+                <Button Text="Export .pcm" Clicked="B_Exportpcm_clicked" Grid.Row="1"/>
+                <Button Text="Export .wav" Clicked="B_Exportwav_clicked" Grid.Row="2"/>
+            </Grid>
+            <Button Text="Save" Clicked="B_Save_Click" Grid.Row="1"/>
+            <Button Text="Cancel" Clicked="B_Cancel_Click" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

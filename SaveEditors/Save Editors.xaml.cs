@@ -72,6 +72,8 @@ public partial class SaveEditors : ContentPage
             B_Misc.IsVisible = true;
             B_Roamer.IsVisible = true;
         }
+        if(sav is SAV4)
+            B_Chatter.IsVisible = true;
     }
 
     private void OpenTrainerEditor(object sender, EventArgs e)
@@ -144,5 +146,10 @@ public partial class SaveEditors : ContentPage
     private void OpenRoamerEditor(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new RoamerEditor3((SAV3)sav));
+    }
+
+    private void OpenChatterEditor(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new ChatterEditor());
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿using Plugin.Maui.Audio;
 using CommunityToolkit.Maui;
 using Microsoft.Maui.LifecycleEvents;
 using System.Diagnostics;
@@ -13,6 +13,7 @@ public static class MauiProgram
                 builder
                         .UseMauiApp<App>()
                         .UseMauiCommunityToolkit()
+                        .AddAudio()
                         .ConfigureLifecycleEvents(events =>
                         {
 #if ANDROID
