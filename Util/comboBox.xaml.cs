@@ -203,10 +203,10 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
     }
     private void AutoCompleteText(object sender, EventArgs e)
     {
-        IList tempsource = Items.Where(z => z.StartsWith(entry.Text, StringComparison.CurrentCultureIgnoreCase)).ToList();
+        IList tempsource = Items.Where(z => z.Contains(entry.Text, StringComparison.CurrentCultureIgnoreCase)).ToList();
         var item = ItemSource.Cast<object>().FirstOrDefault(z => tempsource.Contains(z.GetType().GetProperty(DisplayMemberPath) is null ? z.ToString() : z.GetType().GetProperty(DisplayMemberPath)?.GetValue(z)?.ToString() ?? ""))??"";
         if (item.GetType().GetProperty(DisplayMemberPath) is null)
-            SelectedItemText = picker.SelectedItem.ToString() ?? "";
+            SelectedItemText = picker.SelectedItem?.ToString() ?? "";
         else
             SelectedItemText = item.GetType().GetProperty(DisplayMemberPath)?.GetValue(item)?.ToString() ?? "";
         entry.Text = SelectedItemText;

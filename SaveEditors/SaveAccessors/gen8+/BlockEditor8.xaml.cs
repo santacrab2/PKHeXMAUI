@@ -26,7 +26,7 @@ namespace PKHeXMAUI
         {
             if (BlockKey_Picker.SelectedItem != null)
             {
-                var key = (uint?)((ComboItem?)BlockKey_Picker.SelectedItem)?.Value??0;
+                var key = (uint?)((ComboItem?)BlockKey_Picker.SelectedItem)?.Value??(uint)0;
                 CurrentBlock = SAV.Accessor.GetBlock(key);
                 UpdateBlockSummaryControls();
             }
@@ -55,7 +55,8 @@ namespace PKHeXMAUI
                     new ComboItem(nameof(SCTypeCode.Bool1), (int)SCTypeCode.Bool1),
                     new ComboItem(nameof(SCTypeCode.Bool2), (int)SCTypeCode.Bool2),
                 },
-                    SelectedIndex = (int)CurrentBlock.Type - 1
+                    SelectedIndex = (int)CurrentBlock.Type - 1,
+                    DisplayMemberPath = "Text"
                 };
                 CB_TypeToggle.SelectedIndexChanged += CB_TypeToggle_SelectionChanged;
                 BlockStack.Add(CB_TypeToggle);
@@ -176,7 +177,7 @@ namespace PKHeXMAUI
             if (Pickedfile is null)
                 return;
             var data = blockTarget.Data;
-            var path = Pickedfile.FileName;
+            var path = Pickedfile.FullPath;
             var file = new FileInfo(path);
             if(file.Length != data.Length)
             {
