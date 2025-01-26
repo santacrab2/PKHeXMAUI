@@ -179,6 +179,9 @@
 	  <Compile Update="pktabs\StatsTab.xaml.cs">
 	    <DependentUpon>StatsTab.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SaveEditors\Gen1\EventReset1.xaml.cs">
+	    <DependentUpon>EventReset1.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SaveEditors\Gen3\Misc\MiscMain.xaml.cs">
 	    <DependentUpon>MiscMain.xaml</DependentUpon>
 	  </Compile>
@@ -254,7 +257,13 @@
 	  <MauiXaml Update="pktabs\StatsTab.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="SaveEditors\Gen1\EventFlags1.xaml">
+	  <MauiXaml Update="SaveEditors\Event Flags\EventConstants.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Event Flags\EventFlags.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen1\EventReset1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen1\Pokedex1.xaml">

@@ -2,10 +2,10 @@
 using PKHeX.Core;
 namespace PKHeXMAUI;
 
-public partial class EventFlags1 : ContentPage
+public partial class EventReset1 : ContentPage
 {
     private readonly G1OverworldSpawner Overworld;
-    public EventFlags1(SAV1 sav)
+    public EventReset1(SAV1 sav)
 	{
 		InitializeComponent();
         Overworld = new G1OverworldSpawner(sav);

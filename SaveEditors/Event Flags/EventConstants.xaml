@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.EventConstants"
+             Title="EventConstants">
+    <ScrollView>
+        <VerticalStackLayout>
+            <CollectionView x:Name="ConstantCollection" HeightRequest="400"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

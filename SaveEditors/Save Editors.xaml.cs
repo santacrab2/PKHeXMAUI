@@ -97,10 +97,14 @@ public partial class SaveEditors : ContentPage
 
     private void OpenEventFlagEditor(object sender, EventArgs e)
     {
-        if (sav is SAV1)
-            Navigation.PushModalAsync(new EventFlags1((SAV1)MainPage.sav));
-        else
-            Navigation.PushModalAsync(new EventFlags2Tab());
+        Navigation.PushModalAsync(sav switch
+        {
+            SAV1 => new EventReset1((SAV1)sav),
+            SAV2 => new EventFlags2Tab(),
+            IEventFlag37 g37 => new EventFlagsTab(g37,sav.Version),
+            IEventFlagProvider37 p => new EventFlagsTab(p.EventWork,sav.Version),
+            _ => throw new Exception()
+        });
     }
 
     private void OpenSimplePokedex(object sender, EventArgs e)
