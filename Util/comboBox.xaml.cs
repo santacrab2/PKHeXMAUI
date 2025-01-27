@@ -16,7 +16,7 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
     ///<summary>Bindable property for <see cref="DisplayMemberPath"/></summary>
     public static BindableProperty DisplayMemberPathProperty = BindableProperty.Create(nameof(DisplayMemberPath), typeof(string), typeof(comboBox),".",propertyChanged:OnItemsCollectionChanged);
     /// <summary>Bindable property for <see cref="ItemSource"/> </summary>
-    public static BindableProperty ItemSourceProperty = BindableProperty.Create(nameof(ItemSource), typeof(IEnumerable), typeof(comboBox), propertyChanged:OnItemsCollectionChanged);
+    public static BindableProperty ItemSourceProperty = BindableProperty.Create(nameof(ItemSource), typeof(IEnumerable), typeof(comboBox),new List<object>(), propertyChanged:OnItemsCollectionChanged);
     /// <summary>Bindable property for <see cref="Title"/> </summary>
     public static BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(comboBox));
     /// <summary>Bindable property for <see cref="Placeholder"/></summary>
@@ -39,7 +39,7 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
     /// <summary>
     /// Gets or sets the ItemSource Property of the comboBox. Default is null. This is a bindable property.
     /// </summary>
-    public IEnumerable ItemSource { get =>(IEnumerable)GetValue(ItemSourceProperty); set =>SetValue(ItemSourceProperty, value); }
+    public IList ItemSource { get =>(IList)GetValue(ItemSourceProperty); set =>SetValue(ItemSourceProperty, value); }
     /// <summary>
     /// Gets or sets the Placeholder property of the comboBox. Default is null. This is a bindable property.
     /// </summary>

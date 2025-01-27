@@ -182,6 +182,9 @@
 	  <Compile Update="SaveEditors\Gen1\EventReset1.xaml.cs">
 	    <DependentUpon>EventReset1.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SaveEditors\Gen2\EventResearch2.xaml.cs">
+	    <DependentUpon>EventResearch2.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SaveEditors\Gen3\Misc\MiscMain.xaml.cs">
 	    <DependentUpon>MiscMain.xaml</DependentUpon>
 	  </Compile>
@@ -273,6 +276,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen2\EventFlags2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen2\EventResearch2.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen2\MailBox.xaml">

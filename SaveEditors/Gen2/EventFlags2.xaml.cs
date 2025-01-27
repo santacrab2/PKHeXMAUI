@@ -46,7 +46,7 @@ public partial class EventFlags2 : ContentPage
         }
         FlagCollection.ItemsSource = ValueDict;
     }
-#nullable enable
+
     public void tapp(object? g, TappedEventArgs? e)
     {
         Grid gr = (Grid?)g??[];
@@ -72,14 +72,17 @@ public partial class EventFlags2Tab : TabbedPage
 {
 	public static EventFlags2? EF2;
     public static EventConstants2? EC2;
+    public static EventResearch2? ER2;
 	public EventFlags2Tab()
 	{
         this.BarBackgroundColor = Color.FromArgb("303030");
         this.BarTextColor = Colors.White;
         EF2 = new();
         EC2 = new();
+        ER2 = new((SAV2)sav,sav.Version);
         this.Children.Add(EF2);
         this.Children.Add(EC2);
+        this.Children.Add(ER2);
         this.Children.Add(new EventEditor2Save());
         this.Children.Add(new cancelpage());
     }
