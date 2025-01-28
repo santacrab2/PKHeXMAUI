@@ -266,6 +266,9 @@
 	  <MauiXaml Update="SaveEditors\Event Flags\EventFlags.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Event Flags\EventResearch.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen1\EventReset1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

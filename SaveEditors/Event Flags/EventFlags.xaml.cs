@@ -72,14 +72,17 @@ public partial class EventFlagsTab : TabbedPage
 {
     public static EventFlags? EF2;
     public static EventConstants? EC2;
+    public static EventResearch? ER2;
     public EventFlagsTab(IEventFlag37 g37, GameVersion version)
     {
         this.BarBackgroundColor = Color.FromArgb("303030");
         this.BarTextColor = Colors.White;
         EF2 = new(g37, version);
         EC2 = new(g37, version);
+        ER2 = new(g37, version);
         this.Children.Add(EF2);
         this.Children.Add(EC2);
+        this.Children.Add(ER2);
         this.Children.Add(new EventEditorSave());
         this.Children.Add(new cancelpage());
     }
