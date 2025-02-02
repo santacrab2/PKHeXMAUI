@@ -72,8 +72,11 @@ public partial class SaveEditors : ContentPage
             B_Misc.IsVisible = true;
             B_Roamer.IsVisible = true;
         }
-        if(sav is SAV4)
+        if (sav is SAV4)
+        {
             B_Chatter.IsVisible = true;
+            B_Geonet.IsVisible = true;
+        }
 
     }
 
@@ -156,5 +159,10 @@ public partial class SaveEditors : ContentPage
     private void OpenChatterEditor(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new ChatterEditor());
+    }
+
+    private void B_Geonet_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new Geonet4Editor((SAV4)sav));
     }
 }

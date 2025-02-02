@@ -24,7 +24,7 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
     ///<summary>Bindable property for <see cref="SelectedItem"/></summary>
     public static BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(comboBox), null, BindingMode.TwoWay, propertyChanged: SetSelectedItem);
     /// <summary>Bindable property for <see cref="SelectedIndex"/> </summary>
-    public static BindableProperty SelectedIndexProperty = BindableProperty.Create(nameof(SelectedIndex), typeof(int), typeof(comboBox),propertyChanged: SetSelectedIndex);
+    public static BindableProperty SelectedIndexProperty = BindableProperty.Create(nameof(SelectedIndex), typeof(int), typeof(comboBox),-1,propertyChanged: SetSelectedIndex);
     /// <summary>Bindable property for <see cref="SelectedIndex"/> </summary>
     public event EventHandler? SelectedIndexChanged;
     public event EventHandler? TextChanged;

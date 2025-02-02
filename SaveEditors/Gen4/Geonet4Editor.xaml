@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.Geonet4Editor"
+             Title="Geonet4">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,*,*">
+                <Button x:Name="B_SetAllLocations" Text="Set All Locations" Clicked="B_SetAllLocations_Clicked"/>
+                <Button x:Name="B_SetAllLegalLocations" Text="Set All Legal Locations" Clicked="B_SetAllLegalLocations_Clicked" Grid.Column="1"/>
+                <Button x:Name="B_ClearAllLocations" Text="Clear All Locations" Clicked="B_ClearAllLocations_Clicked" Grid.Column="2"/>
+            </Grid>
+            <CollectionView x:Name="CV_Geonet" HeightRequest="400"/>
+            <Grid ColumnDefinitions="*,*">
+                <CheckBox x:Name="CHK_GlobalFlag"/>
+                <Label VerticalOptions="Center" Text="Whole Globe Visible" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*">
+                <Button x:Name="B_Save" Text="Save" Clicked="B_Save_Clicked"/>
+                <Button x:Name="B_Cancel" Text="Cancel" Clicked="B_Cancel_Clicked" Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

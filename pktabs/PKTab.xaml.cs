@@ -293,18 +293,10 @@ public partial class MainPage : ContentPage
         iseggcheck.IsChecked = pkm.IsEgg;
         infectedcheck.IsChecked = pkm.IsPokerusInfected;
         curedcheck.IsChecked = pkm.IsPokerusCured;
-        if (abilitySource.Count != 0)
-            abilitySource.Clear();
-        for (int i = 0; i < pkm.PersonalInfo.AbilityCount; i++)
-        {
-            var abili = pkm.PersonalInfo.GetAbilityAtIndex(i);
-
-            abilitySource.Add(new ComboItem($"{(Ability)abili}", i));
-        }
+        abilitySource = GameInfo.FilteredSources.GetAbilityList(pkm).ToList();
         abilitypicker.ItemDisplayBinding = new Binding("Text");
         abilitypicker.ItemsSource = abilitySource;
-        abilitypicker.SelectedIndex = -1;
-        abilitypicker.SelectedIndex =pkm.AbilityNumber == 4? 2: pkm.AbilityNumber;
+        abilitypicker.SelectedIndex = pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
         Friendshipdisplay.Text = $"{pkm.CurrentFriendship}";
         genderdisplay.Source = $"gender_{pkm.Gender}.png";
         helditempicker.SelectedItem = datasourcefiltered.Items.FirstOrDefault(z=>z.Value == pkm.HeldItem)??new ComboItem("(None)",0);
@@ -411,17 +403,10 @@ public partial class MainPage : ContentPage
             formpicker.IsVisible = false;
 
             pk.Species = (ushort)test.Value;
-            if (abilitySource.Count != 0)
-                abilitySource.Clear();
-            for (int i = 0; i < pk.PersonalInfo.AbilityCount; i++)
-            {
-                var abili = pk.PersonalInfo.GetAbilityAtIndex(i);
-                abilitySource.Add(new ComboItem($"{(Ability)abili}",i));
-            }
+            abilitySource = GameInfo.FilteredSources.GetAbilityList(pk).ToList();
             abilitypicker.ItemDisplayBinding =new Binding("Text");
             abilitypicker.ItemsSource = abilitySource;
-            abilitypicker.SelectedIndex = -1;
-            abilitypicker.SelectedIndex = pk.AbilityNumber == 4 ? 2 : pk.AbilityNumber;
+            abilitypicker.SelectedIndex = pk.AbilityNumber == 4 ? 2 : pk.AbilityNumber-1;
             if (pk.PersonalInfo.Genderless && genderdisplay.Source != (ImageSource)"gender_2.png")
             {
                 pk.Gender = 2;
@@ -583,11 +568,7 @@ public partial class MainPage : ContentPage
     {
         if (!SkipTextChange)
         {
-            if (abilitypicker.SelectedItem != null)
-            {
-                var abil = pk.PersonalInfo.GetAbilityAtIndex(((ComboItem)abilitypicker.SelectedItem).Value);
-                pk.SetAbility(abil);
-            }
+            pk.SetAbilityIndex(abilitypicker.SelectedIndex);
         }
     }
 

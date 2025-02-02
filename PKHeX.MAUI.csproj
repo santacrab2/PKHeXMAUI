@@ -191,6 +191,9 @@
 	  <Compile Update="SaveEditors\Gen3\RoamerEditor3.xaml.cs">
 	    <DependentUpon>RoamerEditor3.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SaveEditors\Gen4\Geonet4Editor.xaml.cs">
+	    <DependentUpon>Geonet4Editor.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SaveEditors\SaveAccessors\gen8+\BlockEditor8.xaml.cs">
 	    <DependentUpon>BlockEditor8.xaml</DependentUpon>
 	  </Compile>
@@ -312,6 +315,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen3\RTC3Editor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen4\Geonet4Editor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\SaveAccessors\gen8+\BlockEditor8.xaml">
