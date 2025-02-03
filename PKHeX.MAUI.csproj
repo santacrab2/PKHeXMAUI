@@ -320,6 +320,9 @@
 	  <MauiXaml Update="SaveEditors\Gen4\Geonet4Editor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen4\HoneyTreeEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\SaveAccessors\gen8+\BlockEditor8.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -16,5 +16,6 @@
         <Button x:Name="B_Roamer" Text="Roamer" IsVisible="False" Clicked="OpenRoamerEditor"/>
         <Button x:Name="B_Chatter" Text="Chatter" IsVisible="False" Clicked="OpenChatterEditor"/>
         <Button x:Name="B_Geonet" Text="Geonet" IsVisible="False" Clicked="B_Geonet_Clicked"/>
+        <Button x:Name="B_HoneyTree" Text="Honey Tree" IsVisible="False" Clicked="B_HoneyTree_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

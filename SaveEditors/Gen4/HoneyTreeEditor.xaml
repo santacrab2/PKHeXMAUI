@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.HoneyTreeEditor"
+             Title="Honey Tree">
+    <VerticalStackLayout>
+        <Label Text="Munchlax Trees:" x:Name="L_Munchlax" />
+        <Label x:Name="L_Tree0" />
+        <Label Text="Honey Tree"/>
+        <l:comboBox x:Name="CB_TreeList" SelectedIndexChanged="ChangeTree"/>
+        <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,*,*,*,*,*,*">
+            <Label Text="Tree Info"/>
+            <Label Text="Group" Grid.Row="1"/>
+            <Label Text="Slot" Grid.Row="1" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_Group" Grid.Row="2" MaxValue="3" MinValue="0" ValueChanged="ChangeGroupSlot"/>
+            <l:NumericUpDown x:Name="NUD_Slot" Grid.Row="2" Grid.Column="1" MaxValue="5" MinValue="0" ValueChanged="ChangeGroupSlot"/>
+            <Label x:Name="L_Species" Grid.Row="2" Grid.Column="2"/>
+            <Label Text="Time left (Minutes)" Grid.Row="3"/>
+            <Label Text="Shake" Grid.Row="3" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_Time" Grid.Row="4" MinValue="0" MaxValue="1440"/>
+            <l:NumericUpDown x:Name="NUD_Shake" Grid.Row="4" Grid.Column="1" MinValue="0" MaxValue="3"/>
+            <Button x:Name="B_Catchable" Text="Make Catchable" Clicked="B_Catchable_Clicked" Grid.Row="5"/>
+            <Button x:Name="B_Cancel" Text="Cancel" Clicked="B_Cancel_Clicked" Grid.Row="6"/>
+            <Button x:Name="B_Save" Text="Save" Clicked="B_Save_Clicked" Grid.Row="6" Grid.Column="1"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
