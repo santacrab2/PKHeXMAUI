@@ -53,7 +53,7 @@ public partial class SaveEditors : ContentPage
         if (!sav.State.Exportable || sav is BulkStorage)
             return;
         Button_BlockData.IsVisible = true;
-        if (sav is not SAV8BS or SAV8SWSH)
+        if (sav is not SAV8BS or SAV8SWSH or SAV7b)
             TrainerInfoButton.IsVisible = true;
         if (sav is SAV1 or SAV2 or SAV3 or SAV4)
             Button_EventFlags1.IsVisible = true;
@@ -61,7 +61,6 @@ public partial class SaveEditors : ContentPage
             Button_Pokedex1.IsVisible = true;
         if (sav is SAV2 sav2)
         {
-            MailBoxButton.IsVisible = true;
             GSBallButton.IsVisible = sav.Version is GameVersion.C;
             GSBallButton.IsEnabled = !sav2.IsEnabledGSBallMobileEvent;
         }
@@ -79,6 +78,8 @@ public partial class SaveEditors : ContentPage
         }
         if(sav is SAV4Sinnoh)
             B_HoneyTree.IsVisible = true;
+        if (sav is SAV2 or SAV3 or SAV4 or SAV5)
+            MailBoxButton.IsVisible = true;
     }
 
     private void OpenTrainerEditor(object sender, EventArgs e)

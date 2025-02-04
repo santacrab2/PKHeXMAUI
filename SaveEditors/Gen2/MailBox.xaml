@@ -1,98 +1,92 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MailBox"
              Title="MailBox Editor">
     <ScrollView>
         <VerticalStackLayout>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-
-                </Grid.RowDefinitions>
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
                 <Label Text="MailBox  (Party)"/>
                 <Label Text="MailBox (PC)" Grid.Column="1"/>
-                <CollectionView x:Name="MBP_CV" HeightRequest="150" Grid.Row="1" SelectionChanged="EntryControl" SelectionMode="Single"/>
-                <CollectionView x:Name="MBPC_CV" HeightRequest="150" Grid.Row="1" Grid.Column="1" SelectionChanged="EntryControl" SelectionMode="Single"/>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Text="MailBox (PC) Served:"/>
-                    <Entry x:Name="MBServed" Grid.Column="1" Keyboard="Numeric" TextChanged="MBServedValueChanged"/>
-                </Grid>
-                <Button Text="Delete" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Message" Grid.Row="3"/>
-                <Label Text="Author" Grid.Row="3" Grid.Column="1"/>
-                <Entry x:Name="Message1" Grid.Row="4"/>
-                <Entry x:Name="Message2" Grid.Row="5"/>
-                <Grid Grid.Row="4" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Entry x:Name="AuthorOT"/>
-                    <Picker x:Name="AuthorLang" Grid.Column="1"/>
-                    <Entry x:Name="AuthorTID" Grid.Row="1" Keyboard="Numeric"/>
-                    <CheckBox x:Name="UserEnteredCB" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
-                    <Label Text="User Entered" Grid.Row="1" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"/>
-                </Grid>
-                <Label Text="Mail Type:" Grid.Row="6"/>
-                <Picker x:Name="MailTypePicker" Grid.Row="6" Grid.Column="1"/>
-                <Label Text="Appear PKM:" Grid.Row="7"/>
-                <Picker x:Name="AppearPKMPicker" Grid.Row="7" Grid.Column="1"/>
-                <Label Text="Held MailID" Grid.Row="8"/>
-                <Label x:Name="pkmlabel1" Grid.Row="9"/>
-                <Label x:Name="helditemlabel1" Grid.Row="10"/>
-                <Entry x:Name="pkmnud1" Grid.Row="10" Grid.Column="1"/>
-                <Label x:Name="pkmlabel2" Grid.Row="11"/>
-                <Label x:Name="helditemlabel2" Grid.Row="12"/>
-                <Entry x:Name="pkmnud2" Grid.Row="12" Grid.Column="1"/>
-                <Label x:Name="pkmlabel3" Grid.Row="13"/>
-                <Label x:Name="helditemlabel3" Grid.Row="14"/>
-                <Entry x:Name="pkmnud3" Grid.Row="14" Grid.Column="1"/>
-                <Label x:Name="pkmlabel4" Grid.Row="15"/>
-                <Label x:Name="helditemlabel4" Grid.Row="16"/>
-                <Entry x:Name="pkmnud4" Grid.Row="16" Grid.Column="1"/>
-                <Label x:Name="pkmlabel5" Grid.Row="17"/>
-                <Label x:Name="helditemlabel5" Grid.Row="18"/>
-                <Entry x:Name="pkmnud5" Grid.Row="18" Grid.Column="1"/>
-                <Label x:Name="pkmlabel6" Grid.Row="19"/>
-                <Label x:Name="helditemlabel6" Grid.Row="20"/>
-                <Entry x:Name="pkmnud6" Grid.Row="20" Grid.Column="1"/>
-                <Button Grid.Row="21" Clicked="Save" Text="Save"/>
-                <Button Grid.Row="21" Grid.Column="1" Text="Cancel" Clicked="close"/>
+                <CollectionView x:Name="CV_PartyHeld" HeightRequest="150" Grid.Row="1" SelectionChanged="EntryControl" SelectionMode="Single"/>
+                <CollectionView x:Name="CV_PCBox" HeightRequest="150" Grid.Row="1" Grid.Column="1" SelectionChanged="EntryControl" SelectionMode="Single"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*,*">
+                <Label x:Name="L_BoxSize" Text="MailBox (PC) Served:"/>
+                <l:NumericUpDown x:Name="NUD_BoxSize" Grid.Column="1" MinValue="0" MaxValue="10" ValueChanged="MBServedValueChanged"/>
+                <Button Text="Delete" Grid.Column="2"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*">
+                
+                
+            </Grid>
+            <Grid x:Name="GB_MessageTB" RowDefinitions="*,*,*">
+                <Label Text="Message" />
+                <Entry x:Name="Message1"/>
+                <Entry x:Name="Message2"/>
+                
+            </Grid>
+            <Grid x:Name="GB_MessageNUD" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*">
+                <l:NumericUpDown x:Name="NUD_Message00" MinValue="0" MaxValue="65535"/>
+                <l:NumericUpDown x:Name="NUD_Message01" MinValue="0" MaxValue="65535" Grid.Column="1"/>
+                <l:NumericUpDown x:Name="NUD_Message02" MinValue="0" MaxValue="65535" Grid.Column="2"/>
+                <l:NumericUpDown x:Name="NUD_Message03" MinValue="0" MaxValue="65535" Grid.Column="3"/>
+                <l:NumericUpDown x:Name="NUD_Message10" MinValue="0" MaxValue="65535" Grid.Row="1"/>
+                <l:NumericUpDown x:Name="NUD_Message11" MinValue="0" MaxValue="65535" Grid.Row="1" Grid.Column="1"/>
+                <l:NumericUpDown x:Name="NUD_Message12" MinValue="0" MaxValue="65535" Grid.Row="1" Grid.Column="2"/>
+                <l:NumericUpDown x:Name="NUD_Message13" MinValue="0" MaxValue="65535" Grid.Row="1" Grid.Column="3"/>
+                <l:NumericUpDown x:Name="NUD_Message20" MinValue="0" MaxValue="65535" Grid.Row="2"/>
+                <l:NumericUpDown x:Name="NUD_Message21" MinValue="0" MaxValue="65535" Grid.Row="2" Grid.Column="1"/>
+                <l:NumericUpDown x:Name="NUD_Message22" MinValue="0" MaxValue="65535" Grid.Row="2" Grid.Column="2"/>
+                <l:NumericUpDown x:Name="NUD_Message23" MinValue="0" MaxValue="65535" Grid.Row="2" Grid.Column="3"/>
+                <l:NumericUpDown x:Name="NUD_MessageEnding" MinValue="0" MaxValue="65535" Grid.Row="3"/> 
+            </Grid>
+            <Grid x:Name="GB_Author" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
+                <Label Text="Author" />
+                <Entry x:Name="AuthorOT" Grid.Row="1"/>
+                <ImageButton x:Name="L_OTGender" Grid.Row="1" Grid.Column="1" BorderWidth="1" Clicked="L_OTGender_Click"/>
+                <Picker x:Name="AuthorLang" Grid.Row="1" Grid.Column="2"/>
+                <l:NumericUpDown x:Name="NUD_AuthorTID" MinValue="0" MaxValue="65535" Grid.Row="2" />
+                <l:NumericUpDown x:Name="NUD_AuthorSID" MinValue="0" MaxValue="65535" Grid.Row="2" Grid.Column="1"/>
+                <l:comboBox x:Name="CB_AuthorVersion" Grid.Row="2" Grid.Column="2"/>
+                <CheckBox x:Name="CHK_UserEntered" Grid.Row="2" Grid.Column="1" />
+                <Label x:Name="L_UserEntered" Text="User Entered" Grid.Row="2" Grid.Column="2" />
+            </Grid>
+            <Grid x:Name="GB_MailType" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
+                <Label Text="Mail Type:"/>
+                <Picker x:Name="MailTypePicker" Grid.Column="1"/>
+                <Label x:Name="L_MiscValue" Text="Misc:" Grid.Row="1"/>
+                <l:NumericUpDown x:Name="NUD_Misc1" Grid.Row="1" Grid.Column="1" MinValue="0" MaxValue="65535"/>
+                <l:NumericUpDown x:Name="NUD_Misc2" Grid.Row="1" Grid.Column="2" MinValue="0" MaxValue="65535"/>
+                <l:NumericUpDown x:Name="NUD_Misc3" Grid.Row="1" Grid.Column="3" MinValue="0" MaxValue="65535"/>
+                <Label x:Name="L_AppearPKM" Text="Appear PKM:" Grid.Row="1"/>
+                <l:comboBox x:Name="CB_AppearPKM1" Grid.Row="1" Grid.Column="1"/>
+                <l:comboBox x:Name="CB_AppearPKM2" Grid.Row="1" Grid.Column="2"/>
+                <l:comboBox x:Name="CB_AppearPKM3" Grid.Row="1" Grid.Column="3"/>
+            </Grid>
+            <Grid x:Name="GB_PKM" ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+                <Label Text="Held MailID" Grid.Row="2"/>
+                <Label x:Name="L_PKM1" Grid.Row="3"/>
+                <Label x:Name="L_HeldItem1" Grid.Row="4"/>
+                <l:NumericUpDown x:Name="NUD_MailID1" Grid.Row="4" Grid.Column="1"/>
+                <Label x:Name="L_PKM2" Grid.Row="5"/>
+                <Label x:Name="L_HeldItem2" Grid.Row="6"/>
+                <l:NumericUpDown x:Name="NUD_MailID2" Grid.Row="6" Grid.Column="1"/>
+                <Label x:Name="L_PKM3" Grid.Row="7"/>
+                <Label x:Name="L_HeldItem3" Grid.Row="8"/>
+                <l:NumericUpDown x:Name="NUD_MailID3" Grid.Row="8" Grid.Column="1"/>
+                <Label x:Name="L_PKM4" Grid.Row="9"/>
+                <Label x:Name="L_HeldItem4" Grid.Row="10"/>
+                <l:NumericUpDown x:Name="NUD_MailID4" Grid.Row="10" Grid.Column="1"/>
+                <Label x:Name="L_PKM5" Grid.Row="11"/>
+                <Label x:Name="L_HeldItem5" Grid.Row="12"/>
+                <l:NumericUpDown x:Name="NUD_MailID5" Grid.Row="12" Grid.Column="1"/>
+                <Label x:Name="L_PKM6" Grid.Row="13"/>
+                <Label x:Name="L_HeldItem6" Grid.Row="14"/>
+                <l:NumericUpDown x:Name="NUD_MailID6" Grid.Row="14" Grid.Column="1"/>
+                <Button Grid.Row="15" Clicked="B_Save_Clicked" Text="Save"/>
+                <Button Grid.Row="15" Grid.Column="1" Text="Cancel" Clicked="close"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>
