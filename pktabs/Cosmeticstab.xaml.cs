@@ -251,7 +251,7 @@ public partial class Cosmeticstab : ContentPage
     {
         if (pk is IContestStats CTstats && !SkipEvent)
         {
-            if (!byte.TryParse(Cutestats.Text, out var result))
+            if (byte.TryParse(Cutestats.Text, out var result))
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     Cutestats.Text = result.ToString();
@@ -265,7 +265,7 @@ public partial class Cosmeticstab : ContentPage
     {
         if (pk is IContestStats CTstats && !SkipEvent)
         {
-            if (!byte.TryParse(Cleverstats.Text, out var result))
+            if (byte.TryParse(Cleverstats.Text, out var result))
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                 Cleverstats.Text = result.ToString();
@@ -279,7 +279,7 @@ public partial class Cosmeticstab : ContentPage
     {
         if (pk is IContestStats CTstats && !SkipEvent)
         {
-            if (!byte.TryParse(toughstats.Text, out var result))
+            if (byte.TryParse(toughstats.Text, out var result))
             {
                 result = Math.Clamp(result, minStat, maxCosmStat);
                     toughstats.Text = result.ToString();

@@ -12,7 +12,7 @@
         <Button x:Name="TrainerInfoButton" Text="Trainer Info" IsVisible="false" Clicked="OpenTrainerEditor"/>
         <Button x:Name="MailBoxButton" Text="Mail Box" IsVisible="False" Clicked="OpenMailBoxEditor"/>
         <Button x:Name="GSBallButton" Text="Enable GS Ball Event(Virtual Console)" IsVisible="False" Clicked="EnableGSBallEvent"/>
-        <Button x:Name="B_Misc" Text="Misc" IsVisible="False" Clicked="OpenMisc3Editor"/>
+        <Button x:Name="B_Misc" Text="Misc" IsVisible="False" Clicked="OpenMiscEditor"/>
         <Button x:Name="B_Roamer" Text="Roamer" IsVisible="False" Clicked="OpenRoamerEditor"/>
         <Button x:Name="B_Chatter" Text="Chatter" IsVisible="False" Clicked="OpenChatterEditor"/>
         <Button x:Name="B_Geonet" Text="Geonet" IsVisible="False" Clicked="B_Geonet_Clicked"/>

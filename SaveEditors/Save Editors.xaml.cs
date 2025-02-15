@@ -75,6 +75,7 @@ public partial class SaveEditors : ContentPage
         {
             B_Chatter.IsVisible = true;
             B_Geonet.IsVisible = true;
+            B_Misc.IsVisible = true;
         }
         if(sav is SAV4Sinnoh)
             B_HoneyTree.IsVisible = true;
@@ -148,9 +149,14 @@ public partial class SaveEditors : ContentPage
         GSBallButton.IsEnabled = false;
     }
 
-    private void OpenMisc3Editor(object sender, EventArgs e)
+    private void OpenMiscEditor(object sender, EventArgs e)
     {
-        Navigation.PushModalAsync(new MiscTab());
+        switch (sav) 
+        { 
+            case SAV3 s3: Navigation.PushModalAsync(new MiscTab()); break; 
+            case SAV4 s4: Navigation.PushModalAsync(new MiscTab4()); break; 
+        }
+       
     }
 
     private void OpenRoamerEditor(object sender, EventArgs e)
