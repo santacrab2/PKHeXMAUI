@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.StatsTab"
              Title="Stats">
     <RefreshView x:Name="StatsRefresh">
@@ -58,49 +59,49 @@
             <!--HP-->
             <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="HP:"/>
             <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="hpbasedisplay"/>
-            <Editor Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPIV" TextChanged="applyhpIV"/>
-            <Editor Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPEV" TextChanged="applyhpEV"/>
-            <Editor IsVisible="false" Grid.Row="2" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPGV" TextChanged="applyhpGV"/>
+            <Editor Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPIV" TextChanged="applyhpIV" Keyboard="Numeric"/>
+            <Editor Grid.Row="2" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPEV" TextChanged="applyhpEV" Keyboard="Numeric"/>
+                <Editor IsVisible="false" Grid.Row="2" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="HPGV" TextChanged="applyhpGV" Keyboard="Numeric"/>
             <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalhpdisplay"/>
             <CheckBox Grid.Row="2" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" x:Name="hpHyper" CheckedChanged="applyHPhyper"/>
             <!--ATK-->
             <Label Grid.Row="3" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Atk:"/>
             <Editor IsReadOnly="True" Grid.Row="3" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="atkbasedisplay"/>
-            <Editor Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkIV" TextChanged="applyatkIV"/>
-            <Editor Grid.Row="3" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkEV" TextChanged="applyatkEV"/>
-            <Editor IsVisible="false" Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkGV" TextChanged="applyatkGV"/>
+                <Editor Grid.Row="3" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkIV" TextChanged="applyatkIV" Keyboard="Numeric"/>
+                <Editor Grid.Row="3" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkEV" TextChanged="applyatkEV" Keyboard="Numeric"/>
+                <Editor IsVisible="false" Grid.Row="3" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="AtkGV" TextChanged="applyatkGV" Keyboard="Numeric"/>
             <Editor IsReadOnly="True" Grid.Row="3" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalatkdisplay"/>
             <CheckBox Grid.Row="3" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" x:Name="ATKHyper" CheckedChanged="applyATKhyper"/>
             <!--DEF-->
             <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Def:"/>
             <Editor IsReadOnly="True" Grid.Row="4" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="defbasedisplay"/>
-            <Editor Grid.Row="4" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFIV" TextChanged="applydefIV"/>
-            <Editor Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFEV" TextChanged="applydefEV"/>
-            <Editor IsVisible="false" Grid.Row="4" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFGV" TextChanged="applydefGV"/>
+                <Editor Grid.Row="4" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFIV" TextChanged="applydefIV" Keyboard="Numeric"/>
+                <Editor Grid.Row="4" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFEV" TextChanged="applydefEV" Keyboard="Numeric"/>
+                <Editor IsVisible="false" Grid.Row="4" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFGV" TextChanged="applydefGV" Keyboard="Numeric"/>
             <Editor IsReadOnly="True" Grid.Row="4" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totaldefdisplay"/>
             <CheckBox Grid.Row="4" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" x:Name="DEFHyper" CheckedChanged="applyDEFhyper"/>
             <!--SPA-->
             <Label Grid.Row="5" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="SpA:"/>
             <Editor IsReadOnly="True" Grid.Row="5" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="spabasedisplay"/>
-            <Editor Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAIV" TextChanged="applyspaIV"/>
-            <Editor Grid.Row="5" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAEV" TextChanged="applyspaEV"/>
-            <Editor IsVisible="false" Grid.Row="5" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAGV" TextChanged="applyspaGV"/>
+                <Editor Grid.Row="5" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAIV" TextChanged="applyspaIV" Keyboard="Numeric"/>
+                <Editor Grid.Row="5" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAEV" TextChanged="applyspaEV" Keyboard="Numeric"/>
+                <Editor IsVisible="false" Grid.Row="5" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAGV" TextChanged="applyspaGV" Keyboard="Numeric"/>
             <Editor IsReadOnly="True" Grid.Row="5" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalspadisplay"/>
             <CheckBox Grid.Row="5" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPAHyper" CheckedChanged="applySPAhyper"/>
             <!--SPD-->
             <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="SpD:"/>
             <Editor IsReadOnly="True" Grid.Row="6" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="spdbasedisplay"/>
-            <Editor Grid.Row="6" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDIV" TextChanged="applyspdIV"/>
-            <Editor Grid.Row="6" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDEV" TextChanged="applyspdEV"/>
-            <Editor IsVisible="false" Grid.Row="6" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDGV" TextChanged="applyspdGV"/>
+                <Editor Grid.Row="6" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDIV" TextChanged="applyspdIV" Keyboard="Numeric"/>
+                <Editor Grid.Row="6" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDEV" TextChanged="applyspdEV" Keyboard="Numeric"/>
+                <Editor IsVisible="false" Grid.Row="6" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDGV" TextChanged="applyspdGV" Keyboard="Numeric"/>
             <Editor IsReadOnly="True" Grid.Row="6" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalspddisplay"/>
             <CheckBox Grid.Row="6" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPDHyper" CheckedChanged="applySPDhyper"/>
             <!--SPE-->
             <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Text="Spe:"/>
             <Editor IsReadOnly="True" Grid.Row="7" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" x:Name="spebasedisplay"/>
-            <Editor Grid.Row="7" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEIV" TextChanged="applyspeIV"/>
-            <Editor Grid.Row="7" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEEV" TextChanged="applyspeEV"/>
-            <Editor IsVisible="false" Grid.Row="7" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEGV" TextChanged="applyspeGV"/>
+                <Editor Grid.Row="7" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEIV" TextChanged="applyspeIV" Keyboard="Numeric"/>
+                <Editor Grid.Row="7" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEEV" TextChanged="applyspeEV" Keyboard="Numeric"/>
+                <Editor IsVisible="false" Grid.Row="7" Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEGV" TextChanged="applyspeGV" Keyboard="Numeric"/>
             <Editor IsReadOnly="True" Grid.Row="7" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center" x:Name="totalspedisplay"/>
             <CheckBox Grid.Row="7" Grid.Column="6" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SPEHyper" CheckedChanged="applySPEhyper"/>
             <!--Totals-->
@@ -124,7 +125,7 @@
             <Button x:Name="suggestedEv" WidthRequest="150" Grid.Row="12" Grid.Column="4" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Suggested Evs" Clicked="suggestedevs"/>
             <!--Dynamax-->
             <Label x:Name="dmaxlabel" IsVisible="false" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" Text="Dynamax Level:"/>
-            <Editor x:Name="dmaxleveleditor" IsVisible="false" Grid.Row="13" Grid.Column="2" TextChanged="applydmaxlevel"/>
+            <l:NumericUpDown x:Name="dmaxleveleditor" IsVisible="false" Grid.Row="13" Grid.Column="2" ValueChanged="applydmaxlevel" MinValue="0" MaxValue="10"/>
             <CheckBox x:Name="GmaxCheck" IsVisible="false" Grid.Row="13" Grid.Column="3" CheckedChanged="applygmax"/>
             <Label x:Name="gmaxlabel" IsVisible="false" Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Gigantamax"/>
             <!--Alpha/Noble-->

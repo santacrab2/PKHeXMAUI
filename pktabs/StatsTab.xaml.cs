@@ -151,7 +151,7 @@ public partial class StatsTab : ContentPage
         {
             dmaxlabel.IsVisible = true;
             dmaxleveleditor.IsVisible = true;
-            dmaxleveleditor.Text = dmax.DynamaxLevel.ToString();
+            dmaxleveleditor.Number = dmax.DynamaxLevel;
         }
         if(pkm is IGigantamax gmax)
         {
@@ -640,15 +640,13 @@ public partial class StatsTab : ContentPage
         }
     }
 
-    private void applydmaxlevel(object sender, TextChangedEventArgs e)
+    private void applydmaxlevel(object sender, EventArgs e)
     {
-        if (dmaxleveleditor.Text.Length > 0 && !SkipEvent)
+        if (!SkipEvent)
         {
-            if(byte.TryParse(dmaxleveleditor.Text,out var result))
-            {
-                if (pk is IDynamaxLevel dmax)
-                    dmax.DynamaxLevel = Math.Clamp(result, (byte)minStat, (byte)maxGV);
-            }
+           if (pk is IDynamaxLevel dmax)
+               dmax.DynamaxLevel = Math.Clamp((byte)dmaxleveleditor.Number, (byte)minStat, (byte)maxGV);
+            
         }
     }
 

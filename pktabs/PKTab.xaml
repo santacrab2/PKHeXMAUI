@@ -74,9 +74,9 @@
                 <CheckBox Grid.Row="5" Grid.Column="4" VerticalOptions="Center" x:Name="nicknamecheck" CheckedChanged="nicknamechecker"/>
                 <!--EXP&level-->
                 <Label Grid.Row="6" Grid.Column="0" Text="EXP:" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-                <Editor Grid.Row="6" Grid.Column="1" AutoSize="TextChanges" Text="Exp" HorizontalOptions="Start" VerticalOptions="Center" x:Name="exp" TextChanged="applyexp"></Editor>
+                <Editor Grid.Row="6" Grid.Column="1" AutoSize="TextChanges" Text="Exp" HorizontalOptions="Start" VerticalOptions="Center" x:Name="exp" TextChanged="applyexp" Keyboard="Numeric"></Editor>
                 <Label Grid.Row="6" Grid.Column="2" Text="Level:" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-                <Editor Grid.Row="6" Grid.Column="3" Text="0" HorizontalOptions="Start" VerticalOptions="Center" x:Name="leveldisplay" TextChanged="changelevel"></Editor>
+                <Editor Grid.Row="6" Grid.Column="3" Text="0" HorizontalOptions="Start" VerticalOptions="Center" x:Name="leveldisplay" TextChanged="changelevel" Keyboard="Numeric"></Editor>
                 <!--Nature-->
                 <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Nature:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <control:comboBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Nature" x:Name="naturepicker" HorizontalOptions="Start" VerticalOptions="Center" SelectedIndexChanged="applynature" BackgroundColor="Transparent"></control:comboBox>
@@ -95,7 +95,7 @@
                 <Picker Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="abilitypicker" Title="Ability" SelectedIndexChanged="applyability"></Picker>
                 <!--friendship-->
                 <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Friendship:" x:Name="FriendshipLabel"></Label>
-                <Editor Grid.Row="13" Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Friendshipdisplay" TextChanged="applyfriendship"></Editor>
+                <Editor Grid.Row="13" Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Friendshipdisplay" TextChanged="applyfriendship" Keyboard="Numeric"></Editor>
                 <!--Language-->
                 <Label Text="Language:" Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Picker Grid.Row="14" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>

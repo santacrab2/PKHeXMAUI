@@ -57,17 +57,17 @@
                 <ImageButton Grid.Row="2" Grid.Column="4" VerticalOptions="End" HorizontalOptions="Start" Source="ribbon_affix_none.png" IsVisible="False" Clicked="OpenRibbonEditor" x:Name="AffixedRibbonSprite"/>
                 <!--Height-->
                 <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:" IsVisible="false" x:Name="HeightLabel"></Label>
-                <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight" IsVisible="false"/>
+                <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight" IsVisible="false" Keyboard="Numeric"/>
                 <Editor IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="HeightAbsoluteEditor" IsVisible="false"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="HeighDetailLabel" IsVisible="false"/>
                 <!--Weight-->
                 <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:" IsVisible="false" x:Name="WeightLabel"/>
-                <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight" IsVisible="false"/>
+                <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight" IsVisible="false" Keyboard="Numeric"/>
                 <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="WeightAbsoluteEditor" IsVisible="false"/>
                 <Label Grid.Row="2" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="WeightDetailLabel" IsVisible="false"/>
                 <!--Scale/CP-->
                 <Label x:Name="scalelabel" Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:" IsVisible="false"/>
-                <Editor Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale" IsVisible="false"/>
+                <Editor Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale" IsVisible="false" Keyboard="Numeric"/>
                 <CheckBox Grid.Row="3" Grid.Column="1" x:Name="AutoCP" HorizontalOptions="End" IsVisible="false" CheckedChanged="AutoCalcCP"></CheckBox>
                 <Label Grid.Row="3" Grid.Column="2" Text="Auto" IsVisible="false" x:Name="cpAutoLabel"/>
                 <Label Grid.Row="3" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="ScaleDetailLabel" IsVisible="false"/>
@@ -93,18 +93,18 @@
                 <!--Contest Stats-->
                 <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Contest Stats"/>
                 <Label Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Cool"/>
-                <Editor x:Name="Coolstats" Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycoolness"/>
+                <Editor x:Name="Coolstats" Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycoolness" Keyboard="Numeric"/>
                 <Label Grid.Row="8" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Beauty"/>
-                <Editor x:Name="Beautystats" Grid.Row="9" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makepretty"/>
+                <Editor x:Name="Beautystats" Grid.Row="9" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makepretty" Keyboard="Numeric"/>
                 <Label Grid.Row="8" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Cute"/>
-                <Editor x:Name="Cutestats" Grid.Row="9" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycuteness"/>
+                <Editor x:Name="Cutestats" Grid.Row="9" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycuteness" Keyboard="Numeric"/>
 
                 <Label Grid.Row="10" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Clever"/>
-                <Editor x:Name="Cleverstats" Grid.Row="11" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makesmart"/>
+                <Editor x:Name="Cleverstats" Grid.Row="11" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makesmart" Keyboard="Numeric"/>
                 <Label Grid.Row="10" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Tough"/>
-                <Editor x:Name="toughstats" Grid.Row="11" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="GoToTheGym"/>
+                <Editor x:Name="toughstats" Grid.Row="11" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="GoToTheGym" Keyboard="Numeric"/>
                 <Label Grid.Row="10" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Sheen"/>
-                <Editor x:Name="sheenstats" Grid.Row="11" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="MakeMeSparkle"/>
+                <Editor x:Name="sheenstats" Grid.Row="11" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="MakeMeSparkle" Keyboard="Numeric"/>
 
 
 

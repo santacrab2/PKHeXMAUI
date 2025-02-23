@@ -6,13 +6,17 @@
              Title="Main">
     <ScrollView>
         <VerticalStackLayout>
-            <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
+            <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*">
                 <Label x:Name="L_BP" Text="BP:"/>
                 <l:NumericUpDown x:Name="NUD_BP" MinValue="0" MaxValue="9999" Grid.Column="1"/>
                 <Label x:Name="L_Coins" Text="Coins:" Grid.Column="2"/>
                 <l:NumericUpDown x:Name="NUD_Coin" MinValue="0" MaxValue="9999" Grid.Column="3"/>
                 <Label x:Name="L_UGFlags" Text="Flags Obtained:" Grid.Row="1"/>
                 <l:NumericUpDown x:Name="NUD_UGFlags" MinValue="0" MaxValue="999999" Grid.Row="1" Grid.Column="1"/>
+                <Label x:Name="L_PokeathlonPoints" Text="Pokeathlon Points:" Grid.Row="1"/>
+                <l:NumericUpDown x:Name="NUD_PokeathlonPoints" MinValue="0" MaxValue="9999" Grid.Row="1" Grid.Column="1"/>
+                <Label x:Name="L_UpgradeMap" Text="Current Map" Grid.Row="2"/>
+                <l:comboBox x:Name="CB_UpgradeMap" Grid.Row="3"/>
             </Grid>
             <Grid x:Name="GB_Poketch" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*">
                 <Label x:Name="L_Poketch" Text="Poketch" />

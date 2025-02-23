@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscBattleFrontier4"
+             Title="MiscBattleFrontier4">
+    <ScrollView>
+    <VerticalStackLayout>
+        <Grid x:Name="GB_Prints" RowDefinitions="*,*,*">
+            <Label Text="Prints" Grid.Row="0"/>
+            <Grid ColumnDefinitions="*,*,*" Grid.Row="1">
+                <Button x:Name="BTN_PrintTower" Text="Tower" />
+                <Button x:Name="BTN_PrintFactory" Text="Factory" Grid.Column="1"/>
+                <Button x:Name="BTN_PrintHall" Text="Hall" Grid.Column="2"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*" Grid.Row="2">
+                <Button x:Name="BTN_PrintCastle" Text="Castle"/>
+                <Button x:Name="BTN_PrintArcade" Text="Arcade" Grid.Column="1"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="GB_Streaks" RowDefinitions="*,*,*,*,*,*,*,*,*" ColumnDefinitions="*,*,*,*">
+            <Label Text="Streaks"/>
+            <l:comboBox x:Name="CB_Stats1" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <l:comboBox x:Name="CB_Stats2" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <RadioButton x:Name="RB_Stats3_01" Grid.Row="3"/>
+            <Label Text="Lv. 50" Grid.Row="3" Grid.Column="1"/>
+            <RadioButton x:Name="RB_Stats3_02" Grid.Row="3" Grid.Column="2"/>
+            <Label Text="Open" Grid.Row="3" Grid.Column="3"/>
+            <CheckBox x:Name="CHK_Continue" Grid.Row="4"/>
+            <Label Text="Continue" Grid.Row="4" Grid.Column="1"/>
+            <Label x:Name="L_Stat0" Grid.Row="5"/>
+            <l:NumericUpDown x:Name="NUD_Stat0" Grid.Row="5" Grid.Column="1" MinValue="0" MaxValue="9999"/>
+            <Label x:Name="L_Stat1" Grid.Row="6"/>
+            <l:NumericUpDown x:Name="NUD_Stat1" Grid.Column="1" Grid.Row="6" MinValue="0" MaxValue="9999"/>
+            <Label x:Name="L_Stat2" Grid.Row="7"/>
+            <l:NumericUpDown x:Name="NUD_Stat2" Grid.Column="1" Grid.Row="7" MinValue="0" MaxValue="9999"/>
+            <Label x:Name="L_Stat3" Grid.Row="8"/>
+            <l:NumericUpDown x:Name="NUD_Stat3" Grid.Column="1" Grid.Row="8" MinValue="0" MaxValue="9999"/>
+        </Grid>
+        <Grid x:Name="GB_Hall" RowDefinitions="*,*,*,*,*,*,*,*,*" ColumnDefinitions="*,*,*">
+            <Label x:Name="L_Hall"/>
+            <l:comboBox x:Name="CB_Species" Grid.Row="1" Grid.RowSpan="2"/>
+            <CheckBox x:Name="CHK_HallCurrent" Grid.Row="2"/>
+            <Label x:Name="L_HallCurrent" Text="Current: (None)" Grid.Row="2" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_HallType01" MinValue="0" MaxValue="10" Grid.Row="3"/>
+            <l:NumericUpDown x:Name="NUD_HallType02" MinValue="0" MaxValue="10" Grid.Row="3" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_HallType03" MinValue="0" MaxValue="10" Grid.Row="3" Grid.Column="2"/>
+            <l:NumericUpDown x:Name="NUD_HallType04" MinValue="0" MaxValue="10" Grid.Row="4"/>
+            <l:NumericUpDown x:Name="NUD_HallType05" MinValue="0" MaxValue="10" Grid.Row="4" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_HallType06" MinValue="0" MaxValue="10" Grid.Row="4" Grid.Column="2"/>
+            <l:NumericUpDown x:Name="NUD_HallType07" MinValue="0" MaxValue="10" Grid.Row="5"/>
+            <l:NumericUpDown x:Name="NUD_HallType08" MinValue="0" MaxValue="10" Grid.Row="5" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_HallType09" MinValue="0" MaxValue="10" Grid.Row="5" Grid.Column="2"/>
+            <l:NumericUpDown x:Name="NUD_HallType10" MinValue="0" MaxValue="10" Grid.Row="6"/>
+            <l:NumericUpDown x:Name="NUD_HallType11" MinValue="0" MaxValue="10" Grid.Row="6" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_HallType12" MinValue="0" MaxValue="10" Grid.Row="6" Grid.Column="2"/>
+            <l:NumericUpDown x:Name="NUD_HallType13" MinValue="0" MaxValue="10" Grid.Row="7"/>
+            <l:NumericUpDown x:Name="NUD_HallType14" MinValue="0" MaxValue="10" Grid.Row="7" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_HallType15" MinValue="0" MaxValue="10" Grid.Row="7" Grid.Column="2"/>
+            <l:NumericUpDown x:Name="NUD_HallType16" MinValue="0" MaxValue="10" Grid.Row="8"/>
+            <l:NumericUpDown x:Name="NUD_HallType17" MinValue="0" MaxValue="10" Grid.Row="8" Grid.Column="1"/>
+            <Label x:Name="L_SumHall" Grid.Row="8" Grid.Column="2"/>
+            
+        </Grid>
+        <Grid x:Name="GB_Castle" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*">
+            <Label Text="Battle Castle (Singles)" x:Name="L_Castle"/>
+            <Label Text="Recovery / Item / Info" Grid.Row="1" Grid.ColumnSpan="3"/>
+            <l:NumericUpDown x:Name="NUD_CastleRankRcv" Grid.Row="2"/>
+            <l:NumericUpDown x:Name="NUD_CastleRankItem" Grid.Row="2" Grid.Column="1"/>
+            <l:NumericUpDown x:Name="NUD_CastleRankInfo" Grid.Row="2" Grid.Column="2"/>
+        </Grid>
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

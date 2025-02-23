@@ -29,6 +29,7 @@ public partial class MiscMain : ContentPage
 		InitializeComponent();
         SAV = (SAV4)(Origin = sav).Clone();
         GB_Poketch.IsVisible = sav is not SAV4HGSS;
+        L_UpgradeMap.IsVisible = CB_UpgradeMap.IsVisible = sav is SAV4HGSS;
         poketchapps = GameInfo.Strings.poketchapps;
         TapGestureRecognizer tap = new();
         tap.Tapped += PB_DotArtist_MouseClick;
@@ -72,10 +73,9 @@ public partial class MiscMain : ContentPage
             NUD_UGFlags.Number = Math.Clamp(sinnoh.UG_FlagsCaptured, 0, SAV4Sinnoh.UG_MAX);
            // L_PokeathlonPoints.Visible = NUD_PokeathlonPoints.Visible = false;
         }
-       /* else if (SAV is SAV4HGSS hgss)
+        else if (SAV is SAV4HGSS hgss)
         {
-            ReadWalker(hgss);
-            ReadPokeathlon(hgss);
+            NUD_PokeathlonPoints.Number = hgss.PokeathlonPoints;
             L_UGFlags.IsVisible = NUD_UGFlags.IsVisible = false;
             ReadOnlySpan<string> items = ["Map Johto", "Map Johto+", "Map Johto & Kanto"];
             var index = hgss.MapUnlockState;
@@ -84,8 +84,45 @@ public partial class MiscMain : ContentPage
             foreach (var item in items)
                 CB_UpgradeMap.Items.Add(item);
             CB_UpgradeMap.SelectedIndex = (int)index;
-        }*/
+        }
 
+    }
+    public void SaveMain()
+    {
+        SAV.Coin = (uint)NUD_Coin.Number;
+        SAV.BP = (ushort)NUD_BP.Number;
+
+        var flags = SAV is SAV4Sinnoh ? FlyWorkFlagSinnoh : FlyWorkFlagHGSS;
+        for (int i = 0; i < FlyDestItems.Count; i++)
+        {
+            var index = FlyFlagStart + flags[i];
+            SAV.SetEventFlag(index, FlyDestItems[i].Item2);
+        }
+
+        if (SAV is SAV4Sinnoh sinnoh)
+        {
+            SavePoketch(sinnoh);
+            sinnoh.UG_FlagsCaptured = (uint)NUD_UGFlags.Number;
+        }
+        else if (SAV is SAV4HGSS hgss)
+        {
+            hgss.PokeathlonPoints = (uint)NUD_PokeathlonPoints.Number;
+            hgss.MapUnlockState = (MapUnlockState4)CB_UpgradeMap.SelectedIndex;
+        }
+
+    }
+    private void SavePoketch(SAV4Sinnoh s)
+    {
+        int unlockedCount = 0;
+        s.CurrentPoketchApp = (sbyte)CB_CurrentApp.SelectedIndex;
+        for (int i = 0; i < PoketchItems.Count; i++)
+        {
+            var b = PoketchItems[i].Item2;
+            s.SetPoketchAppUnlocked((PoketchApp)i, b);
+            if (b) unlockedCount++;
+        }
+        s.SetPoketchDotArtistData(DotArtistByte);
+        s.PoketchUnlockedCount = (byte)unlockedCount;
     }
     private ObservableCollection<Tuple<string, bool>> PoketchItems = [];
     private void ReadPoketch(SAV4Sinnoh s)
@@ -228,5 +265,18 @@ public class MiscTab4 : TabbedPage
         BarTextColor = Colors.White;
         Children.Add(MiscMain);
         Children.Add(new cancelpage());
+    }
+}
+public partial class Misc4Save : ContentPage
+{
+    public Misc4Save()
+    {
+        this.Title = "Save";
+        this.Content = new Label() { Text = "The MAUI Framework has bugs. This is the save page. Navigate to another page, and then select the page you were trying to reach!" };
+    }
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        MiscTab4.MiscMain.SaveMain();
+        Navigation.PopModalAsync();
     }
 }

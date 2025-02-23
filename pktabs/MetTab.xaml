@@ -61,10 +61,10 @@
                 <DatePicker Grid.Row="5" Grid.Column="1" x:Name="metdatepicker" DateSelected="applymetdate" HorizontalOptions="Start"/>
                 <!--Met Level-->
                 <Label Grid.Row="6" Grid.Column="0" Text="Met Level:" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Editor Grid.Row="6" Grid.Column="1" Text="Met Level" AutoSize="TextChanges" HorizontalOptions="Start" Grid.ColumnSpan="2" VerticalOptions="Center" TextChanged="applymetlevel" x:Name="metleveldisplay"/>
+                <Editor Grid.Row="6" Grid.Column="1" Text="Met Level" AutoSize="TextChanges" HorizontalOptions="Start" Grid.ColumnSpan="2" VerticalOptions="Center" TextChanged="applymetlevel" x:Name="metleveldisplay" Keyboard="Numeric"/>
                 <!--Obedience level-->
                 <Label x:Name="obediencelevellabel" IsVisible="false" Grid.Row="7" Grid.Column="0" Text="Obedience Level:" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="152"/>
-                <Editor IsVisible="false" Grid.Row="7" Grid.Column="1" Text="Obedience Level" AutoSize="TextChanges" HorizontalOptions="Start" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay"/>
+                <Editor IsVisible="false" Grid.Row="7" Grid.Column="1" Text="Obedience Level" AutoSize="TextChanges" HorizontalOptions="Start" VerticalOptions="Center" TextChanged="applyobediencelevel" x:Name="obedienceleveldisplay" Keyboard="Numeric"/>
                 <!--fateful-->
                 <Label Grid.Row="8" Grid.Column="0" Text="Fateful Encounter:" Grid.ColumnSpan="2" HorizontalOptions="Start"/>
                 <CheckBox Grid.Row="8" Grid.Column="2" HorizontalOptions="Start" x:Name="fatefulcheck" CheckedChanged="applyfateful"/>
