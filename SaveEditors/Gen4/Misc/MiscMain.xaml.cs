@@ -71,7 +71,7 @@ public partial class MiscMain : ContentPage
         {
             ReadPoketch(sinnoh);
             NUD_UGFlags.Number = Math.Clamp(sinnoh.UG_FlagsCaptured, 0, SAV4Sinnoh.UG_MAX);
-           // L_PokeathlonPoints.Visible = NUD_PokeathlonPoints.Visible = false;
+            L_PokeathlonPoints.IsVisible = NUD_PokeathlonPoints.IsVisible = false;
         }
         else if (SAV is SAV4HGSS hgss)
         {
@@ -259,11 +259,13 @@ public static class PoketchDotMatrix
 public class MiscTab4 : TabbedPage 
 {
     public static MiscMain MiscMain = new((SAV4)MainPage.sav);
+    public static MiscBattleFrontier4 MBF4 = new((SAV4)MainPage.sav);
     public MiscTab4()
     {
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
         BarTextColor = Colors.White;
         Children.Add(MiscMain);
+        Children.Add(MBF4);
         Children.Add(new cancelpage());
     }
 }

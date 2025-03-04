@@ -23,7 +23,7 @@ public partial class NumericUpDown : ContentView
         if ((decimal)newValue < ((NumericUpDown)bindable).MinValue)
             newValue = ((NumericUpDown)bindable).MinValue;
         ((NumericUpDown)bindable).E_Number.Text = newValue.ToString();
-        ((NumericUpDown)bindable).ValueChanged?.Invoke(null, EventArgs.Empty);
+        ((NumericUpDown)bindable).ValueChanged?.Invoke(bindable, EventArgs.Empty);
 	}
 
     private void Increase(object sender, EventArgs e)

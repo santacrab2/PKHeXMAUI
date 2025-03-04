@@ -94,12 +94,14 @@ public partial class MiscBattleFrontier4 : ContentPage
             NUD_HallStreaks.Visible = NUD_HallStreaks.Enabled = false; I need a save that displays this so i know wtf it is*/
 
         editing = true;
-        CB_Stats1.Items.Clear();
+       List<string> facilityList = new();
         for (BattleFrontierFacility4 i = 0; i <= SAV.MaxFacility; i++)
-            CB_Stats1.Items.Add(i.ToString());
+            facilityList.Add(i.ToString());
+        CB_Stats1.ItemSource = facilityList;
         StatRBA[0].IsChecked = true;
         var speciesList = GameInfo.FilteredSources.Species.Skip(1).ToList();
         CB_Species.ItemSource = speciesList;
+        CB_Species.DisplayMemberPath = "Text";
         editing = false;
         CB_Stats1.SelectedIndex = 0;
     }
@@ -157,7 +159,6 @@ public partial class MiscBattleFrontier4 : ContentPage
             return;
 
         editing = true;
-        CB_Stats2.Items.Clear();
         CB_Stats2.ItemSource=BFT[BFF[facility][1]];
 
         StatRBA[0].IsChecked = true;
@@ -371,11 +372,11 @@ public partial class MiscBattleFrontier4 : ContentPage
         }
         L_SumHall.Text = s.ToString();
 
-        /*if (Hall is not null)
+        if (Hall is not null)
         {
             ushort v = Hall.GetCount(CB_Stats2.SelectedIndex, species);
-            NUD_HallStreaks.Value = Math.Min((ushort)9999, v);
-        }*/
+            //NUD_HallStreaks.Value = Math.Min((ushort)9999, v);
+        }
     }
 
     private void CHK_HallCurrent_CheckedChanged(object sender, EventArgs e)
@@ -397,9 +398,10 @@ public partial class MiscBattleFrontier4 : ContentPage
         int i = Array.IndexOf(HallNUDA, sender);
         if (i < 0)
             return;
+
         int ofs = BFF[2][2] + (BFF[2][3] * CB_Stats2.SelectedIndex) + 6 + ((i >> 1) << 1);
         SAV.General[ofs] = (byte)((SAV.General[ofs] & ~(0xF << ((i & 1) << 2))) | ((int)HallNUDA[i].Number << ((i & 1) << 2)));
-        L_SumHall.Text = HallNUDA.Sum(x => x.Number).ToString(CultureInfo.InvariantCulture);
+        L_SumHall.Text = HallNUDA.Sum(x => x.Number).ToString();
     }
 
     private void NUD_HallStreaks_ValueChanged(object sender, EventArgs e)
