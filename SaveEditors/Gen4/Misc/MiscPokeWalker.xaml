@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscPokeWalker"
+             Title="PokeWalker">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+                <Label Text="Watts:"/>
+                <l:NumericUpDown x:Name="NUD_Watts" MinValue="0" MaxValue="9999999" Grid.Column="1"/>
+                <Label Text="Steps:" Grid.Row="1"/>
+                <l:NumericUpDown x:Name="NUD_Steps" MinValue="0" MaxValue="9999999" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+            <Label Text="PokeWalker Courses"/>
+            <CollectionView x:Name="CV_WalkerCourses" HeightRequest="300"/>
+            <Button x:Name="B_AllWalkerCourses" Text="Check All" Clicked="B_AllWalkerCourses_Click"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

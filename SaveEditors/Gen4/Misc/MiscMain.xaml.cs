@@ -81,8 +81,7 @@ public partial class MiscMain : ContentPage
             var index = hgss.MapUnlockState;
             if (index >= MapUnlockState4.Invalid)
                 index = MapUnlockState4.JohtoKanto;
-            foreach (var item in items)
-                CB_UpgradeMap.Items.Add(item);
+            CB_UpgradeMap.ItemSource = items.ToArray();
             CB_UpgradeMap.SelectedIndex = (int)index;
         }
 
@@ -260,12 +259,15 @@ public class MiscTab4 : TabbedPage
 {
     public static MiscMain MiscMain = new((SAV4)MainPage.sav);
     public static MiscBattleFrontier4 MBF4 = new((SAV4)MainPage.sav);
+    public static MiscPokeWalker MPW;
     public MiscTab4()
     {
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
         BarTextColor = Colors.White;
         Children.Add(MiscMain);
         Children.Add(MBF4);
+        if (MainPage.sav is SAV4HGSS s)
+            Children.Add(MPW = new(s));
         Children.Add(new cancelpage());
     }
 }

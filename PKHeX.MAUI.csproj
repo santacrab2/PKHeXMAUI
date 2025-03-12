@@ -329,6 +329,9 @@
 	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscMain.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscPokeWalker.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\SaveAccessors\gen8+\BlockEditor8.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
