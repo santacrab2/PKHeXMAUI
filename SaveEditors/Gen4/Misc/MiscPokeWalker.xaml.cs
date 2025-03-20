@@ -14,16 +14,16 @@ public partial class MiscPokeWalker : ContentPage
         {
             Grid grid = [];
             CheckBox cb = new();
-            cb.SetBinding(CheckBox.IsCheckedProperty, ".Item1",BindingMode.TwoWay);
+            cb.SetBinding(CheckBox.IsCheckedProperty, ".Unlocked", BindingMode.TwoWay);
             Label lab = new();
-            lab.SetBinding(Label.TextProperty, ".Item2");
+            lab.SetBinding(Label.TextProperty, ".Name");
             grid.Add(cb);
             grid.Add(lab);
             return grid;
         });
         ReadWalker(sav);
     }
-    public ObservableCollection<Tuple<bool, string>> CourseList = [];
+    public ObservableCollection<pokeWalkerCourse> CourseList = [];
     private void ReadWalker(SAV4HGSS s)
     {
         ReadWalkerCourseUnlockFlags(s);
@@ -38,15 +38,15 @@ public partial class MiscPokeWalker : ContentPage
         Span<bool> courses = stackalloc bool[SAV4HGSS.PokewalkerCourseFlagCount];
         s.GetPokewalkerCoursesUnlocked(courses);
         for (int i = 0; i < walkercourses.Length; i++)
-            CourseList.Add(Tuple.Create(courses[i], walkercourses[i]));
+            CourseList.Add(new(courses[i], walkercourses[i]));
         CV_WalkerCourses.ItemsSource = CourseList;
     }
 
-    private void SaveWalker(SAV4HGSS s)
+    public void SaveWalker(SAV4HGSS s)
     {
         Span<bool> courses = stackalloc bool[SAV4HGSS.PokewalkerCourseFlagCount];
         for (int i = 0; i < CourseList.Count; i++)
-            courses[i] = CourseList[i].Item1;
+            courses[i] = CourseList[i].Unlocked;
         s.SetPokewalkerCoursesUnlocked(courses);
 
         s.PokewalkerWatts = (uint)NUD_Watts.Number;
@@ -60,4 +60,9 @@ public partial class MiscPokeWalker : ContentPage
         s.PokewalkerCoursesUnlockAll();
         ReadWalkerCourseUnlockFlags(s);
     }
+}
+public class pokeWalkerCourse(bool unlocked, string name)
+{
+    public bool Unlocked { get; set; } = unlocked;
+    public string Name { get; set; } = name;
 }

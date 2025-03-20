@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MiscSeals"
+             Title="MiscSeals">
+    <VerticalStackLayout>
+        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+            <Button Text="Delete All Seals" Clicked="B_ClearSeals_Click"/>
+            <Button Text="Give All Seals (Legal)" Clicked="OnBAllSealsLegalOnClick" Grid.Row="1"/>
+            <Button x:Name="B_AllSealsIllegal" Text="Give All Seals (Illegal)" Clicked="OnBAllSealsLegalOnClick" Grid.Row="2"/>
+            <CollectionView x:Name="CV_Seals" HeightRequest="300" Grid.Column="1" Grid.RowSpan="3"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
