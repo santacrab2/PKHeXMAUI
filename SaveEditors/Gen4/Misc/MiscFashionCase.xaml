@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MiscFashionCase"
+             Title="MiscFashionCase">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Button x:Name="B_ClearAccessories" Text="Delete All Accessories" Clicked="B_ClearAcessoriesClick"/>
+            <Button x:Name="B_AllAccessoriesLegal" Text="Give All Accessories (Legal)" Clicked="OnBAllAccessoriesLegalOnClick"/>
+            <Button x:Name="B_AllAccessoriesIllegal" Text="Give All Accessories (Illegal)" Clicked="OnBAllAccessoriesLegalOnClick"/>
+            <CollectionView x:Name="CV_Accessories" HeightRequest="300"/>
+            <Button x:Name="B_ClearBackdrops" Text="Delete All Backdrops" Clicked="B_ClearBackdropsClick"/>
+            <Button x:Name="B_AllBackdropsLegal" Text="Give All Backdrops (Legal)" Clicked="OnBAllBackdropsLegalOnClick"/>
+            <Button x:Name="B_AllBackdropsIllegal" Text="Give All Backdrops (Illegal)" Clicked="OnBAllBackdropsLegalOnClick"/>
+            <CollectionView x:Name="CV_Backdrops" HeightRequest="300"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

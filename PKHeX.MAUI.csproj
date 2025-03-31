@@ -326,6 +326,9 @@
 	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscBattleFrontier4.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscFashionCase.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscMain.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

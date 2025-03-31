@@ -261,6 +261,7 @@ public class MiscTab4 : TabbedPage
     public static MiscBattleFrontier4 MBF4 = new((SAV4)MainPage.sav);
     public static MiscPokeWalker MPW;
     public static MiscSeals MSeals = new((SAV4)MainPage.sav);
+    public static MiscFashionCase MFC = new((SAV4)MainPage.sav);
     public MiscTab4()
     {
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
@@ -270,6 +271,7 @@ public class MiscTab4 : TabbedPage
         if (MainPage.sav is SAV4HGSS s)
             Children.Add(MPW = new(s));
         Children.Add(MSeals);
+        Children.Add(MFC);
         Children.Add(new cancelpage());
         Children.Add(new Misc4Save());
     }
@@ -287,6 +289,8 @@ public partial class Misc4Save : ContentPage
         if (MainPage.sav is SAV4HGSS s)
             MiscTab4.MPW.SaveWalker(s);
         MiscTab4.MSeals.SaveSeals();
+        MiscTab4.MFC.SaveAccessories();
+        MiscTab4.MFC.SaveBackdrops();
         Navigation.PopModalAsync();
     }
 }
