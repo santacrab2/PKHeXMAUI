@@ -259,9 +259,10 @@ public class MiscTab4 : TabbedPage
 {
     public static MiscMain MiscMain = new((SAV4)MainPage.sav);
     public static MiscBattleFrontier4 MBF4 = new((SAV4)MainPage.sav);
-    public static MiscPokeWalker MPW;
+    public static MiscPokeWalker? MPW;
     public static MiscSeals MSeals = new((SAV4)MainPage.sav);
     public static MiscFashionCase MFC = new((SAV4)MainPage.sav);
+    public static MiscPoffins? MP;
     public MiscTab4()
     {
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
@@ -272,6 +273,8 @@ public class MiscTab4 : TabbedPage
             Children.Add(MPW = new(s));
         Children.Add(MSeals);
         Children.Add(MFC);
+        if (MainPage.sav is SAV4Sinnoh sinnoh)
+            Children.Add(MP = new(sinnoh));
         Children.Add(new cancelpage());
         Children.Add(new Misc4Save());
     }

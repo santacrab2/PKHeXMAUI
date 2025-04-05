@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscPoffins"
+             Title="MiscPoffins">
+    <ScrollView Orientation="Both">
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*" x:Name="G_Poffins">
+            <CollectionView x:Name="CV_Poffins" HeightRequest="300"/>
+            <Button x:Name="B_PoffinAll" Grid.Row="1" Text="Give All" Clicked="B_PoffinAll_Click" />
+            <Button x:Name="B_PoffinDel" Grid.Row="1" Grid.Column="1" Text="Delete All" Clicked="B_PoffinDel_Click" />
+        </Grid>
+    </ScrollView>
+</ContentPage>
