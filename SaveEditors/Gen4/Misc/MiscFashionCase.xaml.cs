@@ -8,7 +8,6 @@ public partial class MiscFashionCase : ContentPage
 {
     private readonly string[] accessories, backdrops;
     public ObservableCollection<string> backdropsSource;
-    private readonly string[] backdropsSorted;
     public SAV4 SAV;
     private void B_ClearAcessoriesClick(object sender, EventArgs e) => ClearAccessories();
     public void ClearAccessories()
@@ -77,11 +76,10 @@ public partial class MiscFashionCase : ContentPage
         SAV = sav;
         accessories = GameInfo.Strings.accessories;
         backdrops = GameInfo.Strings.backdrops;
-        backdropsSorted = [.. backdrops.Order()]; // sorted copy
         backdropsSource = backdrops.ToObservableCollection();
         CV_Accessories.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new();
+            Grid grid = [];
             NumericUpDown cb = new();
             cb.SetBinding(NumericUpDown.NumberProperty, ".Item2", BindingMode.TwoWay);
             Label lab = new();
@@ -92,7 +90,7 @@ public partial class MiscFashionCase : ContentPage
         });
         CV_Backdrops.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new();
+            Grid grid = [];
             Label lab = new();
             lab.SetBinding(Label.TextProperty, ".");
             grid.Children.Add(lab);

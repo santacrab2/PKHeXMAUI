@@ -142,7 +142,7 @@ public partial class MainPage : ContentPage
             }
         }
         var startup = new LegalSettings();
-        SaveFile.SetUpdatePKM = PSettings.SetUpdatePKM ? PKMImportSetting.Update : PKMImportSetting.Skip;
+        SaveFile.SetUpdatePKM = PSettings.SetUpdatePKM ? EntityImportOption.Enable : EntityImportOption.Disable;
         ParseSettings.InitFromSaveFileData(sav);
         ParseSettings.Settings.WordFilter.CheckWordFilter = startup.CheckWordFilter;
         ParseSettings.Settings.Tradeback.AllowGen1Tradeback= startup.AllowGen1Tradeback;
@@ -253,7 +253,7 @@ public partial class MainPage : ContentPage
             var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
             if ((result.IsSuccess() && newpkm is not null) || (PSettings.AllowIncompatibleConversion && newpkm is not null))
             {
-                sav.AdaptPKM(newpkm);
+                sav.AdaptToSaveFile(newpkm);
                 applymainpkinfo(newpkm);
                 checklegality();
                 pk = newpkm;
@@ -265,7 +265,7 @@ public partial class MainPage : ContentPage
                 return;
             }
         }
-        sav.AdaptPKM(pkm);
+        sav.AdaptToSaveFile(pkm);
         applymainpkinfo(pkm);
         checklegality();
         pk = pkm;

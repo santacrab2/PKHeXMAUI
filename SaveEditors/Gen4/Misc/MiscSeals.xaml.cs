@@ -15,7 +15,7 @@ public partial class MiscSeals : ContentPage
         seals = GameInfo.Strings.seals;
         CV_Seals.ItemTemplate = new DataTemplate(() =>
         {
-            Grid grid = new();
+            Grid grid = [];
             NumericUpDown cb = new();
             cb.SetBinding(NumericUpDown.NumberProperty, ".Item1", BindingMode.TwoWay);
             Label lab = new();
