@@ -162,8 +162,8 @@ public partial class MiscMain : ContentPage
     }
     private void SetFlagsFromClickPoint(int inpX, int inpY)
     {
-        inpX = inpX >> 2;
-        inpY = inpY >> 2;
+        inpX >>= 2;
+        inpY >>= 2;
 
         int i = (inpX>>2) + (DotMatrixWidth * (inpY>>2));
         Span<byte> ndab = stackalloc byte[DotMatrixPixelCount / 4];
@@ -255,7 +255,7 @@ public static class PoketchDotMatrix
         return dabmp;
     }
 }
-public class MiscTab4 : TabbedPage 
+public partial class MiscTab4 : TabbedPage 
 {
     public static MiscMain MiscMain = new((SAV4)MainPage.sav);
     public static MiscBattleFrontier4 MBF4 = new((SAV4)MainPage.sav);
@@ -299,7 +299,7 @@ public partial class Misc4Save : ContentPage
         MiscTab4.MSeals.SaveSeals();
         MiscTab4.MFC.SaveAccessories();
         MiscTab4.MFC.SaveBackdrops();
-        if (MainPage.sav is SAV4Sinnoh sinnoh)
+        if (MainPage.sav is SAV4Sinnoh)
             MiscTab4.MPG?.Save();
         MiscTab4.MR4.SaveRecord();
         Navigation.PopModalAsync();

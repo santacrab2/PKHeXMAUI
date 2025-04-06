@@ -153,8 +153,8 @@ public partial class SaveEditors : ContentPage
     {
         switch (sav) 
         { 
-            case SAV3 s3: Navigation.PushModalAsync(new MiscTab()); break; 
-            case SAV4 s4: Navigation.PushModalAsync(new MiscTab4()); break; 
+            case SAV3: Navigation.PushModalAsync(new MiscTab()); break; 
+            case SAV4: Navigation.PushModalAsync(new MiscTab4()); break; 
         }
        
     }

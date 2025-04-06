@@ -5,7 +5,6 @@ namespace PKHeXMAUI;
 
 public partial class MiscBattleFrontier4 : ContentPage
 {
-    private readonly SAV4 Origin;
     private readonly SAV4 SAV;
     private readonly Hall4? Hall;
     private readonly RadioButton[] StatRBA;
@@ -19,11 +18,10 @@ public partial class MiscBattleFrontier4 : ContentPage
     private bool editing;
     private string[][] BFT = null!;
     private int[][] BFV = null!;
-    private bool HallStatUpdated;
     public MiscBattleFrontier4(SAV4 sav)
 	{
 		InitializeComponent();
-        SAV = (SAV4)(Origin = sav).Clone();
+        SAV = (SAV4)(sav).Clone();
         StatNUDA = [NUD_Stat0, NUD_Stat1, NUD_Stat2, NUD_Stat3];
         StatLabelA = [L_Stat0, L_Stat1, L_Stat2, L_Stat3]; // Current, Trade, Record, Trade
         StatRBA = [RB_Stats3_01, RB_Stats3_02];
@@ -85,16 +83,13 @@ public partial class MiscBattleFrontier4 : ContentPage
         if (SAV is not SAV4DP)
         {
             SetPrintColors(PrintButtonA);
-
-            ReadOnlySpan<string> typeNames = GameInfo.Strings.types;
-            ReadOnlySpan<byte> typenameIndex = [0, 9, 10, 12, 11, 14, 1, 3, 4, 2, 13, 6, 5, 7, 15, 16, 8];
             
         }
         /*if (Hall is null)
             NUD_HallStreaks.Visible = NUD_HallStreaks.Enabled = false; I need a save that displays this so i know wtf it is*/
 
         editing = true;
-       List<string> facilityList = new();
+       List<string> facilityList = [];
         for (BattleFrontierFacility4 i = 0; i <= SAV.MaxFacility; i++)
             facilityList.Add(i.ToString());
         CB_Stats1.ItemSource = facilityList;
@@ -371,12 +366,6 @@ public partial class MiscBattleFrontier4 : ContentPage
             s += d;
         }
         L_SumHall.Text = s.ToString();
-
-        if (Hall is not null)
-        {
-            ushort v = Hall.GetCount(CB_Stats2.SelectedIndex, species);
-            //NUD_HallStreaks.Value = Math.Min((ushort)9999, v);
-        }
     }
 
     private void CHK_HallCurrent_CheckedChanged(object sender, EventArgs e)
@@ -409,6 +398,5 @@ public partial class MiscBattleFrontier4 : ContentPage
         if (editing || Hall is null)
             return;
        // Hall.SetCount(CB_Stats2.SelectedIndex, species, (ushort)NUD_HallStreaks.Value);
-        HallStatUpdated = true;
     }
 }

@@ -11,11 +11,13 @@ public partial class MiscPokeGear : ContentPage
 		InitializeComponent();
         SAV = sav;
         Rolodex = SAV.GetPokeGearRoloDex().ToArray();
-        CV_Pokegear.ItemTemplate = new DataTemplate(() =>
+        CV_Pokegear.ItemTemplate = new DataTemplate(static () =>
             {
-                Grid grid = new();
-                comboBox cb = new();
-                cb.ItemSource = Enum.GetValues(typeof(PokegearNumber));
+                Grid grid = [];
+                comboBox cb = new()
+                {
+                    ItemSource = Enum.GetValues<PokegearNumber>()
+                };
                 cb.SetBinding(comboBox.SelectedItemProperty, ".", BindingMode.TwoWay);
                 grid.Add(cb);
                 return grid;

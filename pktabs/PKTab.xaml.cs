@@ -293,7 +293,7 @@ public partial class MainPage : ContentPage
         iseggcheck.IsChecked = pkm.IsEgg;
         infectedcheck.IsChecked = pkm.IsPokerusInfected;
         curedcheck.IsChecked = pkm.IsPokerusCured;
-        abilitySource = GameInfo.FilteredSources.GetAbilityList(pkm).ToList();
+        abilitySource = [.. GameInfo.FilteredSources.GetAbilityList(pkm)];
         abilitypicker.ItemDisplayBinding = new Binding("Text");
         abilitypicker.ItemsSource = abilitySource;
         abilitypicker.SelectedIndex = pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
@@ -403,7 +403,7 @@ public partial class MainPage : ContentPage
             formpicker.IsVisible = false;
 
             pk.Species = (ushort)test.Value;
-            abilitySource = GameInfo.FilteredSources.GetAbilityList(pk).ToList();
+            abilitySource = [.. GameInfo.FilteredSources.GetAbilityList(pk)];
             abilitypicker.ItemDisplayBinding =new Binding("Text");
             abilitypicker.ItemsSource = abilitySource;
             abilitypicker.SelectedIndex = pk.AbilityNumber == 4 ? 2 : pk.AbilityNumber-1;
