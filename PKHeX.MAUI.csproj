@@ -335,7 +335,13 @@
 	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscPoffins.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscPokeGear.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscPokeWalker.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscRecords4.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen4\Misc\MiscSeals.xaml">

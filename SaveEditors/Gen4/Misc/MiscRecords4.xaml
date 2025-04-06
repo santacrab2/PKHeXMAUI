@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscRecords4"
+             Title="Records">
+    <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*">
+        <Label Text="Record"/>
+        <l:NumericUpDown x:Name="NUD_Record16" Grid.Column="1" MinValue="0"/>
+        <Label Text="Value" Grid.Row="1"/>
+        <l:NumericUpDown x:Name="NUD_Record16V" Grid.Column="1" Grid.Row="1" MinValue="0"/>
+        <Label Text="Record" Grid.Row="2"/>
+        <l:NumericUpDown x:Name="NUD_Record32" Grid.Column="1" Grid.Row="2" MinValue="0"/>
+        <Label Text="Value" Grid.Row="3"/>
+        <l:NumericUpDown x:Name="NUD_Record32V" Grid.Column="1" Grid.Row="3" MinValue="0"/>
+    </Grid>
+</ContentPage>

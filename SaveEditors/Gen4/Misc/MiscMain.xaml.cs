@@ -263,6 +263,8 @@ public class MiscTab4 : TabbedPage
     public static MiscSeals MSeals = new((SAV4)MainPage.sav);
     public static MiscFashionCase MFC = new((SAV4)MainPage.sav);
     public static MiscPoffins? MP;
+    public static MiscPokeGear? MPG;
+    public static MiscRecords4 MR4 = new((SAV4)MainPage.sav);
     public MiscTab4()
     {
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
@@ -275,6 +277,9 @@ public class MiscTab4 : TabbedPage
         Children.Add(MFC);
         if (MainPage.sav is SAV4Sinnoh sinnoh)
             Children.Add(MP = new(sinnoh));
+        if (MainPage.sav is SAV4HGSS hgss)
+            Children.Add(MPG = new(hgss));
+        Children.Add(MR4);
         Children.Add(new cancelpage());
         Children.Add(new Misc4Save());
     }
@@ -290,10 +295,13 @@ public partial class Misc4Save : ContentPage
     {
         MiscTab4.MiscMain.SaveMain();
         if (MainPage.sav is SAV4HGSS s)
-            MiscTab4.MPW.SaveWalker(s);
+            MiscTab4.MPW?.SaveWalker(s);
         MiscTab4.MSeals.SaveSeals();
         MiscTab4.MFC.SaveAccessories();
         MiscTab4.MFC.SaveBackdrops();
+        if (MainPage.sav is SAV4Sinnoh sinnoh)
+            MiscTab4.MPG?.Save();
+        MiscTab4.MR4.SaveRecord();
         Navigation.PopModalAsync();
     }
 }

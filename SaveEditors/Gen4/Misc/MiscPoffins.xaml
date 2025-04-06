@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscPoffins"
-             Title="MiscPoffins">
+             Title="Poffins">
     <ScrollView Orientation="Both">
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*" x:Name="G_Poffins">
             <CollectionView x:Name="CV_Poffins" HeightRequest="300"/>

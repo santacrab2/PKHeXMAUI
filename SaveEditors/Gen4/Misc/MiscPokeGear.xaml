@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MiscPokeGear"
+             Title="PokeGear">
+    <ScrollView Orientation="Both">
+        <Grid x:Name="G_pokegear" RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+            <CollectionView x:Name="CV_Pokegear" Grid.Column="1" Grid.RowSpan="3" HeightRequest="500" />
+            <Button x:Name="B_PokegearAll" Text="Give All" Clicked="B_GiveAll_Click" />
+            <Button x:Name="B_PokegearDel" Grid.Row="1" Text="Delete All" Clicked="B_DeleteAll_Click" />
+            <Button x:Name="B_PokegearGiveAllNoTrainers" Text="Give All (No Trainers)" Grid.Row="2" Clicked="B_GiveAllNoTrainers_Click" />
+        </Grid>
+    </ScrollView>
+</ContentPage>
