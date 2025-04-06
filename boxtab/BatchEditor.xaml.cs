@@ -110,7 +110,7 @@ public partial class BatchEditor : ContentPage
         SlotInfoLoader.AddBoxData(MainPage.sav, data);
         process(data);
         foreach (var slot in data)
-            slot.Source.WriteTo(MainPage.sav, slot.Entity, PKMImportSetting.Skip);
+            slot.Source.WriteTo(MainPage.sav, slot.Entity, EntityImportSettings.None);
         void process(IList<SlotCache> d)
         {
             foreach (var set in sets)

@@ -603,12 +603,12 @@ public partial class AppShell : Shell
                     var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result)??EntityBlank.GetBlank(sav.Generation);
                     if (result.IsSuccess() || PSettings.AllowIncompatibleConversion)
                     {
-                        sav.AdaptPKM(newpkm);
+                        sav.AdaptToSaveFile(newpkm);
                         sav.SetBoxSlotAtIndex(newpkm, sav.NextOpenBoxSlot());
                         return;
                     }
                 }
-                sav.AdaptPKM(pkm);
+                sav.AdaptToSaveFile(pkm);
                 sav.SetBoxSlotAtIndex(pkm, sav.NextOpenBoxSlot());
             }
             if (TheShell.CurrentPage is BoxTab tab)
