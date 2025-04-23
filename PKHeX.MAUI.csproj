@@ -422,6 +422,9 @@
 	  <MauiXaml Update="SaveEditors\TrainerEditors\gen7\Trainertab7.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\WondercardEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Settings\LegalitySettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

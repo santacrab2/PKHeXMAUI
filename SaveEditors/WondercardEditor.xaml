@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.WondercardEditor"
+             Title="WondercardEditor">
+    <ScrollView>
+        <Grid ColumnDefinitions="*,2*">
+            <VerticalStackLayout>
+                <Label Text="Received List:"/>
+                <CollectionView BackgroundColor="White" HeightRequest="1000" x:Name="CV_ReceivedList" SelectionMode="Single" SelectionChanged="CV_ReceivedList_SelectionChanged" Grid.Row="1"/>
+            </VerticalStackLayout>
+            <Grid Grid.Column="1" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
+                <Label Text="QR" x:Name="L_QR"/>
+                <Image Grid.Column="1" x:Name="IMG_ActiveSprite" Source="iconp.png" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start"/>
+                <VerticalStackLayout Grid.Column="2">
+                    <Button Text="Export" Clicked="B_ExportClick"/>
+                    <Button Text="Import" Clicked="B_ImportClick" Grid.Row="1"/>
+                </VerticalStackLayout>
+                <Label Text="Details:" Grid.Row="1"/>
+                <Editor x:Name="E_Details" Grid.Row="2"/>
+            </Grid>
+            
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -94,10 +94,10 @@ public partial class AttacksTab : ContentPage
         move2Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move2, pkm.Context):00}";
         move3Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move3, pkm.Context):00}";
         move4Type.Source = $"type_icon_{MoveInfo.GetType(pkm.Move4, pkm.Context):00}";
-        move1Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move1, pkm.Context):00}";
-        move2Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move2, pkm.Context):00}";
-        move3Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move3, pkm.Context):00}";
-        move4Cat.Source = $"attack_category_{MoveInfo.GetCategory(pkm.Move4, pkm.Context):00}";
+        move1Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pkm.Move1, pkm.Context):00}";
+        move2Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pkm.Move2, pkm.Context):00}";
+        move3Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pkm.Move3, pkm.Context):00}";
+        move4Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pkm.Move4, pkm.Context):00}";
         if (pk is IMoveShop8Mastery)
             moveshopbutton.IsVisible = true;
         if (pk is PA8 pa8)
@@ -128,7 +128,7 @@ public partial class AttacksTab : ContentPage
                 }
             }
             move1Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move1, pk.Context):00}";
-            move1Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move1, pk.Context):00}";
+            move1Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pk.Move1, pk.Context):00}";
         }
     }
     private void applymove2(object sender, EventArgs e)
@@ -148,7 +148,7 @@ public partial class AttacksTab : ContentPage
                 }
             }
             move2Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move2, pk.Context):00}";
-            move2Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move2, pk.Context):00}";
+            move2Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pk.Move2, pk.Context):00}";
         }
     }
     private void applymove3(object sender, EventArgs e)
@@ -168,7 +168,7 @@ public partial class AttacksTab : ContentPage
                 }
             }
             move3Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move3, pk.Context):00}";
-            move3Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move3, pk.Context):00}";
+            move3Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pk.Move3, pk.Context):00}";
         }
     }
     private void applymove4(object sender, EventArgs e)
@@ -188,7 +188,7 @@ public partial class AttacksTab : ContentPage
                 }
             }
             move4Type.Source = $"type_icon_{MoveInfo.GetType(pk.Move4, pk.Context):00}";
-            move4Cat.Source = $"attack_category_{MoveInfo.GetCategory(pk.Move4, pk.Context):00}";
+            move4Cat.Source = $"attack_category_{ExtraMoveInfo.GetCategory(pk.Move4, pk.Context):00}";
         }
     }
     private void applyrmove1(object sender, EventArgs e)
@@ -365,25 +365,25 @@ public partial class AttacksTab : ContentPage
     private async void DisplayMoveInfo1(object sender, EventArgs e)
     {
         var value = pk.Move1;
-        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
         await DisplayAlert($"{(Move)value}", details, "cancel");
     }
     private async void DisplayMoveInfo2(object sender, EventArgs e)
     {
         var value = pk.Move2;
-        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
         await DisplayAlert($"{(Move)value}", details, "cancel");
     }
     private async void DisplayMoveInfo3(object sender, EventArgs e)
     {
         var value = pk.Move3;
-        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
         await DisplayAlert($"{(Move)value}", details, "cancel");
     }
     private async void DisplayMoveInfo4(object sender, EventArgs e)
     {
         var value = pk.Move4;
-        var details = $"Category: {(MoveCategory)MoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {MoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {MoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
+        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
         await DisplayAlert($"{(Move)value}", details, "cancel");
     }
     public void refreshmoveboxelist()

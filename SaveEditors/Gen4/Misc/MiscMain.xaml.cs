@@ -21,7 +21,7 @@ public partial class MiscMain : ContentPage
     private static ReadOnlySpan<byte> LocationIDsHGSS => [138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 229, 227, 221, 225];
 
 
-    private string[] seals, accessories, backdrops, poketchapps;
+    private string[] poketchapps;
     private ObservableCollection<Tuple<string, bool>> FlyDestItems = [];
     private byte[] DotArtistByte = [120];
     public MiscMain(SAV4 sav)

@@ -76,6 +76,7 @@ public partial class SaveEditors : ContentPage
             B_Chatter.IsVisible = true;
             B_Geonet.IsVisible = true;
             B_Misc.IsVisible = true;
+            B_WonderCard.IsVisible = true;
         }
         if(sav is SAV4Sinnoh)
             B_HoneyTree.IsVisible = true;
@@ -177,5 +178,10 @@ public partial class SaveEditors : ContentPage
     private void B_HoneyTree_Clicked(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new HoneyTreeEditor((SAV4Sinnoh)sav));
+    }
+
+    private void B_WonderCard_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new WondercardEditor());
     }
 }
