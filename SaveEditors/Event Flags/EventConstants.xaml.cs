@@ -1,18 +1,14 @@
-
-using static PKHeXMAUI.MainPage;
-using static PKHeXMAUI.EventFlags;
 using PKHeX.Core;
-using Microsoft.Maui.ApplicationModel;
 namespace PKHeXMAUI;
 
 public partial class EventConstants : ContentPage
 {
-    private readonly EventWorkspace<IEventFlag37, ushort> Editor;
+
     private List<Tuple<string, List<ComboItem>, ushort, ComboItem>> ConstList = [];
     public EventConstants(IEventFlag37 sav, GameVersion version)
     {
         InitializeComponent();
-        var editor = Editor = new EventWorkspace<IEventFlag37, ushort>(sav, version);
+        var editor = EventFlags.Editor = new EventWorkspace<IEventFlag37, ushort>(sav, version);
         ConstantCollection.ItemTemplate = new DataTemplate(() =>
         {
             var grid = new Grid() { Padding = 10 };
@@ -46,14 +42,14 @@ public partial class EventConstants : ContentPage
     }
     public void save()
     {
-        EventLabelCollection list = Editor.Labels;
-        ushort[] values = Editor.Values;
+        EventLabelCollection list = EventFlags.Editor.Labels;
+        ushort[] values = EventFlags.Editor.Values;
         var labels = list.Work;
         for (int i = 0; i < labels.Count; i++)
         {
             values[labels[i].Index] = ConstList.Find(z => z.Item1 == labels[i].Name)?.Item3 ?? 0;
         }
 
-        Editor.Save();
+        EventFlags.Editor.Save();
     }
 }

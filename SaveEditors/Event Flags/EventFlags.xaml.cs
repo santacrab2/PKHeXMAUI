@@ -5,8 +5,8 @@ namespace PKHeXMAUI;
 
 public partial class EventFlags : ContentPage
 {
-    private readonly EventWorkspace<IEventFlag37, ushort> Editor;
-    public static Dictionary<string, bool> ValueDict = [];
+    public static EventWorkspace<IEventFlag37, ushort> Editor;
+    public Dictionary<string, bool> ValueDict = [];
     public EventFlags(IEventFlag37 sav, GameVersion version)
     {
         InitializeComponent();
@@ -23,13 +23,10 @@ public partial class EventFlags : ContentPage
             var label = new Label();
             label.SetBinding(Label.TextProperty, new Binding("Key"));
             grid.Add(label, 1);
-            var tap = new TapGestureRecognizer();
-            tap.Tapped += tapp;
-            grid.GestureRecognizers.Add(tap);
             var tap2 = new TapGestureRecognizer
             {
                 CommandParameter = grid,
-                Command = new Command(() => tapp(grid, (TappedEventArgs)EventArgs.Empty))
+                Command = new Command(() => tapp(grid, null))
             };
             check.GestureRecognizers.Add(tap2);
             return grid;
@@ -46,7 +43,7 @@ public partial class EventFlags : ContentPage
         }
         FlagCollection.ItemsSource = ValueDict;
     }
-#nullable enable
+
     public void tapp(object? g, TappedEventArgs? e)
     {
         Grid gr = (Grid?)g ?? [];
@@ -54,7 +51,7 @@ public partial class EventFlags : ContentPage
         ((CheckBox)gr.Children[0]).IsChecked = !chs;
         ValueDict[((Label)gr.Children[1]).Text] = !chs;
     }
-    public void save()
+    public async Task save()
     {
         EventLabelCollection list = Editor.Labels;
         bool[] values = Editor.Flags;
@@ -63,8 +60,8 @@ public partial class EventFlags : ContentPage
         {
             values[labels[i].Index] = ValueDict[labels[i].Name];
         }
-
-        Editor.Save();
+        
+        //Editor.Save();
     }
 }
 
@@ -96,8 +93,8 @@ public partial class EventEditorSave : ContentPage
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        EventFlags2Tab.EF2?.save();
-        EventFlags2Tab.EC2?.save();
+        EventFlagsTab.EF2?.save();
+        EventFlagsTab.EC2?.save();
         Navigation.PopModalAsync();
     }
 }

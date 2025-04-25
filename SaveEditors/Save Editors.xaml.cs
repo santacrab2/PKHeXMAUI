@@ -76,7 +76,7 @@ public partial class SaveEditors : ContentPage
             B_Chatter.IsVisible = true;
             B_Geonet.IsVisible = true;
             B_Misc.IsVisible = true;
-            B_WonderCard.IsVisible = true;
+            //B_WonderCard.IsVisible = true;
         }
         if(sav is SAV4Sinnoh)
             B_HoneyTree.IsVisible = true;
@@ -108,8 +108,8 @@ public partial class SaveEditors : ContentPage
         {
             SAV1 => new EventReset1((SAV1)sav),
             SAV2 => new EventFlags2Tab(),
-            IEventFlag37 g37 => new EventFlagsTab(g37,sav.Version),
-            IEventFlagProvider37 p => new EventFlagsTab(p.EventWork,sav.Version),
+            IEventFlag37 => new EventFlagsTab((IEventFlag37)sav,sav.Version),
+            IEventFlagProvider37 => new EventFlagsTab(((IEventFlagProvider37)sav).EventWork,sav.Version),
             _ => throw new Exception()
         });
     }

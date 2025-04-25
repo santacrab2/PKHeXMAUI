@@ -544,9 +544,8 @@ public partial class AppShell : Shell
 
     private async void OpenPKMClicked(object sender, EventArgs e)
     {
-        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
-        ((MainPage)TheShell.CurrentPage).pk9picker_Clicked(sender, e);
+        ((MainPage)PKPage).pk9picker_Clicked(sender, e);
     }
     private async void ExportSaveClicked(object sender, EventArgs e)
     {
@@ -564,30 +563,26 @@ public partial class AppShell : Shell
     }
     private async void SavePKMClicked(object sender, EventArgs e)
     {
-        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
-        ((MainPage)TheShell.CurrentPage).pk9saver_Clicked(sender, e);
+        ((MainPage)PKPage).pk9saver_Clicked(sender, e);
     }
 
     private async void LegalizePKM(object sender, EventArgs e)
     {
-        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
-        ((MainPage)TheShell.CurrentPage).legalize(sender, e);
+        ((MainPage)PKPage).legalize(sender, e);
     }
 
     private async void ImpShowClicked(object sender, EventArgs e)
     {
-        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
-        ((MainPage)TheShell.CurrentPage).ImportShowdown(sender, e);
+        ((MainPage)PKPage).ImportShowdown(sender, e);
     }
 
     private async void ExpShowClicked(object sender, EventArgs e)
     {
-        await TheShell.GoToAsync("///pkeditortab");
         TheShell.FlyoutIsPresented = false;
-        ((MainPage)TheShell.CurrentPage).ExportShowdown(sender, e);
+        ((MainPage)PKPage).ExportShowdown(sender, e);
     }
 
     private async void LoadBoxesClicked(object sender, EventArgs e)
@@ -793,13 +788,5 @@ public class FlyoutCollectionSelector : DataTemplateSelector
             return MenuItemDropdownDataTemplate;
         }
         return MenuItemDataTemplate2;
-    }
-}
-public partial class tempPage : ContentPage
-{
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        AppShell.Shelltest?.GoToAsync("///pkeditortab");
-        AppShell.Shelltest!.FlyoutIsPresented = false;
     }
 }

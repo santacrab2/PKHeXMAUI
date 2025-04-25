@@ -11,6 +11,7 @@ public partial class EventResearch : ContentPage
     public EventResearch(IEventFlag37 sav, GameVersion version)
     {
         InitializeComponent();
+        ValueDict = [];
         var editor = Editor = new EventWorkspace<IEventFlag37, ushort>(sav, version);
         for (int i = 0; i < editor.Values.Length; i++)
             CB_Stats.ItemSource.Add(new ComboItem(i.ToString(), i));

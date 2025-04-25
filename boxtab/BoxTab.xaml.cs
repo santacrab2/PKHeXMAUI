@@ -20,7 +20,7 @@ public partial class BoxTab : ContentPage
         var sharedrop = new DropGestureRecognizer() { AllowDrop = true };
         sharedrop.Drop += ShareDrop;
         Sharer.GestureRecognizers.Add(sharedrop);
-        boxnum.ItemsSource = Enumerable.Range(1, 32).ToArray();
+        boxnum.ItemsSource = Enumerable.Range(1, sav.BoxCount).ToArray();
         ICommand refreshCommand = new Command(() =>
         {
             try
