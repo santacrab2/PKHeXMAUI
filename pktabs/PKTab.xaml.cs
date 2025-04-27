@@ -814,35 +814,50 @@ public partial class MainPage : ContentPage
         else
             Clipboard.SetTextAsync(ShowdownParsing.GetShowdownSets(sav.GetBoxData(sav.CurrentBox), "\n"));
     }
-    private static async Task<bool> IsUpdateAvailable()
+    private async Task<bool> IsUpdateAvailable()
     {
-            var currentVersion = ParseVersion(Version);
-            var latestVersion = ParseVersion(await GetLatest());
-
-            if (latestVersion[0] > currentVersion[0])
+        
+        var latest = await GetLatest();
+        if (latest == "0")
+        {
+            await AppShell.Shelltest.DisplayAlert("No Internet", "Unable to check for updates", "ok");
+            return false;
+        }
+        var latestVersion = ParseVersion(latest);
+        var currentVersion = ParseVersion(Version);
+        if (latestVersion[0] > currentVersion[0])
+        {
+            return true;
+        }
+        else if (latestVersion[0] == currentVersion[0])
+        {
+            if (latestVersion[1] > currentVersion[1])
             {
                 return true;
             }
-            else if (latestVersion[0] == currentVersion[0])
+            else if (latestVersion[1] == currentVersion[1])
             {
-                if (latestVersion[1] > currentVersion[1])
-                {
+                if (latestVersion[2] > currentVersion[2])
                     return true;
-                }
-                else if (latestVersion[1] == currentVersion[1])
-                {
-                    if (latestVersion[2] > currentVersion[2])
-                        return true;
-                }
             }
+        }
             return false;
     }
 
     private static async Task<string> GetLatest()
     {
-        var client = new GitHubClient(new Octokit.ProductHeaderValue("PKHeXMAUI"));
-        var release = await client.Repository.Release.GetLatest("santacrab2", "PKHeXMAUI");
-        return release.Name;
+        var connection = Connectivity.Current.NetworkAccess;
+        if (connection is NetworkAccess.Internet)
+        {
+            var client = new GitHubClient(new Octokit.ProductHeaderValue("PKHeXMAUI"));
+            var release = await client.Repository.Release.GetLatest("santacrab2", "PKHeXMAUI");
+            return release.Name;
+        }
+        else
+        {
+            return "0";
+        }
+
     }
 
     private static int[] ParseVersion(string version)
@@ -857,7 +872,7 @@ public partial class MainPage : ContentPage
     {
         if (await IsUpdateAvailable())
         {
-            var Update = await DisplayAlert("Update", "Update is available", "Update", "Cancel");
+            var Update = await AppShell.Shelltest.DisplayAlert("Update", "Update is available", "Update", "Cancel");
             if (Update)
             {
                await Browser.OpenAsync("https://github.com/santacrab2/PKHeXMAUI/releases/latest");
