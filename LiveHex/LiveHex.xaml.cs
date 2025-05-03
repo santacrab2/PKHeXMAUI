@@ -106,7 +106,7 @@ public partial class LiveHex : ContentPage
             return false;
         if (data.Species == 0 && data.EncryptionConstant != 0)
             return false;
-        if (data.Species > 0 && (LanguageID)data.Language is LanguageID.Hacked or LanguageID.UNUSED_6)
+        if (data.Species > 0 && (LanguageID)data.Language is LanguageID.None or LanguageID.UNUSED_6)
             return false;
         return true;
     }
