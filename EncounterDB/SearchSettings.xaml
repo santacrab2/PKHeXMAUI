@@ -10,29 +10,29 @@
             <Label Text="Shiny"></Label>
             <CheckBox x:Name="ShinyCheck"/>
             <Label Text="Is Egg"/>
-            <CheckBox x:Name="EggCheck" StyleId="CheckEgg"/>
+            <CheckBox x:Name="EggCheck"/>
             <Label Text="Species"/>
-            <inputs:comboBox SelectedIndex="0" x:Name="EncSpecies" BackgroundColor="Transparent"/>
+            <inputs:comboBox x:Name="EncSpecies" BackgroundColor="Transparent"/>
             <Label Text="Move 1"/>
-            <inputs:comboBox SelectedIndex="0" x:Name="EncMove1" BackgroundColor="Transparent"/>
+            <inputs:comboBox x:Name="EncMove1" BackgroundColor="Transparent"/>
             <Label Text="Move 2"/>
-            <inputs:comboBox SelectedIndex="0" x:Name="EncMove2" BackgroundColor="Transparent"/>
+            <inputs:comboBox x:Name="EncMove2" BackgroundColor="Transparent"/>
             <Label Text="Move 3"/>
-            <inputs:comboBox SelectedIndex="0" x:Name="EncMove3" BackgroundColor="Transparent"/>
+            <inputs:comboBox x:Name="EncMove3" BackgroundColor="Transparent"/>
             <Label Text="Move 4"/>
-            <inputs:comboBox SelectedIndex="0" x:Name="EncMove4" BackgroundColor="Transparent"/>
+            <inputs:comboBox x:Name="EncMove4" BackgroundColor="Transparent"/>
             <Label Text="OT Version"/>
-            <inputs:comboBox SelectedIndex="0" x:Name="EncVersion" BackgroundColor="Transparent"/>
+            <inputs:comboBox x:Name="EncVersion" BackgroundColor="Transparent"/>
             <Label Text="As Egg"/>
-            <CheckBox HorizontalOptions="Start" x:Name="Egg" StyleId="Egg" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Egg" IsChecked="True"/>
             <Label Text="Mystery"/>
-            <CheckBox HorizontalOptions="Start" x:Name="Mystery" StyleId="Mystery" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Mystery" IsChecked="True"/>
             <Label Text="Static"/>
-            <CheckBox HorizontalOptions="Start" x:Name="Static" StyleId="Static" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Static" IsChecked="True"/>
             <Label Text="Trade"/>
-            <CheckBox HorizontalOptions="Start" x:Name="Trade" StyleId="Trade" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Trade" IsChecked="True"/>
             <Label Text="Slot"/>
-            <CheckBox HorizontalOptions="Start" x:Name="Slot" StyleId="Slot" IsChecked="True"/>
+            <CheckBox HorizontalOptions="Start" x:Name="Slot" IsChecked="True"/>
             <Button Text="Save" Clicked="SaveSearchSettings"/>
             <Button Text="Cancel" Clicked="CloseSearchSettings"/>
         </VerticalStackLayout>

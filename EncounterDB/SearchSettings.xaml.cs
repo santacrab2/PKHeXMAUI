@@ -28,7 +28,7 @@ public partial class SearchSettings : ContentPage
         EncVersionList.RemoveAt(EncVersionList.Count - 1); EncVersionList.Insert(0, Any);
         EncVersion.DisplayMemberPath= "Text";
         EncVersion.ItemSource = EncVersionList;
-        if(encSettings != null)
+        if (encSettings != null)
         {
             EncSpecies.SelectedItem = datasourcefiltered.Species.FirstOrDefault(z => (ushort)z.Value == encSettings.Species)??new ComboItem("(None)",0);
             if (encSettings.Moves.Count >0)
