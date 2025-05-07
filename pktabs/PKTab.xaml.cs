@@ -820,7 +820,6 @@ public partial class MainPage : ContentPage
         var latest = await GetLatest();
         if (latest == "0")
         {
-            await AppShell.Shelltest.DisplayAlert("No Internet", "Unable to check for updates", "ok");
             return false;
         }
         var latestVersion = ParseVersion(latest);
@@ -875,9 +874,10 @@ public partial class MainPage : ContentPage
             var Update = await AppShell.Shelltest.DisplayAlert("Update", "Update is available", "Update", "Cancel");
             if (Update)
             {
-               await Browser.OpenAsync("https://github.com/santacrab2/PKHeXMAUI/releases/latest");
+                await Browser.OpenAsync("https://github.com/santacrab2/PKHeXMAUI/releases/latest");
             }
         }
+       
     }
 
     private void applyPID(object sender, TextChangedEventArgs e)
