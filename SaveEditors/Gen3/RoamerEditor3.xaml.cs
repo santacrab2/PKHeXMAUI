@@ -55,6 +55,8 @@ public partial class RoamerEditor3 : ContentPage
     }
     private void TB_PID_TextChanged(object sender, EventArgs e)
     {
+        if (E_PID.Text.Length < 8)
+            return;
         var pid = Util.GetHexValue(E_PID.Text);
         CHK_Shiny.IsChecked = Roamer3.IsShiny(pid, SAV);
     }

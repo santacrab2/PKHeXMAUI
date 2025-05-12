@@ -10,7 +10,7 @@
         <Label Text="Level:" Grid.Row="1" VerticalOptions="Center"/>
         <local:NumericUpDown x:Name="NUD_Level" Grid.Row="1" Grid.Column="1" MaxValue="100"/>
         <Label Text="PID:" Grid.Row="2" VerticalOptions="Center"/>
-        <Entry x:Name="E_PID" Grid.Row="2" Grid.Column="1" Keyboard="Numeric" TextChanged="TB_PID_TextChanged"/>
+        <Entry x:Name="E_PID" Grid.Row="2" Grid.Column="1" TextChanged="TB_PID_TextChanged"/>
         <CheckBox x:Name="CHK_Active" Grid.Row="3"/>
         <Label Text="Roaming(Active)" Grid.Row="3" Grid.Column="1" VerticalOptions="Center"/>
         <CheckBox x:Name="CHK_Shiny" Grid.Row="4"/>
