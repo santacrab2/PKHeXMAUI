@@ -37,7 +37,8 @@ public partial class BatchEditor : ContentPage
         {
             if (BatchProperty.SelectedItem is not null)
             {
-                PropertyTypeLab.Text = BatchEditing.GetPropertyType((string)BatchProperty.SelectedItem, BatchFormat.SelectedIndex);
+                BatchEditing.TryGetPropertyType((string)BatchProperty.SelectedItem,out var res, BatchFormat.SelectedIndex);
+                PropertyTypeLab.Text = res;
                 if (BatchEditing.TryGetHasProperty(MainPage.pk, (string)BatchProperty.SelectedItem, out var pi))
                 {
                     GetPropertyDisplayText(pi, MainPage.pk, out var display);

@@ -85,10 +85,10 @@ public partial class MainPage : ContentPage
         {
             switch (PSettings.StartupPage)
             {
-                case 1: AppShell.Current.GoToAsync("///BoxPage"); break;
-                case 2: AppShell.Current.GoToAsync("///EncounterPage"); break;
-                case 3: AppShell.Current.GoToAsync("///livehextab"); break;
-                case 4: AppShell.Current.GoToAsync("///SaveEditorsPage"); break;
+                case StartPage.Box: AppShell.Current.GoToAsync("///BoxPage"); break;
+                case StartPage.Encounters: AppShell.Current.GoToAsync("///EncounterPage"); break;
+                case StartPage.LiveHex: AppShell.Current.GoToAsync("///livehextab"); break;
+                case StartPage.SaveEditors: AppShell.Current.GoToAsync("///SaveEditorsPage"); break;
             }
         }
     }
@@ -100,8 +100,6 @@ public partial class MainPage : ContentPage
         APILegality.AllowTrainerOverride = true;
         APILegality.SetMatchingBalls = PluginSettings.SetBallByColor;
         Legalizer.EnableEasterEggs = PluginSettings.EnableMemesForIllegalSets;
-        APILegality.PrioritizeGame = PluginSettings.PrioritizeGame;
-        APILegality.PrioritizeGameVersion = PluginSettings.PrioritizeGameVersion;
         APILegality.SetBattleVersion = PluginSettings.SetBattleVersion;
         APILegality.ForceSpecifiedBall = true;
         APILegality.Timeout = 45;

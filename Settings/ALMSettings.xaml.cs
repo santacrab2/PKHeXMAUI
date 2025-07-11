@@ -9,15 +9,11 @@ namespace PKHeXMAUI;
 
 public partial class ALMSettings : ContentPage
 {
-    public static List<GenericCollection> props = [];
     public ALMSettings()
 	{
 		InitializeComponent();
-        props = [];
-        foreach (var p in new PluginSettings().GetType().GetProperties())
-            props.Add(new GenericCollection(p));
-        ALMSettingsCollection.ItemTemplate = new GenericCollectionSelector();
-        ALMSettingsCollection.ItemsSource = props;
+        var props = new propertyGrid(new PluginSettings());
+        Stack_AlmSettings.Children.Add(props);
     }
     public async void TapTapTap(object? sender, TappedEventArgs? e)
     {
@@ -58,8 +54,6 @@ public class PluginSettings
     public static string DefaultSID { get => Preferences.Get("DefaultSID", "54321"); }
     public static bool UseTrainerData { get => Preferences.Get("UseTrainerData", false); }
     public static string TrainerFolderPath { get => Preferences.Get("TrainerFolderPath", ""); }
-    public static bool PrioritizeGame { get => Preferences.Default.Get("PrioritizeGame", false);  }
-    public static GameVersion PrioritizeGameVersion { get => (GameVersion)Preferences.Default.Get("PrioritizeGameVersion", 50);  }
     public static bool SetAllLegalRibbons { get => Preferences.Default.Get("SetAllLegalRibbons", false);  }
     public static bool SetBattleVersion { get => Preferences.Default.Get("SetBattleVersion", false);  }
     public static bool SetBallByColor { get => Preferences.Default.Get("SetBallByColor", false);  }
@@ -69,5 +63,5 @@ public class PluginSettings
     public static bool LivingDexNativeOnly { get => Preferences.Get("LivingDexNativeOnly", false); }
     public static bool LivingDexSetAlpha { get => Preferences.Get("LivingDexSetAlpha", false); }
     public static bool LivingDexSetShiny { get => Preferences.Get("LivingDexSetShiny", false); }
-    public static ObservableCollection<MoveType>? RandomTypes { get => JsonSerializer.Deserialize<ObservableCollection<MoveType>>(Preferences.Get("RandomTypes", string.Empty)); }
+    
 }

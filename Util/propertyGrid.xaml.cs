@@ -34,7 +34,7 @@ public partial class propertyGrid : ContentView
             {
                 Text = cat.Key+ "▽"
             };
-            Expander expander = new() { Header = label };
+            Expander expander = new() { Header = label, IsExpanded=true };
             var stack = new Grid();
             for (int i = 0; i < cat.Value.Count; i++)
             {
@@ -44,6 +44,10 @@ public partial class propertyGrid : ContentView
                 if (pi.PropertyType.IsEnum)
                 {
                     stack.Add(GetEnumCombo(pi), 1, i);
+                }
+                else if (pi.PropertyType == typeof(string))
+                {
+                     stack.Add(GetPropertyEntry(pi), 1, i);
                 }
                 else if (pi.PropertyType.IsClass)
                 {
@@ -56,9 +60,9 @@ public partial class propertyGrid : ContentView
                 }
                 else
                 {
-                   
+
                     stack.Add(GetPropertyEntry(pi), 1, i);
-                    
+
                 }
             }
             expander.Content = stack;

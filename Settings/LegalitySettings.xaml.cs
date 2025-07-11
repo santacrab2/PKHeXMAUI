@@ -9,12 +9,9 @@ public partial class LegalitySettings : ContentPage
     public LegalitySettings()
 	{
 		InitializeComponent();
-        props = [];
-        foreach (var p in new LegalSettings().GetType().GetProperties())
-            props.Add(new GenericCollection(p));
-        LegalitySettingsCollection.ItemTemplate = new GenericCollectionSelector();
-        LegalitySettingsCollection.ItemsSource = props;
-	}
+        var prop = new propertyGrid(new LegalSettings());
+        Stack_LegalitySettings.Children.Add(prop);
+    }
 }
 
 public class LegalSettings

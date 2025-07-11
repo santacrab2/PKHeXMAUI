@@ -61,7 +61,7 @@ public partial class SearchSettings : ContentPage
             Version = (GameVersion)((ComboItem?)EncVersion.SelectedItem??Any).Value,
             Nature = (EncounterSettings.UsePkEditorAsCriteria ? pk.Nature : 0),
             Ability = (EncounterSettings.UsePkEditorAsCriteria ? pk.Ability : 0),
-            Level = (EncounterSettings.UsePkEditorAsCriteria ? pk.CurrentLevel : 0),
+            Level = (EncounterSettings.UsePkEditorAsCriteria ? pk.CurrentLevel : (byte)0),
             Item = (EncounterSettings.UsePkEditorAsCriteria ? pk.HeldItem : 0)
         };
         encSettings.AddMove((ushort)((ComboItem?)EncMove1.SelectedItem??Any).Value);

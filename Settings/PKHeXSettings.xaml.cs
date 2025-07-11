@@ -19,20 +19,9 @@ public partial class PKHeXSettings : ContentPage
     public PKHeXSettings()
 	{
 		InitializeComponent();
-        props = [];
-        foreach (var p in new PSettings().GetType().GetProperties())
-            props.Add(new GenericCollection(p));
-        foreach (var p in new EncounterSettings().GetType().GetProperties())
-            props.Add(new GenericCollection(p));
-        PKHeXSettingsCollection.ItemTemplate = new GenericCollectionSelector();
-        try
-        {
-            GenericCollectionSelector.SelectedSource = JsonSerializer.Deserialize<ObservableCollection<MoveType>>(Preferences.Get("RandomTypes", string.Empty))??[];
-            foreach (var removeType in GenericCollectionSelector.SelectedSource)
-                GenericCollectionSelector.MoveTypeOptionsSource.Remove(removeType);
-        }
-        catch (Exception) { }
-		PKHeXSettingsCollection.ItemsSource = props;
+
+        var prop = new propertyGrid(new PSettings());
+        Stack_PKHeXSettings.Children.Add(prop);
         Permissions.RequestAsync<Permissions.StorageWrite>();
         var noSelectVersions = new[] { GameVersion.GO, GameVersion.Any };
         SaveVersionPicker.ItemsSource = GameInfo.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
@@ -59,7 +48,7 @@ public partial class PKHeXSettings : ContentPage
 }
 public class PSettings
 {
-    public static int StartupPage { get => Preferences.Get("StartupPage", 0); }
+    public static StartPage StartupPage { get => (StartPage)Preferences.Get("StartupPage", 0); }
 	public static bool IgnoreLegalPopup { get => Preferences.Get("IgnoreLegalPopup",false); }
 	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
 	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
@@ -291,4 +280,12 @@ public class GenericCollectionSelector : DataTemplateSelector
         }
         catch (Exception) { }
     }
+}
+public enum StartPage
+{
+    PKEditor,
+    Box,
+    Encounters,
+    LiveHex,
+    SaveEditors
 }

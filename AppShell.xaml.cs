@@ -215,8 +215,8 @@ public partial class AppShell : Shell
         {
             manip.Execute(manipType, BoxTab.CurrentBox, false);
         }
-
-        HideAllFlyoutItems(manipType.GetManipCategoryName());
+        manipType.TryGetManipCategoryName(out var cat);
+        HideAllFlyoutItems(cat);
     }
 
     private void HideAllFlyoutItems(string? Menu)

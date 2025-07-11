@@ -92,7 +92,7 @@ public partial class EncounterDB : ContentPage
         var moves = encSettings.Moves.ToArray();
         var versions = encSettings.GetVersions(sav);
         var species = new[] { encSettings.Species };
-        var results = GetAllSpeciesFormEncounters(species, sav.Personal, versions, moves, pk);
+        var results = GetAllSpeciesFormEncounters(species,sav, sav.Personal, versions.ToArray(), moves, pk);
         if (encSettings.SearchEgg == true)
             results = results.Where(z => z.IsEgg == encSettings.SearchEgg);
         if (encSettings.SearchShiny == true)
@@ -116,7 +116,7 @@ public partial class EncounterDB : ContentPage
         }
         return results.ToList();
     }
-    public IEnumerable<IEncounterInfo> GetAllSpeciesFormEncounters(IEnumerable<ushort> species, IPersonalTable pt, IReadOnlyList<GameVersion> versions, ushort[] moves, PKM pk)
+    public IEnumerable<IEncounterInfo> GetAllSpeciesFormEncounters(IEnumerable<ushort> species,ITrainerInfo info, IPersonalTable pt, GameVersion[] versions, ushort[] moves, PKM pk)
     {
         var returnlist = new List<IEncounterInfo>();
         foreach (var s in species)
@@ -128,19 +128,19 @@ public partial class EncounterDB : ContentPage
             {
                 if (FormInfo.IsBattleOnlyForm(s, f, pk.Format))
                     continue;
-                var encs = GetEncounters(s, f, moves, pk, versions);
+                var encs = GetEncounters(s, f, info, moves, pk, versions);
                 returnlist.AddRange(encs);
             }
         }
         return returnlist;
     }
-    private IEnumerable<IEncounterInfo> GetEncounters(ushort species, byte form, ushort[] moves, PKM pk, IReadOnlyList<GameVersion> vers)
+    private IEnumerable<IEncounterInfo> GetEncounters(ushort species, byte form,ITrainerInfo info, ushort[] moves, PKM pk, GameVersion[] vers)
     {
         pk.Species = species;
         pk.Form = form;
         pk.SetGender(pk.GetSaneGender());
         EncounterMovesetGenerator.OptimizeCriteria(pk, sav);
-        return EncounterMovesetGenerator.GenerateEncounters(pk, moves, vers);
+        return EncounterMovesetGenerator.GenerateEncounters(pk,info, moves, vers);
     }
 }
 public class ReferenceComparer<T> : IEqualityComparer<T> where T : class
