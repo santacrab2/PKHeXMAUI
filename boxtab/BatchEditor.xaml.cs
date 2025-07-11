@@ -109,6 +109,11 @@ public partial class BatchEditor : ContentPage
         }
         var data = new List<SlotCache>(MainPage.sav.SlotCount);
         SlotInfoLoader.AddBoxData(MainPage.sav, data);
+        if (data.All(z=>z.Entity.Species == 0))
+        {
+            await DisplayAlert("Batch Editor", "No slots to edit", "cancel");
+            return;
+        }
         process(data);
         foreach (var slot in data)
             slot.Source.WriteTo(MainPage.sav, slot.Entity, EntityImportSettings.None);
