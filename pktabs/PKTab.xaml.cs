@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
     public static string Version = "v25.05.03";
     public static PKM pk = EntityBlank.GetBlank(9);
     public static LegalityAnalysis la = new(pk);
-    public static SaveFile sav = AppShell.AppSaveFile??SaveUtil.GetBlankSAV(EntityContext.Gen9,"");
+    public static SaveFile sav = AppShell.AppSaveFile??BlankSaveFile.Get(EntityContext.Gen9,"");
     public static FilteredGameDataSource datasourcefiltered = new(sav, GameInfo.Sources);
     public static Socket SwitchConnection = new(SocketType.Stream, ProtocolType.Tcp);
     public static string spriteurl = "iconp.png";
@@ -25,7 +25,7 @@ public partial class MainPage : ContentPage
     public static PokeSysBotMini Remote = new(LiveHeXVersion.SV_v301, new SysBotMini(), false);
     public static bool ReadonChangeBox = Preferences.Get("ReadonChangeBox", true);
     public static bool InjectinSlot = Preferences.Get("InjectinSlot", true);
-    public static TextEditor TrashWindow = new("", [], SaveUtil.GetBlankSAV(EntityContext.Gen9,""), 9);
+    public static TextEditor TrashWindow = new("", [], BlankSaveFile.Get(EntityContext.Gen9,""), 9);
     public static bool EditingTrash = false;
     public MainPage()
 	{
@@ -291,7 +291,7 @@ public partial class MainPage : ContentPage
         iseggcheck.IsChecked = pkm.IsEgg;
         infectedcheck.IsChecked = pkm.IsPokerusInfected;
         curedcheck.IsChecked = pkm.IsPokerusCured;
-        abilitySource = [.. GameInfo.FilteredSources.GetAbilityList(pkm)];
+        abilitySource = [.. GameInfo.FilteredSources.GetAbilityList(pkm.PersonalInfo)];
         abilitypicker.ItemDisplayBinding = new Binding("Text");
         abilitypicker.ItemsSource = abilitySource;
         abilitypicker.SelectedIndex = pkm.AbilityNumber == 4? 2: pkm.AbilityNumber-1;
@@ -401,7 +401,7 @@ public partial class MainPage : ContentPage
             formpicker.IsVisible = false;
 
             pk.Species = (ushort)test.Value;
-            abilitySource = [.. GameInfo.FilteredSources.GetAbilityList(pk)];
+            abilitySource = [.. GameInfo.FilteredSources.GetAbilityList(pk.PersonalInfo)];
             abilitypicker.ItemDisplayBinding =new Binding("Text");
             abilitypicker.ItemsSource = abilitySource;
             abilitypicker.SelectedIndex = pk.AbilityNumber == 4 ? 2 : pk.AbilityNumber-1;

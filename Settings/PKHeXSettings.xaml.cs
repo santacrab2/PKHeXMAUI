@@ -24,13 +24,13 @@ public partial class PKHeXSettings : ContentPage
         Stack_PKHeXSettings.Children.Add(prop);
         Permissions.RequestAsync<Permissions.StorageWrite>();
         var noSelectVersions = new[] { GameVersion.GO, GameVersion.Any };
-        SaveVersionPicker.ItemsSource = GameInfo.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
+        SaveVersionPicker.ItemsSource = GameInfo.Sources.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
         SaveVersionPicker.ItemDisplayBinding = new Binding("Text");
         skipevent = true;
         var newVersion = MainPage.sav.Version;
         if (newVersion == GameVersion.HGSS)
             newVersion = MainPage.sav.Version.GetSingleVersion();
-        SaveVersionPicker.SelectedItem = GameInfo.VersionDataSource.FirstOrDefault(z => (GameVersion)z.Value == newVersion);
+        SaveVersionPicker.SelectedItem = GameInfo.Sources.VersionDataSource.FirstOrDefault(z => (GameVersion)z.Value == newVersion);
         skipevent = false;
     }
     private void applynewsave(object sender, EventArgs e)
@@ -39,7 +39,7 @@ public partial class PKHeXSettings : ContentPage
         {
             var selected = (ComboItem)SaveVersionPicker.SelectedItem;
             Preferences.Set("SaveFile", selected.Value);
-            var blanksav = SaveUtil.GetBlankSAV((GameVersion)selected.Value, "PKHeX");
+            var blanksav = BlankSaveFile.Get((GameVersion)selected.Value, "PKHeX");
 
             App.Current!.Windows[0].Page = new AppShell(blanksav);
         }

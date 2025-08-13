@@ -554,7 +554,7 @@ public partial class AppShell : Shell
             sav.CurrentBox = BoxTab.CurrentBox;
         var ext = sav.Metadata.GetSuggestedExtension();
         var flags = sav.Metadata.GetSuggestedFlags(ext);
-        await using var LiveStream = new MemoryStream(sav.Write(flags));
+        await using var LiveStream = new MemoryStream(sav.Write(flags).ToArray());
         var result = await FileSaver.Default.SaveAsync(sav.Metadata.FileName??"", LiveStream, CancellationToken.None);
         if (result.IsSuccessful)
             await DisplayAlert("Success", $"Save file was exported to {result.FilePath}", "cancel");

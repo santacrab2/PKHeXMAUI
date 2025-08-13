@@ -145,7 +145,7 @@ public partial class SaveEditors : ContentPage
 
     private void EnableGSBallEvent(object sender, EventArgs e)
     {
-        var sav2 = sav as SAV2??((SAV2)SaveUtil.GetBlankSAV(EntityContext.Gen2,""));
+        var sav2 = sav as SAV2??((SAV2)BlankSaveFile.Get(EntityContext.Gen2,""));
         sav2.EnableGSBallMobileEvent();
         GSBallButton.IsEnabled = false;
     }

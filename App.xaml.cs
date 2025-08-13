@@ -13,8 +13,8 @@ public partial class App : Application
     {
         var Version = Preferences.Default.Get("SaveFile", 50);
         Window window = new(PSettings.RememberLastSave
-            ? new AppShell(SaveUtil.GetBlankSAV((GameVersion)Version, "PKHeX"))
-            : (Page)new AppShell(SaveUtil.GetBlankSAV(GameVersion.SL, "PKHeX")));
+            ? new AppShell(BlankSaveFile.Get((GameVersion)Version, "PKHeX"))
+            : (Page)new AppShell(BlankSaveFile.Get(GameVersion.SL, "PKHeX")));
         window.Resumed += (s, e) =>
         {
             if (LiveHex.Reconnect)

@@ -58,8 +58,8 @@ public partial class TextEditor : ContentPage
         });
         StringHexCV.ItemsLayout= new GridItemsLayout(4, ItemsLayoutOrientation.Vertical);
         StringHexCV.ItemsSource = TrashList;
-        SpeciesCombo.ItemSource = (System.Collections.IList)GameInfo.SpeciesDataSource;
-        SpeciesCombo.SelectedItem = GameInfo.SpeciesDataSource.FirstOrDefault(z => z.Value == MainPage.pk.Species) ?? new("(None)", 0);
+        SpeciesCombo.ItemSource = (System.Collections.IList)GameInfo.Strings.Species;
+        SpeciesCombo.SelectedItem = GameInfo.Sources.SpeciesDataSource.FirstOrDefault(z => z.Value == MainPage.pk.Species) ?? new("(None)", 0);
         GenerationPicker.ItemsSource = Enumerable.Range(1, 9).ToArray();
         GenerationPicker.SelectedIndex = MainPage.sav.Generation - 1;
     }

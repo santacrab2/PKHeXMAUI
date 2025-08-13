@@ -172,7 +172,7 @@ public partial class MailBox : ContentPage
                 a.ItemSource = species;
             }
 
-            var vers = GameInfo.VersionDataSource
+            var vers = GameInfo.Sources.VersionDataSource
                 .Where(z => ((GameVersion)z.Value).GetGeneration() == Generation);
             CB_AuthorVersion.ItemSource = vers.ToList();
             CB_AuthorVersion.DisplayMemberPath = "Text";
@@ -387,11 +387,11 @@ public partial class MailBox : ContentPage
                     // duplicate
                     int ofs = 0x600;
                     int len = Mail2.GetMailSize(SAV.Language) * 6;
-                    Array.Copy(SAV.Data, ofs, SAV.Data, ofs + len, len);
+                    Array.Copy(SAV.Data.ToArray(), ofs, SAV.Data.ToArray(), ofs + len, len);
                     ofs += len << 1;
                     SAV.Data[ofs] = (byte)NUD_BoxSize.Number;
                     len = (Mail2.GetMailSize(SAV.Language) * 10) + 1;
-                    Array.Copy(SAV.Data, ofs, SAV.Data, ofs + len, len);
+                    Array.Copy(SAV.Data.ToArray(), ofs, SAV.Data.ToArray(), ofs + len, len);
                 }
                 else if (SAV is SAV2Stadium)
                 {
