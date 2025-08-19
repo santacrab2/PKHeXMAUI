@@ -1,0 +1,29 @@
+name: Build MAUI iOS App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.x'
+        
+    - name: Install MAUI workload
+      run: dotnet workload install maui
+
+    - name: Build .NET MAUI project
+      run: dotnet build -f net9.0-ios -c Release /p:BuildIpa=True
+
+    - name: Upload IPA artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: pkhex-maui-ipa
+        path: bin/Release/net9.0-ios/PKHeX.MAUI.ipa
