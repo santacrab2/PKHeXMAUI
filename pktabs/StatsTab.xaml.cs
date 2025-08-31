@@ -111,6 +111,16 @@ public partial class StatsTab : ContentPage
             SPDHyper.IsChecked = hpt.HT_SPD;
             SPEHyper.IsChecked = hpt.HT_SPE;
         }
+        else
+        {
+            hpHyper.IsVisible = false;
+            ATKHyper.IsVisible = false;
+            DEFHyper.IsVisible = false;
+            SPAHyper.IsVisible = false;
+            SPDHyper.IsVisible = false;
+            SPEHyper.IsVisible = false;
+            hyperlabel.IsVisible = false;
+        }
 
         if (pkm is ITeraType tera)
         {
