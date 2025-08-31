@@ -114,16 +114,16 @@ public partial class MedalEditor : ContentPage
 
     private void UnlockSuperTraining(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is PK6 pk6)
+        if(pk is ISuperTrain st)
         {
-            pk6.SecretSuperTrainingUnlocked = SuperUnlockedCheck.IsChecked;
+            st.SecretSuperTrainingUnlocked = SuperUnlockedCheck.IsChecked;
         }
     }
 
     private void CompleteSecretTraining(object sender, CheckedChangedEventArgs e)
     {
-        if(pk is PK6 pk6)
-            pk6.SecretSuperTrainingComplete = SecretCompleteCheck.IsChecked;
+        if(pk is ISuperTrain st)
+            st.SuperTrainSupremelyTrained = SecretCompleteCheck.IsChecked;
     }
 }
 
