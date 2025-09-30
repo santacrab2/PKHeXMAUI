@@ -26,6 +26,7 @@ public partial class RibbonSelector : ContentPage
             AffixedSprite.SetBinding(Image.IsVisibleProperty, "affixed");
             grid.Add(allthetests);
             grid.Add(AffixedSprite);
+            grid.SetBinding(Grid.BackgroundColorProperty, "legal");
             SwipeView Swipe = new();
             SwipeItem affix = new()
             {
@@ -45,8 +46,7 @@ public partial class RibbonSelector : ContentPage
         List<Ribbonstuff> idk = [];
         foreach(var fg in ribbs)
         {
-            if(fg.HasRibbon)
-                idk.Add(new Ribbonstuff(fg));
+            idk.Add(new Ribbonstuff(fg) { legal = fg.HasRibbon ? Colors.Green : Colors.Transparent});
         }
         var selectedribbonslist = new List<object>();
         var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
@@ -85,8 +85,7 @@ public partial class RibbonSelector : ContentPage
         List<Ribbonstuff> idk = [];
         foreach (var fg in ribbs)
         {
-            if (fg.HasRibbon)
-                idk.Add(new Ribbonstuff(fg));
+            idk.Add(new Ribbonstuff(fg) { legal = fg.HasRibbon ? Colors.Green : Colors.Transparent });
         }
         var selectedribbonslist = new List<object>();
         var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
@@ -187,4 +186,5 @@ public class Ribbonstuff
     public RibbonValueType typer{ get; set; }
     public int index { get; set; }
     public bool affixed { get; set; }
+    public Color legal { get; set; } = Colors.Transparent;
 }

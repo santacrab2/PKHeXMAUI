@@ -10,7 +10,7 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v25.05.03";
+    public static string Version = "v25.09.29";
     public static PKM pk = EntityBlank.GetBlank(9);
     public static LegalityAnalysis la = new(pk);
     public static SaveFile sav = AppShell.AppSaveFile??BlankSaveFile.Get(EntityContext.Gen9,"");
@@ -22,7 +22,7 @@ public partial class MainPage : ContentPage
     public bool SkipTextChange = false;
     public static int[] NoFormSpriteSpecies = [664, 665, 744, 982, 855, 854, 869,892,1012,1013];
     public bool FirstLoad = true;
-    public static PokeSysBotMini Remote = new(LiveHeXVersion.SV_v301, new SysBotMini(), false);
+    public static PokeSysBotMini Remote = new(LiveHeXVersion.SV_v301, new SysBotMini());
     public static bool ReadonChangeBox = Preferences.Get("ReadonChangeBox", true);
     public static bool InjectinSlot = Preferences.Get("InjectinSlot", true);
     public static TextEditor TrashWindow = new("", [], BlankSaveFile.Get(EntityContext.Gen9,""), 9);
@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
         pk.Language = sav.Language;
         var validvers = RamOffsets.GetValidVersions(sav);
         ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
-        Remote = new PokeSysBotMini(validvers[^1], com, false);
+        Remote = new PokeSysBotMini(validvers[^1], com);
 
         InitializeComponent();
         var OpenTrash = new TapGestureRecognizer() { NumberOfTapsRequired = 2 };

@@ -291,7 +291,6 @@ public partial class BoxTab : ContentPage
         await Task.Delay(100);
         ModLogic.SetAlpha = PluginSettings.LivingDexSetAlpha;
         ModLogic.IncludeForms = PluginSettings.LivingDexAllForms;
-        ModLogic.NativeOnly = PluginSettings.LivingDexNativeOnly;
         ModLogic.SetShiny = PluginSettings.LivingDexSetShiny;
 
         await Task.Run(copyboxdata);

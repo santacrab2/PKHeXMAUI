@@ -691,7 +691,9 @@ public partial class StatsTab : ContentPage
         {
             var hptype = ((ComboItem)HiddenPowerPicker.SelectedItem).Value;
             pk.HPType = hptype;
-            HiddenPower.SetIVs(hptype, pk.IVs, pk.Context);
+            Span<int> ivs = stackalloc int[6];
+            pk.GetIVs(ivs);
+            HiddenPower.SetIVs(hptype, ivs, pk.Context);
             applystatsinfo(pk);
         }
     }

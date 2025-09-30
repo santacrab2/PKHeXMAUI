@@ -14,7 +14,7 @@ public partial class LiveHex : ContentPage
 		Port.Text = sav.Generation > 7 ? "6000" : "8000";
 		var validvers = RamOffsets.GetValidVersions(sav);
         ICommunicator com = RamOffsets.IsSwitchTitle(sav) ? new SysBotMini() : new NTRClient();
-		Remote = new PokeSysBotMini(validvers[^1], com, false);
+		Remote = new PokeSysBotMini(validvers[^1], com);
         var ip = Preferences.Default.Get("IP", "192.168.1.1");
         SkipTextChanges = true;
         IP.Text = ip;
@@ -52,7 +52,7 @@ public partial class LiveHex : ContentPage
                 return;
             }
             var lv = InjectionBase.GetVersionFromTitle(titleid, gameVer);
-            Remote = new PokeSysBotMini(lv, Remote.com, false);
+            Remote = new PokeSysBotMini(lv, Remote.com);
             if (!IsPKMDataValid(sav.GetDecryptedPKM(Remote.ReadSlot(0, 0).ToArray())))
             {
                 if (InjectionBase.CheckRAMShift(Remote, out var errorMessage))
@@ -75,12 +75,12 @@ public partial class LiveHex : ContentPage
             {
                 try
                 {
-                    Remote = new PokeSysBotMini(version, Remote.com, false);
+                    Remote = new PokeSysBotMini(version, Remote.com);
                     var data = sav.GetDecryptedPKM(Remote.ReadSlot(0, 0).ToArray());
                     valid = IsPKMDataValid(data);
                     if (valid)
                     {
-                        Remote = new PokeSysBotMini(version, Remote.com, false);
+                        Remote = new PokeSysBotMini(version, Remote.com);
                         break;
                     }
                 }
@@ -265,7 +265,7 @@ public partial class LiveHex : ContentPage
         var ptr = offset.Text.Contains("[key]")
             ? offset.Text.Replace("[key]", "").Trim()
             : offset.Text.Trim();
-        var address = Remote.GetCachedPointer(sb, ptr, false);
+        var address = sb.GetPointerAddress(ptr, false);
         return address;
     }
     private void SetTrainerData(SaveFile sav)
