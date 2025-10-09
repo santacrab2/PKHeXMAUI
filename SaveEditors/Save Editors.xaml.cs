@@ -53,7 +53,7 @@ public partial class SaveEditors : ContentPage
         if (!sav.State.Exportable || sav is BulkStorage)
             return;
         Button_BlockData.IsVisible = true;
-        if (sav is not SAV8BS or SAV8SWSH or SAV7b)
+        if (sav is not SAV8BS || sav is not SAV8SWSH || sav is not SAV7b)
             TrainerInfoButton.IsVisible = true;
         if (sav is SAV1 or SAV2 or SAV3 or SAV4)
             Button_EventFlags1.IsVisible = true;
