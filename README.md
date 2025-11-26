@@ -10,7 +10,10 @@ Architdate</br>
 ***AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT SERVER***</br>
 Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. 
 
-Support Discord: [The Sea Tavern](https://piplup.net)
+# Support Server
+[<img src="https://discord.com/api/guilds/872587205787394119/widget.png?style=banner2">](https://discord.com/invite/vxT5sSHvvn) <br>
+**Website with Links to downloads for this and other projects by Santacrab**
+[The Sea Tavern's website](https://piplup.net)
 
 # Self Compiling
 Can be compiled for a variety of platforms including Android, IOS, MacOS, and Windows. Please consult the documents for each platform and the requirements for them. IOS and MacOS as it stands will need updates to the combobox class (This will be removed when that changes).
