@@ -13,7 +13,7 @@ public partial class MetTab : ContentPage
 	public MetTab()
 	{
 		InitializeComponent();
-
+        FirstLoad = false;
         mettabpic.Source = spriteurl;
         origingamepicker.ItemDisplayBinding = new Binding("Text");
         origingamepicker.ItemsSource = (System.Collections.IList)datasourcefiltered.Games;
@@ -41,9 +41,14 @@ public partial class MetTab : ContentPage
         });
         MetRefresh.Command = refreshCommand;
         applymetinfo(pk);
-        FirstLoad = false;
+        
     }
     public static string ballspriteurl = "ball4.png";
+    protected override void OnAppearing()
+    {
+        if (!FirstLoad)
+            applymetinfo(pk);
+    }
     public async Task applymetinfo(PKM pkm)
     {
         SkipEvent = true;
@@ -202,9 +207,4 @@ public partial class MetTab : ContentPage
         }
     }
 
-    private void refreshmet(object sender, EventArgs e)
-    {
-        if(pk.Species != 0)
-            applymetinfo(pk);
-    }
 }

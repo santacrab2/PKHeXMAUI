@@ -19,6 +19,7 @@ public partial class StatsTab : ContentPage
     public StatsTab()
 	{
 		InitializeComponent();
+        FirstLoad = false;
         foreach (var ty in Enum.GetNames<MoveType>())
             Teratypepicker.Items.Add(ty);
         Teratypepicker.Items.Add("Stellar");
@@ -36,10 +37,13 @@ public partial class StatsTab : ContentPage
         });
         StatsRefresh.Command = refreshCommand;
         applystatsinfo(pk);
-        FirstLoad = false;
     }
-
-	public async Task applystatsinfo(PKM pkm)
+    protected override void OnAppearing()
+    {
+        if (!FirstLoad)
+            applystatsinfo(pk);
+    }
+    public async Task applystatsinfo(PKM pkm)
 	{
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;

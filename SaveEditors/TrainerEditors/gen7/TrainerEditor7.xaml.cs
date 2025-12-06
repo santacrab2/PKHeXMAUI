@@ -35,7 +35,7 @@ public partial class TrainerEditor7 : ContentPage
         TrainerPropPicker.SelectedIndex = recordres.FirstOrDefault().Key;
         dsRegionPicker.ItemsSource = (System.Collections.IList)GameInfo.Sources.Regions;
         dsRegionPicker.ItemDisplayBinding = new Binding("Text");
-        LanguagePicker.ItemsSource = (System.Collections.IList)GameInfo.LanguageDataSource(SAV.Generation);
+        LanguagePicker.ItemsSource = (System.Collections.IList)GameInfo.LanguageDataSource(SAV.Generation, SAV.Context);
         LanguagePicker.ItemDisplayBinding = new Binding("Text");
         CountryPicker.ItemsSource = Util.GetCountryRegionList("countries", GameInfo.CurrentLanguage);
         CountryPicker.ItemDisplayBinding = new Binding("Text");

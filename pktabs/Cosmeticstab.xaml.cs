@@ -13,6 +13,7 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
+        FirstLoad = false;
         Flags = [LeafCheckBox1, LeafCheckBox2, LeafCheckBox3, LeafCheckBox4, LeafCheckBox5, CrownCheckbox];
         applycomsetics(pk);
         ICommand refreshCommand = new Command(async () =>
@@ -21,7 +22,12 @@ public partial class Cosmeticstab : ContentPage
             CosmeticsRefresh.IsRefreshing = false;
         });
         CosmeticsRefresh.Command = refreshCommand;
-        FirstLoad = false;
+        
+    }
+    protected override void OnAppearing()
+    {
+        if (!FirstLoad)
+            applycomsetics(pk);
     }
     private static readonly string[] SizeClass = Enum.GetNames<PokeSize>();
     private static readonly string[] SizeClassDetailed = Enum.GetNames<PokeSizeDetailed>();

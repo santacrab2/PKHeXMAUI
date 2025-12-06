@@ -177,7 +177,7 @@ public partial class MailBox : ContentPage
             CB_AuthorVersion.ItemSource = vers.ToList();
             CB_AuthorVersion.DisplayMemberPath = "Text";
         }
-        AuthorLang.ItemsSource = GameInfo.LanguageDataSource(sav.Generation).ToList();
+        AuthorLang.ItemsSource = GameInfo.LanguageDataSource(sav.Generation, sav.Context).ToList();
         AuthorLang.ItemDisplayBinding = new Binding("Text");
         var ItemList = GameInfo.Strings.GetItemStrings(sav.Context, sav.Version);
         MailItemIDs.Add(ItemList[0]);
@@ -225,7 +225,7 @@ public partial class MailBox : ContentPage
         MailDetail mail = m[entry];
         AuthorOT.Text = mail.AuthorName;
         NUD_AuthorTID.Number = mail.AuthorTID;
-        AuthorLang.SelectedItem = GameInfo.LanguageDataSource(SAV.Generation).FirstOrDefault(z=>z.Value == (int)mail.AuthorLanguage);
+        AuthorLang.SelectedItem = GameInfo.LanguageDataSource(SAV.Generation, SAV.Context).FirstOrDefault(z=>z.Value == (int)mail.AuthorLanguage);
         MailTypePicker.SelectedIndex = MailTypeToCBIndex(mail);
         var species = mail.AppearPKM;
         if (Generation == 2)

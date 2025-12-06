@@ -15,9 +15,9 @@ public partial class TrainerEditor8a : ContentPage
 		TE8aMoneyEntry.Text = SAV.Money.ToString();
 		TE8aGenderPicker.ItemsSource = GameInfo.GenderSymbolUnicode.Take(2).ToArray();
 		TE8aGenderPicker.SelectedIndex = SAV.Gender;
-		TE8aLanguagePicker.ItemsSource = (List<ComboItem>)GameInfo.LanguageDataSource(SAV.Generation);
+		TE8aLanguagePicker.ItemsSource = (List<ComboItem>)GameInfo.LanguageDataSource(SAV.Generation, SAV.Context);
 		TE8aLanguagePicker.ItemDisplayBinding = new Binding("Text");
-		TE8aLanguagePicker.SelectedItem = ((List<ComboItem>)GameInfo.LanguageDataSource(SAV.Generation)).Find(z => z.Value == SAV.Language);
+		TE8aLanguagePicker.SelectedItem = ((List<ComboItem>)GameInfo.LanguageDataSource(SAV.Generation, SAV.Context)).Find(z => z.Value == SAV.Language);
 		var CMP = (uint)SAV.Blocks.GetBlockValue(SaveBlockAccessor8LA.KMeritCurrent);
 		TE8aCMPEntry.Number = Math.Min(CMP, 999999999);
 		var EMP = (uint)SAV.Blocks.GetBlockValue(SaveBlockAccessor8LA.KMeritEarnedTotal);

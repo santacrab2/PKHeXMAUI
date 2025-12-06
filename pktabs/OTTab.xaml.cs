@@ -10,6 +10,7 @@ public partial class OTTab : ContentPage
 	public OTTab()
 	{
 		InitializeComponent();
+        FirstLoad = false;
         htlanguagepicker.ItemsSource = Enum.GetValues<LanguageID>();
         var OpenTrash = new TapGestureRecognizer() { NumberOfTapsRequired = 2 };
         OpenTrash.Tapped += OpenTrashEditor;
@@ -28,10 +29,14 @@ public partial class OTTab : ContentPage
         });
         OTRefresh.Command = refreshCommand;
         applyotinfo(pk);
-        FirstLoad = false;
+        
     }
-
-	public async Task applyotinfo(PKM pkm)
+    protected override void OnAppearing()
+    {
+        if (!FirstLoad)
+            applyotinfo(pk);
+    }
+    public async Task applyotinfo(PKM pkm)
 	{
         SkipEvent = true;
         eggsprite.IsVisible = pkm.IsEgg;

@@ -92,6 +92,14 @@ public partial class MainPage : ContentPage
             }
         }
     }
+    protected override void OnAppearing()
+    {
+        if (!FirstLoad)
+        {
+            applymainpkinfo(pk);
+            checklegality();
+        }
+    }
     public static void SetSettings()
     {
         APILegality.SetAllLegalRibbons = PluginSettings.SetAllLegalRibbons;

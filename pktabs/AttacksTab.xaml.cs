@@ -12,6 +12,7 @@ public partial class AttacksTab : ContentPage
     public AttacksTab()
     {
         InitializeComponent();
+        FirstLoad = false;
         moveboxes = [move1, move2, move3, move4, rmove1, rmove2, rmove3, rmove4];
         move1ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
         move2ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
@@ -26,7 +27,12 @@ public partial class AttacksTab : ContentPage
             AttackRefresh.IsRefreshing = false;
         });
         AttackRefresh.Command = refreshCommand;
-        FirstLoad = false;
+        
+    }
+    protected override void OnAppearing()
+    {
+        if (!FirstLoad)
+            applyattackinfo(pk);
     }
     public static List<MoveDisplay> movlist = [];
     public async Task applyattackinfo(PKM pkm)

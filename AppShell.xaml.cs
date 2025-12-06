@@ -110,37 +110,6 @@ public partial class AppShell : Shell
     }
     public async void checkbox(object sender, EventArgs e)
     {
-        switch (TheShell.CurrentPage)
-        {
-            case MainPage:
-                if (!((MainPage)TheShell.CurrentPage).FirstLoad)
-                    ((MainPage)TheShell.CurrentPage).applymainpkinfo(pk);
-                break;
-            case MetTab:
-                if (!((MetTab)TheShell.CurrentPage).FirstLoad)
-                    ((MetTab)TheShell.CurrentPage).applymetinfo(pk);
-                break;
-            case AttacksTab:
-                if (!((AttacksTab)TheShell.CurrentPage).FirstLoad)
-                    ((AttacksTab)TheShell.CurrentPage).applyattackinfo(pk);
-                break;
-            case Cosmeticstab:
-                if (!((Cosmeticstab)TheShell.CurrentPage).FirstLoad)
-                    ((Cosmeticstab)TheShell.CurrentPage).applycomsetics(pk);
-                break;
-            case OTTab:
-                if (!((OTTab)TheShell.CurrentPage).FirstLoad)
-                    ((OTTab)TheShell.CurrentPage).applyotinfo(pk);
-                break;
-            case StatsTab:
-                if (!((StatsTab)TheShell.CurrentPage).FirstLoad)
-                    ((StatsTab)TheShell.CurrentPage).applystatsinfo(pk);
-                break;
-            case PartyTab:
-                ((PartyTab)TheShell.CurrentPage).fillParty();
-                break;
-
-        }
         if (TheShell.CurrentPage.GetType() != typeof(BoxTab))
         {
             try

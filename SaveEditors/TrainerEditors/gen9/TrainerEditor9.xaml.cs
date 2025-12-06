@@ -19,9 +19,9 @@ public partial class TrainerEditor9 : ContentPage
 		VersionPicker.Items.Add(games[(int)GameVersion.SL]);
 		VersionPicker.Items.Add(games[(int)GameVersion.VL]);
 		VersionPicker.SelectedIndex = MainPage.sav.Version - GameVersion.SL;
-		LanguagePicker.ItemsSource = GameInfo.LanguageDataSource(MainPage.sav.Generation).ToList();
+		LanguagePicker.ItemsSource = GameInfo.LanguageDataSource(MainPage.sav.Generation, MainPage.sav.Context).ToList();
 		LanguagePicker.ItemDisplayBinding = new Binding("Text");
-		LanguagePicker.SelectedItem = GameInfo.LanguageDataSource(MainPage.sav.Generation).ToList().Find(z=>z.Value == MainPage.sav.Language);
+		LanguagePicker.SelectedItem = GameInfo.LanguageDataSource(MainPage.sav.Generation, MainPage.sav.Context).ToList().Find(z=>z.Value == MainPage.sav.Language);
 		TrainerMinutesEditor.Text = MainPage.sav.PlayedMinutes.ToString();
 		TrainerHoursEditor.Text = MainPage.sav.PlayedHours.ToString();
 		TrainerSecondsEditor.Text = MainPage.sav.PlayedSeconds.ToString();
