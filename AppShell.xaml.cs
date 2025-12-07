@@ -569,7 +569,7 @@ public partial class AppShell : Shell
                     {
                         sav.AdaptToSaveFile(newpkm);
                         sav.SetBoxSlotAtIndex(newpkm, sav.NextOpenBoxSlot());
-                        return;
+                        continue;
                     }
                 }
                 sav.AdaptToSaveFile(pkm);
