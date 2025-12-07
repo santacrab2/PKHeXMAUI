@@ -169,7 +169,7 @@ public partial class MainPage : ContentPage
         if (pkfile is null)
             return;
         var input = File.ReadAllBytes(pkfile.FullPath);
-        var obj = FileUtil.GetSupportedFile(input,pkfile.ContentType,sav);
+        var obj = FileUtil.GetSupportedFile(input,Path.GetExtension(pkfile.FullPath),sav);
         if(obj is null) return;
         switch (obj)
         {
