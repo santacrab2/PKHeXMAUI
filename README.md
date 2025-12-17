@@ -1,6 +1,6 @@
 # Support Server
 ***AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT PROJECTS SERVER***</br>
-Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. 
+Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. <br>
 [<img src="https://discord.com/api/guilds/872587205787394119/widget.png?style=banner2">](https://discord.com/invite/vxT5sSHvvn) <br>
 **Website with Links to downloads for this and other projects by Santacrab**
 [The Sea Tavern's website](https://piplup.net)
