@@ -1,3 +1,10 @@
+# Support Server
+***AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT PROJECTS SERVER***</br>
+Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. 
+[<img src="https://discord.com/api/guilds/872587205787394119/widget.png?style=banner2">](https://discord.com/invite/vxT5sSHvvn) <br>
+**Website with Links to downloads for this and other projects by Santacrab**
+[The Sea Tavern's website](https://piplup.net)
+
 # PKHeX MAUI(Mobile)
 
 This project is simply applying the public PKHeX code library to a cross platform interface. Currently this is only compiled for Android, however it is possible for a user to compile it for MACOS or IOS as well. 
@@ -7,13 +14,7 @@ Kurt(Kaphotics) - [original PKHeX which this project is based on](https://github
 Anubis(Lusamine)</br>
 Architdate</br>
 
-***AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT SERVER***</br>
-Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. 
 
-# Support Server
-[<img src="https://discord.com/api/guilds/872587205787394119/widget.png?style=banner2">](https://discord.com/invite/vxT5sSHvvn) <br>
-**Website with Links to downloads for this and other projects by Santacrab**
-[The Sea Tavern's website](https://piplup.net)
 
 # Self Compiling
 Can be compiled for a variety of platforms including Android, IOS, MacOS, and Windows. Please consult the documents for each platform and the requirements for them. IOS and MacOS as it stands will need updates to the combobox class (This will be removed when that changes).
