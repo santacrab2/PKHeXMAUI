@@ -270,6 +270,8 @@ public partial class Items : TabbedPage
     private void ChangeItemSprite(object? sender, EventArgs? e)
     {
         var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
+        if (pindex < 0)
+            return;
         var CurrentSource = SourceList[pindex];
         itemInfo? CurrentItem = CurrentSource.Find(z => z.name == (string?)((comboBox?)sender)?.SelectedItem);
         if (CurrentItem is not null)
