@@ -149,7 +149,7 @@ public partial class MetTab : ContentPage
     private void applymetdate(object sender, DateChangedEventArgs e)
     {
         if(!SkipEvent)
-            pk.MetDate = DateOnly.FromDateTime( metdatepicker.Date);
+            pk.MetDate = DateOnly.FromDateTime(metdatepicker.Date??DateTime.MinValue);
     }
 
     private void applymetlevel(object sender, TextChangedEventArgs e)
@@ -187,7 +187,7 @@ public partial class MetTab : ContentPage
     private void applyeggdate(object sender, DateChangedEventArgs e)
     {
         if(!SkipEvent)
-        pk.EggMetDate = DateOnly.FromDateTime(eggdatepicker.Date);
+        pk.EggMetDate = DateOnly.FromDateTime(eggdatepicker.Date??DateTime.MinValue);
     }
 
     private void wasegg(object sender, CheckedChangedEventArgs e)

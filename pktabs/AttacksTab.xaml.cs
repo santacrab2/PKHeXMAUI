@@ -372,25 +372,25 @@ public partial class AttacksTab : ContentPage
     {
         var value = pk.Move1;
         var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlert($"{(Move)value}", details, "cancel");
+        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
     }
     private async void DisplayMoveInfo2(object sender, EventArgs e)
     {
         var value = pk.Move2;
         var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlert($"{(Move)value}", details, "cancel");
+        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
     }
     private async void DisplayMoveInfo3(object sender, EventArgs e)
     {
         var value = pk.Move3;
         var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlert($"{(Move)value}", details, "cancel");
+        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
     }
     private async void DisplayMoveInfo4(object sender, EventArgs e)
     {
         var value = pk.Move4;
         var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlert($"{(Move)value}", details, "cancel");
+        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
     }
     public void refreshmoveboxelist()
     {

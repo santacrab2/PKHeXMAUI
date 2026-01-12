@@ -29,7 +29,7 @@ public partial class MainPage : ContentPage
     public static bool EditingTrash = false;
     public MainPage()
 	{
-        sav = AppShell.AppSaveFile;
+        sav = AppShell.AppSaveFile ?? BlankSaveFile.Get(EntityContext.Gen9, "");
         GameInfo.FilteredSources = new FilteredGameDataSource(sav, GameInfo.Sources);
         datasourcefiltered = GameInfo.FilteredSources;
         pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
@@ -139,7 +139,7 @@ public partial class MainPage : ContentPage
 
                     byte[] data = File.ReadAllBytes(file);
                     EntityContext contextFromExtension = EntityFileExtension.GetContextFromExtension(file);
-                    PKM fromBytes = EntityFormat.GetFromBytes(data, contextFromExtension)??EntityBlank.GetBlank(contextFromExtension.Generation());
+                    PKM fromBytes = EntityFormat.GetFromBytes(data, contextFromExtension)??EntityBlank.GetBlank(contextFromExtension.Generation);
                     if (fromBytes != null)
                     {
                         TrainerSettings.Register(new PokeTrainerDetails(fromBytes.Clone()));
@@ -184,8 +184,7 @@ public partial class MainPage : ContentPage
     private async void opensavefile(SaveFile savefile, string path)
     {
         savefile.Metadata.SetExtraInfo(path);
-        if(App.Current is not null)
-            App.Current.Windows[0].Page = new AppShell(savefile);
+        App.Current?.Windows[0].Page = new AppShell(savefile);
     }
     public async void OpenPCBoxBin(ConcatenatedEntitySet pkms)
     {
@@ -194,33 +193,33 @@ public partial class MainPage : ContentPage
         {
             if (sav.IsAnySlotLockedInBox(0, sav.BoxCount - 1))
             {
-                await DisplayAlert("Fail", "Battle Box slots prevent loading of PC data.", "cancel");
+                await DisplayAlertAsync("Fail", "Battle Box slots prevent loading of PC data.", "cancel");
                 return;
             }
             if(!sav.SetPCBinary(data))
             {
-                await DisplayAlert("Fail", "Failed to import", "cancel");
+                await DisplayAlertAsync("Fail", "Failed to import", "cancel");
                 return;
             }
-            await DisplayAlert("Success", "PC Binary imported.", "okay");
+            await DisplayAlertAsync("Success", "PC Binary imported.", "okay");
         }
         else if(sav.GetBoxBinary(sav.CurrentBox).Length == data.Length)
         {
             if (sav.IsAnySlotLockedInBox(0, sav.BoxCount - 1))
             {
-                await DisplayAlert("Fail", "Battle Box slots prevent loading of Box data.", "cancel");
+                await DisplayAlertAsync("Fail", "Battle Box slots prevent loading of Box data.", "cancel");
                 return;
             }
             if (!sav.SetBoxBinary(data,sav.CurrentBox))
             {
-                await DisplayAlert("Fail", "Failed to import", "cancel");
+                await DisplayAlertAsync("Fail", "Failed to import", "cancel");
                 return;
             }
-            await DisplayAlert("Success", "Box Binary imported.", "okay");
+            await DisplayAlertAsync("Success", "Box Binary imported.", "okay");
         }
         else
         {
-            await DisplayAlert("Fail", "Failed to import", "cancel");
+            await DisplayAlertAsync("Fail", "Failed to import", "cancel");
         }
     }
     public async void OpenMG(MysteryGift g)
@@ -257,7 +256,7 @@ public partial class MainPage : ContentPage
         if (pkm.GetType() != sav.PKMType)
         {
             var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result);
-            if ((result.IsSuccess() && newpkm is not null) || (PSettings.AllowIncompatibleConversion && newpkm is not null))
+            if ((result.IsSuccess && newpkm is not null) || (PSettings.AllowIncompatibleConversion && newpkm is not null))
             {
                 sav.AdaptToSaveFile(newpkm);
                 applymainpkinfo(newpkm);
@@ -267,7 +266,7 @@ public partial class MainPage : ContentPage
             }
             else
             {
-                await DisplayAlert("Incompatible", "This file is incompatible with the current save file", "cancel");
+                await DisplayAlertAsync("Incompatible", "This file is incompatible with the current save file", "cancel");
                 return;
             }
         }
@@ -388,9 +387,9 @@ public partial class MainPage : ContentPage
         await using var CrossedStreams = new MemoryStream(pk.DecryptedPartyData);
         var result = await FileSaver.Default.SaveAsync(pk.FileName, CrossedStreams, CancellationToken.None);
         if (result.IsSuccessful)
-            await DisplayAlert("Success", $"PK File saved at {result.FilePath}", "cancel");
+            await DisplayAlertAsync("Success", $"PK File saved at {result.FilePath}", "cancel");
         else
-            await DisplayAlert("Failure", $"PK File did not save due to {result.Exception.Message}", "cancel");
+            await DisplayAlertAsync("Failure", $"PK File did not save due to {result.Exception.Message}", "cancel");
     }
 
     private void specieschanger(object sender, EventArgs e)
@@ -643,7 +642,7 @@ public partial class MainPage : ContentPage
         }
         catch(Exception j)
         {
-            await DisplayAlert("error", j.Message, "ok");
+            await DisplayAlertAsync("error", j.Message, "ok");
         }
     }
 
@@ -653,7 +652,7 @@ public partial class MainPage : ContentPage
         checklegality();
         if (la.Valid && PSettings.IgnoreLegalPopup)
             return;
-        var makelegal = await DisplayAlert("Legality Report", la.Report(), "legalize","ok");
+        var makelegal = await DisplayAlertAsync("Legality Report", la.Report(), "legalize","ok");
         if (makelegal)
         {
             pk = await Task.Run(()=>sav.Legalize(pk));
@@ -791,10 +790,10 @@ public partial class MainPage : ContentPage
     {
         if (!Clipboard.HasText)
         {
-            await DisplayAlert("Showdown", "No showdown text found on clipboard", "cancel");
+            await DisplayAlertAsync("Showdown", "No showdown text found on clipboard", "cancel");
             return;
         }
-        var doit = await DisplayAlert("Showdown", $"Apply this set?\n{await Clipboard.GetTextAsync()}", "Yes", "cancel");
+        var doit = await DisplayAlertAsync("Showdown", $"Apply this set?\n{await Clipboard.GetTextAsync()}", "Yes", "cancel");
         if (!doit)
             return;
         var set = new ShowdownSet(await Clipboard.GetTextAsync());
@@ -809,13 +808,13 @@ public partial class MainPage : ContentPage
         {
             if (PluginSettings.EnableMemesForIllegalSets)
                 applymainpkinfo(pkm);
-            await DisplayAlert("Showdown", "I could not legalize the provided Showdown Set","cancel");
+            await DisplayAlertAsync("Showdown", "I could not legalize the provided Showdown Set","cancel");
         }
     }
 
     public async void ExportShowdown(object sender, EventArgs e)
     {
-        if (!await DisplayAlert("Showdown", "Export the current box?", "yes", "cancel"))
+        if (!await DisplayAlertAsync("Showdown", "Export the current box?", "yes", "cancel"))
             Clipboard.SetTextAsync(ShowdownParsing.GetShowdownText(pk));
         else
             Clipboard.SetTextAsync(ShowdownParsing.GetShowdownSets(sav.GetBoxData(sav.CurrentBox), "\n"));
@@ -877,7 +876,7 @@ public partial class MainPage : ContentPage
     {
         if (await IsUpdateAvailable())
         {
-            var Update = await AppShell.Shelltest.DisplayAlert("Update", "Update is available", "Update", "Cancel");
+            var Update = await AppShell.Shelltest.DisplayAlertAsync("Update", "Update is available", "Update", "Cancel");
             if (Update)
             {
                 await Browser.OpenAsync("https://github.com/santacrab2/PKHeXMAUI/releases/latest");

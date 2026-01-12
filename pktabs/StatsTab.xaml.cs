@@ -137,7 +137,7 @@ public partial class StatsTab : ContentPage
                 Teratypepicker.SelectedIndex = (int)tera.TeraTypeOverride;
                 if (moveonce)
                 {
-                    teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
+                    teratypeimage.TranslateToAsync(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
                     moveonce = false;
                 }
             }
@@ -525,7 +525,7 @@ public partial class StatsTab : ContentPage
             if (Teratypepicker.SelectedIndex == 18)
             {
                 pk9.TeraTypeOverride = (MoveType)0x13;
-                teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY + 50);
+                teratypeimage.TranslateToAsync(teratypeimage.TranslationX, teratypeimage.TranslationY + 50);
                 moveonce = true;
             }
             else
@@ -540,7 +540,7 @@ public partial class StatsTab : ContentPage
                 }
                 if (moveonce)
                 {
-                    teratypeimage.TranslateTo(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
+                    teratypeimage.TranslateToAsync(teratypeimage.TranslationX, teratypeimage.TranslationY - 50);
                     moveonce = false;
                 }
             }

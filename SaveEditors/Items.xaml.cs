@@ -25,6 +25,7 @@ public partial class Items : TabbedPage
             {
                 switch (sav)
                 {
+                    case SAV9ZA za: data?.ToArray()[0].CopyTo(za.Items.Data.ToArray(), 0); break;
                     case SAV9SV s: data?.ToArray()[0].CopyTo(s.Items.Data.ToArray(), 0); break;
                     case SAV8LA la: data?.ToArray()[0].CopyTo(la.Items.Data.ToArray(), 0); break;
                     case SAV8BS bs: data?.ToArray()[0].CopyTo(bs.Items.Data.ToArray(), 0); break;
@@ -35,7 +36,7 @@ public partial class Items : TabbedPage
             }
             else
             {
-                DisplayAlert("Error", "No Data Found, I guess", "okay...");
+                DisplayAlertAsync("Error", "No Data Found, I guess", "okay...");
             }
         }
         SAV = (Origin = sav).Clone();
@@ -191,7 +192,7 @@ public partial class Items : TabbedPage
     private string[] GetStringsForPouch(ReadOnlySpan<ushort> items, bool sort = true)
     {
         string[] res = new string[items.Length + 1];
-        for (int i = 0; i < res.Length - 1; i++)
+        for (int i = 0; i < res.Length - 1; i++) 
             res[i] = itemlist[items[i]];
         res[items.Length] = itemlist[0];
         if (sort)
@@ -277,7 +278,7 @@ public partial class Items : TabbedPage
         if (CurrentItem is not null)
         {
             var lump = HeldItemLumpUtil.GetIsLump(CurrentItem.InvItem.Index, sav.Context);
-            CurrentItem.itemsprite = sav is SAV9SV ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png";
+            CurrentItem.itemsprite = sav.Generation >= 9 ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png";
             if (itemInfo.Pouch_Material_SV.Contains((ushort)CurrentItem.InvItem.Index))
                 CurrentItem.itemsprite = "aitem_material.png";
             if (CurrentItem.InvItem.Index >= 2522 && CurrentItem.InvItem.Index <= 2546)
