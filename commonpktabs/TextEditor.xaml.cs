@@ -100,13 +100,13 @@ public partial class TextEditor : ContentPage
         ReadOnlySpan<byte> current = SetString(StringEntry.Text);
         if (data.Length <= current.Length)
         {
-            DisplayAlert("Trash byte layer is hidden by current text.",
+            DisplayAlertAsync("Trash byte layer is hidden by current text.",
                 $"Current Bytes: {current.Length}" + Environment.NewLine + $"Layer Bytes: {data.Length}","cancel");
             return;
         }
         if (data.Length > TrashList.Count)
         {
-            DisplayAlert("Trash byte layer is too long to apply.","Too Long.", "cancel");
+            DisplayAlertAsync("Trash byte layer is too long to apply.","Too Long.", "cancel");
             return;
         }
         for (int i = current.Length; i < data.Length; i++)

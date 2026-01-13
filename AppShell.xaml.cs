@@ -1,9 +1,11 @@
-﻿
-using CommunityToolkit.Maui.Storage;
+﻿using CommunityToolkit.Maui.Storage;
 using PKHeX.Core;
 using PKHeX.Core.AutoMod;
 using System.Windows.Input;
 using static PKHeXMAUI.MainPage;
+using System;
+using System.Diagnostics;
+
 namespace PKHeXMAUI;
 
 public partial class AppShell : Shell
@@ -176,11 +178,11 @@ public partial class AppShell : Shell
 
     private async Task ManipulateBoxes(string title, string allBoxesMessage, string currentBoxMessage, BoxManipType manipType)
     {
-        if (await DisplayAlert(title, allBoxesMessage, "Yes", "No"))
+        if (await DisplayAlertAsync(title, allBoxesMessage, "Yes", "No"))
         {
             manip.Execute(manipType, 0, true);
         }
-        else if (await DisplayAlert(title, currentBoxMessage, "Yes", "No"))
+        else if (await DisplayAlertAsync(title, currentBoxMessage, "Yes", "No"))
         {
             manip.Execute(manipType, BoxTab.CurrentBox, false);
         }
@@ -245,8 +247,7 @@ public partial class AppShell : Shell
             SetFlyoutItemIsVisible(Heal, false);
             ModifyExpanded = false;
         }
-        if(Shell.Current is not null)
-            Shell.Current.FlyoutIsPresented = false;
+        Shell.Current?.FlyoutIsPresented = false;
     }
     private void SortClick(object? sender, EventArgs? e)
     {
@@ -526,9 +527,9 @@ public partial class AppShell : Shell
         await using var LiveStream = new MemoryStream(sav.Write(flags).ToArray());
         var result = await FileSaver.Default.SaveAsync(sav.Metadata.FileName??"", LiveStream, CancellationToken.None);
         if (result.IsSuccessful)
-            await DisplayAlert("Success", $"Save file was exported to {result.FilePath}", "cancel");
+            await DisplayAlertAsync("Success", $"Save file was exported to {result.FilePath}", "cancel");
         else
-            await DisplayAlert("Failure", $"Save file did not export due to {result.Exception.Message}", "cancel");
+            await DisplayAlertAsync("Failure", $"Save file did not export due to {result.Exception.Message}", "cancel");
     }
     private async void SavePKMClicked(object sender, EventArgs e)
     {
@@ -565,7 +566,7 @@ public partial class AppShell : Shell
                 if (pkm.GetType() != sav.PKMType)
                 {
                     var newpkm = EntityConverter.ConvertToType(pkm, sav.PKMType, out var result)??EntityBlank.GetBlank(sav.Generation);
-                    if (result.IsSuccess() || PSettings.AllowIncompatibleConversion)
+                    if (result.IsSuccess || PSettings.AllowIncompatibleConversion)
                     {
                         sav.AdaptToSaveFile(newpkm);
                         sav.SetBoxSlotAtIndex(newpkm, sav.NextOpenBoxSlot());
@@ -582,14 +583,14 @@ public partial class AppShell : Shell
 
     private async void DumpBoxClicked(object sender, EventArgs e)
     {
-        if (await DisplayAlert("Dump","Dump All Boxes?", "yes", "cancel"))
+        if (await DisplayAlertAsync("Dump","Dump All Boxes?", "yes", "cancel"))
         {
             var result = await FolderPicker.PickAsync(CancellationToken.None);
             if(result.IsSuccessful)
                 BoxExport.Export(sav, result.Folder.Path, BoxExportSettings.Default);
             return;
         }
-        else if(await DisplayAlert("Dump","Dump Current Box?", "yes", "cancel"))
+        else if(await DisplayAlertAsync("Dump","Dump Current Box?", "yes", "cancel"))
         {
             var result = await FolderPicker.PickAsync(CancellationToken.None);
             if (result.IsSuccessful)
@@ -600,13 +601,13 @@ public partial class AppShell : Shell
 
     private async void SaveBoxDataClicked(object sender, EventArgs e)
     {
-        if (await DisplayAlert("Dump", "Dump ALL Boxes?", "yes", "no"))
+        if (await DisplayAlertAsync("Dump", "Dump ALL Boxes?", "yes", "no"))
         {
             await using MemoryStream boxstream = new(sav.GetPCBinary());
             await FileSaver.SaveAsync("pcdata.bin", boxstream);
             return;
         }
-        if (await DisplayAlert("Dump", "Dump Current Box?", "yes", "cancel"))
+        if (await DisplayAlertAsync("Dump", "Dump Current Box?", "yes", "cancel"))
         {
             await using MemoryStream Cboxstream = new(sav.GetBoxBinary(sav.CurrentBox));
             await FileSaver.SaveAsync($"boxdata {sav.CurrentBox}.bin", Cboxstream);
@@ -622,13 +623,13 @@ public partial class AppShell : Shell
 public class BoxManipulatorMAUI : BoxManipulator
 {
     protected override SaveFile SAV => sav;
-    protected override void FinishBoxManipulation(string message, bool all, int count) => Shell.Current.DisplayAlert("Finished", message + $" ({count})", "cancel");
+    protected override void FinishBoxManipulation(string message, bool all, int count) => Shell.Current.DisplayAlertAsync("Finished", message + $" ({count})", "cancel");
 
     protected override bool CanManipulateRegion(int start, int end, string prompt, string fail)
     {
         bool canModify = base.CanManipulateRegion(start, end, prompt, fail);
         if (!canModify && !string.IsNullOrEmpty(fail))
-            Shell.Current.DisplayAlert("Box", fail, "cancel");
+            Shell.Current.DisplayAlertAsync("Box", fail, "cancel");
         return canModify;
     }
 }

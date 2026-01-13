@@ -57,7 +57,7 @@ public partial class TrainerEditor9 : ContentPage
 		MainPage.sav.PlayedHours = parsed ? iresult : MainPage.sav.PlayedHours;
 		parsed = int.TryParse(TrainerMinutesEditor.Text, out iresult);
 		MainPage.sav.PlayedMinutes = parsed ? iresult : MainPage.sav.PlayedMinutes;
-		((SAV9SV)MainPage.sav).LastSaved.Timestamp = LastSavedPicker.Date;
-		((SAV9SV)MainPage.sav).EnrollmentDate.Timestamp = GameStartedPicker.Date;
+		((SAV9SV)MainPage.sav).LastSaved.Timestamp = LastSavedPicker.Date.GetValueOrDefault();
+		((SAV9SV)MainPage.sav).EnrollmentDate.Timestamp = GameStartedPicker.Date.GetValueOrDefault();
 	}
 }

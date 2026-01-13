@@ -23,21 +23,21 @@ public partial class TrainerEditor9Blueberry : ContentPage
     {
         SAV.ActivateSnacksworthLegendaries();
         ActivateLegendsButton.IsEnabled = false;
-        DisplayAlert("Legends", "Snacksworth Activated", "cancel");
+        DisplayAlertAsync("Legends", "Snacksworth Activated", "cancel");
     }
 
     private void UnlockCoaches(object sender, EventArgs e)
     {
         SAV.UnlockAllCoaches();
         CoachesButton.IsEnabled = false;
-        DisplayAlert("Coaches", "All Coaches Unlocked", "cancel");
+        DisplayAlertAsync("Coaches", "All Coaches Unlocked", "cancel");
     }
 
     private void UnlockThrowStyles(object sender, EventArgs e)
     {
         SAV.UnlockAllThrowStyles();
         ThrowStyleButton.IsEnabled = false;
-        DisplayAlert("ThrowStyles", "All ThrowStyles Unlocked", "cancel");
+        DisplayAlertAsync("ThrowStyles", "All ThrowStyles Unlocked", "cancel");
     }
 
     public void SaveTE9Blueberry()

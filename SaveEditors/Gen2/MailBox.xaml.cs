@@ -173,7 +173,7 @@ public partial class MailBox : ContentPage
             }
 
             var vers = GameInfo.Sources.VersionDataSource
-                .Where(z => ((GameVersion)z.Value).GetGeneration() == Generation);
+                .Where(z => ((GameVersion)z.Value).Generation == Generation);
             CB_AuthorVersion.ItemSource = vers.ToList();
             CB_AuthorVersion.DisplayMemberPath = "Text";
         }
@@ -423,7 +423,7 @@ public partial class MailBox : ContentPage
         if (entry >= 0) TempSave();
         Save();
         var Err = CheckValid();
-        if (Err.Count != 0 && await DisplayAlert("Invalid", $"{Err.Aggregate($"Validation Error. Save?{Environment.NewLine}", (tmp, v) => $"{tmp}{Environment.NewLine}{v}")}","yes","no"))
+        if (Err.Count != 0 && await DisplayAlertAsync("Invalid", $"{Err.Aggregate($"Validation Error. Save?{Environment.NewLine}", (tmp, v) => $"{tmp}{Environment.NewLine}{v}")}","yes","no"))
             return;
         Origin.CopyChangesFrom(SAV);
         Navigation.PopModalAsync();

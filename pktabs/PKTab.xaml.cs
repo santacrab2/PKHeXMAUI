@@ -918,4 +918,5 @@ public partial class MainPage : ContentPage
             pk.ClearNickname();
         applymainpkinfo(pk);
     }
+
 }

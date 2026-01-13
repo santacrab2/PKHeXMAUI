@@ -52,7 +52,7 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
     /// Gets or sets the selected item in the comboBox. Default is null. This is a bindable property.
     /// </summary>
 	public object? SelectedItem { get => GetValue(SelectedItemProperty); set { picker.SelectedItem = value; SetValue(SelectedItemProperty, value); } }
-    public Microsoft.Maui.Controls.ListView picker;
+    public CollectionView picker;
     public comboBox()
     {
         InitializeComponent();
@@ -60,27 +60,27 @@ public partial class comboBox : Microsoft.Maui.Controls.ContentView
         {
             BackgroundColor = Colors.White
         };
-        picker.ItemSelected += IndexChanged;
+        picker.SelectionChanged += IndexChanged;
         picker.HeightRequest = 50;
-        picker.SelectionMode = ListViewSelectionMode.Single;
-        picker.SetBinding(Microsoft.Maui.Controls.ListView.ItemsSourceProperty, new Binding("ItemSource", source: ThisView));
+        picker.SelectionMode = SelectionMode.Single;
+        picker.SetBinding(Microsoft.Maui.Controls.CollectionView.ItemsSourceProperty, new Binding("ItemSource", source: ThisView));
         picker.ItemTemplate = new DataTemplate(() =>
         {
-            ViewCell cell = new();
+            Grid cell = [];
             Label label = new();
             label.SetBinding(Label.TextProperty, new Binding(DisplayMemberPath));
             label.TextColor = Colors.Black;
             picker.ItemTemplate = new DataTemplate(() =>
             {
-                ViewCell cell = new();
+                Grid cell = [];
                 Label label = new();
                 label.SetBinding(Label.TextProperty, new Binding(DisplayMemberPath));
                 label.SetBinding(Label.BackgroundColorProperty, new Binding("Valid", converter: new BoolToColorConverter()));
                 label.TextColor = Colors.Black;
-                cell.View = label;
+                cell.Add(label);
                 return cell;
             });
-            cell.View = label;
+            cell.Add(label);
             return cell;
         });
 #if ANDROID
@@ -240,6 +240,7 @@ internal class BoolToColorConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
+        if (value is null) return Colors.White;
         return (bool)value ? Colors.Green : Colors.White;
     }
 

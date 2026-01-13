@@ -132,9 +132,9 @@ public partial class TrainerEditor6 : ContentPage
 		parsed = ushort.TryParse(SecPlayedEntry.Text, out result);
 		if (parsed) SAV.PlayedSeconds = result % 60;
 		SAV.Vivillon = VivillonPicker.SelectedIndex;
-        SAV.SecondsToStart = (uint)DateUtil.GetSecondsFrom2000(GSDatePicker.Date, GSDatePicker.Date.AddSeconds(GSTimePicker.Time.TotalSeconds));
-        SAV.SecondsToFame = (uint)DateUtil.GetSecondsFrom2000(HOFDatePicker.Date, HOFDatePicker.Date.AddSeconds(HOFTimePicker.Time.TotalSeconds));
+        SAV.SecondsToStart = (uint)DateUtil.GetSecondsFrom2000(GSDatePicker.Date.GetValueOrDefault(), GSDatePicker.Date.GetValueOrDefault().AddSeconds(GSTimePicker.Time.GetValueOrDefault().TotalSeconds));
+        SAV.SecondsToFame = (uint)DateUtil.GetSecondsFrom2000(HOFDatePicker.Date.GetValueOrDefault(), HOFDatePicker.Date.GetValueOrDefault().AddSeconds(HOFTimePicker.Time.GetValueOrDefault().TotalSeconds));
 		if (SAV.Played.LastSavedDate.HasValue)
-			SAV.Played.LastSavedDate = LSDatePicker.Date.AddSeconds(LSTimePicker.Time.TotalSeconds);
+			SAV.Played.LastSavedDate = LSDatePicker.Date.GetValueOrDefault().AddSeconds(LSTimePicker.Time.GetValueOrDefault().TotalSeconds);
     }
 }

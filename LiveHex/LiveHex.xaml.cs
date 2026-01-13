@@ -28,7 +28,7 @@ public partial class LiveHex : ContentPage
         IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
 		if (!profiles.Contains(ConnectionProfile.WiFi))
 		{
-			await DisplayAlert("WiFi", "Please Connect to WiFi", "ok");
+			await DisplayAlertAsync("WiFi", "Please Connect to WiFi", "ok");
 			return;
 		}
         if (Remote.Connected)
@@ -47,7 +47,7 @@ public partial class LiveHex : ContentPage
             var compatible = InjectionBase.SaveCompatibleWithTitle(sav, titleid);
             if (!compatible)
             {
-                await DisplayAlert("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
+                await DisplayAlertAsync("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
                 Remote.com.Disconnect();
                 return;
             }
@@ -57,13 +57,13 @@ public partial class LiveHex : ContentPage
             {
                 if (InjectionBase.CheckRAMShift(Remote, out var errorMessage))
                 {
-                    await DisplayAlert("Error", errorMessage, "disconnect");
+                    await DisplayAlertAsync("Error", errorMessage, "disconnect");
                 }
                 else
                 {
-                    await DisplayAlert("Error", "Error Connecting", "disconnect");
+                    await DisplayAlertAsync("Error", "Error Connecting", "disconnect");
                 }
-                await DisplayAlert("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
+                await DisplayAlertAsync("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
                 Remote.com.Disconnect();
                 return;
             }
@@ -88,7 +88,7 @@ public partial class LiveHex : ContentPage
             }
             if (!valid)
             {
-                await DisplayAlert("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
+                await DisplayAlertAsync("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
                 Remote.com.Disconnect();
                 return;
             }
@@ -122,12 +122,12 @@ public partial class LiveHex : ContentPage
         {
             if (!int.TryParse(boxnum.Text, out var box))
             {
-                await DisplayAlert("Invalid", "Invalid Box number", "cancel");
+                await DisplayAlertAsync("Invalid", "Invalid Box number", "cancel");
                 return;
             }
             if (!int.TryParse(slotnum.Text, out var slot))
             {
-                await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
+                await DisplayAlertAsync("Invalid", "Invalid Slot number", "cancel");
                 return;
             }
             Remote.SendSlot(pk.EncryptedBoxData, box - 1, slot - 1);
@@ -140,12 +140,12 @@ public partial class LiveHex : ContentPage
         {
             if (!int.TryParse(boxnum.Text, out var box))
             {
-                await DisplayAlert("Invalid", "Invalid Box number", "cancel");
+                await DisplayAlertAsync("Invalid", "Invalid Box number", "cancel");
                 return;
             }
             if (!int.TryParse(slotnum.Text, out var slot))
             {
-                await DisplayAlert("Invalid", "Invalid Slot number", "cancel");
+                await DisplayAlertAsync("Invalid", "Invalid Slot number", "cancel");
                 return;
             }
             pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box - 1, slot - 1).ToArray())??EntityBlank.GetBlank(sav.Generation);
@@ -160,14 +160,14 @@ public partial class LiveHex : ContentPage
             {
                 if (Remote.com is not ICommunicatorNX sb)
                 {
-                    await DisplayAlert("Error", "Error", "cancel");
+                    await DisplayAlertAsync("Error", "Error", "cancel");
                     return;
                 }
 
                 ulong address = GetPointerAddress(sb);
                 if (address == 0)
                 {
-                    await DisplayAlert("Error", "No pointer address.", "cancel");
+                    await DisplayAlertAsync("Error", "No pointer address.", "cancel");
                     return;
                 }
 
@@ -185,7 +185,7 @@ public partial class LiveHex : ContentPage
                 var off = Util.GetHexValue64(txt);
                 if (off.ToString("X16") != txt.ToUpper().PadLeft(16, '0'))
                 {
-                    await DisplayAlert("Error", "Specified offset is not a valid hex string.", "cancel");
+                    await DisplayAlertAsync("Error", "Specified offset is not a valid hex string.", "cancel");
                     return;
                 }
                 try
@@ -194,11 +194,11 @@ public partial class LiveHex : ContentPage
 
                     var result = ReadOffset(off, method);
                     if (!result)
-                        await DisplayAlert("Error", "No valid data is located at the specified offset.", "cancel");
+                        await DisplayAlertAsync("Error", "No valid data is located at the specified offset.", "cancel");
                 }
                 catch (Exception ex)
                 {
-                    await DisplayAlert("Error", $"Unable to load data from the specified offset. {ex.Message}", "cancel");
+                    await DisplayAlertAsync("Error", $"Unable to load data from the specified offset. {ex.Message}", "cancel");
                 }
             }
         }

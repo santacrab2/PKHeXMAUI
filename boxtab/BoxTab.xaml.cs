@@ -67,14 +67,14 @@ public partial class BoxTab : ContentPage
             SlotNumber.SetBinding(Label.TextProperty, "SlotNumber");
             Image image = new() { WidthRequest = 45, HeightRequest = 45 };
             Image shinysp = new() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
-            shinysp.TranslateTo(shinysp.TranslationX + 20, shinysp.TranslationY);
+            shinysp.TranslateToAsync(shinysp.TranslationX + 20, shinysp.TranslationY);
             Image Egg = new() { Source = "a_egg.png", HeightRequest = 50, WidthRequest = 50, VerticalOptions = LayoutOptions.End };
             Egg.SetBinding(Image.IsVisibleProperty, "pkm.IsEgg");
             Image ItemSprite = new() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
             ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
-            ItemSprite.TranslateTo(ItemSprite.TranslationX + 18, ItemSprite.TranslationY);
+            ItemSprite.TranslateToAsync(ItemSprite.TranslationX + 18, ItemSprite.TranslationY);
             Image LegalSprite = new() { WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start, Source = "warn.png" };
-            LegalSprite.TranslateTo(LegalSprite.TranslationX - 6, ItemSprite.TranslationY);
+            LegalSprite.TranslateToAsync(LegalSprite.TranslationX - 6, ItemSprite.TranslationY);
             LegalSprite.SetBinding(Image.IsVisibleProperty, "legal");
             image.SetBinding(Image.SourceProperty, "url");
             var gesture = new DragGestureRecognizer() { CanDrag = true };
@@ -107,7 +107,7 @@ public partial class BoxTab : ContentPage
     {
         boxview.SelectedItem = e?.Parameter;
 
-        var result = await DisplayActionSheet($"Slot {((boxsprite?)e?.Parameter)?.SlotNumber}", "cancel", "Delete", ["View", "Set"]);
+        var result = await DisplayActionSheetAsync($"Slot {((boxsprite?)e?.Parameter)?.SlotNumber}", "cancel", "Delete", ["View", "Set"]);
         switch (result)
         {
             case "Delete": del(sender,e); break;

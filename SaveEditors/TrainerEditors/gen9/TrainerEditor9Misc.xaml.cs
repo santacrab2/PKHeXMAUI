@@ -23,7 +23,7 @@ public partial class TrainerEditor9Misc : ContentPage
             if (accessor.TryGetBlock(hash, out var block))
                 block.ChangeBooleanType(SCTypeCode.Bool2);
         }
-        DisplayAlert("Fly", "All Fly Locations Unlocked", "cancel");
+        DisplayAlertAsync("Fly", "All Fly Locations Unlocked", "cancel");
         AllFlyButton.IsEnabled = false;
     }
     private static ReadOnlySpan<uint> FlyHashes =>
@@ -148,14 +148,14 @@ public partial class TrainerEditor9Misc : ContentPage
     {
         SAV.CollectAllStakes();
         StakesButton.IsEnabled = false;
-        DisplayAlert("Stakes", "All Stakes Collected", "cancel");
+        DisplayAlertAsync("Stakes", "All Stakes Collected", "cancel");
     }
 
     private void UnlockTMRecipes(object sender, EventArgs e)
     {
         SAV.UnlockAllTMRecipes();
         TMRecipeButton.IsEnabled = false;
-        DisplayAlert("TMs", "All TM Recipes Unlocked", "cancel");
+        DisplayAlertAsync("TMs", "All TM Recipes Unlocked", "cancel");
     }
 
     private void UnlockBike(object sender, EventArgs e)
@@ -175,7 +175,7 @@ public partial class TrainerEditor9Misc : ContentPage
         if (accessor.TryGetBlock("FSYS_RIDE_FLIGHT_ENABLE", out var fly))
             fly.ChangeBooleanType(SCTypeCode.Bool2); // Base & DLC1 saves do not have this block
         BikeButton.IsEnabled = false;
-        DisplayAlert("Bike", "All Bike Modes Unlocked", "cancel");
+        DisplayAlertAsync("Bike", "All Bike Modes Unlocked", "cancel");
     }
 
     private void UnlockFashion(object sender, EventArgs e)
@@ -183,7 +183,7 @@ public partial class TrainerEditor9Misc : ContentPage
         var accessor = SAV.Accessor;
         PlayerFashionUnlock9.UnlockBase(accessor, SAV.Gender);
         FashionButton.IsEnabled = false;
-        DisplayAlert("Fashion", "All Fashion Unlocked", "cancel");
+        DisplayAlertAsync("Fashion", "All Fashion Unlocked", "cancel");
     }
 
     public void SaveTEMisc()

@@ -22,7 +22,7 @@ public partial class EncounterDB : ContentPage
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             Image image = new() { WidthRequest = 50, HeightRequest = 50 };
             Image shinysp = new() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
-            shinysp.TranslateTo(shinysp.TranslationX + 15, shinysp.TranslationY);
+            shinysp.TranslateToAsync(shinysp.TranslationX + 15, shinysp.TranslationY);
             image.SetBinding(Image.SourceProperty, "url");
             shinysp.SetBinding(Image.IsVisibleProperty, "EncounterInfo.IsShiny");
             Image EggSprite = new() { Source = "a_egg.png", HeightRequest=40, WidthRequest=40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.End };
@@ -31,7 +31,7 @@ public partial class EncounterDB : ContentPage
             AlphaSprite.SetBinding(Image.IsVisibleProperty, "Alpha");
             Image BallSprite = new() { HeightRequest = 16, WidthRequest = 16, VerticalOptions = LayoutOptions.End, HorizontalOptions = LayoutOptions.Start };
             BallSprite.SetBinding(Image.SourceProperty, "BallUrl");
-            BallSprite.TranslateTo(TranslationX - 10, TranslationY);
+            BallSprite.TranslateToAsync(TranslationX - 10, TranslationY);
             Image MightySprite = new() { HeightRequest = 40, WidthRequest = 40, Source = "ribbonmarkmightiest.png", VerticalOptions = LayoutOptions.Start, HorizontalOptions = LayoutOptions.Center };
             MightySprite.SetBinding(Image.IsVisibleProperty, "Mighty");
             Image GMaxSprite = new() { HeightRequest = 16, WidthRequest = 16, Source = "dyna.png", VerticalOptions = LayoutOptions.Start, HorizontalOptions = LayoutOptions.Center };
@@ -55,7 +55,7 @@ public partial class EncounterDB : ContentPage
     private async void ShowViewBox(object? sender, TappedEventArgs? e)
     {
         EncounterCollection.SelectedItem = (EncounterSprite?)e?.Parameter;
-        var view = await DisplayAlert("View Encounter", "View this encounter?", "view", "cancel");
+        var view = await DisplayAlertAsync("View Encounter", "View this encounter?", "view", "cancel");
         if (view)
             applyencpk(sender, e);
         EncounterCollection.SelectedItem = null;
@@ -114,7 +114,7 @@ public partial class EncounterDB : ContentPage
                 _ => results.Where(z => z.Generation <= 7),
             };
         }
-        return results.ToList();
+        return [.. results];
     }
     public IEnumerable<IEncounterInfo> GetAllSpeciesFormEncounters(IEnumerable<ushort> species,ITrainerInfo info, IPersonalTable pt, GameVersion[] versions, ushort[] moves, PKM pk)
     {

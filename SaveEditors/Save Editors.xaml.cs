@@ -128,7 +128,7 @@ public partial class SaveEditors : ContentPage
                 var msg = MessageStrings.MsgSaveGen2RTCResetBitflag;
                 if (!sav2.Japanese) // show Reset Key for non-Japanese saves
                     msg = string.Format(MessageStrings.MsgSaveGen2RTCResetPassword, sav2.ResetKey) + Environment.NewLine + Environment.NewLine + msg;
-                var dr = await DisplayAlert("Reset RTC", msg, "Yes", "cancel");
+                var dr = await DisplayAlertAsync("Reset RTC", msg, "Yes", "cancel");
                 if (dr)
                     sav2.ResetRTC();
                 break;

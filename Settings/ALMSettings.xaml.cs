@@ -19,7 +19,7 @@ public partial class ALMSettings : ContentPage
     {
         PKHeXSettings.skipevent = true;
         GenericCollectionSelector.Options.SelectedItem = e?.Parameter;
-        var result = await DisplayActionSheet("Add Type", "cancel", null, ["Add"]);
+        var result = await DisplayActionSheetAsync("Add Type", "cancel", null, ["Add"]);
         switch (result)
         {
             case "cancel": break;
@@ -35,7 +35,7 @@ public partial class ALMSettings : ContentPage
     public async void RemoveTap(object? sender, TappedEventArgs? e)
     {
         GenericCollectionSelector.Selected.SelectedItem = e?.Parameter;
-        var result = await DisplayActionSheet("Remove Type", "cancel", null, ["Remove"]);
+        var result = await DisplayActionSheetAsync("Remove Type", "cancel", null, ["Remove"]);
         switch (result)
         {
             case "cancel": break;

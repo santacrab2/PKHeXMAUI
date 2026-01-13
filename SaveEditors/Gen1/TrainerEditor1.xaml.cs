@@ -238,8 +238,8 @@ public partial class TrainerEditor1 : ContentPage
                 s.Region = region.Value;
         }
         DateTime Epoch2000 = new(2000, 1, 1);
-        SAV.SecondsToStart = (uint)DateUtil.GetSecondsFrom2000(GSDatePicker.Date, Epoch2000.AddSeconds(GSTimerPicker.Time.TotalSeconds % 86400));
-        SAV.SecondsToFame = (uint)DateUtil.GetSecondsFrom2000(HOFDatePicker.Date, Epoch2000.AddSeconds(HOFTimePicker.Time.TotalSeconds % 86400));
+        SAV.SecondsToStart = (uint)DateUtil.GetSecondsFrom2000(GSDatePicker.Date.GetValueOrDefault(), Epoch2000.AddSeconds(GSTimerPicker.Time.GetValueOrDefault().TotalSeconds % 86400));
+        SAV.SecondsToFame = (uint)DateUtil.GetSecondsFrom2000(HOFDatePicker.Date.GetValueOrDefault(), Epoch2000.AddSeconds(HOFTimePicker.Time.GetValueOrDefault().TotalSeconds % 86400));
         Navigation.PopModalAsync();
     }
 

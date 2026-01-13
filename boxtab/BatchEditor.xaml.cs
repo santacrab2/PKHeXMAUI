@@ -89,17 +89,17 @@ public partial class BatchEditor : ContentPage
         var sets = StringInstructionSet.GetBatchSets(BatchText.Text);
         if (Array.Exists(sets, s => s.Filters.Any(z => string.IsNullOrWhiteSpace(z.PropertyValue))))
         {
-            await DisplayAlert("Batch Editor", "Batch Instructions Format Error", "cancel");
+            await DisplayAlertAsync("Batch Editor", "Batch Instructions Format Error", "cancel");
             return;
         }
         if (Array.Exists(sets, z => z.Instructions.Count == 0))
         {
-            await DisplayAlert("Batch Editor", "No Batch instructions included", "cancel");
+            await DisplayAlertAsync("Batch Editor", "No Batch instructions included", "cancel");
         }
         var emptyVal = sets.SelectMany(s => s.Instructions.Where(z => string.IsNullOrWhiteSpace(z.PropertyValue))).ToArray();
         if (emptyVal.Length > 0)
         {
-            await DisplayAlert("Batch Editor", "Another Error Display", "Cancel");
+            await DisplayAlertAsync("Batch Editor", "Another Error Display", "Cancel");
             return;
         }
         foreach(var set in sets)
@@ -111,7 +111,7 @@ public partial class BatchEditor : ContentPage
         SlotInfoLoader.AddBoxData(MainPage.sav, data);
         if (data.All(z=>z.Entity.Species == 0))
         {
-            await DisplayAlert("Batch Editor", "No slots to edit", "cancel");
+            await DisplayAlertAsync("Batch Editor", "No slots to edit", "cancel");
             return;
         }
         process(data);
@@ -133,7 +133,7 @@ public partial class BatchEditor : ContentPage
 
         var filterMeta = Filters.Where(f => BatchFilters.FilterMeta.Any(z => z.IsMatch(f.PropertyName))).ToArray();
         if (filterMeta.Length != 0)
-            Filters = Filters.Except(filterMeta).ToArray();
+            Filters = [.. Filters.Except(filterMeta)];
 
         var max = data[0].Entity.MaxSpeciesID;
 

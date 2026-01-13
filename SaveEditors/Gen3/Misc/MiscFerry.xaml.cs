@@ -43,7 +43,7 @@ public partial class MiscFerry : ContentPage
         var tickets = TicketItemIDs;
         var p = Pouches.FirstOrDefault(z => z.Type == InventoryType.KeyItems)??Pouches[0];
         bool hasOldSea = Array.Exists(p.Items, static z => z.Index == ItemIDOldSeaMap);
-        if (!hasOldSea && !SAV.Japanese && DisplayAlert("Non Japanese Save", $"Non Japanese save file. Add {itemlist[ItemIDOldSeaMap]} (unreleased)?","Yes","No").Result)
+        if (!hasOldSea && !SAV.Japanese && DisplayAlertAsync("Non Japanese Save", $"Non Japanese save file. Add {itemlist[ItemIDOldSeaMap]} (unreleased)?","Yes","No").Result)
             tickets = tickets[..^1]; // remove old sea map
 
         // check for missing tickets
@@ -62,7 +62,7 @@ public partial class MiscFerry : ContentPage
 
         if (missing.Length == 0)
         {
-            DisplayAlert("Tickets","Already have all tickets.","cancel");
+            DisplayAlertAsync("Tickets","Already have all tickets.","cancel");
             getticketsButton.IsEnabled = false;
             return;
         }
@@ -71,7 +71,7 @@ public partial class MiscFerry : ContentPage
         int end = Array.FindIndex(p.Items, static z => z.Index == 0);
         if (end == -1 || end + missing.Length >= p.Items.Length)
         {
-            DisplayAlert("Not enough space in pouch.", "Please use the InventoryEditor.","canel");
+            DisplayAlertAsync("Not enough space in pouch.", "Please use the InventoryEditor.","canel");
             getticketsButton.IsEnabled = false;
             return;
         }
@@ -95,7 +95,7 @@ public partial class MiscFerry : ContentPage
             var havemsg = $"Already have:{Environment.NewLine}{had}";
             addmsg += Environment.NewLine + Environment.NewLine + havemsg;
         }
-        if (DisplayAlert("", addmsg, "Yes", "No").Result)
+        if (DisplayAlertAsync("", addmsg, "Yes", "No").Result)
             return;
 
         // insert items at the end
@@ -107,7 +107,7 @@ public partial class MiscFerry : ContentPage
         }
 
         string alert = $"Inserted the following items to the Key Items Pouch:{Environment.NewLine}{added}";
-        DisplayAlert("",alert,"cancel");
+        DisplayAlertAsync("",alert,"cancel");
         SAV.Inventory = Pouches;
 
         getticketsButton.IsEnabled = false;

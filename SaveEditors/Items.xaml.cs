@@ -9,7 +9,7 @@ namespace PKHeXMAUI;
 
 public partial class Items : TabbedPage
 {
-    public static string[] itemlist = [.. GameInfo.Strings.GetItemStrings(sav.Context, sav.Version)];
+    private readonly string[] itemlist;
     public List<List<itemInfo>> SourceList = [];
     private readonly IReadOnlyList<InventoryPouch> pouches;
     private readonly SaveFile Origin;
@@ -18,6 +18,13 @@ public partial class Items : TabbedPage
     public Items()
 	{
         InitializeComponent();
+        SAV = (Origin = sav).Clone();
+        itemlist = [.. GameInfo.Strings.GetItemStrings(SAV.Context, SAV.Version)];
+        for (int i = 0; i < itemlist.Length; i++)
+        {
+            if (string.IsNullOrEmpty(itemlist[i]))
+                itemlist[i] = $"(Item #{i:000})";
+        }
         if (Remote.Connected)
         {
             var success = Remote.Injector.ReadBlockFromString(Remote, sav, "Items", out var data);
@@ -39,8 +46,8 @@ public partial class Items : TabbedPage
                 DisplayAlertAsync("Error", "No Data Found, I guess", "okay...");
             }
         }
-        SAV = (Origin = sav).Clone();
-        pouches = sav.Inventory;
+
+        pouches = SAV.Inventory;
 
         foreach (var pouch in pouches)
         {
@@ -71,7 +78,7 @@ public partial class Items : TabbedPage
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-                comboBox itemname = new() { Placeholder = "(None)", BackgroundColor = Colors.Transparent };
+                comboBox itemname = new() { Placeholder = "(None)", BackgroundColor = Colors.Transparent, };
                 itemname.SelectedIndexChanged += ChangeItemSprite;
                 var pouchstrings = GetStringsForPouch(pouch.GetAllItems());
                 itemname.ItemSource = pouchstrings;
@@ -96,7 +103,7 @@ public partial class Items : TabbedPage
             var infolist = new List<itemInfo>();
             foreach(var item in pouch.Items)
             {
-                infolist.Add(new itemInfo(item));
+                infolist.Add(new itemInfo(item, itemlist));
             }
             SourceList.Add(infolist);
             ItemCollection.ItemsSource = infolist;
@@ -144,7 +151,7 @@ public partial class Items : TabbedPage
         pouchlist.RemoveAll();
         foreach (var item in pouchlist.Items)
         {
-            list.Add(new itemInfo(item));
+            list.Add(new itemInfo(item, itemlist));
         }
         SourceList[pindex] = list;
     }
@@ -171,7 +178,7 @@ public partial class Items : TabbedPage
         pouchlist.GiveAllItems(sav, allitems, currentcount);
         foreach(var item in pouchlist.Items)
         {
-            list.Add(new itemInfo(item));
+            list.Add(new itemInfo(item, itemlist));
         }
         SourceList[pindex] = list;
     }
@@ -184,7 +191,7 @@ public partial class Items : TabbedPage
         pouchlist.ModifyAllCount(sav,currentcount);
         foreach (var item in pouchlist.Items)
         {
-            list.Add(new itemInfo(item));
+            list.Add(new itemInfo(item,itemlist));
         }
         SourceList[pindex] = list;
     }
@@ -299,10 +306,10 @@ public class itemInfo
     public bool isfreespace { get; set; }
     public uint isfreespaceindex { get; set; }
     public InventoryItem InvItem { get; set; }
-    public itemInfo(InventoryItem item)
+    public itemInfo(InventoryItem item, string[] itemlist)
     {
         count = item.Count.ToString();
-        name = Items.itemlist[item.Index];
+        name = itemlist[item.Index];
         if (item is IItemFavorite f)
             isfav = f.IsFavorite;
         if (item is IItemNewFlag n)
@@ -312,7 +319,7 @@ public class itemInfo
         if (item is IItemFreeSpaceIndex fi)
             isfreespaceindex = fi.FreeSpaceIndex;
         var lump = HeldItemLumpUtil.GetIsLump(item.Index, sav.Context);
-        itemsprite = sav is SAV9SV ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{item.Index}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{item.Index}.png";
+        itemsprite = sav.Generation >= 9 ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{item.Index}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{item.Index}.png";
         if (Pouch_Material_SV.Contains((ushort)item.Index))
             itemsprite = "aitem_material.png";
         if (item.Index >= 2522 && item.Index <= 2546)

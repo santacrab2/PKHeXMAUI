@@ -17,7 +17,7 @@ namespace PKHeXMAUI
             InitializeComponent();
             SAV = sav;
             Metadata = new SCBlockMetadata(sav.Accessor, [], []);
-            SortedBlockKeys = Metadata.GetSortedBlockKeyList().ToArray();
+            SortedBlockKeys = [.. Metadata.GetSortedBlockKeyList()];
             BlockKey_Picker.ItemSource = SortedBlockKeys;
             BlockKey_Picker.DisplayMemberPath = "Text";
         }
@@ -152,7 +152,7 @@ namespace PKHeXMAUI
                 if(failed.Count != 0)
                 {
                     var msg = string.Join(Environment.NewLine, failed);
-                    await DisplayAlert("Failed", $"Failed to import: {msg}", "cancel");
+                    await DisplayAlertAsync("Failed", $"Failed to import: {msg}", "cancel");
                 }
             }
         }
@@ -165,9 +165,9 @@ namespace PKHeXMAUI
             await using var BlockStreams = new MemoryStream(block.Data.ToArray());
             var result = await FileSaver.SaveAsync($"{name}.bin", BlockStreams, CancellationToken.None);
             if (result.IsSuccessful)
-                await DisplayAlert("Success", $"Block File saved at {result.FilePath}", "cancel");
+                await DisplayAlertAsync("Success", $"Block File saved at {result.FilePath}", "cancel");
             else
-                await DisplayAlert("Failure", $"Block File did not save due to {result.Exception.Message}", "cancel");
+                await DisplayAlertAsync("Failure", $"Block File did not save due to {result.Exception.Message}", "cancel");
         }
 
         private void ImportCurrentBlock_Clicked(object sender, EventArgs e) => ImportSelectBlock(CurrentBlock);
@@ -181,7 +181,7 @@ namespace PKHeXMAUI
             var file = new FileInfo(path);
             if(file.Length != data.Length)
             {
-                await DisplayAlert("Error", string.Format(MessageStrings.MsgFileSize, $"0x{file.Length:X8}"), "cancel");
+                await DisplayAlertAsync("Error", string.Format(MessageStrings.MsgFileSize, $"0x{file.Length:X8}"), "cancel");
                 return;
             }
             var newdata = File.ReadAllBytes(path);

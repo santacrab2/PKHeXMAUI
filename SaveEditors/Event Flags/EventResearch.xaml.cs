@@ -7,7 +7,7 @@ public partial class EventResearch : ContentPage
 {
     private readonly EventWorkspace<IEventFlag37, ushort> Editor;
     public static Dictionary<string, bool> ValueDict = [];
-    private List<Tuple<string, List<ComboItem>, ushort, ComboItem>> ConstList = [];
+    private readonly List<Tuple<string, List<ComboItem>, ushort, ComboItem>> ConstList = [];
     public EventResearch(IEventFlag37 sav, GameVersion version)
     {
         InitializeComponent();
@@ -21,7 +21,7 @@ public partial class EventResearch : ContentPage
         NUD_Flag.Number = 0;
         CHK_CustomFlag.IsChecked = editor.Flags[0];
         AddFlagList(editor.Labels, editor.Flags);
-        AddConstList(editor.Labels, editor.Values);
+        AddConstList();
     }
     private void AddFlagList(EventLabelCollection list, bool[] values)
     {
@@ -32,7 +32,7 @@ public partial class EventResearch : ContentPage
             ValueDict.Add(labels[i].Name, values[labels[i].Index]);
         }
     }
-    private void AddConstList(EventLabelCollection list, ushort[] values)
+    private void AddConstList()
     {
         var labels = Editor.Labels.Work.OrderByDescending(z => z.Type).ToList();
         for (int i = 0; i < labels.Count; i++)
@@ -93,7 +93,7 @@ public partial class EventResearch : ContentPage
         var diff = new EventBlockDiff<SAV2, byte>(L_Old.Text, L_New.Text);
         if (diff.Message != EventWorkDiffCompatibility.Valid)
         {
-            await DisplayAlert("Invalid", diff.Message.GetMessage(), "Cancel");
+            await DisplayAlertAsync("Invalid", diff.Message.GetMessage(), "Cancel");
             return;
         }
 
@@ -102,11 +102,11 @@ public partial class EventResearch : ContentPage
 
         if (diff.WorkDiff.Count == 0)
         {
-            await DisplayAlert("Error", "No Event Constant diff found.", "cancel");
+            await DisplayAlertAsync("Error", "No Event Constant diff found.", "cancel");
             return;
         }
 
-        var promptCopy = await DisplayAlert("Copy", "Copy Event Constant diff to clipboard?", "Yes", "No");
+        var promptCopy = await DisplayAlertAsync("Copy", "Copy Event Constant diff to clipboard?", "Yes", "No");
         if (promptCopy)
             Clipboard.SetTextAsync(string.Join(Environment.NewLine, diff.WorkDiff));
     }

@@ -21,7 +21,7 @@ public partial class PartyTab : ContentPage
             image.SetBinding(Image.SourceProperty, "url");
             Image shiny = new() { Source = "rare_icon.png", HeightRequest = 16, WidthRequest = 16, VerticalOptions = LayoutOptions.Start };
             shiny.SetBinding(Image.IsVisibleProperty, "shiny");
-            shiny.TranslateTo(shiny.TranslationX + 15, TranslationY);
+            shiny.TranslateToAsync(shiny.TranslationX + 15, TranslationY);
             grid.Add(image);
             grid.Add(shiny);
             var tap = new TapGestureRecognizer();
@@ -46,7 +46,7 @@ public partial class PartyTab : ContentPage
     {
         PartyView.SelectedItem = e?.Parameter;
 
-        var result = await DisplayActionSheet($"Slot {((boxsprite?)e?.Parameter)?.SlotNumber}", "cancel", "Delete", ["View", "Set"]);
+        var result = await DisplayActionSheetAsync($"Slot {((boxsprite?)e?.Parameter)?.SlotNumber}", "cancel", "Delete", ["View", "Set"]);
         switch (result)
         {
             case "Delete": del(sender, e); break;

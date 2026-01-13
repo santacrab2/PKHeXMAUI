@@ -61,10 +61,10 @@ public partial class TrainerEditor8a : ContentPage
 		parsed = int.TryParse(TE8aSPEntry.Text, out iresult);
 		SAV.PlayedSeconds = parsed ? iresult : SAV.PlayedSeconds;
 		var GS = TE8aGSDatePicker.Date;
-		GS.AddSeconds(TE8aGSTimePicker.Time.TotalSeconds);
-		SAV.AdventureStart.Timestamp = GS;
+		GS.GetValueOrDefault().AddSeconds(TE8aGSTimePicker.Time.GetValueOrDefault().TotalSeconds);
+		SAV.AdventureStart.Timestamp = GS.GetValueOrDefault();
 		var LS = TE8aLSDatePicker.Date;
-		LS.AddSeconds(TE8aLSTimePicker.Time.TotalSeconds);
-		SAV.LastSaved.Timestamp = LS;
+		LS.GetValueOrDefault().AddSeconds(TE8aLSTimePicker.Time.GetValueOrDefault().TotalSeconds);
+		SAV.LastSaved.Timestamp = LS.GetValueOrDefault();
 	}
 }
