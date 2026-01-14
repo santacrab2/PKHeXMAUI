@@ -461,6 +461,11 @@ public partial class MainPage : ContentPage
         pk.SetPIDGender(pk.Gender);
         pk.SetRandomEC();
         displaypid.Text = $"{pk.PID:X}";
+        if (!pk.IsShiny)
+        {
+            shinybutton.IsEnabled = true;
+            shinybutton.Text = "☆";
+        }
         checklegality();
     }
 
@@ -483,11 +488,7 @@ public partial class MainPage : ContentPage
         {
             pk.SetIsShiny(true);
             shinybutton.Text = "★";
-        }
-        else
-        {
-            pk.SetIsShiny(false);
-            shinybutton.Text = "☆";
+            shinybutton.IsEnabled = false;
         }
 
         displaypid.Text = $"{pk.PID:X}";
