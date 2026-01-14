@@ -41,7 +41,7 @@ public partial class propertyGrid : ContentView
                 var pi = cat.Value[i];
                 Label plabel = new() { Text = pi.Name, VerticalOptions = LayoutOptions.Center };
                 stack.Add(plabel, 0, i);
-                if (pi.PropertyType.IsEnum)
+                if (pi.PropertyType.IsEnum || pi.PropertyType == typeof(bool))
                 {
                     stack.Add(GetEnumCombo(pi), 1, i);
                 }
@@ -104,7 +104,7 @@ public partial class propertyGrid : ContentView
                 var pi = cat.Value[i];
                 Label plabel = new() { Text = pi.Name, VerticalOptions = LayoutOptions.Center };
                 stack.Add(plabel, 0, i);
-                if (pi.PropertyType.IsEnum)
+                if (pi.PropertyType.IsEnum || pi.PropertyType == typeof(bool))
                 {
                     stack.Add(GetEnumCombo(pi), 1, i);
                 }
@@ -122,7 +122,7 @@ public partial class propertyGrid : ContentView
                             if (pi.PropertyType.GetCustomAttribute<TypeConverterAttribute>() == null) { L_intern.Text = pi.PropertyType.ToString(); break; };
                             Label L_prop = new() { Text = pr.Name };
                             G_stack.Add(L_prop, 0, o);
-                            if (pr.PropertyType.IsEnum)
+                            if (pr.PropertyType.IsEnum || pr.PropertyType == typeof(bool))
                             {
 
                                 G_stack.Add(GetEnumCombo(pi, pr), 1, o);
@@ -156,7 +156,7 @@ public partial class propertyGrid : ContentView
     {
         comboBox cb = new()
         {
-            ItemSource = Enum.GetValues(CurrentProperty.PropertyType),
+            ItemSource = CurrentProperty.PropertyType == typeof(bool) ? new List<bool>() { false, true} : Enum.GetValues(CurrentProperty.PropertyType),
             SelectedItem = CurrentProperty?.GetValue(CurrentItem) ?? new()
         };
         cb.SelectedIndexChanged += (_, _) => CurrentProperty?.SetValue(CurrentItem, cb.SelectedItem); 
@@ -166,7 +166,7 @@ public partial class propertyGrid : ContentView
     {
         comboBox cb = new()
         {
-            ItemSource = Enum.GetValues(LowerProperty.PropertyType),
+            ItemSource = LowerProperty.PropertyType == typeof(bool) ? new List<bool>() { false, true } : Enum.GetValues(LowerProperty.PropertyType),
             SelectedItem = LowerProperty?.GetValue(upperProperty?.GetValue(CurrentItem)) ?? null
         };
         cb.SelectedIndexChanged += (_, _) => LowerProperty?.SetValue(upperProperty?.GetValue(CurrentItem), cb.SelectedItem);
@@ -176,7 +176,7 @@ public partial class propertyGrid : ContentView
     {
         comboBox cb = new()
         {
-            ItemSource = Enum.GetValues(CurrentProperty.PropertyType),
+            ItemSource = CurrentProperty.PropertyType == typeof(bool) ? new List<bool>() { false, true } : Enum.GetValues(CurrentProperty.PropertyType),
             SelectedItem = CurrentProperty?.GetValue(Value) ?? new()
         };
         cb.SelectedIndexChanged += (_, _) => CurrentProperty?.SetValue(Value, cb.SelectedItem); 
@@ -187,7 +187,7 @@ public partial class propertyGrid : ContentView
     {
         comboBox cb = new()
         {
-            ItemSource = Enum.GetValues(value.GetType()),
+            ItemSource = value.GetType() == typeof(bool) ? new List<bool>() { false, true } : Enum.GetValues(value.GetType()),
             SelectedItem = value
         };
         cb.SelectedIndexChanged += (_, _) => value = cb.SelectedItem;
@@ -265,7 +265,7 @@ public partial class propertyGrid : ContentView
                 if (CurrentProperty.PropertyType.GetCustomAttribute<TypeConverterAttribute>() == null) { L_intern.Text = CurrentProperty.PropertyType.ToString(); break; };
                 Label L_prop = new() { Text = pr.Name };
                 G_stack.Add(L_prop, 0, o);
-                if (pr.PropertyType.IsEnum)
+                if (pr.PropertyType.IsEnum || pr.PropertyType == typeof(bool))
                 {
 
                     G_stack.Add(GetEnumCombo(CurrentProperty, pr), 1, o);
@@ -299,7 +299,7 @@ public partial class propertyGrid : ContentView
             
             Label L_prop = new() { Text = pr.Name };
             G_stack.Add(L_prop, 0, o);
-            if (pr.PropertyType.IsEnum)
+            if (pr.PropertyType.IsEnum || pr.PropertyType == typeof(bool))
             {
 
                 G_stack.Add(GetEnumCombo(currentobj), 1, o);
@@ -337,7 +337,7 @@ public partial class propertyGrid : ContentView
                 var PAItemProperty = PAItemProperties[a];
                 Label L_prop = new() { Text = PAItemProperty.Name };
                 A_stack.Add(L_prop, 0, a);
-                if (PAItemProperty.PropertyType.IsEnum)
+                if (PAItemProperty.PropertyType.IsEnum || PAItemProperty.PropertyType == typeof(bool))
                 {
                    A_stack.Add(GetEnumCombo(PropertyArrayItem,PAItemProperty), 1, a);
                 }
@@ -369,7 +369,7 @@ public partial class propertyGrid : ContentView
             
                 Label L_prop = new() { Text = PropertyArrayItem.ToString() };
                 A_stack.Add(L_prop, 0, i);
-                if (PropertyArrayItem.GetType().IsEnum)
+                if (PropertyArrayItem.GetType().IsEnum || PropertyArrayItem.GetType() == typeof(bool))
                 {
                     A_stack.Add(GetEnumCombo(PropertyArrayItem), 1, i);
                 }
