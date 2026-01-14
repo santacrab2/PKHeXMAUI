@@ -40,7 +40,8 @@ public partial class TrainerEditor9 : ContentPage
     }
 	public void SaveTrainerEditor9()
 	{
-		MainPage.sav.OT = TrainerNameEditor.Text;
+        MainPage.sav.Version = (GameVersion)(VersionPicker.SelectedIndex + (int)GameVersion.SL);
+        MainPage.sav.OT = TrainerNameEditor.Text;
 		MainPage.sav.Gender = (byte)TrainerGenderPicker.SelectedIndex;
 		var parsed = uint.TryParse(TrainerTIDEditor.Text, out var result);
 		MainPage.sav.DisplayTID = parsed ? result : MainPage.sav.DisplayTID;
