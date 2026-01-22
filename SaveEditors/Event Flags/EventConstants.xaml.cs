@@ -21,7 +21,7 @@ public partial class EventConstants : ContentPage
             combo.SetBinding(Picker.ItemsSourceProperty, new Binding("Item2"));
             combo.ItemDisplayBinding = new Binding("Text");
             combo.SetBinding(Picker.SelectedItemProperty, new Binding("Item4"));
-            combo.SelectedIndexChanged += (object? sender, EventArgs e) =>
+            combo.SelectedIndexChanged += (sender, e) =>
             {
                 var index = ConstList.IndexOf(ConstList.Find(z => z.Item1 == ((Label)grid.Children[0]).Text) ?? new Tuple<string, List<ComboItem>, ushort, ComboItem>("", [], 0, new ComboItem("", 0)));
                 ConstList[index] = (ConstList[index].Item1, ConstList[index].Item2, (ushort?)((ComboItem?)((Picker?)sender)?.SelectedItem)?.Value ?? 0, ConstList[index].Item4).ToTuple();

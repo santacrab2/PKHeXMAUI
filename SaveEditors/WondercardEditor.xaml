@@ -4,7 +4,7 @@
              x:Class="PKHeXMAUI.WondercardEditor"
              Title="WondercardEditor">
     <ScrollView>
-        <Grid ColumnDefinitions="*,2*">
+        <Grid ColumnDefinitions="*,2*" RowDefinitions="*,*,*,*">
             <VerticalStackLayout>
                 <Label Text="Received List:"/>
                 <CollectionView BackgroundColor="White" HeightRequest="1000" x:Name="CV_ReceivedList" SelectionMode="Single" SelectionChanged="CV_ReceivedList_SelectionChanged" Grid.Row="1"/>
@@ -17,9 +17,13 @@
                     <Button Text="Import" Clicked="B_ImportClick" Grid.Row="1"/>
                 </VerticalStackLayout>
                 <Label Text="Details:" Grid.Row="1"/>
-                <Editor x:Name="E_Details" Grid.Row="2"/>
+                <Editor x:Name="E_Details" Grid.Row="2" IsReadOnly="True"/>
             </Grid>
-            
+            <Grid Grid.Row="1" x:Name="G_Gifts"></Grid>
+            <Button Text="All Unused" x:Name="B_UnusedAll" Clicked="B_ModifyAll_Click" Grid.Row="2"/>
+            <Button Text="All Used" x:Name="B_UsedAll" Clicked="B_ModifyAll_Click" Grid.Row="2" Grid.Column="1"/>
+            <Button Text="Close" x:Name="B_Close" Clicked="B_Close_Click" Grid.Row="3"/>
+            <Button Text="Save" x:Name="B_Save" Clicked="B_Save_Click" Grid.Row="3" Grid.Column="1"/>
         </Grid>
     </ScrollView>
 </ContentPage>

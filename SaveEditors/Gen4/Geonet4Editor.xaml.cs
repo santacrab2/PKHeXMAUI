@@ -11,7 +11,7 @@ public partial class Geonet4Editor : ContentPage
 
     private readonly List<ComboItem> countryList;
     private readonly List<ComboItem> subregionListDefault;
-    private readonly List<GeonetItem> geonetItems = new();
+    private readonly List<GeonetItem> geonetItems = [];
     private readonly List<ComboItem> pointList;
     public Geonet4Editor(SAV4 sav)
 	{
@@ -31,7 +31,7 @@ public partial class Geonet4Editor : ContentPage
     {
         CV_Geonet.ItemTemplate = new(() =>
         {
-            Grid grid = new();
+            Grid grid = [];
             Label lbl = new();
             lbl.SetBinding(Label.TextProperty, new Binding("CountryName"));
             Label lbl2 = new();
@@ -45,7 +45,7 @@ public partial class Geonet4Editor : ContentPage
             grid.Add(box, 2);
             return grid;
         });
-        if (geonetItems.Any())
+        if (geonetItems.Count == 0)
             geonetItems.Clear();
         for (int i = 1; i <= Geonet4.CountryCount; i++)
         {
