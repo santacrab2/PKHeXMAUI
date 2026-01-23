@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.Underground"
+             Title="Underground">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid ColumnDefinitions="*,*">
+                <Label Text="Scores"/>
+                <Label Text="People Met:" Grid.Row="1"/>
+                <l:NumericUpDown MinValue="0" MaxValue="999999" x:Name="NUD_PlayersMet" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="Gifts Given:" Grid.Row="2"/>
+                <l:NumericUpDown x:Name="NUD_GiftsGiven" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="2"/>
+                <Label Text="Flags Obtained:" Grid.Row="3"/>
+                <l:NumericUpDown x:Name="NUD_FlagsObtained" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="3"/>
+                <Label Text="Spheres Obtained:" Grid.Row="4"/>
+                <l:NumericUpDown x:Name="NUD_Spheres" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="4"/>
+                <Label Text="Fossils Obtained" Grid.Row="5"/>
+                <l:NumericUpDown x:Name="NUD_Fossils" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="5"/>
+                <Label Text="Trap Hits(Players):" Grid.Row="6"/>
+                <l:NumericUpDown x:Name="NUD_TrapPlayers" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="6"/>
+                <Label Text="Trap Hits(Self)" Grid.Row="7"/>
+                <l:NumericUpDown x:Name="NUD_TrapSelf" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="7"/>
+                <Label Text="Others Helped:" Grid.Row="8"/>
+                <l:NumericUpDown x:Name="NUD_HelpedOthers" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="8"/>
+                <Label Text="Gifts Received:" Grid.Row="9"/>
+                <l:NumericUpDown x:Name="NUD_GiftsReceived" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="9"/>
+                <Label Text="My Flag Taken:" Grid.Row="10"/>
+                <l:NumericUpDown x:Name="NUD_MyFlagTaken" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="10"/>
+                <Label Text="Recovered Flags:" Grid.Row="11"/>
+                <l:NumericUpDown x:Name="NUD_MyFlagRecovered" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="11"/>
+                <Label Text="Moved My Base:" Grid.Row="12"/>
+                <l:NumericUpDown x:Name="NUD_MyBaseMoved" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="12"/>
+                <Label Text="Flags Captured:" Grid.Row="13"/>
+                <l:NumericUpDown x:Name="NUD_FlagsCaptured" MinValue="0" MaxValue="999999" Grid.Column="1" Grid.Row="13"/>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

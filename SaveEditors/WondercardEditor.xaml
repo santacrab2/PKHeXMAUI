@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PKHeXMAUI.WondercardEditor"
              Title="WondercardEditor">
-    <ScrollView>
+    <ScrollView Orientation="Both">
         <Grid ColumnDefinitions="*,2*" RowDefinitions="*,*,*,*">
             <VerticalStackLayout>
                 <Label Text="Received List:"/>

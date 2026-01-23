@@ -53,35 +53,24 @@ public partial class SaveEditors : ContentPage
         if (!sav.State.Exportable || sav is BulkStorage)
             return;
         Button_BlockData.IsVisible = true;
-        if (sav is not SAV8BS || sav is not SAV8SWSH || sav is not SAV7b)
-            TrainerInfoButton.IsVisible = true;
-        if (sav is SAV1 or SAV2 or SAV3 or SAV4)
-            Button_EventFlags1.IsVisible = true;
-        if (sav is SAV1 or SAV2 or SAV3)
-            Button_Pokedex1.IsVisible = true;
+
+        TrainerInfoButton.IsVisible = (sav is not SAV8BS || sav is not SAV8SWSH || sav is not SAV7b);
+        Button_EventFlags1.IsVisible = (sav is SAV1 or SAV2 or SAV3 or SAV4);
+        
+        Button_Pokedex1.IsVisible = (sav is SAV1 or SAV2 or SAV3);
         if (sav is SAV2 sav2)
         {
             GSBallButton.IsVisible = sav.Version is GameVersion.C;
             GSBallButton.IsEnabled = !sav2.IsEnabledGSBallMobileEvent;
         }
-        if(sav is SAV2 or SAV3)
-            Button_RTCEditor.IsVisible = true;
-        if (sav is SAV3)
-        {
-            B_Misc.IsVisible = true;
-            B_Roamer.IsVisible = true;
-        }
-        if (sav is SAV4)
-        {
-            B_Chatter.IsVisible = true;
-            B_Geonet.IsVisible = true;
-            B_Misc.IsVisible = true;
-            B_WonderCard.IsVisible = true;
-        }
-        if(sav is SAV4Sinnoh)
-            B_HoneyTree.IsVisible = true;
-        if (sav is SAV2 or SAV3 or SAV4 or SAV5)
-            MailBoxButton.IsVisible = true;
+        Button_RTCEditor.IsVisible = (sav is SAV2 or SAV3);
+        B_Misc.IsVisible = (sav is SAV3 or SAV4);
+        B_Roamer.IsVisible = (sav is SAV3);
+        B_Chatter.IsVisible = (sav is SAV4);
+        B_Geonet.IsVisible = (sav is SAV4);
+        B_WonderCard.IsVisible = (sav is SAV4 or SAV5 or SAV6 or SAV7);
+        B_HoneyTree.IsVisible = (sav is SAV4Sinnoh);
+        MailBoxButton.IsVisible = (sav is SAV2 or SAV3 or SAV4 or SAV5);
     }
 
     private void OpenTrainerEditor(object sender, EventArgs e)
