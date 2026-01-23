@@ -6,7 +6,7 @@
              Title="Underground">
     <ScrollView>
         <VerticalStackLayout>
-            <Grid ColumnDefinitions="*,*">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*">
                 <Label Text="Scores"/>
                 <Label Text="People Met:" Grid.Row="1"/>
                 <l:NumericUpDown MinValue="0" MaxValue="999999" x:Name="NUD_PlayersMet" Grid.Row="1" Grid.Column="1"/>

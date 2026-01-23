@@ -32,15 +32,33 @@ public partial class Underground : ContentPage
         static void LoadValue(NumericUpDown box, uint value)
             => box.Number = Math.Clamp(value, 0, SAV4Sinnoh.UG_MAX);
     }
+    private void SetUGScores()
+    {
+        SAV.UG_PeopleMet = (uint)NUD_PlayersMet.Number;
+        SAV.UG_GiftsGiven = (uint)NUD_GiftsGiven.Number;
+        SAV.UG_GiftsReceived = (uint)NUD_GiftsReceived.Number;
+        SAV.UG_Spheres = (uint)NUD_Spheres.Number;
+        SAV.UG_Fossils = (uint)NUD_Fossils.Number;
+        SAV.UG_TrapPlayers = (uint)NUD_TrapPlayers.Number;
+        SAV.UG_TrapSelf = (uint)NUD_TrapSelf.Number;
+        SAV.UG_MyBaseMoved = (uint)NUD_MyBaseMoved.Number;
+        SAV.UG_FlagsTaken = (uint)NUD_FlagsObtained.Number;
+        SAV.UG_FlagsFromMe = (uint)NUD_MyFlagTaken.Number;
+        SAV.UG_FlagsRecovered = (uint)NUD_MyFlagRecovered.Number;
+        SAV.UG_FlagsCaptured = (uint)NUD_FlagsCaptured.Number;
+        SAV.UG_HelpedOthers = (uint)NUD_HelpedOthers.Number;
+    }
 }
 
 public partial class UndergroundTab : TabbedPage
 {
     public static Underground underground = new((SAV4Sinnoh)MainPage.sav);
-	public UndergroundTab()
+    public static UndergroundGoods undergroundGoods = new((SAV4Sinnoh)MainPage.sav);
+    public UndergroundTab()
 	{
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
         BarTextColor = Colors.White;
         Children.Add(underground);
+        Children.Add(undergroundGoods);
     }
 }

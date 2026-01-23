@@ -71,6 +71,7 @@ public partial class SaveEditors : ContentPage
         B_WonderCard.IsVisible = (sav is SAV4 or SAV5 or SAV6 or SAV7);
         B_HoneyTree.IsVisible = (sav is SAV4Sinnoh);
         MailBoxButton.IsVisible = (sav is SAV2 or SAV3 or SAV4 or SAV5);
+        B_Underground.IsVisible = (sav is SAV4Sinnoh);
     }
 
     private void OpenTrainerEditor(object sender, EventArgs e)
@@ -172,5 +173,10 @@ public partial class SaveEditors : ContentPage
     private void B_WonderCard_Clicked(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new WondercardEditor(sav));
+    }
+
+    private void B_Underground_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new UndergroundTab());
     }
 }

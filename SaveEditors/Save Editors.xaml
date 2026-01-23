@@ -18,5 +18,6 @@
         <Button x:Name="B_Geonet" Text="Geonet" IsVisible="False" Clicked="B_Geonet_Clicked"/>
         <Button x:Name="B_HoneyTree" Text="Honey Tree" IsVisible="False" Clicked="B_HoneyTree_Clicked"/>
         <Button x:Name="B_WonderCard" Text="Wonder Card" IsVisible="False" Clicked="B_WonderCard_Clicked"/>
+        <Button x:Name="B_Underground" Text="Underground" IsVisible="False" Clicked="B_Underground_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>
