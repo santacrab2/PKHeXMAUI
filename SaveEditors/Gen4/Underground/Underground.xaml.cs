@@ -54,11 +54,13 @@ public partial class UndergroundTab : TabbedPage
 {
     public static Underground underground = new((SAV4Sinnoh)MainPage.sav);
     public static UndergroundGoods undergroundGoods = new((SAV4Sinnoh)MainPage.sav);
+    public static UndergroundSpheres undergroundSpheres = new((SAV4Sinnoh)MainPage.sav);
     public UndergroundTab()
 	{
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
         BarTextColor = Colors.White;
         Children.Add(underground);
         Children.Add(undergroundGoods);
+        Children.Add(undergroundSpheres);
     }
 }

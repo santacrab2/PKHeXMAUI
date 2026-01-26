@@ -20,7 +20,7 @@ public partial class UndergroundGoods : ContentPage
 		{
 			Grid grid = [];
             var combo = new comboBox() { ItemSource = ugGoodsSorted };
-            combo.SetBinding(comboBox.SelectedIndexProperty, ".", BindingMode.TwoWay);
+            combo.SetBinding(comboBox.SelectedIndexProperty, ".");
             grid.Add(combo);
             return grid;
 		});
