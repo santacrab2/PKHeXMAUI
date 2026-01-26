@@ -4,12 +4,11 @@ namespace PKHeXMAUI;
 
 public partial class Underground : ContentPage
 {
-    private readonly SaveFile Origin;
     private readonly SAV4Sinnoh SAV;
     public Underground(SAV4Sinnoh sav)
 	{
 		InitializeComponent();
-        SAV = (SAV4Sinnoh)(Origin = sav).Clone();
+        SAV = sav;
         GetUGScores();
     }
 
@@ -32,7 +31,7 @@ public partial class Underground : ContentPage
         static void LoadValue(NumericUpDown box, uint value)
             => box.Number = Math.Clamp(value, 0, SAV4Sinnoh.UG_MAX);
     }
-    private void SetUGScores()
+    public void SetUGScores()
     {
         SAV.UG_PeopleMet = (uint)NUD_PlayersMet.Number;
         SAV.UG_GiftsGiven = (uint)NUD_GiftsGiven.Number;
@@ -55,6 +54,8 @@ public partial class UndergroundTab : TabbedPage
     public static Underground underground = new((SAV4Sinnoh)MainPage.sav);
     public static UndergroundGoods undergroundGoods = new((SAV4Sinnoh)MainPage.sav);
     public static UndergroundSpheres undergroundSpheres = new((SAV4Sinnoh)MainPage.sav);
+    public static UndergroundTraps undergroundTraps = new((SAV4Sinnoh)MainPage.sav);
+    public static UndergroundTreasures undergroundTreasures = new((SAV4Sinnoh)MainPage.sav);
     public UndergroundTab()
 	{
         BarBackgroundColor = Microsoft.Maui.Graphics.Color.FromArgb("303030");
@@ -62,5 +63,25 @@ public partial class UndergroundTab : TabbedPage
         Children.Add(underground);
         Children.Add(undergroundGoods);
         Children.Add(undergroundSpheres);
+        Children.Add(undergroundTraps);
+        Children.Add(undergroundTreasures);
+        Children.Add(new cancelpage());
+    }
+}
+public partial class UndergroundSave : ContentPage
+{
+    public UndergroundSave()
+    {
+        this.Title = "Save";
+        this.Content = new Label() { Text = "The MAUI Framework has bugs. This is the save page. Navigate to another page, and then select the page you were trying to reach!" };
+    }
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        UndergroundTab.underground.SetUGScores();
+        UndergroundTab.undergroundTreasures.SaveUGData();
+        UndergroundTab.undergroundGoods.SaveUGData();
+        UndergroundTab.undergroundSpheres.SaveUGData();
+        UndergroundTab.undergroundTraps.SaveUGData();
+        Navigation.PopModalAsync();
     }
 }

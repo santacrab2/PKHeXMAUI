@@ -2,24 +2,24 @@ using PKHeX.Core;
 
 namespace PKHeXMAUI;
 
-public partial class UndergroundGoods : ContentPage
+public partial class UndergroundTreasures : ContentPage
 {
     private readonly SaveFile Origin;
     private readonly SAV4Sinnoh SAV;
-	private readonly string[] ugGoods;
-    private readonly string[] ugGoodsSorted;
+	private readonly string[] ugTreasures;
+    private readonly string[] ugTreasuresSorted;
     private const int MAX_SIZE = SAV4Sinnoh.UG_POUCH_SIZE;
-    public UndergroundGoods(SAV4Sinnoh sav)
+    public UndergroundTreasures(SAV4Sinnoh sav)
 	{
 		InitializeComponent();
         SAV = (SAV4Sinnoh)(Origin = sav).Clone();
 
-        ugGoods = GameInfo.Strings.uggoods;
-        ugGoodsSorted = SanitizeList(ugGoods);
-        CV_UndergroundGoods.ItemTemplate = new DataTemplate(() =>
+        ugTreasures = GameInfo.Strings.ugtreasures;
+        ugTreasuresSorted = SanitizeList(ugTreasures);
+        CV_UndergroundTreasures.ItemTemplate = new DataTemplate(() =>
 		{
 			Grid grid = [];
-            var combo = new comboBox() { ItemSource = ugGoodsSorted };
+            var combo = new comboBox() { ItemSource = ugTreasuresSorted };
             combo.SetBinding(comboBox.SelectedIndexProperty, ".");
             grid.Add(combo);
             return grid;
@@ -28,10 +28,10 @@ public partial class UndergroundGoods : ContentPage
     }
     private void ReadUGData()
     {
-        var goodsList = SAV.GetUGI_Goods();
-        while (goodsList.Length < MAX_SIZE)
-            goodsList.ToArray().ToList().Add(0);
-        CV_UndergroundGoods.ItemsSource = goodsList.ToArray();
+        var treasuresList = SAV.GetUGI_Treasures();
+        while (treasuresList.Length < MAX_SIZE)
+            treasuresList.ToArray().ToList().Add(0);
+        CV_UndergroundTreasures.ItemsSource = treasuresList.ToArray();
     }
     private static string[] SanitizeList(string[] inputlist)
     {
@@ -42,17 +42,18 @@ public partial class UndergroundGoods : ContentPage
     }
     public void SaveUGData()
     {
-        var goodsList = SAV.GetUGI_Goods();
-        goodsList.Clear();
+        var treasuresList = SAV.GetUGI_Treasures();
+        treasuresList.Clear();
         
-        if (CV_UndergroundGoods.ItemsSource is not byte[] items) return;
+        if (CV_UndergroundTreasures.ItemsSource is not byte[] items) return;
         
         int ctr = 0;
         foreach (var item in items)
         {
             if (item <= 0) continue; // ignore empty slot
-            goodsList[ctr] = item;
+            treasuresList[ctr] = item;
             ctr++;
         }
     }
+    
 }

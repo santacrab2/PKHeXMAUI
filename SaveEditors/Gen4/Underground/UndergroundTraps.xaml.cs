@@ -2,24 +2,24 @@ using PKHeX.Core;
 
 namespace PKHeXMAUI;
 
-public partial class UndergroundGoods : ContentPage
+public partial class UndergroundTraps : ContentPage
 {
     private readonly SaveFile Origin;
     private readonly SAV4Sinnoh SAV;
-	private readonly string[] ugGoods;
-    private readonly string[] ugGoodsSorted;
+	private readonly string[] ugTraps;
+    private readonly string[] ugTrapsSorted;
     private const int MAX_SIZE = SAV4Sinnoh.UG_POUCH_SIZE;
-    public UndergroundGoods(SAV4Sinnoh sav)
+    public UndergroundTraps(SAV4Sinnoh sav)
 	{
 		InitializeComponent();
         SAV = (SAV4Sinnoh)(Origin = sav).Clone();
 
-        ugGoods = GameInfo.Strings.uggoods;
-        ugGoodsSorted = SanitizeList(ugGoods);
-        CV_UndergroundGoods.ItemTemplate = new DataTemplate(() =>
+        ugTraps = GameInfo.Strings.ugtraps;
+        ugTrapsSorted = SanitizeList(ugTraps);
+        CV_UndergroundTraps.ItemTemplate = new DataTemplate(() =>
 		{
 			Grid grid = [];
-            var combo = new comboBox() { ItemSource = ugGoodsSorted };
+            var combo = new comboBox() { ItemSource = ugTrapsSorted };
             combo.SetBinding(comboBox.SelectedIndexProperty, ".");
             grid.Add(combo);
             return grid;
@@ -28,10 +28,10 @@ public partial class UndergroundGoods : ContentPage
     }
     private void ReadUGData()
     {
-        var goodsList = SAV.GetUGI_Goods();
-        while (goodsList.Length < MAX_SIZE)
-            goodsList.ToArray().ToList().Add(0);
-        CV_UndergroundGoods.ItemsSource = goodsList.ToArray();
+        var trapsList = SAV.GetUGI_Traps();
+        while (trapsList.Length < MAX_SIZE)
+            trapsList.ToArray().ToList().Add(0);
+        CV_UndergroundTraps.ItemsSource = trapsList.ToArray();
     }
     private static string[] SanitizeList(string[] inputlist)
     {
@@ -42,16 +42,16 @@ public partial class UndergroundGoods : ContentPage
     }
     public void SaveUGData()
     {
-        var goodsList = SAV.GetUGI_Goods();
-        goodsList.Clear();
+        var trapsList = SAV.GetUGI_Traps();
+        trapsList.Clear();
         
-        if (CV_UndergroundGoods.ItemsSource is not byte[] items) return;
+        if (CV_UndergroundTraps.ItemsSource is not byte[] items) return;
         
         int ctr = 0;
         foreach (var item in items)
         {
             if (item <= 0) continue; // ignore empty slot
-            goodsList[ctr] = item;
+            trapsList[ctr] = item;
             ctr++;
         }
     }

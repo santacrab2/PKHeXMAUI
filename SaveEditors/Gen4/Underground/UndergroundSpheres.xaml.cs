@@ -47,4 +47,20 @@ public partial class UndergroundSpheres : ContentPage
 
         return listSorted;
     }
+    public void SaveUGData()
+    {
+        var spheresList = SAV.GetUGI_Spheres();
+        spheresList.Clear();
+        
+        if (CV_UndergroundSpheres.ItemsSource is not List<Tuple<byte, byte>> items) return;
+        
+        int ctr = 0;
+        foreach (var item in items)
+        {
+            if (item.Item1 <= 0) continue; // ignore empty slot
+            spheresList[ctr] = item.Item1;
+            spheresList[ctr + MAX_SIZE] = item.Item2;
+            ctr++;
+        }
+    }
 }
