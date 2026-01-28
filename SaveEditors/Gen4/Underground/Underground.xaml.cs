@@ -66,6 +66,7 @@ public partial class UndergroundTab : TabbedPage
         Children.Add(undergroundTraps);
         Children.Add(undergroundTreasures);
         Children.Add(new cancelpage());
+        Children.Add(new UndergroundSave());
     }
 }
 public partial class UndergroundSave : ContentPage

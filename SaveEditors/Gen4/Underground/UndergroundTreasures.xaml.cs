@@ -1,18 +1,23 @@
 using PKHeX.Core;
+using System.Collections.ObjectModel;
 
 namespace PKHeXMAUI;
 
 public partial class UndergroundTreasures : ContentPage
 {
-    private readonly SaveFile Origin;
     private readonly SAV4Sinnoh SAV;
 	private readonly string[] ugTreasures;
     private readonly string[] ugTreasuresSorted;
     private const int MAX_SIZE = SAV4Sinnoh.UG_POUCH_SIZE;
+    private ObservableCollection<TreasuresEntry> treasuresList = [];
+    private class TreasuresEntry
+    {
+        public string ItemName { get; set; } = "";
+    }
     public UndergroundTreasures(SAV4Sinnoh sav)
 	{
 		InitializeComponent();
-        SAV = (SAV4Sinnoh)(Origin = sav).Clone();
+        SAV = sav;
 
         ugTreasures = GameInfo.Strings.ugtreasures;
         ugTreasuresSorted = SanitizeList(ugTreasures);
@@ -20,7 +25,7 @@ public partial class UndergroundTreasures : ContentPage
 		{
 			Grid grid = [];
             var combo = new comboBox() { ItemSource = ugTreasuresSorted };
-            combo.SetBinding(comboBox.SelectedIndexProperty, ".");
+            combo.SetBinding(comboBox.SelectedItemProperty, ".", BindingMode.TwoWay);
             grid.Add(combo);
             return grid;
 		});
@@ -28,10 +33,16 @@ public partial class UndergroundTreasures : ContentPage
     }
     private void ReadUGData()
     {
-        var treasuresList = SAV.GetUGI_Treasures();
-        while (treasuresList.Length < MAX_SIZE)
-            treasuresList.ToArray().ToList().Add(0);
-        CV_UndergroundTreasures.ItemsSource = treasuresList.ToArray();
+        var originlist = SAV.GetUGI_Treasures();
+        for(int i = 0; i < originlist.Length; i++)
+        {
+            var itemID = originlist[i];
+            var itemName = itemID <= 0 ? ugTreasures[0] : ugTreasures[itemID];
+            treasuresList.Add(new TreasuresEntry { ItemName = itemName });
+        }
+        while (treasuresList.Count < MAX_SIZE)
+            treasuresList.Add(new TreasuresEntry() { ItemName = ugTreasures[0] });
+        CV_UndergroundTreasures.ItemsSource = treasuresList;
     }
     private static string[] SanitizeList(string[] inputlist)
     {
@@ -42,16 +53,11 @@ public partial class UndergroundTreasures : ContentPage
     }
     public void SaveUGData()
     {
-        var treasuresList = SAV.GetUGI_Treasures();
-        treasuresList.Clear();
-        
-        if (CV_UndergroundTreasures.ItemsSource is not byte[] items) return;
-        
         int ctr = 0;
-        foreach (var item in items)
+        foreach (var item in treasuresList)
         {
-            if (item <= 0) continue; // ignore empty slot
-            treasuresList[ctr] = item;
+            if (item.ItemName == ugTreasures[0]) continue; // ignore empty slot
+            SAV.GetUGI_Treasures()[ctr] = (byte)Array.IndexOf(ugTreasures,item.ItemName);
             ctr++;
         }
     }
