@@ -10,7 +10,6 @@ namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
 {
-    public static string Version = "v26.01.14";
     public static PKM pk = EntityBlank.GetBlank(9);
     public static LegalityAnalysis la = new(pk);
     public static SaveFile sav = AppShell.AppSaveFile??BlankSaveFile.Get(EntityContext.Gen9,"");
@@ -828,25 +827,13 @@ public partial class MainPage : ContentPage
         {
             return false;
         }
-        var latestVersion = ParseVersion(latest);
-        var currentVersion = ParseVersion(Version);
-        if (latestVersion[0] > currentVersion[0])
-        {
+        if (latest.StartsWith('v'))
+            latest = latest[1..];
+        var latestVersion = Version.TryParse(latest, out var v);
+        var currentVersion = AppInfo.Current.Version;
+        if (v is null || v >= currentVersion)
             return true;
-        }
-        else if (latestVersion[0] == currentVersion[0])
-        {
-            if (latestVersion[1] > currentVersion[1])
-            {
-                return true;
-            }
-            else if (latestVersion[1] == currentVersion[1])
-            {
-                if (latestVersion[2] > currentVersion[2])
-                    return true;
-            }
-        }
-            return false;
+        return false;
     }
 
     private static async Task<string> GetLatest()
@@ -856,22 +843,13 @@ public partial class MainPage : ContentPage
         {
             var client = new GitHubClient(new Octokit.ProductHeaderValue("PKHeXMAUI"));
             var release = await client.Repository.Release.GetLatest("santacrab2", "PKHeXMAUI");
-            return release.Name;
+            return release.TagName;
         }
         else
         {
             return "0";
         }
 
-    }
-
-    private static int[] ParseVersion(string version)
-    {
-        var v = new int[3];
-        v[0] = int.Parse($"{version[1] + version[2]}");
-        v[1] = int.Parse($"{version[4] + version[5]}");
-        v[2] = int.Parse($"{version[7..]}");
-        return v;
     }
     public async void CheckForUpdate()
     {
