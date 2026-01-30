@@ -55,7 +55,7 @@ public partial class SaveEditors : ContentPage
         Button_BlockData.IsVisible = true;
 
         TrainerInfoButton.IsVisible = (sav is not SAV8BS || sav is not SAV8SWSH || sav is not SAV7b);
-        Button_EventFlags1.IsVisible = (sav is SAV1 or SAV2 or SAV3 or SAV4);
+        Button_EventFlags1.IsVisible = (sav is SAV1 or SAV2 or SAV3 or SAV4 or SAV5);
         
         Button_Pokedex1.IsVisible = (sav is SAV1 or SAV2 or SAV3);
         if (sav is SAV2 sav2)
