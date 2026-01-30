@@ -66,7 +66,7 @@ public partial class SaveEditors : ContentPage
         Button_RTCEditor.IsVisible = (sav is SAV2 or SAV3);
         B_Misc.IsVisible = (sav is SAV3 or SAV4);
         B_Roamer.IsVisible = (sav is SAV3);
-        B_Chatter.IsVisible = (sav is SAV4);
+        B_Chatter.IsVisible = (sav is SAV4 or SAV5);
         B_Geonet.IsVisible = (sav is SAV4);
         B_WonderCard.IsVisible = (sav is SAV4 or SAV5 or SAV6 or SAV7);
         B_HoneyTree.IsVisible = (sav is SAV4Sinnoh);

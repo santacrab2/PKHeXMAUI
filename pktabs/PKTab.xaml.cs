@@ -831,7 +831,7 @@ public partial class MainPage : ContentPage
             latest = latest[1..];
         var latestVersion = Version.TryParse(latest, out var v);
         var currentVersion = AppInfo.Current.Version;
-        if (v is null || v >= currentVersion)
+        if (v is null || v > currentVersion)
             return true;
         return false;
     }
