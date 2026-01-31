@@ -223,6 +223,9 @@
 	  <Compile Update="SaveEditors\Gen4\Geonet4Editor.xaml.cs">
 	    <DependentUpon>Geonet4Editor.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="SaveEditors\Gen5\Misc\MiscMain5.xaml.cs">
+	    <DependentUpon>MiscMain5.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="SaveEditors\SaveAccessors\gen8+\BlockEditor8.xaml.cs">
 	    <DependentUpon>BlockEditor8.xaml</DependentUpon>
 	  </Compile>
@@ -389,6 +392,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen4\Underground\UndergroundTreasures.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscMain5.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\SaveAccessors\gen8+\BlockEditor8.xaml">

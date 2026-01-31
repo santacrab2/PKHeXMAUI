@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscMain5"
+             Title="MiscMain">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid x:Name="GB_Flydest" RowDefinitions="*,*,*">
+                <Label Text="Fly Destination"/>
+                <Button x:Name="B_AllFlydest" Text="Check All" Clicked="B_AllFlyDest_Click" Grid.Row="1"/>
+                <CollectionView x:Name="CV_Flydest" HeightRequest="200" Grid.Row="2"/>
+            </Grid>
+            <Grid x:Name="GB_Roamer" RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
+                <Label Text="Roamers"/>
+                <Label Text="Tornadus" Grid.Row="1"/>
+                <l:comboBox x:Name="CB_Roamer641" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="Thundurus" Grid.Row="2"/>
+                <l:comboBox x:Name="CB_Roamer642" Grid.Row="2" Grid.Column="1"/>
+                <Label Text="Roam Status" Grid.Row="3"/>
+                <l:comboBox x:Name="CB_RoamStatus" Grid.Row="3" Grid.Column="1"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*">
+                <CheckBox x:Name="CHK_LibertyPass"/>
+                <Label Text="Activate Liberty Pass" Grid.Column="1"/>
+            </Grid>
+            <Grid x:Name="GB_KeySystem" RowDefinitions="*,*,*">
+                <Label Text="Unlocked Keys"/>
+                <Button x:Name="B_UnlockAllKeys" Text="Check All" Clicked="B_AllKeys_Click" Grid.Row="1"/>
+                <CollectionView x:Name="CV_Keys" HeightRequest="200" Grid.Row="2"/>
+            </Grid>
+            <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
+                <Label Text="Record:"/>
+                <l:NumericUpDown x:Name="NUD_Record16"/>
+                <Label Text="Value" Grid.Row="1"/>
+                <l:NumericUpDown x:Name="NUD_Record16V" Grid.Column="1" Grid.Row="1"/>
+                <Label Text="Record:" Grid.Row="2"/>
+                <l:NumericUpDown x:Name="NUD_Record32" Grid.Row="2" Grid.Column="1"/>
+                <Label Text="Value" Grid.Row="3"/>
+                <l:NumericUpDown x:Name="NUD_Record32V" Grid.Row="3" Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
