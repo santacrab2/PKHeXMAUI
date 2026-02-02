@@ -137,7 +137,7 @@ public partial class MiscMain5 : ContentPage
         }
         else if (SAV is SAV5B2W2 b2w2)
         {
-            GB_Roamer.IsVisible = CHK_LibertyPass.IsVisible = false;
+            GB_Roamer.IsVisible = CHK_LibertyPass.IsVisible = L_LibertyPass.IsVisible = false;
             var keys = b2w2.Keys;
             // KeySystem
             string[] KeySystemA =
@@ -183,10 +183,13 @@ public partial class MiscMain5 : ContentPage
 public partial class MiscTab5 : TabbedPage
 {
     public static MiscMain5 miscMain = new((SAV5)MainPage.sav);
+    public static MiscEntree miscEntree = new((SAV5)MainPage.sav);
     public MiscTab5()
     {
         BarBackgroundColor = Color.FromArgb("303030");
         BarTextColor = Colors.White;
         Children.Add(miscMain);
+        Children.Add(miscEntree);
+        Children.Add(new cancelpage());
     }
 }

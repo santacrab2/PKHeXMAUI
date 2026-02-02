@@ -22,7 +22,7 @@
             </Grid>
             <Grid ColumnDefinitions="*,*">
                 <CheckBox x:Name="CHK_LibertyPass"/>
-                <Label Text="Activate Liberty Pass" Grid.Column="1"/>
+                <Label x:Name="L_LibertyPass" Text="Activate Liberty Pass" Grid.Column="1"/>
             </Grid>
             <Grid x:Name="GB_KeySystem" RowDefinitions="*,*,*">
                 <Label Text="Unlocked Keys"/>
@@ -31,7 +31,7 @@
             </Grid>
             <Grid RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
                 <Label Text="Record:"/>
-                <l:NumericUpDown x:Name="NUD_Record16"/>
+                <l:NumericUpDown x:Name="NUD_Record16" Grid.Column="1"/>
                 <Label Text="Value" Grid.Row="1"/>
                 <l:NumericUpDown x:Name="NUD_Record16V" Grid.Column="1" Grid.Row="1"/>
                 <Label Text="Record:" Grid.Row="2"/>

@@ -64,7 +64,7 @@ public partial class SaveEditors : ContentPage
             GSBallButton.IsEnabled = !sav2.IsEnabledGSBallMobileEvent;
         }
         Button_RTCEditor.IsVisible = (sav is SAV2 or SAV3);
-        B_Misc.IsVisible = (sav is SAV3 or SAV4);
+        B_Misc.IsVisible = (sav is SAV3 or SAV4 or SAV5);
         B_Roamer.IsVisible = (sav is SAV3);
         B_Chatter.IsVisible = (sav is SAV4 or SAV5);
         B_Geonet.IsVisible = (sav is SAV4);
@@ -145,7 +145,8 @@ public partial class SaveEditors : ContentPage
         switch (sav) 
         { 
             case SAV3: Navigation.PushModalAsync(new MiscTab()); break; 
-            case SAV4: Navigation.PushModalAsync(new MiscTab4()); break; 
+            case SAV4: Navigation.PushModalAsync(new MiscTab4()); break;
+            case SAV5: Navigation.PushModalAsync(new MiscTab5()); break;
         }
        
     }
