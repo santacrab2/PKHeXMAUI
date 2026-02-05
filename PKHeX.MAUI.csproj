@@ -397,6 +397,9 @@
 	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscEntree.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscForest.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscMain5.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

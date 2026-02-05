@@ -5,7 +5,8 @@ namespace PKHeXMAUI;
 public partial class MiscEntree : ContentPage
 {
 	public SAV5 SAV;
-	public MiscEntree(SAV5 sav)
+    private bool editing;
+    public MiscEntree(SAV5 sav)
 	{
 		SAV = sav;
         InitializeComponent();
@@ -15,9 +16,11 @@ public partial class MiscEntree : ContentPage
             Label.SetBinding(Label.TextProperty, ".");
             return Label;
         });
+        ReadEntralink();
     }
     private void ReadEntralink()
 	{
+        editing = true;
         var entree = SAV.Entralink;
         NUD_EntreeWhiteLV.Number = entree.WhiteForestLevel;
         NUD_EntreeBlackLV.Number = entree.BlackCityLevel;
@@ -50,11 +53,16 @@ public partial class MiscEntree : ContentPage
             string[] levels = ["Lv.1", "Lv.2 +", "Lv.3 ++", "Lv.3 +++"];
             CB_FMLevel.ItemSource = levels;
             CV_FunfestMissions.SelectedItem = FMTitles[0];
+            SetNudMax();
         }
         else
         {
+            GB_PassPowers.IsVisible = false;
+            PAN_MissionMeta.IsVisible = false;
+            GB_FunfestMissions.IsVisible = false;
             NUD_EntreeWhiteEXP.IsVisible = NUD_EntreeBlackEXP.IsVisible = false;
         }
+        editing = false;
     }
 
     private void B_FunfestMissions_Click(object sender, EventArgs e)
@@ -65,7 +73,9 @@ public partial class MiscEntree : ContentPage
 
     private void CV_FunfestMissions_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        editing = true;
         LoadFestaMissionRecord();
+        editing = false;
     }
     private void LoadFestaMissionRecord()
     {
@@ -84,7 +94,8 @@ public partial class MiscEntree : ContentPage
     }
     private void ChangeFestaMissionValue(object sender, EventArgs e)
     {
-
+        if (editing)
+            return;
         FestaBlock5 block = ((SAV5B2W2)SAV).Festa;
         int mission = Array.IndexOf([..CV_FunfestMissions.ItemsSource],CV_FunfestMissions.SelectedItem);
         if ((uint)mission > FestaBlock5.MaxMissionIndex)
@@ -118,5 +129,36 @@ public partial class MiscEntree : ContentPage
             block.BlackEXP = (byte)NUD_EntreeBlackEXP.Number;
             block.Participants = (byte)NUD_FMMostParticipants.Number;
         }
+    }
+    private void SetNudMax(bool? isBlack = null)
+    {
+        if (isBlack == true)
+            return;
+
+        for (int i = 0; i < 2; i++)
+        {
+            var nud_lvl = i == 0 ? NUD_EntreeWhiteLV : NUD_EntreeBlackLV;
+            var nud_exp = i == 0 ? NUD_EntreeWhiteEXP : NUD_EntreeBlackEXP;
+
+            var lv = (int)nud_lvl.Number;
+            var expmax = FestaBlock5.GetExpNeededForLevelUp(lv) - 1;
+
+            if (nud_exp.Number > expmax)
+                nud_exp.Number = expmax;
+            nud_exp.MaxValue = expmax;
+        }
+    }
+    private void NUD_EntreeBlackLV_ValueChanged(object sender, EventArgs e)
+    {
+        if (editing)
+            return;
+        SetNudMax(isBlack: true);
+    }
+
+    private void NUD_EntreeWhiteLV_ValueChanged(object sender, EventArgs e)
+    {
+        if (editing)
+            return;
+        SetNudMax(isBlack: false);
     }
 }
