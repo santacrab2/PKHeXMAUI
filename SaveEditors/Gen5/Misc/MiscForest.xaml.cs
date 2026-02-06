@@ -1,4 +1,5 @@
 using PKHeX.Core;
+using System.Collections.ObjectModel;
 
 namespace PKHeXMAUI;
 
@@ -7,7 +8,7 @@ public partial class MiscForest : ContentPage
     public SAV5 SAV;
     private EntreeForest Forest = null!;
     private IList<EntreeSlot> AllSlots = null!;
-    private List<string> slotlist = [];
+    private ObservableCollection<string> slotlist = [];
     public MiscForest(SAV5 sav)
 	{
         SAV = sav;
@@ -27,9 +28,11 @@ public partial class MiscForest : ContentPage
 
         var filtered = GameInfo.FilteredSources;
         CB_Species.ItemSource = filtered.Species.ToArray();
+        CB_Species.DisplayMemberPath = "Text";
         CB_Move.ItemSource = filtered.Moves.ToArray();
+        CB_Move.DisplayMemberPath = "Text";
         CB_Areas.ItemSource = areas;
-
+        CB_Areas.DisplayMemberPath = "Text";
         CB_Areas.SelectedIndex = 0;
     }
     private void SaveForest()
@@ -42,11 +45,12 @@ public partial class MiscForest : ContentPage
 
     private void ChangeArea(object sender, EventArgs e)
     {
-        var area = CB_Areas.SelectedIndex;
-        CurrentSlots = [.. AllSlots.Where(z => (int)z.Area == area)];
+        ComboItem area = (ComboItem)CB_Areas.SelectedItem;
+        CurrentSlots = [.. AllSlots.Where(z => (int)z.Area == area.Value)];
         slotlist.Clear();
         foreach (var z in CurrentSlots.Select(z => GetSpeciesName(z.Species)))
             slotlist.Add(z);
+        CV_Slots.ItemsSource = slotlist;
         CV_Slots.SelectedItem = slotlist[currentIndex = 0];
     }
 
@@ -56,11 +60,12 @@ public partial class MiscForest : ContentPage
         if (slotlist.IndexOf((string)CV_Slots.SelectedItem) >= 0)
             currentIndex = slotlist.IndexOf((string)CV_Slots.SelectedItem);
         var current = CurrentSlots[currentIndex];
-        CB_Species.SelectedItem = (int)current.Species;
+        var filtered = GameInfo.FilteredSources;
+        CB_Species.SelectedItem = filtered.Species.Where(z=>z.Value==(int)current.Species).First();
         SetForms(current);
         SetGenders(current);
-        CB_Move.SelectedItem = (int)current.Move;
-        CB_Gender.SelectedItem = (int)current.Gender;
+        CB_Move.SelectedItem = filtered.Moves.Where(z=>z.Value==(int)current.Move).First();
+        CB_Gender.SelectedIndex = (int)current.Gender;
         CB_Form.SelectedIndex = CB_Form.Items.Count <= current.Form ? 0 : current.Form;
         NUD_Animation.Number = (current.Animation);
         CurrentSlot = current;
@@ -84,6 +89,7 @@ public partial class MiscForest : ContentPage
     private void SetGenders(EntreeSlot slot)
     {
         CB_Gender.ItemSource = GetGenderChoices(slot.Species);
+        CB_Gender.DisplayMemberPath = "Text";
     }
     private static List<ComboItem> GetGenderChoices(ushort species)
     {
@@ -102,5 +108,61 @@ public partial class MiscForest : ContentPage
         if (!pi.OnlyMale)
             list.Add(new ComboItem("Female", 1));
         return list;
+    }
+
+    private void B_RandForest_Click(object sender, EventArgs e)
+    {
+        var source = (SAV is SAV5BW ? Encounters5BW.DreamWorld_BW : Encounters5B2W2.DreamWorld_B2W2).Concat(Encounters5DR.DreamWorld_Common).ToList();
+        var rnd = Util.Rand;
+        foreach (var s in AllSlots)
+        {
+            int index = rnd.Next(source.Count);
+            var slot = source[index];
+            source.Remove(slot);
+            s.Species = slot.Species;
+            s.Form = slot.Form;
+            s.Gender = !((IFixedGender)slot).IsFixedGender ? PersonalTable.B2W2[slot.Species].RandomGender() : slot.Gender;
+
+            ReadOnlySpan<ushort> moves = slot.Moves;
+            var count = moves.Length - moves.Count<ushort>(0);
+            s.Move = count == 0 ? (ushort)0 : moves[rnd.Next(count)];
+        }
+        ChangeArea(this, EventArgs.Empty); // refresh
+        NUD_Unlocked.Number = 8;
+        CHK_Area9.IsChecked = true;
+    }
+    private void UpdateSlotValue(object sender, EventArgs e)
+    {
+        if (CurrentSlot is null)
+            return;
+
+        if (sender == CB_Species)
+        {
+            var filtered = GameInfo.FilteredSources;
+            CurrentSlot.Species = (ushort)filtered.Species.Where(z=>z.Value == ((ComboItem)CB_Species.SelectedItem).Value).First().Value;
+            slotlist[currentIndex] = GetSpeciesName(CurrentSlot.Species);
+            SetForms(CurrentSlot);
+            SetGenders(CurrentSlot);
+        }
+        else if (sender == CB_Move)
+        {
+            CurrentSlot.Move = (ushort)CB_Move.SelectedIndex;
+        }
+        else if (sender == CB_Gender)
+        {
+            CurrentSlot.Gender = (byte)CB_Gender.SelectedIndex;
+        }
+        else if (sender == CB_Form)
+        {
+            CurrentSlot.Form = (byte)CB_Form.SelectedIndex;
+        }
+        else if (sender == CHK_Invisible)
+        {
+            CurrentSlot.Invisible = CHK_Invisible.IsChecked;
+        }
+        else if (sender == NUD_Animation)
+        {
+            CurrentSlot.Animation = (int)NUD_Animation.Number;
+        }
     }
 }

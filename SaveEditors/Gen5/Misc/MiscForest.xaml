@@ -7,7 +7,7 @@
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView x:Name="CV_Slots" HeightRequest="300" SelectionMode="Single" SelectionChanged="ChangeSlot"/>
-            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*">
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*,*">
                 <l:comboBox x:Name="CB_Areas" SelectedIndexChanged="ChangeArea" Grid.ColumnSpan="2"/>
                 <Label Grid.Row="1" Text="Areas 1-8 Unlocked:"/>
                 <l:NumericUpDown x:Name="NUD_Unlocked" MinValue="2" MaxValue="8" Grid.Row="1" Grid.Column="1"/>
@@ -15,16 +15,16 @@
                 <CheckBox x:Name="CHK_Area9" Grid.Row="2" Grid.Column="1"/>
                 <Button x:Name="B_RandForest" Grid.Row="3" Text="Randomize All Areas" Clicked="B_RandForest_Click" Grid.ColumnSpan="2"/>
                 <Label Grid.Row="4" Text="Species:"/>
-                <l:comboBox x:Name="CB_Species" Grid.Row="4" Grid.Column="1"/>
+                <l:comboBox x:Name="CB_Species" Grid.Row="4" Grid.Column="1" SelectedIndexChanged="UpdateSlotValue"/>
                 <Label x:Name="L_Form" Grid.Row="5" Text="Form"/>
-                <l:comboBox x:Name="CB_Form" Grid.Row="5" Grid.Column="1"/>
+                <l:comboBox x:Name="CB_Form" Grid.Row="5" Grid.Column="1" SelectedIndexChanged="UpdateSlotValue"/>
                 <Label Grid.Row="6" Text="Gender:"/>
-                <l:comboBox x:Name="CB_Gender" Grid.Row="6" Grid.Column="1"/>
+                <l:comboBox x:Name="CB_Gender" Grid.Row="6" Grid.Column="1" SelectedIndexChanged="UpdateSlotValue"/>
                 <Label Grid.Row="7" Text="Move:"/>
-                <l:comboBox x:Name="CB_Move" Grid.Row="7" Grid.Column="1"/>
+                <l:comboBox x:Name="CB_Move" Grid.Row="7" Grid.Column="1" SelectedIndexChanged="UpdateSlotValue"/>
                 <Label Grid.Row="8" Text="Animation:"/>
-                <l:NumericUpDown x:Name="NUD_Animation" Grid.Row="8" Grid.Column="1" MinValue="0" MaxValue="5"/>
-                <CheckBox x:Name="CHK_Invisible" Grid.Row="9"/>
+                <l:NumericUpDown x:Name="NUD_Animation" Grid.Row="8" Grid.Column="1" MinValue="0" MaxValue="5" ValueChanged="UpdateSlotValue"/>
+                <CheckBox x:Name="CHK_Invisible" Grid.Row="9" CheckedChanged="UpdateSlotValue"/>
                 <Label Grid.Row="9" Grid.Column="1" Text="Invisible"/>
             </Grid>
         </VerticalStackLayout>
