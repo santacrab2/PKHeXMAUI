@@ -11,7 +11,7 @@ public partial class Items : TabbedPage
 {
     private readonly string[] itemlist;
     public List<List<itemInfo>> SourceList = [];
-    private readonly IReadOnlyList<InventoryPouch> pouches;
+    private readonly PlayerBag pouches;
     private readonly SaveFile Origin;
     private readonly SaveFile SAV;
     public static int currentcount = 995;
@@ -49,7 +49,7 @@ public partial class Items : TabbedPage
 
         pouches = SAV.Inventory;
 
-        foreach (var pouch in pouches)
+        foreach (var pouch in pouches.Pouches)
         {
             var content = new ContentPage() { Title = pouch.Type.ToString() };
             Grid header = [];
@@ -147,7 +147,7 @@ public partial class Items : TabbedPage
         var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
         var list = SourceList[pindex];
         list.Clear();
-        var pouchlist = pouches[pindex];
+        var pouchlist = pouches.Pouches[pindex];
         pouchlist.RemoveAll();
         foreach (var item in pouchlist.Items)
         {
@@ -173,9 +173,9 @@ public partial class Items : TabbedPage
         var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage)-1;
         var list = SourceList[pindex];
         list.Clear();
-        var pouchlist = pouches[pindex];
+        var pouchlist = pouches.Pouches[pindex];
         var allitems = pouchlist.GetAllItems();
-        pouchlist.GiveAllItems(sav, allitems, currentcount);
+        pouchlist.GiveAllItems(sav.Inventory, allitems, currentcount);
         foreach(var item in pouchlist.Items)
         {
             list.Add(new itemInfo(item, itemlist));
@@ -187,8 +187,8 @@ public partial class Items : TabbedPage
         var pindex = Array.IndexOf([.. ItemsMain.Children], ItemsMain.CurrentPage) - 1;
         var list = SourceList[pindex];
         list.Clear();
-        var pouchlist = pouches[pindex];
-        pouchlist.ModifyAllCount(sav,currentcount);
+        var pouchlist = pouches.Pouches[pindex];
+        pouchlist.ModifyAllCount(currentcount);
         foreach (var item in pouchlist.Items)
         {
             list.Add(new itemInfo(item,itemlist));
@@ -212,12 +212,12 @@ public partial class Items : TabbedPage
         int i = 0;
         saveitems.Text = "saving...";
         Task.Delay(100);
-       foreach(var pouch in pouches)
+       foreach(var pouch in pouches.Pouches)
         {
             await setbag(pouch,i);
             i++;
         }
-        SAV.Inventory = pouches;
+        pouches.CopyTo(SAV);
         Origin.CopyChangesFrom(SAV);
         if (Remote.Connected)
         {

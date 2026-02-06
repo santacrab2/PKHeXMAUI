@@ -28,7 +28,7 @@ public partial class MiscEntree : ContentPage
         {
             var pass = (Entralink5B2W2)entree;
             var ppv = Enum.GetValues<PassPower5>();
-            var ppn = Enum.GetNames(typeof(PassPower5));
+            var ppn = Enum.GetNames<PassPower5>();
             var PassPowerB = new ComboItem[ppv.Length];
             for (int i = 0; i < ppv.Length; i++)
                 PassPowerB[i] = new ComboItem(ppn[i], (int)ppv[i]);
@@ -48,7 +48,7 @@ public partial class MiscEntree : ContentPage
             NUD_FMMostParticipants.Number = block.Participants;
             NUD_EntreeWhiteEXP.Number = block.WhiteEXP;
             NUD_EntreeBlackEXP.Number = block.BlackEXP;
-            string[] FMTitles = Enum.GetNames(typeof(Funfest5Mission));
+            string[] FMTitles = Enum.GetNames<Funfest5Mission>();
             CV_FunfestMissions.ItemsSource = FMTitles;
             string[] levels = ["Lv.1", "Lv.2 +", "Lv.3 ++", "Lv.3 +++"];
             CB_FMLevel.ItemSource = levels;

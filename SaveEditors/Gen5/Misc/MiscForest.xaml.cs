@@ -43,7 +43,7 @@ public partial class MiscForest : ContentPage
     private void ChangeArea(object sender, EventArgs e)
     {
         var area = CB_Areas.SelectedIndex;
-        CurrentSlots = AllSlots.Where(z => (int)z.Area == area).ToArray();
+        CurrentSlots = [.. AllSlots.Where(z => (int)z.Area == area)];
         slotlist.Clear();
         foreach (var z in CurrentSlots.Select(z => GetSpeciesName(z.Species)))
             slotlist.Add(z);
