@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscSubway"
+             Title="Subway">
+    <ScrollView>
+        
+        <Grid RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="*,*">
+            <Border Stroke="White" StrokeThickness="1">
+                <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" x:Name="GB_Singles">
+                    <Label Text="Singles"/>
+                    <Label Grid.Row="1" Text="Past" x:Name="L_SinglePast"/>
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_SinglePast"/>
+                    <Label Grid.Row="2" Text="Record" x:Name="L_SingleRecord"/>
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_SingleRecord"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="1">
+                <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*" Grid.Row="1" x:Name="GB_Doubles">
+                    <Label Text="Doubles"/>
+                    <Label Grid.Row="1" Text="Past" x:Name="L_DoublePast"/>
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_DoublePast"/>
+                    <Label Text="Record" Grid.Row="2" x:Name="L_DoubleRecord"/>
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_DoubleRecord"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="2">
+                <Grid RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="*,*" Grid.Row="2" x:Name="GB_Multi">
+                    <Label Text="Multi"/>
+                    <Label Text="NPC" Grid.Column="1"/>
+                    <Label Grid.Row="1" Text="Past" x:Name="L_MultiNpcPast"/>
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_MultiNpcPast"/>
+                    <Label Grid.Row="2" Text="Record" x:Name="L_MultiNpcRecord"/>
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_MultiNpcRecord"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="Friends"/>
+                    <Label Grid.Row="4" Text="Past" x:Name="L_MultiFriendsPast"/>
+                    <l:NumericUpDown Grid.Row="4" Grid.Column="1" x:Name="NUD_MultiFriendsPast"/>
+                    <Label Grid.Row="5" Text="Record" x:Name="L_MultiFriendsRecord"/>
+                    <l:NumericUpDown Grid.Row="5" Grid.Column="1" x:Name="NUD_MultiFriendsRecord"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Column="1">
+                <Grid Grid.Column="1" RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+                    <Label Text="Super Singles"/>
+                    <Label Grid.Row="1" Text="Past" x:Name="L_SSinglePast"/>
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_SSinglePast"/>
+                    <Label Grid.Row="2" Text="Record" x:Name="L_SSingleRecord"/>
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_SSingleRecord"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="1" Grid.Column="1">
+                <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+                    <Label Text="Super Doubles"/>
+                    <Label Grid.Row="1" Text="Past" x:Name="L_SDoublePast"/>
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_SDoublePast"/>
+                    <Label Grid.Row="2" Text="Record" x:Name="L_SDoubleRecord"/>
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_SDoubleRecord"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="2" Grid.Column="1">
+                <Grid Grid.Row="2" Grid.Column="1" RowDefinitions="*,*,*,*,*,*" ColumnDefinitions="*,*">
+                    <Label Text="Super Multi"/>
+                    <Label Text="NPC" Grid.Column="1"/>
+                    <Label Grid.Row="1" Text="Past" x:Name="L_SMultiNpcPast"/>
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_SMultiNpcPast"/>
+                    <Label Grid.Row="2" Text="Record" x:Name="L_SMultiNpcRecord"/>
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_SMultiNpcRecord"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="Friends"/>
+                    <Label Grid.Row="4" Text="Past" x:Name="L_SMultiFriendsPast"/>
+                    <l:NumericUpDown Grid.Row="4" Grid.Column="1" x:Name="NUD_SMultiFriendsPast"/>
+                    <Label Grid.Row="5" Text="Record" x:Name="L_SMultiFriendsRecord"/>
+                    <l:NumericUpDown Grid.Row="5" Grid.Column="1" x:Name="NUD_SMultiFriendsRecord"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="3">
+                <Grid Grid.Row="3" RowDefinitions="*,*,*,*,*,*,*,*" ColumnDefinitions="*,*,*,*">
+                    <Label Text="Subway Flags"/>
+                    <CheckBox x:Name="CHK_Subway0" Grid.Row="1"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Flag 0"/>
+                    <CheckBox x:Name="CHK_Subway1" Grid.Row="1" Grid.Column="2"/>
+                    <Label Grid.Row="1" Grid.Column="3" Text="Flag 1"/>
+                    <CheckBox x:Name="CHK_Subway2" Grid.Row="2"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="Flag 2"/>
+                    <CheckBox x:Name="CHK_Subway3" Grid.Row="2" Grid.Column="2"/>
+                    <Label Grid.Row="2" Grid.Column="3" Text="Flag 3"/>
+                    <CheckBox x:Name="CHK_SuperSingle" Grid.Row="3"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="Super Singles?"/>
+                    <CheckBox x:Name="CHK_SuperMulti" Grid.Row="4"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="Super Multi?"/>
+                    <CheckBox x:Name="CHK_SuperDouble" Grid.Row="5"/>
+                    <Label Grid.Row="5" Grid.Column="1" Text="Super Doubles?"/>
+                    <CheckBox x:Name="CHK_Subway7" Grid.Row="6"/>
+                    <Label Grid.Row="6" Grid.Column="1" Text="Flag 7"/>
+                    <CheckBox x:Name="CHK_SWNPCMet" Grid.Row="6" Grid.Column="2"/>
+                    <Label Grid.Row="6" Grid.Column="3" Text="NPC met"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="3" Grid.Column="1">
+                <Grid Grid.Row="3" Grid.Column="1" RowDefinitions="*,*,*" ColumnDefinitions="*,*">
+                    <Label Text="Current run data"/>
+                    <Label Grid.Row="1" Text="Type" />
+                    <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="NUD_CurrentType"/>
+                    <Label Grid.Row="2" Text="Battle No." />
+                    <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="NUD_CurrentBattle"/>
+                </Grid>
+            </Border>
+            <Border Stroke="White" StrokeThickness="1" Grid.Row="4">
+                <Grid Grid.Row="4" RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="*,*,*">
+                    <Label Text="Is run active?"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Normal"/>
+                    <Label Grid.Row="1" Grid.Column="2" Text="Super"/>
+                    <Label Grid.Row="2" Text="Single" x:Name="L_ActiveSingles"/>
+                    <CheckBox x:Name="CHK_SingleSet" Grid.Row="2" Grid.Column="1"/>
+                    <CheckBox x:Name="CHK_SuperSingleSet" Grid.Row="2" Grid.Column="2"/>
+                    <Label Grid.Row="3" Text="Double" x:Name="L_ActiveDoubles"/>
+                    <CheckBox x:Name="CHK_DoubleSet" Grid.Row="3" Grid.Column="1"/>
+                    <CheckBox x:Name="CHK_SuperDoubleSet" Grid.Row="3" Grid.Column="2"/>
+                    <Label Grid.Row="4" Text="NPC" x:Name="L_ActiveMulti"/>
+                    <CheckBox x:Name="CHK_MultiNPCSet" Grid.Row="4" Grid.Column="1"/>
+                    <CheckBox x:Name="CHK_SuperMultiNPCSet" Grid.Row="4" Grid.Column="2"/>
+                    <Label Grid.Row="5" Text="Friends" x:Name="L_ActiveMultiFriends"/>
+                    <CheckBox x:Name="CHK_MultiFriendsSet" Grid.Row="5" Grid.Column="1"/>
+                    <CheckBox x:Name="CHK_SuperMultiFriendsSet" Grid.Row="5" Grid.Column="2"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>

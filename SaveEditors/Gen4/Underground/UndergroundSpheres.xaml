@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PKHeXMAUI.UndergroundSpheres"
-             Title="UndergroundSpheres">
+             Title="Spheres">
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView x:Name="CV_UndergroundSpheres" HeightRequest="400" WidthRequest="300"/>

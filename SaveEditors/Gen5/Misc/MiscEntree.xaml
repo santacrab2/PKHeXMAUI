@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:l="clr-namespace:PKHeXMAUI"
+             xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscEntree"
-             Title="MiscEntree">
+             Title="Entree">
     <ScrollView>
         <VerticalStackLayout>
-            <Grid x:Name="GB_EntreeLevel" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*">
-                <Label Text="Entree Level"/>
-                <Label Text="B" Grid.Row="1"/>
-                <l:NumericUpDown x:Name="NUD_EntreeBlackLV" MinValue="0" MaxValue="999" Grid.Row="1" Grid.Column="1" ValueChanged="NUD_EntreeBlackLV_ValueChanged"/>
-                <l:NumericUpDown x:Name="NUD_EntreeBlackEXP" MinValue="0" MaxValue="49" Grid.Row="1" Grid.Column="2" />
-                <Label Text="W" Grid.Row="2"/>
-                <l:NumericUpDown x:Name="NUD_EntreeWhiteLV" MinValue="0" MaxValue="999" Grid.Row="2" Grid.Column="1" ValueChanged="NUD_EntreeWhiteLV_ValueChanged"/>
-                <l:NumericUpDown x:Name="NUD_EntreeWhiteEXP" MinValue="0" MaxValue="49" Grid.Row="2" Grid.Column="2" />
-            </Grid>
-            <Grid x:Name="GB_PassPowers" RowDefinitions="*,*,*,*">
-                <Label Text="Pass Powers"/>
-                <l:comboBox x:Name="CB_PassPower1" Grid.Row="1"/>
-                <l:comboBox x:Name="CB_PassPower2" Grid.Row="2"/>
-                <l:comboBox x:Name="CB_PassPower3" Grid.Row="3"/>
-            </Grid>
-            <Grid x:Name="GB_FunfestMissions" RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="*,*">
-                <Label Text="Funfest Missions"/>
-                <Button x:Name="B_FunfestMissions" Clicked="B_FunfestMissions_Click" Text="Unlock All(w/o No.0)" Grid.Row="1"/>
-                <CollectionView x:Name="CV_FunfestMissions" HeightRequest="200" Grid.Row="2" SelectionMode="Single" SelectionChanged="CV_FunfestMissions_SelectionChanged"/>
-                <Label x:Name="L_FMLocked" Text="Unlocked" Grid.Row="3"/>
-                <l:comboBox x:Name="CB_FMLevel" Grid.Row="3" Grid.Column="1" SelectedIndexChanged="ChangeFestaMissionValue"/>
-                <Label Text="Best Records Total" Grid.Row="4"/>
-                <l:NumericUpDown x:Name="NUD_FMBestTotal" MinValue="0" MaxValue="9999" Grid.Row="4" Grid.Column="1" ValueChanged="ChangeFestaMissionValue"/>
-                <Label Text="Score" Grid.Row="5"/>
-                <l:NumericUpDown x:Name="NUD_FMBestScore" MinValue="0" MaxValue="9999" Grid.Row="5" Grid.Column="1" ValueChanged="ChangeFestaMissionValue"/>
-                <Label Text="New" Grid.Row="6"/>
-                <CheckBox x:Name="CHK_FMNew" Grid.Row="6" Grid.Column="1" CheckedChanged="ChangeFestaMissionValue"/> 
-            </Grid>
-            <Grid x:Name="PAN_MissionMeta" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*">
-                <Label Text="Hosted"/>
-                <l:NumericUpDown x:Name="NUD_FMHosted" MinValue="0" MaxValue="9999" Grid.Column="1"/>
-                <Label Text="Participated" Grid.Row="1"/>
-                <l:NumericUpDown x:Name="NUD_FMParticipated" MinValue="0" MaxValue="9999" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Completed" Grid.Row="2"/>
-                <l:NumericUpDown x:Name="NUD_FMCompleted" MinValue="0" MaxValue="9999" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Top Score" Grid.Row="3"/>
-                <l:NumericUpDown x:Name="NUD_FMTopScores" MinValue="0" MaxValue="9999" Grid.Row="3" Grid.Column="1"/>
-                <Label Text="Most Participants" Grid.Row="4"/>
-                <l:NumericUpDown x:Name="NUD_FMMostParticipants" MinValue="0" MaxValue="255" Grid.Row="4" Grid.Column="1"/>
-            </Grid>
+            <Border x:Name="GB_EntreeLevel" Stroke="White" StrokeThickness="1">
+                <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*">
+                    <Label Text="Entree Level"/>
+                    <Label Text="B" Grid.Row="1"/>
+                    <l:NumericUpDown x:Name="NUD_EntreeBlackLV" MinValue="0" MaxValue="999" Grid.Row="1" Grid.Column="1" ValueChanged="NUD_EntreeBlackLV_ValueChanged"/>
+                    <l:NumericUpDown x:Name="NUD_EntreeBlackEXP" MinValue="0" MaxValue="49" Grid.Row="1" Grid.Column="2" />
+                    <Label Text="W" Grid.Row="2"/>
+                    <l:NumericUpDown x:Name="NUD_EntreeWhiteLV" MinValue="0" MaxValue="999" Grid.Row="2" Grid.Column="1" ValueChanged="NUD_EntreeWhiteLV_ValueChanged"/>
+                    <l:NumericUpDown x:Name="NUD_EntreeWhiteEXP" MinValue="0" MaxValue="49" Grid.Row="2" Grid.Column="2" />
+                </Grid>
+            </Border>
+            <Border x:Name="GB_PassPowers" Stroke="White" StrokeThickness="1">
+                <Grid RowDefinitions="*,*,*,*">
+                    <Label Text="Pass Powers"/>
+                    <l:comboBox x:Name="CB_PassPower1" Grid.Row="1"/>
+                    <l:comboBox x:Name="CB_PassPower2" Grid.Row="2"/>
+                    <l:comboBox x:Name="CB_PassPower3" Grid.Row="3"/>
+                </Grid>
+            </Border>
+            <Border x:Name="GB_FunfestMissions" Stroke="White" StrokeThickness="1">
+                <Grid RowDefinitions="*,*,*,*,*,*,*" ColumnDefinitions="*,*">
+                    <Label Text="Funfest Missions"/>
+                    <Button x:Name="B_FunfestMissions" Clicked="B_FunfestMissions_Click" Text="Unlock All(w/o No.0)" Grid.Row="1"/>
+                    <CollectionView x:Name="CV_FunfestMissions" HeightRequest="200" Grid.Row="2" SelectionMode="Single" SelectionChanged="CV_FunfestMissions_SelectionChanged"/>
+                    <Label x:Name="L_FMLocked" Text="Unlocked" Grid.Row="3"/>
+                    <l:comboBox x:Name="CB_FMLevel" Grid.Row="3" Grid.Column="1" SelectedIndexChanged="ChangeFestaMissionValue"/>
+                    <Label Text="Best Records Total" Grid.Row="4"/>
+                    <l:NumericUpDown x:Name="NUD_FMBestTotal" MinValue="0" MaxValue="9999" Grid.Row="4" Grid.Column="1" ValueChanged="ChangeFestaMissionValue"/>
+                    <Label Text="Score" Grid.Row="5"/>
+                    <l:NumericUpDown x:Name="NUD_FMBestScore" MinValue="0" MaxValue="9999" Grid.Row="5" Grid.Column="1" ValueChanged="ChangeFestaMissionValue"/>
+                    <Label Text="New" Grid.Row="6"/>
+                    <CheckBox x:Name="CHK_FMNew" Grid.Row="6" Grid.Column="1" CheckedChanged="ChangeFestaMissionValue"/>
+                </Grid>
+            </Border>
+            <Border x:Name="PAN_MissionMeta" Stroke="White" StrokeThickness="1">
+                <Grid RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*">
+                    <Label Text="Hosted"/>
+                    <l:NumericUpDown x:Name="NUD_FMHosted" MinValue="0" MaxValue="9999" Grid.Column="1"/>
+                    <Label Text="Participated" Grid.Row="1"/>
+                    <l:NumericUpDown x:Name="NUD_FMParticipated" MinValue="0" MaxValue="9999" Grid.Row="1" Grid.Column="1"/>
+                    <Label Text="Completed" Grid.Row="2"/>
+                    <l:NumericUpDown x:Name="NUD_FMCompleted" MinValue="0" MaxValue="9999" Grid.Row="2" Grid.Column="1"/>
+                    <Label Text="Top Score" Grid.Row="3"/>
+                    <l:NumericUpDown x:Name="NUD_FMTopScores" MinValue="0" MaxValue="9999" Grid.Row="3" Grid.Column="1"/>
+                    <Label Text="Most Participants" Grid.Row="4"/>
+                    <l:NumericUpDown x:Name="NUD_FMMostParticipants" MinValue="0" MaxValue="255" Grid.Row="4" Grid.Column="1"/>
+                </Grid>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

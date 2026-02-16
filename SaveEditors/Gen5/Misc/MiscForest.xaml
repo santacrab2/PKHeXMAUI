@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscForest"
-             Title="MiscForest">
+             Title="Forest">
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView x:Name="CV_Slots" HeightRequest="300" SelectionMode="Single" SelectionChanged="ChangeSlot"/>
