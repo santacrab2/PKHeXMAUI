@@ -186,6 +186,7 @@ public partial class MiscTab5 : TabbedPage
     public static MiscEntree miscEntree = new((SAV5)MainPage.sav);
     public static MiscForest miscForest = new((SAV5)MainPage.sav);
     public static MiscSubway miscSubway = new((SAV5)MainPage.sav);
+    public static MiscCityForest miscCityForest = new((SAV5)MainPage.sav);
     public MiscTab5()
     {
         BarBackgroundColor = Color.FromArgb("303030");
@@ -194,6 +195,7 @@ public partial class MiscTab5 : TabbedPage
         Children.Add(miscEntree);
         Children.Add(miscForest);
         Children.Add(miscSubway);
+        Children.Add(miscCityForest);
         Children.Add(new cancelpage());
     }
 }

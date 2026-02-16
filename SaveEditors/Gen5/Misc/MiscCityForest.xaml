@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PKHeXMAUI.MiscCityForest"
+             Title="WhiteForest/BlackCity">
+    <VerticalStackLayout>
+        <Button x:Name="B_DumpFC" Text="Dump data" Clicked="B_DumpFC_Click"/>
+        <Button x:Name="B_ImportFC" Text="Import data" Clicked="B_ImportFC_Click"/>
+        <Label Text="Dump data from a white save file and import it into a black one and vice versa, there you can have either city or forest in one save!" />
+    </VerticalStackLayout>
+</ContentPage>
