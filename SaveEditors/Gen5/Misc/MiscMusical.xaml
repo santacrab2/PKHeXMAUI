@@ -10,7 +10,7 @@
             <CheckBox x:Name="CHK_PropObtained"/>
             <Label x:Name="L_PropObtained" Text="Obtained" Grid.Column="1"/>
         </Grid>
-        <Button x:Name="B_UnlockAllProps" Clicked="B_UnlockAllProps_Click"/>
+        <Button x:Name="B_UnlockAllProps" Clicked="B_UnlockAllProps_Click" Text="Unlock All Props"/>
 
     </VerticalStackLayout>
 </ContentPage>

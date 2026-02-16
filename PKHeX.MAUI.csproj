@@ -409,6 +409,9 @@
 	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscMain5.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscMedals.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="SaveEditors\Gen5\Misc\MiscMusical.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

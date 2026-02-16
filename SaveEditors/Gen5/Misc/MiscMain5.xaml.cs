@@ -55,7 +55,7 @@ public partial class MiscMain5 : ContentPage
         NUD_Record16.ValueChanged += (_, _) => NUD_Record16V.Number = record.GetRecord16((int)NUD_Record16.Number);
         NUD_Record32.ValueChanged += (_, _) => NUD_Record32V.Number = record.GetRecord32((int)NUD_Record32.Number);
     }
-    private void SaveRecord() => SAV.Records.EndAccess();
+    public void SaveRecord() => SAV.Records.EndAccess();
     private void ReadMain()
     {
         string[]? FlyDestA;
@@ -178,6 +178,72 @@ public partial class MiscMain5 : ContentPage
         for (int i = 0; i < UnlockedKeysItems.Count; i++)
             UnlockedKeysItems[i] = new Tuple<string,bool>(UnlockedKeysItems[i].Item1, true);
     }
+    public void SaveMain()
+    {
+        uint valFly = ReadUInt32LittleEndian(SAV.Data[ofsFly..]);
+        for (int i = 0; i < FlyDestItems.Count; i++)
+        {
+            if (FlyDestC[i] < 32)
+            {
+                if (FlyDestItems[i].Item2)
+                    valFly |= 1u << FlyDestC[i];
+                else
+                    valFly &= ~(1u << FlyDestC[i]);
+            }
+            else
+            {
+                var ofs = ofsFly + (FlyDestC[i] >> 3);
+                SAV.Data[ofs] = (byte)((SAV.Data[ofs] & ~(1 << (FlyDestC[i] & 7))) | ((FlyDestItems[i].Item2 ? 1 : 0) << (FlyDestC[i] & 7)));
+            }
+        }
+        WriteUInt32LittleEndian(SAV.Data[ofsFly..], valFly);
+
+        if (SAV is SAV5BW bw)
+        {
+            // Roamer
+            var encount = bw.Encount;
+            for (int i = 0; i < cbr.Length; i++)
+            {
+                int c = bw.Encount.GetRoamerState(i);
+                var d = (byte)cbr[i].SelectedIndex;
+
+                if (c == d)
+                    continue;
+                encount.SetRoamerState(i, d);
+                if (c != 1)
+                    continue;
+                var roamer = i == 0 ? encount.Roamer1 : encount.Roamer2;
+                roamer.Clear();
+                encount.SetRoamerState2C(i, 0);
+            }
+
+            // RoamStatus
+            {
+                var desired = (ushort)CB_RoamStatus.SelectedIndex;
+                bw.EventWork.SetWorkRoamer(desired);
+            }
+
+            // LibertyPass
+            if (CHK_LibertyPass.IsChecked != bw.Misc.IsLibertyTicketActivated)
+                bw.Misc.IsLibertyTicketActivated = CHK_LibertyPass.IsChecked;
+        }
+        else if (SAV is SAV5B2W2 b2w2)
+        {
+            // KeySystem
+            var keys = b2w2.Keys;
+            for (int i = 0; i < 5; i++)
+            {
+                var index = i * 2;
+                var obtain = UnlockedKeysItems[index].Item2;
+                if (obtain != keys.GetIsKeyObtained((KeyType5)i))
+                    keys.SetIsKeyObtained((KeyType5)i, obtain);
+
+                var unlock = UnlockedKeysItems[index + 1].Item2;
+                if (unlock != keys.GetIsKeyUnlocked((KeyType5)i))
+                    keys.SetIsKeyUnlocked((KeyType5)i, unlock);
+            }
+        }
+    }
 }
 
 public partial class MiscTab5 : TabbedPage
@@ -187,6 +253,8 @@ public partial class MiscTab5 : TabbedPage
     public static MiscForest miscForest = new((SAV5)MainPage.sav);
     public static MiscSubway miscSubway = new((SAV5)MainPage.sav);
     public static MiscCityForest miscCityForest = new((SAV5)MainPage.sav);
+    public static MiscMusical miscMusical = new((SAV5)MainPage.sav);
+    public static MiscMedals miscMedals = new((SAV5)MainPage.sav);
     public MiscTab5()
     {
         BarBackgroundColor = Color.FromArgb("303030");
@@ -195,7 +263,29 @@ public partial class MiscTab5 : TabbedPage
         Children.Add(miscEntree);
         Children.Add(miscForest);
         Children.Add(miscSubway);
-        Children.Add(miscCityForest);
+        if (MainPage.sav is SAV5BW)
+            Children.Add(miscCityForest);
+        if (MainPage.sav is SAV5B2W2)
+            Children.Add(miscMedals);
+        Children.Add(miscMusical);
         Children.Add(new cancelpage());
+        Children.Add(new Misc5Save());
+    }
+}
+public partial class Misc5Save : ContentPage
+{
+    public Misc5Save()
+    {
+        this.Title = "Save";
+        this.Content = new Label() { Text = "The MAUI Framework has bugs. This is the save page. Navigate to another page, and then select the page you were trying to reach!" };
+    }
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        MiscTab5.miscMain.SaveRecord();
+        MiscTab5.miscMain.SaveMain();
+        MiscTab5.miscEntree.SaveEntralink();
+        MiscTab5.miscForest.SaveForest();
+        MiscTab5.miscSubway.SaveSubway();
+        Navigation.PopModalAsync();
     }
 }

@@ -89,7 +89,7 @@ public partial class MiscSubway : ContentPage
         NUD_SMultiFriendsRecord.Number = sw.SuperMultiFriendsRecord;
     }
 
-    private void SaveSubway()
+    public void SaveSubway()
     {
         // Running Battle Subway Data
         swp.CurrentType = (int)NUD_CurrentType.Number;

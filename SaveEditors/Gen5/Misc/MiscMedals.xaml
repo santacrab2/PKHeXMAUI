@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscMedals"
+             Title="MiscMedals">
+    <VerticalStackLayout>
+        <l:comboBox x:Name="CB_CurrentMedal" SelectedIndexChanged="CB_CurrentMedal_SelectedIndexChanged"/>
+        <l:comboBox x:Name="CB_MedalState" SelectedIndexChanged="CB_MedalState_SelectedIndexChanged"/>
+        <DatePicker x:Name="CAL_MedalDate" />
+        <Grid ColumnDefinitions="*,*,*">
+            <CheckBox x:Name="CHK_MedalUnread" CheckedChanged="CHK_MedalUnread_CheckedChanged"/>
+            <Label Text="Unread" Grid.Column="1"/>
+            <Entry x:Name="TB_MedalType" Grid.Column="2"/>
+        </Grid>
+        <Button x:Name="B_UnlockAllMedals" Clicked="B_ObtainAllMedals_Click" Text="Obtain All Medals"/>
+    </VerticalStackLayout>
+</ContentPage>

@@ -5,7 +5,7 @@ namespace PKHeXMAUI;
 public partial class MiscMusical : ContentPage
 {
 	public SAV5 SAV;
-    private readonly string[] PropNames = Util.GetStringList("props");
+    public string[] PropNames = Util.GetStringList("props","en");
     public MiscMusical(SAV5 sav)
 	{
 		InitializeComponent();
