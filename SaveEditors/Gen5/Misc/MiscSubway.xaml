@@ -111,17 +111,17 @@
                     <Label Grid.Row="1" Grid.Column="1" Text="Normal"/>
                     <Label Grid.Row="1" Grid.Column="2" Text="Super"/>
                     <Label Grid.Row="2" Text="Single" x:Name="L_ActiveSingles"/>
-                    <CheckBox x:Name="CHK_SingleSet" Grid.Row="2" Grid.Column="1"/>
-                    <CheckBox x:Name="CHK_SuperSingleSet" Grid.Row="2" Grid.Column="2"/>
+                    <CheckBox x:Name="CHK_SingleSet" Grid.Row="2" Grid.Column="1" CheckedChanged="CHK_SingleSet_CheckedChanged"/>
+                    <CheckBox x:Name="CHK_SuperSingleSet" Grid.Row="2" Grid.Column="2" CheckedChanged="CHK_SuperSingleSet_CheckedChanged"/>
                     <Label Grid.Row="3" Text="Double" x:Name="L_ActiveDoubles"/>
-                    <CheckBox x:Name="CHK_DoubleSet" Grid.Row="3" Grid.Column="1"/>
-                    <CheckBox x:Name="CHK_SuperDoubleSet" Grid.Row="3" Grid.Column="2"/>
+                    <CheckBox x:Name="CHK_DoubleSet" Grid.Row="3" Grid.Column="1" CheckedChanged="CHK_DoubleSet_CheckedChanged"/>
+                    <CheckBox x:Name="CHK_SuperDoubleSet" Grid.Row="3" Grid.Column="2" CheckedChanged="CHK_SuperDoubleSet_CheckedChanged"/>
                     <Label Grid.Row="4" Text="NPC" x:Name="L_ActiveMulti"/>
-                    <CheckBox x:Name="CHK_MultiNPCSet" Grid.Row="4" Grid.Column="1"/>
-                    <CheckBox x:Name="CHK_SuperMultiNPCSet" Grid.Row="4" Grid.Column="2"/>
+                    <CheckBox x:Name="CHK_MultiNPCSet" Grid.Row="4" Grid.Column="1" CheckedChanged="CHK_MultiNPCSet_CheckedChanged"/>
+                    <CheckBox x:Name="CHK_SuperMultiNPCSet" Grid.Row="4" Grid.Column="2" CheckedChanged="CHK_SuperMultiNPCSet_CheckedChanged"/>
                     <Label Grid.Row="5" Text="Friends" x:Name="L_ActiveMultiFriends"/>
-                    <CheckBox x:Name="CHK_MultiFriendsSet" Grid.Row="5" Grid.Column="1"/>
-                    <CheckBox x:Name="CHK_SuperMultiFriendsSet" Grid.Row="5" Grid.Column="2"/>
+                    <CheckBox x:Name="CHK_MultiFriendsSet" Grid.Row="5" Grid.Column="1" CheckedChanged="CHK_MultiFriendsSet_CheckedChanged"/>
+                    <CheckBox x:Name="CHK_SuperMultiFriendsSet" Grid.Row="5" Grid.Column="2" CheckedChanged="CHK_SuperMultiFriendsSet_CheckedChanged"/>
                 </Grid>
             </Border>
         </Grid>

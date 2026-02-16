@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:l="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.MiscMusical"
+             Title="Musical">
+    <VerticalStackLayout>
+        <l:comboBox x:Name="CB_Prop" SelectedIndexChanged="CB_Prop_SelectedIndexChanged"/>
+        <Grid ColumnDefinitions="*,*">
+            <CheckBox x:Name="CHK_PropObtained"/>
+            <Label x:Name="L_PropObtained" Text="Obtained" Grid.Column="1"/>
+        </Grid>
+        <Button x:Name="B_UnlockAllProps" Clicked="B_UnlockAllProps_Click"/>
+
+    </VerticalStackLayout>
+</ContentPage>

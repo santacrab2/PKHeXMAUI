@@ -154,4 +154,44 @@ public partial class MiscSubway : ContentPage
         sw.SuperMultiNPCSet = (CHK_SuperMultiNPCSet.IsChecked ? (sw.SuperMultiNPCPast / 7) + 1 : 0);
         sw.SuperMultiFriendsSet = (CHK_SuperMultiFriendsSet.IsChecked ? (sw.SuperMultiFriendsPast / 7) + 1 : 0);
     }
+
+    private void CHK_SingleSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_SinglePast.Text = CHK_SingleSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_DoubleSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_DoublePast.Text = CHK_DoubleSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_MultiNPCSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_MultiNpcPast.Text = CHK_MultiNPCSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_MultiFriendsSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_MultiFriendsPast.Text = CHK_MultiFriendsSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_SuperSingleSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_SSinglePast.Text = CHK_SuperSingleSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_SuperDoubleSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_SDoublePast.Text = CHK_SuperDoubleSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_SuperMultiNPCSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_SMultiNpcPast.Text = CHK_SuperMultiNPCSet.IsChecked ? "Current" : "Past";
+    }
+
+    private void CHK_SuperMultiFriendsSet_CheckedChanged(object sender, EventArgs e)
+    {
+        L_SMultiFriendsPast.Text = CHK_SuperMultiFriendsSet.IsChecked ? "Current" : "Past";
+    }
 }
