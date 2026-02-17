@@ -5,8 +5,8 @@ namespace PKHeXMAUI;
 public partial class MiscMedals : ContentPage
 {
     public SAV5 SAV;
-    private readonly string[] MedalNames = Util.GetStringList("medals", "en");
-    private readonly string[] MedalTypeNames = Util.GetStringList("medal_types", "en");
+    private string[] MedalNames = Util.GetStringList("medals", "en");
+    private string[] MedalTypeNames = Util.GetStringList("medal_types", "en");
     public MiscMedals(SAV5 sav)
 	{
 		InitializeComponent();

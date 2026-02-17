@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscMedals"
-             Title="MiscMedals">
+             Title="Medals">
     <VerticalStackLayout>
         <l:comboBox x:Name="CB_CurrentMedal" SelectedIndexChanged="CB_CurrentMedal_SelectedIndexChanged"/>
         <l:comboBox x:Name="CB_MedalState" SelectedIndexChanged="CB_MedalState_SelectedIndexChanged"/>

@@ -15,11 +15,6 @@ public partial class MiscForest : ContentPage
         InitializeComponent();
         LoadForest();
     }
-    public void SaveForest()
-    {
-        Forest.Unlock38Areas = (int)NUD_Unlocked.Number - 2;
-        Forest.Unlock9thArea = CHK_Area9.IsChecked;
-    }
     private void LoadForest()
     {
         Forest = SAV.EntreeForest;
@@ -40,7 +35,7 @@ public partial class MiscForest : ContentPage
         CB_Areas.DisplayMemberPath = "Text";
         CB_Areas.SelectedIndex = 0;
     }
-    private void SaveForest()
+    public void SaveForest()
     {
         Forest.Unlock38Areas = (int)NUD_Unlocked.Number - 2;
         Forest.Unlock9thArea = CHK_Area9.IsChecked;
