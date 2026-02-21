@@ -56,7 +56,7 @@ public partial class SearchSettings : ContentPage
         encSettings = new()
         {
             Species = (ushort)((ComboItem?)EncSpecies.SelectedItem??Any).Value,
-            Format = sav.Generation,
+            Context = sav.Context,
             Generation = sav.Generation,
             Version = (GameVersion)((ComboItem?)EncVersion.SelectedItem??Any).Value,
             Nature = (EncounterSettings.UsePkEditorAsCriteria ? pk.Nature : 0),

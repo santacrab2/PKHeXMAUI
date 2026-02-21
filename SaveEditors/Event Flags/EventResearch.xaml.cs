@@ -6,7 +6,7 @@ namespace PKHeXMAUI;
 public partial class EventResearch : ContentPage
 {
     private readonly EventWorkspace<IEventFlag37, ushort> Editor;
-    public static Dictionary<string, bool> ValueDict = [];
+    public static Dictionary<NamedEventValue, bool> ValueDict = [];
     private readonly List<Tuple<string, List<ComboItem>, ushort, ComboItem>> ConstList = [];
     public EventResearch(IEventFlag37 sav, GameVersion version)
     {
@@ -29,7 +29,7 @@ public partial class EventResearch : ContentPage
         labels = [.. labels.OrderByDescending(z => z.Type)];
         for (var i = 0; i < labels.Count; i++)
         {
-            ValueDict.Add(labels[i].Name, values[labels[i].Index]);
+            ValueDict.Add(labels[i], values[labels[i].Index]);
         }
     }
     private void AddConstList()

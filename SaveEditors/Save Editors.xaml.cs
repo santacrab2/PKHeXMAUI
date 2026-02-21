@@ -96,11 +96,10 @@ public partial class SaveEditors : ContentPage
     {
         Navigation.PushModalAsync(sav switch
         {
-            SAV1 => new EventReset1((SAV1)sav),
+            SAV1 s => new EventReset1(s),
             SAV2 => new EventFlags2Tab(),
-            IEventFlag37 => new EventFlagsTab((IEventFlag37)sav,sav.Version),
-            IEventFlagProvider37 => new EventFlagsTab(((IEventFlagProvider37)sav).EventWork,sav.Version),
-            _ => throw new Exception()
+            IEventFlag37 g37 => new EventFlagsTab(g37,sav.Version),
+            IEventFlagProvider37 p=> new EventFlagsTab(p.EventWork,sav.Version)
         });
     }
 

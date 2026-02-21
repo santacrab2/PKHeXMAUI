@@ -6,7 +6,7 @@ namespace PKHeXMAUI;
 public partial class EventFlags : ContentPage
 {
     public static EventWorkspace<IEventFlag37, ushort> Editor;
-    public Dictionary<string, bool> ValueDict = [];
+    public Dictionary<NamedEventValue, bool> ValueDict = [];
     public EventFlags(IEventFlag37 sav, GameVersion version)
     {
         InitializeComponent();
@@ -21,7 +21,7 @@ public partial class EventFlags : ContentPage
             check.SetBinding(CheckBox.IsCheckedProperty, new Binding("Value"));
             grid.Add(check);
             var label = new Label();
-            label.SetBinding(Label.TextProperty, new Binding("Key"));
+            label.SetBinding(Label.TextProperty, new Binding("Key.Name"));
             grid.Add(label, 1);
             var tap2 = new TapGestureRecognizer
             {
@@ -39,7 +39,7 @@ public partial class EventFlags : ContentPage
         labels = [.. labels.OrderByDescending(z => z.Type)];
         for (var i = 0; i < labels.Count; i++)
         {
-            ValueDict.Add(labels[i].Name, values[labels[i].Index]);
+            ValueDict.Add(labels[i], values[labels[i].Index]);
         }
         FlagCollection.ItemsSource = ValueDict;
     }
@@ -49,7 +49,8 @@ public partial class EventFlags : ContentPage
         Grid gr = (Grid?)g ?? [];
         var chs = ((CheckBox)gr.Children[0]).IsChecked;
         ((CheckBox)gr.Children[0]).IsChecked = !chs;
-        ValueDict[((Label)gr.Children[1]).Text] = !chs;
+        var val = ValueDict.Where(z=>z.Key.Name ==((Label)gr.Children[1]).Text).First();
+        ValueDict[val.Key] = !chs;
     }
     public async Task save()
     {
@@ -58,7 +59,7 @@ public partial class EventFlags : ContentPage
         var labels = list.Flag;
         for (int i = 0; i < labels.Count; i++)
         {
-            values[labels[i].Index] = ValueDict[labels[i].Name];
+            values[labels[i].Index] = ValueDict[labels[i]];
         }
         
         //Editor.Save();
