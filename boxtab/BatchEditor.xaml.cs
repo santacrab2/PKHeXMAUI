@@ -11,11 +11,11 @@ public partial class BatchEditor : ContentPage
 	{
 		InitializeComponent();
 		BatchFormat.Items.Add("Any");
-        foreach (Type t in BatchEditing.Types)
+        foreach (Type t in EntityBatchEditor.Instance.Types)
 			BatchFormat.Items.Add(t.Name.ToLowerInvariant());
 		BatchFormat.Items.Add("All");
 		var format = BatchFormat.SelectedIndex = 0;
-		BatchProperty.ItemSource = BatchEditing.Properties[format];
+		BatchProperty.ItemSource = EntityBatchEditor.Instance.Properties[format];
         BatchProperty.SelectedIndex = -1;
 		BatchProperty.SelectedIndex = 0;
 		BatchEditType.ItemsSource = new object[] { "Set", "==", "!=", ">", ">=", "<", "<=" };
@@ -37,9 +37,9 @@ public partial class BatchEditor : ContentPage
         {
             if (BatchProperty.SelectedItem is not null)
             {
-                BatchEditing.TryGetPropertyType((string)BatchProperty.SelectedItem,out var res, BatchFormat.SelectedIndex);
+                EntityBatchEditor.Instance.TryGetPropertyType((string)BatchProperty.SelectedItem,out var res, BatchFormat.SelectedIndex);
                 PropertyTypeLab.Text = res;
-                if (BatchEditing.TryGetHasProperty(MainPage.pk, (string)BatchProperty.SelectedItem, out var pi))
+                if (EntityBatchEditor.Instance.TryGetHasProperty(MainPage.pk, (string)BatchProperty.SelectedItem, out var pi))
                 {
                     GetPropertyDisplayText(pi, MainPage.pk, out var display);
                     PropertyValueLab.Text = display;
@@ -75,7 +75,7 @@ public partial class BatchEditor : ContentPage
     {
         skipchange = true;
         var format = BatchFormat.SelectedIndex;
-        BatchProperty.ItemSource = BatchEditing.Properties[format];
+        BatchProperty.ItemSource = EntityBatchEditor.Instance.Properties[format];
         skipchange = false;
         BatchProperty.SelectedIndex = 0;
     }
@@ -104,8 +104,8 @@ public partial class BatchEditor : ContentPage
         }
         foreach(var set in sets)
         {
-            BatchEditing.ScreenStrings(set.Filters);
-            BatchEditing.ScreenStrings(set.Instructions);
+            EntityBatchEditor.ScreenStrings(set.Filters);
+            EntityBatchEditor.ScreenStrings(set.Instructions);
         }
         var data = new List<SlotCache>(MainPage.sav.SlotCount);
         SlotInfoLoader.AddBoxData(MainPage.sav, data);
@@ -125,7 +125,7 @@ public partial class BatchEditor : ContentPage
        await Navigation.PopModalAsync();
         ((BoxTab)AppShell.Current.CurrentPage).fillbox();
     }
-    public PKHeX.Core.BatchEditor editor = new();
+    public PKHeX.Core.EntityBatchProcessor editor = new();
     private void ProcessSAV(IList<SlotCache> data, IReadOnlyList<StringInstruction> Filters, IReadOnlyList<StringInstruction> Instructions)
     {
         if (data.Count == 0)
@@ -148,7 +148,7 @@ public partial class BatchEditor : ContentPage
 
             if (entry.Source is SlotInfoBox info && sav.GetBoxSlotFlags(info.Box, info.Slot).IsOverwriteProtected())
                 editor.AddSkipped();
-            else if (!BatchEditing.IsFilterMatchMeta(filterMeta, entry))
+            else if (!EntityBatchEditor.IsFilterMatchMeta(filterMeta, entry))
                 editor.AddSkipped();
             else
                 editor.Process(pk, Filters, Instructions);

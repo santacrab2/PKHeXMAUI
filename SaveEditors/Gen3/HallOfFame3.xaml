@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.HallOfFame3"
+             Title="HallOfFame3">
+    <ScrollView>
+        <VerticalStackLayout>
+            <CollectionView x:Name="HoFCV" HeightRequest="300" SelectionMode="Single" Margin="5"/>
+            <Grid ColumnDefinitions="*,*,*">
+                <local:comboBox x:Name="CB_Species"/>
+                <local:NumericUpDown x:Name="NUD_Members" Grid.Column="1" MinValue="0" MaxValue="5"/>
+                <Button Text="Clear" Clicked="B_Clear_Click" Grid.Column="2"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*">
+                <Label Text="Nickname:"/>
+                <Entry x:Name="TB_Nickname" Grid.Column="1"/>
+                <Label Text="Level:" Grid.Row="1"/>
+                <local:NumericUpDown x:Name="NUD_Level" Grid.Column="1" Grid.Row="1" MinValue="1" MaxValue="100"/>
+                <Label Text="PID:" Grid.Row="2"/>
+                <Entry x:Name="TB_PID" Grid.Column="1" Grid.Row="2"/>
+                <CheckBox x:Name="CHK_Shiny" Grid.Row="3"/>
+                <Label Text="Shiny" Grid.Column="1" Grid.Row="3"/>
+                <Label Text="TID:" Grid.Row="4"/>
+                <Entry x:Name="TB_TID" Grid.Column="1" Grid.Row="4"/>
+                <Label Text="SID:" Grid.Row="5"/>
+                <Entry x:Name="TB_SID" Grid.Column="1" Grid.Row="5"/>
+                <Button Text="Cancel" Clicked="B_Cancel_Click" Grid.Row="6"/>
+                <Button Text="Save" Clicked="B_Save_Click" Grid.Column="1" Grid.Row="6"/>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

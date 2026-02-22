@@ -72,6 +72,7 @@ public partial class SaveEditors : ContentPage
         B_HoneyTree.IsVisible = (sav is SAV4Sinnoh);
         MailBoxButton.IsVisible = (sav is SAV2 or SAV3 or SAV4 or SAV5);
         B_Underground.IsVisible = (sav is SAV4Sinnoh);
+        B_HallofFame.IsVisible = (sav is SAV3);
     }
 
     private void OpenTrainerEditor(object sender, EventArgs e)
@@ -178,5 +179,10 @@ public partial class SaveEditors : ContentPage
     private void B_Underground_Clicked(object sender, EventArgs e)
     {
         Navigation.PushModalAsync(new UndergroundTab());
+    }
+
+    private void B_HallofFame_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new HallOfFame3((SAV3)sav));
     }
 }

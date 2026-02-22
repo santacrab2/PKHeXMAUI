@@ -28,7 +28,7 @@ public partial class NumericUpDown : ContentView
 
     private void Increase(object sender, EventArgs e)
     {
-        if (Number+1 > MaxValue)
+        if (Number+1 >= MaxValue)
             Number = MaxValue;
         else
             Number++;
@@ -36,7 +36,7 @@ public partial class NumericUpDown : ContentView
 
     private void Decrease(object sender, EventArgs e)
     {
-        if (Number < MinValue)
+        if (Number <= MinValue)
             Number = MinValue;
         else
             Number--;
