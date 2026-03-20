@@ -391,7 +391,7 @@ public partial class WondercardEditor : ContentPage
         if (import is null)
             return;
 
-        var path = import.FileName;
+        var path = import.FullPath;
         var data = File.ReadAllBytes(path);
         var ext = Path.GetExtension(path.AsSpan());
         var gift = MysteryGift.GetMysteryGift(data, ext);
