@@ -1,5 +1,6 @@
-using System.Windows.Input;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using PKHeX.Core;
+using System.Windows.Input;
 using static PKHeXMAUI.MainPage;
 
 namespace PKHeXMAUI;
@@ -442,7 +443,17 @@ public partial class StatsTab : ContentPage
 
     private void randomizeivs(object sender, EventArgs e)
     {
-        pk.SetRandomIVs();
+        Span<int> ivs = stackalloc int[6];
+        var la = new LegalityAnalysis(pk);
+        var enc = la.EncounterMatch;
+        if (enc is IFlawlessIVCount { FlawlessIVCount: not 0 } fc)
+            pk.SetRandomIVs(ivs, fc.FlawlessIVCount);
+        else if (enc is IFixedIVSet { IVs: { IsSpecified: true } iv })
+            pk.SetRandomIVs(ivs, iv);
+        else if (enc is IFlawlessIVCountConditional c && c.GetFlawlessIVCount(pk) is { Max: not 0 } x)
+            pk.SetRandomIVs(ivs, Util.Rand.Next(x.Min, x.Max + 1));
+        else
+            pk.SetRandomIVs(ivs);
         applystatsinfo(pk);
     }
 
