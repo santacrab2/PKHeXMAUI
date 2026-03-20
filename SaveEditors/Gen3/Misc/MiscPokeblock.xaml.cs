@@ -7,8 +7,8 @@ namespace PKHeXMAUI;
 public partial class MiscPokeblock : ContentPage
 {
     private PokeBlock3Case Case = null!; // initialized on load
-    IGen3Hoenn SAV;
-    public MiscPokeblock(IGen3Hoenn sav)
+    ISaveBlock3LargeHoenn SAV;
+    public MiscPokeblock(ISaveBlock3LargeHoenn sav)
 	{
 		InitializeComponent();
         SAV = sav;

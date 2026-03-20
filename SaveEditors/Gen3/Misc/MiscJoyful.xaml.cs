@@ -4,8 +4,8 @@ namespace PKHeXMAUI;
 
 public partial class MiscJoyful : ContentPage
 {
-	IGen3Joyful SAV;
-	public MiscJoyful(IGen3Joyful j)
+    ISaveBlock3SmallExpansion SAV;
+	public MiscJoyful(ISaveBlock3SmallExpansion j)
 	{
 		InitializeComponent();
 		SAV = j;

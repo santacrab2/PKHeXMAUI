@@ -8,9 +8,10 @@ public partial class RTC3Editor : ContentPage
 	public RTC3Editor(SaveFile sav)
 	{
 		InitializeComponent();
-        SAV = (IGen3Hoenn)sav;
-        ClockInitial = SAV.ClockInitial;
-        ClockElapsed = SAV.ClockElapsed;
+        SAV = (SAV3)sav;
+        Small = (ISaveBlock3SmallHoenn)SAV.SmallBlock;
+        ClockInitial = Small.ClockInitial;
+        ClockElapsed = Small.ClockElapsed;
         InitialDayEntry.Text = ClockInitial.Day.ToString();
         InitialHoursEntry.Text = ClockInitial.Hour.ToString();
         InitialMinutesEntry.Text = ClockInitial.Minute.ToString();
@@ -20,7 +21,8 @@ public partial class RTC3Editor : ContentPage
         ElapsedMinutesEntry.Text = ClockElapsed.Minute.ToString();
         ElapsedSecondsEntry.Text = ClockElapsed.Second.ToString();
     }
-    private readonly IGen3Hoenn SAV;
+    private readonly SAV3 SAV;
+    private readonly ISaveBlock3SmallHoenn Small;
     private readonly RTC3 ClockInitial;
     private readonly RTC3 ClockElapsed;
     private void ResetRTCClick(object sender, EventArgs e)
@@ -42,8 +44,8 @@ public partial class RTC3Editor : ContentPage
     private void SaveRTC(object sender, EventArgs e)
     {
         SaveData();
-        SAV.ClockInitial = ClockInitial;
-        SAV.ClockElapsed = ClockElapsed;
+        Small.ClockInitial = ClockInitial;
+        Small.ClockElapsed = ClockElapsed;
         Navigation.PopModalAsync();
     }
     private void SaveData()

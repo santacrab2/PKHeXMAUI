@@ -10,7 +10,7 @@ public partial class RoamerEditor3 : ContentPage
 	{
 		InitializeComponent();
 		SAV = sav;
-		Reader = new Roamer3(sav);
+		Reader = new Roamer3(sav.LargeBlock);
 		CB_Species.ItemSource = GameInfo.FilteredSources.Species.ToList();
 		CB_Species.DisplayMemberPath = "Text";
         E_PID.Text = Reader.PID.ToString("X8");

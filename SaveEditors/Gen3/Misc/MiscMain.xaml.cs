@@ -11,9 +11,9 @@ public partial class MiscMainEditor : ContentPage
 		InitializeComponent();
         if (SAV is SAV3E em)
         {
-            E_BP.Number = em.BP;
-            E_EarnedBP.Number = em.BPEarned;
-            E_EarnedBP.ValueChanged += (_, _) => em.BPEarned = (uint)E_EarnedBP.Number;
+            E_BP.Number = em.SmallBlock.BP;
+            E_EarnedBP.Number = em.SmallBlock.BPEarned;
+            E_EarnedBP.ValueChanged += (_, _) => em.SmallBlock.BPEarned = (ushort)E_EarnedBP.Number;
         }
         else
         {

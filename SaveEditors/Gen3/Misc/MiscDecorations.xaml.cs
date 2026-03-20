@@ -5,7 +5,7 @@ namespace PKHeXMAUI;
 
 public partial class MiscDecorations : ContentPage
 {
-	public MiscDecorations(IGen3Hoenn sav)
+	public MiscDecorations(ISaveBlock3LargeHoenn sav)
 	{
 		InitializeComponent();
 		ObservableCollection<Tuple<DecorationCategory3,Decoration3[]>> decoarray = [Tuple.Create(DecorationCategory3.Desk, sav.Decorations.Desk.ToArray()), Tuple.Create(DecorationCategory3.Chair, sav.Decorations.Chair.ToArray()), Tuple.Create(DecorationCategory3.Plant, sav.Decorations.Plant.ToArray()), Tuple.Create(DecorationCategory3.Ornament, sav.Decorations.Ornament.ToArray()), Tuple.Create(DecorationCategory3.Mat, sav.Decorations.Mat.ToArray()), Tuple.Create(DecorationCategory3.Poster, sav.Decorations.Poster.ToArray()), Tuple.Create(DecorationCategory3.Doll, sav.Decorations.Doll.ToArray()), Tuple.Create(DecorationCategory3.Cushion, sav.Decorations.Cushion.ToArray())];

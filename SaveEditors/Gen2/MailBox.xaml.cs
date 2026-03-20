@@ -102,7 +102,7 @@ public partial class MailBox : ContentPage
             case SAV3 sav3:
                 m = new Mail3[6 + 10];
                 for (int i = 0; i < m.Length; i++)
-                    m[i] = sav3.GetMail(i);
+                    m[i] = sav3.LargeBlock.GetMail(i);
 
                 MailItemID = [121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132];
                 PartyBoxCount = 6;

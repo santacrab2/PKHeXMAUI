@@ -21,8 +21,8 @@ public partial class MiscTab : TabbedPage
         MME = new MiscMainEditor();
 		MRE = new((SAV3)sav);
         misctab3.Children.Add(MME);
-		if(sav is IGen3Joyful j)
-		{
+        if (((SAV3)sav).SmallBlock is ISaveBlock3SmallExpansion j)
+        {
             MJE = new(j);
 			misctab3.Children.Add(MJE);
         }
@@ -34,8 +34,8 @@ public partial class MiscTab : TabbedPage
 			misctab3.Children.Add(MBF);
 		}
         misctab3.Children.Add(MRE);
-        if (sav is IGen3Hoenn hoenn)
-		{
+        if (((SAV3)sav).LargeBlock is ISaveBlock3LargeHoenn hoenn)
+        {
 			MPB = new(hoenn);
 			MDE = new(hoenn);
 			MPE = new((SAV3)sav);

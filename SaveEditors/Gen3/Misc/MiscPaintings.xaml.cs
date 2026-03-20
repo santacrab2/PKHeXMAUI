@@ -28,8 +28,9 @@ public partial class MiscPaintings : ContentPage
     {
         if ((uint)index >= 5)
             return;
-        var gallery = (IGen3Hoenn)SAV;
-        var painting = gallery.GetPainting(index);
+        if (SAV.LargeBlock is not ISaveBlock3LargeHoenn gallery)
+            return;
+        var painting = gallery.GetPainting(index, SAV.Japanese);
 
         CurrentPaintingView.IsVisible = PaintingEnabledCheck.IsChecked = SAV.GetEventFlag(Paintings3.GetFlagIndexContestStat(index));
 
@@ -56,8 +57,9 @@ public partial class MiscPaintings : ContentPage
     {
         if ((uint)index >= 5)
             return;
-        var gallery = (IGen3Hoenn)SAV;
-        var painting = gallery.GetPainting(index);
+        if (SAV.LargeBlock is not ISaveBlock3LargeHoenn gallery)
+            return;
+        var painting = gallery.GetPainting(index, SAV.Japanese);
 
         var enabled = PaintingEnabledCheck.IsChecked;
         SAV.SetEventFlag(Paintings3.GetFlagIndexContestStat(index), enabled);
