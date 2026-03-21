@@ -19,7 +19,7 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">30.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<Nullable>enable</Nullable>
@@ -43,7 +43,7 @@
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android36.0|AnyCPU'">
@@ -53,37 +53,37 @@
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.26100.0|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.26100.0|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.02.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 
