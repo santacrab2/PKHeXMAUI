@@ -130,7 +130,9 @@ public partial class LiveHex : ContentPage
                 await DisplayAlertAsync("Invalid", "Invalid Slot number", "cancel");
                 return;
             }
-            Remote.SendSlot(pk.EncryptedBoxData, box - 1, slot - 1);
+            Span<byte> data = stackalloc byte[MainPage.sav.SIZE_BOXSLOT];
+            pk.WriteEncryptedDataStored(data);
+            Remote.SendSlot(data, box - 1, slot - 1);
         }
     }
 

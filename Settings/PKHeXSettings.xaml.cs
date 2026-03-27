@@ -48,17 +48,17 @@ public partial class PKHeXSettings : ContentPage
 }
 public class PSettings
 {
-    public static StartPage StartupPage { get => (StartPage)Preferences.Get("StartupPage", 0); }
-	public static bool IgnoreLegalPopup { get => Preferences.Get("IgnoreLegalPopup",false); }
-	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true);  }
-	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false);  }
-	public static bool AllowIncompatibleConversion { get => Preferences.Default.Get("AllowIncompatibleConversion", false); }
-    public static bool SetUpdatePKM { get => Preferences.Get("SetUpdatePKM", true); }
+    public static StartPage StartupPage { get => (StartPage)Preferences.Get("StartupPage", 0); set => Preferences.Set("StartupPage", (int)value); } 
+	public static bool IgnoreLegalPopup { get => Preferences.Get("IgnoreLegalPopup", false); set => Preferences.Set("IgnoreLegalPopup", value); }
+	public static bool RememberLastSave { get => Preferences.Default.Get("RememberLastSave", true); set => Preferences.Set("RememberLastSave", value); }
+	public static bool DisplayLegalBallsOnly { get => Preferences.Default.Get("DisplayLegalBallsOnly", false); set => Preferences.Set("DisplayLegalBallsOnly", value); }
+	public static bool AllowIncompatibleConversion { get => Preferences.Default.Get("AllowIncompatibleConversion", false); set => Preferences.Set("AllowIncompatibleConversion", value); }
+    public static bool SetUpdatePKM { get => Preferences.Get("SetUpdatePKM", true); set => Preferences.Set("SetUpdatePKM", value); }
 }
 public class EncounterSettings
 {
-	public static bool FilterUnavailableSpecies { get => Preferences.Default.Get("FilterUnavailableSpecies", false); }
-	public static bool UsePkEditorAsCriteria { get => Preferences.Default.Get("UsePkEditorAsCriteria", false); }
+	public static bool FilterUnavailableSpecies { get => Preferences.Default.Get("FilterUnavailableSpecies", false); set => Preferences.Set("FilterUnavalableSpecies", value); }
+	public static bool UsePkEditorAsCriteria { get => Preferences.Default.Get("UsePkEditorAsCriteria", false); set => Preferences.Set("UsePKEditorAsCriteria", value); }
 }
 
 public class GenericCollection

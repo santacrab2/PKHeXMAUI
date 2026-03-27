@@ -155,8 +155,12 @@ public partial class BoxTab : ContentPage
                 sav.SetBoxSlotAtIndex(((boxsprite)toreplace).pkm, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 if (Remote.Connected && InjectinSlot)
                 {
-                    Remote.SendSlot(((boxsprite)boxview.SelectedItem).pkm.EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
-                    Remote.SendSlot(((boxsprite)toreplace).pkm.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                    Span<byte> selecteddata = stackalloc byte[MainPage.sav.SIZE_PARTY];
+                    ((boxsprite)boxview.SelectedItem).pkm.WriteEncryptedDataParty(selecteddata);
+                    Remote.SendSlot(selecteddata, boxnum.SelectedIndex, toreplaceindex);
+                    Span<byte> replacedata = stackalloc byte[MainPage.sav.SIZE_PARTY];
+                    ((boxsprite)toreplace).pkm.WriteEncryptedDataParty(replacedata);
+                    Remote.SendSlot(replacedata, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 }
             }
             catch (Exception)
@@ -164,7 +168,9 @@ public partial class BoxTab : ContentPage
                 sav.SetBoxSlotAtIndex((PKM?)e?.Data?.Properties["PKM"]??EntityBlank.GetBlank(sav.Generation), boxnum.SelectedIndex, toreplaceindex);
                 if (Remote.Connected && InjectinSlot)
                 {
-                    Remote.SendSlot(((PKM?)e?.Data?.Properties["PKM"])?.EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
+                    Span<byte> data =  new(new byte[MainPage.sav.SIZE_PARTY]);
+                    ((PKM?)e?.Data?.Properties["PKM"]??EntityBlank.GetBlank(sav.Generation)).WriteEncryptedDataParty(data);
+                    Remote.SendSlot(data, boxnum.SelectedIndex, toreplaceindex);
                 }
             }
         }
@@ -173,7 +179,9 @@ public partial class BoxTab : ContentPage
             sav.SetBoxSlotAtIndex((PKM?)e?.Data?.Properties["PKM"]??EntityBlank.GetBlank(sav.Generation), boxnum.SelectedIndex, toreplaceindex);
             if(Remote.Connected && InjectinSlot)
             {
-                Remote.SendSlot(((PKM?)e?.Data?.Properties["PKM"])?.EncryptedPartyData, boxnum.SelectedIndex, toreplaceindex);
+                Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
+                ((PKM?)e?.Data?.Properties["PKM"]??EntityBlank.GetBlank(sav.Generation)).WriteEncryptedDataParty(data);
+                Remote.SendSlot(data, boxnum.SelectedIndex, toreplaceindex);
             }
         }
         deleter.IsVisible = false;
@@ -214,7 +222,9 @@ public partial class BoxTab : ContentPage
             if (Remote.Connected && InjectinSlot)
             {
                 pk.ResetPartyStats();
-                Remote.SendSlot(pk.EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
+                pk.WriteEncryptedDataParty(data);
+                Remote.SendSlot(data, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             }
             sav.SetBoxSlotAtIndex(pk, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             fillbox();
@@ -231,7 +241,9 @@ public partial class BoxTab : ContentPage
         {
             if (Remote.Connected && InjectinSlot)
             {
-                Remote.SendSlot(EntityBlank.GetBlank(sav.Generation, sav.Version).EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
+                EntityBlank.GetBlank(sav.Generation, sav.Version).WriteEncryptedDataParty(data);
+                Remote.SendSlot(data, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             }
             sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             fillbox();
@@ -250,7 +262,9 @@ public partial class BoxTab : ContentPage
             {
                 if (Remote.Connected && InjectinSlot)
                 {
-                    Remote.SendSlot(EntityBlank.GetBlank(sav.Generation, sav.Version).EncryptedPartyData, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                    Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
+                    EntityBlank.GetBlank(sav.Generation, sav.Version).WriteEncryptedDataParty(data);
+                    Remote.SendSlot(data, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 }
                 sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 fillbox();

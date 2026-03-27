@@ -383,7 +383,9 @@ public partial class MainPage : ContentPage
     public async void pk9saver_Clicked(object sender, EventArgs e)
     {
         pk.ResetPartyStats();
-        await using var CrossedStreams = new MemoryStream(pk.DecryptedPartyData);
+        Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
+        pk.WriteDecryptedDataParty(data);
+        await using var CrossedStreams = new MemoryStream([..data]);
         var result = await FileSaver.Default.SaveAsync(pk.FileName, CrossedStreams, CancellationToken.None);
         if (result.IsSuccessful)
             await DisplayAlertAsync("Success", $"PK File saved at {result.FilePath}", "cancel");
