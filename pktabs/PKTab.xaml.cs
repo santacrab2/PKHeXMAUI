@@ -801,17 +801,12 @@ public partial class MainPage : ContentPage
         var set = new ShowdownSet(await Clipboard.GetTextAsync());
         var result = sav.GetLegalFromSet(set);
         var pkm = result.Created;
-        if(new LegalityAnalysis(pkm).Valid)
+        if(!new LegalityAnalysis(pkm).Valid)
         {
-            pk = pkm;
-            applymainpkinfo(pk);
+            await DisplayAlertAsync("Showdown", "I could not legalize the provided Showdown Set", "cancel");
         }
-        else
-        {
-            if (PluginSettings.EnableMemesForIllegalSets)
-                applymainpkinfo(pkm);
-            await DisplayAlertAsync("Showdown", "I could not legalize the provided Showdown Set","cancel");
-        }
+        pk = pkm;
+        applymainpkinfo(pk);
     }
 
     public async void ExportShowdown(object sender, EventArgs e)

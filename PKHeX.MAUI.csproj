@@ -43,7 +43,7 @@
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android36.0|AnyCPU'">
@@ -53,37 +53,37 @@
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.26100.0|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.26100.0|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.03.21</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.03.30</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 
@@ -154,7 +154,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
 		<PackageReference Include="Octokit" Version="14.0.0" />
-		<PackageReference Include="PKHeX.Core" Version="26.3.20" />
+		<PackageReference Include="PKHeX.Core" Version="26.4.11" />
 		<PackageReference Include="Plugin.Maui.Audio" Version="3.1.1" />
 		<PackageReference Include="SkiaSharp" Version="3.119.2" />
 		<PackageReference Include="System.Drawing.Common" Version="10.0.5" />
