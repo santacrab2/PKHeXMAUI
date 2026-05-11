@@ -70,7 +70,7 @@ public partial class Pokedex1 : ContentPage
     private void SetCaughtNone(object sender, EventArgs e)
     {
         foreach (var info in pkdxInfo)
-            info.caught = true;
+            info.caught = false;
     }
     private void save(object sender, EventArgs e)
     {
