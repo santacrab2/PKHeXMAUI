@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using PKHeX.Core;
-using System.Net.Sockets;
-using PKHeX.Core.AutoMod;
+﻿using CommunityToolkit.Maui.Storage;
 using Octokit;
-using System.Windows.Input;
+using PKHeX.Core;
+using PKHeX.Core.AutoMod;
 using PKHeX.Core.Injection;
-using CommunityToolkit.Maui.Storage;
+using System.Collections;
+using System.Globalization;
+using System.Net.Sockets;
+using System.Windows.Input;
 namespace PKHeXMAUI;
 
 public partial class MainPage : ContentPage
@@ -865,7 +866,7 @@ public partial class MainPage : ContentPage
     {
         if(displaypid.Text.Length > 0 && !SkipTextChange)
         {
-            if (uint.TryParse(displaypid.Text, out var result))
+            if (uint.TryParse(displaypid.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var result))
             {
                 pk.PID = result;
             }
