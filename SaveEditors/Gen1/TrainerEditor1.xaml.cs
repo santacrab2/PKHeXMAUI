@@ -204,10 +204,10 @@ public partial class TrainerEditor1 : ContentPage
             if (parsed && iresult != sav4.Y) sav4.Y = iresult;
             parsed = int.TryParse(ZCoordEntry.Text, out iresult);
             if (parsed && iresult != sav4.Z) sav4.Z = iresult;
-            sav4.Badges = badgeval & 0xFF;
+            sav4.Badges = (byte)(badgeval & 0xFF);
             if (sav4 is SAV4HGSS hgss)
             {
-                hgss.Badges16 = badgeval >> 8;
+                hgss.Badges16 = (byte)(badgeval >> 8);
             }
             var country = (ComboItem)CountryPicker.SelectedItem;
             if (country is not null)

@@ -242,15 +242,15 @@ public partial class BoxTab : ContentPage
             if (Remote.Connected && InjectinSlot)
             {
                 Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
-                EntityBlank.GetBlank(sav.Generation, sav.Version).WriteEncryptedDataParty(data);
+                EntityBlank.GetBlank(sav).WriteEncryptedDataParty(data);
                 Remote.SendSlot(data, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             }
-            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             fillbox();
         }
         catch (Exception)
         {
-            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+            sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
             fillbox();
         }
     }
@@ -263,15 +263,15 @@ public partial class BoxTab : ContentPage
                 if (Remote.Connected && InjectinSlot)
                 {
                     Span<byte> data = stackalloc byte[MainPage.sav.SIZE_PARTY];
-                    EntityBlank.GetBlank(sav.Generation, sav.Version).WriteEncryptedDataParty(data);
+                    EntityBlank.GetBlank(sav).WriteEncryptedDataParty(data);
                     Remote.SendSlot(data, boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 }
-                sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 fillbox();
             }
             catch (Exception)
             {
-                sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav.Generation, sav.Version), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
+                sav.SetBoxSlotAtIndex(EntityBlank.GetBlank(sav), boxnum.SelectedIndex, boxsprites.IndexOf((boxsprite)boxview.SelectedItem));
                 fillbox();
             }
         }

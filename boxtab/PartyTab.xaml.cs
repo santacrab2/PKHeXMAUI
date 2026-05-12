@@ -84,7 +84,7 @@ public partial class PartyTab : ContentPage
         }
         while (i < 6)
         {
-            PartySprites.Add(new boxsprite(EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version), i));
+            PartySprites.Add(new boxsprite(EntityBlank.GetBlank(sav), i));
             i++;
         }
         PartyView.ItemsSource = PartySprites;
