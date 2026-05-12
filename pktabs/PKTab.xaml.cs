@@ -31,7 +31,7 @@ public partial class MainPage : ContentPage
         sav = AppShell.AppSaveFile ?? BlankSaveFile.Get(EntityContext.Gen9, "");
         GameInfo.FilteredSources = new FilteredGameDataSource(sav, GameInfo.Sources);
         datasourcefiltered = GameInfo.FilteredSources;
-        pk = EntityBlank.GetBlank(sav.Generation,(GameVersion)sav.Version);
+        pk = EntityBlank.GetBlank(sav);
         pk.Species = sav.MaxSpeciesID;
         pk.Language = sav.Language;
         var validvers = RamOffsets.GetValidVersions(sav);
@@ -402,7 +402,7 @@ public partial class MainPage : ContentPage
             var tree = EvolutionTree.GetEvolutionTree(sav.Context);
             var evos = tree.GetEvolutionsAndPreEvolutions(pk.Species, pk.Form);
             if(!evos.Contains(((ushort)test.Value,pk.Form)))
-                pk = EntityBlank.GetBlank(sav.Generation, (GameVersion)sav.Version);
+                pk = EntityBlank.GetBlank(sav);
             pk.Language = sav.Language;
             formargstepper.IsVisible = false;
             formlabel.IsVisible = false;
