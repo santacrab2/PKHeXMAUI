@@ -14,9 +14,8 @@ public partial class Pokedex1 : ContentPage
 		InitializeComponent();
         SAV = sav;
         MaxSpeciesID = SAV.MaxSpeciesID;
-        var speciesNames = GameInfo.Strings.specieslist.AsSpan(1, MaxSpeciesID);
-        foreach (var sp in speciesNames)
-            pkdxInfo.Add(new SimplePokedexInfo(sp));
+        for (ushort i = 1; i <= MaxSpeciesID; i++)
+            pkdxInfo.Add(new SimplePokedexInfo(i));
         SeenCollection.ItemTemplate = new DataTemplate(() =>
         {
             Grid grid = new() { Padding = 10 };
@@ -76,9 +75,10 @@ public partial class Pokedex1 : ContentPage
     {
         for(var i = 1; i < MaxSpeciesID; i++)
         {
-            SAV.SetSeen((ushort)i, pkdxInfo[i].seen);
-            SAV.SetCaught((ushort)i, pkdxInfo[i].caught);
+            MainPage.sav.SetSeen((ushort)i, pkdxInfo[i].seen);
+            MainPage.sav.SetCaught((ushort)i, pkdxInfo[i].caught);
         }
+        
         Navigation.PopModalAsync();
     }
 }
@@ -88,11 +88,10 @@ public class SimplePokedexInfo
     public bool caught { get; set; }
     public ushort SpecieID { get; set; }
     public string Species { get; set; }
-    public SimplePokedexInfo(string species)
+    public SimplePokedexInfo(ushort species)
     {
-        Species = species;
-        SpeciesName.TryGetSpecies(species, 2, out var specid);
-        SpecieID = specid;
+        Species = SpeciesName.GetSpeciesName(species,2);
+        SpecieID = species;
         seen = MainPage.sav.GetSeen(SpecieID);
         caught = MainPage.sav.GetCaught(SpecieID);
     }
