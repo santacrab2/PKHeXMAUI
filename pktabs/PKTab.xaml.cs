@@ -508,7 +508,9 @@ public partial class MainPage : ContentPage
                 pk.EXP = result;
                 var newlevel = Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth);
                 pk.CurrentLevel = newlevel;
+                SkipTextChange = true;
                 leveldisplay.Text = $"{pk.CurrentLevel}";
+                SkipTextChange = false;
             }
             checklegality();
         }

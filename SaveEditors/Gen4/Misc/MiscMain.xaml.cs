@@ -75,7 +75,7 @@ public partial class MiscMain : ContentPage
         }
         else if (SAV is SAV4HGSS hgss)
         {
-            NUD_PokeathlonPoints.Number = hgss.PokeathlonPoints;
+            NUD_PokeathlonPoints.Number = hgss.Pokeathlon.Points;
             L_UGFlags.IsVisible = NUD_UGFlags.IsVisible = false;
             ReadOnlySpan<string> items = ["Map Johto", "Map Johto+", "Map Johto & Kanto"];
             var index = hgss.MapUnlockState;
@@ -105,7 +105,7 @@ public partial class MiscMain : ContentPage
         }
         else if (SAV is SAV4HGSS hgss)
         {
-            hgss.PokeathlonPoints = (uint)NUD_PokeathlonPoints.Number;
+            hgss.Pokeathlon.Points = (uint)NUD_PokeathlonPoints.Number;
             hgss.MapUnlockState = (MapUnlockState4)CB_UpgradeMap.SelectedIndex;
         }
 

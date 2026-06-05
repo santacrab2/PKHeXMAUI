@@ -59,7 +59,7 @@ public partial class MiscMedals : ContentPage
         if (SAV is SAV5B2W2 b2w2)
         {
             var medal = b2w2.Medals[CB_CurrentMedal.SelectedIndex];
-            medal.State = (Medal5State)CB_MedalState.SelectedIndex;
+            medal.State = (MedalState5)CB_MedalState.SelectedIndex;
             if (medal.CanHaveDate)
             {
                 if (!medal.HasDate)

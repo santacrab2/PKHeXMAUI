@@ -47,11 +47,11 @@ public partial class Geonet4Editor : ContentPage
         });
         if (geonetItems.Count == 0)
             geonetItems.Clear();
-        for (int i = 1; i <= Geonet4.CountryCount; i++)
+        for (int i = 1; i <= LocaleNDS4.CountryCount; i++)
         {
             var country = countryList[i].Value;
             var countryName = countryList[i].Text;
-            var subregionCount = Geonet4.GetSubregionCount((byte)country);
+            var subregionCount = LocaleNDS4.GetSubregionCount((byte)country);
             var subregionList = (subregionCount == 0) ? subregionListDefault : Util.GetCountryRegionList($"gen4_sr_{country:000}", "en");
             if (subregionCount == 0)
             {

@@ -23,7 +23,7 @@ public partial class RoamerEditor3 : ContentPage
         for (int i = 0; i < iv.Length; i++)
             iv[i].Text = IVs[i].ToString();
 
-        CHK_Active.IsChecked = Reader.Active;
+        CHK_Active.IsChecked = Reader.IsActive;
         NUD_Level.Number = Math.Min(NUD_Level.MaxValue, Reader.CurrentLevel);
     }
     private void SaveData()
@@ -39,7 +39,7 @@ public partial class RoamerEditor3 : ContentPage
             Util.ToInt32(E_SPAIV.Text),
             Util.ToInt32(E_SPDIV.Text),
         ]);
-        Reader.Active = CHK_Active.IsChecked;
+        Reader.IsActive = CHK_Active.IsChecked;
         Reader.CurrentLevel = (byte)NUD_Level.Number;
     }
 
