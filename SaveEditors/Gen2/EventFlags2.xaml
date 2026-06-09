@@ -5,7 +5,7 @@
              Title="Event Flags">
     <ScrollView>
         <VerticalStackLayout>
-            <CollectionView x:Name="FlagCollection" HeightRequest="400"/>
+            <CollectionView x:Name="FlagCollection" HeightRequest="400" VerticalScrollBarVisibility="Always"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
