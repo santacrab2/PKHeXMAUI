@@ -1,3 +1,5 @@
+# NO MATTER WHAT YOUTUBE TELLS YOU, THIS APP IS NOT COMPATIBLE WITH ROMHACKS
+
 # Support Server
 ***AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT PROJECTS SERVER***</br>
 Please join the server below for any support needed for the app. Eventually a wiki will be added to answer common questions. <br>
