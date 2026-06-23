@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PKHeXMAUI.EventFlags2"
              Title="Event Flags">
-    <ScrollView>
-        <VerticalStackLayout>
-            <CollectionView x:Name="FlagCollection" HeightRequest="400" VerticalScrollBarVisibility="Always"/>
-        </VerticalStackLayout>
-    </ScrollView>
+    <VerticalStackLayout>
+        <CollectionView x:Name="FlagCollection" HeightRequest="400"/>
+    </VerticalStackLayout>
 </ContentPage>

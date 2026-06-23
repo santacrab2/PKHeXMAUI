@@ -24,8 +24,6 @@
                 <l:comboBox x:Name="CB_Move" Grid.Row="7" Grid.Column="1" SelectedIndexChanged="UpdateSlotValue"/>
                 <Label Grid.Row="8" Text="Animation:"/>
                 <l:NumericUpDown x:Name="NUD_Animation" Grid.Row="8" Grid.Column="1" MinValue="0" MaxValue="5" ValueChanged="UpdateSlotValue"/>
-                <CheckBox x:Name="CHK_Invisible" Grid.Row="9" CheckedChanged="UpdateSlotValue"/>
-                <Label Grid.Row="9" Grid.Column="1" Text="Invisible"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

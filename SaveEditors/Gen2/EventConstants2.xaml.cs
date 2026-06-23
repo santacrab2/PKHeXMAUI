@@ -1,8 +1,6 @@
 
 using static PKHeXMAUI.MainPage;
-using static PKHeXMAUI.EventFlags2;
 using PKHeX.Core;
-using Microsoft.Maui.ApplicationModel;
 namespace PKHeXMAUI;
 
 public partial class EventConstants2 : ContentPage
@@ -53,7 +51,6 @@ public partial class EventConstants2 : ContentPage
         {
             values[labels[i].Index] = ConstList.Find(z => z.Item1 == labels[i].Name)?.Item3??0;
         }
-
-        Editor.Save();
+        ((SAV2)sav).SetAllEventWork(values);
     }
 }

@@ -84,7 +84,7 @@ public partial class TrainerEditor7 : ContentPage
     }
     private void MaxCash(object sender, EventArgs e)
     {
-        OTMoneyEntry.Text = "9,999,999";
+        OTMoneyEntry.Text = "9999999";
     }
     private void UpdateRegion(object sender, EventArgs e)
     {
@@ -122,15 +122,15 @@ public partial class TrainerEditor7 : ContentPage
         SAV.Language = ((ComboItem)LanguagePicker.SelectedItem).Value;
         SAV.GameTime.AlolaTime =(ulong) ((ComboItem)TimeOffsetPicker.SelectedItem).Value;
         SAV.OT = OTNameEntry.Text;
-        var parsed = int.TryParse(TIDEntry.Text, out var result);
+        var parsed = int.TryParse(TIDEntry.Text, System.Globalization.CultureInfo.InvariantCulture, out var result);
         if (parsed) SAV.DisplayTID = (uint)result;
-        parsed = int.TryParse(SIDEntry.Text, out result);
+        parsed = int.TryParse(SIDEntry.Text, System.Globalization.CultureInfo.InvariantCulture, out result);
         if (parsed) SAV.DisplaySID = (uint)result;
-        parsed = int.TryParse(HrsPlayedEntry.Text, out result);
+        parsed = int.TryParse(HrsPlayedEntry.Text, System.Globalization.CultureInfo.InvariantCulture, out result);
         if (parsed) SAV.PlayedHours = result;
-        parsed = int.TryParse(MinPlayedEntry.Text, out result);
+        parsed = int.TryParse(MinPlayedEntry.Text, System.Globalization.CultureInfo.InvariantCulture, out result);
         if (parsed) SAV.PlayedMinutes = result;
-        parsed = int.TryParse(SecPlayedEntry.Text, out result);
+        parsed = int.TryParse(SecPlayedEntry.Text, System.Globalization.CultureInfo.InvariantCulture, out result);
         if (parsed) SAV.PlayedSeconds = result;
         SAV.SecondsToStart = (uint)DateUtil.GetSecondsFrom2000(GSDatePicker.Date.GetValueOrDefault(), GSDatePicker.Date.GetValueOrDefault().AddSeconds(GSTimePicker.Time.GetValueOrDefault().TotalSeconds));
         SAV.SecondsToFame = (uint)DateUtil.GetSecondsFrom2000(HOFDatePicker.Date.GetValueOrDefault(), HOFDatePicker.Date.GetValueOrDefault().AddSeconds(HOFTimePicker.Time.GetValueOrDefault().TotalSeconds));

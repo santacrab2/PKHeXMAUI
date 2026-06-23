@@ -61,8 +61,6 @@ public partial class EventFlags : ContentPage
         {
             values[labels[i].Index] = ValueDict[labels[i]];
         }
-        
-        //Editor.Save();
     }
 }
 

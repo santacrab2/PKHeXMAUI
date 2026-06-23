@@ -5,8 +5,8 @@ namespace PKHeXMAUI;
 
 public partial class EventFlags2 : ContentPage
 {
-    private readonly EventWorkspace<SAV2, byte> Editor;
-    public static Dictionary<string,bool> ValueDict = [];
+    public EventWorkspace<SAV2, byte> Editor;
+    public Dictionary<string,bool> ValueDict = [];
     public EventFlags2()
 	{
 		InitializeComponent();
@@ -23,13 +23,11 @@ public partial class EventFlags2 : ContentPage
             var label = new Label();
             label.SetBinding(Label.TextProperty, new Binding("Key"));
             grid.Add(label, 1);
-            var tap = new TapGestureRecognizer();
-            tap.Tapped += tapp;
-            grid.GestureRecognizers.Add(tap);
+
             var tap2 = new TapGestureRecognizer
             {
                 CommandParameter = grid,
-                Command = new Command(() => tapp(grid, (TappedEventArgs)EventArgs.Empty))
+                Command = new Command(() => tapp(grid))
             };
             check.GestureRecognizers.Add(tap2);
             return grid;
@@ -39,7 +37,6 @@ public partial class EventFlags2 : ContentPage
     private void AddFlagList(EventLabelCollection list, bool[] values)
     {
         var labels = list.Flag;
-        labels = [.. labels.OrderByDescending(z => z.Type)];
         for (var i = 0; i < labels.Count; i++)
         {
             ValueDict.Add(labels[i].Name, values[labels[i].Index]);
@@ -47,7 +44,7 @@ public partial class EventFlags2 : ContentPage
         FlagCollection.ItemsSource = ValueDict;
     }
 
-    public void tapp(object? g, TappedEventArgs? e)
+    public void tapp(object? g)
     {
         Grid gr = (Grid?)g??[];
         var chs = ((CheckBox)gr.Children[0]).IsChecked;
@@ -57,14 +54,15 @@ public partial class EventFlags2 : ContentPage
     public void save()
     {
         EventLabelCollection list = Editor.Labels;
-        bool[] values = Editor.Flags;
         var labels = list.Flag;
+        var sav2 = (SAV2)sav;
+
         for (int i = 0; i < labels.Count; i++)
         {
-            values[labels[i].Index] = ValueDict[labels[i].Name];
+            var flagIndex = labels[i].Index;
+            var newValue = ValueDict[labels[i].Name];
+            sav2.SetEventFlag(flagIndex, newValue);
         }
-
-        Editor.Save();
     }
 }
 

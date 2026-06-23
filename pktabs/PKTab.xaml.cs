@@ -294,7 +294,7 @@ public partial class MainPage : ContentPage
         exp.Text = $"{pkm.EXP}";
         leveldisplay.Text = $"{Experience.GetLevel(pkm.EXP, pkm.PersonalInfo.EXPGrowth)}";
         naturepicker.SelectedItem = datasourcefiltered.Natures.FirstOrDefault(z => z.Value == (int)pkm.Nature)??new ComboItem("Hardy",0);
-        statnaturepicker.SelectedItem = datasourcefiltered.Natures.FirstOrDefault(z => z.Value == (int)pkm.StatNature) ?? new ComboItem("Hardy", 0);
+        statnaturepicker.SelectedItem = datasourcefiltered.Natures.FirstOrDefault(z => z.Value == (int)pkm.StatAlignment) ?? new ComboItem("Hardy", 0);
         iseggcheck.IsChecked = pkm.IsEgg;
         infectedcheck.IsChecked = pkm.IsPokerusInfected;
         curedcheck.IsChecked = pkm.IsPokerusCured;
@@ -700,7 +700,7 @@ public partial class MainPage : ContentPage
     private void applystatnature(object sender, EventArgs e)
     {
         if(!SkipTextChange)
-            pk.StatNature = (Nature?)((ComboItem?)statnaturepicker.SelectedItem)?.Value??Nature.Hardy;
+            pk.StatAlignment = (Nature?)((ComboItem?)statnaturepicker.SelectedItem)?.Value??Nature.Hardy;
         checklegality();
     }
 

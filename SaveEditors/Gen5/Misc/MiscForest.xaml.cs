@@ -67,7 +67,7 @@ public partial class MiscForest : ContentPage
         CB_Move.SelectedItem = filtered.Moves.Where(z=>z.Value==(int)current.Move).First();
         CB_Gender.SelectedIndex = (int)current.Gender;
         CB_Form.SelectedIndex = CB_Form.Items.Count <= current.Form ? 0 : current.Form;
-        NUD_Animation.Number = (current.Animation);
+        NUD_Animation.Number = (decimal)current.Animation;
         CurrentSlot = current;
     }
     private EntreeSlot? CurrentSlot;
@@ -156,13 +156,9 @@ public partial class MiscForest : ContentPage
         {
             CurrentSlot.Form = (byte)CB_Form.SelectedIndex;
         }
-        else if (sender == CHK_Invisible)
-        {
-            CurrentSlot.Invisible = CHK_Invisible.IsChecked;
-        }
         else if (sender == NUD_Animation)
         {
-            CurrentSlot.Animation = (int)NUD_Animation.Number;
+            CurrentSlot.Animation = (EntreeForestAnimation)NUD_Animation.Number;
         }
     }
 }

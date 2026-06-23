@@ -11,6 +11,7 @@ public partial class EventResearch2 : ContentPage
     public EventResearch2(SAV2 sav, GameVersion version)
 	{
 		InitializeComponent();
+        ValueDict = [];
         var editor = Editor = new EventWorkspace<SAV2, byte>(sav, version);
         for (int i = 0; i < editor.Values.Length; i++)
             CB_Stats.ItemSource.Add(new ComboItem(i.ToString(),i));
