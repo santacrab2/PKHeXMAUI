@@ -1,4 +1,5 @@
 # NO MATTER WHAT YOUTUBE TELLS YOU, THIS APP IS NOT COMPATIBLE WITH ROMHACKS
+# Not Compatible with all manufacturers, especially but not limited too Chinese and other Asian specific brands.
 
 # Support Server
 ***AS THIS IS A SIDE PROJECT NO SUPPORT WILL BE PROVIDED ON THE PKHEX DEVELOPMENT PROJECTS SERVER***</br>
