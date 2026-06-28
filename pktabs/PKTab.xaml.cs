@@ -507,7 +507,8 @@ public partial class MainPage : ContentPage
                     return;
                 pk.EXP = result;
                 var newlevel = Experience.GetLevel(pk.EXP, pk.PersonalInfo.EXPGrowth);
-                pk.CurrentLevel = newlevel;
+                if (pk.CurrentLevel != newlevel)
+                    pk.CurrentLevel = newlevel;
                 SkipTextChange = true;
                 leveldisplay.Text = $"{pk.CurrentLevel}";
                 SkipTextChange = false;
@@ -586,19 +587,17 @@ public partial class MainPage : ContentPage
 
     private void changelevel(object sender, TextChangedEventArgs e)
     {
-        if (!SkipTextChange)
+        if (leveldisplay.Text.Length > 0 && !SkipTextChange)
         {
-            if (leveldisplay.Text.Length > 0 && !SkipTextChange)
-            {
-                if (!byte.TryParse(leveldisplay.Text, out var result))
-                    return;
-                pk.CurrentLevel = result;
-                exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
-                pk.EXP = Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth);
+            if (!byte.TryParse(leveldisplay.Text, out var result))
+                return;
+            pk.CurrentLevel = result;
+            exp.Text = $"{Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth)}";
+            pk.EXP = Experience.GetEXP(pk.CurrentLevel, pk.PersonalInfo.EXPGrowth);
 
-                checklegality();
-            }
+            checklegality();
         }
+        
     }
 
         private void applyfriendship(object sender, TextChangedEventArgs e)
