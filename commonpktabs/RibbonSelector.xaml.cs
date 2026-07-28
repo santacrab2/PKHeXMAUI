@@ -52,20 +52,18 @@ public partial class RibbonSelector : ContentPage
         }
         var selectedribbonslist = new List<object>();
         var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
-        int o = 0;
         foreach(var pkrib in pkhasribbonslist)
         {
             if (pkrib.HasRibbon)
             {
                 foreach(var imrunningoutofnames in idk)
                 {
-                    if(imrunningoutofnames.index== o)
+                    if(imrunningoutofnames.info.Name == pkrib.Name)
                     {
                         selectedribbonslist.Add(imrunningoutofnames);
                     }
                 }
             }
-            o++;
         }
         if (!ApplicatorMode)
         {
@@ -91,20 +89,18 @@ public partial class RibbonSelector : ContentPage
         }
         var selectedribbonslist = new List<object>();
         var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
-        int o = 0;
         foreach (var pkrib in pkhasribbonslist)
         {
             if (pkrib.HasRibbon)
             {
                 foreach (var imrunningoutofnames in idk)
                 {
-                    if (imrunningoutofnames.index == o)
+                    if (imrunningoutofnames.info.Name == pkrib.Name)
                     {
                         selectedribbonslist.Add(imrunningoutofnames);
                     }
                 }
             }
-            o++;
         }
         if (!ApplicatorMode)
         {
@@ -132,26 +128,16 @@ public partial class RibbonSelector : ContentPage
     }
     private void applyribbonsandclose(object sender, EventArgs e)
     {
-        for (int c = 0; c < 110; c++)
+        var riblist = RibbonInfo.GetRibbonInfo(pk);
+        foreach (var rib in riblist)
         {
-            if (pk is IRibbonIndex ri)
-                ri.SetRibbon(c, false);
+            ReflectUtil.SetValue(pk, rib.Name, rib.Type is RibbonValueType.Boolean ? false : rib.RibbonCount);
         }
 
         foreach (var ribs in ribboncollection.SelectedItems)
         {
             var rib = (Ribbonstuff)ribs;
-            for (int c = 0; c < 110; c++)
-            {
-                var ribtest = (RibbonIndex)c;
-                if (rib.Name == ribtest.ToString())
-                {
-                    if (pk is IRibbonIndex ri)
-                    {
-                        ri.SetRibbon(c);
-                    }
-                }
-            }
+            var test = ReflectUtil.SetValue(pk, rib.info.Name, rib.typer is RibbonValueType.Boolean ? true : rib.info.RibbonCount);
         }
         Navigation.PopModalAsync();
     }
@@ -182,11 +168,13 @@ public class Ribbonstuff
         typer = rib.Type;
         Name = rib.Name.Replace("Ribbon","");
         spritename = $"{rib.Name}.png";
+        info = rib;
     }
     public string Name { get; set; }
-   public string spritename { get; set; }
+    public string spritename { get; set; }
     public RibbonValueType typer{ get; set; }
     public int index { get; set; }
     public bool affixed { get; set; }
     public Color legal { get; set; } = Colors.Transparent;
+   public RibbonInfo info { get; set; }
 }
