@@ -6,6 +6,7 @@
     <RefreshView x:Name="ribbonrefresh">
     <VerticalStackLayout>
         <CollectionView HeightRequest="500" WidthRequest="400" x:Name="ribboncollection" SelectionMode="Multiple" ></CollectionView>
+        <Button x:Name="affixribbons" Text="Display Ribbon" Clicked="AffixRibbon"></Button>
         <Button x:Name="applyribbons" Text="Apply" Clicked="applyribbonsandclose"></Button>
         <Button x:Name="close" Text="Close" Clicked="closer"/>
     </VerticalStackLayout>

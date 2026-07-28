@@ -11,6 +11,8 @@ public partial class RibbonSelector : ContentPage
         InitializeComponent();
         if (ApplicatorMode)
             applyribbons.IsVisible = false;
+        else
+            affixribbons.IsVisible = false;
 
         ribboncollection.ItemTemplate = new DataTemplate(() =>
         {
