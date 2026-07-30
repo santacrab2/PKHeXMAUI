@@ -48,7 +48,7 @@ public partial class RibbonSelector : ContentPage
         List<Ribbonstuff> idk = [];
         foreach(var fg in ribbs)
         {
-            idk.Add(new Ribbonstuff(fg) { legal = fg.HasRibbon ? Colors.Green : Colors.Transparent});
+            idk.Add(new Ribbonstuff(fg) { legal = fg.HasRibbon ? Color.FromArgb("80008000") : Colors.Transparent});
         }
         var selectedribbonslist = new List<object>();
         var pkhasribbonslist = RibbonInfo.GetRibbonInfo(pk);
