@@ -22,6 +22,8 @@ public partial class PKHeXSettings : ContentPage
 
         var prop = new propertyGrid(new PSettings());
         Stack_PKHeXSettings.Children.Add(prop);
+        var prop2 = new propertyGrid(new EncounterSettings());
+        Stack_PKHeXSettings.Children.Add(prop2);
         Permissions.RequestAsync<Permissions.StorageWrite>();
         var noSelectVersions = new[] { GameVersion.GO, GameVersion.Any };
         SaveVersionPicker.ItemsSource = GameInfo.Sources.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
@@ -59,6 +61,7 @@ public class EncounterSettings
 {
 	public static bool FilterUnavailableSpecies { get => Preferences.Default.Get("FilterUnavailableSpecies", false); set => Preferences.Set("FilterUnavalableSpecies", value); }
 	public static bool UsePkEditorAsCriteria { get => Preferences.Default.Get("UsePkEditorAsCriteria", false); set => Preferences.Set("UsePKEditorAsCriteria", value); }
+    public static bool ShowExtraEncounterInfo { get => Preferences.Default.Get("ShowExtraEncounterInfo", false); set => Preferences.Set("ShowExtraEncounterInfo", value); }
 }
 
 public class GenericCollection

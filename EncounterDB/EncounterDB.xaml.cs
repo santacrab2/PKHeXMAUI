@@ -54,11 +54,17 @@ public partial class EncounterDB : ContentPage
     }
     private async void ShowViewBox(object? sender, TappedEventArgs? e)
     {
-        EncounterCollection.SelectedItem = (EncounterSprite?)e?.Parameter;
-        var view = await DisplayAlertAsync("View Encounter", "View this encounter?", "view", "cancel");
+        var enc = (EncounterSprite?)e?.Parameter;
+        EncounterCollection.SelectedItem = enc;
+        var view = await DisplayAlertAsync("View Encounter", $"View this encounter?\n{GetPreviewText(enc.EncounterInfo,EncounterSettings.ShowExtraEncounterInfo)}", "view", "cancel");
         if (view)
             applyencpk(sender, e);
         EncounterCollection.SelectedItem = null;
+    }
+    private static string GetPreviewText(IEncounterInfo enc, bool verbose = false)
+    {
+        var lines = enc.GetTextLines(verbose);
+        return string.Join(Environment.NewLine, lines);
     }
     private void SetSearchSettings(object sender, EventArgs e)
     {
