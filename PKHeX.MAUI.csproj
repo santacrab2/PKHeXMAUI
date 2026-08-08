@@ -43,7 +43,7 @@
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <RunAOTCompilation>False</RunAOTCompilation>
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android36.0|AnyCPU'">
@@ -53,37 +53,37 @@
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-windows10.0.26100.0|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-ios|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-maccatalyst|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-windows10.0.26100.0|AnyCPU'">
 	  <ApplicationVersion>1</ApplicationVersion>
-	  <ApplicationDisplayVersion>26.07.29</ApplicationDisplayVersion>
+	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 
