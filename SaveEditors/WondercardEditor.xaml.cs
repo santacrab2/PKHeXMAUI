@@ -57,7 +57,7 @@ public partial class WondercardEditor : ContentPage
     private void SetGiftBoxes()
     {
         for (int i = 0; i < Album.Length; i++)
-            pba[i].Source = $"a_{Album[i].Species}{((Album[i].Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(Album[i].Species)) ? $"_{Album[i].Form}" : "")}.png";
+            pba[i].Source = SpeciesSpriteUtil.FileName(SAV, Album[i].Species, Album[i].Form);
     }
     private void GetReceivedFlags()
     {
@@ -145,10 +145,10 @@ public partial class WondercardEditor : ContentPage
     }
     private async void ShowActionSheet(object? sender, TappedEventArgs e)
     {
-        var result = await DisplayActionSheetAsync("", "cancel", "Delete", ["View", "Set"]);
+        var result = await DisplayActionSheetAsync("", L10n.T("box_cancel"), L10n.T("box_delete"), [L10n.T("box_view"), L10n.T("code_write")]);
         switch (result)
         {
-            case "Set": ClickSet(sender, e); break;
+            case "Write": ClickSet(sender, e); break;
             case "Delete": ClickDelete(sender, e); break;
             case "View": ClickView(sender, e); break;
         }
@@ -160,7 +160,7 @@ public partial class WondercardEditor : ContentPage
 
         if (!gift.IsCardCompatible(SAV, out var msg))
         {
-            await DisplayAlertAsync("","Unable to insert the Mystery Gift. " + msg, "cancel");
+            await DisplayAlertAsync(L10n.T("saveedit_write_failed"),L10n.T("saveedit_unable_to_write") + msg, L10n.T("pktab_ok"));
             return;
         }
 
@@ -181,12 +181,12 @@ public partial class WondercardEditor : ContentPage
         }
         else if (gift.Type != other.Type)
         {
-            await DisplayAlertAsync("", "Unable to insert the Mystery Gift."+ $"{gift.Type} != {other.Type}","Cancel");
+            await DisplayAlertAsync("", L10n.T("saveedit_unable_to_insert")+ $"{gift.Type} != {other.Type}",L10n.T("pktab_ok"));
             return;
         }
         else if (gift is PCD g && (g is { IsLockCapsule: true } != (index == 11)))
         {
-            await DisplayAlertAsync("", "Unable to insert the Mystery Gift." + $"{GameInfo.Strings.Item[533]} slot not valid.","Cancel");
+            await DisplayAlertAsync("", L10n.T("code_unable_to_insert_the", GameInfo.Strings.Item[533]), L10n.T("pktab_ok"));
             return;
         }
         gifts[index] = gift.Clone();
@@ -297,7 +297,7 @@ public partial class WondercardEditor : ContentPage
             // only check if the form is visible (not opening)
             if (g.GiftUsed)
             {
-                var prompt = await DisplayAlertAsync("Alert", "Mystery Gift is marked as USED and will not be able to be picked up in-game."+ "Do you want to remove the USED flag so that it is UNUSED?","Yes","No");
+                var prompt = await DisplayAlertAsync(L10n.T("pktab_notice"), L10n.T("saveedit_this_mystery_gift"),L10n.T("pktab_ok"), L10n.T("box_cancel"));
                 if (prompt)
                     g.GiftUsed = false;
             }
@@ -306,14 +306,14 @@ public partial class WondercardEditor : ContentPage
             {
                 E_Details.Text += desc.ToArray()[i] + Environment.NewLine;
             }
-            IMG_ActiveSprite.Source = $"a_{g.Species}{((g.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(g.Species)) ? $"_{g.Form}" : "")}.png";
+            IMG_ActiveSprite.Source = SpeciesSpriteUtil.FileName(SAV, g.Species, g.Form);
             mg = g;
         }
         // Some user input mystery gifts can have out-of-bounds values. Just swallow any exception.
         catch (Exception e)
         {
             E_Details.Text = string.Empty;
-            await DisplayAlertAsync("Error", $"An error occurred while trying to view this Mystery Gift's data.{Environment.NewLine}{e.Message}", "OK");
+            await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("code_an_error_occurred_while", Environment.NewLine, e.Message), L10n.T("pktab_ok"));
         }
     }
     private void SetCardID(int cardID)
@@ -397,7 +397,7 @@ public partial class WondercardEditor : ContentPage
         var gift = MysteryGift.GetMysteryGift(data, ext);
         if (gift is null)
         {
-            await DisplayAlertAsync("error","File is not a Mystery Gift: " + path,"cancel");
+            await DisplayAlertAsync(L10n.T("livehex_error"),L10n.T("saveedit_file_is_not") + path,L10n.T("pktab_ok"));
             return;
         }
         ViewGiftData(gift);

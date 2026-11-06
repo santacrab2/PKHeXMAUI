@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.SaveEditors"
-             Title="Save Editors">
+             Title="{l10n:Tr Key=shell_save_editor}">
     <VerticalStackLayout>
-        <Button x:Name="Button_BlockData" Text="Block Data" Clicked="OpenBlockEditor" IsVisible="false"/>
-        <Button x:Name="Button_RTCEditor" Text="Clock (RTC)" Clicked="OpenRTCEditor" IsVisible="false"/>
-        <Button x:Name="Button_EventFlags1" Text="Event Flags" Clicked="OpenEventFlagEditor" IsVisible="False"/>
-        <Button Text="Inventory Editor" Clicked="OpenItems"/>
-        <Button x:Name="Button_Pokedex1" Text="Pokedex" Clicked="OpenSimplePokedex" IsVisible="False"/>
-        <Button x:Name="TrainerInfoButton" Text="Trainer Info" IsVisible="false" Clicked="OpenTrainerEditor"/>
-        <Button x:Name="MailBoxButton" Text="Mail Box" IsVisible="False" Clicked="OpenMailBoxEditor"/>
-        <Button x:Name="GSBallButton" Text="Enable GS Ball Event(Virtual Console)" IsVisible="False" Clicked="EnableGSBallEvent"/>
-        <Button x:Name="B_Misc" Text="Misc" IsVisible="False" Clicked="OpenMiscEditor"/>
-        <Button x:Name="B_Roamer" Text="Roamer" IsVisible="False" Clicked="OpenRoamerEditor"/>
-        <Button x:Name="B_Chatter" Text="Chatter" IsVisible="False" Clicked="OpenChatterEditor"/>
-        <Button x:Name="B_Geonet" Text="Geonet" IsVisible="False" Clicked="B_Geonet_Clicked"/>
-        <Button x:Name="B_HoneyTree" Text="Honey Tree" IsVisible="False" Clicked="B_HoneyTree_Clicked"/>
-        <Button x:Name="B_WonderCard" Text="Wonder Card" IsVisible="False" Clicked="B_WonderCard_Clicked"/>
-        <Button x:Name="B_Underground" Text="Underground" IsVisible="False" Clicked="B_Underground_Clicked"/>
-        <Button x:Name="B_HallofFame" Text="Hall of Fame" IsVisible="False" Clicked="B_HallofFame_Clicked"/> 
+        <Button x:Name="Button_BlockData" Text="{l10n:Tr Key=saveedit_blocks}" Clicked="OpenBlockEditor" IsVisible="false"/>
+        <Button x:Name="Button_RTCEditor" Text="{l10n:Tr Key=saveedit_clock}" Clicked="OpenRTCEditor" IsVisible="false"/>
+        <Button x:Name="Button_EventFlags1" Text="{l10n:Tr Key=saveedit_event_flags}" Clicked="OpenEventFlagEditor" IsVisible="False"/>
+        <Button Text="{l10n:Tr Key=saveedit_item_bag_editor}" Clicked="OpenItems"/>
+        <Button x:Name="Button_Pokedex1" Text="{l10n:Tr Key=saveedit_dex}" Clicked="OpenSimplePokedex" IsVisible="False"/>
+        <Button x:Name="TrainerInfoButton" Text="{l10n:Tr Key=saveedit_trainer_info}" IsVisible="false" Clicked="OpenTrainerEditor"/>
+        <Button x:Name="MailBoxButton" Text="{l10n:Tr Key=saveedit_mailbox}" IsVisible="False" Clicked="OpenMailBoxEditor"/>
+        <Button x:Name="GSBallButton" Text="{l10n:Tr Key=saveedit_enable_gs_ball}" IsVisible="False" Clicked="EnableGSBallEvent"/>
+        <Button x:Name="B_Misc" Text="{l10n:Tr Key=saveedit_miscellaneous}" IsVisible="False" Clicked="OpenMiscEditor"/>
+        <Button x:Name="B_Roamer" Text="{l10n:Tr Key=saveedit_roamers}" IsVisible="False" Clicked="OpenRoamerEditor"/>
+        <Button x:Name="B_Chatter" Text="{l10n:Tr Key=saveedit_chatter}" IsVisible="False" Clicked="OpenChatterEditor"/>
+        <Button x:Name="B_Geonet" Text="{l10n:Tr Key=saveedit_geonet}" IsVisible="False" Clicked="B_Geonet_Clicked"/>
+        <Button x:Name="B_HoneyTree" Text="{l10n:Tr Key=gen4_sweet_tree}" IsVisible="False" Clicked="B_HoneyTree_Clicked"/>
+        <Button x:Name="B_WonderCard" Text="{l10n:Tr Key=saveedit_mystery_cards}" IsVisible="False" Clicked="B_WonderCard_Clicked"/>
+        <Button x:Name="B_Underground" Text="{l10n:Tr Key=saveedit_underground}" IsVisible="False" Clicked="B_Underground_Clicked"/>
+        <Button x:Name="B_HallofFame" Text="{l10n:Tr Key=saveedit_hall_of_fame}" IsVisible="False" Clicked="B_HallofFame_Clicked"/> 
     </VerticalStackLayout>
 </ContentPage>

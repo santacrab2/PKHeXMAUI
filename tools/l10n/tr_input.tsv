@@ -1,0 +1,975 @@
+pktab_ok	确定	OK
+common_save	保存	Save
+box_cancel	取消	Cancel
+livehex_error	错误	Error
+gen5_records	记录	Records
+stats_stats	数值	Stats
+ottab_sid	SID：	SID:
+ottab_tid	TID：	TID:
+common_close	关闭	Close
+gen5_past	过去	Past
+gen1_bp	BP：	BP:
+gen3_trade	交易	Trade
+gen5_select_all	全部勾选	Select All
+ottab_language	语言：	Language:
+gen6_wheel	轮盘：	Wheel:
+gen1_x_coord	X 坐标：	X Coord:
+gen1_y_coord	Y 坐标：	Y Coord:
+gen1_z_coord	Z 坐标：	Z Coord:
+common_friendship	亲密度：	Friendship:
+pktab_failed	失败	Failed
+shell_export	导出	Export
+box_batch_editor	批量编辑器	Batch Editor
+livehex_disconnect	断开连接	Disconnect
+gen1_hour	时：	Hour:
+gen1_game_start_time	游戏开始时间：	Game Start Time:
+gen1_seconds	秒：	Seconds:
+pktab_pid	PID：	PID:
+shell_main	主界面	Main
+common_give_all	全部给予	Give All
+gen6_min	分：	Min:
+common_memory_type	回忆类型	Memory Type
+ottab_country	国家：	Country:
+gen1_current_map	当前地图：	Current Map:
+pktab_success	成功	Success
+pktab_notice	提示	Notice
+livehex_invalid	无效	Invalid
+gen6_normal	普通	Normal
+gen6_last_save	最后保存：	Last Save:
+saveedit_miscellaneous	杂项	Miscellaneous
+gen6_overview	概览	Overview
+pktab_species	物种：	Species:
+gen6_trainer_name	训练家名字：	Trainer Name:
+gen6_super	超级	Super
+ottab_3ds_region	3DS 地区：	3DS Region:
+misc_unsupported_method	不支持该方法	Unsupported method
+saveedit_event_flags	事件标志	Event Flags
+gen1_coins	代币：	Coins:
+common_remove_all	全部移除	Remove All
+gen1_adventure_info	冒险信息	Adventure Info
+gen5_single	单打	Single
+gen5_double	双打	Double
+gen1_region	地区：	Region:
+gen6_map_position	地图位置	Map Position
+gen5_friends	好友	Friends
+shell_save_editor	存档编辑器	Save Editor
+shell_pkm_editor	宝可梦编辑器	Pokémon Editor
+gen3_battle_frontier	对战开拓区	Battle Frontier
+pktab_showdown	对战队	Showdown
+pktab_import_failed	导入失败	Import Failed
+shell_export_the_current	导出当前箱子？	Export the current box?
+box_apply	应用	Apply
+gen3_current	当前	Current
+shell_moves	招式	Moves
+pktab_nickname	昵称：	Nickname:
+livehex_invalid_version_detected	检测到无效版本，无法连接设备	Invalid version detected, cannot connect to the device
+saveedit_roamers	游走宝可梦	Roamers
+common_species	物种	Species
+gen4_sweet_tree	甜蜜树	Sweet Tree
+shell_encounter_database	相遇数据库	Encounter Database
+pktab_level	等级：	Level:
+shell_boxes	箱子	Boxes
+gen3_continue	继续	Continue
+gen1_trainer_editor	训练家编辑器	Trainer Editor
+encounter_shiny	闪光	Shiny
+gen4_flight_destinations	飞行目的地	Flight Destinations
+shell_alm_settings	ALM 设置	ALM Settings
+stats_hp	HP：	HP:
+shell_pkhex_settings	PKHeX 设置	PKHeX Settings
+gen6_triple	三打：	Triple:
+eventflags_event_constants	事件常量	Event Constants
+eventflags_event_research	事件调查	Event Research
+gen4_failed_to_save	保存录音失败。	Failed to save the recording.
+gen6_offset	偏移：	Offset:
+gen4_delete_all	全部删除	Delete All
+common_apply_all	全部应用	Apply All
+livehex_write_slot	写入槽位	Write Slot
+gen3_minutes	分钟	Minutes
+ottab_original_trainer	初训家	Original Trainer
+ottab_original_trainer_2	初训家：	Original Trainer:
+box_delete	删除	Delete
+eventflags_load_new_save	加载新档	Load New Save
+eventflags_load_old_save	加载旧档	Load Old Save
+gen6_single	单打：	Single:
+gen3_southern_island	南方孤岛	Southern Island
+gen6_double	双打：	Double:
+shell_legality_settings	合法性设置	Legality Settings
+saveedit_hall_of_fame	名人堂	Hall of Fame
+common_memory	回忆	Memory
+saveedit_dex	图鉴	Pokédex
+saveedit_underground	地下世界	Underground
+saveedit_geonet	地理网	Geonet
+eventflags_copy	复制	Copy
+cosmetic_appearance	外观	Appearance
+gen5_multi	多人	Multi
+gen6_multi	多人：	Multi:
+gen3_day	天	Day
+stats_ivs	天赋值	IVs
+stats_tera_type	太晶属性	Tera Type
+cosmetic_medals	奖牌	Medals
+shell_export_all_boxes	导出所有箱子？	Export all boxes?
+eventflags_copy_the_event	将事件常量差异复制到剪贴板？	Copy the event constant differences to the clipboard?
+gen3_hour	小时	Hour
+gen1_caught	已捕获：	Caught:
+gen4_obtained_flags	已获得标志：	Obtained Flags:
+eventflags_set	已设置：	Set:
+gen6_hall_of_fame	已进入名人堂：	Hall of Fame Entry:
+eventflags_constant	常量：	Constant:
+gen4_recording_saved	录音已保存。	Recording saved.
+pktab_form	形态	Form
+gen6_vivillon	彩粉蝶：	Vivillon:
+gen4_score	得分	Score
+gen3_open	打开	Open
+encounter_search_settings	搜索设置	Search Settings
+stats_attack	攻击：	Attack:
+gen6_value	数值：	Value:
+livehex_invalid_slot_number	无效的槽位编号	Invalid slot number
+livehex_invalid_box_number	无效的箱子编号	Invalid box number
+encounter_is_egg	是蛋	Is Egg
+pktab_update	更新	Update
+gen3_high_score	最高分：	High Score:
+eventflags_no_event_constant	未发现事件常量差异。	No event constant differences found.
+pktab_failed_to_generate	未能生成合法的宝可梦。	Failed to generate a legal Pokémon.
+eventflags_unset	未设置：	Unset:
+eventflags_flag_diff_analyzer	标志差异分析器	Flag Diff Analyzer
+eventflags_flag	标志：	Flag:
+eventflags_check_state	检查状态	Check State
+encounter_slot	槽位	Slot
+stats_sp_atk	特攻：	Sp. Atk:
+stats_sp_def	特防：	Sp. Def:
+box_generate_random_team	生成随机队伍	Generate Random Team
+gen3_seconds	秒	Seconds
+shell_boxes_party	箱子/同行宝可梦	Boxes / Party
+gen3_birth_island	肚脐岩	Birth Island
+pktab_auto_legalize_failed	自动合规失败	Auto-Legalize Failed
+gen5_record	记录：	Record:
+shell_settings	设置	Settings
+gen3_birth_island_2	诞生之岛	Birth Island
+common_language	语言	Language
+gen6_mega_evolution_unlocked	超级进化已解锁	Mega Evolution Unlocked
+livehex_connect	连接	Connect
+gen3_streak_of_5	连续 5 次：	Streak of 5:
+gen3_streak_record	连胜记录	Streak Record
+stats_speed	速度：	Speed:
+saveedit_items	道具	Items
+gen3_faraway_island	遥远小岛	Faraway Island
+stats_defense	防御：	Defense:
+shell_iv_potential	        - 个体值潜力	    - IV Potential
+shell_clones	        - 克隆体	    - Clones
+shell_remove_held_items	        - 删除持有道具	    - Remove Held Items
+shell_previous_generations	        - 前代	    - Previous Generations
+shell_ev_training	        - 努力值训练	    - EV Training
+shell_legal	        - 合法	    - Legal
+shell_heal	        - 回复（数值/PP）	    - Heal (Stats/PP)
+shell_dex_no	        - 图鉴编号	    - Pokédex No.
+shell_dex_no_2	        - 图鉴编号（逆序）	    - Pokédex No. (Reverse)
+shell_tera_type	        - 太晶属性	    - Tera Type
+shell_ribbon_count	        - 奖章数	    - Ribbon Count
+shell_hatch_eggs	        - 孵化蛋	    - Hatch Eggs
+shell_scale	        - 尺寸	    - Scale
+shell_type	        - 属性	    - Type
+shell_foreign	        - 异国	    - Foreign
+shell_ownership	        - 归属	    - Ownership
+shell_no_held_item	        - 无持有道具	    - No Held Item
+shell_max_friendship	        - 最大亲密度	    - Max Friendship
+shell_max_level	        - 最大等级	    - Max Level
+shell_untrained	        - 未训练	    - Untrained
+shell_hyper_train	        - 极限特训	    - Hyper Train
+shell_clear	        - 清除	    - Clear
+shell_version	        - 版本	    - Version
+shell_species_name	        - 物种名	    - Species Name
+shell_usage	        - 用途	    - Usage
+shell_date_met	        - 相遇日期	    - Date Met
+shell_encounter_type	        - 相遇类型	    - Encounter Type
+shell_bst	        - 种族值总和	    - BST
+shell_remove_nicknames	        - 移除昵称	    - Remove Nicknames
+shell_level	        - 等级（低→高）	    - Level (Low to High)
+shell_level_2	        - 等级（高→低）	    - Level (High to Low)
+shell_eggs	        - 蛋	    - Eggs
+shell_mark_count	        - 证章数	    - Mark Count
+shell_reset_moves	        - 重置招式	    - Reset Moves
+shell_shiny	        - 闪光	    - Shiny
+shell_random	        - 随机	    - Random
+shell_randomize_moves	        - 随机招式	    - Randomize Moves
+shell_illegal	        - 非法	    - Illegal
+shell_save_pkm	    - 保存 PKM	  - Save PKM
+shell_save_box_data	    - 保存箱子数据++	  - Save Box Data++
+shell_modify	    - 修改	  - Modify
+shell_delete	    - 删除	  - Delete
+shell_legalize	    - 合法化	  - Legalize
+shell_import_showdown	    - 导入对战队	  - Import Showdown
+shell_export_save	    - 导出存档	  - Export Save
+shell_export_showdown	    - 导出对战队	  - Export Showdown
+shell_export_boxes	    - 导出箱子	  - Export Boxes
+shell_open	    - 打开	  - Open
+shell_batch_editor	    - 批量编辑器	  - Batch Editor
+shell_sort_boxes	    - 整理箱子	  - Sort Boxes
+shell_sort_boxes_2	    - 整理箱子（高级）	  - Sort Boxes (Advanced)
+shell_load_boxes	    - 载入箱子	  - Load Boxes
+cosmetic_cp	CP：	CP:
+shell_gen3_priority	Gen3 优先级	Gen3 Priority
+settings_gen3_compliance_priority	Gen3 合规优先级	Gen3 Compliance Priority
+settings_keep_priority_for	Gen3 合规时的保留优先级	Keep Priority for Gen3 Compliance
+settings_in_gen3_the	Gen3 的 PID 与个体值同源（Method 1 随机算法），闪光、性格、个体值、性别这四项在数学上无法全部同时成立。发生冲突时，程序会按下面的顺序逐级让步：越靠前的项目优先保留，靠后的先被牺牲。	In Gen3 the PID and Individual Values share the same source (Method 1 random algorithm), so shiny, nature, Individual Values and gender cannot all hold at the same time. When they conflict, the program gives way step by step in the order below: items further up are kept first, items further down are sacrificed first.
+ottab_home_tracker_id	HOME 追踪码：	HOME Tracker ID:
+livehex_ip	IP：	IP:
+gen9_lp	LP：	LP:
+pktab_shiny_for_n	N 的闪光	Shiny for N
+gen3_rtc_editor	RTC 编辑器	RTC Editor
+gen9_tm_recipes	TM配方	TM Recipes
+common_tr_editor	TR 编辑器	TR Editor
+gen7_z_move_unlocked	Z 招式已解锁	Z-Move Unlocked
+settings_individual_values_the	· 个体值：即 IV，6 项能力值。刷满个体值时通常与性格冲突。	· Individual Values (IV): the 6 stat values. Maxing them usually conflicts with the nature.
+settings_gender_derived_from	· 性别：由 PID 派生，最容易让步。	· Gender: derived from the PID, the easiest to give up.
+settings_nature_in_gen3	· 性格：Gen3 性格由 PID 决定（PID % 25），会影响能力与性格修正。	· Nature: in Gen3 the nature is determined by the PID (PID % 25), affecting stats and nature modifiers.
+settings_max_ivs_all	· 满个体值：6 项直接拉满 31，不参与取舍；随后会尽量找一个与之配套的 PID，此时性格可能改变（全 31 对应的候选性格是固定的）。	· Max IVs: all 6 are set to 31 directly and take no part in the trade-off; a matching PID is then looked for, and the nature may change (the set of candidate natures for all-31 IVs is fixed).
+settings_reroll_pid_a	· 重掷 PID：随机一个新 PID，个体值随之变化。排在这个列表里「个体值之前」的项目会被保住（例如 性格→闪光→个体值→性别 时，保住性格与闪光）。	· Reroll PID: a new PID is generated and the Individual Values change with it. Items listed before "Individual Values" in this list are kept (e.g. with Nature→Shiny→IV→Gender, nature and shiny are kept).
+settings_shiny_a_shiny	· 闪光：异色个体，命中率约 1/4096。	· Shiny: a shiny individual, with a hit rate of roughly 1/4096.
+settings_randomize_ivs_a	· 随机个体值：随机一组个体值，再让 PID 跟着它走，同样保住「个体值之前」的项目。	· Randomize IVs: a random set of Individual Values is generated and the PID follows it, keeping the same items listed before "Individual Values".
+common_last_used_bag	上次使用的背包：	Last Used Bag:
+pktab_incompatible	不兼容	Incompatible
+common_generation	世代	Generation
+stats_individual_values	个体值	Individual Values
+gen7_ulaula_island	乌拉乌拉岛：	Ulaula Island:
+common_trash_byte_layer	乱数字节层	Trash Byte Layer
+common_the_trash_byte	乱数字节层过长，无法应用。	The trash byte layer is too long to apply.
+gen1_event_reset	事件重置	Event Reset
+gen1_event_resetter	事件重置器	Event Resetter
+saveedit_qr_code	二维码	QR Code
+accessor_blocks_only	仅数据块	Blocks Only
+livehex_read_from_offset	从偏移/指针读取	Read from Offset/Pointer
+accessor_import_blocks_from	从文件夹导入数据块	Import Blocks from Folder
+livehex_read_from_slot	从槽位读取	Read from Slot
+gen5_export_data_from	从白版存档导出数据并导入黑版（反向亦然），这样同一存档里既能是白森林也能是黑城市！	Export data from a White save and import it into Black (and vice versa), so one save can be both White Forest and Black City!
+encounter_as_an_egg	以蛋的形式	As an Egg
+gen9_legendary	传说	Legendary
+shell_cosmetic	体貌	Cosmetic
+cosmetic_weight	体重：	Weight:
+gen2_author	作者	Author
+gen1_use_battle_effects	使用战斗效果	Use Battle Effects
+saveedit_saving	保存中…	Saving…
+saveedit_save_items	保存道具	Save Items
+livehex_offset_pointer	偏移/指针：	Offset/Pointer:
+cosmetic_sheen	光泽	Sheen
+gen4_globally_visible	全球可见	Globally Visible
+accessor_export_all	全部导出（单文件）	Export All (Single File)
+saveedit_all_used	全部已使用	All Used
+gen1_all_caught	全部已捕获	All Caught
+gen1_all_seen	全部已见过	All Seen
+saveedit_all_unused	全部未使用	All Unused
+gen1_all_uncaught	全部未捕获	All Uncaught
+gen1_all_unseen	全部未见过	All Unseen
+gen4_give_all	全部给予（不含训练家）	Give All (excl. Trainers)
+common_other	其他	Other
+attacks_relearn_moves	再学习招式	Relearn Moves
+attacks_relearn_flag	再学习标志	Relearn Flag
+saveedit_write_failed	写入失败	Write Failed
+livehex_write_current_box	写入当前箱子	Write Current Box
+gen7_surf_score	冲浪得分	Surf Score
+gen2_appearing_pkm	出现的宝可梦：	Appearing Pokémon:
+gen1_min	分	Min
+box_share	分享	Share
+gen4_group	分组	Group
+livehex_read_on_box	切换箱子时读取	Read on Box Switch
+gen3_initial_event	初始事件	Initial Event
+gen3_initial_time	初始时间	Initial Time
+common_ot_memory	初训家回忆	OT Memory
+ottab_ot_gender	初训家性别：	OT Gender:
+encounter_ot_version	初训家版本	OT Version
+gen4_delete_all_backgrounds	删除所有背景	Delete All Backgrounds
+gen4_delete_all_stickers	删除所有贴纸	Delete All Stickers
+gen4_delete_all_accessories	删除所有饰品	Delete All Accessories
+gen4_time_remaining	剩余时间（分钟）	Time Remaining (min)
+pktab_no_showdown_text	剪贴板中没有对战队文本	No Showdown text in the clipboard
+ottab_encryption_constant	加密常量：	Encryption Constant:
+gen5_animation	动画：	Animation:
+stats_effort_values	努力值	Effort Values
+gen3_rival_name	劲敌名字：	Rival Name:
+accessor_include_32_bit	包含 32 位密钥	Include 32-bit Keys
+accessor_include_attribute_info	包含属性信息	Include Attribute Info
+gen5_areas_1_8	区域 1-8 已解锁：	Areas 1-8 Unlocked:
+gen5_area_9_unlocked	区域 9 已解锁：	Area 9 Unlocked:
+attacks_level_up_count	升级数	Level Up Count
+cosmetic_contest_values	华丽大赛数值	Contest Values
+gen9_solo_quest	单人任务：	Solo Quest:
+gen4_stamps	印章	Stamps
+gen7_stamps	印章：	Stamps:
+stats_original_tera_type	原始太晶属性：	Original Tera Type:
+box_another_error_message	另一个错误提示	Another error message
+gen3_reachable	可到达	Reachable
+cosmetic_cute	可爱	Cute
+gen3_rideable	可骑乘	Rideable
+settings_how_each_button	各按钮如何使用这个优先级	How each button uses this priority
+box_party	同行	Party
+shell_party	同行宝可梦	Party
+gen1_hall_of_fame	名人堂：	Hall of Fame:
+gen1_name	名字：	Name:
+pktab_enabled	启用	Enable
+saveedit_enable_gs_ball	启用 GS 球事件（虚拟主机）	Enable GS Ball Event (e-Shop)
+met_fateful_encounter	命运邂逅：	Fateful Encounter:
+gen4_goods	商品	Goods
+saveedit_chatter	喋喋不休	Chatter
+gen4_chatter_editor	喋喋不休编辑器	Chatter Editor
+gen9_group_quest	团体任务：	Group Quest:
+gen3_dex_icon	图鉴图标	Dex Icon
+gen4_catching_a_bounsweet	在此树上捕获小卡比兽会使该存档的 TID16/SID16 组合变为非法。	Catching a Bounsweet on this tree makes the save's TID16/SID16 combination illegal.
+gen7_map	地图	Map
+gen7_all_maps_revealed	地图全开	All Maps Revealed
+gen5_subway	地铁	Subway
+gen5_subway_marks	地铁标志	Subway Marks
+gen4_castle	城堡	Castle
+stats_base	基础	Base
+gen4_tower	塔	Tower
+gen1_sound_type	声音类型：	Sound Type:
+gen6_multiplayer_appearance	多人形象：	Multiplayer Appearance:
+gen6_multiplayer_mode	多人模式	Multiplayer Mode
+stats_alpha	头目	Alpha
+attacks_alpha_knows	头目已掌握：	Alpha Knows:
+common_medal_editor	奖牌编辑器	Medal Editor
+cosmetic_ribbons	奖章	Ribbons
+ottab_sub_region	子地区：	Sub-Region:
+common_string	字符串	String
+accessor_save_accessor	存档访问器	Save Accessor
+pktab_hatch_counter	孵化计数：	Hatch Counter:
+gen4_super_training_course	宝可全能竞技赛点数：	Super Training Course Points:
+gen4_pok_tch	宝可手表	Pokétch
+gen7_pok_finder	宝可搜寻镜	Poké Finder
+gen3_pok_block	宝可方块	Pokéblock
+gen3_pok_jump	宝可梦跳跃	Poké Jump
+gen6_pkm_link	宝可英里：	Pokémon Link:
+gen4_pok_gear	宝可装置	Pokégear
+gen4_pok_walker	宝可计步器	Poké Walker
+gen4_treasures	宝物	Treasures
+gen4_crystals	宝玉	Crystals
+gen4_poffins	宝芬	Poffins
+gen4_battle_castle	对战城堡（单打）	Battle Castle (Single)
+gen6_battle_maison	对战宅第	Battle Maison
+gen6_battle_maison_streak	对战宅第连胜（当前）	Battle Maison Streak (Current)
+gen6_battle_maison_streak_2	对战宅第连胜（最佳）	Battle Maison Streak (Best)
+gen7_battle_tree	对战树	Battle Tree
+met_battle_version	对战版本：	Battle Version:
+pktab_battle_box_slots	对战箱槽位阻止了电脑数据的载入。	Battle box slots blocked loading of PC data.
+pktab_battle_box_slots_2	对战箱槽位阻止了箱子数据的载入。	Battle box slots blocked loading of box data.
+gen5_battle_number	对战编号	Battle Number
+gen1_battle_rules	对战规则	Battle Rules
+saveedit_import	导入	Import
+gen4_import_pcm	导入 .pcm	Import .pcm
+accessor_import_current_block	导入当前数据块	Import Current Block
+gen5_import_data	导入数据	Import Data
+gen4_export_pcm	导出 .pcm	Export .pcm
+gen4_export_wav	导出 .wav	Export .wav
+accessor_export_current_block	导出当前数据块	Export Current Block
+gen5_export_data	导出数据	Export Data
+accessor_export_blocks_to	导出数据块到文件夹	Export Blocks to Folder
+gen4_bounsweet_tree	小卡比兽树：	Bounsweet Tree:
+cosmetic_size	尺寸：	Size:
+gen5_type	属性	Type
+gen4_factory	工厂	Factory
+gen5_hosted	已主办	Hosted
+gen6_saved_phrase	已保存短语	Saved Phrase
+gen4_initialized	已初始化	Initialized
+gen5_joined	已参与	Joined
+gen3_already_enabled	已启用	Enabled
+gen5_completed	已完成	Completed
+pktab_pc_binary_data	已导入电脑二进制数据。	PC binary data imported.
+pktab_box_binary_data	已导入箱子二进制数据。	Box binary data imported.
+gen4_players_helped	已帮助他人数：	Players Helped:
+gen4_restored_flags	已恢复标志：	Restored Flags:
+pktab_infected	已感染	Infected
+gen3_you_already_have	已拥有全部船票。	You already have all the tickets.
+gen4_caught_flags	已捕获标志：	Caught Flags:
+common_known	已掌握	Known
+saveedit_received_list	已接收列表：	Received List:
+gen4_gifts_received	已收到礼物数：	Gifts Received:
+gen9_collected_all_stakes	已收集所有桩子	Collected All Stakes
+pktab_cured	已治愈	Cured
+gen3_activated	已激活	Activated
+gen3_time_used	已用时间	Time Used
+gen5_obtained	已获得	Obtained
+gen3_bp_obtained	已获得 BP：	BP Obtained:
+gen8a_gained_merit_points	已获得功绩点数：	Gained Merit Points:
+gen4_fossils_obtained	已获得化石	Fossils Obtained
+gen4_crystals_obtained	已获得宝玉：	Crystals Obtained:
+gen1_seen	已见过：	Seen:
+gen5_unlocked	已解锁	Unlocked
+gen9_unlocked_all_tm	已解锁所有 TM 配方	Unlocked All TM Recipes
+gen9_unlocked_all_throw	已解锁所有投掷姿势	Unlocked All Throw Poses
+gen9_unlocked_all_coaches	已解锁所有教练	Unlocked All Coaches
+gen9_unlocked_all_costumes	已解锁所有时装	Unlocked All Costumes
+gen9_unlocked_all_bike	已解锁所有自行车模式	Unlocked All Bike Modes
+gen9_unlocked_all_fly	已解锁所有飞行地点	Unlocked All Fly Locations
+gen5_keys_unlocked	已解锁钥匙	Keys Unlocked
+common_purchased	已购买	Purchased
+gen4_base_moved	已迁移我的基地：	Base Moved:
+gen4_gifts_given	已送出礼物数：	Gifts Given:
+gen5_npcs_met	已遇见 NPC	NPCs Met
+gen4_people_met	已遇见人数：	People Met:
+cosmetic_cool	帅气	Cool
+common_number	序号	Number
+common_apply_trash_data	应用乱数数据	Apply Trash Data
+gen3_frontier_pass	开拓通行证	Frontier Pass
+cosmetic_tough	强壮	Tough
+gen8a_current_merit_points	当前功绩点数：	Current Merit Points:
+gen4_current_map	当前地图	Current Map
+settings_current_save	当前存档	Current Save
+gen4_current_application	当前应用	Current Application
+attacks_current_moves	当前招式	Current Moves
+gen5_current_run_data	当前流程数据	Current Run Data
+gen7_current_streak	当前连胜（单打）：	Current Streak (Single):
+gen7_current_streak_2	当前连胜（双打）：	Current Streak (Double):
+gen7_current_streak_3	当前连胜（多人）：	Current Streak (Multi):
+gen4_current	当前：（无）	Current: (None)
+pktab_form_2	形态：	Form:
+gen6_badge_map	徽章/地图	Badge/Map
+gen1_badges	徽章：	Badges:
+gen3_happy	快乐	Happy
+gen5_gender	性别：	Gender:
+pktab_nature	性格	Nature
+pktab_nature_2	性格（数值）	Nature (Value)
+pktab_nature_3	性格（数值）：	Nature (Value):
+pktab_nature_4	性格：	Nature:
+stats_total	总计：	Total:
+gen4_recovery_items_info	恢复/道具/信息	Recovery / Items / Info
+settings_reset_to_default	恢复默认（性格 → 个体值 → 闪光 → 性别）	Reset to Default (Nature → IV → Shiny → Gender)
+gen4_my_flag_taken	我的旗被夺取：	My Flag Taken:
+box_malformed_batch_command	批量指令格式错误	Malformed batch command
+gen9_throw_pose	投掷姿势	Throw Pose
+gen9_throw_pose_2	投掷姿势：	Throw Pose:
+gen7_throw_pose	投球姿势：	Throw Pose:
+gen7_lottery_1_top	抽奖 1 等奖	Lottery 1 Top Prize
+gen7_lottery_2_top	抽奖 2 等奖	Lottery 2 Top Prize
+gen7_photos_taken	拍照次数：	Photos Taken:
+encounter_move_1	招式 1	Move 1
+encounter_move_2	招式 2	Move 2
+encounter_move_3	招式 3	Move 3
+encounter_move_4	招式 4	Move 4
+attacks_move_shop	招式商店	Move Shop
+common_move_shop_editor	招式商店编辑器	Move Shop Editor
+gen5_moves	招式：	Moves:
+pktab_held_item	持有道具	Held Item
+pktab_held_item_2	持有道具：	Held Item:
+gen2_held_mail_number	持有邮件编号	Held Mail Number
+livehex_no_valid_data	指定偏移处没有有效数据。	No valid data at the specified offset.
+livehex_the_specified_offset	指定的偏移不是有效的十六进制字符串。	The specified offset is not a valid hex string.
+stats_recommended_evs	推荐努力值	Recommended EVs
+stats_recommended_ivs	推荐天赋值	Recommended IVs
+attacks_recommended_moves	推荐招式	Recommended Moves
+encounter_search	搜索	Search
+gen4_shake	摇晃	Shake
+gen3_fruit_picking	摘树果	Fruit Picking
+gen4_play_recording	播放录音	Play Recording
+gen9_collect_all_stakes	收集所有桩子	Collect All Stakes
+gen9_coaches	教练	Coaches
+shell_data	数据	Data
+saveedit_blocks	数据块	Blocks
+accessor_block_editor	数据块编辑器	Block Editor
+shell_file	文件	File
+saveedit_file_is_not	文件不是神秘礼物：	File is not a Mystery Gift:
+gen1_text_speed	文字速度：	Text Speed:
+common_text_editor	文本编辑器	Text Editor
+gen5_new	新建	New
+common_new_page	新页面	New Page
+saveedit_unable_to_write	无法写入该神秘礼物。	Unable to write this Mystery Gift.
+pktab_unable_to_legalize	无法将所给的对战队配置合法化	Unable to legalize the given Showdown set
+saveedit_unable_to_insert	无法插入神秘礼物。	Unable to insert the Mystery Gift.
+gen9_costumes	时装	Costumes
+gen4_fashion_case	时装盒	Fashion Case
+saveedit_clock	时钟（RTC）	Clock (RTC)
+gen7_time_offset	时间偏移：	Time Offset:
+pktab_nickname_2	昵称	Nickname
+common_show_ribbons	显示奖章	Show Ribbons
+met_was_an_egg	曾是蛋：	Was an Egg:
+gen5_best_record_count	最佳记录总数	Best Record Count
+gen5_max_participants	最多参与人数	Max Participants
+gen3_max_players	最大玩家数：	Max Players:
+gen5_high_score	最高得分	High Score
+gen7_best_streak	最高连胜（单打）：	Best Streak (Single):
+gen7_best_streak_2	最高连胜（双打）：	Best Streak (Double):
+gen7_best_streak_3	最高连胜（多人）：	Best Streak (Multi):
+pktab_update_available	有可用更新	Update Available
+met_obey_level	服从等级	Obey Level
+met_obey_level_2	服从等级：	Obey Level:
+box_no_batch_commands	未包含批量指令	No batch commands included
+gen5_unread	未读	Unread
+gen2_misc	杂项：	Misc:
+met_source_game	来源游戏：	Source Game:
+stats_dynamax_level	极巨化等级：	Dynamax Level:
+stats_maximum	极限	Maximum
+common_hyper_training_memory	极限特训回忆	Hyper Training Memory
+ottab_hyper_training	极限特训：	Hyper Training:
+box_view	查看	View
+gen5_mark_0	标志 0	Mark 0
+gen5_mark_1	标志 1	Mark 1
+gen5_mark_2	标志 2	Mark 2
+gen5_mark_3	标志 3	Mark 3
+gen5_mark_7	标志 7	Mark 7
+accessor_mark_block_start	标记数据块起点（ASCII）	Mark Block Start (ASCII)
+gen3_title	标题：	Title:
+gen3_fruit_correction	树果修正	Fruit Correction
+gen3_fruit_powder	树果粉末	Fruit Powder
+gen4_tree_info	树的信息	Tree Info
+gen9_stakes	桩子	Stakes
+gen5_forest	森林	Forest
+livehex_slot	槽位：	Slot:
+gen5_festival_missions	欢乐祭任务	Festival Missions
+pktab_this_file_is	此文件与当前存档不兼容	This file is incompatible with the current save
+gen4_steps	步数：	Steps:
+gen4_hall	殿堂	Hall
+box_no_editable_slots	没有可编辑的槽位	No editable slots
+saveedit_no_data_found	没有找到数据	No data found
+livehex_no_pointer_address	没有指针地址。	No pointer address.
+gen7_melemele_island	波尼岛：	Melemele Island:
+gen7_rotom	洛托姆	Rotom
+gen7_rotom_ot	洛托姆初训家：	Rotom OT:
+gen5_is_a_run	流程是否进行中？	Is a Run in Progress?
+gen2_message	消息	Message
+gen4_chaos_ratio	混乱率 %：	Chaos Ratio %:
+box_add	添加	Add
+gen3_clear	清除	Clear
+common_clear_trash_data	清除乱数数据	Clear Trash Data
+gen4_clear_all_locations	清除所有地点	Clear All Locations
+gen3_ferry	渡轮	Ferry
+gen4_playground	游乐场	Playground
+gen5_roamer_state	游走状态	Roamer State
+gen3_roaming	游走（进行中）	Roaming (Active)
+stats_max_ivs	满个体值	Max IVs
+common_fullness	满足度：	Fullness:
+gen9_activate_legendary_pkm	激活传说宝可梦	Activate Legendary Pokémon
+gen5_activate_free_pass	激活自由票	Activate Free Pass
+gen7_total_likes	点赞总数：	Total Likes:
+gen9_bbq_quest	烧烤任务	BBQ Quest
+pktab_ability	特性	Ability
+pktab_ability_2	特性：	Ability:
+stats_royal	王族	Royal
+common_current_owner	现在的主人：	Current Owner:
+met_ball	球种：	Ball:
+gen4_watts	瓦特：	Watts:
+gen2_user_input	用户输入	User Input
+gen3_paintings	画作	Paintings
+gen5_white_forest_black	白森林/黑城市	White Forest / Black City
+gen1_pikachu_friendship	皮卡丘亲密度：	Pikachu Friendship:
+gen1_pikachu_beach	皮卡丘海滩：	Pikachu Beach:
+gen7_camera_version	相机版本：	Camera Version:
+shell_encounter	相遇	Encounter
+met_met_location	相遇地点	Met Location
+met_met_location_2	相遇地点：	Met Location:
+met_met_date	相遇日期：	Met Date:
+met_met_level	相遇等级	Met Level
+met_met_level_2	相遇等级：	Met Level:
+saveedit_ok_dots	确定…	OK…
+encounter_mystery	神秘	Mystery
+saveedit_mystery_cards	神秘卡片	Mystery Cards
+saveedit_mystery_card_editor	神秘卡片编辑器	Mystery Card Editor
+gen7_festival_coins	祭典币：	Festival Coins:
+gen7_festival_plaza_name	祭典广场名称：	Festival Plaza Name:
+common_secret_training_complete	秘密特训已完成	Secret Training Complete
+common_secret_training_unlocked	秘密特训已解锁	Secret Training Unlocked
+livehex_port	端口：	Port:
+livehex_box	箱子：	Box:
+pktab_experience	经验值	Experience
+pktab_experience_2	经验值：	Experience:
+gen7_give_all_costume	给予所有时装道具	Give All Costume Items
+gen4_give_all_backgrounds	给予所有背景（合法）	Give All Backgrounds (Legal)
+gen4_give_all_backgrounds_2	给予所有背景（非法）	Give All Backgrounds (Illegal)
+gen4_give_all_stickers	给予所有贴纸（合法）	Give All Stickers (Legal)
+gen4_give_all_stickers_2	给予所有贴纸（非法）	Give All Stickers (Illegal)
+gen6_give_all_accessories	给予所有饰品	Give All Accessories
+gen4_give_all_accessories	给予所有饰品（合法）	Give All Accessories (Legal)
+gen4_give_all_accessories_2	给予所有饰品（非法）	Give All Accessories (Illegal)
+cosmetic_beautiful	美丽	Beautiful
+gen7_melemele_island_2	美乐美乐岛：	Melemele Island:
+gen5_food	美食	Food
+gen5_food_level	美食等级	Food Level
+cosmetic_clever	聪明	Clever
+gen7_skin_color	肤色：	Skin Color:
+gen8a_pack_upgrade	背包升级：	Pack Upgrade:
+gen3_not_enough_bag	背包空间不足。	Not enough bag space.
+cosmetic_auto	自动	Auto
+gen9_bike	自行车	Bike
+gen3_tickets	船票	Tickets
+gen3_get_tickets	获取船票	Get Tickets
+gen5_give_all_medals	获得所有奖牌	Give All Medals
+gen9_blueberry_academy	蓝莓学园	Blueberry Academy
+met_egg_location	蛋所在地：	Egg Location:
+met_egg_date	蛋获得日期：	Egg Date:
+gen3_decorations	装饰	Decorations
+stats_override_tera_type	覆盖太晶属性：	Override Tera Type:
+stats_weakness_policy	觉醒力量	Weakness Policy
+gen5_unlock_all	解锁全部（不含 No.0）	Unlock All (excl. No.0)
+gen9_unlock_all_tm	解锁所有 TM 配方	Unlock All TM Recipes
+gen9_unlock_all_throw	解锁所有投球姿势	Unlock All Throw Poses
+gen9_unlock_all_coaches	解锁所有教练	Unlock All Coaches
+gen9_unlock_all_costumes	解锁所有时装	Unlock All Costumes
+gen9_unlock_all_bike	解锁所有自行车升级	Unlock All Bike Upgrades
+gen5_unlock_all_items	解锁所有道具	Unlock All Items
+gen9_unlock_all_fly	解锁所有飞行地点	Unlock All Fly Locations
+gen7_unlock_super	解锁超级*	Unlock Super*
+gen4_warning	警告	Warning
+gen4_walker_route	计步器路线	Walker Route
+gen6_trainer	训练家	Trainer
+shell_trainer_misc	训练家/杂项	Trainer / Misc
+saveedit_trainer_info	训练家信息	Trainer Info
+gen3_trainer_card_icon	训练家卡宝可梦图标	Trainer Card Icon
+gen9_trainer_appearance	训练家形象	Trainer Appearance
+gen6_trainer_nickname	训练家昵称：	Trainer Nickname:
+gen7_record_likes	记录点赞数：	Record Likes:
+gen4_set_catchable	设为可捕获	Set Catchable
+gen4_set_all_legal	设置所有合法地点	Set All Legal Locations
+gen4_set_all_locations	设置所有地点	Set All Locations
+saveedit_this_mystery_gift	该神秘礼物已被标记为「已使用」，在游戏中无法领取。是否清除「已使用」标记，使其变为「未使用」？	This Mystery Gift is flagged as "used" and cannot be received in-game. Clear the "used" flag and mark it as "unused"?
+gen3_details	详情	Details
+saveedit_details	详情：	Details:
+settings_notes	说明	Notes
+gen3_please_use_the	请使用道具背包编辑器。	Please use the Item Bag editor.
+livehex_please_connect_to	请先连接 WiFi	Please connect to WiFi first
+livehex_read_current_box	读取当前箱子	Read Current Box
+gen4_stickers	贴纸	Stickers
+stats_gigantamax	超极巨化	Gigantamax
+gen5_super_single	超级单打	Super Single
+gen5_super_single_2	超级单打？	Super Single?
+gen5_super_double	超级双打	Super Double
+gen5_super_double_2	超级双打？	Super Double?
+gen5_super_multi	超级多人	Super Multi
+gen5_super_multi_2	超级多人？	Super Multi?
+gen6_super_rayquaza_unlocked	超级烈空坐已解锁	Super Rayquaza Unlocked
+gen7_days_until_reset	距刷新天数：	Days Until Reset:
+cosmetic_height	身高：	Height:
+box_loading	载入中…	Loading…
+common_too_long	过长。	Too long.
+pktab_this_pkm_s	这只宝可梦原有的个体值与「闪光」状态在 Gen3 的随机算法下无法同时成立（两者同源）。\n已按你设置的优先级让位，并重新生成了一组合法的个体值。\n可在「设置 → Gen3 优先级」中调整保留顺序。	This Pokémon's existing Individual Values and its shiny state cannot both hold under Gen3's random algorithm (they share the same source).\nOne of them gave way according to your priority order, and a new legal set of Individual Values was generated.\nYou can adjust the keep order in Settings → Gen3 Priority.
+stats_this_pkm_s	这只宝可梦原有的个体值与其它设定在 Gen3 的随机算法下无法同时成立（它们同源）。\n已按你设置的优先级让位，并重新生成了一组合法的个体值。\n可在「设置 → Gen3 优先级」中调整保留顺序。	This Pokémon's existing Individual Values and the other settings cannot all hold under Gen3's random algorithm (they share the same source).\nOne of them gave way according to your priority order, and a new legal set of Individual Values was generated.\nYou can adjust the keep order in Settings → Gen3 Priority.
+pktab_this_pkm_s_2	这只宝可梦原有的个体值与指定性格在 Gen3 的随机算法下无法同时成立（两者同源）。\n已按你设置的优先级让位，并重新生成了一组合法的个体值。\n可在「设置 → Gen3 优先级」中调整保留顺序。	This Pokémon's existing Individual Values and the requested nature cannot both hold under Gen3's random algorithm (they share the same source).\nOne of them gave way according to your priority order, and a new legal set of Individual Values was generated.\nYou can adjust the keep order in Settings → Gen3 Priority.
+livehex_connection_error	连接出错	Connection error
+gen3_streak	连续次数：	Streak:
+gen1_options	选项	Options
+gen5_power_pass	通行之力	Power Pass
+saveedit_item_bag_editor	道具背包编辑器	Item Bag Editor
+saveedit_mailbox	邮件盒	Mailbox
+gen2_mailbox_editor	邮件盒编辑器	Mailbox Editor
+gen2_mailbox	邮件盒（同行）	Mailbox (Party)
+gen2_mailbox_2	邮件盒（电脑）	Mailbox (PC)
+gen2_mailbox_delivered	邮件盒（电脑）已送达：	Mailbox (PC) Delivered:
+gen2_mail_type	邮件类型：	Mail Type:
+pktab_reroll	重掷	Reroll
+gen3_reset_rtc	重置 RTC	Reset RTC
+gen8a_galaxy_team_rank	银河队等级：	Galaxy Team Rank:
+gen3_shiny	闪光：	Shiny:
+gen7_akala_island	阿卡拉岛：	Akala Island:
+gen7_gyroscope	陀螺仪	Gyroscope
+gen4_traps	陷阱	Traps
+gen4_trap_hits	陷阱命中（玩家）：	Trap Hits (Player):
+gen4_trap_hits_2	陷阱命中（自己）	Trap Hits (Self)
+stats_randomize_ivs	随机个体值	Randomize IVs
+stats_randomize_evs	随机努力值	Randomize EVs
+gen5_randomize_all_areas	随机化所有区域	Randomize All Areas
+stats_randomize_ivs_2	随机天赋值	Randomize IVs
+ottab_hidden_trainer	隐藏训练家	Hidden Trainer
+gen9_snacks_grandpa_activated	零食爷爷已激活	Snacks Grandpa Activated
+gen5_thundercloud	雷电云	Thundercloud
+encounter_static	静态	Static
+gen5_musical	音乐剧	Musical
+ottab_extra_bytes	额外字节：	Extra Bytes:
+gen6_style	风格：	Style:
+common_satiety	饱食度：	Satiety:
+gen5_tornado	龙卷云	Tornado
+settings_ui_language	界面语言	Interface Language
+code_sort_all_boxes_by	要按图鉴编号整理所有箱子吗？	Sort all boxes by Pokédex No.?
+code_sort_the_current_box	要按图鉴编号整理当前箱子吗？	Sort the current box by Pokédex No.?
+code_sort_all_boxes_by_2	要按图鉴编号（逆序）整理所有箱子吗？	Sort all boxes by Pokédex No. (Reverse)?
+code_sort_the_current_box_2	要按图鉴编号（逆序）整理当前箱子吗？	Sort the current box by Pokédex No. (Reverse)?
+code_sort_all_boxes_by_3	要按等级（低→高）整理所有箱子吗？	Sort all boxes by Level (Low to High)?
+code_sort_the_current_box_3	要按等级（低→高）整理当前箱子吗？	Sort the current box by Level (Low to High)?
+code_sort_all_boxes_by_4	要按等级（高→低）整理所有箱子吗？	Sort all boxes by Level (High to Low)?
+code_sort_the_current_box_4	要按等级（高→低）整理当前箱子吗？	Sort the current box by Level (High to Low)?
+code_sort_all_boxes_by_5	要按相遇日期整理所有箱子吗？	Sort all boxes by Date Met?
+code_sort_the_current_box_5	要按相遇日期整理当前箱子吗？	Sort the current box by Date Met?
+code_sort_all_boxes_by_6	要按名称整理所有箱子吗？	Sort all boxes by Name?
+code_sort_the_current_box_6	要按名称整理当前箱子吗？	Sort the current box by Name?
+code_sort_all_boxes_by_7	要按闪光整理所有箱子吗？	Sort all boxes by Shiny?
+code_sort_the_current_box_7	要按闪光整理当前箱子吗？	Sort the current box by Shiny?
+code_sort_all_boxes_by_9	要按个体值潜力整理所有箱子吗？	Sort all boxes by IV Potential?
+code_sort_the_current_box_9	要按个体值潜力整理当前箱子吗？	Sort the current box by IV Potential?
+code_sort_all_boxes_by_10	要按努力值训练整理所有箱子吗？	Sort all boxes by EV Training?
+code_sort_the_current_box_10	要按努力值训练整理当前箱子吗？	Sort the current box by EV Training?
+code_sort_all_boxes_by_11	要按种族值总和整理所有箱子吗？	Sort all boxes by BST?
+code_sort_the_current_box_11	要按种族值总和整理当前箱子吗？	Sort the current box by BST?
+code_sort_all_boxes_by_12	要按合法性整理所有箱子吗？	Sort all boxes by Legal?
+code_sort_the_current_box_12	要按合法性整理当前箱子吗？	Sort the current box by Legal?
+code_sort_all_boxes_by_13	要按奖章数整理所有箱子吗？	Sort all boxes by Ribbon Count?
+code_sort_the_current_box_13	要按奖章数整理当前箱子吗？	Sort the current box by Ribbon Count?
+code_sort_all_boxes_by_14	要按证章数整理所有箱子吗？	Sort all boxes by Mark Count?
+code_sort_the_current_box_14	要按证章数整理当前箱子吗？	Sort the current box by Mark Count?
+code_sort_all_boxes_by_15	要按相遇类型整理所有箱子吗？	Sort all boxes by Encounter Type?
+code_sort_the_current_box_15	要按相遇类型整理当前箱子吗？	Sort the current box by Encounter Type?
+code_sort_all_boxes_by_16	要按用途整理所有箱子吗？	Sort all boxes by Usage?
+code_sort_the_current_box_16	要按用途整理当前箱子吗？	Sort the current box by Usage?
+code_sort_all_boxes_by_17	要按属性整理所有箱子吗？	Sort all boxes by Type?
+code_sort_the_current_box_17	要按属性整理当前箱子吗？	Sort the current box by Type?
+code_sort_all_boxes_by_18	要按归属整理所有箱子吗？	Sort all boxes by Ownership?
+code_sort_the_current_box_18	要按归属整理当前箱子吗？	Sort the current box by Ownership?
+code_sort_all_boxes_by_19	要按版本整理所有箱子吗？	Sort all boxes by Version?
+code_sort_the_current_box_19	要按版本整理当前箱子吗？	Sort the current box by Version?
+code_sort_all_boxes_by_20	要按尺寸整理所有箱子吗？	Sort all boxes by Scale?
+code_sort_the_current_box_20	要按尺寸整理当前箱子吗？	Sort the current box by Scale?
+code_sort_all_boxes_by_21	要按太晶属性整理所有箱子吗？	Sort all boxes by Tera Type?
+code_sort_the_current_box_21	要按太晶属性整理当前箱子吗？	Sort the current box by Tera Type?
+code_clear_the_untrained_pkm	清理当前箱子里的未训练宝可梦	Clear the untrained Pokémon in the current box
+code_clear_the_cross_generation	清理当前箱子里的跨世代宝可梦	Clear the cross-generation Pokémon in the current box
+code_clear_the_untrained_pkm_2	清理所有箱子里的未训练宝可梦	Clear the untrained Pokémon in all boxes
+code_clear_the_cross_generation_2	清理所有箱子里的跨世代宝可梦	Clear the cross-generation Pokémon in all boxes
+code_clear_the_foreign_pkm	清理当前箱子里的外来宝可梦	Clear the foreign Pokémon in the current box
+code_clear_the_foreign_pkm_2	清理所有箱子里的外来宝可梦	Clear the foreign Pokémon in all boxes
+code_clear_the_eggs_in	清理当前箱子里的蛋	Clear the eggs in the current box
+code_clear_the_eggs_in_2	清理所有箱子里的蛋	Clear the eggs in all boxes
+code_clear_the_current_box	清理当前箱子	Clear the current box
+code_clear_all_boxes	清理所有箱子	Clear all boxes
+code_clear	清理	Clear
+code_sort_boxes	整理箱子（高级）	Sort Boxes (Advanced)
+code_sort_boxes_2	整理箱子	Sort Boxes
+code_modify_boxes	修改箱子	Modify Boxes
+code_save_export_failed_result	存档导出失败：{result.Exception?.Message ?? "未知原因"}	Save export failed: {result.Exception?.Message ?? "unknown reason"}
+code_save_exported_to_result	存档已导出到 {result.FilePath}	Save exported to {result.FilePath}
+code_remove	移除	Remove
+code_write	写入	Write
+code_quantity	数量	Quantity
+code_favorite	收藏	Favorite
+code_newly_obtained	新获得	Newly Obtained
+code_modify_all	全部修改	Modify All
+code_clear_all	全部清空	Clear All
+code_empty_the_current_bag	清空当前袋子	Empty the current bag
+code_top_up_the_items	把你已有的道具补到上面的数量	Top up the items you already have to the quantity above
+code_top_up_every_item	把此袋子里的所有道具都补到上面的数量，即使原本没有	Top up every item in this bag to the quantity above, even ones you did not have
+code_region	区域：	Region:
+code_location	地点：	Location:
+code_item	道具：	Item:
+code_intensity	强度	Intensity
+code_affection	感情	Affection
+code_memory_with_pk_handlingtrainername	与 {pk.HandlingTrainerName}（非原始训练家）的回忆	Memory with {pk.HandlingTrainerName} (non-original trainer)
+code_memory_with_pk_originaltrainername	与 {pk.OriginalTrainerName}（原始训练家）的回忆	Memory with {pk.OriginalTrainerName} (original trainer)
+code_non_japanese_save	非日版存档	Non-Japanese save
+code_non_japanese_save_add	非日版存档，要添加 {itemlist[ItemIDOldSeaMap]}（未发布）吗？	Non-Japanese save: add {itemlist[ItemIDOldSeaMap]} (unreleased)?
+code_added_to_the_key	已向关键道具袋添加：{Environment.NewLine}{added}	Added to the Key Item Pocket:{Environment.NewLine}{added}
+code_add_the_following_items	要添加以下道具吗？{Environment.NewLine}{added}	Add the following items?{Environment.NewLine}{added}
+code_already_own_environment_newline	已拥有：{Environment.NewLine}{had}	Already own:{Environment.NewLine}{had}
+code_unhandled_exception	未捕获异常（已拦截，程序继续运行）	Unhandled exception (caught, the app keeps running)
+code_text	（进程即将终止）	(the process is about to terminate)
+code_app_start	应用启动	App start
+code_something_went_wrong	出错了	Something went wrong
+code_5_digit_trainer_sid	5 位训练家里 ID（不是界面上 4 位的显示值）	5-digit Trainer SID (not the 4-digit value shown in the UI)
+code_5_digit_trainer_tid	5 位训练家 ID（不是界面上 7 位的显示值）	5-digit Trainer TID (not the 7-digit value shown in the UI)
+code_original_trainer_name_written	点击“合法化”时写入的初训家名称	Original Trainer name written when clicking "Legalize"
+code_add_attribute	添加属性	Add Attribute
+code_remove_attribute	移除属性	Remove Attribute
+code_view_this_encounter_getpreviewtext	要查看这个相遇方式吗？\n{GetPreviewText(enc.EncounterInfo,EncounterSettings.ShowExtraEncounterInfo)}	View this encounter?\n{GetPreviewText(enc.EncounterInfo,EncounterSettings.ShowExtraEncounterInfo)}
+code_view_encounter	查看相遇	View Encounter
+code_an_error_occurred_while	查看该神秘礼物的数据时发生错误。{Environment.NewLine}{e.Message}	An error occurred while viewing this Mystery Gift's data.{Environment.NewLine}{e.Message}
+code_unable_to_insert_the	无法插入神秘礼物。{GameInfo.Strings.Item[533]} 的槽位不合法。	Unable to insert the Mystery Gift. The slot for {GameInfo.Strings.Item[533]} is invalid.
+code_slot_e_parameter_slotnumber	格子 {((boxsprite?)e?.Parameter)?.SlotNumber}	Slot {((boxsprite?)e?.Parameter)?.SlotNumber}
+code_failed_to_save_the	数据块文件保存失败：{result.Exception.Message}	Failed to save the block file: {result.Exception.Message}
+code_block_file_saved_to	数据块文件已保存到 {result.FilePath}	Block file saved to {result.FilePath}
+code_no_save_loaded_cannot	没有载入存档，无法自动合规。	No save loaded, cannot auto-legalize.
+code_no_pkm_available_to	没有可自动合规的宝可梦。	No Pokémon available to auto-legalize.
+code_category_extramoveinfo_getcategoryvalue_entitycontext	分类：{(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\n威力：{ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\n命中：{ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n	Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n
+code_wrong_size_got_len	尺寸不正确：收到 {len} 字节，预期 {IChatter.SIZE_PCM} 字节。	Wrong size: got {len} bytes, expected {IChatter.SIZE_PCM} bytes.
+code_unable_to_load_data	无法从指定偏移载入数据：{ex.Message}	Unable to load data from the specified offset: {ex.Message}
+code_the_trash_byte_layer	乱数字节层被当前文本隐藏。	The trash byte layer is hidden by the current text.
+code_saving	正在保存…	Saving…
+code_simple_editor	简易编辑器	Simple Editor
+code_gender	性别	Gender
+code_text_2	（无）	(None)
+loc_props_startuppage	启动页	Startup Page
+loc_props_ignorelegalpopup	忽略合法性弹窗	Ignore Legality Popup
+loc_props_rememberlastsave	记住上次存档	Remember Last Save
+loc_props_displaylegalballsonly	仅显示合法球种	Display Legal Balls Only
+loc_props_allowincompatibleconversion	允许不兼容转换	Allow Incompatible Conversion
+loc_props_setupdatepkm	同步更新宝可梦	Sync Update Pokémon
+loc_props_filterunavailablespecies	过滤不可用宝可梦	Filter Unavailable Species
+loc_props_usepkeditorascriteria	以编辑器为筛选条件	Use Editor as Criteria
+loc_props_showextraencounterinfo	显示额外相遇信息	Show Extra Encounter Info
+loc_props_defaultot	默认初训家	Default OT
+loc_props_defaulttid	默认表 ID	Default TID
+loc_props_defaultsid	默认里 ID	Default SID
+loc_props_usetrainerdata	使用训练家数据	Use Trainer Data
+loc_props_trainerfolderpath	训练家文件夹路径	Trainer Folder Path
+loc_props_setalllegalribbons	设置所有合法奖章	Set All Legal Ribbons
+loc_props_setbattleversion	设置对战版本	Set Battle Version
+loc_props_setballbycolor	按球色匹配精灵球	Match Balls by Color
+loc_props_enablememesforillegalsets	非法配招启用梗配置	Enable Memes for Illegal Sets
+loc_props_forcelevel100for50	50 级规则强制 100 级	Force Level 100 for Level 50
+loc_props_livingdexallforms	活体图鉴含所有形态	Living Dex Includes All Forms
+loc_props_livingdexnativeonly	活体图鉴仅限本世代	Living Dex Native Generation Only
+loc_props_livingdexsetalpha	活体图鉴设为头目	Living Dex Set Alpha
+loc_props_livingdexsetshiny	活体图鉴设为闪光	Living Dex Set Shiny
+loc_props_checkwordfilter	检查违禁词	Check Word Filter
+loc_props_allowgen1tradeback	允许第一世代回传	Allow Gen 1 Tradebacks
+loc_props_nicknamedtrade	交换时已改名	Nicknamed on Trade
+loc_props_nicknamedmysterygift	神秘礼物已改名	Nicknamed Mystery Gift
+loc_props_rngframenotfound	未找到 RNG 帧	RNG Frame Not Found
+loc_props_gen7transferstarpid	第七世代传送星号 PID	Gen 7 Transfer Star PID
+loc_props_gen8memorymissinght	第八世代记忆缺少初训家	Gen 8 Memory Missing OT
+loc_props_gen8transfertrackernotpresent	第八世代传送记录缺失	Gen 8 Transfer Tracker Not Present
+loc_props_nicknamedanotherspecies	以其他物种的昵称	Nicknamed as Another Species
+loc_props_zeroheightweight	身高体重为零	Zero Height/Weight
+loc_props_currenthandlermismatch	当前持有者不匹配	Current Handler Mismatch
+loc_props_checkactivehandler	检查当前持有者	Check Current Handler
+loc_categories_legality	合法性	Legality
+loc_categories_event	活动	Event
+loc_typenames_psettings	通用设置	General Settings
+loc_typenames_encountersettings	相遇设置	Encounter Settings
+loc_games_cp	宝可梦冠军	Pokémon Champions
+loc_games_za	传说 Z-A	Legends Z-A
+loc_games_sl	朱	Scarlet
+loc_games_vl	紫	Violet
+loc_games_pla	传说 阿尔宙斯	Legends Arceus
+loc_games_bd	晶灿钻石	Brilliant Diamond
+loc_games_sp	明亮珍珠	Shining Pearl
+loc_games_sw	剑	Sword
+loc_games_sh	盾	Shield
+loc_games_gp	Let's Go 皮卡丘	Let's Go Pikachu
+loc_games_ge	Let's Go 伊布	Let's Go Eevee
+loc_games_sn	太阳	Sun
+loc_games_mn	月亮	Moon
+loc_games_us	究极之日	Ultra Sun
+loc_games_um	究极之月	Ultra Moon
+loc_games_x	X	X
+loc_games_y	Y	Y
+loc_games_or	欧米加红宝石	Omega Ruby
+loc_games_as	阿尔法蓝宝石	Alpha Sapphire
+loc_games_b	黑	Black
+loc_games_w	白	White
+loc_games_b2	黑2	Black 2
+loc_games_w2	白2	White 2
+loc_games_d	钻石	Diamond
+loc_games_p	珍珠	Pearl
+loc_games_pt	白金	Platinum
+loc_games_batrev	对战革命	Battle Revolution
+loc_games_hg	心金	HeartGold
+loc_games_ss	魂银	SoulSilver
+loc_games_r	红宝石	Ruby
+loc_games_s	蓝宝石	Sapphire
+loc_games_e	绿宝石	Emerald
+loc_games_fr	火红	FireRed
+loc_games_lg	叶绿	LeafGreen
+loc_games_cxd	圆形竞技场/XD	Circle Stadium/XD
+loc_games_gd	金	Gold
+loc_games_si	银	Silver
+loc_games_c	水晶	Crystal
+loc_games_rd	红	Red
+loc_games_gn	蓝(国际)/绿(日)	Blue (International)/Green (Japan)
+loc_games_bu	蓝(日)	Blue (Japan)
+loc_games_yw	黄	Yellow
+loc_games_go	GO	GO
+loc_languages_japanese	日文	Japanese
+loc_languages_english	英文	English
+loc_languages_french	法文	French
+loc_languages_german	德文	German
+loc_languages_italian	意大利文	Italian
+loc_languages_spanish	西班牙文	Spanish
+loc_languages_spanishl	拉丁美洲西班牙文	Latin American Spanish
+loc_languages_korean	韩文	Korean
+loc_languages_chineses	简体中文	Simplified Chinese
+loc_languages_chineset	繁体中文	Traditional Chinese
+loc_languages_unused_6	（未使用）	(Unused)
+loc_languages_none	（未指定）	(Unspecified)
+loc_eventflagsmap_lati_s_roaming	拉帝欧斯/拉帝亚斯 漫游	Lati@s Roaming
+loc_eventflagsmap_defeated_mew_unreleased_internationally	击败 梦幻（国际未发布）	Defeated Mew (Unreleased Internationally)
+loc_eventflagsmap_captured_mew_unreleased_internationally	捕获 梦幻（国际未发布）	Captured Mew (Unreleased Internationally)
+loc_eventflagsmap_captured_lugia	捕获 洛奇亚	Captured Lugia
+loc_eventflagsmap_captured_ho_oh	捕获 凤王	Captured Ho-Oh
+loc_eventflagsmap_defeated_ho_oh	击败 凤王	Defeated Ho-Oh
+loc_eventflagsmap_defeated_mew	击败 梦幻	Defeated Mew
+loc_eventflagsmap_captured_mew	捕获 梦幻	Captured Mew
+loc_eventflagsmap_obtained_mew	获得 梦幻	Obtained Mew
+loc_eventflagsmap_distributed_mew	分发 梦幻	Distributed Mew
+loc_inventorytypemap_keyitems	重要道具	Key Items
+loc_inventorytypemap_balls	精灵球	Poké Balls
+loc_inventorytypemap_battleitems	战斗道具	Battle Items
+loc_inventorytypemap_berries	树果	Berries
+loc_inventorytypemap_medicine	药品	Medicine
+loc_inventorytypemap_machines	招式机	Machines
+loc_inventorytypemap_tmhm	招式学习器	TM/HM
+loc_inventorytypemap_ct	招式记录	CT
+loc_inventorytypemap_freespace	自由空间	Free Space
+loc_inventorytypemap_candy	糖果	Candy
+loc_inventorytypemap_zcrystals	Z 纯晶	Z-Crystals
+loc_inventorytypemap_mail	邮件	Mail
+loc_inventorytypemap_megastone	Mega 石	Mega Stones
+loc_inventorytypemap_rotompower	洛托姆力量	Rotom Power
+loc_inventorytypemap_nectar	花蜜	Nectar
+loc_inventorytypemap_ingredient	食材	Ingredients
+loc_inventorytypemap_wood	木材	Wood
+loc_inventorytypemap_fishing	钓竿	Fishing
+loc_inventorytypemap_recipe	食谱	Recipes
+loc_inventorytypemap_material	材料	Materials
+loc_inventorytypemap_picnic	野餐	Picnic
+loc_inventorytypemap_snack	零食	Snacks
+loc_inventorytypemap_valuables	贵重物品	Valuables
+loc_inventorytypemap_trash	垃圾	Trash
+loc_exceptions_indexoutofrangeexception	索引越界（访问了不存在的数组元素）	Index out of range (accessed a non-existent array element)
+loc_exceptions_argumentoutofrangeexception	参数越界（取值超出允许范围）	Argument out of range (value outside the allowed range)
+loc_exceptions_nullreferenceexception	空引用（对象未初始化）	Null reference (object not initialized)
+loc_exceptions_argumentnullexception	参数为空	Argument is null
+loc_exceptions_formatexception	格式错误	Format error
+loc_exceptions_invalidoperationexception	操作无效	Invalid operation
+loc_exceptions_argumentexception	参数错误	Argument error
+loc_encountergroups_egg	蛋	Egg
+loc_encountergroups_mystery	神秘礼物	Mystery Gift
+loc_encountergroups_static	定点	Static
+loc_encountergroups_trade	交换	Trade
+loc_encountergroups_slot	野外	Wild
+shell_hyper_train_all	要极限特训所有箱子里的宝可梦吗？	Hyper train the Pokémon in all boxes?
+shell_hyper_train_current	只极限特训当前箱子里的宝可梦吗？	Hyper train the Pokémon in the current box only?
+shell_max_friendship_all	要最大化所有箱子里的亲密度吗？	Maximize friendship in all boxes?
+shell_max_friendship_current	只最大化当前箱子里的亲密度吗？	Maximize friendship in the current box only?
+shell_remove_items_all	要删除所有箱子里的持有道具吗？	Remove held items from all boxes?
+shell_remove_items_current	只删除当前箱子里的持有道具吗？	Remove held items from the current box only?
+shell_max_level_all	要最大化所有箱子里的等级吗？	Maximize level in all boxes?
+shell_max_level_current	只最大化当前箱子里的等级吗？	Maximize level in the current box only?
+shell_random_moves_all	要随机化所有箱子里的招式吗？	Randomize the moves in all boxes?
+shell_random_moves_current	只随机化当前箱子里的招式吗？	Randomize the moves in the current box only?
+shell_reset_moves_all	要重置所有箱子里的招式吗？	Reset the moves in all boxes?
+shell_reset_moves_current	只重置当前箱子里的招式吗？	Reset the moves in the current box only?
+shell_remove_nicknames_all	要移除所有箱子里的昵称吗？	Remove nicknames in all boxes?
+shell_remove_nicknames_current	只移除当前箱子里的昵称吗？	Remove nicknames in the current box only?
+shell_hatch_eggs_all	要孵化所有箱子里的蛋吗？	Hatch the eggs in all boxes?
+shell_hatch_eggs_current	只孵化当前箱子里的蛋吗？	Hatch the eggs in the current box only?
+shell_sort_random_all	要随机整理所有箱子吗？	Sort all boxes randomly?
+shell_sort_random_current	要随机整理当前箱子吗？	Sort the current box randomly?
+common_unknown_reason	未知原因	unknown reason
+common_version_label	版本：	Version:
+common_version_label_sp	版本： 	Version: 
+common_encounter_label	遭遇类型：	Encounter Type:
+common_encounter_label_sp	遭遇类型： 	Encounter Type: 
+common_yes	是	Yes
+common_no	否	No
+common_invalid	非法	Invalid
+common_fishy	可疑	Fishy
+common_valid	合法	Valid
+loc_autolegalize_failed	自动合规失败：{m}	Auto-legalize failed: {m}
+loc_autolegalize_no_reason	自动合规失败，但没有返回具体原因。	Auto-legalize failed, but no specific reason was returned.
+loc_illegal_ball	按当前设置，这只宝可梦不可能用该精灵球合法存在。\n（原始信息：{m}）	Under the current settings, this Pokémon cannot legally exist with that Poké Ball.\n(Original info: {m})
+loc_no_encounter_match	找不到可用的匹配相遇方式，无法自动合规。\n（原始信息：{m}）	No matching encounter could be found, cannot auto-legalize.\n(Original info: {m})
+common_export_failed	导出失败	Export failed
+common_load_failed	载入失败	Load failed
+common_open_failed	打开失败	Open failed
+common_save_failed	保存失败	Save failed
+code_pk_file_saved_to	PK 文件已保存到 {result.FilePath}	PK file saved to {result.FilePath}
+code_pk_file_save_failed	PK 文件保存失败：{result.Exception?.Message ?? "未知原因"}	Failed to save the PK file: {result.Exception?.Message ?? "unknown reason"}
+common_legality_report	合法性报告	Legality Report
+common_legalize	合法化	Legalize
+code_apply_this_set	要应用这套配置吗？\n{await Clipboard.GetTextAsync()}	Apply this set?\n{await Clipboard.GetTextAsync()}
+code_share_pkm	分享 PKM	Share PKM
+code_validation_errors_save_anyway	存在校验错误，仍要保存吗？{Environment.NewLine}	There are validation errors, save anyway?{Environment.NewLine}
+code_exception_detail	异常 {ex.GetType().Name}: {ex.Message}	Exception {ex.GetType().Name}: {ex.Message}
+code_query_failed	查询失败: {ex.GetType().Name}	Query failed: {ex.GetType().Name}
+gamelang_japanese	日文	Japanese
+gamelang_english	英文	English
+gamelang_french	法文	French
+gamelang_italian	意大利文	Italian
+gamelang_german	德文	German
+gamelang_spanish	西班牙文	Spanish
+gamelang_korean	韩文	Korean
+gamelang_chineses	简体中文	Simplified Chinese
+gamelang_chineset	繁体中文	Traditional Chinese
+gamelang_spanishl	拉丁美洲西班牙文	Latin American Spanish
+gamelang_unspecified	（未指定）	Unspecified

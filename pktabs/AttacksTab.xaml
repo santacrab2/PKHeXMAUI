@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.AttacksTab"
-             Title="Attacks">
+             Title="{l10n:Tr Key=shell_moves}">
     <RefreshView x:Name="AttackRefresh">
 
         <ScrollView>
@@ -52,9 +52,9 @@
                 <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
                 <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="End" IsVisible="false"/>
                 <!--labels-->
-                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Current Moves"/>
+                <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=attacks_current_moves}"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="PP"/>
-                <Label Grid.Row="1" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="Ups"/>
+                <Label Grid.Row="1" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=attacks_level_up_count}"/>
 
                 <!--Move1-->
                 <ImageButton Grid.Row="2" Grid.Column="0" Source="type_icon_01.png" WidthRequest="25" HeightRequest="25" HorizontalOptions="Start" x:Name="move1Type" Clicked="DisplayMoveInfo1"/>
@@ -85,18 +85,18 @@
                 <Picker Grid.Row="5" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" x:Name="move4ppups" SelectedIndexChanged="applymove4ppups"/>
 
                 <!--Relearn Moves-->
-                <Label Grid.Row="7" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Relearn Moves"/>
+                <Label Grid.Row="7" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=attacks_relearn_moves}"/>
                 <l:comboBox Grid.Row="8" Grid.Column="1"  VerticalOptions="Center" x:Name="rmove1" SelectedIndexChanged="applyrmove1" />
                 <l:comboBox Grid.Row="9" Grid.Column="1"   VerticalOptions="Center" x:Name="rmove2" SelectedIndexChanged="applyrmove2"/>
                 <l:comboBox Grid.Row="10" Grid.Column="1"   VerticalOptions="Center" x:Name="rmove3" SelectedIndexChanged="applyrmove3" />
                 <l:comboBox Grid.Row="11" Grid.Column="1"   VerticalOptions="Center" x:Name="rmove4" SelectedIndexChanged="applyrmove4"/>
 
                 <!--helpful buttons-->
-                <Button Grid.Row="6" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="suggestedmoves" Clicked="setsuggmoves"  WidthRequest="150"/>
-                <Button Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Relearn Flags" Clicked="openTReditor" Grid.ColumnSpan="2"/>
-                <Button x:Name="moveshopbutton" IsVisible="false" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Move Shop" Clicked="openMoveShopEditor"/>
+                <Button Grid.Row="6" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=attacks_recommended_moves}" Clicked="setsuggmoves"  WidthRequest="150"/>
+                <Button Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=attacks_relearn_flag}" Clicked="openTReditor" Grid.ColumnSpan="2"/>
+                <Button x:Name="moveshopbutton" IsVisible="false" Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=attacks_move_shop}" Clicked="openMoveShopEditor"/>
                 <!--Alpha Mastered-->
-                <Label x:Name="AlphaMasteredLabel" IsVisible="false" Grid.Row="13" Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="2" Text="Alpha Mastered:"/>
+                <Label x:Name="AlphaMasteredLabel" IsVisible="false" Grid.Row="13" Grid.Column="0" VerticalOptions="Center" Grid.ColumnSpan="2" Text="{l10n:Tr Key=attacks_alpha_knows}"/>
                 <l:comboBox x:Name="AlphaMasteredPicker" IsVisible="false" Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" SelectedIndexChanged="applyAlphaMasteredMove" />
 
 

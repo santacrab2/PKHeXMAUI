@@ -28,13 +28,13 @@ public partial class LiveHex : ContentPage
         IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
 		if (!profiles.Contains(ConnectionProfile.WiFi))
 		{
-			await DisplayAlertAsync("WiFi", "Please Connect to WiFi", "ok");
+			await DisplayAlertAsync("WiFi", L10n.T("livehex_please_connect_to"), L10n.T("pktab_ok"));
 			return;
 		}
         if (Remote.Connected)
         {
             Remote.com.Disconnect();
-            connect.Text = "Connect";
+            connect.Text = L10n.T("livehex_connect");
             return;
         }
         Remote.com.IP = IP.Text;
@@ -47,7 +47,7 @@ public partial class LiveHex : ContentPage
             var compatible = InjectionBase.SaveCompatibleWithTitle(sav, titleid);
             if (!compatible)
             {
-                await DisplayAlertAsync("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
+                await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_invalid_version_detected"), L10n.T("livehex_disconnect"));
                 Remote.com.Disconnect();
                 return;
             }
@@ -57,13 +57,13 @@ public partial class LiveHex : ContentPage
             {
                 if (InjectionBase.CheckRAMShift(Remote, out var errorMessage))
                 {
-                    await DisplayAlertAsync("Error", errorMessage, "disconnect");
+                    await DisplayAlertAsync(L10n.T("livehex_error"), errorMessage, L10n.T("livehex_disconnect"));
                 }
                 else
                 {
-                    await DisplayAlertAsync("Error", "Error Connecting", "disconnect");
+                    await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_connection_error"), L10n.T("livehex_disconnect"));
                 }
-                await DisplayAlertAsync("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
+                await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_invalid_version_detected"), L10n.T("livehex_disconnect"));
                 Remote.com.Disconnect();
                 return;
             }
@@ -88,7 +88,7 @@ public partial class LiveHex : ContentPage
             }
             if (!valid)
             {
-                await DisplayAlertAsync("Error", "Invalid Version Detected. Could not connect to device", "disconnect");
+                await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_invalid_version_detected"), L10n.T("livehex_disconnect"));
                 Remote.com.Disconnect();
                 return;
             }
@@ -96,7 +96,7 @@ public partial class LiveHex : ContentPage
         SetTrainerData(sav);
         RecentTrainerCache.SetRecentTrainer(sav);
         Reconnect = true;
-        connect.Text = "Disconnect";
+        connect.Text = L10n.T("livehex_disconnect");
     }
     private bool IsPKMDataValid(PKM data)
     {
@@ -122,12 +122,12 @@ public partial class LiveHex : ContentPage
         {
             if (!int.TryParse(boxnum.Text, out var box))
             {
-                await DisplayAlertAsync("Invalid", "Invalid Box number", "cancel");
+                await DisplayAlertAsync(L10n.T("livehex_invalid"), L10n.T("livehex_invalid_box_number"), L10n.T("pktab_ok"));
                 return;
             }
             if (!int.TryParse(slotnum.Text, out var slot))
             {
-                await DisplayAlertAsync("Invalid", "Invalid Slot number", "cancel");
+                await DisplayAlertAsync(L10n.T("livehex_invalid"), L10n.T("livehex_invalid_slot_number"), L10n.T("pktab_ok"));
                 return;
             }
             Span<byte> data = stackalloc byte[MainPage.sav.SIZE_BOXSLOT];
@@ -142,12 +142,12 @@ public partial class LiveHex : ContentPage
         {
             if (!int.TryParse(boxnum.Text, out var box))
             {
-                await DisplayAlertAsync("Invalid", "Invalid Box number", "cancel");
+                await DisplayAlertAsync(L10n.T("livehex_invalid"), L10n.T("livehex_invalid_box_number"), L10n.T("pktab_ok"));
                 return;
             }
             if (!int.TryParse(slotnum.Text, out var slot))
             {
-                await DisplayAlertAsync("Invalid", "Invalid Slot number", "cancel");
+                await DisplayAlertAsync(L10n.T("livehex_invalid"), L10n.T("livehex_invalid_slot_number"), L10n.T("pktab_ok"));
                 return;
             }
             pk = EntityFormat.GetFromBytes(Remote.ReadSlot(box - 1, slot - 1).ToArray())??EntityBlank.GetBlank(sav.Generation);
@@ -162,14 +162,14 @@ public partial class LiveHex : ContentPage
             {
                 if (Remote.com is not ICommunicatorNX sb)
                 {
-                    await DisplayAlertAsync("Error", "Error", "cancel");
+                    await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_error"), L10n.T("pktab_ok"));
                     return;
                 }
 
                 ulong address = GetPointerAddress(sb);
                 if (address == 0)
                 {
-                    await DisplayAlertAsync("Error", "No pointer address.", "cancel");
+                    await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_no_pointer_address"), L10n.T("pktab_ok"));
                     return;
                 }
 
@@ -187,7 +187,7 @@ public partial class LiveHex : ContentPage
                 var off = Util.GetHexValue64(txt);
                 if (off.ToString("X16") != txt.ToUpper().PadLeft(16, '0'))
                 {
-                    await DisplayAlertAsync("Error", "Specified offset is not a valid hex string.", "cancel");
+                    await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_the_specified_offset"), L10n.T("pktab_ok"));
                     return;
                 }
                 try
@@ -196,11 +196,11 @@ public partial class LiveHex : ContentPage
 
                     var result = ReadOffset(off, method);
                     if (!result)
-                        await DisplayAlertAsync("Error", "No valid data is located at the specified offset.", "cancel");
+                        await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("livehex_no_valid_data"), L10n.T("pktab_ok"));
                 }
                 catch (Exception ex)
                 {
-                    await DisplayAlertAsync("Error", $"Unable to load data from the specified offset. {ex.Message}", "cancel");
+                    await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("code_unable_to_load_data", ex.Message), L10n.T("pktab_ok"));
                 }
             }
         }

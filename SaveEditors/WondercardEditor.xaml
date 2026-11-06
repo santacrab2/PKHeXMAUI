@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.WondercardEditor"
-             Title="WondercardEditor">
+             Title="{l10n:Tr Key=saveedit_mystery_card_editor}">
     <ScrollView>
         <Grid ColumnDefinitions="*,2*" RowDefinitions="*,*,*,*">
             <VerticalStackLayout>
-                <Label Text="Received List:"/>
+                <Label Text="{l10n:Tr Key=saveedit_received_list}"/>
                 <CollectionView BackgroundColor="White" HeightRequest="1000" x:Name="CV_ReceivedList" SelectionMode="Single" SelectionChanged="CV_ReceivedList_SelectionChanged" Grid.Row="1"/>
             </VerticalStackLayout>
             <Grid Grid.Column="1" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
-                <Label Text="QR" x:Name="L_QR"/>
+                <Label Text="{l10n:Tr Key=saveedit_qr_code}" x:Name="L_QR"/>
                 <Image Grid.Column="1" x:Name="IMG_ActiveSprite" Source="iconp.png" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start"/>
                 <VerticalStackLayout Grid.Column="2">
-                    <Button Text="Export" Clicked="B_ExportClick"/>
-                    <Button Text="Import" Clicked="B_ImportClick" Grid.Row="1"/>
+                    <Button Text="{l10n:Tr Key=shell_export}" Clicked="B_ExportClick"/>
+                    <Button Text="{l10n:Tr Key=saveedit_import}" Clicked="B_ImportClick" Grid.Row="1"/>
                 </VerticalStackLayout>
-                <Label Text="Details:" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=saveedit_details}" Grid.Row="1"/>
                 <Editor x:Name="E_Details" Grid.Row="2" IsReadOnly="True"/>
             </Grid>
             <Grid Grid.Row="1" x:Name="G_Gifts"></Grid>
-            <Button Text="All Unused" x:Name="B_UnusedAll" Clicked="B_ModifyAll_Click" Grid.Row="2"/>
-            <Button Text="All Used" x:Name="B_UsedAll" Clicked="B_ModifyAll_Click" Grid.Row="2" Grid.Column="1"/>
-            <Button Text="Close" x:Name="B_Close" Clicked="B_Close_Click" Grid.Row="3"/>
-            <Button Text="Save" x:Name="B_Save" Clicked="B_Save_Click" Grid.Row="3" Grid.Column="1"/>
+            <Button Text="{l10n:Tr Key=saveedit_all_unused}" x:Name="B_UnusedAll" Clicked="B_ModifyAll_Click" Grid.Row="2"/>
+            <Button Text="{l10n:Tr Key=saveedit_all_used}" x:Name="B_UsedAll" Clicked="B_ModifyAll_Click" Grid.Row="2" Grid.Column="1"/>
+            <Button Text="{l10n:Tr Key=common_close}" x:Name="B_Close" Clicked="B_Close_Click" Grid.Row="3"/>
+            <Button Text="{l10n:Tr Key=common_save}" x:Name="B_Save" Clicked="B_Save_Click" Grid.Row="3" Grid.Column="1"/>
         </Grid>
     </ScrollView>
 </ContentPage>

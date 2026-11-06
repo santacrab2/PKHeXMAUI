@@ -25,16 +25,61 @@ public partial class PKHeXSettings : ContentPage
         var prop2 = new propertyGrid(new EncounterSettings());
         Stack_PKHeXSettings.Children.Add(prop2);
         Permissions.RequestAsync<Permissions.StorageWrite>();
+
+        // 界面语言选择器
+        LangLabel.Text = L10n.T("settings_ui_language");
+        LangPicker.Title = L10n.T("settings_ui_language");
+        LangPicker.ItemsSource = L10nLangs.All
+            .Select(i => new ComboItem(i.NativeName, (int)i.Lang))
+            .ToList();
+        LangPicker.ItemDisplayBinding = new Binding("Text");
+        skipevent = true;
+        LangPicker.SelectedItem = LangPicker.ItemsSource
+            .Cast<ComboItem>()
+            .FirstOrDefault(z => z.Value == (int)L10nManager.Instance.Current);
+        skipevent = false;
+
         var noSelectVersions = new[] { GameVersion.GO, GameVersion.Any };
-        SaveVersionPicker.ItemsSource = GameInfo.Sources.VersionDataSource.Where(z => !noSelectVersions.Contains((GameVersion)z.Value)).ToList();
+        // 存档版本列表用中文名显示，但 Value 仍是原始 GameVersion，取值逻辑不变
+        var versions = GameInfo.Sources.VersionDataSource
+            .Where(z => !noSelectVersions.Contains((GameVersion)z.Value))
+            .Select(z => new ComboItem(Loc.Game((GameVersion)z.Value, z.Text), z.Value))
+            .ToList();
+        SaveVersionPicker.ItemsSource = versions;
         SaveVersionPicker.ItemDisplayBinding = new Binding("Text");
         skipevent = true;
         var newVersion = MainPage.sav.Version;
         if (newVersion == GameVersion.HGSS)
             newVersion = MainPage.sav.Version.GetSingleVersion();
-        SaveVersionPicker.SelectedItem = GameInfo.Sources.VersionDataSource.FirstOrDefault(z => (GameVersion)z.Value == newVersion);
+        SaveVersionPicker.SelectedItem = versions.FirstOrDefault(z => (GameVersion)z.Value == newVersion);
         skipevent = false;
     }
+    /// <summary>
+    /// 切换界面语言：立即生效（索引器绑定刷新）+ 持久化 + 应用 RTL 布局。
+    /// </summary>
+    private void applylang(object sender, EventArgs e)
+    {
+        if (skipevent)
+            return;
+        if (LangPicker.SelectedItem is not ComboItem sel)
+            return;
+
+        var lang = (L10nLang)sel.Value;
+        if (lang == L10nManager.Instance.Current)
+            return;
+
+        L10nManager.Instance.SetLanguage(lang);
+
+        // 语言变了，本页的静态文案也要重刷
+        LangLabel.Text = L10n.T("settings_ui_language");
+        LangPicker.Title = L10n.T("settings_ui_language");
+
+        // RTL 语言需要重新计算布局方向
+        L10nLayout.Apply(this);
+        if (App.Current?.Windows is { Count: > 0 } wins)
+            L10nLayout.Apply(wins[0]);
+    }
+
     private void applynewsave(object sender, EventArgs e)
     {
         if (!skipevent)
@@ -180,7 +225,7 @@ public class GenericCollectionSelector : DataTemplateSelector
         var proplabel = new Label();
         proplabel.SetBinding(Label.TextProperty, "prop.Name");
         grid.Add(proplabel);
-        grid.Add(new Label() { Text = "Options" }, 1, 0);
+        grid.Add(new Label() { Text = L10n.T("gen1_options") }, 1, 0);
         grid.Add(Selected,0,1);
         grid.Add(Options,1,1);
         return grid;
@@ -259,9 +304,9 @@ public class GenericCollectionSelector : DataTemplateSelector
                         LastBox = editor.Placeholder;
                         var description = editor.Placeholder switch
                         {
-                            "DefaultOT" => "The OT Name that will be set when you press Legalize",
-                            "DefaultTID" => "5 digit Trainer ID (Not the 7 digit display)",
-                            "DefaultSID" => "5 digit Trainer Secret ID (not the 4 digit display)",
+                            "DefaultOT" => L10n.T("code_original_trainer_name_written"),
+                            "DefaultTID" => L10n.T("code_5_digit_trainer_tid"),
+                            "DefaultSID" => L10n.T("code_5_digit_trainer_sid"),
                             _ => ""
                         };
                         ToolTipProperties.SetText(editor, description);

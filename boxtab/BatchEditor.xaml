@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:control="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.BatchEditor"
-             Title="BatchEditor">
+             Title="{l10n:Tr Key=box_batch_editor}">
     <VerticalStackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -23,9 +23,9 @@
             <Label x:Name="PropertyValueLab" Grid.Row="1" Grid.Column="1" FontSize="16"/>
         </Grid>
         
-        <Button Text="Add" x:Name="AddButton" Clicked="AddButton_Clicked"/>
+        <Button Text="{l10n:Tr Key=box_add}" x:Name="AddButton" Clicked="AddButton_Clicked"/>
         <Editor AutoSize="TextChanges" x:Name="BatchText" HeightRequest="300"/>
-        <Button Text="Apply" x:Name="ApplyButton" Clicked="ApplyBatchChanges"/>
-        <Button Text="Cancel" x:Name="CloseButton" Clicked="CloseButtonClicked"/>
+        <Button Text="{l10n:Tr Key=box_apply}" x:Name="ApplyButton" Clicked="ApplyBatchChanges"/>
+        <Button Text="{l10n:Tr Key=box_cancel}" x:Name="CloseButton" Clicked="CloseButtonClicked"/>
     </VerticalStackLayout>
 </ContentPage>

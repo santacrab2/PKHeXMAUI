@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.LiveHex"
              Title="LiveHex">
     <ScrollView>
@@ -37,28 +37,28 @@
 
 
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="Connect"  x:Name="connect" Clicked="botbaseconnect"></Button>
-            <Label Text="IP:" Grid.Row="1" Grid.Column="0"/>
+            <Button Grid.Row="0" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=livehex_connect}"  x:Name="connect" Clicked="botbaseconnect"></Button>
+            <Label Text="{l10n:Tr Key=livehex_ip}" Grid.Row="1" Grid.Column="0"/>
             <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="192.168.1.151" AutoSize="TextChanges" x:Name="IP" TextChanged="SaveUserIP" ></Editor>
-            <Label Text="Port:" Grid.Row="1" Grid.Column="2"/>
+            <Label Text="{l10n:Tr Key=livehex_port}" Grid.Row="1" Grid.Column="2"/>
             <Editor Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" Text="6000" AutoSize="TextChanges" x:Name="Port"></Editor>
-            <Label Text="PKM Editor" Grid.Row="2" Grid.Column="0"/>
-            <Label Text="Box:" Grid.Row="3" Grid.Column="0"/>
+            <Label Text="{l10n:Tr Key=shell_pkm_editor}" Grid.Row="2" Grid.Column="0"/>
+            <Label Text="{l10n:Tr Key=livehex_box}" Grid.Row="3" Grid.Column="0"/>
             <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="1" Text="1" x:Name="boxnum"/>
-            <Label Text="Slot:" Grid.Row="3" Grid.Column="2"/>
+            <Label Text="{l10n:Tr Key=livehex_slot}" Grid.Row="3" Grid.Column="2"/>
             <Entry Keyboard="Numeric" Grid.Row="3" Grid.Column="3" Text="1" x:Name="slotnum"/>
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="Write to Slot" Clicked="inject"></Button>
-            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="Read from Slot" Clicked="read"/>
-            <Label Text="Offset/Pointer:" VerticalOptions="Center" Grid.Row="5" Grid.Column="0"/>
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="{l10n:Tr Key=livehex_write_slot}" Clicked="inject"></Button>
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="{l10n:Tr Key=livehex_read_from_slot}" Clicked="read"/>
+            <Label Text="{l10n:Tr Key=livehex_offset_pointer}" VerticalOptions="Center" Grid.Row="5" Grid.Column="0"/>
             <Editor Grid.Row="5" Grid.Column="1" x:Name="offset"/>
-            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Read from Offset/Pointer" Clicked="B_ReadFromOff_Click"/>
-            <Label Text="Boxes" Grid.Row="7"/>
+            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="{l10n:Tr Key=livehex_read_from_offset}" Clicked="B_ReadFromOff_Click"/>
+            <Label Text="{l10n:Tr Key=shell_boxes}" Grid.Row="7"/>
             <CheckBox Grid.Row="8" Grid.Column="0" x:Name="CB_ReadChangeBox" CheckedChanged="CB_ReadChangeBox_Check"/>
-            <Label Grid.Row="8" Grid.Column="1" Text="Read on Change Box"/>
+            <Label Grid.Row="8" Grid.Column="1" Text="{l10n:Tr Key=livehex_read_on_box}"/>
             <CheckBox Grid.Row="8" Grid.Column="2" x:Name="CB_InjectinSlot" CheckedChanged="CB_InjectinSlot_check"/>
-            <Label Grid.Row="8" Grid.Column="3" Text="Inject in Slot"/>
-            <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="Read Current Box" Clicked="B_ReadCurrentBox_Click"/>
-            <Button Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Text="Write Current Box" Clicked="B_WriteCurrentBox_Click"/>
+            <Label Grid.Row="8" Grid.Column="3" Text="{l10n:Tr Key=livehex_write_slot}"/>
+            <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Text="{l10n:Tr Key=livehex_read_current_box}" Clicked="B_ReadCurrentBox_Click"/>
+            <Button Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Text="{l10n:Tr Key=livehex_write_current_box}" Clicked="B_WriteCurrentBox_Click"/>
         </Grid>
     </ScrollView>
 </ContentPage>

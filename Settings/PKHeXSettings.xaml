@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.PKHeXSettings"
-             Title="PKHeXSettings">
+             Title="{l10n:Tr Key=shell_pkhex_settings}">
     <ScrollView>
     <VerticalStackLayout x:Name="Stack_PKHeXSettings">
-        <Picker x:Name="SaveVersionPicker" Title="Current Save" SelectedIndexChanged="applynewsave"></Picker>
+        <!-- 界面语言选择器：切换后立即生效并持久化 -->
+        <Grid Padding="10,6" ColumnDefinitions="175,*">
+            <Label x:Name="LangLabel" VerticalOptions="Center"
+                   Text="{l10n:Tr Key=settings_ui_language}"/>
+            <Picker x:Name="LangPicker" Grid.Column="1" HorizontalOptions="Fill"
+                    Title="{l10n:Tr Key=settings_ui_language}" SelectedIndexChanged="applylang"/>
+        </Grid>
+        <Picker x:Name="SaveVersionPicker" Title="{l10n:Tr Key=settings_current_save}" SelectedIndexChanged="applynewsave"></Picker>
     </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

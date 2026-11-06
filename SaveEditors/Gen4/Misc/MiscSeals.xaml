@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscSeals"
-             Title="Seals">
+             Title="{l10n:Tr Key=gen4_stickers}">
     <VerticalStackLayout>
         <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*">
-            <Button Text="Delete All Seals" Clicked="B_ClearSeals_Click"/>
-            <Button Text="Give All Seals (Legal)" Clicked="OnBAllSealsLegalOnClick" Grid.Row="1"/>
-            <Button x:Name="B_AllSealsIllegal" Text="Give All Seals (Illegal)" Clicked="OnBAllSealsLegalOnClick" Grid.Row="2"/>
+            <Button Text="{l10n:Tr Key=gen4_delete_all_stickers}" Clicked="B_ClearSeals_Click"/>
+            <Button Text="{l10n:Tr Key=gen4_give_all_stickers}" Clicked="OnBAllSealsLegalOnClick" Grid.Row="1"/>
+            <Button x:Name="B_AllSealsIllegal" Text="{l10n:Tr Key=gen4_give_all_stickers_2}" Clicked="OnBAllSealsLegalOnClick" Grid.Row="2"/>
             <CollectionView x:Name="CV_Seals" HeightRequest="300" Grid.Column="1" Grid.RowSpan="3"/>
         </Grid>
     </VerticalStackLayout>

@@ -35,7 +35,7 @@ public partial class SavePage7 : ContentPage
 {
     public SavePage7()
     {
-        this.Title = "Save";
+        this.Title = L10n.T("common_save");
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {

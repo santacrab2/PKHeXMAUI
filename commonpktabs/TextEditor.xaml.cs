@@ -36,8 +36,15 @@ public partial class TextEditor : ContentPage
         var f = new Microsoft.Maui.Graphics.Font("sans-serif", 11);
         AddCharEditing(f, generation);
         StringEntry.Text = TB_NN;
-        LanguagePicker.ItemsSource = Enum.GetValues<LanguageID>();
-        LanguagePicker.SelectedIndex = MainPage.sav.Language;
+        // 语言下拉框：显示名走本地化资源（原来直接塞 LanguageID 枚举，显示的是英文原名），
+        // 并且只列出当前存档版本实际发行过的语言。
+        var langs = GameLanguageCatalog.ForSave(MainPage.sav);
+        LanguagePicker.ItemsSource = langs.Select(o => new ComboItem(o.Display, o.Value)).ToList();
+        LanguagePicker.ItemDisplayBinding = new Binding("Text");
+        // 第一、二世代的语言不可直接设置，ForSave 返回空列表 —— 此时不要选任何项。
+        // （原来写成 langs.FirstOrDefault(...).Value == want，空列表时会 NRE。）
+        var want = MainPage.sav.Language;
+        LanguagePicker.SelectedItem = langs.FirstOrDefault(o => o.Value == (byte)want);
     }
     private void AddTrashEditing(int count)
     {
@@ -100,13 +107,13 @@ public partial class TextEditor : ContentPage
         ReadOnlySpan<byte> current = SetString(StringEntry.Text);
         if (data.Length <= current.Length)
         {
-            DisplayAlertAsync("Trash byte layer is hidden by current text.",
-                $"Current Bytes: {current.Length}" + Environment.NewLine + $"Layer Bytes: {data.Length}","cancel");
+            DisplayAlertAsync(L10n.T("code_the_trash_byte_layer"),
+                $"Current Bytes: {current.Length}" + Environment.NewLine + $"Layer Bytes: {data.Length}",L10n.T("pktab_ok"));
             return;
         }
         if (data.Length > TrashList.Count)
         {
-            DisplayAlertAsync("Trash byte layer is too long to apply.","Too Long.", "cancel");
+            DisplayAlertAsync(L10n.T("common_the_trash_byte"),L10n.T("common_too_long"), L10n.T("pktab_ok"));
             return;
         }
         for (int i = current.Length; i < data.Length; i++)
@@ -145,7 +152,9 @@ public partial class TextEditor : ContentPage
     private string GetTrashString()
     {
         var species = (ushort?)((ComboItem?)SpeciesCombo.SelectedItem)?.Value??0;
-        var language = (LanguageID)LanguagePicker.SelectedItem;
+        // 下拉框现在存的是 ComboItem（Value 为语言字节值）
+        var languageVal = ((ComboItem?)LanguagePicker.SelectedItem)?.Value ?? 2;
+        var language = (LanguageID)languageVal;
         var gen = (byte)(int)GenerationPicker.SelectedItem;
         string text = SpeciesName.GetSpeciesNameGeneration(species, (int)language, gen);
 

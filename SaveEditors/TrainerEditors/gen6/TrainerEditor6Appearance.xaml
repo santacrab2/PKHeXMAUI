@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor6Appearance"
-             Title="Appearance">
+             Title="{l10n:Tr Key=cosmetic_appearance}">
     <ScrollView>
         <VerticalStackLayout>
-            <Label Text="Trainer Nickname:"/>
+            <Label Text="{l10n:Tr Key=gen6_trainer_nickname}"/>
             <Entry x:Name="TNickEntry" />
-            <Button Text="Give All Accessories" Clicked="GiveAllAccessories"/>
+            <Button Text="{l10n:Tr Key=gen6_give_all_accessories}" Clicked="GiveAllAccessories"/>
             <Grid x:Name="BlockStack">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

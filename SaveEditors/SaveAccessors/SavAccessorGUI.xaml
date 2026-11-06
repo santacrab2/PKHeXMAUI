@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
     
              xmlns:local="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.SavAccessorGUI"
-             Title="SavAccessorGUI">
+             Title="{l10n:Tr Key=accessor_save_accessor}">
     <ScrollView>
         <VerticalStackLayout>
             <local:comboBox x:Name="BlockKey_Picker" SelectedIndexChanged="Update_BlockCV" BackgroundColor="Transparent"></local:comboBox>

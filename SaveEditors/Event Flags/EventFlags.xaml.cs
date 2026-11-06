@@ -21,7 +21,7 @@ public partial class EventFlags : ContentPage
             check.SetBinding(CheckBox.IsCheckedProperty, new Binding("Value"));
             grid.Add(check);
             var label = new Label();
-            label.SetBinding(Label.TextProperty, new Binding("Key.Name"));
+            label.SetBinding(Label.TextProperty, new Binding("Key.Name", converter: new Loc.EventFlagConverter()));
             grid.Add(label, 1);
             var tap2 = new TapGestureRecognizer
             {
@@ -46,11 +46,14 @@ public partial class EventFlags : ContentPage
 
     public void tapp(object? g, TappedEventArgs? e)
     {
-        Grid gr = (Grid?)g ?? [];
+        Grid gr = (Grid?)g ?? new Grid();
         var chs = ((CheckBox)gr.Children[0]).IsChecked;
         ((CheckBox)gr.Children[0]).IsChecked = !chs;
-        var val = ValueDict.Where(z=>z.Key.Name ==((Label)gr.Children[1]).Text).First();
-        ValueDict[val.Key] = !chs;
+        // 标签显示已被翻译成中文，不能用文本反查；改用 BindingContext 的键值对。
+        if (gr.BindingContext is KeyValuePair<NamedEventValue, bool> kvp)
+        {
+            ValueDict[kvp.Key] = !chs;
+        }
     }
     public async Task save()
     {
@@ -87,7 +90,7 @@ public partial class EventEditorSave : ContentPage
 {
     public EventEditorSave()
     {
-        this.Title = "Save";
+        this.Title = L10n.T("common_save");
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)

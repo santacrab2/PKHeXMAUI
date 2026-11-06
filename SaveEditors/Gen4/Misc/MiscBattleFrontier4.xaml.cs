@@ -165,7 +165,7 @@ public partial class MiscBattleFrontier4 : ContentPage
         if (facility == 0)
         {
             StatLabelA[1].IsVisible = StatLabelA[1].IsEnabled = StatNUDA[1].IsVisible = StatNUDA[1].IsEnabled = true;
-            StatLabelA[1].Text = "Continue";
+            StatLabelA[1].Text = L10n.T("gen3_continue");
             StatNUDA[1].MaxValue = 65535;
         }
         else
@@ -176,7 +176,7 @@ public partial class MiscBattleFrontier4 : ContentPage
         }
 
         if (facility == 1)
-            StatLabelA[1].Text = StatLabelA[3].Text = "Trade";
+            StatLabelA[1].Text = StatLabelA[3].Text = L10n.T("gen3_trade");
         else if (facility == 3)
             StatLabelA[1].Text = StatLabelA[3].Text = "CP";
 

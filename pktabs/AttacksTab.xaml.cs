@@ -12,6 +12,8 @@ public partial class AttacksTab : ContentPage
     public AttacksTab()
     {
         InitializeComponent();
+        // 蛋图：b_ 集里没有蛋素材（b_0.png 是空图），统一用唯一那张 a_egg.png
+        eggsprite.Source = SpeciesSpriteUtil.EggFileName(sav);
         FirstLoad = false;
         moveboxes = [move1, move2, move3, move4, rmove1, rmove2, rmove3, rmove4];
         move1ppups.ItemsSource = new List<int>() { 0, 1, 2, 3 };
@@ -50,9 +52,7 @@ public partial class AttacksTab : ContentPage
         }
 
         shinysparklessprite.IsVisible = pkm.IsShiny;
-        spriteurl = pkm.Species == 0
-            ? "a_egg.png"
-            : $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        spriteurl = SpeciesSpriteUtil.FileName(sav, pkm.Species, pkm.Form, pkm.IsShiny);
         attackpic.Source = spriteurl;
         movlist = [];
         LegalMoveSource<ComboItem> p = new(new LegalMoveComboSource());
@@ -371,26 +371,26 @@ public partial class AttacksTab : ContentPage
     private async void DisplayMoveInfo1(object sender, EventArgs e)
     {
         var value = pk.Move1;
-        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
+        var details = L10n.T("code_category_extramoveinfo_getcategoryvalue_entitycontext", (MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9));
+        await DisplayAlertAsync($"{(Move)value}", details, L10n.T("pktab_ok"));
     }
     private async void DisplayMoveInfo2(object sender, EventArgs e)
     {
         var value = pk.Move2;
-        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
+        var details = L10n.T("code_category_extramoveinfo_getcategoryvalue_entitycontext", (MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9));
+        await DisplayAlertAsync($"{(Move)value}", details, L10n.T("pktab_ok"));
     }
     private async void DisplayMoveInfo3(object sender, EventArgs e)
     {
         var value = pk.Move3;
-        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
+        var details = L10n.T("code_category_extramoveinfo_getcategoryvalue_entitycontext", (MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9));
+        await DisplayAlertAsync($"{(Move)value}", details, L10n.T("pktab_ok"));
     }
     private async void DisplayMoveInfo4(object sender, EventArgs e)
     {
         var value = pk.Move4;
-        var details = $"Category: {(MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9)}\nPower: {ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9)}\nAccuracy: {ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9)}\n";
-        await DisplayAlertAsync($"{(Move)value}", details, "cancel");
+        var details = L10n.T("code_category_extramoveinfo_getcategoryvalue_entitycontext", (MoveCategory)ExtraMoveInfo.GetCategory((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetPower((ushort)value, EntityContext.Gen9), ExtraMoveInfo.GetAccuracy((ushort)value, EntityContext.Gen9));
+        await DisplayAlertAsync($"{(Move)value}", details, L10n.T("pktab_ok"));
     }
     public void refreshmoveboxelist()
     {

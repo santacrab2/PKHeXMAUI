@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MailBox"
-             Title="MailBox Editor">
+             Title="{l10n:Tr Key=gen2_mailbox_editor}">
     <ScrollView>
         <VerticalStackLayout>
             <Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
-                <Label Text="MailBox  (Party)"/>
-                <Label Text="MailBox (PC)" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen2_mailbox}"/>
+                <Label Text="{l10n:Tr Key=gen2_mailbox_2}" Grid.Column="1"/>
                 <CollectionView x:Name="CV_PartyHeld" HeightRequest="150" Grid.Row="1" SelectionChanged="EntryControl" SelectionMode="Single"/>
                 <CollectionView x:Name="CV_PCBox" HeightRequest="150" Grid.Row="1" Grid.Column="1" SelectionChanged="EntryControl" SelectionMode="Single"/>
             </Grid>
             <Grid ColumnDefinitions="*,*,*">
-                <Label x:Name="L_BoxSize" Text="MailBox (PC) Served:"/>
+                <Label x:Name="L_BoxSize" Text="{l10n:Tr Key=gen2_mailbox_delivered}"/>
                 <l:NumericUpDown x:Name="NUD_BoxSize" Grid.Column="1" MinValue="0" MaxValue="10" ValueChanged="MBServedValueChanged"/>
-                <Button Text="Delete" Grid.Column="2"/>
+                <Button Text="{l10n:Tr Key=box_delete}" Grid.Column="2"/>
             </Grid>
             <Grid ColumnDefinitions="*,*">
                 
                 
             </Grid>
             <Grid x:Name="GB_MessageTB" RowDefinitions="*,*,*">
-                <Label Text="Message" />
+                <Label Text="{l10n:Tr Key=gen2_message}" />
                 <Entry x:Name="Message1"/>
                 <Entry x:Name="Message2"/>
                 
@@ -43,7 +43,7 @@
                 <l:NumericUpDown x:Name="NUD_MessageEnding" MinValue="0" MaxValue="65535" Grid.Row="3"/> 
             </Grid>
             <Grid x:Name="GB_Author" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
-                <Label Text="Author" />
+                <Label Text="{l10n:Tr Key=gen2_author}" />
                 <Entry x:Name="AuthorOT" Grid.Row="1"/>
                 <ImageButton x:Name="L_OTGender" Grid.Row="1" Grid.Column="1" BorderWidth="1" Clicked="L_OTGender_Click"/>
                 <Picker x:Name="AuthorLang" Grid.Row="1" Grid.Column="2"/>
@@ -51,22 +51,22 @@
                 <l:NumericUpDown x:Name="NUD_AuthorSID" MinValue="0" MaxValue="65535" Grid.Row="2" Grid.Column="1"/>
                 <l:comboBox x:Name="CB_AuthorVersion" Grid.Row="2" Grid.Column="2"/>
                 <CheckBox x:Name="CHK_UserEntered" Grid.Row="2" Grid.Column="1" />
-                <Label x:Name="L_UserEntered" Text="User Entered" Grid.Row="2" Grid.Column="2" />
+                <Label x:Name="L_UserEntered" Text="{l10n:Tr Key=gen2_user_input}" Grid.Row="2" Grid.Column="2" />
             </Grid>
             <Grid x:Name="GB_MailType" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*">
-                <Label Text="Mail Type:"/>
+                <Label Text="{l10n:Tr Key=gen2_mail_type}"/>
                 <Picker x:Name="MailTypePicker" Grid.Column="1"/>
-                <Label x:Name="L_MiscValue" Text="Misc:" Grid.Row="1"/>
+                <Label x:Name="L_MiscValue" Text="{l10n:Tr Key=gen2_misc}" Grid.Row="1"/>
                 <l:NumericUpDown x:Name="NUD_Misc1" Grid.Row="1" Grid.Column="1" MinValue="0" MaxValue="65535"/>
                 <l:NumericUpDown x:Name="NUD_Misc2" Grid.Row="1" Grid.Column="2" MinValue="0" MaxValue="65535"/>
                 <l:NumericUpDown x:Name="NUD_Misc3" Grid.Row="1" Grid.Column="3" MinValue="0" MaxValue="65535"/>
-                <Label x:Name="L_AppearPKM" Text="Appear PKM:" Grid.Row="1"/>
+                <Label x:Name="L_AppearPKM" Text="{l10n:Tr Key=gen2_appearing_pkm}" Grid.Row="1"/>
                 <l:comboBox x:Name="CB_AppearPKM1" Grid.Row="1" Grid.Column="1"/>
                 <l:comboBox x:Name="CB_AppearPKM2" Grid.Row="1" Grid.Column="2"/>
                 <l:comboBox x:Name="CB_AppearPKM3" Grid.Row="1" Grid.Column="3"/>
             </Grid>
             <Grid x:Name="GB_PKM" ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
-                <Label Text="Held MailID" Grid.Row="2"/>
+                <Label Text="{l10n:Tr Key=gen2_held_mail_number}" Grid.Row="2"/>
                 <Label x:Name="L_PKM1" Grid.Row="3"/>
                 <Label x:Name="L_HeldItem1" Grid.Row="4"/>
                 <l:NumericUpDown x:Name="NUD_MailID1" Grid.Row="4" Grid.Column="1"/>
@@ -85,8 +85,8 @@
                 <Label x:Name="L_PKM6" Grid.Row="13"/>
                 <Label x:Name="L_HeldItem6" Grid.Row="14"/>
                 <l:NumericUpDown x:Name="NUD_MailID6" Grid.Row="14" Grid.Column="1"/>
-                <Button Grid.Row="15" Clicked="B_Save_Clicked" Text="Save"/>
-                <Button Grid.Row="15" Grid.Column="1" Text="Cancel" Clicked="close"/>
+                <Button Grid.Row="15" Clicked="B_Save_Clicked" Text="{l10n:Tr Key=common_save}"/>
+                <Button Grid.Row="15" Grid.Column="1" Text="{l10n:Tr Key=box_cancel}" Clicked="close"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

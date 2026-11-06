@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.BoxTab"
-             Title="BoxTab">
+             Title="{l10n:Tr Key=shell_boxes}">
     <RefreshView x:Name="boxrefresh">
         <ScrollView>
             <StackLayout>
@@ -19,11 +19,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="load.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" IsVisible="False" x:Name="viewer"/>
-                    <Label Text="View" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_view" IsVisible="false"/>
+                    <Label Text="{l10n:Tr Key=box_view}" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_view" IsVisible="false"/>
                     <Image Source="export.png" Grid.Row="0" Grid.Column="1" IsVisible="False" WidthRequest="50" HeightRequest="50" x:Name="Sharer"/>
-                    <Label Text="Share" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_Share" IsVisible="false" />
+                    <Label Text="{l10n:Tr Key=box_share}" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_Share" IsVisible="false" />
                     <Image Source="delete.png" HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="2" IsVisible="False" x:Name="deleter"/>
-                    <Label Text="Delete" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_delete" IsVisible="false"/>
+                    <Label Text="{l10n:Tr Key=box_delete}" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="End" x:Name="LB_delete" IsVisible="false"/>
                     <Image Source="box_wp_default.png" x:Name="boxbg" Aspect="AspectFill" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"></Image>
                     <CollectionView HeightRequest="375" x:Name="boxview" x:FieldModifier="public" SelectionMode="Single" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" >
                         <CollectionView.GestureRecognizers>
@@ -31,7 +31,7 @@
                         </CollectionView.GestureRecognizers>
                     </CollectionView>
                 </Grid>
-                <Button x:Name="RandomTeamButton" Text="Generate Random Team" Clicked="GenerateRandomTeam"/>
+                <Button x:Name="RandomTeamButton" Text="{l10n:Tr Key=box_generate_random_team}" Clicked="GenerateRandomTeam"/>
             </StackLayout>
         </ScrollView>
       

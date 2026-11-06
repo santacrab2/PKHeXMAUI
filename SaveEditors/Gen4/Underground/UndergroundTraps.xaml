@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.UndergroundTraps"
-             Title="Traps">
+             Title="{l10n:Tr Key=gen4_traps}">
     <ScrollView>
         <VerticalStackLayout>
             <CollectionView x:Name="CV_UndergroundTraps" HeightRequest="400" WidthRequest="300"/>

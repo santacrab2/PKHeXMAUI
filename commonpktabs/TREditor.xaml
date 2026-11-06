@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TREditor"
-             Title="TR Editor">
+             Title="{l10n:Tr Key=common_tr_editor}">
     <VerticalStackLayout>
         <CollectionView HeightRequest="500" WidthRequest="400" x:Name="trcollection" SelectionMode="Multiple" ></CollectionView>
-        <Button x:Name="applytrs" Text="Apply" Clicked="applytrsandclose"></Button>
-        <Button x:Name="applyalltrs" Text="Apply All" Clicked="applyalltrsandclose"/>
-        <Button x:Name="removealltrs" Text="Remove All" Clicked="removealltrsandclose"/>
-        <Button x:Name="close" Text="Close" Clicked="closer"/>
+        <Button x:Name="applytrs" Text="{l10n:Tr Key=box_apply}" Clicked="applytrsandclose"></Button>
+        <Button x:Name="applyalltrs" Text="{l10n:Tr Key=common_apply_all}" Clicked="applyalltrsandclose"/>
+        <Button x:Name="removealltrs" Text="{l10n:Tr Key=common_remove_all}" Clicked="removealltrsandclose"/>
+        <Button x:Name="close" Text="{l10n:Tr Key=common_close}" Clicked="closer"/>
     </VerticalStackLayout>
 </ContentPage>

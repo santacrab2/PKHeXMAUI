@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:local="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.BlockEditor8"
-             Title="BlockEditor">
+             Title="{l10n:Tr Key=accessor_block_editor}">
     <ScrollView>
     <VerticalStackLayout>
             <local:comboBox x:Name="BlockKey_Picker" SelectedIndexChanged="Update_BlockCV" BackgroundColor="Transparent">
@@ -51,11 +51,11 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Text="Export Blocks to Folder" Clicked="ExportBlocksFolder"/>
-                <Button Grid.Column="1" Text="Import Blocks from Folder" Clicked="ImportBlocksFolder"/>
-                <Button Grid.Row="1" Text="Export Current Block" Clicked="ExportCurrentBlock_Clicked"/>
-                <Button Grid.Row="1" Grid.Column="1" Text="Import Current Block" Clicked="ImportCurrentBlock_Clicked"/>
-                <Button Grid.Row="2" Text="Export All(Single File)" Clicked="ExportAllSingleFile"/>
+                <Button Text="{l10n:Tr Key=accessor_export_blocks_to}" Clicked="ExportBlocksFolder"/>
+                <Button Grid.Column="1" Text="{l10n:Tr Key=accessor_import_blocks_from}" Clicked="ImportBlocksFolder"/>
+                <Button Grid.Row="1" Text="{l10n:Tr Key=accessor_export_current_block}" Clicked="ExportCurrentBlock_Clicked"/>
+                <Button Grid.Row="1" Grid.Column="1" Text="{l10n:Tr Key=accessor_import_current_block}" Clicked="ImportCurrentBlock_Clicked"/>
+                <Button Grid.Row="2" Text="{l10n:Tr Key=accessor_export_all}" Clicked="ExportAllSingleFile"/>
                 <Grid Grid.Row="2" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -64,16 +64,16 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <CheckBox x:Name="CHK_DataOnly" HorizontalOptions="Start"/>
-                    <Label Text="Data Blocks Only" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="{l10n:Tr Key=accessor_blocks_only}" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <CheckBox x:Name="CHK_Key" Grid.Row="1" HorizontalOptions="Start"/>
-                    <Label Text="Include 32bit Key" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="{l10n:Tr Key=accessor_include_32_bit}" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <CheckBox x:Name="CHK_Type" Grid.Row="2" HorizontalOptions="Start"/>
-                    <Label Text="Include Type Info" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="{l10n:Tr Key=accessor_include_attribute_info}" Grid.Row="2" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <CheckBox x:Name="CHK_FakeHeader" Grid.Row="3" HorizontalOptions="Start"/>
-                    <Label Text="Mark Block Start(ASCII)" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="{l10n:Tr Key=accessor_mark_block_start}" Grid.Row="3" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </Grid>
             </Grid>
-            <Button x:Name="BE_Close" Text="Close" Clicked="CloseBlockEditor8"/>
+            <Button x:Name="BE_Close" Text="{l10n:Tr Key=common_close}" Clicked="CloseBlockEditor8"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

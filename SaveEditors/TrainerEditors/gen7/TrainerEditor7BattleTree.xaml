@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor7BattleTree"
-             Title="BattleTree">
+             Title="{l10n:Tr Key=gen7_battle_tree}">
     <VerticalStackLayout>
         <Grid Padding="10">
             <Grid.RowDefinitions>
@@ -20,24 +20,24 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Text="Regular" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Label Text="Super" Grid.Column="2" VerticalOptions="Center"/>
-            <Label Text="Current Streak Singles:" Grid.Row="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen6_normal}" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen6_super}" Grid.Column="2" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_current_streak}" Grid.Row="1" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="CSSNEntry" Grid.Row="1" Grid.Column="1"/>
             <l:NumericUpDown x:Name="CSSSEntry" Grid.Row="1" Grid.Column="2"/>
-            <Label Text="Max Streak Singles:" Grid.Row="2" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_best_streak}" Grid.Row="2" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="MSSNEntry" Grid.Row="2" Grid.Column="1"/>
             <l:NumericUpDown x:Name="MSSSEntry" Grid.Row="2" Grid.Column="2"/>
-            <Label Text="Current Streak Doubles:" Grid.Row="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_current_streak_2}" Grid.Row="3" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="CSDNEntry" Grid.Row="3" Grid.Column="1"/>
             <l:NumericUpDown x:Name="CSDSEntry" Grid.Row="3" Grid.Column="2"/>
-            <Label Text="Max Streak Doubles:" Grid.Row="4" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_best_streak_2}" Grid.Row="4" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="MSDNEntry" Grid.Row="4" Grid.Column="1"/>
             <l:NumericUpDown x:Name="MSDSEntry" Grid.Row="4" Grid.Column="2"/>
-            <Label Text="Current Streak Multi:" Grid.Row="5" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_current_streak_3}" Grid.Row="5" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="CSMNEntry" Grid.Row="5" Grid.Column="1"/>
             <l:NumericUpDown x:Name="CSMSEntry" Grid.Row="5" Grid.Column="2"/>
-            <Label Text="Max Streak Multi:" Grid.Row="6" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_best_streak_3}" Grid.Row="6" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="MSMNEntry" Grid.Row="6" Grid.Column="1"/>
             <l:NumericUpDown x:Name="MSMSEntry" Grid.Row="6" Grid.Column="2"/>
         </Grid>
@@ -54,13 +54,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Text="Unlock Super*" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen7_unlock_super}" VerticalOptions="Center"/>
             <CheckBox x:Name="SuperSingleCheck" Grid.Row="1"/>
-            <Label Text="Singles" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen5_single}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="SuperDoubleCheck" Grid.Row="1" Grid.Column="2"/>
-            <Label Text="Doubles" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen5_double}" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"/>
             <CheckBox x:Name="SuperMultiCheck" Grid.Row="1" Grid.Column="4"/>
-            <Label Text="Multi" Grid.Row="1" Grid.Column="5" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen5_multi}" Grid.Row="1" Grid.Column="5" VerticalOptions="Center"/>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

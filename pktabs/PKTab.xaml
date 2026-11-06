@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:control="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MainPage"
-             Title="pk editor"
+             Title="{l10n:Tr Key=shell_pkm_editor}"
              x:Name="PKMain">
     <RefreshView x:Name="PKRefresh">
         <ScrollView>
@@ -58,57 +58,57 @@
                 <Button  Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="☆" x:Name="shinybutton" Clicked="turnshiny"/>
 
                 <!--PID-->
-                <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="PID:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="Default" Text="{l10n:Tr Key=pktab_pid}" VerticalOptions="Center" HorizontalOptions="Start"></Label>
                 <Editor Grid.Row="3" Grid.Column="1" VerticalOptions="Center" AutoSize="TextChanges" x:Name="displaypid" Text="PID" TextChanged="applyPID"></Editor>
-                <Button  Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="Re-Roll"></Button>
+                <Button  Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="PIDroll" Clicked="rollpid" Text="{l10n:Tr Key=pktab_reroll}"></Button>
                 <!--Species-->
-                <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="Species:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-                <control:comboBox  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Species" x:Name="specieslabel" SelectedIndexChanged="specieschanger" BackgroundColor="Transparent"/>
+                <Label Grid.Row="4" Grid.Column="0" FontSize="Default" Text="{l10n:Tr Key=pktab_species}" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                <control:comboBox  Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="{l10n:Tr Key=common_species}" x:Name="specieslabel" SelectedIndexChanged="specieschanger" BackgroundColor="Transparent"/>
                 <!--gender-->
                 <ImageButton Source="gender_0.png" Grid.Row="3" Grid.Column="3" WidthRequest="32" HeightRequest="32"  x:Name="genderdisplay" HorizontalOptions="Start" Clicked="swapgender"/>
 
 
                 <!--nickname-->
-                <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="NicknameLabel" Text="Nickname:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-                <Editor Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" AutoSize="TextChanges" Text="Nickname" x:Name="nickname" VerticalOptions="Center" TextChanged="applynickname"></Editor>
+                <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="NicknameLabel" Text="{l10n:Tr Key=pktab_nickname}" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                <Editor Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" AutoSize="TextChanges" Text="{l10n:Tr Key=pktab_nickname_2}" x:Name="nickname" VerticalOptions="Center" TextChanged="applynickname"></Editor>
                 <CheckBox Grid.Row="5" Grid.Column="4" VerticalOptions="Center" x:Name="nicknamecheck" CheckedChanged="nicknamechecker"/>
                 <!--EXP&level-->
-                <Label Grid.Row="6" Grid.Column="0" Text="EXP:" HorizontalOptions="Start" VerticalOptions="Center"></Label>
-                <Editor Grid.Row="6" Grid.Column="1" AutoSize="TextChanges" Text="Exp" HorizontalOptions="Start" VerticalOptions="Center" x:Name="exp" TextChanged="applyexp" Keyboard="Numeric"></Editor>
-                <Label Grid.Row="6" Grid.Column="2" Text="Level:" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                <Label Grid.Row="6" Grid.Column="0" Text="{l10n:Tr Key=pktab_experience_2}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                <Editor Grid.Row="6" Grid.Column="1" AutoSize="TextChanges" Text="{l10n:Tr Key=pktab_experience}" HorizontalOptions="Start" VerticalOptions="Center" x:Name="exp" TextChanged="applyexp" Keyboard="Numeric"></Editor>
+                <Label Grid.Row="6" Grid.Column="2" Text="{l10n:Tr Key=pktab_level}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
                 <Editor Grid.Row="6" Grid.Column="3" Text="0" HorizontalOptions="Start" VerticalOptions="Center" x:Name="leveldisplay" TextChanged="changelevel" Keyboard="Numeric"></Editor>
                 <!--Nature-->
-                <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Nature:" VerticalOptions="Center" HorizontalOptions="Start"></Label>
-                <control:comboBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="Nature" x:Name="naturepicker" HorizontalOptions="Start" VerticalOptions="Center" SelectedIndexChanged="applynature" BackgroundColor="Transparent"></control:comboBox>
-                <Label Grid.Row="7" Grid.Column="3" x:Name="Lab_StatNature" Text="Stat Nature:" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="False"/>
-                <control:comboBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Placeholder="Stat Nature" x:Name="statnaturepicker" VerticalOptions="Center" SelectedIndexChanged="applystatnature" BackgroundColor="Transparent" IsVisible="False"/>
+                <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{l10n:Tr Key=pktab_nature_4}" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                <control:comboBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Placeholder="{l10n:Tr Key=pktab_nature}" x:Name="naturepicker" HorizontalOptions="Start" VerticalOptions="Center" SelectedIndexChanged="applynature" BackgroundColor="Transparent"></control:comboBox>
+                <Label Grid.Row="7" Grid.Column="3" x:Name="Lab_StatNature" Text="{l10n:Tr Key=pktab_nature_3}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="False"/>
+                <control:comboBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" Placeholder="{l10n:Tr Key=pktab_nature_2}" x:Name="statnaturepicker" VerticalOptions="Center" SelectedIndexChanged="applystatnature" BackgroundColor="Transparent" IsVisible="False"/>
 
                 <!--form-->
-                <Label x:Name="formlabel" IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Form:"></Label>
-                <Picker IsVisible="false" Grid.Row="10" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="formpicker" Title="Form" SelectedIndexChanged="applyform"></Picker>
+                <Label x:Name="formlabel" IsVisible="false" Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=pktab_form_2}"></Label>
+                <Picker IsVisible="false" Grid.Row="10" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="formpicker" Title="{l10n:Tr Key=pktab_form}" SelectedIndexChanged="applyform"></Picker>
                 <Editor IsVisible="false" Grid.Row="10" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="formargstepper" TextChanged="applyformarg"></Editor>
                 <!--held item-->
-                <Label x:Name="helditemlabel" IsVisible="false" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Held Item:" Margin="0,0,48,0"></Label>
-                <control:comboBox IsVisible="false" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalOptions="Center" x:Name="helditempicker" Margin="48,0,0,0" Placeholder="Held Item" SelectedIndexChanged="applyhelditem" BackgroundColor="Transparent"></control:comboBox>
+                <Label x:Name="helditemlabel" IsVisible="false" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Center" Text="{l10n:Tr Key=pktab_held_item_2}" Margin="0,0,48,0"></Label>
+                <control:comboBox IsVisible="false" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="3" VerticalOptions="Center" x:Name="helditempicker" Margin="48,0,0,0" Placeholder="{l10n:Tr Key=pktab_held_item}" SelectedIndexChanged="applyhelditem" BackgroundColor="Transparent"></control:comboBox>
                 <!--ability-->
-                <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Ability:"></Label>
-                <Picker Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="abilitypicker" Title="Ability" SelectedIndexChanged="applyability"></Picker>
+                <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=pktab_ability_2}"></Label>
+                <Picker Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="abilitypicker" Title="{l10n:Tr Key=pktab_ability}" SelectedIndexChanged="applyability"></Picker>
                 <!--friendship-->
-                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" Grid.ColumnSpan="2" VerticalOptions="Center" Text="Friendship:" x:Name="FriendshipLabel"></Label>
+                <Label Grid.Row="13" Grid.Column="0" HorizontalOptions="Start" Grid.ColumnSpan="2" VerticalOptions="Center" Text="{l10n:Tr Key=common_friendship}" x:Name="FriendshipLabel"></Label>
                 <Editor Grid.Row="13" Grid.Column="2"  HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Friendshipdisplay" TextChanged="applyfriendship" Keyboard="Numeric"></Editor>
                 <!--Language-->
-                <Label Text="Language:" Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center"/>
-                <Picker Grid.Row="14" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Title="Language" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
+                <Label Text="{l10n:Tr Key=ottab_language}" x:Name="languagelabel" Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Picker Grid.Row="14" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Title="{l10n:Tr Key=common_language}" x:Name="languagepicker" SelectedIndexChanged="applylang"/>
                 <!--checkboxes-->
                 <CheckBox x:Name="iseggcheck" Grid.Row="15" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyisegg"></CheckBox>
-                <Label Text="IsEgg" Grid.Row="15" Grid.Column="1" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=encounter_is_egg}" Grid.Row="15" Grid.Column="1" VerticalOptions="Center"/>
                 <CheckBox x:Name="infectedcheck" Grid.Row="16" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applyinfection"/>
-                <Label Text="Infected" Grid.Row="16" Grid.Column="1"  VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=pktab_infected}" Grid.Row="16" Grid.Column="1"  VerticalOptions="Center"/>
                 <CheckBox x:Name="curedcheck" Grid.Row="16" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applycure"/>
-                <Label Text="Cured" Grid.Row="16" Grid.Column="3" HorizontalOptions="Start"  VerticalOptions="Center"/>
-                <Label Grid.Row="17" Grid.Column="0" x:Name="NSparkleLabel" IsVisible="false" Text="N's Sparkle" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=pktab_cured}" Grid.Row="16" Grid.Column="3" HorizontalOptions="Start"  VerticalOptions="Center"/>
+                <Label Grid.Row="17" Grid.Column="0" x:Name="NSparkleLabel" IsVisible="false" Text="{l10n:Tr Key=pktab_shiny_for_n}" HorizontalOptions="End" VerticalOptions="Center"/>
                 <CheckBox Grid.Row="17" Grid.Column="1" x:Name="NSparkleCheckbox" IsVisible="false" HorizontalOptions="Start" VerticalOptions="Center" CheckedChanged="applySparkle"/>
-                <Label Grid.Row="17" Grid.Column="2" x:Name="NSparkleActiveLabel" IsVisible="false" Text="Active" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Label Grid.Row="17" Grid.Column="2" x:Name="NSparkleActiveLabel" IsVisible="false" Text="{l10n:Tr Key=pktab_enabled}" HorizontalOptions="Start" VerticalOptions="Center"/>
 
 
 

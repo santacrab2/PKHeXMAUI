@@ -42,9 +42,9 @@ public partial class ChatterEditor : ContentPage
         await using var CrossedStreams = new MemoryStream(ConvertPCMToWAV(Chatter.Recording));
         var result = await FileSaver.SaveAsync("recording.wav", CrossedStreams);
         if (result.IsSuccessful)
-            await DisplayAlertAsync("Success", "Recording saved.", "OK");
+            await DisplayAlertAsync(L10n.T("pktab_success"), L10n.T("gen4_recording_saved"), L10n.T("pktab_ok"));
         else
-            await DisplayAlertAsync("Error", "Failed to save recording.", "OK");
+            await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("gen4_failed_to_save"), L10n.T("pktab_ok"));
     }
 
     private async void B_Exportpcm_clicked(object sender, EventArgs e)
@@ -52,9 +52,9 @@ public partial class ChatterEditor : ContentPage
         await using var CrossedStreams = new MemoryStream(Chatter.Recording.ToArray());
         var result = await FileSaver.SaveAsync("recording.pcm", CrossedStreams);
         if (result.IsSuccessful)
-            await DisplayAlertAsync("Success", "Recording saved.", "OK");
+            await DisplayAlertAsync(L10n.T("pktab_success"), L10n.T("gen4_recording_saved"), L10n.T("pktab_ok"));
         else
-            await DisplayAlertAsync("Error", "Failed to save recording.", "OK");
+            await DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("gen4_failed_to_save"), L10n.T("pktab_ok"));
     }
 
     private async void B_Importpcm_clicked(object sender, EventArgs e)
@@ -65,7 +65,7 @@ public partial class ChatterEditor : ContentPage
         var len = new FileInfo(soundfile.FullPath).Length;
         if (len != IChatter.SIZE_PCM)
         {
-            await DisplayAlertAsync("Error",$"Incorrect size, got {len} bytes, expected {IChatter.SIZE_PCM} bytes.","cancel");
+            await DisplayAlertAsync(L10n.T("livehex_error"),L10n.T("code_wrong_size_got_len", len, IChatter.SIZE_PCM),L10n.T("pktab_ok"));
             return;
         }
         byte[] data = File.ReadAllBytes(soundfile.FullPath);
