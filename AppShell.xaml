@@ -2,116 +2,140 @@
 <Shell
     x:Class="PKHeXMAUI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
     xmlns:local="clr-namespace:PKHeXMAUI"
     FlyoutBackgroundColor="Black"
+    FlyoutBehavior="Flyout"
     x:Name="TheShell"
     Navigated="checkbox">
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid HeightRequest="100">
-                <Image HeightRequest="100" Source="iconp.png"></Image>
-                
+            <Grid HeightRequest="56" BackgroundColor="#161616">
+                <Image HeightRequest="40" WidthRequest="40" Source="iconp.png" VerticalOptions="Center" HorizontalOptions="Center"/>
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
-    <MenuItem Text="File"/>
-    <MenuItem Text="    - Open" x:Name="OpenFile" Shell.FlyoutItemIsVisible="False" Clicked="OpenPKMClicked"/>
-    <MenuItem Text="    - Save PKM" x:Name="SavePKM" Shell.FlyoutItemIsVisible="False" Clicked="SavePKMClicked"/>
-    <MenuItem Text="    - Export Save" x:Name="ExportSave" Shell.FlyoutItemIsVisible="False" Clicked="ExportSaveClicked"/>
-    <MenuItem Text="Data"/>
-    <MenuItem Text="    - Load Box" x:Name="LoadBoxes" Shell.FlyoutItemIsVisible="False" Clicked="LoadBoxesClicked"/>
-    <MenuItem Text="    - Dump Box" x:Name="DumpBox" Shell.FlyoutItemIsVisible="False" Clicked="DumpBoxClicked"/>
-    <MenuItem Text="    - Save Box Data++" x:Name="SaveBoxData" Shell.FlyoutItemIsVisible="False" Clicked="SaveBoxDataClicked"/>
-    <MenuItem Text="    - Batch Editor" x:Name="MenuBatchEditor" Shell.FlyoutItemIsVisible="False" Clicked="OpenBatchEditorClick"/>
+
+    <!-- 紧凑型侧边栏条目模板（学 v1.0 的小巧风格：行高 44、字号 14、图标 22） -->
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="30,*" Padding="14,3" HeightRequest="44">
+                <Image Source="{Binding FlyoutIcon}"
+                       HeightRequest="22" WidthRequest="22"
+                       VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Grid.Column="1" Text="{Binding Title}"
+                       VerticalTextAlignment="Center" FontSize="14"
+                       TextColor="White" LineBreakMode="TailTruncation"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid Padding="14,1" HeightRequest="36">
+                <Label Text="{Binding Text}" VerticalTextAlignment="Center"
+                       FontSize="13" TextColor="#d8d8d8" LineBreakMode="TailTruncation"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+    <MenuItem Text="{l10n:Tr Key=shell_file}" AutomationId="File"/>
+    <MenuItem Text="{l10n:Tr Key=shell_open}" x:Name="OpenFile" Shell.FlyoutItemIsVisible="False" Clicked="OpenPKMClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_save_pkm}" x:Name="SavePKM" Shell.FlyoutItemIsVisible="False" Clicked="SavePKMClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_export_save}" x:Name="ExportSave" Shell.FlyoutItemIsVisible="False" Clicked="ExportSaveClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_data}" AutomationId="Data"/>
+    <MenuItem Text="{l10n:Tr Key=shell_load_boxes}" x:Name="LoadBoxes" Shell.FlyoutItemIsVisible="False" Clicked="LoadBoxesClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_export_boxes}" x:Name="DumpBox" Shell.FlyoutItemIsVisible="False" Clicked="DumpBoxClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_save_box_data}" x:Name="SaveBoxData" Shell.FlyoutItemIsVisible="False" Clicked="SaveBoxDataClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_batch_editor}" x:Name="MenuBatchEditor" Shell.FlyoutItemIsVisible="False" Clicked="OpenBatchEditorClick"/>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="PKShell" Route="PKShell">
 
-        <Tab x:Name="pkeditortab" Title="pk editor" Icon="bag_pcitems.png" Route="pkeditortab">
+        <Tab x:Name="pkeditortab" Title="{l10n:Tr Key=shell_pkm_editor}" Icon="bag_pcitems.png" Route="pkeditortab">
 
-            <ShellContent Title="Main" Route="PKPage">
+            <ShellContent Title="{l10n:Tr Key=shell_main}" Route="PKPage">
                 <local:MainPage x:Name="PKPage"></local:MainPage></ShellContent>
-            <ShellContent Title="Met" ContentTemplate="{DataTemplate local:MetTab}" />
+            <ShellContent Title="{l10n:Tr Key=shell_encounter}" Route="MetPage" ContentTemplate="{DataTemplate local:MetTab}" />
 
 
-            <ShellContent Title="Stats" ContentTemplate="{DataTemplate local:StatsTab}"></ShellContent>
+            <ShellContent Title="{l10n:Tr Key=stats_stats}" Route="StatsPage" ContentTemplate="{DataTemplate local:StatsTab}"></ShellContent>
 
-            <ShellContent Title="Moves" ContentTemplate="{DataTemplate local:AttacksTab}"></ShellContent>
-            <ShellContent Title="Cosmetic" ContentTemplate="{DataTemplate local:Cosmeticstab}"></ShellContent>
-            <ShellContent Title="OT/MISC" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
+            <ShellContent Title="{l10n:Tr Key=shell_moves}" Route="MovesPage" ContentTemplate="{DataTemplate local:AttacksTab}"></ShellContent>
+            <ShellContent Title="{l10n:Tr Key=shell_cosmetic}" Route="CosmeticPage" ContentTemplate="{DataTemplate local:Cosmeticstab}"></ShellContent>
+            <ShellContent Title="{l10n:Tr Key=shell_trainer_misc}" Route="OTPage" ContentTemplate="{DataTemplate local:OTTab}"></ShellContent>
         </Tab>
     </FlyoutItem>
     
     <!--Hidden PK Editor Menus-->
-    <MenuItem Text="    - Legalize" x:Name="thelegalizer" Shell.FlyoutItemIsVisible="False" Clicked="LegalizePKM"/>
-    <MenuItem Text="    - Import Showdown" x:Name="impshow" Shell.FlyoutItemIsVisible="False" Clicked="ImpShowClicked"/>
-    <MenuItem Text="    - Export Showdown" x:Name="expshow" Shell.FlyoutItemIsVisible="False" Clicked="ExpShowClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_legalize}" x:Name="thelegalizer" Shell.FlyoutItemIsVisible="False" Clicked="LegalizePKM"/>
+    <MenuItem Text="{l10n:Tr Key=shell_import_showdown}" x:Name="impshow" Shell.FlyoutItemIsVisible="False" Clicked="ImpShowClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_export_showdown}" x:Name="expshow" Shell.FlyoutItemIsVisible="False" Clicked="ExpShowClicked"/>
     
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="BoxShell" Route="BoxShell" Title="Box/Party">
-        <Tab Icon="ball4.png" Title="Box/Party" x:Name="boxtab" Route="boxtab">
-            <ShellContent Title="Box" ContentTemplate="{DataTemplate local:BoxTab}" x:Name="BoxPage" Route="BoxPage"/>
-            <ShellContent Title="Party" ContentTemplate="{DataTemplate local:PartyTab}"/>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="BoxShell" Route="BoxShell" Title="{l10n:Tr Key=shell_boxes_party}">
+        <Tab Icon="ball4.png" Title="{l10n:Tr Key=shell_boxes_party}" x:Name="boxtab" Route="boxtab">
+            <ShellContent Title="{l10n:Tr Key=shell_boxes}" ContentTemplate="{DataTemplate local:BoxTab}" x:Name="BoxPage" Route="BoxPage"/>
+            <ShellContent Title="{l10n:Tr Key=shell_party}" Route="PartyPage" ContentTemplate="{DataTemplate local:PartyTab}"/>
         </Tab>
     </FlyoutItem>
     
     <!--Hidden Box Menus-->
-    <MenuItem Text="    - Delete" x:Name="DeleteBoxes" Shell.FlyoutItemIsVisible="False" Clicked="DeleteClicked"/>
-    <MenuItem Text="        - Clear" x:Name="ClearBox" Shell.FlyoutItemIsVisible="False" Clicked="ClearBoxClicked"/>
-    <MenuItem Text="        - Eggs" x:Name="ClearEggs" Shell.FlyoutItemIsVisible="False" Clicked="ClearEggsClicked"/>
-    <MenuItem Text="        - Past Generation" x:Name="ClearPast" Shell.FlyoutItemIsVisible="False" Clicked="ClearPastClicked"/>
-    <MenuItem Text="        - Foreign" x:Name="ClearForeign" Shell.FlyoutItemIsVisible="False" Clicked="ClearForeignClicked"/>
-    <MenuItem Text="        - Untrained" x:Name="ClearUntrained" Shell.FlyoutItemIsVisible="False" Clicked="ClearUntrainedClicked"/>
-    <MenuItem Text="        - No Held Item" x:Name="ClearNoHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="ClearNoHeldItemClicked"/>
-    <MenuItem Text="        - Illegal" x:Name="ClearIllegal" Shell.FlyoutItemIsVisible="False" Clicked="ClearIllegalClicked"/>
-    <MenuItem Text="        - Clones" x:Name="ClearClones" Shell.FlyoutItemIsVisible="False" Clicked="ClearClonesClicked"/>
-    <MenuItem Text="    - Sort Boxes" x:Name="SortBoxes" Shell.FlyoutItemIsVisible="false" Clicked="SortClick" ></MenuItem>
-    <MenuItem Text="        - Pokedex No" x:Name="SortSpecies" Shell.FlyoutItemIsVisible="false" Clicked="SortBySpecies"/>
-    <MenuItem Text="        - Pokedex No (Reverse)" x:Name="SortSpeciesReverse" Shell.FlyoutItemIsVisible="False" Clicked="SortSpeciesReverseClicked"/>
-    <MenuItem Text="        - Level (low to high)" x:Name="SortLevellohi" Shell.FlyoutItemIsVisible="False" Clicked="SortLevellohiClicked"/>
-    <MenuItem Text="        - Level (high to low)" x:Name="SortLevelhilo" Shell.FlyoutItemIsVisible="False" Clicked="SortLevelhiloClicked"/>
-    <MenuItem Text="        - Met Date" x:Name="SortMetDate" Shell.FlyoutItemIsVisible="False" Clicked="SortMetDateClicked"/>
-    <MenuItem Text="        - Species Name" x:Name="SortSpeciesName" Shell.FlyoutItemIsVisible="False" Clicked="SortSpeciesNameClicked"/>
-    <MenuItem Text="        - Shiny" x:Name="SortShiny" Shell.FlyoutItemIsVisible="False" Clicked="SortShinyClicked"/>
-    <MenuItem Text="        - Random" x:Name="SortRandom" Shell.FlyoutItemIsVisible="False" Clicked="SortRandomClicked"/>
-    <MenuItem Text="    - Sort Boxes (Advanced)" x:Name="SortBoxesAdvanced" Shell.FlyoutItemIsVisible="False" Clicked="SortBoxesAdvancedClicked"/>
-    <MenuItem Text="        - Usage" x:Name="SortUsage" Shell.FlyoutItemIsVisible="False" Clicked="SortUsageClicked"/>
-    <MenuItem Text="        - IV Potential" x:Name="SortIV" Shell.FlyoutItemIsVisible="False" Clicked="SortIVClicked"/>
-    <MenuItem Text="        - EV Training" x:Name="SortEV" Shell.FlyoutItemIsVisible="False" Clicked="SortEVClicked"/>
-    <MenuItem Text="        - Ownership" x:Name="SortOwnership" Shell.FlyoutItemIsVisible="False" Clicked="SortOwnershipClicked"/>
-    <MenuItem Text="        - Type" x:Name="SortType" Shell.FlyoutItemIsVisible="False" Clicked="SortTypeClicked"/>
-    <MenuItem Text="        - Tera Type" x:Name="SortTera" Shell.FlyoutItemIsVisible="False" Clicked="SortTeraClicked"/>
-    <MenuItem Text="        - Version" x:Name="SortVersion" Shell.FlyoutItemIsVisible="False" Clicked="SortVersionClicked"/>
-    <MenuItem Text="        - Base Stat Total" x:Name="SortBaseStat" Shell.FlyoutItemIsVisible="False" Clicked="SortBaseStatClicked"/>
-    <MenuItem Text="        - Scale" x:Name="SortScale" Shell.FlyoutItemIsVisible="False" Clicked="SortScaleClicked"/>
-    <MenuItem Text="        - Ribbon Count" x:Name="SortRibbonCount" Shell.FlyoutItemIsVisible="False" Clicked="SortRibbonClicked"/>
-    <MenuItem Text="        - Mark Count" x:Name="SortMarkCount" Shell.FlyoutItemIsVisible="False" Clicked="SortMarkClicked"/>
-    <MenuItem Text="        - Legal" x:Name="SortLegal" Shell.FlyoutItemIsVisible="False" Clicked="SortLegalClicked"/>
-    <MenuItem Text="        - Encounter Type" x:Name="SortEncounter" Shell.FlyoutItemIsVisible="False" Clicked="SortEncounterClicked"/>
-    <MenuItem Text="    - Modify" x:Name="ModifyBoxes" Shell.FlyoutItemIsVisible="False" Clicked="ModifyBoxesClicked"/>
-    <MenuItem Text="        - Hatch Eggs" x:Name="HatchEggs" Shell.FlyoutItemIsVisible="False" Clicked="HatchEggsClicked"/>
-    <MenuItem Text="        - Max Friendship" x:Name="MaxFriendship" Shell.FlyoutItemIsVisible="False" Clicked="MaxFriendshipClicked"/>
-    <MenuItem Text="        - Max Level" x:Name="MaxLevel" Shell.FlyoutItemIsVisible="False" Clicked="MaxLevelClicked"/>
-    <MenuItem Text="        - Reset Moves" x:Name="ResetMoves" Shell.FlyoutItemIsVisible="False" Clicked="ResetMovesClicked"/>
-    <MenuItem Text="        - Randomize Moves" x:Name="RandomizeMoves" Shell.FlyoutItemIsVisible="False" Clicked="RandomizeMovesClicked"/>
-    <MenuItem Text="        - Hyper Train" x:Name="HyperTrain" Shell.FlyoutItemIsVisible="False" Clicked="HyperTrainClicked"/>
-    <MenuItem Text="        - Remove Nicknames" x:Name="RemoveNicknames" Shell.FlyoutItemIsVisible="False" Clicked="RemoveNicknamesClicked"/>
-    <MenuItem Text="        - Delete Held Item" x:Name="DeleteHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="DeleteHeldItemClicked"/>
-    <MenuItem Text="        - Heal (Stats/PP)" x:Name="Heal" Shell.FlyoutItemIsVisible="False" Clicked="HealClicked"/>
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" Title="Settings">
-        <Tab Icon="main.png" Title="Settings">
-            <ShellContent Title="PKHeX Settings" ContentTemplate="{DataTemplate local:PKHeXSettings}"/>
-            <ShellContent Title="ALM Settings" ContentTemplate="{DataTemplate local:ALMSettings}"/>
-            <ShellContent Title="Legality Settings" ContentTemplate="{DataTemplate local:LegalitySettings}"/>
+    <MenuItem Text="{l10n:Tr Key=shell_delete}" x:Name="DeleteBoxes" Shell.FlyoutItemIsVisible="False" Clicked="DeleteClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_clear}" x:Name="ClearBox" Shell.FlyoutItemIsVisible="False" Clicked="ClearBoxClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_eggs}" x:Name="ClearEggs" Shell.FlyoutItemIsVisible="False" Clicked="ClearEggsClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_previous_generations}" x:Name="ClearPast" Shell.FlyoutItemIsVisible="False" Clicked="ClearPastClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_foreign}" x:Name="ClearForeign" Shell.FlyoutItemIsVisible="False" Clicked="ClearForeignClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_untrained}" x:Name="ClearUntrained" Shell.FlyoutItemIsVisible="False" Clicked="ClearUntrainedClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_no_held_item}" x:Name="ClearNoHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="ClearNoHeldItemClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_illegal}" x:Name="ClearIllegal" Shell.FlyoutItemIsVisible="False" Clicked="ClearIllegalClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_clones}" x:Name="ClearClones" Shell.FlyoutItemIsVisible="False" Clicked="ClearClonesClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_sort_boxes}" x:Name="SortBoxes" Shell.FlyoutItemIsVisible="false" Clicked="SortClick" ></MenuItem>
+    <MenuItem Text="{l10n:Tr Key=shell_dex_no}" x:Name="SortSpecies" Shell.FlyoutItemIsVisible="false" Clicked="SortBySpecies"/>
+    <MenuItem Text="{l10n:Tr Key=shell_dex_no_2}" x:Name="SortSpeciesReverse" Shell.FlyoutItemIsVisible="False" Clicked="SortSpeciesReverseClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_level}" x:Name="SortLevellohi" Shell.FlyoutItemIsVisible="False" Clicked="SortLevellohiClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_level_2}" x:Name="SortLevelhilo" Shell.FlyoutItemIsVisible="False" Clicked="SortLevelhiloClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_date_met}" x:Name="SortMetDate" Shell.FlyoutItemIsVisible="False" Clicked="SortMetDateClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_species_name}" x:Name="SortSpeciesName" Shell.FlyoutItemIsVisible="False" Clicked="SortSpeciesNameClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_shiny}" x:Name="SortShiny" Shell.FlyoutItemIsVisible="False" Clicked="SortShinyClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_random}" x:Name="SortRandom" Shell.FlyoutItemIsVisible="False" Clicked="SortRandomClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_sort_boxes_2}" x:Name="SortBoxesAdvanced" Shell.FlyoutItemIsVisible="False" Clicked="SortBoxesAdvancedClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_usage}" x:Name="SortUsage" Shell.FlyoutItemIsVisible="False" Clicked="SortUsageClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_iv_potential}" x:Name="SortIV" Shell.FlyoutItemIsVisible="False" Clicked="SortIVClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_ev_training}" x:Name="SortEV" Shell.FlyoutItemIsVisible="False" Clicked="SortEVClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_ownership}" x:Name="SortOwnership" Shell.FlyoutItemIsVisible="False" Clicked="SortOwnershipClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_type}" x:Name="SortType" Shell.FlyoutItemIsVisible="False" Clicked="SortTypeClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_tera_type}" x:Name="SortTera" Shell.FlyoutItemIsVisible="False" Clicked="SortTeraClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_version}" x:Name="SortVersion" Shell.FlyoutItemIsVisible="False" Clicked="SortVersionClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_bst}" x:Name="SortBaseStat" Shell.FlyoutItemIsVisible="False" Clicked="SortBaseStatClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_scale}" x:Name="SortScale" Shell.FlyoutItemIsVisible="False" Clicked="SortScaleClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_ribbon_count}" x:Name="SortRibbonCount" Shell.FlyoutItemIsVisible="False" Clicked="SortRibbonClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_mark_count}" x:Name="SortMarkCount" Shell.FlyoutItemIsVisible="False" Clicked="SortMarkClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_legal}" x:Name="SortLegal" Shell.FlyoutItemIsVisible="False" Clicked="SortLegalClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_encounter_type}" x:Name="SortEncounter" Shell.FlyoutItemIsVisible="False" Clicked="SortEncounterClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_modify}" x:Name="ModifyBoxes" Shell.FlyoutItemIsVisible="False" Clicked="ModifyBoxesClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_hatch_eggs}" x:Name="HatchEggs" Shell.FlyoutItemIsVisible="False" Clicked="HatchEggsClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_max_friendship}" x:Name="MaxFriendship" Shell.FlyoutItemIsVisible="False" Clicked="MaxFriendshipClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_max_level}" x:Name="MaxLevel" Shell.FlyoutItemIsVisible="False" Clicked="MaxLevelClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_reset_moves}" x:Name="ResetMoves" Shell.FlyoutItemIsVisible="False" Clicked="ResetMovesClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_randomize_moves}" x:Name="RandomizeMoves" Shell.FlyoutItemIsVisible="False" Clicked="RandomizeMovesClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_hyper_train}" x:Name="HyperTrain" Shell.FlyoutItemIsVisible="False" Clicked="HyperTrainClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_remove_nicknames}" x:Name="RemoveNicknames" Shell.FlyoutItemIsVisible="False" Clicked="RemoveNicknamesClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_remove_held_items}" x:Name="DeleteHeldItem" Shell.FlyoutItemIsVisible="False" Clicked="DeleteHeldItemClicked"/>
+    <MenuItem Text="{l10n:Tr Key=shell_heal}" x:Name="Heal" Shell.FlyoutItemIsVisible="False" Clicked="HealClicked"/>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="SettingsFlyout" Route="SettingsFlyout" Title="{l10n:Tr Key=shell_settings}">
+        <Tab Icon="main.png" Title="{l10n:Tr Key=shell_settings}" x:Name="SettingsTab" Route="SettingsTab">
+            <ShellContent Title="{l10n:Tr Key=shell_pkhex_settings}" Route="PKHeXSettingsPage" ContentTemplate="{DataTemplate local:PKHeXSettings}"/>
+            <ShellContent Title="{l10n:Tr Key=shell_alm_settings}" Route="ALMSettingsPage" ContentTemplate="{DataTemplate local:ALMSettings}"/>
+            <ShellContent Title="{l10n:Tr Key=shell_legality_settings}" Route="LegalitySettingsPage" ContentTemplate="{DataTemplate local:LegalitySettings}"/>
+            <ShellContent Title="{l10n:Tr Key=shell_gen3_priority}" Route="Gen3PrioritySettingsPage" ContentTemplate="{DataTemplate local:Gen3PrioritySettings}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Icon="users.png" Title="Encounter Database">
-        <ShellContent Title="Encounter Database" ContentTemplate="{DataTemplate local:EncounterDB}" Route="EncounterPage"/>
+    <FlyoutItem Icon="users.png" x:Name="EncounterFlyout" Route="EncounterFlyout" Title="{l10n:Tr Key=shell_encounter_database}">
+        <ShellContent Title="{l10n:Tr Key=shell_encounter_database}" ContentTemplate="{DataTemplate local:EncounterDB}" Route="EncounterPage"/>
     </FlyoutItem>
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Shell.TabBarIsVisible="False" x:Name="LiveHexFlyout" Route="LiveHexFlyout" Title="LiveHex">
         <Tab Icon="language.png" Title="LiveHex" x:Name="livehextab" Route="livehextab">
-            <ShellContent Title="LiveHex" ContentTemplate="{DataTemplate local:LiveHex}"/>
+            <ShellContent Title="LiveHex" Route="LiveHexPage" ContentTemplate="{DataTemplate local:LiveHex}"/>
         </Tab>
-        <Tab Title="Save Editors" Route="SaveEditorsPage">
-            <ShellContent Title="Save Editors" ContentTemplate="{DataTemplate local:SaveEditors}"/>
+        <Tab Title="{l10n:Tr Key=shell_save_editor}" Route="SaveEditorsPage">
+            <ShellContent Title="{l10n:Tr Key=shell_save_editor}" ContentTemplate="{DataTemplate local:SaveEditors}"/>
         </Tab>
     </FlyoutItem>
    

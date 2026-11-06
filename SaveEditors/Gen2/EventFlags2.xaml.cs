@@ -89,7 +89,7 @@ public partial class EventEditor2Save : ContentPage
 {
     public EventEditor2Save()
     {
-        this.Title = "Save";
+        this.Title = L10n.T("common_save");
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)

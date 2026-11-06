@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor8aMap"
-             Title="TrainerEditor8aMap">
+             Title="{l10n:Tr Key=gen1_trainer_editor}">
     <VerticalStackLayout>
         <Grid Padding="10">
             <Grid.RowDefinitions>
@@ -17,15 +17,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Text="Current Map:"/>
+            <Label Text="{l10n:Tr Key=gen1_current_map}"/>
             <Entry Grid.Column="1" x:Name="TE8aCMapEntry"/>
-            <Label Text="X Coordinate:" Grid.Row="1"/>
+            <Label Text="{l10n:Tr Key=gen1_x_coord}" Grid.Row="1"/>
             <l:NumericUpDown Grid.Row="1" Grid.Column="1" x:Name="TE8aXEntry"/>
-            <Label Grid.Row="2" Text="Z Coordinate:"/>
+            <Label Grid.Row="2" Text="{l10n:Tr Key=gen1_z_coord}"/>
             <l:NumericUpDown Grid.Row="2" Grid.Column="1" x:Name="TE8aZEntry"/>
-            <Label Grid.Row="3" Text="Y Coordinates:"/>
+            <Label Grid.Row="3" Text="{l10n:Tr Key=gen1_y_coord}"/>
             <l:NumericUpDown Grid.Row="3" Grid.Column="1" x:Name="TE8aYEntry"/>
-            <Label Grid.Row="4" Text="Rotation:"/>
+            <Label Grid.Row="4" Text="{l10n:Tr Key=gen6_wheel}"/>
             <l:NumericUpDown Grid.Row="4" Grid.Column="1" x:Name="TE8aREntry"/>
         </Grid>
     </VerticalStackLayout>

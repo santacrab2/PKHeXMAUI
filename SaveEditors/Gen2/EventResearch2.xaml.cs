@@ -93,7 +93,7 @@ public partial class EventResearch2 : ContentPage
         var diff = new EventBlockDiff<SAV2, byte>(L_Old.Text, L_New.Text);
         if (diff.Message != EventWorkDiffCompatibility.Valid)
         {
-            await DisplayAlertAsync("Invalid",diff.Message.GetMessage(),"Cancel");
+            await DisplayAlertAsync(L10n.T("livehex_invalid"),diff.Message.GetMessage(),L10n.T("pktab_ok"));
             return;
         }
 
@@ -102,11 +102,11 @@ public partial class EventResearch2 : ContentPage
 
         if (diff.WorkDiff.Count == 0)
         {
-            await DisplayAlertAsync("Error","No Event Constant diff found.","cancel");
+            await DisplayAlertAsync(L10n.T("livehex_error"),L10n.T("eventflags_no_event_constant"),L10n.T("pktab_ok"));
             return;
         }
 
-        var promptCopy = await DisplayAlertAsync("Copy", "Copy Event Constant diff to clipboard?","Yes","No");
+        var promptCopy = await DisplayAlertAsync(L10n.T("eventflags_copy"), L10n.T("eventflags_copy_the_event"),L10n.T("pktab_ok"), L10n.T("box_cancel"));
         if (promptCopy)
             Clipboard.SetTextAsync(string.Join(Environment.NewLine, diff.WorkDiff));
     }

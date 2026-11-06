@@ -20,6 +20,8 @@ public partial class StatsTab : ContentPage
     public StatsTab()
 	{
 		InitializeComponent();
+        // 蛋图：b_ 集里没有蛋素材（b_0.png 是空图），统一用唯一那张 a_egg.png
+        eggsprite.Source = SpeciesSpriteUtil.EggFileName(sav);
         FirstLoad = false;
         foreach (var ty in Enum.GetNames<MoveType>())
             Teratypepicker.Items.Add(ty);
@@ -60,9 +62,7 @@ public partial class StatsTab : ContentPage
 
         pkm.ResetPartyStats();
         shinysparklessprite.IsVisible = pkm.IsShiny;
-        spriteurl = pkm.Species == 0
-            ? "a_egg.png"
-            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        spriteurl = SpeciesSpriteUtil.FileName(sav, pkm.Species, pkm.Form, pkm.IsShiny);
         statpic.Source = spriteurl;
         hpbasedisplay.Text = pkm.PersonalInfo.HP.ToString();
         HPIV.Text = pkm.IV_HP.ToString();
@@ -80,9 +80,9 @@ public partial class StatsTab : ContentPage
         totalIVdisplay.Text = pkm.IVTotal.ToString();
         if (pk is IAwakened woke)
         {
-            EvLabel.Text = "AVs";
-            randomEv.Text = "Random AVs";
-            suggestedEv.Text = "Suggested AVs";
+            EvLabel.Text = L10n.T("stats_ivs");
+            randomEv.Text = L10n.T("stats_randomize_ivs_2");
+            suggestedEv.Text = L10n.T("stats_recommended_ivs");
             HPEV.Text = woke.AV_HP.ToString();
             AtkEV.Text = woke.AV_ATK.ToString();
             DEFEV.Text = woke.AV_DEF.ToString();
@@ -191,6 +191,32 @@ public partial class StatsTab : ContentPage
             HiddenPowerPicker.IsVisible = true;
             HiddenPLabel.IsVisible = true;
             HiddenPowerPicker.SelectedItem = types.Find(z => z.Value == pkm.HPType);
+        }
+
+        // Gen3：改 IV 会打破 PID/IV 的 Method 1 关系（报告里报「遭遇类型与PID不一致」、
+        // PID 类型显示 None）。这里统一补一次修复，让 PID 与新 IV 重新配对。
+        if (pkm.Format == 3 && Gen3PidFixer.HasPidTypeMismatch(pkm))
+        {
+            var fixResult = Gen3PidFixer.TryFixDetailed(pkm, pkm.IsShiny, trainer: MainPage.sav);
+            if (fixResult != Gen3PidFixer.FixResult.None)
+            {
+                // 修复后 PID/IV 变了，界面上的 IV 数字要同步刷新
+                HPIV.Text = pkm.IV_HP.ToString();
+                AtkIV.Text = pkm.IV_ATK.ToString();
+                DEFIV.Text = pkm.IV_DEF.ToString();
+                SPAIV.Text = pkm.IV_SPA.ToString();
+                SPDIV.Text = pkm.IV_SPD.ToString();
+                SPEIV.Text = pkm.IV_SPE.ToString();
+                totalIVdisplay.Text = pkm.IVTotal.ToString();
+
+                if (fixResult == Gen3PidFixer.FixResult.IvReplaced)
+                {
+                    // 降级路径：原 IV 与闪光状态在 Method 1 下无解，只能换一组 IV
+                    DisplayAlertAsync(L10n.T("pktab_notice"),
+                        L10n.T("stats_this_pkm_s"),
+                        L10n.T("pktab_ok"));
+                }
+            }
         }
         SkipEvent = false;
     }
@@ -443,25 +469,64 @@ public partial class StatsTab : ContentPage
 
     private void randomizeivs(object sender, EventArgs e)
     {
-        Span<int> ivs = stackalloc int[6];
-        var la = new LegalityAnalysis(pk);
-        var enc = la.EncounterMatch;
-        if (enc is IFlawlessIVCount { FlawlessIVCount: not 0 } fc)
-            pk.SetRandomIVs(ivs, fc.FlawlessIVCount);
-        else if (enc is IFixedIVSet { IVs: { IsSpecified: true } iv })
-            pk.SetRandomIVs(ivs, iv);
-        else if (enc is IFlawlessIVCountConditional c && c.GetFlawlessIVCount(pk) is { Max: not 0 } x)
-            pk.SetRandomIVs(ivs, Util.Rand.Next(x.Min, x.Max + 1));
+        if (pk.Format == 3)
+        {
+            // Gen3：个体值与 PID 同源（Method 1 随机算法），不能「各刷各的」——
+            // 单独刷 IV 会让合法性报「遭遇类型与PID不一致」。
+            //
+            // 这里随机一颗种子，由它同时派生 PID 与个体值，两者天然配套；
+            // 优先级顺序里排在「个体值」之前的项必须保住
+            // （当前顺序「性格 → 闪光 → 个体值 → 性别」= 保住性格与闪光）。
+            var res = Gen3PidFixer.TryRandomizeGen3(pk, trainer: sav);
+            if (res == Gen3PidFixer.FixResult.None)
+            {
+                // 约束互斥时的退路：按遭遇表约束定出个体值，再让 PID 跟着它走。
+                var la = new LegalityAnalysis(pk);
+                var enc = la.EncounterMatch;
+                Span<int> ivs = stackalloc int[6];
+                if (enc is IFlawlessIVCount { FlawlessIVCount: not 0 } fc)
+                    pk.SetRandomIVs(ivs, fc.FlawlessIVCount);
+                else if (enc is IFixedIVSet { IVs: { IsSpecified: true } iv })
+                    pk.SetRandomIVs(ivs, iv);
+                else if (enc is IFlawlessIVCountConditional c && c.GetFlawlessIVCount(pk) is { Max: not 0 } x)
+                    pk.SetRandomIVs(ivs, Util.Rand.Next(x.Min, x.Max + 1));
+                else
+                    pk.SetRandomIVs(ivs);
+                pk.SetIVs(ivs);
+                Gen3PidFixer.MatchPidForCurrentIvs(pk, trainer: sav);
+            }
+        }
         else
-            pk.SetRandomIVs(ivs);
+        {
+            Span<int> ivs = stackalloc int[6];
+            var la = new LegalityAnalysis(pk);
+            var enc = la.EncounterMatch;
+            if (enc is IFlawlessIVCount { FlawlessIVCount: not 0 } fc)
+                pk.SetRandomIVs(ivs, fc.FlawlessIVCount);
+            else if (enc is IFixedIVSet { IVs: { IsSpecified: true } iv })
+                pk.SetRandomIVs(ivs, iv);
+            else if (enc is IFlawlessIVCountConditional c && c.GetFlawlessIVCount(pk) is { Max: not 0 } x)
+                pk.SetRandomIVs(ivs, Util.Rand.Next(x.Min, x.Max + 1));
+            else
+                pk.SetRandomIVs(ivs);
+        }
         applystatsinfo(pk);
     }
 
     private void perfectivs(object sender, EventArgs e)
     {
-        Span<int> ivs = stackalloc int[6];
-        ivs.Fill(pk.MaxIV);
-        pk.IVs = ivs.ToArray();
+        if (pk.Format == 3)
+        {
+            // Gen3：满个体值 = 6 项直接拉满，个体值是硬要求、不参与优先级取舍；
+            // 随后尽量反解一个同源的 PID，让「满 IV」与「合法 PID」同时成立。
+            Gen3PidFixer.TrySetMaxIvsGen3(pk, trainer: sav);
+        }
+        else
+        {
+            Span<int> ivs = stackalloc int[6];
+            ivs.Fill(pk.MaxIV);
+            pk.IVs = ivs.ToArray();
+        }
         applystatsinfo(pk);
     }
 

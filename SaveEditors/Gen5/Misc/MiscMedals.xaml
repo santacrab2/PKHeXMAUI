@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscMedals"
-             Title="Medals">
+             Title="{l10n:Tr Key=cosmetic_medals}">
     <VerticalStackLayout>
         <l:comboBox x:Name="CB_CurrentMedal" SelectedIndexChanged="CB_CurrentMedal_SelectedIndexChanged"/>
         <l:comboBox x:Name="CB_MedalState" SelectedIndexChanged="CB_MedalState_SelectedIndexChanged"/>
         <DatePicker x:Name="CAL_MedalDate" />
         <Grid ColumnDefinitions="*,*,*">
             <CheckBox x:Name="CHK_MedalUnread" CheckedChanged="CHK_MedalUnread_CheckedChanged"/>
-            <Label Text="Unread" Grid.Column="1"/>
+            <Label Text="{l10n:Tr Key=gen5_unread}" Grid.Column="1"/>
             <Entry x:Name="TB_MedalType" Grid.Column="2"/>
         </Grid>
-        <Button x:Name="B_UnlockAllMedals" Clicked="B_ObtainAllMedals_Click" Text="Obtain All Medals"/>
+        <Button x:Name="B_UnlockAllMedals" Clicked="B_ObtainAllMedals_Click" Text="{l10n:Tr Key=gen5_give_all_medals}"/>
     </VerticalStackLayout>
 </ContentPage>

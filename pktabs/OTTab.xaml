@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.OTTab"
-             Title="OT">
+             Title="{l10n:Tr Key=ottab_original_trainer}">
     <RefreshView x:Name="OTRefresh">
         <ScrollView>
 
@@ -49,39 +49,39 @@
                 <Image Source="a_egg.png" Grid.Column="0" Grid.Row="0" x:Name="eggsprite" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="End" IsVisible="false"/>
                 <Image Grid.Column="0" Grid.Row="0" x:Name="itemsprite" HeightRequest="16" HorizontalOptions="End" VerticalOptions="End" IsVisible="false"/>
                 <!--OT-->
-                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Original Trainer" Grid.ColumnSpan="2" />
+                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_original_trainer}" Grid.ColumnSpan="2" />
                 <CheckBox Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="OTcurrentcheck" CheckedChanged="MakeOTCurrent"/>
-                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="SID:"/>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_sid}"/>
                 <Entry Grid.Row="2" Grid.Column="1" VerticalOptions="Center" ClearButtonVisibility="WhileEditing" x:Name="SIDdisplay" TextChanged="applySID" Keyboard="Numeric"/>
-                <Label Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="TID:"/>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_tid}"/>
                 <Entry Grid.Row="2" Grid.Column="3" VerticalOptions="Center" ClearButtonVisibility="WhileEditing" x:Name="TIDdisplay" TextChanged="applyTID" Keyboard="Numeric"/>
-                <Label Grid.Row="3" Grid.Column="0"  VerticalOptions="Center" Text="OT:" x:Name="OTLabel"/>
+                <Label Grid.Row="3" Grid.Column="0"  VerticalOptions="Center" Text="{l10n:Tr Key=ottab_original_trainer_2}" x:Name="OTLabel"/>
                 <Editor Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="otdisplay" TextChanged="applyot" AutoSize="TextChanges"/>
-                <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="OT Gender:" Grid.ColumnSpan="2"/>
+                <Label Grid.Row="4" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_ot_gender}" Grid.ColumnSpan="2"/>
                 <ImageButton HeightRequest="32" Grid.Row="4" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="otgenderpicker" Clicked="applyotgender"/>
                 <!--IRegionOrigin-->
-                <Label Grid.Row="5" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Country:" IsVisible="false" x:Name="countrylabel"></Label>
+                <Label Grid.Row="5" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_country}" IsVisible="false" x:Name="countrylabel"></Label>
                 <Picker Grid.Row="5" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="CountryPicker" IsVisible="false" SelectedIndexChanged="applyCountry"/>
-                <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="SubRegion:" IsVisible="false" x:Name="subregionlabel"/>
+                <Label Grid.Row="6" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_sub_region}" IsVisible="false" x:Name="subregionlabel"/>
                 <Picker Grid.Row="6" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" IsVisible="false" x:Name="subregionPicker" SelectedIndexChanged="applySubregion"/>
-                <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" IsVisible="false" x:Name="DSregion" Text="3DS Region:"/>
+                <Label Grid.Row="7" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" IsVisible="false" x:Name="DSregion" Text="{l10n:Tr Key=ottab_3ds_region}"/>
                 <Picker Grid.Row="7" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" IsVisible="false" x:Name="DSregionPicker" SelectedIndexChanged="apply3DSregion"/>
                 <!--EC-->
-                <Label Grid.Row="8" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Encryption Constant:" Grid.ColumnSpan="3"/>
+                <Label Grid.Row="8" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_encryption_constant}" Grid.ColumnSpan="3"/>
                 <Editor Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" VerticalOptions="Center" x:Name="ecdisplay" TextChanged="applyec" AutoSize="TextChanges"/>
                 <!--Hidden trainer-->
-                <Label Grid.Row="9" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Hidden Trainer" IsVisible="false" x:Name="HTLabel" Grid.ColumnSpan="2"/>
+                <Label Grid.Row="9" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_hidden_trainer}" IsVisible="false" x:Name="HTLabel" Grid.ColumnSpan="2"/>
                 <CheckBox Grid.Row="9" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="HTcurrentcheck" CheckedChanged="MakeHTCurrent" IsVisible="false"/>
-                <Label Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="HT:" IsVisible="false" x:Name="HTNameLabel"/>
+                <Label Grid.Row="10" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_hyper_training}" IsVisible="false" x:Name="HTNameLabel"/>
                 <Editor Grid.Row="10" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="htname" TextChanged="applyHT" AutoSize="TextChanges" IsVisible="false"/>
-                <Label Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Language:" IsVisible="false" x:Name="htlanguagelabel" Grid.ColumnSpan="2"/>
+                <Label Grid.Row="11" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_language}" IsVisible="false" x:Name="htlanguagelabel" Grid.ColumnSpan="2"/>
                 <Picker IsVisible="false" Grid.Row="11" Grid.Column="2" VerticalOptions="Center" x:Name="htlanguagepicker" SelectedIndexChanged="applyhtlanguage"/>
                 <!--Extra Bytes-->
-                <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Extra Bytes:" Grid.ColumnSpan="2"/>
+                <Label Grid.Row="12" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_extra_bytes}" Grid.ColumnSpan="2"/>
                 <Picker Grid.Row="12" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="extrabytespicker" SelectedIndexChanged="extrabytestuff"/>
                 <Editor Grid.Row="12" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="extrabytesvalue" TextChanged="applyextrabytesvalue"/>
                 <!--HomeTracker-->
-                <Label Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="Home Tracker:" IsVisible="false" x:Name="HomeLabel"/>
+                <Label Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=ottab_home_tracker_id}" IsVisible="false" x:Name="HomeLabel"/>
                 <Editor x:Name="trackereditor" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" TextChanged="applyhometracker" IsVisible="false"/>
 
 

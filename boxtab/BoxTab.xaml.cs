@@ -68,7 +68,7 @@ public partial class BoxTab : ContentPage
             Image image = new() { WidthRequest = 45, HeightRequest = 45 };
             Image shinysp = new() { Source = "rare_icon.png", WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.Start };
             shinysp.TranslateToAsync(shinysp.TranslationX + 20, shinysp.TranslationY);
-            Image Egg = new() { Source = "a_egg.png", HeightRequest = 50, WidthRequest = 50, VerticalOptions = LayoutOptions.End };
+            Image Egg = new() { Source = SpeciesSpriteUtil.EggFileName(sav), HeightRequest = 50, WidthRequest = 50, VerticalOptions = LayoutOptions.End };
             Egg.SetBinding(Image.IsVisibleProperty, "pkm.IsEgg");
             Image ItemSprite = new() {  WidthRequest = 16, HeightRequest = 16, VerticalOptions = LayoutOptions.End };
             ItemSprite.SetBinding(Image.SourceProperty, "ItemResource");
@@ -107,13 +107,13 @@ public partial class BoxTab : ContentPage
     {
         boxview.SelectedItem = e?.Parameter;
 
-        var result = await DisplayActionSheetAsync($"Slot {((boxsprite?)e?.Parameter)?.SlotNumber}", "cancel", "Delete", ["View", "Set"]);
+        var result = await DisplayActionSheetAsync(L10n.T("code_slot_e_parameter_slotnumber", ((boxsprite?)e?.Parameter)?.SlotNumber), L10n.T("box_cancel"), L10n.T("box_delete"), [L10n.T("box_view"), L10n.T("code_write")]);
         switch (result)
         {
             case "Delete": del(sender,e); break;
             case "View": applypkfrombox(sender, e); break;
-            case "Set": inject(sender, e); break;
-            case "cancel": boxview.SelectedItem = null; break;
+            case "Write": inject(sender, e); break;
+            case "Cancel": boxview.SelectedItem = null; break;
         }
     }
     public void DisplayOptions()
@@ -192,11 +192,35 @@ public partial class BoxTab : ContentPage
         LB_Share.IsVisible = false;
         fillbox();
     }
+    /// <summary>
+    /// 通知编辑器刷新为指定的宝可梦。
+    /// 从箱子「查看」时必须调用，否则编辑器界面与合法性判定仍停留在上一只宝可梦，
+    /// 会出现「箱子里看着合法，进编辑器就报非法」的不一致。
+    /// </summary>
+    private static void RefreshEditorFor(PKM target)
+    {
+        try
+        {
+            var page = MainPage.Instance;
+            if (page is null)
+                return;
+            page.applymainpkinfo(target);
+            page.checklegality(target);
+        }
+        catch (Exception ex)
+        {
+            CrashLog.Write("箱子查看刷新编辑器", ex);
+        }
+    }
+
     private async void applypkfrombox(object? sender, EventArgs? e)
     {
             if (((boxsprite)boxview.SelectedItem).pkm.Species != 0)
             {
                 pk = ((boxsprite)boxview.SelectedItem).pkm;
+                // 从箱子查看时必须刷新编辑器界面与合法性判定，
+                // 否则编辑器仍显示上一只宝可梦的合法/非法状态，与箱子里的显示不一致。
+                RefreshEditorFor(pk);
             }
     }
     private async void applypkfromboxDrop(object? sender, DropEventArgs? e)
@@ -206,6 +230,7 @@ public partial class BoxTab : ContentPage
             if (((boxsprite)boxview.SelectedItem).pkm.Species != 0)
             {
                 pk = ((boxsprite)boxview.SelectedItem).pkm;
+                RefreshEditorFor(pk);
             }
         }
             deleter.IsVisible = false;
@@ -289,7 +314,7 @@ public partial class BoxTab : ContentPage
         File.WriteAllBytes(TempPath, pkm.Data);
         await Share.RequestAsync(new ShareFileRequest()
         {
-            Title = "Share PKM",
+            Title = L10n.T("code_share_pkm"),
             File = new ShareFile(TempPath)
         });
         deleter.IsVisible = false;
@@ -301,7 +326,7 @@ public partial class BoxTab : ContentPage
     }
     private async void GenerateRandomTeam(object sender, EventArgs e)
     {
-        RandomTeamButton.Text = "loading...";
+        RandomTeamButton.Text = L10n.T("box_loading");
         await Task.Delay(100);
         ModLogic.SetAlpha = PluginSettings.LivingDexSetAlpha;
         ModLogic.IncludeForms = PluginSettings.LivingDexAllForms;
@@ -309,15 +334,49 @@ public partial class BoxTab : ContentPage
 
         await Task.Run(copyboxdata);
         fillbox();
-        RandomTeamButton.Text = "Generate Random Team";
+        RandomTeamButton.Text = L10n.T("box_generate_random_team");
     }
     public void copyboxdata()
     {
-        PKM[] pkms = sav.GetSixRandomMons();
+        // GetSixRandomMons 是 AutoMod 26.7.8 的扩展方法，与 Core 26.7.7 不配套时可能抛
+        // MissingMethodException，这里改用 Core 自带的遭遇生成器实现同样的效果。
+        PKM[] pkms = GetSixRandomMonsCore();
         sav.BoxData ??= [];
-        var empties = Legalizer.FindAllEmptySlots(sav.BoxData, 0);
-        for (int i = 0; i < 6; i++)
-            sav.SetBoxSlotAtIndex(pkms[i], empties[i]);
+        var empties = AlmService.FindAllEmptySlots(sav.BoxData);
+        for (int i = 0; i < 6 && i < pkms.Length; i++)
+            sav.SetBoxSlotAtIndex(pkms[i], empties.Count > i ? empties[i] : i);
+    }
+
+    /// <summary>用 Core 自带的遭遇生成器取 6 只随机宝可梦（替代 AutoMod 的 GetSixRandomMons）。</summary>
+    private static PKM[] GetSixRandomMonsCore()
+    {
+        var result = new List<PKM>();
+        var generation = AlmService.GetGeneration(sav.Context);
+        try
+        {
+            var blank = EntityBlank.GetBlank(generation);
+            var generator = EncounterGenerator.GetGenerator((GameVersion)sav.Version, generation);
+            var info = new LegalInfo(blank, new List<CheckResult>());
+            var rng = new Random();
+            var encounters = generator.GetEncounters(blank, Array.Empty<EvoCriteria>(), info).ToList();
+            for (int i = 0; i < 6 && encounters.Count > 0; i++)
+            {
+                var enc = encounters[rng.Next(encounters.Count)];
+                if (enc is IEncounterConvertible conv)
+                {
+                    var pkm = conv.ConvertToPKM(sav);
+                    if (pkm is not null)
+                        result.Add(pkm);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            CrashLog.Write("生成随机队伍", ex);
+        }
+        while (result.Count < 6)
+            result.Add(EntityBlank.GetBlank(generation));
+        return result.ToArray();
     }
     private void changebox(object sender, EventArgs e)
     {
@@ -354,9 +413,11 @@ public class boxsprite
         SlotNumber = slot.ToString();
         pkm = pk9;
         species = $"{(Species)pk9.Species}";
-        url = pk9.Species == 0 ? "" : $"a_{pkm.Species}{((pkm.Form > 0 && !NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        // 按存档世代选图集：Gen9 用 a_（朱紫造型），Gen1~8 用 b_（历代造型）
+        // 闪光个体用对应世代的闪光造型，星标（rare_icon.png）另外叠在旁边
+        url = pk9.Species == 0 ? "" : SpeciesSpriteUtil.FileName(sav, pkm.Species, pkm.Form, pk9.IsShiny);
         shiny = (pk9.IsShiny && pk9.Species != 0);
-        ItemResource = sav is SAV9SV ? $"aitem_{pkm.SpriteItem}.png" : $"bitem_{pkm.SpriteItem}.png";
+        ItemResource = ItemSpriteUtil.FileName(pkm.HeldItem, sav.Context, sav.Generation >= 9);
         legal = !new LegalityAnalysis(pk9).Valid;
         if (pk9.Species == 0)
             legal = false;

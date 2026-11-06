@@ -366,3 +366,13 @@ FodyWeavers.xsd
 .DS_Store
 /PKHeX.MAUI.apk
 /PKHeX.MAUI-Signed.apk
+
+# ---- 多语言工具链（tools/l10n/）的运行期产物 ----
+# 门禁脚本从 app 源码提取的参考键集合（每次运行都会重生成）
+tools/l10n/app_ref_keys.txt
+
+# 资源表备份（写入门禁在覆盖前自动生成）
+tools/l10n/_l10n_backup/
+
+# 通用备份文件（deps/ 下的手工备份等）
+*.bak

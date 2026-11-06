@@ -19,13 +19,13 @@ public partial class ALMSettings : ContentPage
     {
         PKHeXSettings.skipevent = true;
         GenericCollectionSelector.Options.SelectedItem = e?.Parameter;
-        var result = await DisplayActionSheetAsync("Add Type", "cancel", null, ["Add"]);
+        var result = await DisplayActionSheetAsync(L10n.T("code_add_attribute"), L10n.T("box_cancel"), null, [L10n.T("box_add")]);
         switch (result)
         {
-            case "cancel": break;
+            case "Cancel": break;
             case "Add": GenericCollectionSelector.SelectedSource.Add((MoveType?)e?.Parameter??0);
                 Preferences.Set("RandomTypes", JsonSerializer.Serialize(GenericCollectionSelector.SelectedSource));
-                APILegality.RandTypes = [.. GenericCollectionSelector.SelectedSource];
+                SetRandTypes();
                 GenericCollectionSelector.MoveTypeOptionsSource.Remove((MoveType?)e?.Parameter??0);
                 break;
 
@@ -35,14 +35,31 @@ public partial class ALMSettings : ContentPage
     public async void RemoveTap(object? sender, TappedEventArgs? e)
     {
         GenericCollectionSelector.Selected.SelectedItem = e?.Parameter;
-        var result = await DisplayActionSheetAsync("Remove Type", "cancel", null, ["Remove"]);
+        var result = await DisplayActionSheetAsync(L10n.T("code_remove_attribute"), L10n.T("box_cancel"), null, [L10n.T("code_remove")]);
         switch (result)
         {
-            case "cancel": break;
+            case "Cancel": break;
             case "Remove": GenericCollectionSelector.SelectedSource.Remove((MoveType?)e?.Parameter ?? 0);
                 Preferences.Set("RandomTypes", JsonSerializer.Serialize(GenericCollectionSelector.SelectedSource));
-                APILegality.RandTypes = [.. GenericCollectionSelector.SelectedSource];
+                SetRandTypes();
                 GenericCollectionSelector.MoveTypeOptionsSource.Add((MoveType?)e?.Parameter ?? 0); break;
+        }
+    }
+
+    /// <summary>
+    /// 同步随机招式类型到 AutoMod。
+    /// AutoMod 26.7.8 与 Core 26.7.7 不配套，其类型初始化可能抛 MissingMethodException，
+    /// 这里兜底：失败只记日志，不让设置页崩溃。
+    /// </summary>
+    private static void SetRandTypes()
+    {
+        try
+        {
+            APILegality.RandTypes = [.. GenericCollectionSelector.SelectedSource];
+        }
+        catch (Exception ex)
+        {
+            CrashLog.Write("自动合规随机招式设置", ex);
         }
     }
 }

@@ -89,17 +89,17 @@ public partial class BatchEditor : ContentPage
         var sets = StringInstructionSet.GetBatchSets(BatchText.Text);
         if (Array.Exists(sets, s => s.Filters.Any(z => string.IsNullOrWhiteSpace(z.PropertyValue))))
         {
-            await DisplayAlertAsync("Batch Editor", "Batch Instructions Format Error", "cancel");
+            await DisplayAlertAsync(L10n.T("box_batch_editor"), L10n.T("box_malformed_batch_command"), L10n.T("pktab_ok"));
             return;
         }
         if (Array.Exists(sets, z => z.Instructions.Count == 0))
         {
-            await DisplayAlertAsync("Batch Editor", "No Batch instructions included", "cancel");
+            await DisplayAlertAsync(L10n.T("box_batch_editor"), L10n.T("box_no_batch_commands"), L10n.T("pktab_ok"));
         }
         var emptyVal = sets.SelectMany(s => s.Instructions.Where(z => string.IsNullOrWhiteSpace(z.PropertyValue))).ToArray();
         if (emptyVal.Length > 0)
         {
-            await DisplayAlertAsync("Batch Editor", "Another Error Display", "Cancel");
+            await DisplayAlertAsync(L10n.T("box_batch_editor"), L10n.T("box_another_error_message"), L10n.T("pktab_ok"));
             return;
         }
         foreach(var set in sets)
@@ -111,7 +111,7 @@ public partial class BatchEditor : ContentPage
         SlotInfoLoader.AddBoxData(MainPage.sav, data);
         if (data.All(z=>z.Entity.Species == 0))
         {
-            await DisplayAlertAsync("Batch Editor", "No slots to edit", "cancel");
+            await DisplayAlertAsync(L10n.T("box_batch_editor"), L10n.T("box_no_editable_slots"), L10n.T("pktab_ok"));
             return;
         }
         process(data);

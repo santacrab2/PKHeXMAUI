@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscFerry"
-             Title="Ferry">
+             Title="{l10n:Tr Key=gen3_ferry}">
     <ScrollView>
         <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*,*,*">
-            <Label Text="Reachable" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
-            <Label Text="Initial Event" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_reachable}" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_initial_event}" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
             <CheckBox x:Name="RsouthernCheck" Grid.Row="1"/>
-            <Label Text="Southern Island" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_southern_island}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="IsoutherCheck" Grid.Row="1" Grid.Column="2"/>
-            <Label Text="Southern Island" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_southern_island}" Grid.Row="1" Grid.Column="3" VerticalOptions="Center"/>
             <CheckBox x:Name="RnavelrockCheck" Grid.Row="2"/>
-            <Label Text="Navel Rock" Grid.Row="2" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_birth_island}" Grid.Row="2" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="InavelrockCheck" Grid.Row="2" Grid.Column="2"/>
-            <Label Text="Navel Rock" Grid.Row="2" Grid.Column="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_birth_island}" Grid.Row="2" Grid.Column="3" VerticalOptions="Center"/>
             <CheckBox x:Name="RbirthislandCheck" Grid.Row="3"/>
-            <Label Text="Birth Island" Grid.Row="3" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_birth_island_2}" Grid.Row="3" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="IbirthislandCheck" Grid.Row="3" Grid.Column="2"/>
-            <Label Text="Birth Island" Grid.Row="3" Grid.Column="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_birth_island_2}" Grid.Row="3" Grid.Column="3" VerticalOptions="Center"/>
             <CheckBox x:Name="RfarawayislandCheck" Grid.Row="4"/>
-            <Label Text="Faraway Island" Grid.Row="4" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_faraway_island}" Grid.Row="4" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="IfarawayislandCheck" Grid.Row="4" Grid.Column="2"/>
-            <Label Text="Faraway Island" Grid.Row="4" Grid.Column="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_faraway_island}" Grid.Row="4" Grid.Column="3" VerticalOptions="Center"/>
             <CheckBox x:Name="RbattlefrontierCheck" Grid.Row="5"/>
-            <Label Text="Battle Frontier" Grid.Row="5" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_battle_frontier}" Grid.Row="5" Grid.Column="1" VerticalOptions="Center"/>
             <CheckBox x:Name="cangetrideCheck" Grid.Row="6"/>
-            <Label Text="Can Get Ride" Grid.Row="6" Grid.Column="1" VerticalOptions="Center"/>
-            <Button x:Name="getticketsButton" Text="Get Tickets" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Clicked="UnlockTickets"/>
+            <Label Text="{l10n:Tr Key=gen3_rideable}" Grid.Row="6" Grid.Column="1" VerticalOptions="Center"/>
+            <Button x:Name="getticketsButton" Text="{l10n:Tr Key=gen3_get_tickets}" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Clicked="UnlockTickets"/>
         </Grid>
     </ScrollView>
 </ContentPage>

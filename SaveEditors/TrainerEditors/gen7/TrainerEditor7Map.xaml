@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor7Map"
-             Title="Map">
+             Title="{l10n:Tr Key=gen7_map}">
     <ScrollView>
         <VerticalStackLayout>
             <Grid Padding="10" x:Name="MapGrid">
@@ -19,16 +19,16 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Map Position"/>
-                <Label Text="Current Map:" Grid.Row="1" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_map_position}"/>
+                <Label Text="{l10n:Tr Key=gen1_current_map}" Grid.Row="1" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="CurrentMapEntry" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="X Coordinate:" Grid.Row="2" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen1_x_coord}" Grid.Row="2" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="XCoordEntry" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Z Coordinate:" Grid.Row="3" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen1_z_coord}" Grid.Row="3" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="ZCoordEntry" Grid.Row="3" Grid.Column="1"/>
-                <Label Text="Y Coordinate:" Grid.Row="4" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen1_y_coord}" Grid.Row="4" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="YCoordEntry" Grid.Row="4" Grid.Column="1"/>
-                <Label Text="Rotation:" Grid.Row="5" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_wheel}" Grid.Row="5" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="RotationEntry" Grid.Row="5" Grid.Column="1"/>
             </Grid>
             <Grid Padding="10">
@@ -37,8 +37,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Fly Destination"/>
-                <Button Text="Check All" Clicked="UnlockAllFly" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=gen4_flight_destinations}"/>
+                <Button Text="{l10n:Tr Key=gen5_select_all}" Clicked="UnlockAllFly" Grid.Row="1"/>
                 <CollectionView x:Name="FlyDestinationCV" Grid.Row="2" HeightRequest="300"/>
             </Grid>
             <Grid Padding="10">
@@ -47,8 +47,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Map Unmask"/>
-                <Button Text="Check All" Clicked="UnmaskAll" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=gen7_all_maps_revealed}"/>
+                <Button Text="{l10n:Tr Key=gen5_select_all}" Clicked="UnmaskAll" Grid.Row="1"/>
                 <CollectionView x:Name="MapUnmaskCV" Grid.Row="2" HeightRequest="300"/>
             </Grid>
         </VerticalStackLayout>

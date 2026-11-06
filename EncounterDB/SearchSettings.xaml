@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
               xmlns:inputs="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.SearchSettings"
-             Title="Search Settings"
+             Title="{l10n:Tr Key=encounter_search_settings}"
              >
     <ScrollView>
         <VerticalStackLayout x:Name="SearchSettingsPage">
-            <Label Text="Shiny"></Label>
+            <Label Text="{l10n:Tr Key=encounter_shiny}"></Label>
             <CheckBox x:Name="ShinyCheck"/>
-            <Label Text="Is Egg"/>
+            <Label Text="{l10n:Tr Key=encounter_is_egg}"/>
             <CheckBox x:Name="EggCheck"/>
-            <Label Text="Species"/>
+            <Label Text="{l10n:Tr Key=common_species}"/>
             <inputs:comboBox x:Name="EncSpecies" BackgroundColor="Transparent"/>
-            <Label Text="Move 1"/>
+            <Label Text="{l10n:Tr Key=encounter_move_1}"/>
             <inputs:comboBox x:Name="EncMove1" BackgroundColor="Transparent"/>
-            <Label Text="Move 2"/>
+            <Label Text="{l10n:Tr Key=encounter_move_2}"/>
             <inputs:comboBox x:Name="EncMove2" BackgroundColor="Transparent"/>
-            <Label Text="Move 3"/>
+            <Label Text="{l10n:Tr Key=encounter_move_3}"/>
             <inputs:comboBox x:Name="EncMove3" BackgroundColor="Transparent"/>
-            <Label Text="Move 4"/>
+            <Label Text="{l10n:Tr Key=encounter_move_4}"/>
             <inputs:comboBox x:Name="EncMove4" BackgroundColor="Transparent"/>
-            <Label Text="OT Version"/>
+            <Label Text="{l10n:Tr Key=encounter_ot_version}"/>
             <inputs:comboBox x:Name="EncVersion" BackgroundColor="Transparent"/>
-            <Label Text="As Egg"/>
+            <Label Text="{l10n:Tr Key=encounter_as_an_egg}"/>
             <CheckBox HorizontalOptions="Start" x:Name="Egg" IsChecked="True"/>
-            <Label Text="Mystery"/>
+            <Label Text="{l10n:Tr Key=encounter_mystery}"/>
             <CheckBox HorizontalOptions="Start" x:Name="Mystery" IsChecked="True"/>
-            <Label Text="Static"/>
+            <Label Text="{l10n:Tr Key=encounter_static}"/>
             <CheckBox HorizontalOptions="Start" x:Name="Static" IsChecked="True"/>
-            <Label Text="Trade"/>
+            <Label Text="{l10n:Tr Key=gen3_trade}"/>
             <CheckBox HorizontalOptions="Start" x:Name="Trade" IsChecked="True"/>
-            <Label Text="Slot"/>
+            <Label Text="{l10n:Tr Key=encounter_slot}"/>
             <CheckBox HorizontalOptions="Start" x:Name="Slot" IsChecked="True"/>
-            <Button Text="Save" Clicked="SaveSearchSettings"/>
-            <Button Text="Cancel" Clicked="CloseSearchSettings"/>
+            <Button Text="{l10n:Tr Key=common_save}" Clicked="SaveSearchSettings"/>
+            <Button Text="{l10n:Tr Key=box_cancel}" Clicked="CloseSearchSettings"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

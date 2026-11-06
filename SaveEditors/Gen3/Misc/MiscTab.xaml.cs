@@ -51,13 +51,15 @@ public partial class Misc3Save : ContentPage
 {
 	public Misc3Save()
 	{
-		this.Title = "Save";
-		this.Content = new Label() { Text = "The MAUI Framework has bugs. This is the save page. Navigate to another page, and then select the page you were trying to reach!" };
+		this.Title = L10n.T("common_save");
+		this.Content = new Label() { Text = L10n.T("code_saving") };
 	}
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
 	{
 		MiscTab.MPB?.Save();
 		MiscTab.MJE?.SaveJoyful();
+		// 渡轮页的勾选此前从未回写，事件标志改了不起作用
+		MiscTab.MFE?.SaveFerry();
 		Navigation.PopModalAsync();
 	}
 }

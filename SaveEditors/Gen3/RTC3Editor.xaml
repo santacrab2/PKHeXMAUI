@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.RTC3Editor"
-             Title="RTC3Editor">
+             Title="{l10n:Tr Key=gen3_rtc_editor}">
     <ScrollView>
     <VerticalStackLayout>
             <Grid>
@@ -23,28 +23,28 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Initial Time"/>
-                <Label Text="Time Elapsed" Grid.Column="2"/>
+                <Label Text="{l10n:Tr Key=gen3_initial_time}"/>
+                <Label Text="{l10n:Tr Key=gen3_time_used}" Grid.Column="2"/>
                 <Entry x:Name="InitialDayEntry" Keyboard="Numeric" Grid.Row="1"/>
-                <Label Text="Days" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen3_day}" Grid.Row="1" Grid.Column="1"/>
                 <Entry x:Name="ElapsedDayEntry" Grid.Column="2" Grid.Row="1" Keyboard="Numeric"/>
-                <Label Text="Days" Grid.Row="1" Grid.Column="3"/>
+                <Label Text="{l10n:Tr Key=gen3_day}" Grid.Row="1" Grid.Column="3"/>
                 <Entry x:Name="InitialHoursEntry" Grid.Row="2" Keyboard="Numeric"/>
-                <Label Text="Hours" Grid.Row="2" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen3_hour}" Grid.Row="2" Grid.Column="1"/>
                 <Entry x:Name="ElapsedHoursEntry" Grid.Row="2" Grid.Column="2" Keyboard="Numeric"/>
-                <Label Text="Hours" Grid.Row="2" Grid.Column="3"/>
+                <Label Text="{l10n:Tr Key=gen3_hour}" Grid.Row="2" Grid.Column="3"/>
                 <Entry x:Name="InitialMinutesEntry" Grid.Row="3" Keyboard="Numeric"/>
-                <Label Text="Minutes" Grid.Row="3" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen3_minutes}" Grid.Row="3" Grid.Column="1"/>
                 <Entry x:Name="ElapsedMinutesEntry" Grid.Row="3" Grid.Column="2" Keyboard="Numeric"/>
-                <Label Text="Minutes" Grid.Row="3" Grid.Column="3"/>
+                <Label Text="{l10n:Tr Key=gen3_minutes}" Grid.Row="3" Grid.Column="3"/>
                 <Entry x:Name="InitialSecondsEntry" Grid.Row="4" Keyboard="Numeric"/>
-                <Label Text="Seconds" Grid.Row="4" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen3_seconds}" Grid.Row="4" Grid.Column="1"/>
                 <Entry x:Name="ElapsedSecondsEntry" Grid.Row="4" Grid.Column="2" Keyboard="Numeric"/>
-                <Label Text="Seconds" Grid.Row="4" Grid.Column="3"/>
-                <Button Text="Reset RTC" Grid.Row="5" Clicked="ResetRTCClick"/>
-                <Button Text="Berry Fix" Grid.Row="5" Grid.Column="1" Clicked="BerryFixClick"/>
-                <Button Text="Cancel" Grid.Row="5" Grid.Column="2" Clicked="CloseRTC"/>
-                <Button Text="Save" Grid.Row="5" Grid.Column="3" Clicked="SaveRTC"/>
+                <Label Text="{l10n:Tr Key=gen3_seconds}" Grid.Row="4" Grid.Column="3"/>
+                <Button Text="{l10n:Tr Key=gen3_reset_rtc}" Grid.Row="5" Clicked="ResetRTCClick"/>
+                <Button Text="{l10n:Tr Key=gen3_fruit_correction}" Grid.Row="5" Grid.Column="1" Clicked="BerryFixClick"/>
+                <Button Text="{l10n:Tr Key=box_cancel}" Grid.Row="5" Grid.Column="2" Clicked="CloseRTC"/>
+                <Button Text="{l10n:Tr Key=common_save}" Grid.Row="5" Grid.Column="3" Clicked="SaveRTC"/>
             </Grid>
     </VerticalStackLayout>
     </ScrollView>

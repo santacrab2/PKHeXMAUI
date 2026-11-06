@@ -423,7 +423,7 @@ public partial class MailBox : ContentPage
         if (entry >= 0) TempSave();
         Save();
         var Err = CheckValid();
-        if (Err.Count != 0 && await DisplayAlertAsync("Invalid", $"{Err.Aggregate($"Validation Error. Save?{Environment.NewLine}", (tmp, v) => $"{tmp}{Environment.NewLine}{v}")}","yes","no"))
+        if (Err.Count != 0 && await DisplayAlertAsync(L10n.T("livehex_invalid"), $"{Err.Aggregate(L10n.T("code_validation_errors_save_anyway", Environment.NewLine), (tmp, v) => $"{tmp}{Environment.NewLine}{v}")}",L10n.T("pktab_ok"), L10n.T("box_cancel")))
             return;
         Origin.CopyChangesFrom(SAV);
         Navigation.PopModalAsync();

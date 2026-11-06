@@ -40,7 +40,7 @@ public partial class HoneyTreeEditor : ContentPage
             return;
 
         if (species == (int)Species.Munchlax && !MunchlaxTrees.AsSpan().Contains((byte)CB_TreeList.SelectedIndex))
-            await DisplayAlertAsync("Warning","Catching Munchlax in this tree will make it illegal for this savegame's TID16/SID16 combination.","ok");
+            await DisplayAlertAsync(L10n.T("gen4_warning"),L10n.T("gen4_catching_a_bounsweet"),L10n.T("pktab_ok"));
     }
     private static string GetLabelText(ushort species)
     {

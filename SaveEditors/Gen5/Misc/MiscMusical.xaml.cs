@@ -28,6 +28,6 @@ public partial class MiscMusical : ContentPage
     private void B_UnlockAllProps_Click(object sender, EventArgs e)
     {
         SAV.Musical.UnlockAllMusicalProps();
-        B_UnlockAllProps.IsEnabled = false;
+        // 解锁是幂等操作，按钮保持可点，随时可以再点一次
     }
 }

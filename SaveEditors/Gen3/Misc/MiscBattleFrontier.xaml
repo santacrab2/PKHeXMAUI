@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:local="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscBattleFrontier"
-             Title="Battle Frontier">
+             Title="{l10n:Tr Key=gen3_battle_frontier}">
     <VerticalStackLayout>
-        <Label Text="Frontier Pass" />
+        <Label Text="{l10n:Tr Key=gen3_frontier_pass}" />
         <Grid ColumnDefinitions="*,*">
             <CheckBox x:Name="CHK_ActivatePass"/>
-            <Label Text="Activated" Grid.Column="1" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_activated}" Grid.Column="1" VerticalOptions="Center"/>
         </Grid>
-        <Label Text="Symbol Icons"/>
+        <Label Text="{l10n:Tr Key=gen3_dex_icon}"/>
         <Grid ColumnDefinitions="*,*,*,*">
             <Button x:Name="BTN_SymbolA" Text="A" Clicked="BTN_Symbol_Click"/>
             <Button x:Name="BTN_SymbolS" Text="S" Grid.Column="1" Clicked="BTN_Symbol_Click"/>
@@ -22,25 +22,25 @@
             <Button x:Name="BTN_SymbolG" Text="G" Grid.Column="1" Clicked="BTN_Symbol_Click"/>
             <Button x:Name="BTN_SymbolL" Text="L" Grid.Column="2" Clicked="BTN_Symbol_Click"/>
         </Grid>
-        <Label Text="Streaks"/>
+        <Label Text="{l10n:Tr Key=gen3_streak_record}"/>
         <local:comboBox x:Name="CB_Stats1" SelectedIndexChanged="ChangeStat1"/>
         <local:comboBox x:Name="CB_Stats2" SelectedIndexChanged="ChangeStat"/>
         <Grid ColumnDefinitions="*,*,*,*">
             <RadioButton GroupName="StatRBA" x:Name="RB_Stats3_01" CheckedChanged="ChangeStat"/>
             <Label Text="Lv.50" Grid.Column="1" VerticalOptions="Center"/>
             <RadioButton GroupName="StatRBA" x:Name="RB_Stats3_02" Grid.Column="2" CheckedChanged="ChangeStat"/>
-            <Label Text="Open" Grid.Column="3" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_open}" Grid.Column="3" VerticalOptions="Center"/>
         </Grid>
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*">
             <CheckBox x:Name="CHK_Continue" CheckedChanged="CHK_Continue_CheckedChanged"/>
-            <Label Text="Continue" Grid.Column="1" VerticalOptions="Center"/>
-            <Label x:Name="L_Stat0" Text="Current" Grid.Row="1"/>
+            <Label Text="{l10n:Tr Key=gen3_continue}" Grid.Column="1" VerticalOptions="Center"/>
+            <Label x:Name="L_Stat0" Text="{l10n:Tr Key=gen3_current}" Grid.Row="1"/>
             <local:NumericUpDown x:Name="NUD_Stat0" Grid.Row="1" Grid.Column="1" ValueChanged="ChangeStatVal"/>
-            <Label x:Name="L_Stat1" Text="Trade" Grid.Row="2"/>
+            <Label x:Name="L_Stat1" Text="{l10n:Tr Key=gen3_trade}" Grid.Row="2"/>
             <local:NumericUpDown x:Name="NUD_Stat1" Grid.Row="2" Grid.Column="1" ValueChanged="ChangeStatVal"/>
-            <Label x:Name="L_Stat2" Text="Current" Grid.Row="3"/>
+            <Label x:Name="L_Stat2" Text="{l10n:Tr Key=gen3_current}" Grid.Row="3"/>
             <local:NumericUpDown x:Name="NUD_Stat2" Grid.Row="3" Grid.Column="1" ValueChanged="ChangeStatVal"/>
-            <Label x:Name="L_Stat3" Text="Trade" Grid.Row="4"/>
+            <Label x:Name="L_Stat3" Text="{l10n:Tr Key=gen3_trade}" Grid.Row="4"/>
             <local:NumericUpDown x:Name="NUD_Stat3" Grid.Row="4" Grid.Column="1" ValueChanged="ChangeStatVal"/>
         </Grid>
     </VerticalStackLayout>

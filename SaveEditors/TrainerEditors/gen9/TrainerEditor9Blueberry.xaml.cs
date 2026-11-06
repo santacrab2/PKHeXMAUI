@@ -22,22 +22,22 @@ public partial class TrainerEditor9Blueberry : ContentPage
     private void UnlockLegends(object sender, EventArgs e)
     {
         SAV.ActivateSnacksworthLegendaries();
-        ActivateLegendsButton.IsEnabled = false;
-        DisplayAlertAsync("Legends", "Snacksworth Activated", "cancel");
+        // 按钮保持可点，解锁是幂等操作
+        DisplayAlertAsync(L10n.T("gen9_legendary"), L10n.T("gen9_snacks_grandpa_activated"), L10n.T("pktab_ok"));
     }
 
     private void UnlockCoaches(object sender, EventArgs e)
     {
         SAV.UnlockAllCoaches();
-        CoachesButton.IsEnabled = false;
-        DisplayAlertAsync("Coaches", "All Coaches Unlocked", "cancel");
+        // 按钮保持可点，解锁是幂等操作
+        DisplayAlertAsync(L10n.T("gen9_coaches"), L10n.T("gen9_unlocked_all_coaches"), L10n.T("pktab_ok"));
     }
 
     private void UnlockThrowStyles(object sender, EventArgs e)
     {
         SAV.UnlockAllThrowStyles();
-        ThrowStyleButton.IsEnabled = false;
-        DisplayAlertAsync("ThrowStyles", "All ThrowStyles Unlocked", "cancel");
+        // 按钮保持可点，解锁是幂等操作
+        DisplayAlertAsync(L10n.T("gen9_throw_pose"), L10n.T("gen9_unlocked_all_throw"), L10n.T("pktab_ok"));
     }
 
     public void SaveTE9Blueberry()

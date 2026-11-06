@@ -73,8 +73,8 @@ public partial class UndergroundSave : ContentPage
 {
     public UndergroundSave()
     {
-        this.Title = "Save";
-        this.Content = new Label() { Text = "The MAUI Framework has bugs. This is the save page. Navigate to another page, and then select the page you were trying to reach!" };
+        this.Title = L10n.T("common_save");
+        this.Content = new Label() { Text = L10n.T("code_saving") };
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {

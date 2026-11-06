@@ -61,3 +61,17 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# 多语言资源表与工具链：强制 LF 行尾
+#
+# 原因：资源表由 tools/l10n/rebuild_catalogs.py 生成，格式固定为
+# UTF-8 无 BOM + LF + indent=1；tools/l10n/final_check.py 会逐字节校验。
+# 若被 autocrlf 转成 CRLF，校验会失败、且重建器会判定「产物与源不一致」。
+# 显式声明 eol=lf 可覆盖 autocrlf 的转换。
+###############################################################################
+Resources/L10n/*.json    text eol=lf
+tools/l10n/*.py          text eol=lf
+tools/l10n/*.tsv         text eol=lf
+tools/l10n/*.txt         text eol=lf
+tools/l10n/*.md          text eol=lf

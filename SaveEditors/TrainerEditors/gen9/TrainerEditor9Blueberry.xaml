@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor9Blueberry"
-             Title="Blueberry">
+             Title="{l10n:Tr Key=gen9_blueberry_academy}">
     <VerticalStackLayout>
-        <Label Text="BBQ" HorizontalOptions="Center" />
+        <Label Text="{l10n:Tr Key=gen9_bbq_quest}" HorizontalOptions="Center" />
         <Grid Padding="10" ColumnDefinitions="*,*,*">
-            <Label Text="BP:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen1_bp}" HorizontalOptions="End" VerticalOptions="Center"/>
             <Entry x:Name="BPEditor" Grid.Column="1"/>
             <Button Text="+" Clicked="MaxBP" Grid.Column="2"/>
         </Grid>
         <Grid Padding="10" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*">
-            <Label Text="Solo Quests:" HorizontalOptions="End" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen9_solo_quest}" HorizontalOptions="End" VerticalOptions="Center"/>
             <l:NumericUpDown x:Name="SQEditor" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" MinValue="0"/>
-            <Label Text="Group Quests:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1"/>
+            <Label Text="{l10n:Tr Key=gen9_group_quest}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1"/>
             <l:NumericUpDown x:Name="GQEditor" Grid.Column="1" Grid.Row="1" MinValue="0"/>
-            <Label Text="Throw Style:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2"/>
+            <Label Text="{l10n:Tr Key=gen9_throw_pose_2}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2"/>
             <Picker x:Name="ThrowStylePicker" Grid.Row="2" Grid.Column="1"/>
         </Grid>
-        <Button x:Name="ActivateLegendsButton" Text="Activate Legendaries" Clicked="UnlockLegends"/>
-        <Button Text="Unlock All Coaches" x:Name="CoachesButton" Clicked="UnlockCoaches"/>
-        <Button Text="Unlock All Throw Styles" x:Name="ThrowStyleButton" Clicked="UnlockThrowStyles"/>
+        <Button x:Name="ActivateLegendsButton" Text="{l10n:Tr Key=gen9_activate_legendary_pkm}" Clicked="UnlockLegends"/>
+        <Button Text="{l10n:Tr Key=gen9_unlock_all_coaches}" x:Name="CoachesButton" Clicked="UnlockCoaches"/>
+        <Button Text="{l10n:Tr Key=gen9_unlock_all_throw}" x:Name="ThrowStyleButton" Clicked="UnlockThrowStyles"/>
     </VerticalStackLayout>
 </ContentPage>

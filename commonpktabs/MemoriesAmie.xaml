@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MemoriesAmie"
-             Title="Memories"
+             Title="{l10n:Tr Key=common_memory}"
             BarBackgroundColor="#303030"
             SelectedTabColor="#C8C8C8"
             UnselectedTabColor="#919191"
             BarTextColor="White">
-    <ContentPage Title="OTMemories" x:Name="OTMemories">
+    <ContentPage Title="{l10n:Tr Key=common_ot_memory}" x:Name="OTMemories">
             
             <VerticalStackLayout x:Name="OTMemoryStack">
                 <Label x:Name="MemoriesWithOT" />
-                <Label Text="Friendship:" />
+                <Label Text="{l10n:Tr Key=common_friendship}" />
                 <Editor x:Name="Friendshipeditor" />
-                <Label Text="Memory Type" />
-                <Picker x:Name="MemoryTypePicker" Title="Memory Type"/>
-                <Button Text="Save" x:Name="savememories" Clicked="SaveMemoriesAndClose"/>
-                <Button Text="Close" x:Name="closememories" Clicked="CloseMemories"/>
+                <Label Text="{l10n:Tr Key=common_memory_type}" />
+                <Picker x:Name="MemoryTypePicker" Title="{l10n:Tr Key=common_memory_type}"/>
+                <Button Text="{l10n:Tr Key=common_save}" x:Name="savememories" Clicked="SaveMemoriesAndClose"/>
+                <Button Text="{l10n:Tr Key=common_close}" x:Name="closememories" Clicked="CloseMemories"/>
             </VerticalStackLayout>
         </ContentPage>
 
 
-        <ContentPage x:Name="NotOTMemories" Title="HTMemories">
+        <ContentPage x:Name="NotOTMemories" Title="{l10n:Tr Key=common_hyper_training_memory}">
             <VerticalStackLayout x:Name="HTMemoryStack">
                 <Label x:Name="MemoriesWithHT" />
-                <Label Text="Friendship:" />
+                <Label Text="{l10n:Tr Key=common_friendship}" />
                 <Editor x:Name="HTFriendshipeditor" />
-                <Label Text="Memory Type" />
-                <Picker x:Name="HTMemoryTypePicker" Title="Memory Type"/>
-                <Button Text="Save" x:Name="savememories2" Clicked="SaveMemoriesAndClose"/>
-                <Button Text="Close" x:Name="closememories2" Clicked="CloseMemories"/>
+                <Label Text="{l10n:Tr Key=common_memory_type}" />
+                <Picker x:Name="HTMemoryTypePicker" Title="{l10n:Tr Key=common_memory_type}"/>
+                <Button Text="{l10n:Tr Key=common_save}" x:Name="savememories2" Clicked="SaveMemoriesAndClose"/>
+                <Button Text="{l10n:Tr Key=common_close}" x:Name="closememories2" Clicked="CloseMemories"/>
         </VerticalStackLayout>
         </ContentPage>
-        <ContentPage x:Name="Other" Title="Other">
+        <ContentPage x:Name="Other" Title="{l10n:Tr Key=common_other}">
         <VerticalStackLayout>
-            <Label Text="Current Handler:"></Label>
+            <Label Text="{l10n:Tr Key=common_current_owner}"></Label>
             <Editor IsReadOnly="True" x:Name="chlabel"></Editor>
-            <Label Text="Fullness:"></Label>
+            <Label Text="{l10n:Tr Key=common_satiety}"></Label>
             <Editor x:Name="fullnesseditor"/>
-            <Label Text="Enjoyment:"/>
+            <Label Text="{l10n:Tr Key=common_fullness}"/>
             <Editor x:Name="EnjoymentEditor"/>
-            <Button Text="Save" x:Name="savememories3" Clicked="SaveMemoriesAndClose"/>
-            <Button Text="Close" x:Name="closememories3" Clicked="CloseMemories"/>
+            <Button Text="{l10n:Tr Key=common_save}" x:Name="savememories3" Clicked="SaveMemoriesAndClose"/>
+            <Button Text="{l10n:Tr Key=common_close}" x:Name="closememories3" Clicked="CloseMemories"/>
         </VerticalStackLayout>
     </ContentPage>
   

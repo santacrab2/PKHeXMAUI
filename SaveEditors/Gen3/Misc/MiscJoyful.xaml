@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscJoyful"
-             Title="Joyful">
+             Title="{l10n:Tr Key=gen3_happy}">
     <ScrollView>
         <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*,*,*">
-            <Label Text="Pokemon Jump" Grid.ColumnSpan="2"/>
-            <Label Text="Berry Picking" Grid.Column="2" Grid.ColumnSpan="2"/>
-            <Label Text="In a Row:" Grid.Row="1"/>
+            <Label Text="{l10n:Tr Key=gen3_pok_jump}" Grid.ColumnSpan="2"/>
+            <Label Text="{l10n:Tr Key=gen3_fruit_picking}" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <Label Text="{l10n:Tr Key=gen3_streak}" Grid.Row="1"/>
             <Entry x:Name="inaRowEntry" Grid.Row="1" Grid.Column="1" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="Caught:" Grid.Row="1" Grid.Column="2"/>
+            <Label Text="{l10n:Tr Key=gen1_caught}" Grid.Row="1" Grid.Column="2"/>
             <Entry x:Name="caughtEntry" Grid.Row="1" Grid.Column="3" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="High Score:" Grid.Row="2"/>
+            <Label Text="{l10n:Tr Key=gen3_high_score}" Grid.Row="2"/>
             <Entry x:Name="PJhighscoreEntry" Grid.Row="2" Grid.Column="1" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="High Score:" Grid.Row="2" Grid.Column="2"/>
+            <Label Text="{l10n:Tr Key=gen3_high_score}" Grid.Row="2" Grid.Column="2"/>
             <Entry x:Name="BPhighscoreEntry" Grid.Row="2" Grid.Column="3" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="5 In a Row:" Grid.Row="3"/>
+            <Label Text="{l10n:Tr Key=gen3_streak_of_5}" Grid.Row="3"/>
             <Entry x:Name="PJfiveEntry" Grid.Row="3" Grid.Column="1" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="5 In a Row:" Grid.Row="3" Grid.Column="2"/>
+            <Label Text="{l10n:Tr Key=gen3_streak_of_5}" Grid.Row="3" Grid.Column="2"/>
             <Entry x:Name="BPfiveEntry" Grid.Row="3" Grid.Column="3" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="Max Players:" Grid.Row="4"/>
+            <Label Text="{l10n:Tr Key=gen3_max_players}" Grid.Row="4"/>
             <Entry x:Name="MaxPlayersEntry" Grid.Row="4" Grid.Column="1" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
-            <Label Text="Berry Powder" Grid.Row="5"/>
+            <Label Text="{l10n:Tr Key=gen3_fruit_powder}" Grid.Row="5"/>
             <Entry x:Name="BerryPowderEntry" Grid.Row="5" Grid.Column="1" Keyboard="Numeric" VerticalOptions="Start" HorizontalOptions="Start"/>
         </Grid>
     </ScrollView>
