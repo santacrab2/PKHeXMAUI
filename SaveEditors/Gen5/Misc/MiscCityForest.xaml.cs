@@ -39,7 +39,7 @@ public partial class MiscCityForest : ContentPage
         var fi = new FileInfo(ofd.FileName);
         if (fi.Length != WhiteBlack5BW.ForestCitySize)
         {
-            await DisplayAlertAsync("error",string.Format(MessageStrings.MsgFileSizeIncorrect, fi.Length, WhiteBlack5BW.ForestCitySize), "cancel");
+            await DisplayAlertAsync(L10n.T("livehex_error"),string.Format(MessageStrings.MsgFileSizeIncorrect, fi.Length, WhiteBlack5BW.ForestCitySize), L10n.T("pktab_ok"));
             return;
         }
 

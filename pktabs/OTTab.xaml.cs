@@ -10,8 +10,13 @@ public partial class OTTab : ContentPage
 	public OTTab()
 	{
 		InitializeComponent();
+        // 蛋图：b_ 集里没有蛋素材（b_0.png 是空图），统一用唯一那张 a_egg.png
+        eggsprite.Source = SpeciesSpriteUtil.EggFileName(sav);
         FirstLoad = false;
-        htlanguagepicker.ItemsSource = Enum.GetValues<LanguageID>();
+        // 初训家语言：显示名走本地化资源，并只列该版本实际发行过的语言
+        htlanguagepicker.ItemsSource = GameLanguageCatalog.ForSave(sav)
+            .Select(o => new ComboItem(o.Display, o.Value)).ToList();
+        htlanguagepicker.ItemDisplayBinding = new Binding("Text");
         var OpenTrash = new TapGestureRecognizer() { NumberOfTapsRequired = 2 };
         OpenTrash.Tapped += OpenTrashEditor;
         OTLabel.GestureRecognizers.Add(OpenTrash);
@@ -52,9 +57,7 @@ public partial class OTTab : ContentPage
         }
 
         shinysparklessprite.IsVisible = pkm.IsShiny;
-        spriteurl = pkm.Species == 0
-            ? "a_egg.png"
-            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        spriteurl = SpeciesSpriteUtil.FileName(sav, pkm.Species, pkm.Form, pkm.IsShiny);
         OTpic.Source = spriteurl;
         SIDdisplay.Text = pkm.DisplaySID.ToString();
         TIDdisplay.Text = pkm.DisplayTID.ToString();
@@ -72,7 +75,18 @@ public partial class OTTab : ContentPage
             {
                 htlanguagelabel.IsVisible = true;
                 htlanguagepicker.IsVisible = true;
-                htlanguagepicker.SelectedIndex = htl.HandlingTrainerLanguage;
+                // 下拉框已按版本过滤，下标不等于语言字节值 → 按值匹配
+                if (htlanguagepicker.ItemsSource is IList<ComboItem> langItems)
+                {
+                    foreach (var item in langItems)
+                    {
+                        if (item.Value == htl.HandlingTrainerLanguage)
+                        {
+                            htlanguagepicker.SelectedItem = item;
+                            break;
+                        }
+                    }
+                }
             }
             switch (pkm.CurrentHandler)
             {
@@ -158,8 +172,9 @@ public partial class OTTab : ContentPage
 
     private void applyhtlanguage(object sender, EventArgs e)
     {
-        if(pk is IHandlerLanguage htl && !SkipEvent)
-            htl.HandlingTrainerLanguage = (byte)htlanguagepicker.SelectedIndex;
+        // 下拉框存的是 ComboItem，Value 才是语言字节值
+        if (pk is IHandlerLanguage htl && !SkipEvent && htlanguagepicker.SelectedItem is ComboItem sel)
+            htl.HandlingTrainerLanguage = (byte)sel.Value;
     }
 
     private void MakeOTCurrent(object sender, CheckedChangedEventArgs e)

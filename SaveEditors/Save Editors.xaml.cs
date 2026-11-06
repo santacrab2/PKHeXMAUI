@@ -41,7 +41,7 @@ public partial class SaveEditors : ContentPage
     {
         var form = new ContentPage
         {
-            Title = "Simple Editor",
+            Title = L10n.T("code_simple_editor"),
         };
         var pg = new propertyGrid(sav);
         ScrollView scroll = new() { Content = pg, Orientation = ScrollOrientation.Both };
@@ -118,7 +118,7 @@ public partial class SaveEditors : ContentPage
                 var msg = MessageStrings.MsgSaveGen2RTCResetBitflag;
                 if (!sav2.Japanese) // show Reset Key for non-Japanese saves
                     msg = string.Format(MessageStrings.MsgSaveGen2RTCResetPassword, sav2.ResetKey) + Environment.NewLine + Environment.NewLine + msg;
-                var dr = await DisplayAlertAsync("Reset RTC", msg, "Yes", "cancel");
+                var dr = await DisplayAlertAsync(L10n.T("gen3_reset_rtc"), msg, L10n.T("pktab_ok"), L10n.T("box_cancel"));
                 if (dr)
                     sav2.ResetRTC();
                 break;
@@ -137,7 +137,7 @@ public partial class SaveEditors : ContentPage
     {
         var sav2 = sav as SAV2??((SAV2)BlankSaveFile.Get(EntityContext.Gen2,""));
         sav2.EnableGSBallMobileEvent();
-        GSBallButton.IsEnabled = false;
+        // 按钮保持可点，事件可以反复开启
     }
 
     private void OpenMiscEditor(object sender, EventArgs e)

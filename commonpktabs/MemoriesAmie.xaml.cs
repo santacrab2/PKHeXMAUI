@@ -6,12 +6,12 @@ namespace PKHeXMAUI;
 
 public partial class MemoriesAmie : TabbedPage
 {
-    public Label MoreThanAFeeling = new() { Text = "Feeling", IsVisible = false };
-    public Label HTMoreThanAFeeling = new() { Text = "Feeling", IsVisible = false };
+    public Label MoreThanAFeeling = new() { Text = L10n.T("code_affection"), IsVisible = false };
+    public Label HTMoreThanAFeeling = new() { Text = L10n.T("code_affection"), IsVisible = false };
     public comboBox MoreThanAFeelingbox = new() { IsVisible = false, BackgroundColor = Colors.Transparent };
     public comboBox HTMoreThanAFeelingbox = new() { IsVisible = false, BackgroundColor = Colors.Transparent };
-    public Label Intense = new() { Text = "Intensity", IsVisible = false };
-    public Label HTIntense = new() { Text = "Intensity", IsVisible = false };
+    public Label Intense = new() { Text = L10n.T("code_intensity"), IsVisible = false };
+    public Label HTIntense = new() { Text = L10n.T("code_intensity"), IsVisible = false };
     public comboBox Intensebox = new() { IsVisible = false, BackgroundColor = Colors.Transparent };
     public comboBox HTIntenseBox = new() { IsVisible = false, BackgroundColor = Colors.Transparent };
     public Label TextVar = new() { IsVisible = false };
@@ -23,13 +23,13 @@ public partial class MemoriesAmie : TabbedPage
     public MemoriesAmie()
     {
         InitializeComponent();
-        MemoriesWithOT.Text = $"Memories with {pk.OriginalTrainerName}(OT)";
+        MemoriesWithOT.Text = L10n.T("code_memory_with_pk_originaltrainername", pk.OriginalTrainerName);
         MemoryTypePicker.ItemsSource = memorytext.Memory;
         MemoryTypePicker.ItemDisplayBinding = new Binding("Text");
 
         Friendshipeditor.Text = pk.OriginalTrainerFriendship.ToString();
         HTFriendshipeditor.Text = pk.HandlingTrainerFriendship.ToString();
-        MemoriesWithHT.Text = $"Memories with {pk.HandlingTrainerName}(Not OT)";
+        MemoriesWithHT.Text = L10n.T("code_memory_with_pk_handlingtrainername", pk.HandlingTrainerName);
         HTMemoryTypePicker.ItemsSource = memorytext.Memory;
         HTMemoryTypePicker.ItemDisplayBinding = new Binding("Text");
         if (pk is ITrainerMemories mems)
@@ -202,11 +202,11 @@ public partial class MemoriesAmie : TabbedPage
     }
     public string GetMemoryCategory(MemoryArgType type, int memoryGen) => type switch
     {
-        MemoryArgType.GeneralLocation => "Area:",
-        MemoryArgType.SpecificLocation when memoryGen <= 7 => "Location:",
-        MemoryArgType.Species => "Species:",
-        MemoryArgType.Move => "Move:",
-        MemoryArgType.Item => "Item:",
+        MemoryArgType.GeneralLocation => L10n.T("code_region"),
+        MemoryArgType.SpecificLocation when memoryGen <= 7 => L10n.T("code_location"),
+        MemoryArgType.Species => L10n.T("pktab_species"),
+        MemoryArgType.Move => L10n.T("gen5_moves"),
+        MemoryArgType.Item => L10n.T("code_item"),
         _ => string.Empty,
     };
     private void UpdateMemoryString(object? sender, EventArgs? e)

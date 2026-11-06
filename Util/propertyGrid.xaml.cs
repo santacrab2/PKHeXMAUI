@@ -32,14 +32,14 @@ public partial class propertyGrid : ContentView
         {
             Label label = new()
             {
-                Text = cat.Key+ "▽"
+                Text = Loc.Category(cat.Key) + "▽"
             };
             Expander expander = new() { Header = label, IsExpanded=true };
             var stack = new Grid();
             for (int i = 0; i < cat.Value.Count; i++)
             {
                 var pi = cat.Value[i];
-                Label plabel = new() { Text = pi.Name, VerticalOptions = LayoutOptions.Center };
+                Label plabel = new() { Text = Loc.Prop(pi.Name), VerticalOptions = LayoutOptions.Center };
                 stack.Add(plabel, 0, i);
                 if (pi.PropertyType.IsEnum || pi.PropertyType == typeof(bool))
                 {
@@ -95,14 +95,14 @@ public partial class propertyGrid : ContentView
         {
             Label label = new()
             {
-                Text = cat.Key + "▽"
+                Text = Loc.Category(cat.Key) + "▽"
             };
             Expander expander = new() { Header = label };
             var stack = new Grid();
             for (int i = 0; i < cat.Value.Count; i++)
             {
                 var pi = cat.Value[i];
-                Label plabel = new() { Text = pi.Name, VerticalOptions = LayoutOptions.Center };
+                Label plabel = new() { Text = Loc.Prop(pi.Name), VerticalOptions = LayoutOptions.Center };
                 stack.Add(plabel, 0, i);
                 if (pi.PropertyType.IsEnum || pi.PropertyType == typeof(bool))
                 {
@@ -110,7 +110,7 @@ public partial class propertyGrid : ContentView
                 }
                 else if (pi.PropertyType.IsClass)
                 {
-                    Label L_intern = new() { Text = pi.PropertyType.ToString() + "▽" };
+                    Label L_intern = new() { Text = Loc.TypeName(pi.PropertyType.ToString()) + "▽" };
                     Expander E_intern = new() { Header = L_intern, Margin = 20 };
                     Grid G_stack = [];
                     int o = 0;
@@ -119,8 +119,8 @@ public partial class propertyGrid : ContentView
                     {
                         try
                         {
-                            if (pi.PropertyType.GetCustomAttribute<TypeConverterAttribute>() == null) { L_intern.Text = pi.PropertyType.ToString(); break; };
-                            Label L_prop = new() { Text = pr.Name };
+                            if (pi.PropertyType.GetCustomAttribute<TypeConverterAttribute>() == null) { L_intern.Text = Loc.TypeName(pi.PropertyType.ToString()); break; };
+                            Label L_prop = new() { Text = Loc.Prop(pr.Name) };
                             G_stack.Add(L_prop, 0, o);
                             if (pr.PropertyType.IsEnum || pr.PropertyType == typeof(bool))
                             {
@@ -160,6 +160,7 @@ public partial class propertyGrid : ContentView
             SelectedItem = CurrentProperty?.GetValue(CurrentItem) ?? new()
         };
         cb.SelectedIndexChanged += (_, _) => CurrentProperty?.SetValue(CurrentItem, cb.SelectedItem); 
+        cb.Translate = true;
         return cb;
     }
     public comboBox GetEnumCombo(PropertyInfo upperProperty, PropertyInfo LowerProperty)
@@ -170,6 +171,7 @@ public partial class propertyGrid : ContentView
             SelectedItem = LowerProperty?.GetValue(upperProperty?.GetValue(CurrentItem)) ?? null
         };
         cb.SelectedIndexChanged += (_, _) => LowerProperty?.SetValue(upperProperty?.GetValue(CurrentItem), cb.SelectedItem);
+        cb.Translate = true;
         return cb;
     }
     public comboBox GetEnumCombo(object Value, PropertyInfo CurrentProperty)
@@ -180,6 +182,7 @@ public partial class propertyGrid : ContentView
             SelectedItem = CurrentProperty?.GetValue(Value) ?? new()
         };
         cb.SelectedIndexChanged += (_, _) => CurrentProperty?.SetValue(Value, cb.SelectedItem); 
+        cb.Translate = true;
         return cb;
 
     }
@@ -191,6 +194,7 @@ public partial class propertyGrid : ContentView
             SelectedItem = value
         };
         cb.SelectedIndexChanged += (_, _) => value = cb.SelectedItem;
+        cb.Translate = true;
         return cb;
     }
     public Entry GetPropertyEntry(PropertyInfo CurrentProperty)
@@ -200,7 +204,7 @@ public partial class propertyGrid : ContentView
         {
             pentry.Text = CurrentProperty.GetValue(CurrentItem)?.ToString();
         }
-        catch (Exception) { pentry.Text = "Method is not Supported"; }
+        catch (Exception) { pentry.Text = L10n.T("misc_unsupported_method"); }
         pentry.TextChanged += (_, _) =>
         {
             try
@@ -220,7 +224,7 @@ public partial class propertyGrid : ContentView
         {
             pentry.Text = LowerProperty.GetValue(UpperProperty?.GetValue(CurrentItem))?.ToString();
         }
-        catch (Exception) { pentry.Text = "Method is not Supported"; }
+        catch (Exception) { pentry.Text = L10n.T("misc_unsupported_method"); }
         pentry.TextChanged += (_, _) =>
         {
             try
@@ -240,7 +244,7 @@ public partial class propertyGrid : ContentView
         {
             pentry.Text = CurrentProperty.GetValue(Value)?.ToString();
         }
-        catch (Exception) { pentry.Text = "Method is not Supported"; }
+        catch (Exception) { pentry.Text = L10n.T("misc_unsupported_method"); }
         pentry.TextChanged += (_, _) =>
         {
             try
@@ -255,15 +259,15 @@ public partial class propertyGrid : ContentView
     }
     public Expander GetClassExpander(PropertyInfo CurrentProperty)
     {
-        Label L_intern = new() { Text = CurrentProperty.PropertyType.ToString() + "▽" };
+        Label L_intern = new() { Text = Loc.TypeName(CurrentProperty.PropertyType.ToString()) + "▽" };
         Expander E_intern = new() { Header = L_intern };
         Grid G_stack = [];
         int o = 0;
         foreach (var pr in CurrentProperty.PropertyType.GetProperties().OrderBy(z=>z.Name))
         {
             
-                if (CurrentProperty.PropertyType.GetCustomAttribute<TypeConverterAttribute>() == null) { L_intern.Text = CurrentProperty.PropertyType.ToString(); break; };
-                Label L_prop = new() { Text = pr.Name };
+                if (CurrentProperty.PropertyType.GetCustomAttribute<TypeConverterAttribute>() == null) { L_intern.Text = Loc.TypeName(CurrentProperty.PropertyType.ToString()); break; };
+                Label L_prop = new() { Text = Loc.Prop(pr.Name) };
                 G_stack.Add(L_prop, 0, o);
                 if (pr.PropertyType.IsEnum || pr.PropertyType == typeof(bool))
                 {
@@ -297,7 +301,7 @@ public partial class propertyGrid : ContentView
         {
 
             
-            Label L_prop = new() { Text = pr.Name };
+            Label L_prop = new() { Text = Loc.Prop(pr.Name) };
             G_stack.Add(L_prop, 0, o);
             if (pr.PropertyType.IsEnum || pr.PropertyType == typeof(bool))
             {
@@ -323,7 +327,7 @@ public partial class propertyGrid : ContentView
     }
     public Expander GetArrayExpander(PropertyInfo CurrentProperty)
     {
-        Label L_intern = new() { Text = CurrentProperty.PropertyType.ToString() + "▽" };
+        Label L_intern = new() { Text = Loc.TypeName(CurrentProperty.PropertyType.ToString()) + "▽" };
         Expander E_intern = new() { Header = L_intern };
         Grid A_stack = [];
         ICollection PropertyArray = (ICollection?)CurrentProperty?.GetValue(CurrentItem) ?? new List<object>();
@@ -335,7 +339,7 @@ public partial class propertyGrid : ContentView
            for (int a =0;a<PAItemProperties.Length;a++)
             {
                 var PAItemProperty = PAItemProperties[a];
-                Label L_prop = new() { Text = PAItemProperty.Name };
+                Label L_prop = new() { Text = Loc.Prop(PAItemProperty.Name) };
                 A_stack.Add(L_prop, 0, a);
                 if (PAItemProperty.PropertyType.IsEnum || PAItemProperty.PropertyType == typeof(bool))
                 {
@@ -357,7 +361,7 @@ public partial class propertyGrid : ContentView
     public Expander GetArrayExpander(object? Value,PropertyInfo CurrentProperty)
     {
         
-        Label L_intern = new() { Text = CurrentProperty.PropertyType.ToString() + "▽" };
+        Label L_intern = new() { Text = Loc.TypeName(CurrentProperty.PropertyType.ToString()) + "▽" };
         Expander E_intern = new() { Header = L_intern };
         if (Value == null) return E_intern;
         Grid A_stack = [];
@@ -367,7 +371,7 @@ public partial class propertyGrid : ContentView
         {
             var PropertyArrayItem = PropertyArrayList[i];
             
-                Label L_prop = new() { Text = PropertyArrayItem.ToString() };
+                Label L_prop = new() { Text = Loc.Value(PropertyArrayItem) };
                 A_stack.Add(L_prop, 0, i);
                 if (PropertyArrayItem.GetType().IsEnum || PropertyArrayItem.GetType() == typeof(bool))
                 {

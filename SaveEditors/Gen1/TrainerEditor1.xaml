@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor1"
-             Title="TrainerEditor1">
+             Title="{l10n:Tr Key=gen1_trainer_editor}">
     <ScrollView>
         <VerticalStackLayout>
             <Grid Padding="10">
@@ -10,7 +10,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Name:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen1_name}" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Entry x:Name="OTNameEntry" Grid.Column="1"/>
             </Grid>
             <Grid Padding="10">
@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="TID:" HorizontalOptions="End" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=ottab_tid}" HorizontalOptions="End" VerticalOptions="Center"/>
                 <Entry x:Name="TIDEntry" Grid.Column="1"/>
                 <Label Text="$:" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="2"/>
                 <Entry x:Name="OTMoneyEntry" Grid.Column="3"/>
@@ -34,10 +34,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Coins:" HorizontalOptions="End" VerticalOptions="Center" x:Name="CoinLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_coins}" HorizontalOptions="End" VerticalOptions="Center" x:Name="CoinLabel"/>
                 <Entry x:Name="CoinsEntry" Grid.Column="1"/>
                 <Button Text="+" Clicked="MaxCoins" Grid.Column="2" x:Name="MaxCoinsButton" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Label Text="SID:" HorizontalOptions="End" VerticalOptions="Center" x:Name="SIDLabel"/>
+                <Label Text="{l10n:Tr Key=ottab_sid}" HorizontalOptions="End" VerticalOptions="Center" x:Name="SIDLabel"/>
                 <Entry x:Name="SIDEntry" Grid.Column="1"/>
                 <Picker x:Name="OTGenderPicker" Grid.Column="3"/>
             </Grid>
@@ -50,9 +50,9 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Country:" HorizontalOptions="End" VerticalOptions="Center" x:Name="CountryLabel"/>
+                <Label Text="{l10n:Tr Key=ottab_country}" HorizontalOptions="End" VerticalOptions="Center" x:Name="CountryLabel"/>
                 <Picker x:Name="CountryPicker" Grid.Column="1" SelectedIndexChanged="UpdateRegions"/>
-                <Label Text="Region:" HorizontalOptions="End" VerticalOptions="Center" x:Name="RegionLabel" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=gen1_region}" HorizontalOptions="End" VerticalOptions="Center" x:Name="RegionLabel" Grid.Row="1"/>
                 <Picker x:Name="RegionPicker" Grid.Column="1" Grid.Row="1"/>
             </Grid>
             <Grid Padding="10">
@@ -71,7 +71,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Badges:" Grid.ColumnSpan="2"/>
+                <Label Text="{l10n:Tr Key=gen1_badges}" Grid.ColumnSpan="2"/>
                 <CheckBox x:Name="Badge1" Grid.Row="1" IsVisible="False"/>
                 <CheckBox x:Name="Badge2" Grid.Row="1" Grid.Column="1" IsVisible="False"/>
                 <CheckBox x:Name="Badge3" Grid.Row="1" Grid.Column="2" IsVisible="False"/>
@@ -88,7 +88,7 @@
                 <CheckBox x:Name="Badge14" Grid.Row="2" Grid.Column="5" IsVisible="False"/>
                 <CheckBox x:Name="Badge15" Grid.Row="2" Grid.Column="6" IsVisible="False"/>
                 <CheckBox x:Name="Badge16" Grid.Row="2" Grid.Column="7" IsVisible="False"/>
-                <Label Text="BP:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2" x:Name="BPLabel" IsVisible="False"/>
+                <Label Text="{l10n:Tr Key=gen1_bp}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2" x:Name="BPLabel" IsVisible="False"/>
                 <Entry x:Name="BPEntry" Grid.Row="2" Grid.Column="1" IsVisible="False"/>
                 <Button Text="+" Clicked="MaxBP" x:Name="MaxBPButton" Grid.Row="2" Grid.Column="2" IsVisible="False"/>
             </Grid>
@@ -109,22 +109,22 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Adventure Info" Grid.ColumnSpan="2"/>
-                <Label Text="Hrs:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" x:Name="hrsLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_adventure_info}" Grid.ColumnSpan="2"/>
+                <Label Text="{l10n:Tr Key=gen1_hour}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" x:Name="hrsLabel"/>
                 <Entry x:Name="HrsEntry" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Mins" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" x:Name="minLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_min}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" Grid.Column="2" x:Name="minLabel"/>
                 <Entry x:Name="MinsEntry" Grid.Row="1" Grid.Column="3"/>
-                <Label Text="Sec:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" Grid.Column="4" x:Name="secLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_seconds}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" Grid.Column="4" x:Name="secLabel"/>
                 <Entry x:Name="SecEntry" Grid.Row="1" Grid.Column="5"/>
-                <Label Text="Game Started:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2" x:Name="GSLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_game_start_time}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2" x:Name="GSLabel"/>
                 <DatePicker x:Name="GSDatePicker" Grid.Row="2" Grid.Column="1"/>
                 <TimePicker x:Name="GSTimerPicker" Grid.Row="3" Grid.Column="1"/>
-                <Label Text="Hall Of Fame:" HorizontalOptions="End" VerticalOptions="Center" x:Name="HOFLabel" Grid.Row="4"/>
+                <Label Text="{l10n:Tr Key=gen1_hall_of_fame}" HorizontalOptions="End" VerticalOptions="Center" x:Name="HOFLabel" Grid.Row="4"/>
                 <DatePicker x:Name="HOFDatePicker" Grid.Row="4" Grid.Column="1"/>
                 <TimePicker x:Name="HOFTimePicker" Grid.Row="5" Grid.Column="1"/>
-                <Label Text="Pikachu Friendship:" x:Name="PFLabel" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2"/>
+                <Label Text="{l10n:Tr Key=gen1_pikachu_friendship}" x:Name="PFLabel" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2"/>
                 <Entry x:Name="PFEntry" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Pikachu Beach:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="3" x:Name="PBLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_pikachu_beach}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="3" x:Name="PBLabel"/>
                 <Entry x:Name="PBEntry" Grid.Row="3" Grid.Column="1"/>
 
             </Grid>
@@ -145,14 +145,14 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Options" x:Name="OptionsMapLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_options}" x:Name="OptionsMapLabel"/>
                 <CheckBox x:Name="UseBattleEffectsCB" Grid.Row="1"/>
-                <Label Text="Use Battle Effects" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Battle Style" Grid.Row="2"/>
+                <Label Text="{l10n:Tr Key=gen1_use_battle_effects}" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen1_battle_rules}" Grid.Row="2"/>
                 <Picker x:Name="BattleStylePicker" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Sound Type:" Grid.Row="3" x:Name="SoundTypeLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_sound_type}" Grid.Row="3" x:Name="SoundTypeLabel"/>
                 <Picker x:Name="SoundTypePicker" Grid.Row="3" Grid.Column="1"/>
-                <Label Text="Text Speed:" Grid.Row="4"/>
+                <Label Text="{l10n:Tr Key=gen1_text_speed}" Grid.Row="4"/>
                 <Picker x:Name="TextSpeedPicker" Grid.Row="4" Grid.Column="1"/>
             </Grid>
             <Grid Padding="10" x:Name="MapGrid">
@@ -166,13 +166,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Current Map:" HorizontalOptions="End" VerticalOptions="Center" x:Name="CurrentMapLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_current_map}" HorizontalOptions="End" VerticalOptions="Center" x:Name="CurrentMapLabel"/>
                 <Entry x:Name="CurrentMapEntry" Grid.Column="1"/>
-                <Label Text="X Coordinate:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" x:Name="XCoordLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_x_coord}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="1" x:Name="XCoordLabel"/>
                 <Entry x:Name="XCoordEntry" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Z Coordinate:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2" x:Name="ZCoordLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_z_coord}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="2" x:Name="ZCoordLabel"/>
                 <Entry x:Name="ZCoordEntry" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Y Coordinate:" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="3" x:Name="YCoordLabel"/>
+                <Label Text="{l10n:Tr Key=gen1_y_coord}" HorizontalOptions="End" VerticalOptions="Center" Grid.Row="3" x:Name="YCoordLabel"/>
                 <Entry x:Name="YCoordinate" Grid.Row="3" Grid.Column="1"/>
             </Grid>
             <Grid Padding="10">
@@ -180,8 +180,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Text="Cancel" Clicked="CloseTE1" />
-                <Button Text="Save" Clicked="SaveTE1" Grid.Column="1"/>
+                <Button Text="{l10n:Tr Key=box_cancel}" Clicked="CloseTE1" />
+                <Button Text="{l10n:Tr Key=common_save}" Clicked="SaveTE1" Grid.Column="1"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

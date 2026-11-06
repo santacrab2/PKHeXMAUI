@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.Cosmeticstab"
-             Title="Cosmeticstab">
+             Title="{l10n:Tr Key=cosmetic_appearance}">
     <RefreshView x:Name="CosmeticsRefresh">
         <ScrollView>
 
@@ -56,27 +56,27 @@
                 <!--Affixed Ribbon-->
                 <ImageButton Grid.Row="2" Grid.Column="4" VerticalOptions="End" HorizontalOptions="Start" Source="ribbon_affix_none.png" IsVisible="False" Clicked="OpenRibbonEditor" x:Name="AffixedRibbonSprite"/>
                 <!--Height-->
-                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Height:" IsVisible="false" x:Name="HeightLabel"></Label>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_height}" IsVisible="false" x:Name="HeightLabel"></Label>
                 <Editor Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Heightdisplay" TextChanged="applyheight" IsVisible="false" Keyboard="Numeric"/>
                 <Editor IsReadOnly="True" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="HeightAbsoluteEditor" IsVisible="false"/>
                 <Label Grid.Row="1" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="HeighDetailLabel" IsVisible="false"/>
                 <!--Weight-->
-                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Weight:" IsVisible="false" x:Name="WeightLabel"/>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_weight}" IsVisible="false" x:Name="WeightLabel"/>
                 <Editor Grid.Row="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="Weightdisplay" TextChanged="applyweight" IsVisible="false" Keyboard="Numeric"/>
                 <Editor IsReadOnly="True" Grid.Row="2" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" x:Name="WeightAbsoluteEditor" IsVisible="false"/>
                 <Label Grid.Row="2" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="WeightDetailLabel" IsVisible="false"/>
                 <!--Scale/CP-->
-                <Label x:Name="scalelabel" Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="Scale:" IsVisible="false"/>
+                <Label x:Name="scalelabel" Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_size}" IsVisible="false"/>
                 <Editor Grid.Row="3" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" Text="0" x:Name="scaledisplay" TextChanged="applyscale" IsVisible="false" Keyboard="Numeric"/>
                 <CheckBox Grid.Row="3" Grid.Column="1" x:Name="AutoCP" HorizontalOptions="End" IsVisible="false" CheckedChanged="AutoCalcCP"></CheckBox>
-                <Label Grid.Row="3" Grid.Column="2" Text="Auto" IsVisible="false" x:Name="cpAutoLabel"/>
+                <Label Grid.Row="3" Grid.Column="2" Text="{l10n:Tr Key=cosmetic_auto}" IsVisible="false" x:Name="cpAutoLabel"/>
                 <Label Grid.Row="3" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Center" x:Name="ScaleDetailLabel" IsVisible="false"/>
                 <Image IsVisible="false" Grid.Column="4" Grid.Row="3" HorizontalOptions="Start" x:Name="SizeMarkImage" HeightRequest="32"/>
                
                 <!--Ribbons and Memories-->
-                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="Ribbons" Clicked="openribbons" Grid.ColumnSpan="2"></Button>
-                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="End" x:Name="memoriesbutton" Text="Memories" Clicked="openmemories" IsVisible="false" Grid.ColumnSpan="2"/>
-                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="End" x:Name="MedalEditorButton" Text="Medals" Clicked="openmedaleditor" IsVisible="false" Grid.ColumnSpan="2"/>
+                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="End" x:Name="ribbons" Text="{l10n:Tr Key=cosmetic_ribbons}" Clicked="openribbons" Grid.ColumnSpan="2"></Button>
+                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="End" x:Name="memoriesbutton" Text="{l10n:Tr Key=common_memory}" Clicked="openmemories" IsVisible="false" Grid.ColumnSpan="2"/>
+                <Button Grid.Row="4" Margin="0,16,0,0" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="End" x:Name="MedalEditorButton" Text="{l10n:Tr Key=cosmetic_medals}" Clicked="openmedaleditor" IsVisible="false" Grid.ColumnSpan="2"/>
                 <!--Leaf and Crown-->
                 <CheckBox Grid.Row="5" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" x:Name="LeafCheckBox1" IsVisible="false" CheckedChanged="ApplyLeaf1"/>
                 <Image Grid.Row="5" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" x:Name="LeafSprite1" Source="leaf.png" IsVisible="false"/>
@@ -91,19 +91,19 @@
                 <CheckBox Grid.Row="6" Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" x:Name="CrownCheckbox" IsVisible="false" CheckedChanged="ApplyLeaf1"/>
                 <Image Grid.Row="6" Grid.Column="5" HorizontalOptions="Start" VerticalOptions="Center" x:Name="CrownSprite" Source="crown.png" IsVisible="false"/>
                 <!--Contest Stats-->
-                <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Contest Stats"/>
-                <Label Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Cool"/>
+                <Label Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_contest_values}"/>
+                <Label Grid.Row="8" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_cool}"/>
                 <Editor x:Name="Coolstats" Grid.Row="9" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycoolness" Keyboard="Numeric"/>
-                <Label Grid.Row="8" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Beauty"/>
+                <Label Grid.Row="8" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_beautiful}"/>
                 <Editor x:Name="Beautystats" Grid.Row="9" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makepretty" Keyboard="Numeric"/>
-                <Label Grid.Row="8" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Cute"/>
+                <Label Grid.Row="8" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_cute}"/>
                 <Editor x:Name="Cutestats" Grid.Row="9" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="applycuteness" Keyboard="Numeric"/>
 
-                <Label Grid.Row="10" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="Clever"/>
+                <Label Grid.Row="10" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_clever}"/>
                 <Editor x:Name="Cleverstats" Grid.Row="11" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="makesmart" Keyboard="Numeric"/>
-                <Label Grid.Row="10" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="Tough"/>
+                <Label Grid.Row="10" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_tough}"/>
                 <Editor x:Name="toughstats" Grid.Row="11" Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="GoToTheGym" Keyboard="Numeric"/>
-                <Label Grid.Row="10" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="Sheen"/>
+                <Label Grid.Row="10" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{l10n:Tr Key=cosmetic_sheen}"/>
                 <Editor x:Name="sheenstats" Grid.Row="11" Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="0" TextChanged="MakeMeSparkle" Keyboard="Numeric"/>
 
 

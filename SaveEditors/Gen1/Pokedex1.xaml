@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.Pokedex1"
-             Title="Pokedex1">
+             Title="{l10n:Tr Key=saveedit_dex}">
     <VerticalStackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -17,16 +17,16 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Text="Seen:" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Label Text="Caught:" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1"/>
+            <Label Text="{l10n:Tr Key=gen1_seen}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen1_caught}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1"/>
             <CollectionView x:Name="SeenCollection" Grid.Row="1" HeightRequest="250"/>
             <CollectionView x:Name="CaughtCollection" Grid.Row="1" Grid.Column="1" HeightRequest="250"/>
-            <Button Text="Seen All" Grid.Row="2" Clicked="SetSeenAll"/>
-            <Button Text="Caught All" Grid.Row="2" Grid.Column="1" Clicked="SetCaughtAll"/>
-            <Button Text="Seen None" Grid.Row="3" Clicked="SetSeenNone"/>
-            <Button Text="Caught None" Grid.Row="3" Grid.Column="1" Clicked="SetCaughtNone"/>
-            <Button Text="Save" Grid.Row="4" Clicked="save"/>
-            <Button Text="Cancel" Grid.Row="4" Grid.Column="1" Clicked="close"/>
+            <Button Text="{l10n:Tr Key=gen1_all_seen}" Grid.Row="2" Clicked="SetSeenAll"/>
+            <Button Text="{l10n:Tr Key=gen1_all_caught}" Grid.Row="2" Grid.Column="1" Clicked="SetCaughtAll"/>
+            <Button Text="{l10n:Tr Key=gen1_all_unseen}" Grid.Row="3" Clicked="SetSeenNone"/>
+            <Button Text="{l10n:Tr Key=gen1_all_uncaught}" Grid.Row="3" Grid.Column="1" Clicked="SetCaughtNone"/>
+            <Button Text="{l10n:Tr Key=common_save}" Grid.Row="4" Clicked="save"/>
+            <Button Text="{l10n:Tr Key=box_cancel}" Grid.Row="4" Grid.Column="1" Clicked="close"/>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

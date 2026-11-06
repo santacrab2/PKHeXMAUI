@@ -25,7 +25,7 @@ public partial class EncounterDB : ContentPage
             shinysp.TranslateToAsync(shinysp.TranslationX + 15, shinysp.TranslationY);
             image.SetBinding(Image.SourceProperty, "url");
             shinysp.SetBinding(Image.IsVisibleProperty, "EncounterInfo.IsShiny");
-            Image EggSprite = new() { Source = "a_egg.png", HeightRequest=40, WidthRequest=40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.End };
+            Image EggSprite = new() { Source = SpeciesSpriteUtil.EggFileName(sav), HeightRequest=40, WidthRequest=40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.End };
             EggSprite.SetBinding(Image.IsVisibleProperty, "EncounterInfo.IsEgg");
             Image AlphaSprite = new() { Source = "ribbonmarkalpha.png", HeightRequest = 40, WidthRequest = 40, HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Start };
             AlphaSprite.SetBinding(Image.IsVisibleProperty, "Alpha");
@@ -56,7 +56,7 @@ public partial class EncounterDB : ContentPage
     {
         var enc = (EncounterSprite?)e?.Parameter;
         EncounterCollection.SelectedItem = enc;
-        var view = await DisplayAlertAsync("View Encounter", $"View this encounter?\n{GetPreviewText(enc.EncounterInfo,EncounterSettings.ShowExtraEncounterInfo)}", "view", "cancel");
+        var view = await DisplayAlertAsync(L10n.T("code_view_encounter"), L10n.T("code_view_this_encounter_getpreviewtext", GetPreviewText(enc.EncounterInfo,EncounterSettings.ShowExtraEncounterInfo)), L10n.T("box_view"), L10n.T("box_cancel"));
         if (view)
             applyencpk(sender, e);
         EncounterCollection.SelectedItem = null;
@@ -191,7 +191,7 @@ public class EncounterSprite
         }
         url = info.Species == 0
             ? ""
-            : $"a_{info.Species}{((info.Form > 0 && !NoFormSpriteSpecies.Contains(info.Species)) ? $"_{info.Form}" : "")}.png";
+            : SpeciesSpriteUtil.FileName(sav, info.Species, info.Form);
         itsself = this;
     }
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor7Misc"
-             Title="Misc">
+             Title="{l10n:Tr Key=saveedit_miscellaneous}">
     <ScrollView>
         <VerticalStackLayout>
-            <Button Text="Give All Fashion Items" Clicked="unlockfashion" />
+            <Button Text="{l10n:Tr Key=gen7_give_all_costume}" Clicked="unlockfashion" />
             <Picker x:Name="UnlockFashionPicker" />
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
@@ -32,34 +32,34 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Skin Color:" VerticalOptions="Center" />
+                <Label Text="{l10n:Tr Key=gen7_skin_color}" VerticalOptions="Center" />
                 <Picker x:Name="SkinColorPicker" Grid.Column="1"/>
-                <Label Text="Days from Refreshed:" VerticalOptions="Center" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=gen7_days_until_reset}" VerticalOptions="Center" Grid.Row="1"/>
                 <l:NumericUpDown x:Name="DaysRefreshedEntry" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Ball Throw Style:" VerticalOptions="Center" Grid.Row="2"/>
+                <Label Text="{l10n:Tr Key=gen7_throw_pose}" VerticalOptions="Center" Grid.Row="2"/>
                 <Picker x:Name="BallThrowPicker" Grid.Row="2" Grid.Column="1"/>
                 <Picker x:Name="BattleStlyeDisplayPicker" Grid.Row="3" SelectedIndexChanged="ChangeThrowCollection"/>
                 <CollectionView x:Name="ThrowsUnlockedCollection" Grid.Row="3" Grid.Column="1" SelectionMode="Multiple" HeightRequest="150"/>
                 <CollectionView x:Name="ThrowsLearnedCollection" Grid.Row="3" Grid.Column="1" SelectionMode="Multiple" HeightRequest="150" IsVisible="False"/>
-                <Label Text="Poke Finder" Grid.Row="4"/>
-                <Label Text="Total Thumbs up:" Grid.Row="5" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_pok_finder}" Grid.Row="4"/>
+                <Label Text="{l10n:Tr Key=gen7_total_likes}" Grid.Row="5" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="TThumbUpEntry" Grid.Row="5" Grid.Column="1"/>
-                <Label Text="Record Thumbs up:" Grid.Row="6" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_record_likes}" Grid.Row="6" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="RThumbsupEntry" Grid.Row="6" Grid.Column="1"/>
-                <Label Text="Snap Count:" Grid.Row="7" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_photos_taken}" Grid.Row="7" VerticalOptions="Center"/>
                 <l:NumericUpDown x:Name="SnapCountEntry" Grid.Row="7" Grid.Column="1"/>
-                <Label Text="Camera Version:" Grid.Row="8" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_camera_version}" Grid.Row="8" VerticalOptions="Center"/>
                 <Picker x:Name="CameraVersionPicker" Grid.Row="8" Grid.Column="1"/>
                 <CheckBox x:Name="GyroCheck" Grid.Row="9"/>
-                <Label Text="Gyro" Grid.Row="9" Grid.Column="1" VerticalOptions="Center"/>
-                <Label Text="Festival Plaza Name:" Grid.Row="10" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_gyroscope}" Grid.Row="9" Grid.Column="1" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_festival_plaza_name}" Grid.Row="10" VerticalOptions="Center"/>
                 <Entry x:Name="FPNameEntry" Grid.Row="10" Grid.Column="1"/>
-                <Label Text="Stamps:" Grid.Row="11" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen7_stamps}" Grid.Row="11" VerticalOptions="Center"/>
                 <CollectionView x:Name="StampCollection" Grid.Row="12" Grid.ColumnSpan="2" SelectionMode="Multiple" HeightRequest="300"/>
                 <CheckBox x:Name="MegaUnlockCheck" Grid.Row="13"/>
-                <Label Text="Mega Evolution Unlocked" Grid.Row="13" Grid.Column="1" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_mega_evolution_unlocked}" Grid.Row="13" Grid.Column="1" VerticalOptions="Center"/>
                 <CheckBox x:Name="ZUnlockCheck" Grid.Row="14"/>
-                <Label Text="Z Moves Unlocked" Grid.Row="14" VerticalOptions="Center" Grid.Column="1"/>
+                <Label Text="{l10n:Tr Key=gen7_z_move_unlocked}" Grid.Row="14" VerticalOptions="Center" Grid.Column="1"/>
                 
             </Grid>
             

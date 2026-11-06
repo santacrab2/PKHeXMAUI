@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MedalEditor"
-             Title="Medal Editor">
+             Title="{l10n:Tr Key=common_medal_editor}">
     <ScrollView>
         <VerticalStackLayout>
             <Grid>
@@ -20,16 +20,16 @@
             <CollectionView x:Name="rankside" WidthRequest="200" HeightRequest="400" Grid.Row="0" Grid.Column="0"></CollectionView>
             <CollectionView x:Name="distsuperside" WidthRequest="200" HeightRequest="400" Grid.Column="1" Grid.Row="0"></CollectionView>
                 <CheckBox x:Name="SuperUnlockedCheck" HorizontalOptions="End" Grid.Column="0" Grid.Row="1" CheckedChanged="UnlockSuperTraining" IsVisible="false"/>
-                <Label x:Name="SuperUnlockLabel" Grid.Column="1" Grid.Row="1" Text="Secret Training Unlocked" IsVisible="false"/>
+                <Label x:Name="SuperUnlockLabel" Grid.Column="1" Grid.Row="1" Text="{l10n:Tr Key=common_secret_training_unlocked}" IsVisible="false"/>
                 <CheckBox x:Name="SecretCompleteCheck" HorizontalOptions="End" Grid.Column="0" Grid.Row="2" CheckedChanged="CompleteSecretTraining" IsVisible="false"/>
-                <Label x:Name="SecretCompleteLabel" Grid.Column="1" Grid.Row="2"  Text="Secret Training Complete" IsVisible="false"/>
-                <Label x:Name="LastBagLabel" Grid.Column="0" Grid.Row="3" Text="Last Used Bag:" IsVisible="false"/>
+                <Label x:Name="SecretCompleteLabel" Grid.Column="1" Grid.Row="2"  Text="{l10n:Tr Key=common_secret_training_complete}" IsVisible="false"/>
+                <Label x:Name="LastBagLabel" Grid.Column="0" Grid.Row="3" Text="{l10n:Tr Key=common_last_used_bag}" IsVisible="false"/>
                 <Picker x:Name="BagPicker" Grid.Column="1" Grid.Row="3" IsVisible="false"/>
             </Grid>
-            <Button Text="Apply All" Clicked="ApplyAllST"></Button>
-            <Button Text="Remove All" Clicked="RemoveAllST"/>
-            <Button Text="Save" Clicked="SaveST"></Button>
-            <Button Text="Cancel" Clicked="CloseST"/>
+            <Button Text="{l10n:Tr Key=common_apply_all}" Clicked="ApplyAllST"></Button>
+            <Button Text="{l10n:Tr Key=common_remove_all}" Clicked="RemoveAllST"/>
+            <Button Text="{l10n:Tr Key=common_save}" Clicked="SaveST"></Button>
+            <Button Text="{l10n:Tr Key=box_cancel}" Clicked="CloseST"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

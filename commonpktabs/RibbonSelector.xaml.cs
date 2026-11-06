@@ -32,7 +32,7 @@ public partial class RibbonSelector : ContentPage
             SwipeView Swipe = new();
             SwipeItem affix = new()
             {
-                Text = "Affix",
+                Text = L10n.T("gen3_decorations"),
                 BackgroundColor = Colors.DeepSkyBlue,
                 IconImageSource = "ribbon_affix_noneb.png"
             };
@@ -122,7 +122,10 @@ public partial class RibbonSelector : ContentPage
         if(pk is IRibbonSetAffixed a)
         {
             var ribbon = (Ribbonstuff)ribboncollection.SelectedItem;
-            a.AffixedRibbon = a.AffixedRibbon == -1 ? (sbyte)ribbon.index : (sbyte)-1;
+            // 没有装饰序号的奖章（旧世代/特殊奖章）不做装饰，否则会误清除已有装饰
+            if (ribbon.index < 0)
+                return;
+            a.AffixedRibbon = a.AffixedRibbon == ribbon.index ? (sbyte)-1 : (sbyte)ribbon.index;
         }
         Refresh();
     }
@@ -152,24 +155,56 @@ public class Ribbonstuff
 {
     public Ribbonstuff(RibbonInfo rib)
     {
-        for (int c = 0; c < 110; c++)
+        // RibbonIndex 是「装饰奖章」用的序号表，只有 Gen8+ 才有装饰。
+        // 早期版本只扫到 110，枚举里最后两个（MarkPartner / Partner）永远匹配不上，
+        // 这里改成遍历全部枚举值；匹配不到的旧世代奖章用 -1 表示「不可装饰」。
+        index = -1;
+        var stripped = rib.Name.Replace("Ribbon", "");
+        foreach (var ri in Enum.GetValues<RibbonIndex>())
         {
-            var ribtest = (RibbonIndex)c;
-            if (rib.Name.Replace("Ribbon", "") == ribtest.ToString())
+            if (stripped == ri.ToString())
             {
-                index = c;
+                index = (int)ri;
+                break;
             }
         }
 
         if(pk is IRibbonSetAffixed af)
         {
-            affixed = af.AffixedRibbon == index;
+            // index 为 -1 表示该奖章没有对应的装饰序号，不能拿来当装饰
+            affixed = index >= 0 && af.AffixedRibbon == index;
         }
         typer = rib.Type;
-        Name = rib.Name.Replace("Ribbon","");
-        spritename = $"{rib.Name}.png";
+        Name = DisplayName(rib.Name);
+        spritename = SpriteName(rib.Name);
         info = rib;
     }
+
+    /// <summary>去掉 Ribbon 前缀后的显示名；Gen3 计数类奖章额外去掉中间的 Count。</summary>
+    private static string DisplayName(string coreName)
+    {
+        var n = coreName.StartsWith("Ribbon", StringComparison.Ordinal) ? coreName["Ribbon".Length..] : coreName;
+        if (n.StartsWith("CountG3", StringComparison.Ordinal))
+            n = n["Count".Length..];
+        return n;
+    }
+
+    /// <summary>
+    /// Core 的奖章属性名 -> APK 里的图片名。
+    ///
+    /// Android 的资源名会被 AAPT2 强制转成小写（APK 的 R 表里清一色是 ribbonxxx），
+    /// 所以早期写的 $"{rib.Name}.png"（例如 RibbonAbility.png）永远找不到资源，
+    /// 结果就是整个奖章列表的图片位置一片空白。
+    ///
+    /// 例外：Gen3 的计数类奖章在 Core 里叫 RibbonCountG3Cool，图片却叫 ribbong3cool.png。
+    /// </summary>
+    private static string SpriteName(string coreName)
+    {
+        var n = coreName.Replace("RibbonCountG3", "RibbonG3").ToLowerInvariant() + ".png";
+        // 极少数奖章（目前只有 RibbonPartner）没有对应图片，退回「无装饰」占位图
+        return ResUtil.Pick(n, "ribbon_affix_none.png");
+    }
+
     public string Name { get; set; }
     public string spritename { get; set; }
     public RibbonValueType typer{ get; set; }

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:local="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscMainEditor"
-             Title="Main">
+             Title="{l10n:Tr Key=shell_main}">
     <VerticalStackLayout>
         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*" ColumnDefinitions="*,*">
-            <Label x:Name="L_BP" Text="BP:"/>
+            <Label x:Name="L_BP" Text="{l10n:Tr Key=gen1_bp}"/>
             <local:NumericUpDown x:Name="E_BP" Grid.Column="1"/>
-            <Label x:Name="L_EarnedBP" Text="Earned BP:" Grid.Row="1"/>
+            <Label x:Name="L_EarnedBP" Text="{l10n:Tr Key=gen3_bp_obtained}" Grid.Row="1"/>
             <local:NumericUpDown x:Name="E_EarnedBP" Grid.Row="1" Grid.Column="1"/>
-            <Label x:Name="L_Coins" Text="Coins:" Grid.Row="2"/>
+            <Label x:Name="L_Coins" Text="{l10n:Tr Key=gen1_coins}" Grid.Row="2"/>
             <local:NumericUpDown x:Name="E_Coins" Grid.Row="2" Grid.Column="1"/>
-            <Label x:Name="L_Rival" Text="Rival Name:" Grid.Row="3"/>
+            <Label x:Name="L_Rival" Text="{l10n:Tr Key=gen3_rival_name}" Grid.Row="3"/>
             <Entry x:Name="E_Rival" Grid.Row="3" Grid.Column="1"/>
-            <Label x:Name="L_TrainerCards" Grid.Row="4" Text="Trainer Card Pokemon Icons"/>
+            <Label x:Name="L_TrainerCards" Grid.Row="4" Text="{l10n:Tr Key=gen3_trainer_card_icon}"/>
         </Grid>
         <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*">
             <Picker x:Name="P_TCM1"/>

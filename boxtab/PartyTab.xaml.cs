@@ -46,12 +46,12 @@ public partial class PartyTab : ContentPage
     {
         PartyView.SelectedItem = e?.Parameter;
 
-        var result = await DisplayActionSheetAsync($"Slot {((boxsprite?)e?.Parameter)?.SlotNumber}", "cancel", "Delete", ["View", "Set"]);
+        var result = await DisplayActionSheetAsync(L10n.T("code_slot_e_parameter_slotnumber", ((boxsprite?)e?.Parameter)?.SlotNumber), L10n.T("box_cancel"), L10n.T("box_delete"), [L10n.T("box_view"), L10n.T("code_write")]);
         switch (result)
         {
             case "Delete": del(sender, e); break;
             case "View": ApplyPKFromParty(sender, e); break;
-            case "Set": inject(sender, e); break;
+            case "Write": inject(sender, e); break;
         }
     }
     private async void ApplyPKFromParty(object? sender, EventArgs? e)

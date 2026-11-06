@@ -23,8 +23,8 @@ public partial class TrainerEditor9Misc : ContentPage
             if (accessor.TryGetBlock(hash, out var block))
                 block.ChangeBooleanType(SCTypeCode.Bool2);
         }
-        DisplayAlertAsync("Fly", "All Fly Locations Unlocked", "cancel");
-        AllFlyButton.IsEnabled = false;
+        DisplayAlertAsync("Fly", L10n.T("gen9_unlocked_all_fly"), L10n.T("pktab_ok"));
+        // 解锁是幂等操作，按钮保持可点
     }
     private static ReadOnlySpan<uint> FlyHashes =>
    [
@@ -147,15 +147,15 @@ public partial class TrainerEditor9Misc : ContentPage
     private void CollectStakes(object sender, EventArgs e)
     {
         SAV.CollectAllStakes();
-        StakesButton.IsEnabled = false;
-        DisplayAlertAsync("Stakes", "All Stakes Collected", "cancel");
+        // 按钮保持可点
+        DisplayAlertAsync(L10n.T("gen9_stakes"), L10n.T("gen9_collected_all_stakes"), L10n.T("pktab_ok"));
     }
 
     private void UnlockTMRecipes(object sender, EventArgs e)
     {
         SAV.UnlockAllTMRecipes();
-        TMRecipeButton.IsEnabled = false;
-        DisplayAlertAsync("TMs", "All TM Recipes Unlocked", "cancel");
+        // 按钮保持可点
+        DisplayAlertAsync(L10n.T("gen9_tm_recipes"), L10n.T("gen9_unlocked_all_tm"), L10n.T("pktab_ok"));
     }
 
     private void UnlockBike(object sender, EventArgs e)
@@ -174,16 +174,15 @@ public partial class TrainerEditor9Misc : ContentPage
             accessor.GetBlock(block).ChangeBooleanType(SCTypeCode.Bool2);
         if (accessor.TryGetBlock("FSYS_RIDE_FLIGHT_ENABLE", out var fly))
             fly.ChangeBooleanType(SCTypeCode.Bool2); // Base & DLC1 saves do not have this block
-        BikeButton.IsEnabled = false;
-        DisplayAlertAsync("Bike", "All Bike Modes Unlocked", "cancel");
+        DisplayAlertAsync(L10n.T("gen9_bike"), L10n.T("gen9_unlocked_all_bike"), L10n.T("pktab_ok"));
     }
 
     private void UnlockFashion(object sender, EventArgs e)
     {
         var accessor = SAV.Accessor;
         PlayerFashionUnlock9.UnlockBase(accessor, SAV.Gender);
-        FashionButton.IsEnabled = false;
-        DisplayAlertAsync("Fashion", "All Fashion Unlocked", "cancel");
+        // 按钮保持可点
+        DisplayAlertAsync(L10n.T("gen9_costumes"), L10n.T("gen9_unlocked_all_costumes"), L10n.T("pktab_ok"));
     }
 
     public void SaveTEMisc()

@@ -42,6 +42,7 @@
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	  <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
 	  <RunAOTCompilation>False</RunAOTCompilation>
+	  <RuntimeIdentifiers>android-arm64;android-x64</RuntimeIdentifiers>
 	  <ApplicationVersion>1</ApplicationVersion>
 	  <ApplicationDisplayVersion>26.08.08</ApplicationDisplayVersion>
 	</PropertyGroup>
@@ -106,13 +107,23 @@
 		<MauiImage Include="Resources\Images\SVItemSprites\*" />
 		<MauiImage Include="Resources\Images\ItemSprites\*" />
 		<MauiImage Include="Resources\Images\teratypes\*" />
+		<!-- 属性图标（type_icon_00~17）：早期漏了这个目录，APK 里一个属性图标都没有，
+		     导致编辑器、招式页、相遇数据库里的属性标识全是空白 -->
+		<MauiImage Include="Resources\Images\square\*" />
+		<!-- 传说阿尔宙斯（PLA）专用精灵图 c_*：Hisuian 形态造型与剑盾不一样 -->
+		<MauiImage Include="Resources\Images\LegendsArceusSprites\*" />
 		<MauiImage Include="Resources\Images\Trainer Sprites\*" />
-		
+
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Assets\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+
+		<!-- 本地化资源表：每种语言一个 JSON，以嵌入资源打进程序集。
+		     嵌入（而非文件）的原因：Android 上 MauiAsset 会被复制到应用私有目录，
+		     首次访问需要异步读取，而启动阶段就要用到界面文案。 -->
+		<EmbeddedResource Include="Resources\L10n\*.json" LogicalName="L10n.%(Filename)%(Extension)" />
 	</ItemGroup>
 
 	<ItemGroup>

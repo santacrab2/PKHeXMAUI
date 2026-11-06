@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.RibbonSelector"
-             Title="NewPage1">
+             Title="{l10n:Tr Key=common_new_page}">
     <RefreshView x:Name="ribbonrefresh">
     <VerticalStackLayout>
         <CollectionView HeightRequest="500" WidthRequest="400" x:Name="ribboncollection" SelectionMode="Multiple" ></CollectionView>
-        <Button x:Name="affixribbons" Text="Display Ribbon" Clicked="AffixRibbon"></Button>
-        <Button x:Name="applyribbons" Text="Apply" Clicked="applyribbonsandclose"></Button>
-        <Button x:Name="close" Text="Close" Clicked="closer"/>
+        <Button x:Name="affixribbons" Text="{l10n:Tr Key=common_show_ribbons}" Clicked="AffixRibbon"></Button>
+        <Button x:Name="applyribbons" Text="{l10n:Tr Key=box_apply}" Clicked="applyribbonsandclose"></Button>
+        <Button x:Name="close" Text="{l10n:Tr Key=common_close}" Clicked="closer"/>
     </VerticalStackLayout>
     </RefreshView>
 </ContentPage>

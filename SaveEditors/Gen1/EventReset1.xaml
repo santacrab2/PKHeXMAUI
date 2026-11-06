@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.EventReset1"
-             Title="Event Reset">
+             Title="{l10n:Tr Key=gen1_event_reset}">
     <ScrollView>
     <VerticalStackLayout x:Name="eventstack">
-        <Label Text="Event Resetter"></Label>
+        <Label Text="{l10n:Tr Key=gen1_event_resetter}"></Label>
         
     </VerticalStackLayout>
     </ScrollView>

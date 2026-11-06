@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscFashionCase"
-             Title="Fashion Case">
+             Title="{l10n:Tr Key=gen4_fashion_case}">
     <ScrollView>
         <VerticalStackLayout>
-            <Button x:Name="B_ClearAccessories" Text="Delete All Accessories" Clicked="B_ClearAcessoriesClick"/>
-            <Button x:Name="B_AllAccessoriesLegal" Text="Give All Accessories (Legal)" Clicked="OnBAllAccessoriesLegalOnClick"/>
-            <Button x:Name="B_AllAccessoriesIllegal" Text="Give All Accessories (Illegal)" Clicked="OnBAllAccessoriesLegalOnClick"/>
+            <Button x:Name="B_ClearAccessories" Text="{l10n:Tr Key=gen4_delete_all_accessories}" Clicked="B_ClearAcessoriesClick"/>
+            <Button x:Name="B_AllAccessoriesLegal" Text="{l10n:Tr Key=gen4_give_all_accessories}" Clicked="OnBAllAccessoriesLegalOnClick"/>
+            <Button x:Name="B_AllAccessoriesIllegal" Text="{l10n:Tr Key=gen4_give_all_accessories_2}" Clicked="OnBAllAccessoriesLegalOnClick"/>
             <CollectionView x:Name="CV_Accessories" HeightRequest="300"/>
-            <Button x:Name="B_ClearBackdrops" Text="Delete All Backdrops" Clicked="B_ClearBackdropsClick"/>
-            <Button x:Name="B_AllBackdropsLegal" Text="Give All Backdrops (Legal)" Clicked="OnBAllBackdropsLegalOnClick"/>
-            <Button x:Name="B_AllBackdropsIllegal" Text="Give All Backdrops (Illegal)" Clicked="OnBAllBackdropsLegalOnClick"/>
+            <Button x:Name="B_ClearBackdrops" Text="{l10n:Tr Key=gen4_delete_all_backgrounds}" Clicked="B_ClearBackdropsClick"/>
+            <Button x:Name="B_AllBackdropsLegal" Text="{l10n:Tr Key=gen4_give_all_backgrounds}" Clicked="OnBAllBackdropsLegalOnClick"/>
+            <Button x:Name="B_AllBackdropsIllegal" Text="{l10n:Tr Key=gen4_give_all_backgrounds_2}" Clicked="OnBAllBackdropsLegalOnClick"/>
             <CollectionView x:Name="CV_Backdrops" HeightRequest="300"/>
         </VerticalStackLayout>
     </ScrollView>

@@ -152,7 +152,7 @@ namespace PKHeXMAUI
                 if(failed.Count != 0)
                 {
                     var msg = string.Join(Environment.NewLine, failed);
-                    await DisplayAlertAsync("Failed", $"Failed to import: {msg}", "cancel");
+                    await DisplayAlertAsync(L10n.T("pktab_import_failed"), $"{msg}", L10n.T("pktab_ok"));
                 }
             }
         }
@@ -165,9 +165,9 @@ namespace PKHeXMAUI
             await using var BlockStreams = new MemoryStream(block.Data.ToArray());
             var result = await FileSaver.SaveAsync($"{name}.bin", BlockStreams, CancellationToken.None);
             if (result.IsSuccessful)
-                await DisplayAlertAsync("Success", $"Block File saved at {result.FilePath}", "cancel");
+                await DisplayAlertAsync(L10n.T("pktab_success"), L10n.T("code_block_file_saved_to", result.FilePath), L10n.T("pktab_ok"));
             else
-                await DisplayAlertAsync("Failure", $"Block File did not save due to {result.Exception.Message}", "cancel");
+                await DisplayAlertAsync(L10n.T("pktab_failed"), L10n.T("code_failed_to_save_the", result.Exception.Message), L10n.T("pktab_ok"));
         }
 
         private void ImportCurrentBlock_Clicked(object sender, EventArgs e) => ImportSelectBlock(CurrentBlock);
@@ -181,7 +181,7 @@ namespace PKHeXMAUI
             var file = new FileInfo(path);
             if(file.Length != data.Length)
             {
-                await DisplayAlertAsync("Error", string.Format(MessageStrings.MsgFileSize, $"0x{file.Length:X8}"), "cancel");
+                await DisplayAlertAsync(L10n.T("livehex_error"), string.Format(MessageStrings.MsgFileSize, $"0x{file.Length:X8}"), L10n.T("pktab_ok"));
                 return;
             }
             var newdata = File.ReadAllBytes(path);

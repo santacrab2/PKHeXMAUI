@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:l="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor6"
-             Title="Overview">
+             Title="{l10n:Tr Key=gen6_overview}">
     <ScrollView>
         <VerticalStackLayout>
             <Grid Padding="10">
@@ -22,26 +22,26 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Trainer Name:" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_trainer_name}" VerticalOptions="Center"/>
                 <Entry x:Name="OTNameEntry" Grid.Column="1"/>
-                <Label Text="Country:" Grid.Column="2" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+                <Label Text="{l10n:Tr Key=ottab_country}" Grid.Column="2" VerticalOptions="Center" Grid.ColumnSpan="2"/>
                 <Picker x:Name="CountryPicker" Grid.Column="4" SelectedIndexChanged="UpdateRegion" Grid.ColumnSpan="2"/>
-                <Label Text="TID:" Grid.Row="1" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=ottab_tid}" Grid.Row="1" VerticalOptions="Center"/>
                 <Entry x:Name="TIDEntry" Grid.Row="1" Grid.Column="1"/>
                 <Label Text="$:" Grid.Row="1" Grid.Column="2" VerticalOptions="Center"/>
                 <Entry x:Name="OTMoneyEntry" Grid.Row="1" Grid.Column="3"/>
                 <Button x:Name="MaxCashButton" Grid.Row="1" Grid.Column="4" Text="+" VerticalOptions="Center" HorizontalOptions="Center" Clicked="MaxCash"/>
-                <Label Text="Region:" Grid.Row="1" Grid.Column="5" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen1_region}" Grid.Row="1" Grid.Column="5" VerticalOptions="Center"/>
                 <Picker x:Name="RegionPicker" Grid.Row="1" Grid.Column="6"/>
-                <Label Text="SID:" Grid.Row="2" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=ottab_sid}" Grid.Row="2" VerticalOptions="Center"/>
                 <Entry x:Name="SIDEntry" Grid.Row="2" Grid.Column="1"/>
                 <Picker x:Name="GenderPicker" Grid.Row="2" Grid.Column="2"/>
                 <Picker x:Name="VersionPicker" Grid.Row="2" Grid.Column="3"/>
-                <Label Text="3DS Region:" Grid.Row="2" Grid.Column="4" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=ottab_3ds_region}" Grid.Row="2" Grid.Column="4" VerticalOptions="Center"/>
                 <Picker x:Name="dsRegionPicker" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="2"/>
-                <Label Text="Language:" VerticalOptions="Center" Grid.Row="3" Grid.ColumnSpan="2"/>
+                <Label Text="{l10n:Tr Key=ottab_language}" VerticalOptions="Center" Grid.Row="3" Grid.ColumnSpan="2"/>
                 <Picker x:Name="LanguagePicker" Grid.Row="3" Grid.Column="2"/>
-                <Label Text="Vivillon:" Grid.Row="3" Grid.Column="3" VerticalOptions="Center" Grid.ColumnSpan="2"/>
+                <Label Text="{l10n:Tr Key=gen6_vivillon}" Grid.Row="3" Grid.Column="3" VerticalOptions="Center" Grid.ColumnSpan="2"/>
                 <Picker x:Name="VivillonPicker" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"/>
             </Grid>
             <Grid Padding="10">
@@ -63,20 +63,20 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Adventure Info" Grid.ColumnSpan="2"/>
-                <Label Text="Hrs:" VerticalOptions="Center" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=gen1_adventure_info}" Grid.ColumnSpan="2"/>
+                <Label Text="{l10n:Tr Key=gen1_hour}" VerticalOptions="Center" Grid.Row="1"/>
                 <Entry x:Name="HrsPlayedEntry" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="Min:" VerticalOptions="Center" Grid.Row="1" Grid.Column="2"/>
+                <Label Text="{l10n:Tr Key=gen6_min}" VerticalOptions="Center" Grid.Row="1" Grid.Column="2"/>
                 <Entry x:Name="MinPlayedEntry" Grid.Row="1" Grid.Column="3"/>
-                <Label Text="Sec:" VerticalOptions="Center" Grid.Row="1" Grid.Column="4"/>
+                <Label Text="{l10n:Tr Key=gen1_seconds}" VerticalOptions="Center" Grid.Row="1" Grid.Column="4"/>
                 <Entry x:Name="SecPlayedEntry" Grid.Row="1" Grid.Column="5"/>
-                <Label Text="Game Started:" VerticalOptions="Center" Grid.Row="2"/>
+                <Label Text="{l10n:Tr Key=gen1_game_start_time}" VerticalOptions="Center" Grid.Row="2"/>
                 <DatePicker x:Name="GSDatePicker" Grid.Row="2" Grid.Column="1"/>
                 <TimePicker x:Name="GSTimePicker" Grid.Row="2" Grid.Column="2"/>
-                <Label Text="HoF Entered:" VerticalOptions="Center" Grid.Row="3"/>
+                <Label Text="{l10n:Tr Key=gen6_hall_of_fame}" VerticalOptions="Center" Grid.Row="3"/>
                 <DatePicker x:Name="HOFDatePicker" Grid.Row="3" Grid.Column="1"/>
                 <TimePicker x:Name="HOFTimePicker" Grid.Row="3" Grid.Column="2"/>
-                <Label Text="Last Saved:" VerticalOptions="Center" Grid.Row="4" x:Name="LSLabel"/>
+                <Label Text="{l10n:Tr Key=gen6_last_save}" VerticalOptions="Center" Grid.Row="4" x:Name="LSLabel"/>
                 <DatePicker x:Name="LSDatePicker" Grid.Row="4" Grid.Column="1"/>
                 <TimePicker x:Name="LSTimePicker" Grid.Row="4" Grid.Column="2"/>
             </Grid>
@@ -94,17 +94,17 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Stats" VerticalOptions="Center"/>
-                <Label Text="BP:" VerticalOptions="Center" Grid.Row="1"/>
+                <Label Text="{l10n:Tr Key=stats_stats}" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen1_bp}" VerticalOptions="Center" Grid.Row="1"/>
                 <Entry x:Name="BPEntry" Grid.Row="1" Grid.Column="1"/>
-                <Label Text="PokeMiles:" VerticalOptions="Center" Grid.Row="2"/>
+                <Label Text="{l10n:Tr Key=gen6_pkm_link}" VerticalOptions="Center" Grid.Row="2"/>
                 <Entry x:Name="PMEntry" Grid.Row="2" Grid.Column="1"/>
-                <Label Text="Style:" VerticalOptions="Center" Grid.Row="3"/>
+                <Label Text="{l10n:Tr Key=gen6_style}" VerticalOptions="Center" Grid.Row="3"/>
                 <Entry x:Name="StyleEntry" Grid.Row="3" Grid.Column="1"/>
                 <Picker x:Name="TrainerPropPicker" Grid.Row="4" SelectedIndexChanged="GetStats"/>
-                <Label Text="Value:" VerticalOptions="Center" Grid.Row="5"/>
+                <Label Text="{l10n:Tr Key=gen6_value}" VerticalOptions="Center" Grid.Row="5"/>
                 <l:NumericUpDown x:Name="TPEntry" Grid.Row="5" Grid.Column="1" ValueChanged="ChangeStats"/>
-                <Label Text="Offset:" Grid.Row="6"/>
+                <Label Text="{l10n:Tr Key=gen6_offset}" Grid.Row="6"/>
                 <Label x:Name="OffsetValueLabel" Grid.Row="6" Grid.Column="1"/>
             </Grid>
         </VerticalStackLayout>

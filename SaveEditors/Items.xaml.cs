@@ -43,7 +43,7 @@ public partial class Items : TabbedPage
             }
             else
             {
-                DisplayAlertAsync("Error", "No Data Found, I guess", "okay...");
+                DisplayAlertAsync(L10n.T("livehex_error"), L10n.T("saveedit_no_data_found"), L10n.T("saveedit_ok_dots"));
             }
         }
 
@@ -51,20 +51,20 @@ public partial class Items : TabbedPage
 
         foreach (var pouch in pouches.Pouches)
         {
-            var content = new ContentPage() { Title = pouch.Type.ToString() };
+            var content = new ContentPage() { Title = Loc.InventoryType(pouch.Type) };
             Grid header = [];
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             header.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-            Label headerItem = new() { Text = "Item" };
+            Label headerItem = new() { Text = L10n.T("saveedit_items") };
             header.Add(headerItem,1);
-            Label headerCount = new() { Text = "Count", HorizontalOptions = LayoutOptions.End };
+            Label headerCount = new() { Text = L10n.T("code_quantity"), HorizontalOptions = LayoutOptions.End };
             header.Add(headerCount, 2);
-            Label headerFav = new() { Text = "Fav", HorizontalOptions = LayoutOptions.End };
+            Label headerFav = new() { Text = L10n.T("code_favorite"), HorizontalOptions = LayoutOptions.End };
             header.Add(headerFav,3);
-            Label headerNew = new() { Text = "New", HorizontalOptions = LayoutOptions.Center};
+            Label headerNew = new() { Text = L10n.T("code_newly_obtained"), HorizontalOptions = LayoutOptions.Center};
             header.Add(headerNew,4);
             var ItemCollection = new CollectionView
             {
@@ -78,7 +78,7 @@ public partial class Items : TabbedPage
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-                comboBox itemname = new() { Placeholder = "(None)", BackgroundColor = Colors.Transparent, };
+                comboBox itemname = new() { Placeholder = L10n.T("code_text_2"), BackgroundColor = Colors.Transparent, };
                 itemname.SelectedIndexChanged += ChangeItemSprite;
                 var pouchstrings = GetStringsForPouch(pouch.GetAllItems());
                 itemname.ItemSource = pouchstrings;
@@ -107,16 +107,16 @@ public partial class Items : TabbedPage
             }
             SourceList.Add(infolist);
             ItemCollection.ItemsSource = infolist;
-            Button GiveAll = new() { Text = "Give All" };
+            Button GiveAll = new() { Text = L10n.T("common_give_all") };
             GiveAll.Clicked += GiveAll_Clicked;
-            ToolTipProperties.SetText(GiveAll, "Gives you every item for this bag at the Count above even if you don't have it");
-            Button ModifyAll = new() { Text = "Modify All" };
+            ToolTipProperties.SetText(GiveAll, L10n.T("code_top_up_every_item"));
+            Button ModifyAll = new() { Text = L10n.T("code_modify_all") };
             ModifyAll.Clicked += ModifyAll_Clicked;
-            ToolTipProperties.SetText(ModifyAll, "Gives you the Count above for any item you already have");
+            ToolTipProperties.SetText(ModifyAll, L10n.T("code_top_up_the_items"));
             Editor GiveCount = new() { Text = "995" };
             GiveCount.TextChanged += SetCount;
-            Button ClearAll = new() { Text = "Clear All" };
-            ToolTipProperties.SetText(ClearAll, "Clears the current bag");
+            Button ClearAll = new() { Text = L10n.T("code_clear_all") };
+            ToolTipProperties.SetText(ClearAll, L10n.T("code_empty_the_current_bag"));
             ClearAll.Clicked += ClearAll_Clicked;
             var itemrefresh = new RefreshView();
             var itemscroll = new ScrollView
@@ -210,7 +210,7 @@ public partial class Items : TabbedPage
     private async void SaveItemsClicked(object sender, EventArgs e)
     {
         int i = 0;
-        saveitems.Text = "saving...";
+        saveitems.Text = L10n.T("saveedit_saving");
         Task.Delay(100);
        foreach(var pouch in pouches.Pouches)
         {
@@ -284,8 +284,9 @@ public partial class Items : TabbedPage
         itemInfo? CurrentItem = CurrentSource.Find(z => z.name == (string?)((comboBox?)sender)?.SelectedItem);
         if (CurrentItem is not null)
         {
-            var lump = HeldItemLumpUtil.GetIsLump(CurrentItem.InvItem.Index, sav.Context);
-            CurrentItem.itemsprite = sav.Generation >= 9 ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{Array.IndexOf(itemlist, CurrentItem.name)}.png";
+            // 图标要用「精灵图编号」而不是道具 ID：Gen3 的树果等道具两者相差十几个编号，
+            // 直接拿道具 ID 取图会缺图或串成别的道具（早期背包里树果没图标就是这个原因）。
+            CurrentItem.itemsprite = ItemSpriteUtil.FileName(CurrentItem.InvItem.Index, sav.Context, sav.Generation >= 9);
             if (itemInfo.Pouch_Material_SV.Contains((ushort)CurrentItem.InvItem.Index))
                 CurrentItem.itemsprite = "aitem_material.png";
             if (CurrentItem.InvItem.Index >= 2522 && CurrentItem.InvItem.Index <= 2546)
@@ -318,8 +319,7 @@ public class itemInfo
             isfreespace = fs.IsFreeSpace;
         if (item is IItemFreeSpaceIndex fi)
             isfreespaceindex = fi.FreeSpaceIndex;
-        var lump = HeldItemLumpUtil.GetIsLump(item.Index, sav.Context);
-        itemsprite = sav.Generation >= 9 ? lump is HeldItemLumpImage.TechnicalMachine ? "aitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "aitem_tr.png" : $"aitem_{item.Index}.png" : lump is HeldItemLumpImage.TechnicalMachine ? "bitem_tm.png" : lump is HeldItemLumpImage.TechnicalRecord ? "bitem_tr.png" : $"bitem_{item.Index}.png";
+        itemsprite = ItemSpriteUtil.FileName(item.Index, sav.Context, sav.Generation >= 9);
         if (Pouch_Material_SV.Contains((ushort)item.Index))
             itemsprite = "aitem_material.png";
         if (item.Index >= 2522 && item.Index <= 2546)

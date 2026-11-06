@@ -30,7 +30,7 @@ public partial class cancelpage : ContentPage
 {
     public cancelpage()
     {
-        this.Title = "Cancel";
+        this.Title = L10n.T("box_cancel");
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs e)
     {
@@ -42,7 +42,7 @@ public partial class SavePage9 : ContentPage
 {
     public SavePage9()
     {
-        this.Title = "Save";
+        this.Title = L10n.T("common_save");
     }
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {

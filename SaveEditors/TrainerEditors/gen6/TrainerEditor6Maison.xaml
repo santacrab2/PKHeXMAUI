@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.TrainerEditor6Maison"
-             Title="Maison">
+             Title="{l10n:Tr Key=gen6_battle_maison}">
     <ScrollView>
         <VerticalStackLayout>
             <Grid Padding="10">
@@ -27,40 +27,40 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Maison Streaks (Current)"/>
-                <Label Text="Normal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Label Text="Super" Grid.Row="1" Grid.Column="2" VerticalOptions="Center"/>
-                <Label Text="Singles:" Grid.Row="2" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_battle_maison_streak}"/>
+                <Label Text="{l10n:Tr Key=gen6_normal}" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_super}" Grid.Row="1" Grid.Column="2" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_single}" Grid.Row="2" VerticalOptions="Center"/>
                 <Entry x:Name="MSiNEntry" Grid.Row="2" Grid.Column="1"/>
                 <Entry x:Name="MSiSEntry" Grid.Row="2" Grid.Column="2"/>
-                <Label Text="Doubles:" Grid.Row="3" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_double}" Grid.Row="3" VerticalOptions="Center"/>
                 <Entry x:Name="MDNEntry" Grid.Row="3" Grid.Column="1"/>
                 <Entry x:Name="MDSEntry" Grid.Row="3" Grid.Column="2"/>
-                <Label Text="Triples:" Grid.Row="4" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_triple}" Grid.Row="4" VerticalOptions="Center"/>
                 <Entry x:Name="MTNEntry" Grid.Row="4" Grid.Column="1"/>
                 <Entry x:Name="MTSEntry" Grid.Row="4" Grid.Column="2"/>
-                <Label Text="Rotation:" Grid.Row="5" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_wheel}" Grid.Row="5" VerticalOptions="Center"/>
                 <Entry x:Name="MRNEntry" Grid.Row="5" Grid.Column="1"/>
                 <Entry x:Name="MRSEntry" Grid.Row="5" Grid.Column="2"/>
-                <Label Text="Multi:" Grid.Row="6" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_multi}" Grid.Row="6" VerticalOptions="Center"/>
                 <Entry x:Name="MMNEntry" Grid.Row="6" Grid.Column="1"/>
                 <Entry x:Name="MMSEntry" Grid.Row="6" Grid.Column="2"/>
-                <Label Text="Maison Streaks (Best)" VerticalOptions="Center" Grid.Row="7"/>
-                <Label Text="Normal" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Label Text="Super" Grid.Row="8" Grid.Column="2" VerticalOptions="Center"/>
-                <Label Text="Singles:" Grid.Row="9" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_battle_maison_streak_2}" VerticalOptions="Center" Grid.Row="7"/>
+                <Label Text="{l10n:Tr Key=gen6_normal}" Grid.Row="8" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_super}" Grid.Row="8" Grid.Column="2" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_single}" Grid.Row="9" VerticalOptions="Center"/>
                 <Entry x:Name="MBSiNEntry" Grid.Row="9" Grid.Column="1"/>
                 <Entry x:Name="MBSiSEntry" Grid.Row="9" Grid.Column="2"/>
-                <Label Text="Doubles:" Grid.Row="10" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_double}" Grid.Row="10" VerticalOptions="Center"/>
                 <Entry x:Name="MBDNEntry" Grid.Row="10" Grid.Column="1"/>
                 <Entry x:Name="MBDSEntry" Grid.Row="10" Grid.Column="2"/>
-                <Label Text="Triples:" Grid.Row="11" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_triple}" Grid.Row="11" VerticalOptions="Center"/>
                 <Entry x:Name="MBTNEntry" Grid.Row="11" Grid.Column="1"/>
                 <Entry x:Name="MBTSEntry" Grid.Row="11" Grid.Column="2"/>
-                <Label Text="Rotation:" Grid.Row="12" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_wheel}" Grid.Row="12" VerticalOptions="Center"/>
                 <Entry x:Name="MBRNEntry" Grid.Row="12" Grid.Column="1"/>
                 <Entry x:Name="MBRSEntry" Grid.Row="12" Grid.Column="2"/>
-                <Label Text="Multi:" Grid.Row="13" VerticalOptions="Center"/>
+                <Label Text="{l10n:Tr Key=gen6_multi}" Grid.Row="13" VerticalOptions="Center"/>
                 <Entry x:Name="MBMNEntry" Grid.Row="13" Grid.Column="1"/>
                 <Entry x:Name="MBMSEntry" Grid.Row="13" Grid.Column="2"/>
 

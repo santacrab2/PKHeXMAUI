@@ -28,14 +28,14 @@ public partial class MiscPokeblock : ContentPage
         PokeBlockStack.Add(pg_Pokeblock);
         Button B_GiveAll = new()
         {
-            Text = "Give All"
+            Text = L10n.T("common_give_all")
         };
         B_GiveAll.Clicked += B_GiveAll_Clicked;
         Grid buttongrid = [];
         buttongrid.Add(B_GiveAll);
         Button B_delAll = new()
         {
-            Text = "Delete All"
+            Text = L10n.T("gen4_delete_all")
         };
         B_delAll.Clicked += B_delAll_Clicked;
         buttongrid.Add(B_delAll, 1);

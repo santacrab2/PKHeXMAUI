@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
              xmlns:local="clr-namespace:PKHeXMAUI"
              x:Class="PKHeXMAUI.MiscPaintings"
-             Title="Paintings"
+             Title="{l10n:Tr Key=gen3_paintings}"
              x:Name="ThisView">
     <StackLayout>
         <Grid ColumnDefinitions="*,*,2*">
             <local:NumericUpDown x:Name="CurrentPaintingEntry" ValueChanged="CurrentPaintingChanged" MaxValue="4" Grid.Row="0" Grid.Column="0"/>
             <CheckBox x:Name="PaintingEnabledCheck" Grid.Row="0" Grid.Column="1" CheckedChanged="enablePainting"/>
-            <Label Text="Enabled" Grid.Row="0" Grid.Column="2" VerticalOptions="Center"/>
+            <Label Text="{l10n:Tr Key=gen3_already_enabled}" Grid.Row="0" Grid.Column="2" VerticalOptions="Center"/>
         </Grid>
         <Grid x:Name="CurrentPaintingView" RowDefinitions="*,*,*,*,*,*,*,*,*" ColumnDefinitions="*,*" >
-            <Label Text="Details"/>
-            <Label Text="Species:" Grid.Row="1"/>
+            <Label Text="{l10n:Tr Key=gen3_details}"/>
+            <Label Text="{l10n:Tr Key=pktab_species}" Grid.Row="1"/>
             <local:comboBox x:Name="Speciesbox" Grid.Row="1" Grid.Column="1"/>
-            <Label Text="PID:" Grid.Row="2"/>
+            <Label Text="{l10n:Tr Key=pktab_pid}" Grid.Row="2"/>
             <Entry x:Name="PIDEntry" Grid.Row="2" Grid.Column="1" Keyboard="Numeric"/>
-            <Label Text="Shiny:" Grid.Row="3"/>
+            <Label Text="{l10n:Tr Key=gen3_shiny}" Grid.Row="3"/>
             <CheckBox x:Name="Shinycheck" Grid.Row="3" Grid.Column="1"/>
-            <Label Text="TID:" Grid.Row="4"/>
+            <Label Text="{l10n:Tr Key=ottab_tid}" Grid.Row="4"/>
             <Entry x:Name="TIDEntry" Grid.Row="4" Grid.Column="1" Keyboard="Numeric"/>
-            <Label Text="SID:" Grid.Row="5"/>
+            <Label Text="{l10n:Tr Key=ottab_sid}" Grid.Row="5"/>
             <Entry x:Name="SIDEntry" Grid.Row="5" Grid.Column="1" Keyboard="Numeric"/>
-            <Label Text="OT:" Grid.Row="6"/>
+            <Label Text="{l10n:Tr Key=ottab_original_trainer_2}" Grid.Row="6"/>
             <Entry x:Name="OTEntry" Grid.Row="6" Grid.Column="1"/>
-            <Label Text="Nickname:" Grid.Row="7"/>
+            <Label Text="{l10n:Tr Key=pktab_nickname}" Grid.Row="7"/>
             <Entry x:Name="Nicknameentry" Grid.Row="7" Grid.Column="1"/>
-            <Label Text="Caption:" Grid.Row="8"/>
+            <Label Text="{l10n:Tr Key=gen3_title}" Grid.Row="8"/>
             <local:NumericUpDown x:Name="Captionentry" Grid.Row="8" Grid.Column="1" MaxValue="2"/>
 
         </Grid>

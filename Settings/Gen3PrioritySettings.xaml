@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:l10n="clr-namespace:PKHeXMAUI"
+             x:Class="PKHeXMAUI.Gen3PrioritySettings"
+             Title="{l10n:Tr Key=settings_gen3_compliance_priority}">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="14">
+
+            <Label FontSize="15" FontAttributes="Bold" Text="{l10n:Tr Key=settings_keep_priority_for}"/>
+            <Label FontSize="13" LineBreakMode="WordWrap"
+                   Text="{l10n:Tr Key=settings_in_gen3_the}"/>
+
+            <Border StrokeThickness="1" Stroke="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}" StrokeShape="RoundRectangle 12" Padding="4">
+                <VerticalStackLayout x:Name="Stack_Order" Spacing="0"/>
+            </Border>
+
+            <Button x:Name="ResetButton" Text="{l10n:Tr Key=settings_reset_to_default}" Clicked="OnReset"/>
+
+            <Label FontSize="13" FontAttributes="Bold" Text="{l10n:Tr Key=settings_notes}"/>
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_nature_in_gen3}" />
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_individual_values_the}" />
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_shiny_a_shiny}" />
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_gender_derived_from}" />
+
+            <Label FontSize="13" FontAttributes="Bold" Text="{l10n:Tr Key=settings_how_each_button}"/>
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_reroll_pid_a}" />
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_max_ivs_all}" />
+            <Label FontSize="12" LineBreakMode="WordWrap" Text="{l10n:Tr Key=settings_randomize_ivs_a}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

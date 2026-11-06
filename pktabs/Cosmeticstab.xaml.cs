@@ -13,6 +13,8 @@ public partial class Cosmeticstab : ContentPage
 	public Cosmeticstab()
 	{
 		InitializeComponent();
+        // 蛋图：b_ 集里没有蛋素材（b_0.png 是空图），统一用唯一那张 a_egg.png
+        eggsprite.Source = SpeciesSpriteUtil.EggFileName(sav);
         FirstLoad = false;
         Flags = [LeafCheckBox1, LeafCheckBox2, LeafCheckBox3, LeafCheckBox4, LeafCheckBox5, CrownCheckbox];
         applycomsetics(pk);
@@ -50,9 +52,7 @@ public partial class Cosmeticstab : ContentPage
         }
 
         shinysparklessprite.IsVisible = pkm.IsShiny;
-        spriteurl = pkm.Species == 0
-            ? "a_egg.png"
-            : $"a_{pkm.Species}{((pkm.Form > 0 && !MainPage.NoFormSpriteSpecies.Contains(pkm.Species)) ? $"_{pkm.Form}" : "")}.png";
+        spriteurl = SpeciesSpriteUtil.FileName(sav, pkm.Species, pkm.Form, pkm.IsShiny);
         pic.Source = spriteurl;
         if (pkm is IScaledSize ss)
         {
@@ -99,7 +99,7 @@ public partial class Cosmeticstab : ContentPage
         {
             scalelabel.IsVisible = true;
             scaledisplay.IsVisible = true;
-            scalelabel.Text = "CP:";
+            scalelabel.Text = L10n.T("cosmetic_cp");
             cpAutoLabel.IsVisible = true;
             AutoCP.IsVisible = true;
             if (AutoCP.IsChecked)
@@ -131,7 +131,17 @@ public partial class Cosmeticstab : ContentPage
         if(pkm is IRibbonSetAffixed a)
         {
             AffixedRibbonSprite.IsVisible = true;
-            AffixedRibbonSprite.Source = a.AffixedRibbon != -1 ? (ImageSource)$"ribbon{((RibbonIndex)a.AffixedRibbon).ToString().ToLower()}.png" : (ImageSource)"ribbon_affix_none.png";
+            // 装饰奖章的图名是「ribbon + RibbonIndex 枚举名（小写）」；
+            // 少数枚举（Partner）没有对应图片，找不到时退回「无装饰」占位图，别留空白。
+            if (a.AffixedRibbon != -1)
+            {
+                var affixName = $"ribbon{((RibbonIndex)a.AffixedRibbon).ToString().ToLowerInvariant()}.png";
+                AffixedRibbonSprite.Source = ResUtil.Pick(affixName, "ribbon_affix_none.png");
+            }
+            else
+            {
+                AffixedRibbonSprite.Source = "ribbon_affix_none.png";
+            }
         }
         if(pkm is IContestStats contest)
         {
