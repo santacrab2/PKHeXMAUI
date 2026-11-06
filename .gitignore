@@ -376,3 +376,7 @@ tools/l10n/_l10n_backup/
 
 # 通用备份文件（deps/ 下的手工备份等）
 *.bak
+
+# 推送凭据（含 GitHub Token，绝不能提交）
+.cred
+push-to-own-repo.cred
